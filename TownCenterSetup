@@ -1,0 +1,137 @@
+-- ===============================
+-- Town Center 市鎮中心設置腳本
+-- 可以有很多個，功能類似市政中心
+-- 放在 ReplicatedStorage/Buildings/TownCenter 模型內
+-- ===============================
+local CollectionService = game:GetService("CollectionService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local GRID_SIZE = 8
+
+-- ========== TownCenter 配置 ==========
+local TOWN_CENTER_CONFIG = {
+	name = "TownCenter",
+	icon = "rbxassetid://121498019090765",
+	displayName = "市鎮中心",
+	tag = "TownCenter",
+	entryTag = "TownCenterEntry",
+	-- 尺寸：2格寬，2格深，2格高
+	size = Vector3.new(2, 2, 2),
+	-- 進入點大小
+	entrySize = Vector3.new(4, 6, 2),
+}
+
+-- ========== 查找主部件 ==========
+local function FindMainPart(model)
+	local partNames = {"Mesh0", "Mesh", "MeshPart", "ModelMesh", "Main", "Base", "Visuals", "Graphic", "TownCenter"}
+
+	for _, name in ipairs(partNames) do
+		local part = model:FindFirstChild(name)
+		if part and (part:IsA("MeshPart") or part:IsA("Part")) then
+			return part
+		end
+	end
+
+	local meshPart = model:FindFirstChildOfClass("MeshPart")
+	if meshPart then return meshPart end
+
+	return model:FindFirstChildOfClass("Part")
+end
+
+-- ========== 設置大小 ==========
+local function SetupSize(model)
+	local mainPart = FindMainPart(model)
+	local currentPivot = model:GetPivot()
+
+	local newPivotPos = Vector3.new(currentPivot.X, 0, currentPivot.Z)
+	model:PivotTo(CFrame.new(newPivotPos))
+
+	if mainPart then
+		mainPart.Size = Vector3.new(GRID_SIZE * TOWN_CENTER_CONFIG.size.X, GRID_SIZE * TOWN_CENTER_CONFIG.size.Y, GRID_SIZE * TOWN_CENTER_CONFIG.size.Z)
+		mainPart.CFrame = CFrame.new(newPivotPos + Vector3.new(0, GRID_SIZE * TOWN_CENTER_CONFIG.size.Y / 2, 0))
+
+		print(("✅ %s: 主部件大小設置為 %dx%dx%d"):format(
+			TOWN_CENTER_CONFIG.name, mainPart.Size.X, mainPart.Size.Y, mainPart.Size.Z
+			))
+	else
+		warn(("❌ %s: 找不到主部件！"):format(TOWN_CENTER_CONFIG.name))
+	end
+end
+
+-- ========== 創建進入點 ==========
+local function SetupEntryPoint(model)
+	local oldEntry = model:FindFirstChild("EntryPoint")
+	if oldEntry then oldEntry:Destroy() end
+
+	local modelPos = model:GetPivot().Position
+
+	local entryPoint = Instance.new("Part")
+	entryPoint.Name = "EntryPoint"
+	entryPoint.Size = Vector3.new(TOWN_CENTER_CONFIG.entrySize.X, TOWN_CENTER_CONFIG.entrySize.Y, TOWN_CENTER_CONFIG.entrySize.Z)
+	entryPoint.Transparency = 0.8
+	entryPoint.CanCollide = false
+	entryPoint.Anchored = true
+	entryPoint.Locked = true
+	entryPoint.Parent = model
+
+	entryPoint.CFrame = CFrame.new(modelPos + Vector3.new(0, 0, -GRID_SIZE * TOWN_CENTER_CONFIG.size.Z * 0.8))
+
+	CollectionService:AddTag(model, TOWN_CENTER_CONFIG.tag)
+	CollectionService:AddTag(entryPoint, TOWN_CENTER_CONFIG.entryTag)
+
+	print(("✅ %s: 進入點創建完成"):format(TOWN_CENTER_CONFIG.name))
+end
+
+-- ========== 設置屬性 ==========
+local function SetupAttributes(model)
+	model:SetAttribute("BuildingType", "TownCenter")
+	model:SetAttribute("ResourceType", "TownCenter")
+	model:SetAttribute("IconId", TOWN_CENTER_CONFIG.icon)
+	model:SetAttribute("DisplayName", TOWN_CENTER_CONFIG.displayName)
+	model:SetAttribute("IsMainBase", false)  -- 不是主堡
+	model:SetAttribute("CanTrainVillagers", true)
+
+	print(("✅ %s: 屬性設置完成"):format(TOWN_CENTER_CONFIG.name))
+end
+
+-- ========== 創建生成點 ==========
+local function SetupSpawnPoint(model)
+	local oldSpawn = model:FindFirstChild("SpawnPoint")
+	if oldSpawn then oldSpawn:Destroy() end
+
+	local modelPos = model:GetPivot().Position
+
+	local spawnPoint = Instance.new("Part")
+	spawnPoint.Name = "SpawnPoint"
+	spawnPoint.Size = Vector3.new(4, 2, 4)
+	spawnPoint.Transparency = 1
+	spawnPoint.CanCollide = false
+	spawnPoint.Anchored = true
+	spawnPoint.Locked = true
+	spawnPoint.Parent = model
+
+	spawnPoint.CFrame = CFrame.new(modelPos + Vector3.new(0, 2, 0))
+
+	print(("✅ %s: 生成點創建完成"):format(TOWN_CENTER_CONFIG.name))
+end
+
+-- ========== 完整設置 ==========
+local function SetupTownCenter()
+	local model = script.Parent
+	if not model or not model:IsA("Model") then
+		warn("❌ TownCenterSetup 必須放在 Model 內！")
+		return
+	end
+
+	print(("🔧 開始設置 %s..."):format(TOWN_CENTER_CONFIG.name))
+
+	SetupSize(model)
+	SetupEntryPoint(model)
+	SetupAttributes(model)
+	SetupSpawnPoint(model)
+
+	print(("✅ %s 設置完成！這是市鎮中心，可以建造多個。"):format(TOWN_CENTER_CONFIG.name))
+end
+
+task.wait(0.1)
+SetupTownCenter()

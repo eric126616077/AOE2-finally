@@ -1,0 +1,1 @@
+-- Building preview is initialized by RTSClient.

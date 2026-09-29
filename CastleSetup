@@ -1,0 +1,142 @@
+-- ==============================
+-- Castle 主堡設置腳本
+-- 決定遊戲勝利條件，只能有 1 個
+-- 放在 ReplicatedStorage/Buildings/Castle 模型內
+-- ==============================
+local CollectionService = game:GetService("CollectionService")
+
+local GRID_SIZE = 8
+
+-- ========== Castle 配置 ==========
+local CASTLE_CONFIG = {
+	name = "Castle",
+	icon = "rbxassetid://128725014626525",
+	displayName = "主堡",
+	tag = "Castle",
+	entryTag = "CastleEntry",
+	-- 尺寸：4格寬，4格深，4格高
+	size = Vector3.new(8, 8, 8),
+	-- 進入點大小
+	entrySize = Vector3.new(4, 6, 2),
+}
+
+-- ========== 查找主部件 ==========
+local function FindMainPart(model)
+	local partNames = {"Mesh0", "Mesh", "MeshPart", "ModelMesh", "Main", "Base", "Visuals", "Graphic", "Castle"}
+
+	for _, name in ipairs(partNames) do
+		local part = model:FindFirstChild(name)
+		if part and (part:IsA("MeshPart") or part:IsA("Part")) then
+			return part
+		end
+	end
+
+	local meshPart = model:FindFirstChildOfClass("MeshPart")
+	if meshPart then return meshPart end
+
+	return model:FindFirstChildOfClass("Part")
+end
+
+-- ========== 設置大小 ==========
+local function SetupSize(model)
+	local mainPart = FindMainPart(model)
+	if not mainPart then
+		warn("❌ Castle: 找不到主部件！")
+		return false
+	end
+
+	-- 計算新尺寸
+	local newSize = Vector3.new(
+		GRID_SIZE * CASTLE_CONFIG.size.X,
+		GRID_SIZE * CASTLE_CONFIG.size.Y,
+		GRID_SIZE * CASTLE_CONFIG.size.Z
+	)
+
+	-- 只設置大小，不改變位置
+	-- 位置由 CastleSpawner 的 PivotTo 設置
+	mainPart.Size = newSize
+	return true
+end
+
+-- ========== 創建進入點 ==========
+local function SetupEntryPoint(model)
+	local ownerId = model:GetAttribute("OwnerId")
+	local ownerName = model:GetAttribute("OwnerName") or "Unknown"
+	local uniqueSuffix = ownerName  -- 使用玩家名稱作為唯一標識
+
+	-- 移除舊的進入點
+	local oldEntry = model:FindFirstChild("EntryPoint_" .. uniqueSuffix)
+	if oldEntry then oldEntry:Destroy() end
+
+	-- EntryPoint 和城堡一樣大，放在城堡模型內
+	local castleSize = GRID_SIZE * CASTLE_CONFIG.size.X  -- 64
+	local castleHalfSize = castleSize / 2  -- 32
+
+	local entryPoint = Instance.new("Part")
+	entryPoint.Name = "EntryPoint_" .. uniqueSuffix  -- 唯一名稱
+	entryPoint.Size = Vector3.new(castleSize, castleSize, castleSize)  -- 和城堡一樣大 64x64x64
+	entryPoint.Transparency = 0.9  -- 90% 透明
+	entryPoint.CanCollide = true  -- 可以碰撞，單位碰到就算進入
+	entryPoint.Anchored = false  -- 跟随城堡移動
+	entryPoint.Locked = true
+	entryPoint.Parent = model  -- 放在城堡模型內
+
+	-- 相對於城堡中心的位置 (在模型內)
+	-- 放在城堡左側 (X = -32)
+	entryPoint.CFrame = CFrame.new(-castleHalfSize, castleHalfSize, 0)
+
+	CollectionService:AddTag(model, CASTLE_CONFIG.tag)
+	CollectionService:AddTag(entryPoint, CASTLE_CONFIG.entryTag)
+end
+
+-- ========== 創建生成點 ==========
+local function SetupSpawnPoint(model)
+	local ownerId = model:GetAttribute("OwnerId")
+	local ownerName = model:GetAttribute("OwnerName") or "Unknown"
+	local uniqueSuffix = ownerName  -- 使用玩家名稱作為唯一標識
+
+	-- 移除舊的生成點
+	local oldSpawn = model:FindFirstChild("SpawnPoint_" .. uniqueSuffix)
+	if oldSpawn then oldSpawn:Destroy() end
+
+	local spawnPoint = Instance.new("Part")
+	spawnPoint.Name = "SpawnPoint_" .. uniqueSuffix  -- 唯一名稱
+	spawnPoint.Size = Vector3.new(8, 2, 8)
+	spawnPoint.Transparency = 1  -- 完全隱藏
+	spawnPoint.CanCollide = false
+	spawnPoint.Anchored = false  -- 跟随城堡移動
+	spawnPoint.Locked = true
+	spawnPoint.Parent = model  -- 放在城堡模型內
+
+	-- 相對於城堡中心的位置 (在模型內)
+	spawnPoint.CFrame = CFrame.new(0, 4, 0)  -- 城堡中心上方 4 格
+end
+
+-- ========== 設置屬性 ==========
+local function SetupAttributes(model)
+	model:SetAttribute("BuildingType", "Castle")
+	model:SetAttribute("ResourceType", "Castle")
+	model:SetAttribute("IconId", CASTLE_CONFIG.icon)
+	model:SetAttribute("DisplayName", CASTLE_CONFIG.displayName)
+	model:SetAttribute("IsMainBase", true)
+	model:SetAttribute("CanTrainVillagers", true)
+	model:SetAttribute("HP", 2000)
+	model:SetAttribute("MaxHP", 2000)
+end
+
+-- ========== 完整設置 ==========
+local function SetupCastle()
+	local model = script.Parent
+	if not model or not model:IsA("Model") then
+		warn("❌ CastleSetup 必須放在 Model 內！")
+		return
+	end
+
+	SetupSize(model)
+	SetupEntryPoint(model)
+	SetupAttributes(model)
+	SetupSpawnPoint(model)
+end
+
+task.wait(0.05)
+SetupCastle()

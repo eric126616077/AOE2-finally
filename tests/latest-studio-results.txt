@@ -1,0 +1,19 @@
+[RTS_TEST PASS] RTS scene streaming disabled
+[RTS_TEST PASS] ground exists and is visible on client
+[RTS_TEST PASS] camera looks down toward the map
+[RTS_TEST PASS] camera center sees world geometry
+[RTS_TEST PASS] HUD mounted
+[RTS_TEST PASS] HUD blocks clicks inside command dock
+[RTS_TEST PASS] terrain immediately above HUD remains clickable
+[RTS_TEST PASS] owned castle and villagers replicated with geometry
+[RTS_TEST PASS] server creates house
+[RTS_TEST PASS] server deducts house cost exactly once
+[RTS_TEST PASS] overlapping house rejected without payment
+[RTS_TEST PASS] invalid coordinate and castle requests rejected
+[RTS_TEST PASS] villager training completes and spawns
+[RTS_TEST PASS] training food cost applied
+[RTS_TEST PASS] villager follows real navigation path
+[RTS_TEST PASS] resource extraction credits player food
+[RTS_TEST PASS] stop command clears unit order
+[RTS_TEST PASS] stopped unit stays still
+[RTS_TEST COMPLETE] 18 engine integration checks passed

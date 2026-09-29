@@ -1,0 +1,93 @@
+-- ===============================
+-- 樹的初始化腳本（放在樹的Model內）
+-- ===============================
+local CollectionService = game:GetService("CollectionService")
+
+local model = script.Parent
+local GRID_SIZE = 8  -- 1格 = 8 studs
+
+-- 等待獲取MeshPart（名字叫Mesh0）
+local meshPart = model:WaitForChild("Mesh0", 10)
+if not meshPart then
+	warn("找不到 Mesh0 MeshPart！")
+	return
+end
+
+-- ========== 1格大小 ==========
+local function SetupSize()
+	local size = GRID_SIZE  -- 1格 = 8 studs
+
+	-- 移動 Model 的 Pivot 到正確的格子中心（底部）
+	local currentPos = model:GetPivot().Position
+	local newPivotPos = Vector3.new(currentPos.X, 0, currentPos.Z)
+	model:PivotTo(CFrame.new(newPivotPos))
+
+	-- 設置 MeshPart 大小（樹高 1.5 格）
+	meshPart.Size = Vector3.new(size, size * 1.5, size)
+	-- Mesh 中心在 pivot 上方 0.75 格
+	meshPart.CFrame = CFrame.new(newPivotPos + Vector3.new(0, size * 0.75, 0))
+end
+
+-- ========== 創建Hitbox ==========
+local function SetupHitbox()
+	-- 刪除舊的（如果存在）
+	local oldHitbox = model:FindFirstChild("HarvestHitbox")
+	if oldHitbox then oldHitbox:Destroy() end
+
+	-- 創建新Hitbox
+	local hitbox = Instance.new("Part")
+	hitbox.Name = "HarvestHitbox"
+	hitbox.Size = Vector3.new(GRID_SIZE * 1.2, GRID_SIZE * 1.8, GRID_SIZE * 1.2)
+	-- Hitbox 中心在 pivot 上方 0.75 格
+	hitbox.CFrame = CFrame.new(Vector3.new(0, GRID_SIZE * 0.75, 0))
+	hitbox.Transparency = 1          -- 完全透明
+	hitbox.CanCollide = false        -- 不阻擋村民
+	hitbox.Anchored = true
+	hitbox.Locked = true
+	hitbox.Parent = model
+
+	-- 添加標籤
+	CollectionService:AddTag(model, "Tree")
+	CollectionService:AddTag(hitbox, "TreeHitbox")
+end
+
+-- ========== 設置屬性 ==========
+local function SetupAttributes()
+	if not model:GetAttribute("WoodAmount") then
+		model:SetAttribute("WoodAmount", 100)
+	end
+	if not model:GetAttribute("MaxWood") then
+		model:SetAttribute("MaxWood", 100)
+	end
+	-- 資源類型
+	model:SetAttribute("ResourceType", "Wood")
+end
+
+-- ========== 創建伐木點（村民站的位置） ==========
+local function SetupHarvestPoint()
+	local harvestPoint = Instance.new("Part")
+	harvestPoint.Name = "HarvestPoint"
+	harvestPoint.Size = Vector3.new(1, 1, 1)
+	harvestPoint.Transparency = 1
+	harvestPoint.CanCollide = false
+	harvestPoint.Anchored = true
+	harvestPoint.Locked = true
+	harvestPoint.Parent = model
+
+	-- 站在樹的前面（南邊），相對於 Model 的位置
+	harvestPoint.Position = Vector3.new(0, 0, -GRID_SIZE * 0.7)
+end
+
+-- ========== 運行初始化 ==========
+SetupSize()
+SetupHitbox()
+SetupAttributes()
+SetupHarvestPoint()
+
+-- ========== 打印完成 ==========
+print(("樹初始化完成: %s (Mesh0大小: %dx%dx%d)"):format(
+	model.Name,
+	meshPart.Size.X,
+	meshPart.Size.Y,
+	meshPart.Size.Z
+))

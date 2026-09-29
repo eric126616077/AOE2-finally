@@ -1,0 +1,1 @@
+-- World creation is coordinated by GameServer; no timing-dependent second spawner.

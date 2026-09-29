@@ -1,0 +1,1 @@
+-- Legacy LocalScript retired. Shared/BuildingController is required by RTSClient.

@@ -1,0 +1,1 @@
+-- Legacy model resizing is intentionally inactive; GameServer owns runtime attributes.

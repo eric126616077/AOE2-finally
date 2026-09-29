@@ -1,0 +1,91 @@
+-- ===============================
+-- 石頭的初始化腳本（放在石頭的Model內）
+-- ===============================
+local CollectionService = game:GetService("CollectionService")
+
+local model = script.Parent
+local GRID_SIZE = 8  -- 1格 = 8 studs
+
+-- 等待獲取MeshPart（名字叫Mesh0）
+local meshPart = model:WaitForChild("Mesh0", 10)
+if not meshPart then
+	warn("找不到 Mesh0 MeshPart！")
+	return
+end
+
+-- ========== 1格大小 ==========
+local function SetupSize()
+	local size = GRID_SIZE  -- 1格 = 8 studs
+
+	-- 獲取當前位置作為中心點
+	local currentPos = model:GetPivot().Position
+
+	-- 設置MeshPart大小（石頭比較扁）
+	meshPart.Size = Vector3.new(size, size * 0.6, size)
+	meshPart.CFrame = CFrame.new(currentPos + Vector3.new(0, size * 0.3, 0))
+end
+
+-- ========== 創建Hitbox ==========
+local function SetupHitbox()
+	-- 刪除舊的（如果存在）
+	local oldHitbox = model:FindFirstChild("HarvestHitbox")
+	if oldHitbox then oldHitbox:Destroy() end
+
+	-- 創建新Hitbox
+	local hitbox = Instance.new("Part")
+	hitbox.Name = "HarvestHitbox"
+	hitbox.Size = Vector3.new(GRID_SIZE * 1.2, GRID_SIZE * 0.8, GRID_SIZE * 1.2)
+	hitbox.CFrame = meshPart.CFrame
+	hitbox.Transparency = 1          -- 完全透明
+	hitbox.CanCollide = false        -- 不阻擋村民
+	hitbox.Anchored = true
+	hitbox.Locked = true
+	hitbox.Parent = model
+
+	-- 添加標籤
+	CollectionService:AddTag(model, "Stone")
+	CollectionService:AddTag(hitbox, "StoneHitbox")
+
+	return hitbox
+end
+
+-- ========== 設置屬性 ==========
+local function SetupAttributes()
+	if not model:GetAttribute("StoneAmount") then
+		model:SetAttribute("StoneAmount", 200)  -- 石頭比較多
+	end
+	if not model:GetAttribute("MaxStone") then
+		model:SetAttribute("MaxStone", 200)
+	end
+	model:SetAttribute("ResourceType", "Stone")
+end
+
+-- ========== 創建開採點（村民站的位置） ==========
+local function SetupHarvestPoint(hitbox)
+	local harvestPoint = Instance.new("Part")
+	harvestPoint.Name = "HarvestPoint"
+	harvestPoint.Size = Vector3.new(1, 1, 1)
+	harvestPoint.Transparency = 1
+	harvestPoint.CanCollide = false
+	harvestPoint.Anchored = true
+	harvestPoint.Locked = true
+	harvestPoint.Parent = model
+
+	-- 站在石頭的前面（南邊）
+	local pos = hitbox.CFrame.Position
+	harvestPoint.Position = Vector3.new(pos.X, 0, pos.Z - GRID_SIZE * 0.7)
+end
+
+-- ========== 運行初始化 ==========
+SetupSize()
+local hitbox = SetupHitbox()
+SetupAttributes()
+SetupHarvestPoint(hitbox)
+
+-- ========== 打印完成 ==========
+print(("石頭初始化完成: %s (Mesh0大小: %dx%dx%d)"):format(
+	model.Name,
+	meshPart.Size.X,
+	meshPart.Size.Y,
+	meshPart.Size.Z
+))

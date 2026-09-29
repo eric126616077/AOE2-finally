@@ -1,0 +1,91 @@
+-- ===============================
+-- 金礦的初始化腳本（放在金礦的Model內）
+-- ===============================
+local CollectionService = game:GetService("CollectionService")
+
+local model = script.Parent
+local GRID_SIZE = 8  -- 1格 = 8 studs
+
+-- 等待獲取MeshPart（名字叫Mesh0）
+local meshPart = model:WaitForChild("Mesh0", 10)
+if not meshPart then
+	warn("找不到 Mesh0 MeshPart！")
+	return
+end
+
+-- ========== 1格大小 ==========
+local function SetupSize()
+	local size = GRID_SIZE  -- 1格 = 8 studs
+
+	-- 獲取當前位置作為中心點
+	local currentPos = model:GetPivot().Position
+
+	-- 設置MeshPart大小（金礦比較小）
+	meshPart.Size = Vector3.new(size * 0.6, size * 0.6, size * 0.6)
+	meshPart.CFrame = CFrame.new(currentPos + Vector3.new(0, size * 0.3, 0))
+end
+
+-- ========== 創建Hitbox ==========
+local function SetupHitbox()
+	-- 刪除舊的（如果存在）
+	local oldHitbox = model:FindFirstChild("HarvestHitbox")
+	if oldHitbox then oldHitbox:Destroy() end
+
+	-- 創建新Hitbox
+	local hitbox = Instance.new("Part")
+	hitbox.Name = "HarvestHitbox"
+	hitbox.Size = Vector3.new(GRID_SIZE * 0.8, GRID_SIZE * 0.8, GRID_SIZE * 0.8)
+	hitbox.CFrame = meshPart.CFrame
+	hitbox.Transparency = 1          -- 完全透明
+	hitbox.CanCollide = false        -- 不阻擋村民
+	hitbox.Anchored = true
+	hitbox.Locked = true
+	hitbox.Parent = model
+
+	-- 添加標籤
+	CollectionService:AddTag(model, "Gold")
+	CollectionService:AddTag(hitbox, "GoldHitbox")
+
+	return hitbox
+end
+
+-- ========== 設置屬性 ==========
+local function SetupAttributes()
+	if not model:GetAttribute("GoldAmount") then
+		model:SetAttribute("GoldAmount", 100)  -- 金礦比較少
+	end
+	if not model:GetAttribute("MaxGold") then
+		model:GetAttribute("MaxGold", 100)
+	end
+	model:SetAttribute("ResourceType", "Gold")
+end
+
+-- ========== 創建開採點（村民站的位置） ==========
+local function SetupHarvestPoint(hitbox)
+	local harvestPoint = Instance.new("Part")
+	harvestPoint.Name = "HarvestPoint"
+	harvestPoint.Size = Vector3.new(1, 1, 1)
+	harvestPoint.Transparency = 1
+	harvestPoint.CanCollide = false
+	harvestPoint.Anchored = true
+	harvestPoint.Locked = true
+	harvestPoint.Parent = model
+
+	-- 站在金礦的前面（南邊）
+	local pos = hitbox.CFrame.Position
+	harvestPoint.Position = Vector3.new(pos.X, 0, pos.Z - GRID_SIZE * 0.7)
+end
+
+-- ========== 運行初始化 ==========
+SetupSize()
+local hitbox = SetupHitbox()
+SetupAttributes()
+SetupHarvestPoint(hitbox)
+
+-- ========== 打印完成 ==========
+print(("金礦初始化完成: %s (Mesh0大小: %dx%dx%d)"):format(
+	model.Name,
+	meshPart.Size.X,
+	meshPart.Size.Y,
+	meshPart.Size.Z
+))

@@ -1,0 +1,1 @@
+-- Resource creation is coordinated by GameServer.
