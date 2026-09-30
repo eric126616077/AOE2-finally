@@ -36,10 +36,14 @@ function Factory.model(kind, position, size, color, category, team)
 end
 function Factory.unit(kind,position,data,owner)
  local team=owner:GetAttribute("TeamColor")
+ local ownerId=owner:IsA("Player") and owner.UserId or owner:GetAttribute("UserId")
+ local ownerName=owner:IsA("Player") and owner.DisplayName or owner:GetAttribute("DisplayName") or owner.Name
  local model=Art.Create(kind,team)
  model.Name=data.name
  local root=Instance.new("Part")
- root.Name,root.Size,root.Position="Root",Vector3.new(3,5,3),Vector3.new(0,2.5,0)
+ local siege=data.class=="siege"
+ local mounted=data.class=="cavalry"
+ root.Name,root.Size,root.Position="Root",siege and Vector3.new(6,5,8) or (mounted and Vector3.new(4,7,7) or Vector3.new(3,5,3)),Vector3.new(0,2.5,0)
  root.Transparency=1
  root.Anchored,root.CanCollide,root.CanTouch,root.CanQuery=true,false,false,false
  root.Parent=model
@@ -49,9 +53,12 @@ function Factory.unit(kind,position,data,owner)
  model:SetAttribute("DisplayName",data.name)
  model:SetAttribute("HP",data.hp)
  model:SetAttribute("MaxHP",data.hp)
- model:SetAttribute("OwnerId",owner.UserId)
- model:SetAttribute("OwnerName",owner.DisplayName)
- model:SetAttribute("Radius",2)
+ model:SetAttribute("OwnerId",ownerId)
+ model:SetAttribute("OwnerName",ownerName)
+ model:SetAttribute("Team",owner:GetAttribute("Team"))
+ model:SetAttribute("TeamId",owner:GetAttribute("TeamId"))
+ model:SetAttribute("UnitClass",data.class)
+ model:SetAttribute("Radius",siege and 4 or (mounted and 3 or 2))
  model:SetAttribute("Order","待命")
  return model
 end

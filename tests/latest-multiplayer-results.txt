@@ -1,0 +1,32 @@
+2026-09-30T07:25:07.398Z,476.398163,56d4,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 此客戶端是非房主
+2026-09-30T07:25:08.004Z,477.004608,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 非房主無法開始對局
+2026-09-30T07:27:45.397Z,635.397583,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 此客戶端是房主
+2026-09-30T07:27:45.397Z,635.397583,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 兩名真實 Studio 玩家已加入
+2026-09-30T07:27:45.397Z,635.397583,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 雙人測試從新大廳開始
+2026-09-30T07:27:45.643Z,635.643066,4f18,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 兩端使用完整場景複製
+2026-09-30T07:27:45.643Z,635.643066,4f18,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 雙人局沒有額外電腦
+2026-09-30T07:27:45.643Z,635.643066,4f18,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 雙方市鎮中心、三名村民與斥候完整複製
+2026-09-30T07:27:45.749Z,635.749512,3c20,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主的施工實例由伺服器建立
+2026-09-30T07:27:54.704Z,644.704041,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主村民完成施工
+2026-09-30T07:27:54.704Z,644.704041,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主建屋僅扣款一次
+2026-09-30T07:28:04.802Z,654.802063,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI HOST READY] 可在第二客戶端執行 RunOwnership，再於存留客戶端呼叫 ObserveCleanupClient 後關閉另一玩家。
+2026-09-30T07:28:04.802Z,654.802063,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主正常訓練村民
+2026-09-30T07:28:04.802Z,654.802063,8158,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主訓練扣款同步
+2026-09-30T07:29:03.805Z,712.805054,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 另一方基地與村民在第二端可見
+2026-09-30T07:29:03.805Z,712.805054,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 另一位真實玩家存在
+2026-09-30T07:29:03.805Z,712.805054,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 此客戶端是非房主
+2026-09-30T07:29:03.805Z,712.805054,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 第二玩家已參賽
+2026-09-30T07:29:05.316Z,714.316895,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 第二玩家不能移動或停止另一方村民
+2026-09-30T07:29:05.317Z,714.317932,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI OWNERSHIP COMPLETE]
+2026-09-30T07:29:05.317Z,714.317932,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主完成的房屋同步到第二端
+2026-09-30T07:29:05.317Z,714.317932,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 非法訓練與請求突發不生成單位
+2026-09-30T07:29:05.317Z,714.317932,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 第二玩家不能訓練或研究另一方建築
+2026-09-30T07:29:05.317Z,714.317932,3894,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 跨玩家與非有限座標請求不扣款
+2026-09-30T07:30:26.715Z,795.715576,6e64,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 要退出的另一位玩家存在
+2026-09-30T07:30:26.715Z,795.715576,6e64,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 退出前另一方確實有單位與建築
+2026-09-30T07:30:26.715Z,795.715576,6e64,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 離開清理從進行中的對局開始
+2026-09-30T07:30:26.715Z,795.715576,6e64,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 離開驗證使用兩名玩家且沒有電腦
+2026-09-30T07:31:07.376Z,836.376770,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI CLEANUP COMPLETE]
+2026-09-30T07:31:07.376Z,836.376770,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 存留玩家獲得勝利
+2026-09-30T07:31:07.376Z,836.376770,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主權限交給存留玩家
+2026-09-30T07:31:07.376Z,836.376770,5f94,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 真正玩家退出後清除其全部單位與建築，結束雙人對局

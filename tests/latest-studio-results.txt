@@ -1,19 +1,36 @@
-[RTS_TEST PASS] RTS scene streaming disabled
-[RTS_TEST PASS] ground exists and is visible on client
-[RTS_TEST PASS] camera looks down toward the map
-[RTS_TEST PASS] camera center sees world geometry
-[RTS_TEST PASS] HUD mounted
-[RTS_TEST PASS] HUD blocks clicks inside command dock
-[RTS_TEST PASS] terrain immediately above HUD remains clickable
-[RTS_TEST PASS] owned castle and villagers replicated with geometry
-[RTS_TEST PASS] server creates house
-[RTS_TEST PASS] server deducts house cost exactly once
-[RTS_TEST PASS] overlapping house rejected without payment
-[RTS_TEST PASS] invalid coordinate and castle requests rejected
-[RTS_TEST PASS] villager training completes and spawns
-[RTS_TEST PASS] training food cost applied
-[RTS_TEST PASS] villager follows real navigation path
-[RTS_TEST PASS] resource extraction credits player food
-[RTS_TEST PASS] stop command clears unit order
-[RTS_TEST PASS] stopped unit stays still
-[RTS_TEST COMPLETE] 18 engine integration checks passed
+2026-09-30T07:07:05.310Z,1088.310059,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] server initializes once
+2026-09-30T07:07:05.310Z,1088.310059,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] avatar-free map uses full replication
+2026-09-30T07:07:05.310Z,1088.310059,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] visible ground replicated on client
+2026-09-30T07:07:05.310Z,1088.310059,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] HUD mounted without character
+2026-09-30T07:07:05.725Z,1088.725830,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] invalid lobby settings cannot start match
+2026-09-30T07:07:05.888Z,1088.888428,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] host starts custom match
+2026-09-30T07:07:05.888Z,1088.888428,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] selected map size matches client ground
+2026-09-30T07:07:05.888Z,1088.888428,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] abundant resources replicated
+2026-09-30T07:07:06.044Z,1089.044067,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] AI factions replicated
+2026-09-30T07:07:06.044Z,1089.044067,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] RTS camera looks down at world
+2026-09-30T07:07:06.044Z,1089.044067,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] RTS does not depend on player character
+2026-09-30T07:07:06.044Z,1089.044067,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] owned base and villagers have actual geometry
+2026-09-30T07:07:06.048Z,1089.048950,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] command dock blocks ground clicks
+2026-09-30T07:07:06.048Z,1089.048950,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] ground beside bottom dock remains clickable
+2026-09-30T07:07:06.210Z,1089.210205,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] server creates construction site
+2026-09-30T07:07:06.210Z,1089.210205,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] build cost deducted once by server
+2026-09-30T07:07:06.727Z,1089.727661,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] overlap rejected without payment
+2026-09-30T07:07:07.343Z,1090.343506,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] NaN, wrong type and out-of-bounds requests rejected
+2026-09-30T07:07:15.010Z,1098.010376,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] villager construction completes
+2026-09-30T07:07:15.011Z,1098.011353,0da4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] completed house adds population capacity
+2026-09-30T07:07:25.094Z,1108.094727,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] training queue produces villager
+2026-09-30T07:07:25.094Z,1108.094727,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] training deducts correct food
+2026-09-30T07:07:25.094Z,1108.094727,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] nearby food source exists
+2026-09-30T07:07:25.259Z,1108.259155,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] worker navigates using engine pathfinding
+2026-09-30T07:07:32.426Z,1115.426392,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] worker extracts finite resources
+2026-09-30T07:07:42.427Z,1125.427612,0884,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] carried food returns to dropoff and credits player
+2026-09-30T07:07:42.593Z,1125.593506,8cb0,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] stop clears worker order
+2026-09-30T07:07:43.211Z,1126.211670,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] stopped worker remains stationary
+2026-09-30T07:07:43.211Z,1126.211670,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] AI trains villagers through normal economy
+2026-09-30T07:07:43.211Z,1126.211670,8358,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] AI exposes consistent faction state
+2026-09-30T07:07:43.377Z,1126.377686,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] surrender resolves victory and defeat
+2026-09-30T07:07:43.378Z,1126.378662,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] defeat cleans up owned instances
+2026-09-30T07:07:43.378Z,1126.378662,8ea4,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] result overlay displays match outcome
+2026-09-30T07:07:43.529Z,1126.529419,0884,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] host returns to lobby for rematch
+2026-09-30T07:07:43.529Z,1126.529419,0884,6,Info [FLog::CreatorOutput] [RTS_TEST PASS] rematch removes AI faction state
+2026-09-30T07:07:43.529Z,1126.529419,0884,6,Info [FLog::CreatorOutput] [RTS_TEST COMPLETE] 35 engine integration checks passed
