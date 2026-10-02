@@ -2621,7 +2621,21 @@ local function orderStep(dt,now)
    end
   else
    local goal=order.approachGoal or destination
-   if order.kind~="move" and not order.approachGoal then local outward=current-destination; if outward.Magnitude>0.01 then goal=destination+outward.Unit*math.max(1,range-1) end end
+   if order.kind~="move" and not order.approachGoal then
+    local outward=current-destination
+    if outward.Magnitude>0.01 then
+     local standoff=destination+outward.Unit*math.max(1,range-1)
+     -- 僧侶的停步點若落在建築或障礙內就無法抵達（Studio 實測卡在伐木場內的點）；改朝目標本身尋路，
+     -- 途中進入射程即開始治療／招降。目標移動超過 4 studs 才重新檢查；其他指令維持原本的停步點。
+     if order.kind~="heal" and order.kind~="convert" then order.standoffClear,order.standoffFrom=true,nil
+     elseif not order.standoffFrom or (order.standoffFrom-destination).Magnitude>4 then
+      local r,h=unit:GetAttribute("Radius") or 2,unit:GetAttribute("CollisionHeight") or 5
+      order.standoffFrom=destination
+      order.standoffClear=#obstacleParts(standoff+Vector3.new(0,h/2,0),Vector3.new(r*2,h,r*2))==0
+     end
+     if order.standoffClear then goal=standoff end
+    end
+   end
    moveToward(unit,order,goal,stats.speed,dt,now)
   end
  end

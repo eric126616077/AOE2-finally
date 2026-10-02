@@ -1,0 +1,68 @@
+# Monk Studio integration (MonkTests.Run({peer=true}) + Peer()) — Server & Clients, 2 players
+# Build: build/AOE2-monk-20261002.rbxlx from commit b130710 + working tree (see git diff in this commit)
+# Host log: 0.741.19.7411056_20261002T092204Z_Studio_A68FA_last.log
+# Peer log: 0.741.19.7411056_20261002T092205Z_Studio_C52C3_last.log
+
+## Host
+2026-10-02T09:22:50.893Z [RTS_MONK PASS] 兩名 Studio 玩家在新大廳開始
+2026-10-02T09:22:51.197Z [RTS_MONK PASS] 此客戶端先集合成為房主
+2026-10-02T09:22:51.197Z [RTS_MONK] 等待第二客戶端執行 MonkTests.Peer()
+2026-10-02T09:23:10.379Z [RTS_MONK PASS] 使用正式 Rich 開局資源，沒有測試加值
+2026-10-02T09:23:10.379Z [RTS_MONK PASS] 修道院設定可訓練僧侶
+2026-10-02T09:23:18.789Z [RTS_MONK PASS] 磨坊 由村民正常施工完成（時代 1；資源 1200/1100/800/600；27.9 秒）
+2026-10-02T09:23:27.022Z [RTS_MONK PASS] 伐木場 由村民正常施工完成（時代 1；資源 1200/1000/800/600；36.1 秒）
+2026-10-02T09:24:02.104Z [RTS_MONK PASS] 進入封建時代（時代 2；資源 700/1000/800/600；71.2 秒）
+2026-10-02T09:24:14.287Z [RTS_MONK PASS] 兵工廠 由村民正常施工完成（時代 2；資源 700/850/800/600；83.4 秒）
+2026-10-02T09:24:27.853Z [RTS_MONK PASS] 市集 由村民正常施工完成（時代 2；資源 700/675/800/600；97.0 秒）
+2026-10-02T09:24:27.969Z [RTS_MONK PASS] 市集以正常價格買入食物
+2026-10-02T09:25:13.118Z [RTS_MONK PASS] 進入城堡時代（時代 3；資源 0/675/470/600；142.2 秒）
+2026-10-02T09:25:22.583Z [RTS_MONK PASS] 房屋 由村民正常施工完成（時代 3；資源 0/650/470/600；151.7 秒）
+2026-10-02T09:25:42.700Z [RTS_MONK PASS] 修道院 由村民正常施工完成（時代 3；資源 0/475/470/600；171.8 秒）
+2026-10-02T09:26:42.880Z [RTS_MONK PASS] 新僧侶信仰全滿並複製到客戶端
+2026-10-02T09:26:42.880Z [RTS_MONK PASS] 鍛造等軍事科技以外，僧侶攻擊 0、射程為招降距離
+2026-10-02T09:26:42.880Z [RTS_MONK PASS] 找到 AI 建築作為拒絕目標
+2026-10-02T09:26:42.982Z [RTS_MONK PASS] 右鍵敵方建築不會產生招降指令
+2026-10-02T09:26:42.982Z [RTS_MONK] 招降目標 villager @ -97.20606231689453, 0, -77.40706634521484
+2026-10-02T09:26:43.265Z [RTS_MONK PASS] 僧侶狀態顯示招降
+2026-10-02T09:26:48.263Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=432.4 累計=0.0
+2026-10-02T09:26:53.330Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=384.2 累計=0.0
+2026-10-02T09:26:58.381Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=330.7 累計=0.0
+2026-10-02T09:27:03.463Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=278.9 累計=0.0
+2026-10-02T09:27:08.514Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=225.1 累計=0.0
+2026-10-02T09:27:13.546Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=172.7 累計=0.0
+2026-10-02T09:27:18.614Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=118.7 累計=0.0
+2026-10-02T09:27:23.679Z [RTS_MONK] 招降中：OrderKind=convert Animation=Walk 距離=66.4 累計=0.0
+2026-10-02T09:27:28.744Z [RTS_MONK] 招降中：OrderKind=convert Animation=Work 距離=37.6 累計=1.9
+2026-10-02T09:27:33.247Z [RTS_MONK] 招降累計 6.28 秒（村民）
+2026-10-02T09:27:33.247Z [RTS_MONK PASS] 招降在射程內累計 4–10 秒視窗成功（實測 6.28 秒）
+2026-10-02T09:27:33.247Z [RTS_MONK PASS] 被招降單位轉為己方並保留類型
+2026-10-02T09:27:33.247Z [RTS_MONK PASS] 被招降單位生命在合法範圍
+2026-10-02T09:27:33.247Z [RTS_MONK PASS] 招降後信仰歸零、僧侶回到待命
+2026-10-02T09:27:33.362Z [RTS_MONK PASS] 信仰不足時下令會提示恢復中
+2026-10-02T09:27:35.379Z [RTS_MONK PASS] 信仰不足期間不會招降
+2026-10-02T09:27:38.596Z [RTS_MONK PASS] 信仰約每秒 4.0 恢復（3 秒 +12.0）
+2026-10-02T09:28:21.826Z [RTS_MONK] 招降僧侶回防，距治療僧侶 29.9
+2026-10-02T09:28:21.826Z [RTS_MONK PASS] 仍有開局斥候作為治療對象
+2026-10-02T09:28:23.494Z [RTS_MONK PASS] 滿血單位不能治療
+2026-10-02T09:28:23.494Z [RTS_MONK PASS] 找到 AI 市鎮中心作為傷害來源
+2026-10-02T09:29:08.676Z [RTS_MONK] 斥候撤退停在距治療僧侶 70.1（目標點偏差 13.0）
+2026-10-02T09:29:08.676Z [RTS_MONK PASS] 斥候受傷撤回（50 / 55，距僧侶 70.1）
+2026-10-02T09:29:10.191Z [RTS_MONK PASS] 受傷單位在自動治療半徑外時，僧侶不會自行跑去治療
+2026-10-02T09:29:10.308Z [RTS_MONK PASS] 僧侶狀態顯示治療
+2026-10-02T09:29:12.542Z [RTS_MONK PASS] 治療速率不超過每秒 2（實測 2.13）
+2026-10-02T09:29:12.641Z [RTS_MONK PASS] 滿血後僧侶回到待命
+2026-10-02T09:29:55.922Z [RTS_MONK] 自動治療開始時斥候距治療僧侶 78.7
+2026-10-02T09:29:55.922Z [RTS_MONK PASS] 待命僧侶自動對附近受傷單位下達治療
+2026-10-02T09:29:59.788Z [RTS_MONK PASS] 自動治療恢復滿血
+2026-10-02T09:29:59.788Z [RTS_MONK PASS] 整個僧侶流程後對局仍正常
+2026-10-02T09:29:59.788Z [RTS_MONK COMPLETE] 36 checks, 428.9 秒
+
+## Peer
+2026-10-02T09:23:09.784Z [RTS_MONK PEER] 已集合，等待房主設定
+2026-10-02T09:23:12.236Z [RTS_MONK PEER] 開局，保持被動；招降目標村民前往 -87.30656433105469, 0, -87.30656433105469
+
+## Source SHA256 (tested build)
+64cf67101388fd6cc764ccd356cdf746842aae202e646956c923d98f1ecc115e *src/ReplicatedStorage/Shared/MonkTests.lua
+72a3f9841e625c6ec7aa6c11d1433ff147fe3d4169a61978ce5767dd34c49d85 *src/ServerScriptService/GameServer.server.lua
+10320bc00c2ac7aa66edb3e16229475acecfe583370593d34fca923c2c5c6760 *src/ServerScriptService/ServerModules/UnitRules.lua
+b269d9837afa7ad42e1001a3203f918843605c356aca496edbfce0870162c023 *src/ServerScriptService/ServerModules/MonkRules.lua

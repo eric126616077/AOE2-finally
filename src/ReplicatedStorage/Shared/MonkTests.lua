@@ -271,6 +271,17 @@ local function run(options)
   check(faithAfter > faithBefore and math.abs((faithAfter - faithBefore) - expectedGain) <= Config.Monk.maxFaith / Config.Monk.rechargeTime * 1.5,
    string.format("信仰約每秒 %.1f 恢復（3 秒 +%.1f）", Config.Monk.maxFaith / Config.Monk.rechargeTime, faithAfter - faithBefore))
 
+  -- 招降僧侶停在地圖中段，會自動治療經過的斥候；先讓它回到治療僧侶旁待命，兩名僧侶位置一致。
+  send("Order", { monk }, flat(healer) + Vector3.new(10, 0, 0))
+  waitFor(function() return monk:GetAttribute("Order") ~= "待命" end, 4, "招降僧侶接受回防指令")
+  -- 治療僧侶旁的點可能落在修道院占地內；以距離判定回到附近後下停止，不要求抵達精確點。
+  waitFor(function()
+   assert(monk.Parent, "[RTS_MONK FAIL] 招降僧侶回防途中陣亡；" .. diagnostic())
+   return monk:GetAttribute("Order") == "待命" or (flat(monk) - flat(healer)).Magnitude <= 30
+  end, 180, "招降僧侶回到治療僧侶旁")
+  send("Stop", { monk })
+  waitFor(function() return monk:GetAttribute("Order") == "待命" end, 6, "招降僧侶停止待命")
+  log(string.format("招降僧侶回防，距治療僧侶 %.1f", (flat(monk) - flat(healer)).Magnitude))
   -- 治療：讓斥候進入敵方市鎮中心射程受傷，再撤回。
   local scout = owned(folders.units, "scout", "UnitType")[1]
   check(scout ~= nil, "仍有開局斥候作為治療對象")
@@ -283,18 +294,26 @@ local function run(options)
    if building:IsA("Model") and enemyOwner(building) and building:GetAttribute("BuildingType") == "TownCenter" then enemyCenter = building; break end
   end
   check(enemyCenter ~= nil, "找到 AI 市鎮中心作為傷害來源")
-  local function wound(retreat, radius)
+  local function wound(retreat, radius, allowHealed)
    local start = scout:GetAttribute("HP")
    local direction = (flat(scout) - flat(enemyCenter)).Unit
    send("Order", { scout }, flat(enemyCenter) + direction * 40)
    waitFor(function() return (scout:GetAttribute("HP") or 0) < start end, 120, "斥候受到正常射擊")
    send("Order", { scout }, retreat)
-   waitFor(function() return (flat(scout) - retreat).Magnitude < radius end, 120, "斥候撤回指定位置")
-   check(scout.Parent ~= nil and scout:GetAttribute("HP") < scout:GetAttribute("MaxHP"), string.format("斥候受傷撤回（%d / %d）", scout:GetAttribute("HP"), scout:GetAttribute("MaxHP")))
+   -- 以伺服器回報的待命狀態判定抵達或無法再前進；目標點被建築或樹林擋住時停在附近。
+   waitFor(function() return scout:GetAttribute("Order") ~= "待命" end, 4, "斥候接受撤退指令")
+   waitFor(function()
+    assert(scout.Parent, "[RTS_MONK FAIL] 斥候在撤退途中陣亡；" .. diagnostic())
+    return scout:GetAttribute("Order") == "待命"
+   end, 150, "斥候撤退後待命")
+   local distance = (flat(scout) - flat(healer)).Magnitude
+   log(string.format("斥候撤退停在距治療僧侶 %.1f（目標點偏差 %.1f）", distance, (flat(scout) - retreat).Magnitude))
+   check((allowHealed or scout:GetAttribute("HP") < scout:GetAttribute("MaxHP")) and radius(distance), string.format("斥候受傷撤回（%d / %d，距僧侶 %.1f）", scout:GetAttribute("HP"), scout:GetAttribute("MaxHP"), distance))
   end
   -- 手動：撤到兩名僧侶自動治療半徑之外，再由玩家下令。
-  local away = flat(healer) + (flat(healer) - flat(enemyCenter)).Unit * (Config.Monk.autoHealRadius + 24)
-  wound(away, 10)
+  -- 停在僧侶與敵方主城之間、自動治療半徑外，撤退路線不會經過僧侶身旁。
+  local away = flat(healer) + (flat(enemyCenter) - flat(healer)).Unit * (Config.Monk.autoHealRadius + 30)
+  wound(away, function(distance) return distance > Config.Monk.autoHealRadius + 1 end)
   task.wait(1.5)
   check(healer:GetAttribute("OrderKind") ~= "heal", "受傷單位在自動治療半徑外時，僧侶不會自行跑去治療")
   local healStart, healHP = os.clock(), scout:GetAttribute("HP")
@@ -310,8 +329,23 @@ local function run(options)
   -- 自動治療：待命僧侶自動照顧附近受傷的己方單位。
   send("Order", { healer }, flat(healer))
   waitFor(function() return healer:GetAttribute("OrderKind") == nil end, 20, "治療僧侶待命")
-  wound(flat(healer) + Vector3.new(6, 0, 6), 20)
-  waitFor(function() return healer:GetAttribute("OrderKind") == "heal" or monk:GetAttribute("OrderKind") == "heal" end, 8, "待命僧侶自動治療")
+  -- 撤回途中進入半徑就可能已開始自動治療，因此從受傷前開始監看兩名僧侶的指令。
+  local autoHealed = false
+  for _, m in ipairs({ healer, monk }) do
+   table.insert(connections, m:GetAttributeChangedSignal("OrderKind"):Connect(function()
+    if m:GetAttribute("OrderKind") == "heal" then autoHealed = true end
+   end))
+  end
+  -- 斥候受傷後撤到僧侶附近（不是僧侶站的位置），只要求僧侶自行開始治療，不要求斥候先停下。
+  local before = scout:GetAttribute("HP")
+  send("Order", { scout }, flat(enemyCenter) + (flat(scout) - flat(enemyCenter)).Unit * 40)
+  waitFor(function() return (scout:GetAttribute("HP") or 0) < before end, 120, "斥候第二次受到正常射擊")
+  send("Order", { scout }, flat(healer) + (flat(enemyCenter) - flat(healer)).Unit * 24)
+  waitFor(function()
+   assert(scout.Parent, "[RTS_MONK FAIL] 斥候在撤退途中陣亡；" .. diagnostic())
+   return autoHealed
+  end, 120, "待命僧侶自動治療")
+  log(string.format("自動治療開始時斥候距治療僧侶 %.1f", (flat(scout) - flat(healer)).Magnitude))
   check(true, "待命僧侶自動對附近受傷單位下達治療")
   waitFor(function() return scout:GetAttribute("HP") >= scout:GetAttribute("MaxHP") end, 90, "自動治療到滿血")
   check(true, "自動治療恢復滿血")
