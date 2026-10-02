@@ -1,6 +1,7 @@
 -- Engine-independent limits used by the authority, including repeated target changes.
 local UnitRules = {}
-local actions = {attack=true, gather=true, repair=true, workFeedback=true}
+-- convert / heal：僧侶每秒一次的招降判定與治療。
+local actions = {attack=true, gather=true, repair=true, workFeedback=true, convert=true, heal=true}
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
 end

@@ -80,4 +80,12 @@ expect(MonkRules.regenFaith(50,100,0,5)==50,"zero recharge time changed faith")
 expect(MonkRules.regenFaith(50,0/0,25,5)==0,"invalid max faith accepted")
 expect(MonkRules.regenFaith(150,100,25,-1)==100,"over-max faith not clamped")
 
+-- 伺服器的每秒招降判定與治療走 UnitRules.takeAction；未列入白名單會永遠不觸發（Studio 實測回歸）。
+local UnitRules=require("../src/ServerScriptService/ServerModules/UnitRules")
+for _,action in ipairs({"convert","heal"}) do
+ local clocks,monk={}, {}
+ expect(UnitRules.takeAction(clocks,monk,action,10,1),action.." action was rejected by the server cooldown whitelist")
+ expect(not UnitRules.takeAction(clocks,monk,action,10.5,1),action.." cooldown did not hold for one second")
+ expect(UnitRules.takeAction(clocks,monk,action,11,1),action.." did not fire again after one second")
+end
 print("Monk conversion / heal / faith rules:",checks,"checks passed")

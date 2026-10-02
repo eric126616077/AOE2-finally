@@ -1796,6 +1796,7 @@ Monk.convert=function(state,monk,target)
  if ok then model:SetAttribute("HP",math.clamp(model:GetAttribute("MaxHP")*hp/math.max(1,maxHP),1,model:GetAttribute("MaxHP")))
  else warn("[RTS] 招降單位生成失敗："..tostring(model)) end
  monk:SetAttribute("Faith",0)
+ monk:SetAttribute("ConversionTime",nil)
  stop(monk)
  notify(state.actor,"僧侶成功招降了"..name.."。","Order")
  if victim then notify(victim.actor,"你的"..name.."被敵方僧侶招降了。","Error"); eliminationCheck(victim) end
@@ -1807,15 +1808,19 @@ Monk.step=function(state,unit,order,target,now)
  local ok,reason=Monk.rules.canConvert(data and data.class,false,target:GetAttribute("HP"),faith,Monk.config.maxFaith)
  if not ok then
   -- 信仰不足時留在射程內等待；其他原因（目標改變、不可招降）則停止。
-  order.convertStart=nil
+  order.convertTime,order.convertLast=0,nil
   unit:SetAttribute("Animation","Idle")
   if faith>=Monk.config.maxFaith then notify(state.actor,reason,"Error"); stop(unit) end
   return
  end
- order.convertStart=order.convertStart or now
+ -- 只累計在射程內的時間；目標短暫走開時僧侶跟隨，進度保留（村民採集只停留約 3 秒）。
+ local last=order.convertLast
+ order.convertTime=(order.convertTime or 0)+((last and now-last<=0.6) and now-last or 0)
+ order.convertLast=now
+ unit:SetAttribute("ConversionTime",order.convertTime)
  if UnitRules.takeAction(actionClocks,unit,"convert",now,1) then
   local roll=Monk.random:NextNumber()
-  if Monk.rules.conversionSucceeds(now-order.convertStart,Monk.config.convertMin,Monk.config.convertMax,Monk.config.convertChance,roll) then Monk.convert(state,unit,target) end
+  if Monk.rules.conversionSucceeds(order.convertTime,Monk.config.convertMin,Monk.config.convertMax,Monk.config.convertChance,roll) then Monk.convert(state,unit,target) end
  end
 end
 Monk.autoHeal=function(state,monk)
@@ -2615,7 +2620,6 @@ local function orderStep(dt,now)
     end
    end
   else
-   order.convertStart=nil
    local goal=order.approachGoal or destination
    if order.kind~="move" and not order.approachGoal then local outward=current-destination; if outward.Magnitude>0.01 then goal=destination+outward.Unit*math.max(1,range-1) end end
    moveToward(unit,order,goal,stats.speed,dt,now)
