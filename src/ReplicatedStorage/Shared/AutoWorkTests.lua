@@ -88,6 +88,9 @@ local function run()
    task.wait(.1)
   until os.clock()>=holdUntil
   check(true,"玩家停止的村民保持待命")
+  local free=list[2]
+  check(resourceNear(free,Config.AutoWork.gatherRadius),"主城旁村民的採集半徑內有資源（地圖資源離基地至少 BaseClearance）")
+  waitFor(function() return free:GetAttribute("Order")~="待命" end,Config.AutoWork.idleDelay+Config.AutoWork.retryInterval+2,"未被保留的閒置村民自動開始工作")
 
   local probe=player.PlayerGui:FindFirstChild("RTSSelectionProbe",true)
   check(probe and probe:IsA("BindableFunction"),"正式選取探針可用")

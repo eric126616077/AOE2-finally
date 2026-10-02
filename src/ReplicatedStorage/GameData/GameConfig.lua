@@ -3,7 +3,8 @@ local Config = {}
 Config.Construction = {workRange=5, extraWorkerRate=0.5, maxSelectedWorkers=200}
 -- 自動工作（玩家可在選單關閉）：閒置村民就近施工、交貨或採集；未選村民時建造會派最近村民。
 -- 玩家手動移動或停止的村民保持待命，直到再收到工作指令。
-Config.AutoWork = {idleDelay=2, buildRadius=64, gatherRadius=80, checkInterval=0.5, retryInterval=4, maxPerStep=12, blockedTime=20, busyPenalty=40, reseedFarms=true}
+-- 採集半徑涵蓋開局資源圈（ResourceLayout.OpeningRadius）；資源至少離基地 BaseClearance，80 會讓主城旁的村民找不到資源。
+Config.AutoWork = {idleDelay=2, buildRadius=64, gatherRadius=260, checkInterval=0.5, retryInterval=4, maxPerStep=12, blockedTime=20, busyPenalty=40, reseedFarms=true}
 -- 自動索敵：基礎半徑、換目標需領先的距離、每一優先層級的等效距離，以及自動追擊離開原位的上限。
 Config.Combat = {acquisitionRadius=72, retargetMargin=12, tierDistance=40, leashDistance=120, leashCooldown=2}
 Config.Lobby = {

@@ -260,7 +260,7 @@ end)
 | 同盟與朋友合作／R09 | 19:10 已整合 GameServer／大廳／GUI 與正常遠端 TeamMatchTests；真正雙／四客戶 preview→assignment、改 mode 取消 ready、友軍拒絕、同隊勝負、投降／退出、天然淘汰 pending→final 與重開仍待。 |
 | AI 長局 | 三種難度實際採集／交貨、生產與升級到四時代、資源枯竭後恢復、進攻與防禦、奇觀模式、玩家離開後持續運行。 |
 | 效能／G11 | 大型地圖四方長局、每方 200 人口、資源節點大量耗盡與五次重開的幀率、尋路併發、記憶體與遠端頻率。22.2分鐘單人Advanced及兩局短Flow不代替四方每方200人口或五次重開壓力。 |
-| 村民自動工作 | 新增 `Shared/AutoWorkTests.lua`（新單人 Play 執行 `require(game.ReplicatedStorage.Shared.AutoWorkTests).Run()`）：停止的村民保持待命、空選取顯示建築分類、空選取建造只扣款一次並自動派工、完工接續、選單開關。尚未在 Studio 執行；另需觀察多名閒置村民分工、農田自動重新播種與雙人各自開關互不影響。其他手動控制整合測試開頭會關閉自動工作。 |
+| 村民自動工作 | 新增 `Shared/AutoWorkTests.lua`（新單人 Play 執行 `require(game.ReplicatedStorage.Shared.AutoWorkTests).Run()`）：停止的村民保持待命、空選取顯示建築分類、空選取建造只扣款一次並自動派工、完工接續、選單開關。2026-10-02 單人新 Play：R1 15 項 COMPLETE 但探針發現採集半徑 80 小於資源離基地距離（主城旁村民不會自動採集），改為 260 後 R2 18 項 COMPLETE（含閒置村民自動開始工作、完工接續），見 [紀錄](auto-work-studio-20261002.txt)。仍需觀察多名閒置村民分工、農田自動重新播種、觸控、雙人各自開關互不影響與長局效能。其他手動控制整合測試開頭會關閉自動工作。 |
 | 介面與輸入 | 已有XR橫向命中／安全區、直向可見操作、桌面真控制停用／還原、邊緣平移重聚焦、19:13及20:12桌面覆盤Text／幾何與兩次Restart actual還原。19:58初始化FAIL保留；初始noCharacter、任意avatar替換／teardown、最新手機／隊伍配置、實際多指、持續鍵盤、全部快捷鍵／編隊、聊天輸入、失焦與真手機仍待。 |
 | 正式客戶端 | Roblox 正式客戶端的複製與操作、網路延遲、晚加入觀戰、離開／房主轉移與重開。 |
 | 正式雲端／G10 | 偏好／戰績讀寫與失敗、離開／關閉、跨服併發、Dashboard／Analytics；Studio 關閉 API 與 mock 不證明正式服務通過。 |
