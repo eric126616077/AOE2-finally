@@ -20,13 +20,16 @@ local SelectionIcons = require(RS.Shared.SelectionIcons)
 local UnitSelectionPanel = require(RS.Shared.UnitSelectionPanel)
 local player = Players.LocalPlayer
 local GUI = {hitAreas = {}, reducedMotion = false, tab = "build", page = 1}
--- Iron-and-gilt theme: cool forged panels, warm gold trim, parchment-white text.
-local C = {panel = Color3.fromRGB(25,29,36), card = Color3.fromRGB(40,46,56), edge = Color3.fromRGB(138,112,66),
- gold = Color3.fromRGB(236,200,122), white = Color3.fromRGB(242,236,222), muted = Color3.fromRGB(164,168,174),
- green = Color3.fromRGB(138,206,128), red = Color3.fromRGB(236,120,98), inset = Color3.fromRGB(13,15,20),
- trimLight = Color3.fromRGB(246,214,142), trimDark = Color3.fromRGB(96,74,40), ribbon = Color3.fromRGB(16,19,25)}
-local resourceColors = {food = Color3.fromRGB(222,128,96),wood = Color3.fromRGB(146,192,104),gold = Color3.fromRGB(240,198,86),
- stone = Color3.fromRGB(176,188,200),population = Color3.fromRGB(128,198,214)}
+-- Parchment-and-timber theme, matching the storybook models: warm paper panels in a wood frame,
+-- ink text, cream tiles for buttons. `white` is the main text color (ink), kept under its old key.
+local C = {panel = Color3.fromRGB(240,227,194), card = Color3.fromRGB(252,244,220), edge = Color3.fromRGB(128,92,56),
+ gold = Color3.fromRGB(156,98,16), white = Color3.fromRGB(54,38,26), muted = Color3.fromRGB(120,98,72),
+ green = Color3.fromRGB(44,120,56), red = Color3.fromRGB(184,56,40), inset = Color3.fromRGB(218,201,164),
+ trimLight = Color3.fromRGB(176,134,84), trimDark = Color3.fromRGB(84,58,36), ribbon = Color3.fromRGB(96,66,42)}
+-- Text that sits on a dark timber band (ribbons, badges, notices) or directly over the terrain.
+local L = {white = Color3.fromRGB(252,242,216), gold = Color3.fromRGB(250,216,140), muted = Color3.fromRGB(216,196,162)}
+local resourceColors = {food = Color3.fromRGB(190,84,52),wood = Color3.fromRGB(84,130,56),gold = Color3.fromRGB(188,138,22),
+ stone = Color3.fromRGB(108,122,138),population = Color3.fromRGB(50,126,148)}
 local NUMBER_FONT = Enum.Font.GothamBold
 local reportOutcomes={pending="等待對局結果",win="勝利",loss="戰敗",draw="無勝者"}
 local reportCounters={"buildingsCompleted","villagersTrained","militaryTrained","damageDealt","unitsKilled","buildingsKilled","unitsLost","buildingsLost"}
@@ -99,8 +102,8 @@ local function rule(parent,position,size,color,transparency,name)
 end
 local function inset(parent,size,position,name)
  local frame=make("Frame",parent,{Name=name or "InsetSurface",Size=size,Position=position,BackgroundColor3=C.inset,
-  BackgroundTransparency=0.18,BorderSizePixel=0,Active=false})
- round(frame,3); stroke(frame,C.edge,0.74)
+  BackgroundTransparency=0.35,BorderSizePixel=0,Active=false})
+ round(frame,5); stroke(frame,C.edge,0.7)
  return frame
 end
 local function heraldry(parent,size,position)
@@ -116,13 +119,13 @@ local function heraldry(parent,size,position)
 end
 local function panel(parent, size, position, name, class)
  local frame = make(class or "Frame", parent, {Name = name or "Panel", Size = size, Position = position,
-  BackgroundColor3 = C.panel, BackgroundTransparency = 0.03, BorderSizePixel = 0, Active = true})
- round(frame,6); local edge=stroke(frame,C.edge,0.05); edge.Thickness=1.5; gild(edge); table.insert(GUI.hitAreas, frame)
+  BackgroundColor3 = C.panel, BackgroundTransparency = 0, BorderSizePixel = 0, Active = true})
+ round(frame,8); local edge=stroke(frame,C.edge,0); edge.Thickness=2.5; gild(edge); table.insert(GUI.hitAreas, frame)
  if class ~= "ScrollingFrame" then
-  make("UIGradient",frame,{Color=ColorSequence.new(Color3.fromRGB(255,255,255),Color3.fromRGB(158,164,178)),Rotation=90})
-  -- A caught-light top edge and dark lower seam read as forged, bevelled iron.
-  rule(frame,UDim2.fromOffset(6,2),UDim2.new(1,-12,0,1),C.trimLight,0.7,"PanelLightEdge")
-  rule(frame,UDim2.new(0,6,1,-3),UDim2.new(1,-12,0,1),Color3.new(0,0,0),0.35,"PanelLowerSeam")
+  make("UIGradient",frame,{Color=ColorSequence.new(Color3.fromRGB(255,255,255),Color3.fromRGB(226,211,182)),Rotation=90})
+  -- A pale top edge and a soft lower shadow read as a sheet of paper set into a timber frame.
+  rule(frame,UDim2.fromOffset(8,3),UDim2.new(1,-16,0,1),Color3.new(1,1,1),0.45,"PanelLightEdge")
+  rule(frame,UDim2.new(0,8,1,-4),UDim2.new(1,-16,0,1),C.trimDark,0.72,"PanelLowerSeam")
  end
  return frame
 end
@@ -139,39 +142,40 @@ end
 -- Dark title band with gilt diamonds; purely decorative and never takes input.
 local function ribbon(parent,title,name)
  local band=make("Frame",parent,{Name=name or "TitleRibbon",Size=UDim2.new(1,-8,0,22),Position=UDim2.fromOffset(4,4),
-  BackgroundColor3=C.ribbon,BackgroundTransparency=0.15,BorderSizePixel=0,Active=false})
- round(band,4)
- rule(band,UDim2.new(0,8,1,-1),UDim2.new(1,-16,0,1),C.gold,0.55,"RibbonUnderline")
+  BackgroundColor3=C.ribbon,BackgroundTransparency=0,BorderSizePixel=0,Active=false})
+ round(band,5)
+ make("UIGradient",band,{Color=ColorSequence.new(Color3.fromRGB(255,255,255),Color3.fromRGB(196,180,160)),Rotation=90})
+ rule(band,UDim2.new(0,8,1,-2),UDim2.new(1,-16,0,1),L.gold,0.6,"RibbonUnderline")
  for _,side in ipairs({0,1}) do
   local gem=make("Frame",band,{Name="RibbonGem",Size=UDim2.fromOffset(6,6),AnchorPoint=Vector2.new(0.5,0.5),
-   Position=UDim2.new(side,side==0 and 10 or -10,0.5,0),Rotation=45,BackgroundColor3=C.gold,BorderSizePixel=0,Active=false})
+   Position=UDim2.new(side,side==0 and 10 or -10,0.5,0),Rotation=45,BackgroundColor3=L.gold,BorderSizePixel=0,Active=false})
   gem.Visible=title~=nil
  end
- local label=text(band,title or "",UDim2.new(1,-40,1,0),UDim2.fromOffset(20,0),13,C.gold,Enum.Font.SourceSansBold)
+ local label=text(band,title or "",UDim2.new(1,-40,1,0),UDim2.fromOffset(20,0),14,L.gold,Enum.Font.SourceSansBold)
  label.Name="RibbonTitle"; label.TextWrapped=false; label.TextTruncate=Enum.TextTruncate.AtEnd
  return band,label
 end
 local function button(parent, size, position, callback, name)
  local b = make("TextButton", parent, {Name = name or "Action", Text = "", Size = size, Position = position,
   BackgroundColor3 = C.card, BorderSizePixel = 0, AutoButtonColor = false})
- round(b,4)
- local edge = stroke(b,C.edge,0.4)
- make("UIGradient",b,{Color=ColorSequence.new(Color3.fromRGB(255,255,255),Color3.fromRGB(176,182,196)),Rotation=90})
- local sheen=rule(b,UDim2.fromOffset(4,1),UDim2.new(1,-8,0,1),C.trimLight,0.8,"ButtonLightEdge")
+ round(b,6)
+ local edge = stroke(b,C.edge,0.4); edge.Thickness=1.5
+ make("UIGradient",b,{Color=ColorSequence.new(Color3.fromRGB(255,255,255),Color3.fromRGB(230,216,188)),Rotation=90})
+ local sheen=rule(b,UDim2.new(0,6,1,-2),UDim2.new(1,-12,0,1),C.trimDark,0.8,"ButtonLightEdge")
  local hovered,pressed,focused=false,false,false
  local function refresh(immediate)
   local unavailable=b:GetAttribute("Unavailable")==true
   local selected=b:GetAttribute("Selected")==true
   local primary=b:GetAttribute("Primary")==true
-  local color=b:GetAttribute("AgeLocked") and Color3.fromRGB(36,37,40)
-   or unavailable and Color3.fromRGB(31,34,40)
-   or pressed and Color3.fromRGB(92,74,42)
-   or (hovered or focused) and Color3.fromRGB(58,64,76)
-   or (selected or primary) and Color3.fromRGB(70,58,36) or C.card
+  local color=b:GetAttribute("AgeLocked") and Color3.fromRGB(176,176,176)
+   or unavailable and Color3.fromRGB(226,216,196)
+   or pressed and Color3.fromRGB(224,186,110)
+   or (hovered or focused) and Color3.fromRGB(255,236,180)
+   or (selected or primary) and Color3.fromRGB(244,210,128) or C.card
   if animations[b] then animations[b]:Cancel(); animations[b]=nil end
   if immediate or GUI.reducedMotion then b.BackgroundColor3=color else tween(b,0.1,{BackgroundColor3=color}) end
-  edge.Transparency=focused and 0 or pressed and 0.05 or hovered and 0.12 or unavailable and 0.72 or 0.4
-  sheen.BackgroundTransparency=pressed and 0.94 or (focused or hovered or primary) and 0.5 or 0.8
+  edge.Transparency=focused and 0 or pressed and 0.05 or hovered and 0.1 or unavailable and 0.75 or 0.35
+  sheen.BackgroundTransparency=pressed and 1 or unavailable and 0.92 or 0.8
  end
  b.MouseEnter:Connect(function() hovered=UIS.MouseEnabled; refresh(false) end)
  b.MouseLeave:Connect(function() hovered=false; pressed=false; refresh(false) end)
@@ -222,11 +226,11 @@ local function previewColor(source)
  end
  return nil
 end
-local function viewport(parent, kind, size, position, source)
+local function viewport(parent, kind, size, position, source, stage)
  local view = make("ViewportFrame",parent,{Size = size,Position = position,BackgroundTransparency = 1,
   Ambient = Color3.fromRGB(157,165,157),LightColor = Color3.fromRGB(255,236,206),LightDirection = Vector3.new(-1,-1.3,-0.6),Active = false})
  local world = make("WorldModel",view)
- local model = Art.Create(kind,previewColor(source)); model.Parent = world
+ local model = Art.Create(kind,previewColor(source),nil,stage); model.Parent = world
  local cf,bounds = model:GetBoundingBox()
  local radius = math.max(bounds.X,bounds.Y,bounds.Z,4)
  local camera = make("Camera",view,{FieldOfView = 36,
@@ -236,8 +240,8 @@ local function viewport(parent, kind, size, position, source)
 end
 local function previewStage(parent,size,position)
  local stage=inset(parent,size,position,"PreviewStage")
- stage.BackgroundTransparency=0.08
- make("UIGradient",stage,{Color=ColorSequence.new(Color3.fromRGB(133,143,125),Color3.fromRGB(59,66,56)),Rotation=90})
+ stage.BackgroundColor3=Color3.new(1,1,1); stage.BackgroundTransparency=0
+ make("UIGradient",stage,{Color=ColorSequence.new(Color3.fromRGB(214,226,214),Color3.fromRGB(154,178,128)),Rotation=90})
  rule(stage,UDim2.new(0,6,1,-3),UDim2.new(1,-12,0,1),C.edge,0.48,"StageFloor")
  return stage
 end
@@ -278,6 +282,28 @@ local function compactCost(cost)
  for _,key in ipairs({"food","wood","gold","stone"}) do if cost[key] then table.insert(pieces,names[key]..cost[key]) end end
  return table.concat(pieces," · ")
 end
+-- Price chips: one resource pictogram per amount, each turning red when that resource is short.
+-- Costs too wide for the card keep the compact text underneath.
+local function costChips(parent,cost,label,width,iconSize)
+ local needed=0
+ for _,key in ipairs({"food","wood","gold","stone"}) do
+  if cost[key] then needed+=iconSize+4+#tostring(cost[key])*label.TextSize*0.55 end
+ end
+ if needed==0 or needed>width then return nil end
+ local holder=make("Frame",parent,{Name="CommandCostChips",Size=label.Size,Position=label.Position,BackgroundTransparency=1,Active=false,Visible=false})
+ make("UIListLayout",holder,{FillDirection=Enum.FillDirection.Horizontal,HorizontalAlignment=Enum.HorizontalAlignment.Center,
+  VerticalAlignment=Enum.VerticalAlignment.Center,Padding=UDim.new(0,2),SortOrder=Enum.SortOrder.LayoutOrder})
+ local labels={}
+ for index,key in ipairs({"food","wood","gold","stone"}) do
+  if cost[key] then
+   SelectionIcons.Create(holder,key,UDim2.fromOffset(iconSize,iconSize)).LayoutOrder=index*2-1
+   local value=text(holder,tostring(cost[key]),UDim2.fromOffset(0,iconSize+2),UDim2.fromOffset(0,0),label.TextSize,C.muted)
+   value.Name="Cost_"..key; value.AutomaticSize=Enum.AutomaticSize.X; value.TextWrapped=false; value.LayoutOrder=index*2
+   labels[key]=value
+  end
+ end
+ return holder,labels
+end
 local function selectedBuilders(selected)
  return Building:HasBuilders(selected)
 end
@@ -308,21 +334,29 @@ local function formationIcon(parent,key,width)
  end
  return holder
 end
+-- Pictogram per technology: what it improves, not a generic scroll.
+local techIcons={Loom="armor",Forging="attack",Armor="armor",Wheelbarrow="cart",HandCart="cart",DoubleBitAxe="axe",BowSaw="axe",
+ HorseCollar="food",HeavyPlow="food",Fletching="range",BodkinArrow="range",ThumbRing="interval",Chemistry="flask",GoldMining="gold",
+ StoneMining="stone",Bloodlines="heart",ScaleBarding="armor",Squires="speed",Fervor="speed",Sanctity="heart",Conscription="population"}
 local function commandSymbol(parent,action,width)
  local holder=make("Frame",parent,{Size=UDim2.fromOffset(width,37),BackgroundTransparency=1,Active=false})
  local center=width/2
+ local function badge(symbol)
+  local mark=text(holder,symbol,UDim2.fromOffset(16,18),UDim2.fromOffset(center+9,17),17,C.gold,Enum.Font.SourceSansBold)
+  mark.Name="SymbolBadge"; mark.TextXAlignment=Enum.TextXAlignment.Center
+ end
  if action.tech then
-  local parchment=rule(holder,UDim2.fromOffset(center-11,7),UDim2.fromOffset(22,24),C.gold,0.12,"ResearchScroll")
-  round(parchment,2)
-  for _,y in ipairs({5,29}) do local rod=rule(holder,UDim2.fromOffset(center-14,y),UDim2.fromOffset(28,4),C.white,0.13,"ScrollRod"); round(rod,2) end
-  for i=0,2 do rule(holder,UDim2.fromOffset(center-6,13+i*5),UDim2.fromOffset(i==2 and 8 or 13,1),C.panel,0.12,"ScrollWriting") end
+  SelectionIcons.Create(holder,techIcons[action.key] or "scroll",UDim2.fromOffset(30,30),UDim2.fromOffset(center-15,4)).Name="ResearchIcon"
+  badge("+")
  elseif action.key:match("^Buy_") or action.key:match("^Sell_") then
   local key=action.key:match("_(.+)$")
   local icon=resourceIcon(holder,key); icon.Position=UDim2.fromOffset(center-16,3)
-  local badge=text(holder,action.key:match("^Buy_") and "+" or "−",UDim2.fromOffset(16,18),UDim2.fromOffset(center+7,15),17,C.gold,Enum.Font.SourceSansBold)
-  badge.TextXAlignment=Enum.TextXAlignment.Center
+  badge(action.key:match("^Buy_") and "+" or "−")
+ elseif action.key=="Stop" then
+  SelectionIcons.Create(holder,"stop",UDim2.fromOffset(28,28),UDim2.fromOffset(center-14,5)).Name="StopMark"
  else
-  local stop=rule(holder,UDim2.fromOffset(center-8,11),UDim2.fromOffset(16,16),C.muted,0.05,"StopMark"); round(stop,2)
+  SelectionIcons.Create(holder,"scroll",UDim2.fromOffset(28,28),UDim2.fromOffset(center-14,5)).Name="OrderIcon"
+  if action.symbol then badge(action.symbol) end
  end
  return holder
 end
@@ -406,7 +440,7 @@ function GUI:Init(callbacks)
   Position=UDim2.fromOffset(21,23),Rotation=45,BackgroundColor3=C.ribbon,BorderSizePixel=0,Active=false})
  round(self.ageEmblem,4)
  local emblemEdge=gild(stroke(self.ageEmblem,C.edge,0)); emblemEdge.Thickness=2
- self.ageNumeral=text(self.ageBlock,"I",UDim2.fromOffset(42,46),UDim2.fromOffset(0,0),15,C.gold,Enum.Font.Garamond)
+ self.ageNumeral=text(self.ageBlock,"I",UDim2.fromOffset(42,46),UDim2.fromOffset(0,0),15,L.gold,Enum.Font.Garamond)
  self.ageNumeral.Name="AgeNumeral"; self.ageNumeral.TextXAlignment=Enum.TextXAlignment.Center
  self.ageLabel = text(self.ageBlock,"黑暗時代",UDim2.fromOffset(160,22),UDim2.fromOffset(46,3),17,C.gold,Enum.Font.SourceSansBold)
  self.ageLabel.Name="AgeLabel"; self.ageLabel.TextWrapped=false; self.ageLabel.TextTruncate=Enum.TextTruncate.AtEnd
@@ -428,17 +462,17 @@ function GUI:Init(callbacks)
  self.idleBadge=make("Frame",self.idleButton,{Name="IdleBadge",Size=UDim2.fromOffset(20,16),Position=UDim2.fromOffset(24,1),
   BackgroundColor3=C.red,BorderSizePixel=0,Visible=false,Active=false})
  round(self.idleBadge,8)
- self.idleCount=text(self.idleBadge,"0",UDim2.fromScale(1,1),UDim2.fromOffset(0,0),11,C.white,NUMBER_FONT)
+ self.idleCount=text(self.idleBadge,"0",UDim2.fromScale(1,1),UDim2.fromOffset(0,0),11,L.white,NUMBER_FONT)
  self.idleCount.Name="IdleCountLabel"; self.idleCount.TextXAlignment=Enum.TextXAlignment.Center
  local menu = make("Frame",self.topBar,{Name="MenuDock",Size=UDim2.fromOffset(66,46),Position=UDim2.new(1,-73,0,6),BackgroundTransparency=1,Active=false})
  self.menuDock = menu
  local menuButton,menuLabel=namedButton(menu,"☰  選單",UDim2.fromScale(1,1),UDim2.fromOffset(0,0),function() self:ToggleMenu() end,"MenuButton",C.gold)
  table.insert(self.hitAreas,menuButton); self.menuLabel=menuLabel
- local objective = panel(self.canvas,UDim2.fromOffset(278,78),UDim2.fromOffset(16,8),"Objective")
+ local objective = panel(self.canvas,UDim2.fromOffset(230,78),UDim2.new(1,-246,0,8),"Objective")
  ribbon(objective,"領地與戰局")
- self.objective = text(objective,"建立經濟，發展軍隊\n消滅其他勢力取得勝利",UDim2.fromOffset(252,44),UDim2.fromOffset(13,29),13,C.white)
+ self.objective = text(objective,"建立經濟，發展軍隊\n消滅其他勢力取得勝利",UDim2.fromOffset(206,44),UDim2.fromOffset(12,29),13,C.white)
  self.objective.Name="MatchObjective"; self.objective.TextYAlignment=Enum.TextYAlignment.Top
- self.scoreboard = panel(self.canvas,UDim2.fromOffset(230,151),UDim2.new(1,-246,1,-421),"Scoreboard")
+ self.scoreboard = panel(self.canvas,UDim2.fromOffset(230,151),UDim2.new(1,-246,0,94),"Scoreboard")
  ribbon(self.scoreboard,"對戰勢力")
  self.scoreRows,self.scoreSwatches = {},{}
  for i = 1,4 do
@@ -477,15 +511,15 @@ function GUI:Init(callbacks)
  self.noticePanel.ZIndex = 40; self.noticePanel.BackgroundColor3 = C.ribbon
  for _,side in ipairs({0,1}) do
   make("Frame",self.noticePanel,{Name="NoticeGem",Size=UDim2.fromOffset(7,7),AnchorPoint=Vector2.new(0.5,0.5),
-   Position=UDim2.new(side,side==0 and 14 or -14,0.5,0),Rotation=45,BackgroundColor3=C.gold,BorderSizePixel=0,Active=false})
+   Position=UDim2.new(side,side==0 and 14 or -14,0.5,0),Rotation=45,BackgroundColor3=L.gold,BorderSizePixel=0,Active=false})
  end
- self.notice = text(self.noticePanel,"",UDim2.new(1,-48,1,0),UDim2.fromOffset(24,0),16,C.gold,Enum.Font.SourceSansSemibold); self.notice.TextXAlignment = Enum.TextXAlignment.Center
+ self.notice = text(self.noticePanel,"",UDim2.new(1,-48,1,0),UDim2.fromOffset(24,0),16,L.gold,Enum.Font.SourceSansSemibold); self.notice.TextXAlignment = Enum.TextXAlignment.Center
  -- Selection controls live in the command dock; the former center panel is open terrain.
  self.bottom = panel(self.canvas,UDim2.fromOffset(608,220),UDim2.new(0,16,1,-242),"CommandDock")
  self.commandSurface=inset(self.bottom,UDim2.fromOffset(582,148),UDim2.fromOffset(13,35),"CommandSurface")
  self.dockHeader=make("Frame",self.bottom,{Name="DockHeaderBand",Size=UDim2.new(1,-8,0,28),Position=UDim2.fromOffset(4,4),
-  BackgroundColor3=C.ribbon,BackgroundTransparency=0.2,BorderSizePixel=0,Active=false})
- round(self.dockHeader,4)
+  BackgroundColor3=C.inset,BackgroundTransparency=0.3,BorderSizePixel=0,Active=false})
+ round(self.dockHeader,5)
  rule(self.bottom,UDim2.fromOffset(14,32),UDim2.new(1,-28,0,1),C.gold,0.5,"CommandHeaderRule")
  rule(self.bottom,UDim2.fromOffset(14,183),UDim2.new(1,-28,0,1),C.edge,0.5,"CommandFooterRule")
  self.deleteButton=namedButton(self.bottom,"刪除 [Del]",UDim2.fromOffset(96,25),UDim2.fromOffset(198,5),function() if callbacks.requestDelete then callbacks.requestDelete() end end,"DeleteButton",C.red)
@@ -556,7 +590,7 @@ function GUI:Init(callbacks)
   select=function(unit,remove) if self.callbacks.selectUnit then self.callbacks.selectUnit(unit,remove) end end,
   tooltip=function(value) self.tooltip.Visible=value~=nil; if value then self.tooltipText.Text=value end end,
  })
- local mapFrame = panel(self.canvas,UDim2.fromOffset(230,240),UDim2.new(1,-246,1,-262),"MinimapPanel")
+ local mapFrame = panel(self.canvas,UDim2.fromOffset(230,220),UDim2.new(1,-246,1,-242),"MinimapPanel")
  self.mapPanel = mapFrame
  local _,mapTitle=ribbon(mapFrame,"戰術地圖"); mapTitle.Size=UDim2.fromOffset(100,22)
  self.mapMode="all"
@@ -564,8 +598,8 @@ function GUI:Init(callbacks)
   self.mapMode=({all="economy",economy="military",military="all"})[self.mapMode]
   self.mapModeLabel.Text=({all="全部",economy="經濟",military="軍事"})[self.mapMode]; self:UpdateMap()
  end,"MinimapFilter",C.muted)
- text(mapFrame,"N ↑",UDim2.fromOffset(28,22),UDim2.fromOffset(186,4),12,C.gold,Enum.Font.SourceSansBold).Name="MapNorth"
- self.map = make("TextButton",mapFrame,{Name = "Minimap",Text = "",AutoButtonColor = false,Size = UDim2.fromOffset(204,204),Position = UDim2.fromOffset(13,30),BackgroundColor3 = Color3.fromRGB(75,96,60),BorderSizePixel = 0,ClipsDescendants = true})
+ text(mapFrame,"N ↑",UDim2.fromOffset(28,22),UDim2.fromOffset(186,4),12,L.gold,Enum.Font.SourceSansBold).Name="MapNorth"
+ self.map = make("TextButton",mapFrame,{Name = "Minimap",Text = "",AutoButtonColor = false,Size = UDim2.fromOffset(184,184),Position = UDim2.fromOffset(23,30),BackgroundColor3 = Color3.fromRGB(96,132,74),BorderSizePixel = 0,ClipsDescendants = true})
  round(self.map,4); stroke(self.map,C.trimDark,0)
  for i = 1,3 do
   make("Frame",self.map,{Size = UDim2.new(1,0,0,1),Position = UDim2.fromScale(0,i/4),BackgroundColor3 = C.muted,BackgroundTransparency = 0.86,BorderSizePixel = 0})
@@ -583,7 +617,8 @@ function GUI:Init(callbacks)
   local position = self:MinimapPosition(UIS:GetMouseLocation())
   if position and self.callbacks.minimapMove then self.callbacks.minimapMove(position) end
  end)
- self.keyHelp = text(self.canvas,"WASD 移動 · 滾輪縮放 · Home 回基地 · 拖曳框選 · 右鍵下令／小地圖移動 · F 陣形 · Ctrl + 1–9 編隊 · . 閒置村民 · Del 刪除",UDim2.fromOffset(1040,18),UDim2.new(0.5,-520,1,-19),11,C.white); self.keyHelp.TextXAlignment = Enum.TextXAlignment.Center
+ self.keyHelp = text(self.canvas,"WASD 移動 · 滾輪縮放 · Home 回基地 · 拖曳框選 · 右鍵下令／小地圖移動 · F 陣形 · Ctrl + 1–9 編隊 · . 閒置村民 · Del 刪除",UDim2.fromOffset(760,18),UDim2.new(0.5,-380,1,-20),11,L.white); self.keyHelp.TextXAlignment = Enum.TextXAlignment.Center
+ self.keyHelp.Name="KeyHelp"; self.keyHelp.BackgroundColor3=C.ribbon; self.keyHelp.BackgroundTransparency=0.25; self.keyHelp.TextWrapped=false; round(self.keyHelp,9)
  self.dots = {}
  self.selectionBox = make("Frame",self.screen,{Name = "SelectionBox",Visible = false,BackgroundColor3 = C.green,BackgroundTransparency = 0.86,BorderSizePixel = 1,BorderColor3 = C.green,ZIndex = 8})
  self.hudLayer = make("Frame",self.canvas,{Name = "HUD",Size = UDim2.fromScale(1,1),BackgroundTransparency = 1})
@@ -641,7 +676,7 @@ function GUI:CreateResourceBar()
    round(fill,1)
   end
   local medallion=make("Frame",card,{Name="ResourceIcon",Size=UDim2.fromOffset(34,34),Position=UDim2.fromOffset(4,6),
-   BackgroundColor3=C.ribbon,BorderSizePixel=0,Active=false})
+   BackgroundColor3=C.card,BorderSizePixel=0,Active=false})
   make("UICorner",medallion,{CornerRadius=UDim.new(0.5,0)})
   local ring=stroke(medallion,color,0.05); ring.Thickness=2
   SelectionIcons.Create(medallion,key,UDim2.fromScale(0.72,0.72),UDim2.fromScale(0.14,0.14)).Name="ResourceGlyph"
@@ -657,7 +692,7 @@ function GUI:CreateResourceBar()
   -- Gatherer count sits on the medallion's corner, like a unit-count pip.
   local badge=make("Frame",card,{Name="WorkerBadge",Size=UDim2.fromOffset(18,13),BackgroundColor3=C.ribbon,BorderSizePixel=0,Visible=false,Active=false,ZIndex=card.ZIndex+1})
   round(badge,6); stroke(badge,color,0.15)
-  local workers=text(badge,"",UDim2.fromScale(1,1),UDim2.fromOffset(0,0),10,C.white,NUMBER_FONT)
+  local workers=text(badge,"",UDim2.fromScale(1,1),UDim2.fromOffset(0,0),10,L.white,NUMBER_FONT)
   workers.Name="ResourceWorkers"; workers.TextXAlignment=Enum.TextXAlignment.Center; workers.TextWrapped=false; workers.ZIndex=badge.ZIndex
   self.resourceCards[key],self.resourceLabels[key],self.resourceValues[key] = card,name,value
   self.resourceRates[key],self.resourceDeltas[key] = rate,delta
@@ -755,8 +790,9 @@ function GUI:CreateLobby()
    if waitingInLobby() and not self.lobbyStarting and entry and entry.button:GetAttribute("Unavailable")~=true then lobbyCommand("QueueJoin",portal.id) end
   end,"PortalCard_"..portal.id)
   b:SetAttribute("PortalId",portal.id)
-  local color=portal.color or C.gold
-  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,3,1,-16),color,0.16,"PortalAccent")
+  local accent=portal.color or C.gold
+  local color=accent:Lerp(C.white,0.45)
+  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,4,1,-16),accent,0,"PortalAccent")
   local title=text(b,portal.name,UDim2.new(1,-43,0,27),UDim2.fromOffset(12,7),18,C.white,Enum.Font.SourceSansSemibold)
   local arrow=text(b,"›",UDim2.fromOffset(20,27),UDim2.new(1,-29,0,7),23,color)
   arrow.TextXAlignment=Enum.TextXAlignment.Center
@@ -1032,7 +1068,7 @@ function GUI:LayoutLobby()
 end
 function GUI:CreateGuidance()
  self.tutorialState=Tutorial.New()
- self.guidance=panel(self.hudLayer,UDim2.fromOffset(278,112),UDim2.fromOffset(16,88),"TutorialGuidance")
+ self.guidance=panel(self.hudLayer,UDim2.fromOffset(278,112),UDim2.fromOffset(16,8),"TutorialGuidance")
  self.guidanceTitle=text(self.guidance,"新手指引",UDim2.new(1,-74,0,26),UDim2.fromOffset(12,6),17,C.gold,Enum.Font.SourceSansSemibold)
  self.guidanceText=text(self.guidance,"",UDim2.new(1,-24,0,70),UDim2.fromOffset(12,34),14,C.white)
  namedButton(self.guidance,"隱藏",UDim2.fromOffset(52,44),UDim2.new(1,-58,0,4),function() self.tutorialHidden=true; self.guidanceExpanded=false; self.guidance.Visible=false end,"HideGuidanceButton",C.muted)
@@ -1205,7 +1241,11 @@ function GUI:LayoutTouch()
  for _,child in ipairs(self.hudLayer:GetChildren()) do
   if child:IsA("TextLabel") and child~=self.ageLabel then child.Visible=false end
  end
- self.ageLabel.Position=UDim2.fromOffset(8,59); self.ageLabel.Size=UDim2.fromOffset(math.max(120,width-150),20); self.ageLabel.TextSize=13
+ self.ageLabel.Position=UDim2.fromOffset(8,59); self.ageLabel.Size=UDim2.fromOffset(math.min(230,math.max(120,width-150)),20); self.ageLabel.TextSize=13
+ -- Outside the bar the label sits over the terrain, so it carries its own timber pill.
+ self.ageLabel.BackgroundColor3=C.ribbon; self.ageLabel.BackgroundTransparency=0.08; self.ageLabel.TextColor3=L.gold
+ self.ageLabel.TextXAlignment=Enum.TextXAlignment.Center
+ if not self.ageLabel:FindFirstChildOfClass("UICorner") then round(self.ageLabel,6) end
  self.resourceBar.Size=UDim2.fromOffset(width-72,52); self.resourceBar.Position=UDim2.fromOffset(4,4)
  local cardWidth=(width-76)/5
  for i,key in ipairs(RESOURCE_ORDER) do
@@ -1520,7 +1560,7 @@ function GUI:UpdateLobby()
   entry.status.Text=status=="Configuring" and (count==0 and "空房間 · 進入設定  ›" or "設定中 · "..count.." / "..required.." 人")
    or status=="Waiting" and ((count>=required and "已滿員 · " or "等候中 · ")..count.." / "..required.." 人")
    or status=="Starting" and "隊伍正在出發…" or "對局進行中 · 稍後開放"
-  entry.status.TextColor3=available and (entry.portal.color or C.gold) or C.muted
+  entry.status.TextColor3=available and (entry.portal.color or C.gold):Lerp(C.white,0.45) or C.muted
  end
  self.lobbyHeading.Text=portal and portal.name or "匹配房間"
  self.lobbyDescription.Text=self.lobbyWizard and "選擇模式與人數，再設定遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定模式與規則，先等候玩家加入。")
@@ -1771,6 +1811,13 @@ function GUI:UpdateCommands(selected,buildingKind)
     local data = Config.Technologies[techKey]
     table.insert(actions,{key = techKey,name = data.name,description = data.description,cost = data.cost,minAge = data.minAge or 1,tech = true,requires = data.requires,callback = function() self.callbacks.research(techKey) end})
    end
+   if kind == "Mill" then
+    local farmCost,limit = Config.Buildings.Farm.cost,Config.Farms.queueLimit
+    table.insert(actions,{key = "QueueFarm",name = "預置農田",description = "預先付款儲備一塊農田；任何農田耗盡時自動重新播種，不必另外下令。\n最多預置 "..limit.." 塊。",
+     cost = farmCost,minAge = 1,art = "Farm",costLabel = function() return "已預置 "..(player:GetAttribute("FarmQueue") or 0).." / "..limit end,callback = function() self.callbacks.farmQueue(true) end})
+    table.insert(actions,{key = "UnqueueFarm",name = "取消預置",description = "取消一塊預置的農田，全額退回："..Grid.costText(farmCost),
+     cost = {},minAge = 1,symbol = "−",costLabel = function() return (player:GetAttribute("FarmQueue") or 0) > 0 and "退回一塊" or "尚無預置" end,callback = function() self.callbacks.farmQueue(false) end})
+   end
   end
   if currentFormation and (formationPage or not canBuild) then
    table.insert(actions,{key="Stop",name="停止",description="停止所選單位的目前指令。快捷鍵 X。",cost={},minAge=1,symbol="■",callback=self.callbacks.stop})
@@ -1826,7 +1873,9 @@ function GUI:UpdateCommands(selected,buildingKind)
      title.Visible=pictured; title.Size=UDim2.new(1,-8,0,17)
      cost.Size=UDim2.new(1,-6,0,pictured and 20 or 38); cost.Position=UDim2.fromOffset(3,pictured and 55 or 34); cost.TextSize=13
     end
-    local entry = {button = b,edge = edge,cost = cost,title = title,icon=icon,stage=stage,action = action}; table.insert(self.commandEntries,entry)
+    local chips,chipLabels
+    if not action.costLabel and not action.formation then chips,chipLabels=costChips(b,action.cost,cost,cardWidth-6,self.touchLayout and 15 or 13) end
+    local entry = {button = b,edge = edge,cost = cost,title = title,icon=icon,stage=stage,action = action,chips=chips,chipLabels=chipLabels}; table.insert(self.commandEntries,entry)
     if self.tab == "build" then self.buildButtons[action.key] = entry end
    end
   end
@@ -1851,16 +1900,24 @@ function GUI:UpdateCommands(selected,buildingKind)
   entry.button:SetAttribute("Selected",buildingKind==action.key or activeFormation==true)
   entry.button:SetAttribute("Unavailable",locked or done or missingTech or missingBuilders or incomplete or shortage); entry.edge.Color = (buildingKind == action.key or activeFormation) and C.gold or C.edge; entry.edge.Thickness = (buildingKind == action.key or activeFormation) and 2 or 1
   entry.button:SetAttribute("FormationActive",activeFormation==true)
-  local grey=Color3.fromRGB(145,145,145)
-  if ageLocked then if animations[entry.button] then animations[entry.button]:Cancel(); animations[entry.button]=nil end; entry.button.BackgroundColor3=Color3.fromRGB(42,42,42) end
+  local grey=Color3.fromRGB(104,104,104)
+  if ageLocked then if animations[entry.button] then animations[entry.button]:Cancel(); animations[entry.button]=nil end; entry.button.BackgroundColor3=Color3.fromRGB(184,184,184) end
   entry.title.TextColor3 = ageLocked and grey or (locked or missingBuilders) and C.muted or C.white
   if entry.icon:IsA("ViewportFrame") then entry.icon.ImageColor3=ageLocked and grey or Color3.new(1,1,1)
   elseif entry.icon:IsA("TextLabel") then entry.icon.TextColor3=ageLocked and grey or C.white end
-  if entry.stage then entry.stage.BackgroundColor3=ageLocked and Color3.fromRGB(29,29,28) or C.inset; entry.stage.BackgroundTransparency=locked and 0.28 or 0.08 end
+  if entry.stage then entry.stage.BackgroundColor3=ageLocked and Color3.fromRGB(150,150,150) or Color3.new(1,1,1); entry.stage.BackgroundTransparency=locked and 0.25 or 0 end
   if entry.icon:GetAttribute("UnitType") then UnitIcons.SetMuted(entry.icon,locked or incomplete) end
-  entry.cost.Text = incomplete and "施工未完成" or missingBuilders and "需選取己方村民" or (done and "已完成" or (locked and ("需要"..ageName(action.minAge)) or (missingTech and ("需"..Config.Technologies[action.requires].name) or action.costLabel or compactCost(action.cost))))
+  entry.cost.Text = incomplete and "施工未完成" or missingBuilders and "需選取己方村民" or (done and "已完成" or (locked and ("需要"..ageName(action.minAge)) or (missingTech and ("需"..Config.Technologies[action.requires].name) or (type(action.costLabel)=="function" and action.costLabel()) or action.costLabel or compactCost(action.cost))))
   entry.cost.TextColor3 = ageLocked and grey or done and C.green or (missingBuilders and C.muted or (affordable(action.cost) and C.muted or C.red))
   if action.formation then entry.cost.Text=activeFormation and "使用中" or "點選列隊"; entry.cost.TextColor3=activeFormation and C.gold or C.muted end
+  if entry.chips then
+   -- 狀態文字（需要時代、已完成…）仍用文字；顯示價格時改用圖示。
+   local priced=entry.cost.Text==compactCost(action.cost)
+   entry.chips.Visible=priced; entry.cost.TextTransparency=priced and 1 or 0
+   if priced then
+    for key,value in pairs(entry.chipLabels) do value.TextColor3=(player:GetAttribute(key) or 0)<action.cost[key] and C.red or C.muted end
+   end
+  end
  end
  if formationPage then self.buildHelp.Text=currentFormation=="Mixed" and "混合陣形 · 下次移動依首選單位" or ("陣形："..Config.Formations.types[currentFormation].name.." · 右鍵地面移動") end
  if self.tab == "build" and not canBuild then self.buildHelp.Text = "只有村民能建造 · 請只選取自己的村民" end
@@ -2019,6 +2076,10 @@ function GUI:Update(selected,buildingKind)
    self.scoreSwatches[i].BackgroundColor3 = typeof(teamColor)=="Color3" and teamColor or C.muted
    self.scoreSwatches[i].BackgroundTransparency = actor:GetAttribute("Defeated") and 0.6 or 0
   else row.Text = ""; self.scoreSwatches[i].Visible = false end
+ end
+ if not self.touchLayout then
+  -- The roster is only as tall as its factions and hangs under the objective card.
+  self.scoreboard.Size=UDim2.fromOffset(230,38+math.max(1,math.min(4,#factionList))*28)
  end
  self.healthBack.Visible = false; self.healthText.Text = ""; self.productionBack.Visible = false
  self.selectionState.Visible=false; self.productionText.Visible=false; self.statLine.Text=""; self.queueHolder.Visible=false; self.mobileState.Visible=false

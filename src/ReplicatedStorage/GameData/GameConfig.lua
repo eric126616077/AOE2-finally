@@ -42,6 +42,8 @@ Config.Map = {
   },
  },
 }
+-- 農田：磨坊可預先付款預置，耗盡時優先使用預置；workRange 是村民站在田中央耕作的距離。
+Config.Farms = {queueLimit=40, workRange=4}
 Config.Settings = {
  maxPlayers = 4, gameMode = "Conquest", defaultMapSize = "Medium",
  startingResources = { food = 300, wood = 300, gold = 150, stone = 150 },
@@ -59,8 +61,8 @@ Config.Buildings = {
  TownCenter = { name="市鎮中心", description="訓練村民、交回資源並升級時代，會射擊附近敵軍；城堡時代可增建。", cost={wood=275,stone=100}, hp=2400, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(174,130,79), population=5, minAge=3, buildTime=25, damage=6, range=56, attackInterval=2.0, dropoff={"food","wood","gold","stone"}, trains={"villager"} },
  House = { name="房屋", description="增加 5 人口上限。", cost={wood=25}, hp=550, size=Vector2.new(2,2), height=14, color=Color3.fromRGB(200,173,125), population=5, minAge=1, buildTime=8, trains={} },
  Barracks = { name="兵營", description="訓練步兵與對抗騎兵的長槍兵。", cost={wood=175}, hp=1200, size=Vector2.new(3,3), height=20, color=Color3.fromRGB(149,117,103), population=0, minAge=1, buildTime=18, trains={"infantry","spearman"} },
- Farm = { name="農田", description="提供可採集的食物。", cost={wood=60}, hp=300, size=Vector2.new(3,3), height=1.2, color=Color3.fromRGB(165,141,60), population=0, minAge=1, buildTime=7, amount=700, trains={} },
- Mill = { name="磨坊", description="收集附近的食物，研究農田科技。", cost={wood=100}, hp=800, size=Vector2.new(2,2), height=20, color=Color3.fromRGB(196,174,121), population=0, minAge=1, buildTime=12, dropoff={"food"}, trains={} },
+ Farm = { name="農田", description="提供可採集的食物；一塊農田一位村民，單位可以踩過，耗盡後可重新播種。", cost={wood=60}, hp=300, size=Vector2.new(3,3), height=1.2, walkable=true, color=Color3.fromRGB(165,141,60), population=0, minAge=1, buildTime=7, amount=700, trains={} },
+ Mill = { name="磨坊", description="收集附近的食物，研究農田科技，並可預置農田供耗盡時自動重新播種。", cost={wood=100}, hp=800, size=Vector2.new(2,2), height=20, color=Color3.fromRGB(196,174,121), population=0, minAge=1, buildTime=12, dropoff={"food"}, trains={} },
  LumberCamp = { name="伐木場", description="交回木材，縮短村民往返路程。", cost={wood=100}, hp=800, size=Vector2.new(2,2), height=12, color=Color3.fromRGB(166,134,92), population=0, minAge=1, buildTime=12, dropoff={"wood"}, trains={} },
  MiningCamp = { name="採礦營地", description="交回黃金與石材。", cost={wood=100}, hp=800, size=Vector2.new(2,2), height=12, color=Color3.fromRGB(145,142,125), population=0, minAge=1, buildTime=12, dropoff={"gold","stone"}, trains={} },
  ArcheryRange = { name="射箭場", description="訓練弓箭手與反制弓兵的矛兵。", cost={wood=175}, hp=1200, size=Vector2.new(3,3), height=20, color=Color3.fromRGB(161,131,92), population=0, minAge=2, buildTime=20, trains={"archer","skirmisher"} },

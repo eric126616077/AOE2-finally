@@ -134,6 +134,12 @@ local function research(key)
  local model = selected[1]
  if playable() and model and model:GetAttribute("OwnerId") == player.UserId then command:FireServer("Research", model, key) end
 end
+local function farmQueue(add)
+ local model = selected[1]
+ if playable() and model and model:GetAttribute("OwnerId") == player.UserId and model:GetAttribute("BuildingType") == "Mill" then
+  command:FireServer(add and "QueueFarm" or "UnqueueFarm", model)
+ end
+end
 local function advanceAge()
  local model = selected[1]
  if playable() and model and model:GetAttribute("OwnerId") == player.UserId then command:FireServer("AdvanceAge", model) end
@@ -175,7 +181,7 @@ UI:Init({
   local ok,message = Building:Begin(kind,selected)
   if not ok then UI:Notify(message,"Error") else player:SetAttribute("RTSTouchMode", "build") end
  end,
- train = train, research = research, age = advanceAge, stop = stop, formation = formation,
+ train = train, research = research, farmQueue = farmQueue, age = advanceAge, stop = stop, formation = formation,
  rally = function()
   if not playable() or not rallyBuilding() then UI:Notify("先選取一座已完工的生產建築。") return end
   cancel()

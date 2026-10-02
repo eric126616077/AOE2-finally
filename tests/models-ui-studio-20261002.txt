@@ -1,0 +1,25 @@
+2026-10-02T10:44:43.077Z,141.077652,953c,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Medium。
+2026-10-02T10:45:47.261Z,205.261780,74e4,6,Info [FLog::CreatorOutput] [VIL] 採集 nil tool pick carry  0 near Tree 77.2 dot 0.91 stage nil 461
+2026-10-02T10:45:47.261Z,205.261780,74e4,6,Info [FLog::CreatorOutput] [VIL] 採集 wood tool axe carry wood 9 near Tree 10.0 dot 1.00 stage nil 461
+2026-10-02T10:45:47.261Z,205.261780,74e4,6,Info [FLog::CreatorOutput] [VIL] 採集 nil tool basket carry  0 near Berries 22.4 dot 0.97 stage nil 380
+2026-10-02T10:46:16.558Z,234.558502,953c,6,Info [FLog::CreatorOutput] [STAGE] Tree 150 stage nil Trunk,Crown,Crown,Crown,Footprint 382.8805236816406, 9, 208.8944549560547
+2026-10-02T10:46:16.558Z,234.558502,953c,6,Info [FLog::CreatorOutput] [STAGE] Berries 231 stage 1 Footprint,Bush,Bush,Bush,Berry,Berry,Berry,Berry -291.3530578613281, 2.5, -162.1605987548828
+2026-10-02T10:46:16.559Z,234.559509,953c,6,Info [FLog::CreatorOutput] [STAGE] Berries 236 stage 1 Footprint,Bush,Bush,Bush,Berry,Berry,Berry,Berry 223.36026000976562, 2.5, 168.6328125
+2026-10-02T10:46:16.559Z,234.559509,953c,6,Info [FLog::CreatorOutput] [STAGE] Gold 480 stage nil Rock,Rock,Rock,Rock,Ore,Ore,Ore,Ore,Ore,Ore,Footprint -446.43878173828125, 3, -183.0519256591797
+2026-10-02T10:46:16.559Z,234.559509,953c,6,Info [FLog::CreatorOutput] [STAGE] Gold 479 stage 1 Footprint,Rock,Rock,Rock,Ore,Ore,Ore,Ore 169.0948486328125, 3, 451.760009765625
+2026-10-02T10:46:16.559Z,234.559509,953c,6,Info [FLog::CreatorOutput] [STAGE] Berries 240 stage nil Bush,Bush,Bush,Berry,Berry,Berry,Berry,Berry,Berry,Berry,Berry,Footprint 357.4470520019531, 2.5, 96.66939544677734
+2026-10-02T10:46:16.559Z,234.559509,953c,6,Info [FLog::CreatorOutput] [STAGE] Tree 150 stage nil Trunk,Crown,Crown,Crown,Footprint -385.35595703125, 9, -219.8659210205078
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Tree 127 stage 2 true Footprint,Trunk,Crown,Cut,Log
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Berries 230 stage 1 true Footprint,Bush,Bush,Bush,Berry,Berry,Berry,Berry
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Berries 223 stage 1 true Footprint,Bush,Bush,Bush,Berry,Berry,Berry,Berry
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Gold 470 stage 1 true Footprint,Rock,Rock,Rock,Ore,Ore,Ore,Ore
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Gold 473 stage 1 true Footprint,Rock,Rock,Rock,Ore,Ore,Ore,Ore
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Berries 240 stage nil true Bush,Bush,Bush,Berry,Berry,Berry,Berry,Berry,Berry,Berry,Berry,Footprint
+2026-10-02T10:46:38.751Z,256.751099,41a0,6,Info [FLog::CreatorOutput] [STAGE2] Tree 134 stage 2 true Footprint,Trunk,Crown,Cut,Log
+2026-10-02T10:49:20.871Z,418.871155,74e4,6,Info [FLog::CreatorOutput] [SUITE] BuildMenuTests FAILED ReplicatedStorage.Shared.BuildMenuTests:45: [BUILD_MENU_TEST FAIL] 空選取隱藏村民分類：經濟
+2026-10-02T10:49:20.917Z,418.917358,74e4,6,Info [FLog::CreatorOutput] [SUITE] UnitIconTests FAILED ReplicatedStorage.Shared.UnitIconTests:42: [UNIT_ICON_TEST FAIL] 目前十種單位都納入圖示驗收
+2026-10-02T10:49:21.488Z,419.488251,41a0,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 55 checks
+2026-10-02T10:49:21.489Z,419.489227,41a0,6,Info [FLog::CreatorOutput] [SUITE] HUDTests OK
+2026-10-02T10:49:21.489Z,419.489227,41a0,6,Info [FLog::CreatorOutput] [SUITE] ALL DONE
+2026-10-02T10:50:55.310Z,513.310852,0420,6,Info [FLog::CreatorOutput] [UNIT_ICON_TEST COMPLETE] 982 checks; desktop; fixtures/Age/selection restored; physical clicks require separate UI verification
+2026-10-02T10:50:55.310Z,513.310852,0420,6,Info [FLog::CreatorOutput] [SUITE2] UnitIconTests OK

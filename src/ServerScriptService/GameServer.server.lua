@@ -84,7 +84,26 @@ local unitCollisionIndex=assert(UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS))
 local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.Monk,random=Random.new()}
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
 -- 自動工作的每單位狀態（閒置起點、玩家保留待命、暫時略過的目標）與延後定義的函式。
-local AutoWork={units=setmetatable({},{__mode="k"})}
+local AutoWork={units=setmetatable({},{__mode="k"}),farmClaims=setmetatable({},{__mode="k"}),farmRules=require(script.Parent.ServerModules.FarmRules)}
+-- 農田一次只給一位村民：正在耕作、或交貨後會回來的村民保有該田；其餘村民改派其他食物來源。
+AutoWork.isFarm=function(target)
+ return typeof(target)=="Instance" and target.Parent==buildings and target:GetAttribute("BuildingType")=="Farm"
+end
+AutoWork.farmHolder=function(farm)
+ local unit=AutoWork.farmClaims[farm]
+ local order=unit and unit.Parent==units and orders[unit]
+ if order and AutoWork.farmRules.holds(order.kind,order.target,order.returnTarget,farm) then return unit end
+ AutoWork.farmClaims[farm]=nil
+ return nil
+end
+AutoWork.farmFree=function(farm,unit)
+ return AutoWork.farmRules.free(AutoWork.farmHolder(farm),unit)
+end
+AutoWork.claimFarm=function(farm,unit)
+ if not AutoWork.isFarm(farm) or not AutoWork.farmFree(farm,unit) then return false end
+ AutoWork.farmClaims[farm]=unit
+ return true
+end
 local lobbyWorld = LobbyWorld.Create()
 local rooms, activeRoomId = {}, nil
 for _,portal in ipairs(Config.Lobby.portals) do
@@ -331,6 +350,7 @@ local function makeBuilding(state,kind,pos,complete)
   model:SetAttribute("ResourceType","food")
   model:SetAttribute("Amount",complete and amount or 0)
   model:SetAttribute("MaxAmount",amount)
+  Factory.watchFarm(model)
  end
  refreshBuildingStats(state,model)
  model.Parent=buildings
@@ -348,6 +368,7 @@ local function makeUnit(state,kind,pos)
  model:SetAttribute("FormationForwardX",0)
  model:SetAttribute("FormationForwardZ",-1)
  if kind=="monk" then model:SetAttribute("Faith",Monk.config.maxFaith); model:SetAttribute("MaxFaith",Monk.config.maxFaith) end
+ if kind=="villager" then Factory.watchCarry(model) end
  publishCivilization(state,model)
  publishTeam(state,model)
  model.Parent=units
@@ -495,6 +516,27 @@ local function interactionApproach(unit,order,target,current,range,now)
  order.nextApproach=now+1.5
  return best
 end
+-- 重新播種的判斷：磨坊預置優先，其次是允許自動播種且木材足夠。
+AutoWork.autoReseed=function(state)
+ return Config.AutoWork.reseedFarms==true and (state.ai==true or state.autoWork~=false)
+end
+AutoWork.canReseed=function(state)
+ local source=AutoWork.farmRules.reseedSource(state.actor:GetAttribute("FarmQueue") or 0,false,AutoWork.autoReseed(state))
+ return source=="queue" or (source=="wood" and affordable(state.actor,Config.Buildings.Farm.cost))
+end
+-- 可指派的農田：已完工、沒有其他村民，且仍有食物或能立即重新播種。
+AutoWork.farmUsable=function(state,farm,unit)
+ return farm.Parent==buildings and farm:GetAttribute("BuildingType")=="Farm" and farm:GetAttribute("Complete")==true
+  and AutoWork.farmFree(farm,unit) and ((farm:GetAttribute("Amount") or 0)>0 or AutoWork.canReseed(state))
+end
+-- 耗盡的農田收起作物；使用者自訂模型沒有 CropRow 時維持原樣。
+AutoWork.farmLook=function(farm)
+ local exhausted=(farm:GetAttribute("Amount") or 0)<=0 and farm:GetAttribute("Complete")==true
+ farm:SetAttribute("Exhausted",exhausted)
+ for _,part in ipairs(farm:GetDescendants()) do
+  if part:IsA("BasePart") and part.Name=="CropRow" then part.Transparency=exhausted and 1 or 0 end
+ end
+end
 stop=function(unit,preserveFormationSlot)
  orders[unit]=nil
  if not preserveFormationSlot and unit.Parent then unit:SetAttribute("FormationSlot",nil) end
@@ -508,6 +550,7 @@ stop=function(unit,preserveFormationSlot)
 end
 issue=function(unit,kind,target,automatic)
  orders[unit]={kind=kind,target=target,lastPath=0,automatic=automatic==true}
+ if kind=="gather" then AutoWork.claimFarm(target,unit) end
  local autoEntry=AutoWork.units[unit]
  if autoEntry then autoEntry.idleSince=nil; if kind~="move" then autoEntry.hold=nil end end
  unit:SetAttribute("FormationSlot",kind=="move" and target or nil)
@@ -795,7 +838,7 @@ local function moveToward(unit,order,destination,speed,dt,now)
  unit:PivotTo(CFrame.lookAt(nextPos+Vector3.new(0,2.5,0),nextPos+facing.Unit+Vector3.new(0,2.5,0)))
  unitCollisionIndex:Update(unit,nextPos.X,nextPos.Z,radius)
 end
-local function nearestResource(state,pos,kind)
+local function nearestResource(state,pos,kind,unit)
  local nearest,distance=nil,math.huge
  for resource in pairs(managedResources) do
   if resource.Parent~=resources then managedResources[resource]=nil
@@ -806,7 +849,7 @@ local function nearestResource(state,pos,kind)
  end
  if not kind or kind=="food" then
   for b in pairs(state.buildings) do
-   if b.Parent==buildings and b:GetAttribute("BuildingType")=="Farm" and b:GetAttribute("Complete") and (b:GetAttribute("Amount") or 0)>0 then
+   if AutoWork.farmUsable(state,b,unit) then
     local d=distanceTo(b,pos)
     if d<distance then nearest,distance=b,d end
    end
@@ -835,6 +878,7 @@ local function beginDelivery(state,unit,returnTarget,preferredDropoff,returnKind
   issue(unit,"deliver",dropoff)
   orders[unit].returnTarget=returnTarget
   orders[unit].returnKind=GatheringRules.returnKind(key,returnKind or (returnTarget and returnTarget:GetAttribute("ResourceType")))
+  AutoWork.claimFarm(returnTarget,unit)
  else stop(unit); notify(state.actor,"需要合適的經濟建築才能交回資源。") end
 end
 finishAttack=function(state,unit,order)
@@ -848,7 +892,7 @@ finishAttack=function(state,unit,order)
  if not order.resumeGather then stop(unit); return end
  local target=order.resumeGather
  local key=order.resumeKind
- if not target.Parent or (target:GetAttribute("Amount") or 0)<=0 then target=nearestResource(state,position(unit),key) end
+ if not target.Parent or (target:GetAttribute("Amount") or 0)<=0 then target=nearestResource(state,position(unit),key,unit) end
  if (unit:GetAttribute("Carrying") or 0)>0 and (not target or unit:GetAttribute("CarryType")~=key) then
   beginDelivery(state,unit,target,nil,key)
  elseif target then issue(unit,"gather",target)
@@ -1205,7 +1249,7 @@ local function applyRally(state,building,unit,kind)
  if not rally then return end
  local target=rally.target
  if rally.resourceType and not rallyResource(state,target) then
-  target=nearestResource(state,rally.position,rally.resourceType)
+  target=nearestResource(state,rally.position,rally.resourceType,unit)
  end
  if kind=="villager" and rallyResource(state,target) then
   issue(unit,"gather",target)
@@ -1244,6 +1288,8 @@ local function resetActor(state)
  state.actor:SetAttribute("TrainedVillagers",0)
  for key in pairs(Config.Technologies) do state.actor:SetAttribute("Tech_"..key,nil) end
  for _,key in ipairs({"food","wood","gold","stone"}) do state.actor:SetAttribute(key,0) end
+ state.actor:SetAttribute("FarmQueue",0)
+ state.farmReceipts={}
 end
 local function humanStates()
  local humans={}
@@ -1852,8 +1898,11 @@ local function acceptOrder(state,selection,target,key)
   if kind=="monk" then Monk.order(state,unit,target,victim)
   elseif enemies(state,victim) then issue(unit,"attack",target)
   elseif canBuildWorker(state,unit) and isOwned(state,target,buildings) and construction[target] and not target:GetAttribute("Complete") then issue(unit,"build",target)
-  elseif kind=="villager" and target:GetAttribute("ResourceType") and (not victim or victim==state) and (target:GetAttribute("Amount") or 0)>0 and (target.Parent~=buildings or target:GetAttribute("Complete")) then
-   if (unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType")~=target:GetAttribute("ResourceType") then beginDelivery(state,unit,target) else issue(unit,"gather",target) end
+  elseif kind=="villager" and target:GetAttribute("ResourceType") and (not victim or victim==state) and (target.Parent~=buildings or target:GetAttribute("Complete"))
+   and ((target:GetAttribute("Amount") or 0)>0 or (AutoWork.isFarm(target) and (not AutoWork.farmFree(target,unit) or AutoWork.reseed(state,target,true)))) then
+   -- 己方耗盡的農田下令時先重新播種（預置或扣木材）；已有村民的農田在指令步驟改派。
+   if (unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType")~=target:GetAttribute("ResourceType") then beginDelivery(state,unit,target)
+   else issue(unit,"gather",target); orders[unit].manual=true end
   elseif kind=="villager" and isOwned(state,target,buildings) and (target:GetAttribute("HP") or 0)<(target:GetAttribute("MaxHP") or 0) then issue(unit,"repair",target)
   elseif kind=="villager" and isOwned(state,target,buildings) and (unit:GetAttribute("Carrying") or 0)>0 then
    if target:GetAttribute("Complete") and acceptsResource(target,unit:GetAttribute("CarryType")) then beginDelivery(state,unit,nil,target)
@@ -1914,6 +1963,7 @@ command.OnServerEvent:Connect(function(player,action,a,b,c)
  elseif action=="Rally" then rallyRequest(state,a,b)
  elseif action=="AdvanceAge" then advanceRequest(state,a,false)
  elseif action=="Research" then researchRequest(state,a,b,false)
+ elseif action=="QueueFarm" or action=="UnqueueFarm" then AutoWork.queueFarm(state,a,action=="QueueFarm")
  elseif action=="Trade" then
   if not isOwned(state,a,buildings) or a:GetAttribute("BuildingType")~="Market" or not a:GetAttribute("Complete") then return end
   if type(b)~="string" or not ({food=true,wood=true,stone=true})[b] or (c~="Buy" and c~="Sell") then return end
@@ -2021,7 +2071,7 @@ local function aiStep(state,now)
   if (unit:GetAttribute("Carrying") or 0)>0 then beginDelivery(state,unit,nil)
   else
    local priorities=AIWorkerRules.resourcePriorities(villagerCount,gathering,state.actor:GetAttribute("food") or 0)
-   local target,key=AIWorkerRules.findResource(priorities,function(resourceKind) return nearestResource(state,position(unit),resourceKind) end)
+   local target,key=AIWorkerRules.findResource(priorities,function(resourceKind) return nearestResource(state,position(unit),resourceKind,unit) end)
    if target then issue(unit,"gather",target); gathering[key]+=1 end
   end
  end
@@ -2052,7 +2102,8 @@ local function aiStep(state,now)
   elseif not completedBuilding(state,"University") then aiBuild(state,"University") end
  end
  if age>=2 and not completedBuilding(state,"Tower") and (state.actor:GetAttribute("stone") or 0)>150 then aiBuild(state,"Tower") end
- if not nearestResource(state,state.home,"food") then aiBuild(state,"Farm") end
+ -- 一塊農田只容一位村民：食物人手不足且沒有空閒食物來源時才增建。
+ if gathering.food<math.ceil(villagerCount*0.42) and not nearestResource(state,state.home,"food") then aiBuild(state,"Farm") end
  if settings.victory=="Wonder" and age>=4 and not completedBuilding(state,"Wonder") then aiBuild(state,"Wonder") end
  local armyLimit=settings.difficulty=="Easy" and 16 or settings.difficulty=="Hard" and 60 or 36
  if #military<armyLimit and not savingForAge then
@@ -2239,7 +2290,7 @@ local function nearbySite(state,pos,entry,now)
  return found
 end
 -- 單次掃描取得半徑內各資源最近的目標；已有人耕作的農田不重複指派。
-local function nearbyResources(state,pos,entry,now,farmUsed)
+local function nearbyResources(state,unit,pos,entry,now,farmUsed)
  local nearest,distance={},{}
  local radius=AUTO.gatherRadius
  for resource in pairs(managedResources) do
@@ -2252,8 +2303,7 @@ local function nearbyResources(state,pos,entry,now,farmUsed)
   end
  end
  for b in pairs(state.buildings) do
-  if b.Parent==buildings and b:GetAttribute("BuildingType")=="Farm" and b:GetAttribute("Complete") and (b:GetAttribute("Amount") or 0)>0
-   and not farmUsed[b] and not skipped(entry,b,now) then
+  if not farmUsed[b] and AutoWork.farmUsable(state,b,unit) and not skipped(entry,b,now) then
    local d=distanceTo(b,pos)
    if d<=radius and d<(distance.food or math.huge) then nearest.food,distance.food=b,d end
   end
@@ -2282,7 +2332,7 @@ local function assign(state,unit,context,now)
  local choice={site=nearbySite(state,pos,entry,now),carrying=carrying}
  if not choice.site and carrying>0 then choice.dropoff=nearestDropoff(state,pos,unit:GetAttribute("CarryType")) end
  if not choice.site and carrying<=0 then
-  choice.nearby=nearbyResources(state,pos,entry,now,context.farmUsed)
+  choice.nearby=nearbyResources(state,unit,pos,entry,now,context.farmUsed)
   local general=AIWorkerRules.resourcePriorities(context.villagers,context.gathering,state.actor:GetAttribute("food") or 0)
   local priorities=table.clone(context.preferred or {})
   for _,key in ipairs(general) do if not table.find(priorities,key) then table.insert(priorities,key) end end
@@ -2312,14 +2362,46 @@ AutoWork.afterBuild=function(state,unit,building)
  context.preferred=data and AutoWorkRules.dropoffPreference(data.dropoff)
  return assign(state,unit,context,os.clock())
 end
--- 農田耗盡且木材足夠時自動重新播種，扣款與一般建造相同。
-AutoWork.reseed=function(state,farm)
- if not AUTO.reseedFarms or not enabled(state) or farm:GetAttribute("BuildingType")~="Farm" or not farm:GetAttribute("Complete") then return false end
+-- 耗盡的農田重新播種：優先使用磨坊預置（已付款）；否則在玩家下令或允許自動播種時扣木材。
+AutoWork.reseed=function(state,farm,manual)
+ if not AutoWork.isFarm(farm) or not farm:GetAttribute("Complete") or (farm:GetAttribute("Amount") or 0)>0 then return false end
  local cost=Config.Buildings.Farm.cost
- if not Economy.spend(state.actor,cost) then return false end
- recordReport(state,"spend",{cost=cost})
+ local queued=state.actor:GetAttribute("FarmQueue") or 0
+ local source=AutoWork.farmRules.reseedSource(queued,manual,AutoWork.autoReseed(state))
+ if source=="queue" then
+  state.actor:SetAttribute("FarmQueue",queued-1)
+  if state.farmReceipts then table.remove(state.farmReceipts,1) end
+ elseif source=="wood" then
+  if not Economy.spend(state.actor,cost) then
+   if manual then notify(state.actor,"重新播種所需資源不足："..Grid.costText(cost),"Error") end
+   return false
+  end
+  recordReport(state,"spend",{cost=cost})
+ else return false end
  farm:SetAttribute("Amount",farm:GetAttribute("MaxAmount") or 0)
- notify(state.actor,"農田已耗盡，自動重新播種："..Grid.costText(cost))
+ AutoWork.farmLook(farm)
+ notify(state.actor,source=="queue" and ("農田已用磨坊的預置重新播種，剩餘預置 "..(queued-1).." 塊。") or ("農田已重新播種："..Grid.costText(cost)))
+ return true
+end
+-- 磨坊預置農田：先付款，之後農田耗盡時自動重新播種；取消時全額退回。
+AutoWork.queueFarm=function(state,mill,add)
+ if not isOwned(state,mill,buildings) or mill:GetAttribute("BuildingType")~="Mill" then return false end
+ if not mill:GetAttribute("Complete") then notify(state.actor,"建築尚未完工。"); return false end
+ local cost=Config.Buildings.Farm.cost
+ local queued=state.actor:GetAttribute("FarmQueue") or 0
+ if add then
+  if not AutoWork.farmRules.canQueue(queued,Config.Farms.queueLimit) then notify(state.actor,"預置農田已達上限 "..Config.Farms.queueLimit.." 塊。","Error"); return false end
+  if not Economy.spend(state.actor,cost) then notify(state.actor,"預置農田所需資源不足："..Grid.costText(cost),"Error"); return false end
+  state.farmReceipts=state.farmReceipts or {}
+  table.insert(state.farmReceipts,recordReport(state,"spend",{cost=cost,refundable=true}) or false)
+  state.actor:SetAttribute("FarmQueue",queued+1)
+ else
+  if not AutoWork.farmRules.canUnqueue(queued) then notify(state.actor,"目前沒有預置的農田。"); return false end
+  refund(state.actor,cost)
+  local receipt=state.farmReceipts and table.remove(state.farmReceipts)
+  if receipt then recordReport(state,"refund",{spendId=receipt}) end
+  state.actor:SetAttribute("FarmQueue",queued-1)
+ end
  return true
 end
 AutoWork.step=function(now)
@@ -2384,7 +2466,7 @@ local function productionStep(dt)
      b:SetAttribute("ConstructionProgress",1)
      b:SetAttribute("ConstructionRemaining",0)
      notify(item.state.actor,nil,"ConstructionComplete")
-     if b:GetAttribute("BuildingType")=="Farm" then b:SetAttribute("Amount",b:GetAttribute("MaxAmount") or 0) end
+     if b:GetAttribute("BuildingType")=="Farm" then b:SetAttribute("Amount",b:GetAttribute("MaxAmount") or 0); AutoWork.farmLook(b) end
      recordReport(item.state,"building",{subjectId=reportSubject(b)})
      population(item.state)
      if b:GetAttribute("BuildingType")=="House" then telemetry:Fact(item.state.actor,"firsthouse") end
@@ -2452,7 +2534,8 @@ local function productionStep(dt)
     if data.effect and data.effect.farmCapacity then
      for farm in pairs(state.buildings) do
       if farm:GetAttribute("BuildingType")=="Farm" then
-       if farm:GetAttribute("Complete") then farm:SetAttribute("Amount",(farm:GetAttribute("Amount") or 0)+data.effect.farmCapacity) end
+       -- 耗盡的農田維持耗盡，重新播種時才取得新容量。
+       if farm:GetAttribute("Complete") and (farm:GetAttribute("Amount") or 0)>0 then farm:SetAttribute("Amount",(farm:GetAttribute("Amount") or 0)+data.effect.farmCapacity) end
        farm:SetAttribute("MaxAmount",(farm:GetAttribute("MaxAmount") or 0)+data.effect.farmCapacity)
       end
      end
@@ -2500,11 +2583,25 @@ local function orderStep(dt,now)
   local state=owner(unit)
   if unit.Parent~=units or not alive(state) then orders[unit]=nil; continue end
   local target=order.target
+  local farming=order.kind=="gather" and AutoWork.isFarm(target)
+  if farming then
+   if not AutoWork.claimFarm(target,unit) then
+    -- 這塊田已有村民：改派最近的空閒農田或其他食物來源。
+    local replacement=nearestResource(state,position(unit),"food",unit)
+    local manual,auto=order.manual,order.autoWork
+    if replacement then issue(unit,"gather",replacement); orders[unit].autoWork=auto else stop(unit) end
+    if manual then notify(state.actor,replacement and "這塊農田已有村民耕作，已改派到其他食物來源。" or "這塊農田已有村民耕作，一塊農田只能有一位村民。") end
+    continue
+   end
+   -- 耗盡的農田：有磨坊預置或允許自動播種時重新播種後繼續耕作，否則照一般耗盡處理。
+   if (target:GetAttribute("Amount") or 0)<=0 then AutoWork.reseed(state,target) end
+   order.manual=nil
+  end
   if order.kind~="move" and (not target.Parent or (order.kind=="gather" and (target:GetAttribute("Amount") or 0)<=0)) then
    if order.kind=="gather" then
     local key=target:GetAttribute("ResourceType")
     if (unit:GetAttribute("Carrying") or 0)>0 then beginDelivery(state,unit,target)
-    else local replacement=nearestResource(state,position(unit),key); if replacement then issue(unit,"gather",replacement) else stop(unit) end end
+    else local replacement=nearestResource(state,position(unit),key,unit); if replacement then issue(unit,"gather",replacement) else stop(unit) end end
    elseif order.kind=="deliver" then beginDelivery(state,unit,order.returnTarget,nil,order.returnKind)
    elseif order.kind=="attack" then
     if order.resumeGather or not acquireTarget(state,unit,now,true) then finishAttack(state,unit,order) end
@@ -2524,9 +2621,10 @@ local function orderStep(dt,now)
   if order.kind=="build" and (not canBuildWorker(state,unit) or not isOwned(state,target,buildings) or not construction[target] or target:GetAttribute("Complete")) then stop(unit); continue end
   local current=position(unit)
   local stats=unitStats(state,unit:GetAttribute("UnitType"),order.kind=="gather" and target:GetAttribute("ResourceType") or nil)
-  local destination=order.kind=="move" and target or edgePosition(target,current)
+  -- 農田可以踩踏：村民走進田中央耕作，其餘目標停在外緣。
+  local destination=order.kind=="move" and target or farming and position(target) or edgePosition(target,current)
   -- 到位誤差小於陣形間隙，避免先停止的前排占住後排目的地。
-  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and CONSTRUCTION.workRange or 5
+  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and CONSTRUCTION.workRange or farming and Config.Farms.workRange or 5
   local inRange=(destination-current).Magnitude<=range
   if order.kind=="attack" and order.anchor and not order.objective and not inRange
    and CombatRules.beyondLeash(order.anchor.X,order.anchor.Z,current.X,current.Z,COMBAT.leashDistance) then
@@ -2536,7 +2634,8 @@ local function orderStep(dt,now)
    if order.resumeGather then finishAttack(state,unit,order) else issue(unit,"move",order.anchor) end
    continue
   end
-  if ApproachRules.isWork(order.kind) then
+  if farming then order.approachGoal=nil
+  elseif ApproachRules.isWork(order.kind) then
    if inRange and interactionLineClear(target,current) then
     if order.approachGoal then order.path=nil end
     order.approachGoal=nil
@@ -2566,6 +2665,11 @@ local function orderStep(dt,now)
    order.path=nil
    unit:SetAttribute("Animation",order.kind=="attack" and "Attack" or (order.kind=="gather" or order.kind=="build" or order.kind=="repair" or order.kind=="convert" or order.kind=="heal") and "Work" or "Idle")
    unit:SetAttribute("WorkKind",order.kind=="gather" and target:GetAttribute("ResourceType") or order.kind=="build" and "build" or order.kind=="repair" and "repair" or nil)
+   -- 到位後面向目標並換上對應工具；只轉向，不改變權威位置。
+   if order.kind~="move" and order.kind~="deliver" then
+    Factory.face(unit,position(target))
+    Factory.workTool(unit,unit:GetAttribute("WorkKind"),target)
+   end
    if order.kind=="move" then stop(unit,true)
    elseif order.kind=="deliver" then
     local key,carrying=unit:GetAttribute("CarryType"),unit:GetAttribute("Carrying") or 0
@@ -2579,14 +2683,15 @@ local function orderStep(dt,now)
      unit:SetAttribute("LastDelivery",now)
     end
     local returnTarget=order.returnTarget
-    if not returnTarget or not returnTarget.Parent or (returnTarget:GetAttribute("Amount") or 0)<=0 then returnTarget=nearestResource(state,current,order.returnKind or key) end
+    if not returnTarget or not returnTarget.Parent or ((returnTarget:GetAttribute("Amount") or 0)<=0 and not (AutoWork.isFarm(returnTarget) and AutoWork.farmUsable(state,returnTarget,unit))) then returnTarget=nearestResource(state,current,order.returnKind or key,unit) end
     if returnTarget then issue(unit,"gather",returnTarget) else stop(unit) end
    elseif order.kind=="gather" and UnitRules.takeAction(actionClocks,unit,"gather",now,1) then
     local key=target:GetAttribute("ResourceType")
     local carrying=unit:GetAttribute("Carrying") or 0
     local amount=GatheringRules.takeAmount(target:GetAttribute("Amount") or 0,carrying,stats.carry,stats.gather)
     target:SetAttribute("Amount",math.max(0,(target:GetAttribute("Amount") or 0)-amount))
-    if target.Parent==buildings and (target:GetAttribute("Amount") or 0)<=0 then AutoWork.reseed(state,target) end
+    if target.Parent==resources then Factory.refreshStage(target) end
+    if target.Parent==buildings and (target:GetAttribute("Amount") or 0)<=0 and not AutoWork.reseed(state,target) then AutoWork.farmLook(target) end
     unit:SetAttribute("CarryType",key)
     unit:SetAttribute("Carrying",carrying+amount)
     if amount>0 then unit:SetAttribute("LastWork",now) end

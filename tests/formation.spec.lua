@@ -94,7 +94,8 @@ local units,buildings,construction={},{},{}
 local state={id=7}
 local orders,notices={},{}
 local holds={}
-local AutoWork={units={},hold=function(unit) holds[unit]=true end}
+local AutoWork={units={},hold=function(unit) holds[unit]=true end,
+ isFarm=function() return false end,farmFree=function() return true end,claimFarm=function() return false end,reseed=function() return false end}
 -- Monk handlers are defined inside the extracted order body; formation checks never select monks.
 local Monk={}
 local mode,externalNeighbors="clear",{}

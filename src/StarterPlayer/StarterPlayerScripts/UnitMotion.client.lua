@@ -136,7 +136,7 @@ local groups={
  Arm="right",ArmR="right",Tool="right",ToolHead="right",Sword="right",
  Spear="right",Spearhead="right",Bow="right",Bowstring="right",Staff="right",StaffHead="right",
  ArmL="left",Shield="left",
- Body="torso",Belt="torso",Tabard="torso",Head="torso",Hat="torso",HatBand="torso",Quiver="torso",Robe="torso",
+ Body="torso",Belt="torso",Tabard="torso",Head="torso",Hat="torso",HatBand="torso",Quiver="torso",Robe="torso",Carry="torso",
  HorseBody="horse",Saddle="horse",HorseCloth="horse",HorseHead="horse",HorseNeck="horse",Mane="horse",
  Chassis="siege",Roof="siege",Ridge="siege",SiegeBanner="siege",CatapultPost="siege",TrebuchetFrame="siege",
  RamLog="ram",RamHead="ram",CatapultArm="catapult",StoneBasket="catapult",

@@ -119,6 +119,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Melee attack approach geometry tests failed.' }
     & $runtime tests/approach.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Shared work approach / blocked Farm regression tests failed.' }
+    & $runtime tests/farm.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Farm single-worker / prepaid queue / reseed rule tests failed.' }
     & $runtime tests/path.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Path radius / actual movement segment safety tests failed.' }
     & $runtime tests/path_prefix.spec.lua

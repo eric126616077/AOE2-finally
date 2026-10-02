@@ -227,4 +227,10 @@ local oldProfile=Config.UnitCollision.profiles.cavalry
 Config.UnitCollision.profiles.cavalry={radius=3.25,height=7.5}
 unitFlags("cavalry",Config.Units.cavalry,player,Config.UnitCollision.profiles.cavalry)
 Config.UnitCollision.profiles.cavalry=oldProfile
+-- Fields are walkable: the footprint stays selectable / placement-blocking but never collides.
+local field=Factory.model("Farm",position,size,nil,"Buildings",team)
+expect(field.PrimaryPart.Name=="Footprint" and not field.PrimaryPart.CanCollide and field.PrimaryPart.CanQuery and field.PrimaryPart.Anchored,"farm footprint blocks units or lost its query volume")
+for kind,data in pairs(Config.Buildings) do
+ expect((data.walkable==true)==(kind=="Farm"),"unexpected walkable building "..kind)
+end
 print(string.format("ModelFactory actual-body engine-mock tests: %d PASS (not Studio)",checks))
