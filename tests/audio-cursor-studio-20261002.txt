@@ -1,0 +1,112 @@
+# Studio Play 2026-10-02 (Asia/Taipei 13:22-13:28) place build/AOE2-audio-cursor-20261002-r2.rbxlx
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 實際 PlayerGui 掛載音效開關
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 音效選單使用 GUI 安全區域
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式 HUD 使用 UIScale
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單全部位於目前實際視窗安全範圍內
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ContinueButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SurrenderButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：EdgeScrollButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：GuidanceButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ReducedMotionButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ContinueButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SurrenderButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：EdgeScrollButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：GuidanceButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ReducedMotionButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SurrenderButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／EdgeScrollButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／GuidanceButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／ReducedMotionButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／EdgeScrollButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／GuidanceButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／ReducedMotionButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／GuidanceButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／ReducedMotionButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／SoundButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／MusicButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／MusicVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／SoundVolumeButton
+2026-10-02T05:23:01.391Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／ReducedMotionButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／MusicButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／MusicVolumeButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／SoundVolumeButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／ReducedMotionButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：MusicButton／MusicVolumeButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：MusicButton／SoundVolumeButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：MusicButton／ReducedMotionButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：MusicVolumeButton／SoundVolumeButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：MusicVolumeButton／ReducedMotionButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundVolumeButton／ReducedMotionButton
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 實際音效標籤與玩家設定一致
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 音效 LocalScript 位於實際 PlayerScripts
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 動作 LocalScript 位於實際 PlayerScripts
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 正式音效與動作 LocalScript 已初始化
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 實際音效 LocalScript 提供 Studio 唯讀播放探針
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 正式播放池有總量與世界音效上限
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 正式音效非同步預載完成
+2026-10-02T05:23:01.392Z [FEEDBACK_TEST PASS] 正式音效全部授權素材與內建替代音預載成功
+2026-10-02T05:23:03.239Z [FEEDBACK_TEST PASS] 每個實際 Sound 都有 IsLoaded 與有效 TimeLength
+2026-10-02T05:23:03.240Z [FEEDBACK_TEST PASS] 玩家靜音設定同步正式播放池、清理音效與實際標籤
+2026-10-02T05:23:03.241Z [FEEDBACK_TEST PASS] 本機音效 API 可播放已驗證內建音檔
+2026-10-02T05:23:03.241Z [FEEDBACK_TEST PASS] 播放後實際保留活動聲音
+2026-10-02T05:23:03.292Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Defeat
+2026-10-02T05:23:03.292Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Defeat
+2026-10-02T05:23:03.344Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Victory
+2026-10-02T05:23:03.344Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Victory
+2026-10-02T05:23:03.395Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchStart
+2026-10-02T05:23:03.395Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchStart
+2026-10-02T05:23:03.444Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Train
+2026-10-02T05:23:03.446Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Train
+2026-10-02T05:23:03.499Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Research
+2026-10-02T05:23:03.499Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Research
+2026-10-02T05:23:03.548Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：ConstructionComplete
+2026-10-02T05:23:03.548Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：ConstructionComplete
+2026-10-02T05:23:03.599Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchEnd
+2026-10-02T05:23:03.599Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchEnd
+2026-10-02T05:23:03.651Z [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Error
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Error
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 實際播放可同時保留多個聲音
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 靜音立即清空此 API 的活動播放
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 靜音期間拒絕新增播放
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 解除靜音後可再次播放
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] StopAll 完整釋放播放額度
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST PASS] 解除玩家靜音同步正式播放池與標籤
+2026-10-02T05:23:03.652Z [FEEDBACK_TEST COMPLETE] 92 項檢查；已驗收目前裝置的版面、實際資產載入、多音與靜音；聽感與真人觸控仍需手動驗收
+2026-10-02T05:23:04.817Z [FEEDBACK_TEST PASS] 正常大廳流程啟動單人測試局
+2026-10-02T05:23:04.817Z [FEEDBACK_TEST PASS] 三位初始村民及根零件同步
+2026-10-02T05:23:04.817Z Error: ReplicatedStorage.Shared.FeedbackTests:18: [FEEDBACK_TEST FAIL] 正常無角色 RTS 沙盒
+2026-10-02T05:24:56.106Z [AUDIOPROBE2] {"enabled":true,"played":1,"worldMixVolume":0.8500000238418579,"failedAssets":0,"maxWorldVoices":5,"preloadFinished":true,"world":0,"preloadError":false,"active":0,"fallbackPlays":0,"volume":1,"loadedAssets":57,"skippedUnavailable":0,"maxVoices":8,"assetCount":57}
+2026-10-02T05:24:56.106Z [MUSICPROBE2] {"enabled":true,"groupVolume":0.38499999046325686,"failedTracks":0,"ambience":true,"ducked":false,"mood":"Peace","volume":0.7,"loaded":true,"track":"Travelling Troubadour","playing":true}
+2026-10-02T05:25:07.286Z [SEL] 3 true
+2026-10-02T05:25:35.275Z [ORDERS] 待命/nil,待命/nil,待命/nil,待命/nil markersFolder= true icon= rbxasset://textures/Cursors/KeyboardMouse/ArrowFarCursor.png badge= false
+2026-10-02T05:25:35.275Z [AUDIOPROBE3] {"enabled":true,"played":4,"worldMixVolume":0.8500000238418579,"failedAssets":0,"maxWorldVoices":5,"preloadFinished":true,"world":0,"preloadError":false,"active":0,"fallbackPlays":0,"volume":1,"loadedAssets":57,"skippedUnavailable":0,"maxVoices":8,"assetCount":57}
+2026-10-02T05:26:04.052Z [ORDERS2] 採集/wood,交貨/nil,交貨/nil,待命/nil
+2026-10-02T05:26:04.052Z [AUDIOPROBE4] {"enabled":true,"played":13,"worldMixVolume":0.8500000238418579,"failedAssets":0,"maxWorldVoices":5,"preloadFinished":true,"world":0,"preloadError":false,"active":0,"fallbackPlays":0,"volume":1,"loadedAssets":57,"skippedUnavailable":0,"maxVoices":8,"assetCount":57}
+2026-10-02T05:26:36.031Z [MUSICPROBE5] {"enabled":false,"groupVolume":0,"failedTracks":0,"ambience":true,"ducked":false,"mood":"Peace","volume":0.4,"loaded":false,"playing":false}
+2026-10-02T05:26:53.049Z [MUSICPROBE6] {"enabled":true,"groupVolume":0.2199999988079071,"failedTracks":0,"ambience":true,"ducked":false,"mood":"Peace","volume":0.4,"loaded":true,"track":"Galliard For A Queen","playing":true}
+2026-10-02T05:27:19.239Z [SERVERHIT] done 31
+2026-10-02T05:27:31.175Z [ALERT] -49.318946838378906, 2.5, -235.0189971923828 1 pings= 0
+2026-10-02T05:27:31.175Z [MUSICPROBE7] {"enabled":true,"groupVolume":0.2199999988079071,"failedTracks":0,"ambience":true,"ducked":false,"mood":"Battle","volume":0.4,"loaded":true,"track":"Clash of Swords","playing":true}
+2026-10-02T05:27:31.175Z [AUDIOPROBE7] {"enabled":true,"played":48,"worldMixVolume":0.8500000238418579,"failedAssets":0,"maxWorldVoices":5,"preloadFinished":true,"world":0,"preloadError":false,"active":0,"fallbackPlays":0,"volume":1,"loadedAssets":57,"skippedUnavailable":0,"maxVoices":8,"assetCount":57}
+2026-10-02T05:27:49.756Z [NOTICE] 你的部隊正遭受攻擊！按空白鍵前往。 focus= nil nil
+2026-10-02T05:28:07.390Z [FOCUS] -49.318946838378906, 2.5, -235.0189971923828 1 false

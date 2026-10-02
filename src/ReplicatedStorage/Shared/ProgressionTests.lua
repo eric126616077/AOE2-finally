@@ -12,6 +12,7 @@ local function run()
  local Config=require(RS.GameData.GameConfig)
  local Grid=require(RS.Shared.Grid)
  local command=RS:WaitForChild("RTSRemotes",10):WaitForChild("Command",10)
+ command:FireServer("AutoWork",false) -- 手動控制整合測試：關閉自動工作，避免閒置村民自行介入。
  local feedback=RS.RTSRemotes:WaitForChild("Feedback",10)
  local messages={}
  local connection=feedback.OnClientEvent:Connect(function(message)
@@ -54,13 +55,12 @@ local function run()
  local ok,result=xpcall(function()
   waitFor(function() return workspace:GetAttribute("RTSReady")==true end,10,"伺服器初始化完成")
   check(#Players:GetPlayers()==1,"進階驗證使用單人 Studio 客戶端")
-  waitFor(function() return workspace:GetAttribute("HostUserId")==player.UserId end,5,"本機玩家為房主")
   if workspace:GetAttribute("MatchPhase")=="Ended" then
    command:FireServer("RestartMatch")
    waitFor(function() return workspace:GetAttribute("MatchPhase")=="Lobby" end,8,"結束對局返回大廳")
   end
   check(workspace:GetAttribute("MatchPhase")=="Lobby","只在新的大廳開始驗證")
-  command:FireServer("StartMatch",{size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"})
+  require(RS.Shared.LobbyTests).Start({size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"})
   waitFor(function()
    return workspace:GetAttribute("MatchPhase")=="Playing"
     and workspace:GetAttribute("Sandbox")==true and workspace:GetAttribute("MatchSize")==768
@@ -120,7 +120,7 @@ local function run()
    for _,model in ipairs(owned(buildings,kind,"BuildingType")) do existing[model]=true end
    local balances={}
    for key in pairs(data.cost) do balances[key]=player:GetAttribute(key) end
-   command:FireServer("Build",kind,location(kind))
+   command:FireServer("Build",kind,location(kind),workers)
    local site
    waitFor(function()
     for _,model in ipairs(owned(buildings,kind,"BuildingType")) do if not existing[model] then site=model; return true end end

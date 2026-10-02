@@ -1,0 +1,21 @@
+Studio publish integration acceptance evidence. UTC raw log timestamps; user-facing timezone Asia/Taipei (+08:00).
+Source log: 
+C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20261001T100640Z_Studio_A787A_last.log
+Scope: actual CreatorOutput markers from 2026-10-01T10:08:45Z; Command Bar echo explicitly excluded.
+---
+2026-10-01T10:08:45.135Z,125.135155,dcc8,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION START] ReleaseTests
+2026-10-01T10:08:47.806Z,127.806847,13b00,6,Info [FLog::CreatorOutput] [RELEASE_TEST COMPLETE] 19 checks; gameplay construction follows separately
+2026-10-01T10:08:47.806Z,127.806847,13b00,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION PASS] ReleaseTests
+2026-10-01T10:08:47.806Z,127.806847,13b00,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION START] BuildMenuTests
+2026-10-01T10:08:49.667Z,129.667694,dcc8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST COMPLETE] 840 rendering checks; local attributes/selection restored
+2026-10-01T10:08:49.667Z,129.667694,dcc8,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION PASS] BuildMenuTests
+2026-10-01T10:08:49.667Z,129.667694,dcc8,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION START] HUDTests
+2026-10-01T10:08:52.977Z,132.977859,13b00,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 55 checks
+2026-10-01T10:08:52.977Z,132.977859,13b00,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION PASS] HUDTests
+2026-10-01T10:08:52.977Z,132.977859,13b00,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION START] FormationTests
+2026-10-01T10:09:19.397Z,159.397064,bff0,6,Info [FLog::CreatorOutput] [FORMATION COMPLETE] {"ownershipCovered":false,"checks":210,"scope":"正常 Command 遠端與客戶端收到的伺服器單位複製；未宣稱雙人同步","complete":true,"cleanupStopped":true,"rejections":["重複選取","非陣列表格","密集陣列包含非法成員","空選取","非法隊形","錯誤隊形型別","重複移動選取","密集移動選取包含非法成員","錯誤移動目標型別","非法移動隊形","NaN 移動位置","無限移動位置","地圖外移動位置","混合建築選取","超量選取"],"generation":1,"formations":["Box","Line","Column","Wedge","Spread"],"elapsedSeconds":26.417401300001076,"ownershipOmittedReason":"單人沙盒沒有外方單位；仍需真正雙人新局檢查所有權","ownerId":1261977619}
+2026-10-01T10:09:19.398Z,159.398071,bff0,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION PASS] FormationTests
+2026-10-01T10:09:19.398Z,159.398071,bff0,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION START] UnitCollisionTests
+2026-10-01T10:09:43.063Z,183.063934,13334,6,Info [FLog::CreatorOutput] [UNIT_COLLISION COMPLETE] checks=74 samples=1412 rootChanges=291 elapsed=23.663 work=true/true segments=14
+2026-10-01T10:09:43.063Z,183.063934,13334,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION PASS] UnitCollisionTests
+2026-10-01T10:09:43.063Z,183.063934,13334,6,Info [FLog::CreatorOutput] [PUBLISH_INTEGRATION COMPLETE]

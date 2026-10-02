@@ -1,0 +1,1716 @@
+{
+  "pass": true,
+  "scope": "Local candidate only; no Studio execution or Roblox publication. Preserves every original Item identity/parent, all nonmapped maximal subtrees and unmapped properties; updates only preflight-mapped properties and adds mapped Items.",
+  "base": {
+    "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\build\\AOE2-publish-snapshot-20260930.rbxlx",
+    "sha256": "A9B98DED9265B3D34E4601E3F867BA840BBE17B4C6DFEF63AF74789693CC036B",
+    "bytes": 20857503
+  },
+  "preflight": {
+    "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\build\\AOE2-lobby-publish-preflight-20261001-193006.rbxlx",
+    "sha256": "D3F8CAA53F65C6E14384B4687F9A11ED22B021698FDE0B3199503DE3151AD218",
+    "bytes": 1242616
+  },
+  "candidate": {
+    "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\build\\AOE2-lobby-publish-20261001-193006.rbxlx",
+    "sha256": "DD318508D63A01A864764B4FC7BAC626ECA93B8DA8FE549DDDE5600F3102315C",
+    "bytes": 21143836
+  },
+  "originalSourceCount": 77,
+  "expectedSourceCount": 99,
+  "matchedSourceCount": 99,
+  "extraSourceCount": 0,
+  "testAutorunnerCount": 0,
+  "testAutorunnerPolicy": "Reject Script/LocalScript names containing test/harness/coordinator/validation/runner and direct require() imports of test/harness/coordinator/validation modules. Test ModuleScripts may exist only in the explicit preflight mapping.",
+  "streamingEnabled": false,
+  "newItemCount": 22,
+  "newItems": [
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuRules",
+      "class": "ModuleScript",
+      "referent": "RBX3C1B1D04CBF8428C89B563089E0033B6"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuTests",
+      "class": "ModuleScript",
+      "referent": "RBX2F6F2D1B167F4161BCC576A5DA05C9D7"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ClientUnitView",
+      "class": "ModuleScript",
+      "referent": "RBX2FE969A0375D420D871323D60E94C32A"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualRules",
+      "class": "ModuleScript",
+      "referent": "RBXDA32462E71DB42FDA35F378F94EE3DEC"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualTests",
+      "class": "ModuleScript",
+      "referent": "RBX4E9C59F59C6E4F35A010E17BA62CAEE8"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationRules",
+      "class": "ModuleScript",
+      "referent": "RBX63ECA836E7A0493993BE5603AE6BE00F"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationTests",
+      "class": "ModuleScript",
+      "referent": "RBXD9B5CFD61FA94AE4A60E4D89246D6539"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/HUDTests",
+      "class": "ModuleScript",
+      "referent": "RBX28E6267E35084DD282BDB40CFFD4EE94"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyFlowTests",
+      "class": "ModuleScript",
+      "referent": "RBX641EB6081CAE47EB874736734649F73E"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MapTests",
+      "class": "ModuleScript",
+      "referent": "RBXE9422A55D95C42EFAFD968810E0032C1"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MotionRules",
+      "class": "ModuleScript",
+      "referent": "RBXC668454A92BD4DC597B6A80DB0AC85A0"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ProductionTests",
+      "class": "ModuleScript",
+      "referent": "RBXF2418B04E7754254B18F53D1956D33E1"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/SelectionIcons",
+      "class": "ModuleScript",
+      "referent": "RBXD19913C3F60246B28763040FEA6E3667"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitCollisionTests",
+      "class": "ModuleScript",
+      "referent": "RBXF354B057143C41A9A55D768F6FFA60DD"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIconTests",
+      "class": "ModuleScript",
+      "referent": "RBX0D929498A6154CAF9640B2CE54B4DDE0"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIcons",
+      "class": "ModuleScript",
+      "referent": "RBXC0406F5F523D4D05A65A00D99ECB4474"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitSelectionPanel",
+      "class": "ModuleScript",
+      "referent": "RBXCC29E7EE47A44A41A6049BB79100F000"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/VisualMotionTests",
+      "class": "ModuleScript",
+      "referent": "RBX67595C35038D4F948128F2D078FF1A28"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CommandRules",
+      "class": "ModuleScript",
+      "referent": "RBXC3F88F74A4214728935C924C42DDB485"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PlayerColorTests",
+      "class": "ModuleScript",
+      "referent": "RBXC046706C019D4384A596A859A18C77A7"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/UnitCollisionRules",
+      "class": "ModuleScript",
+      "referent": "RBX94CCAD386039453590B452D4F51139CA"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/BuildingVisuals",
+      "class": "LocalScript",
+      "referent": "RBX04EDAD6746724CB9A0E95683F040C109"
+    }
+  ],
+  "propertyChanges": [
+    {
+      "path": "ReplicatedStorage/GameData/GameConfig",
+      "property": "Source",
+      "beforeSha256": "C51DFB78B2B9B884B097AA1A3C5713D386F21451DD1EE444D5B96C4CEAD1EFA1",
+      "afterSha256": "5CFE4470BF0F6827DF5E0A2D75211019D8F664EC61592D7D1D271D36BE0CAA53"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/Art",
+      "property": "Source",
+      "beforeSha256": "2E7EBD30CC009F7ED9B1FC9C0E0F84F761089F692436CE8EC2E35B8806C6E1E2",
+      "afterSha256": "4ED929EC7A9D509B20313E9DAF96929B2BC81465F340C8DF64E726C8E3991461"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/AudioFeedback",
+      "property": "Source",
+      "beforeSha256": "E7FDD2F1D095123B3DB513537BABE641E45EB6E740224C8750AE8703DBE7A698",
+      "afterSha256": "B3E22D87E68170A83117A37CFB34C0E864D1E18D6A6AFAAEC82E3F6659F953C2"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "501DC058E3CC3D43CAAF29B5B24597DF03FD5F97908028ABE96E6BB9D2E39598"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "E1234E82ECF07654CCD3E823A02C2C613DD436D63026360A27C4F262E2C292D4"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "4E3ACE0C4A6843FCB56B77437841583232D8B91B372B07F0F12F65FD652EDB98"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "1EC6B5C508257F85EEFD33A249AFD3072CBDEC04F6754BD5EB6D9D36162F3D79"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildingController",
+      "property": "Source",
+      "beforeSha256": "9D318C656CBD4E188864E0DA2681738F681B29D43CC3463CD5B6CFBAF0D719DB",
+      "afterSha256": "C613D6AB1BFF74DA79FAB0E3E649B07FBC04D9D5A50EFF094467C7A31BC6E54D"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ClientUnitView",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "339492DEDF77E814F9DE2CC340E4696D1940D4362473EF3585F6D63741037B1F"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ClientUnitView",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "C5E285CA657D97DA5EA2CC404EBC4B08A60BF56245E205D1F3846B3151AF83BF"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "61A020F0AFFA110C5D4A0BAB1F406D6D0B92A23FD2CDD917ADF32B9EDE13235C"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "73C0F3963AF25D4055DCF419131055731B3917B2927B26E658F66954D03FDDEF"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "FF49572D14F45EC39E2C09BC6370E4EB87F41D8EB1D333F10C1CBF8187DE893D"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "914C2C26E63C96475C038285D4FB541DB067D1A9E625B3E19B77C08509128C34"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackRules",
+      "property": "Source",
+      "beforeSha256": "A8AB58B80F31BAB49ECFCCA790F4BBE3CD8261BCDC5CCE8D086C4EF432E65BC4",
+      "afterSha256": "43AB760CE6360454CC819BC6D9A7C3E50FFD73085EB5E5FD1A91CE007DBD4972"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "4EC6881F05D4E7B02D8FF7F6D35C353321E515FFA10BD9AD413D078BD8853041"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "45291D6A000545CB669F88518C9F0CC29FC5BECE3CF9D164BE6453C5B63E8F7C"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "850DBBFDF75F1FB326DDAE6D87B821EDF37044678F55C76B8776B6B1FF7DC07C"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "2E1300ABA46A3250BF8568A023292DD93CC325555793E0C60F0AEEB22FCD97A1"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/HUDTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "0EBE5D6396A279F18D078EC64080F7B6D64080BEC2D16E1A26632D50D19F8FA3"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/HUDTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "59C33A1671E55B591FA4D9024C124687E82800AE8467B29B8D2974CD2BC6503E"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyFlowTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "DFB5497782DC361D921F9287E96F9BF853D2DD8D2459AC2F9DEC226057CFEC60"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyFlowTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "000F967E8F977BF77B53A4E6C57F93A45ED7DC4B8A14D855717C6C4A16F4E48D"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyTests",
+      "property": "Source",
+      "beforeSha256": "B39197FA69F2EAD862DC4CD9BA0FA3882073895A5D05B8A921EE8B7FAA85A874",
+      "afterSha256": "DF69B9A82F4871FAA20D9B227D7DACCDF1251FF9C7A96CD803031BC3C6DBFF60"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MapTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "76EFB7DC712EF9AD9E5B70FA9AFF5AFF7AC95B144A0F5B7C4BC9CBB28A7BAE09"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MapTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "3DF7D5058D0EB04EDFFBC980489C1C240058A6BC210FF278C73DCBF8E3E306EF"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MotionRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "906A5E8A0ECFFC0A31A49F6E76CED8D54D54776C1F94EEE0BC285C321EB21F61"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MotionRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "B88D222B09F609306FE4FB62EC9394E01DE27C4EE053AAB6BC071D3A9A1DAC34"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ProductionTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "36F7D38336A7E3BEC7A9DA107195E28EAC446F32CE4D86B35CB61EC0008DFABD"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ProductionTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "260B3CF4EE9AAA506A6BC14D0C206585B23AEA865789C15B7D4E7BD97982A093"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/SelectionIcons",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "DD423081AD8A8EF2559DDFE6E0CA8FA724525F19DB0F20723E22E19B6D96E8B1"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/SelectionIcons",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "7F40E487529CCAD2D0ED1F4A1BD7E23403FF7677181591BD61A139D865B36D29"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitCollisionTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "3FF70A5EF4C47E0C9F346812C799FE7445AEA52E2D9637295F7BCBB29DFA598B"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitCollisionTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "EF3D8B00CC0976D35A2D36F59399CEA2F6D9ADB83691AA5C6884026AB2F0CB87"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIconTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "8E0DB6C4A923F140BC5443A77FD794DD9AC4786B7F9FD45D4601BB3A6ED15DF4"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIconTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "3145AF7FD72488C6A30C43AA97815DDAD75687C12525AEE7347C2C2C518BD2B4"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIcons",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "22D64F504754C0202CB0CCFED6B7B9C3A216C3F94560D135D08EABC359955A99"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIcons",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "CF8EA1556A247DDF6051978B4AC9F0C134C34E3C7866AD245D8A493C45C35AE6"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitSelectionPanel",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "B8B13069A0C4A6547D23370B110112137DE61BF4D4D8E60E3B0C78677E08B761"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitSelectionPanel",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "AB44F604AA991A1A27626F64BA7819243F19C6D5F599F347BF991E39471FE49C"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/VisualMotionTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "235AFB72CED3D36FE9F1BEED32D5B3EBB79129781FD320FB296773799B997AA7"
+    },
+    {
+      "path": "ReplicatedStorage/Shared/VisualMotionTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "E81691D2C5D007439DE5C27FB4FD0F630025AEE942EFDB7A35819FDC9E72ED30"
+    },
+    {
+      "path": "ServerScriptService/GameServer",
+      "property": "Source",
+      "beforeSha256": "0A2DB544D197839B8861FC681E6283AD977A61B02BC25C55116FB1E525B18921",
+      "afterSha256": "30D3ECBBE0F317600E1D4615933791A4CA900BF65E3C1781355DF5ACB8AED725"
+    },
+    {
+      "path": "ServerScriptService/MapGenerator",
+      "property": "Source",
+      "beforeSha256": "048085F0BE33C572FA7B6D0F9A61B24A345AA9A05541C2824A1F4999155BD7E8",
+      "afterSha256": "C4C5574EABE66B780A45EA9F836958F96D9C2390B9D247D83CC02F9B152041EA"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CommandRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "24355DD20D6FA65722AB35961596B6EBC011C7D6AB6659D1E67F64703B78A417"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CommandRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "BCBFD9D57540994BF10BD55D25364DCA0319CED285B896E63D1A140029EAF00D"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/LobbyRules",
+      "property": "Source",
+      "beforeSha256": "139E850BF6ECE5B8923CDA6388570C93F3DE9ACFBAE739C61FDC771DF2CAD15B",
+      "afterSha256": "D5E00319C19638987454AE94094BE7CDA01275F4BC39CB33167EE66C84F289E7"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/LobbyWorld",
+      "property": "Source",
+      "beforeSha256": "30F54FAE6DA4771FF26FE73EDC2217D82CBE7AE4629E9694D37D7493E3989A2A",
+      "afterSha256": "84FFACD4C1E8D2A358BB2B67ABBACA2DBEAC823DBD7C4441CD5DC9083D040E35"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/MeleeRules",
+      "property": "Source",
+      "beforeSha256": "9553471B4F50175FE37E651C80A0D1A769EA56A36B7BCC8A960A2AC33AB232AB",
+      "afterSha256": "E09367C79AA15791BFEFFC770A150918A9E96855E9C070830D28AC23CF4F09E3"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ModelFactory",
+      "property": "Source",
+      "beforeSha256": "74FCC1568D7F96AF289200AAF3BDA8C269A6A09D70CA2F3A8477D8FBC0A55E1D",
+      "afterSha256": "FBF2175FD0037F23781C7E682EB8E817BE70A528592207E3D9C13DAFA1860312"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ModelFactoryTests",
+      "property": "Source",
+      "beforeSha256": "95C2E15E05A64198CDA9C520D9F8DFE5CD859062C0B8D869CC610DF91F96BBA5",
+      "afterSha256": "50ACCD892679CFD5FF93B00AE6D1CFC7B64C71852E6DD7C48ABA5BE1992670CD"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PathRules",
+      "property": "Source",
+      "beforeSha256": "4E166EAD73879AC003C82F12E3A36B135982EE1AC39476FD4B5893E5ED91594D",
+      "afterSha256": "152E24BC2177EE243A067AA51522657ED86C261D232805546916DE07032A6D8F"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PlayerColorTests",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "F32E7A1912277CA0678DD98BBA229DBB1C5DBC1B5389CF7DDE0B1598007B9DCF"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PlayerColorTests",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "D1752F4E678ADFFDE689D3BB2553A7837EB232BBD25CD4FA124501B684D6BD02"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ProductionRules",
+      "property": "Source",
+      "beforeSha256": "31116F988194A65D2F76007B994B0BA3D46178FA3AEB4AC23FD554E73814DA05",
+      "afterSha256": "526DEC2ED21794238E705CC9AE87094C41CB006BD6F7208955B5E1A37DDC5B1E"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/UnitCollisionRules",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "87305E33925E01B7F553BA99DA1EE5E2018F0E22BD1E693ECFA3CC82DDD8F39F"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/UnitCollisionRules",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "D08BE7DFC07C78BAEC943F5486621EA60C3C9B5C772555D704A2CCE307C1C6EB"
+    },
+    {
+      "path": "ServerScriptService/ServerModules/WorldGenerator",
+      "property": "Source",
+      "beforeSha256": "A8DC77319687A0817F96EE27BA99F1D1E96F2490AAA23676771F4C37670C1FA3",
+      "afterSha256": "8D5AD9461E584DF832B308230106B80D01CE07043F1D61A34725E8CC1142BF83"
+    },
+    {
+      "path": "StarterGui/GameUI/GUIManager",
+      "property": "Source",
+      "beforeSha256": "C987CA2D02CD0666A3B8D69BE34666341E9463D2F3D8F43BF58D851FBD34F724",
+      "afterSha256": "EB8331E1497BFEFDEAEA43FCEAD9123377C85432A8B0F3CBB8B924590FC455DD"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/BuildingVisuals",
+      "property": "Name",
+      "beforeSha256": null,
+      "afterSha256": "ED3C758C2668F82CE3A5C414E333B3FF4F5DFF98207903B546DAE43C5AC7455A"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/BuildingVisuals",
+      "property": "Source",
+      "beforeSha256": null,
+      "afterSha256": "67665A73FE39F885F2A1D87D53334F08C2C82D653A9599AA7D88B112567505D5"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerInput",
+      "property": "Source",
+      "beforeSha256": "9E4D7D7D1AAD6E32013814C801CD765BE9673D9DFEA4731F090681BA0ED7617F",
+      "afterSha256": "DA73333D15EBFF275885EBAB92BDE399309901E36FA082E65DDF03FD62CAD771"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/RTSClient",
+      "property": "Source",
+      "beforeSha256": "3BFBD9007452097611A96F1EBEF98035D6CEFF56BC331B4DC3D14C4541620A54",
+      "afterSha256": "5431A8408A5221F515D2A6D8EC30CAD056BF50AF7C2327C8DBA5A557C78CADBB"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/SoundFeedback",
+      "property": "Source",
+      "beforeSha256": "3C3313F8AC4D48BECDE2EC9A74F47BB2D3F467541129275848AF15D36177118C",
+      "afterSha256": "15E00C9A27B13CE6E94AE0748451381142A161FE5D982605C045DF317EFE69C4"
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/UnitMotion",
+      "property": "Source",
+      "beforeSha256": "BD619714EE37A01469D08C6D6EB683911D66B98F7F292C3DFC7558B6E9FC3E5B",
+      "afterSha256": "E989B7588E5D40D4F4CAC8EEF0DFEA32B984B6843195124D5C7CE66908E19C15"
+    },
+    {
+      "path": "Workspace/AOE2_Ground",
+      "property": "Color3uint8",
+      "beforeSha256": "DDC001128D3898D0636D15CC1BA170B0CCD11790325ED0A636E152B4E883BDB6",
+      "afterSha256": "E60F19725D61194561BBBD389D6E9306098CA3A7E18285D223F1B2DD8024A23F"
+    },
+    {
+      "path": "Workspace/AOE2_Ground",
+      "property": "Position",
+      "beforeSha256": null,
+      "afterSha256": "0E9B0CEA0AD4CC40E4F00C644E13A86EC1D815F1921D56132D568736995205DF"
+    },
+    {
+      "path": "Workspace/AOE2_Ground",
+      "property": "size",
+      "beforeSha256": "6DB08AB13907B429525C93754A12706FD59996D35F3B15B93C3629DC7F283FA5",
+      "afterSha256": "690E0CFE0B3403E159B28EB1FA6AB5FB5FB1FCFDBD42F5A939478A5E80707841"
+    }
+  ],
+  "sourceNormalization": "XML text; CRLF/CR normalized to LF; SHA256 of UTF-8 without BOM; no trimming",
+  "sources": [
+    {
+      "path": "ReplicatedFirst/BuildingSystemLoader",
+      "class": "LocalScript",
+      "sha256": "E3B761B61EB8AC9559F9B609C33D234B850C8BE13698978818CA11540811C52C",
+      "utf8Bytes": 49,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedFirst/ClientLoader",
+      "class": "LocalScript",
+      "sha256": "A90B930EEF7644D6A91CD7551EB786249E69F8CCDE8DCD86E6EF59FD7E9E33EA",
+      "utf8Bytes": 201,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/GameData/GameConfig",
+      "class": "ModuleScript",
+      "sha256": "5CDB50902C86B814A27A4A48031894650983A452BD60BC1E2624D79B404543D3",
+      "utf8Bytes": 16866,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/ResourceSystem",
+      "class": "ModuleScript",
+      "sha256": "CD665AB34A62FDDA024AD9B97ABFF5FBBF16901EB1BEDA8EF4A3D7B404C5294B",
+      "utf8Bytes": 6761,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/AIObservationTests",
+      "class": "ModuleScript",
+      "sha256": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857",
+      "utf8Bytes": 14908,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/AdvancedTests",
+      "class": "ModuleScript",
+      "sha256": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B",
+      "utf8Bytes": 31328,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/Art",
+      "class": "ModuleScript",
+      "sha256": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1",
+      "utf8Bytes": 41904,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/AudioFeedback",
+      "class": "ModuleScript",
+      "sha256": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E",
+      "utf8Bytes": 8505,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuRules",
+      "class": "ModuleScript",
+      "sha256": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030",
+      "utf8Bytes": 1182,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildMenuTests",
+      "class": "ModuleScript",
+      "sha256": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A",
+      "utf8Bytes": 12950,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildingController",
+      "class": "ModuleScript",
+      "sha256": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE",
+      "utf8Bytes": 6693,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/BuildingSystem",
+      "class": "LocalScript",
+      "sha256": "546BC7D2270B3FEDBD910E8F3B65348CCA94530D804D390FD5C1A3ADF0CD008E",
+      "utf8Bytes": 83,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/CameraFocus",
+      "class": "ModuleScript",
+      "sha256": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764",
+      "utf8Bytes": 1265,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ClientUnitView",
+      "class": "ModuleScript",
+      "sha256": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13",
+      "utf8Bytes": 522,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/CombatFlowTests",
+      "class": "ModuleScript",
+      "sha256": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "utf8Bytes": 40850,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/CombatStageContext",
+      "class": "ModuleScript",
+      "sha256": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "utf8Bytes": 14958,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/CombatTechnologyTests",
+      "class": "ModuleScript",
+      "sha256": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "utf8Bytes": 7700,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionTests",
+      "class": "ModuleScript",
+      "sha256": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B",
+      "utf8Bytes": 8444,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualRules",
+      "class": "ModuleScript",
+      "sha256": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205",
+      "utf8Bytes": 821,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ConstructionVisualTests",
+      "class": "ModuleScript",
+      "sha256": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED",
+      "utf8Bytes": 8529,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/DeliveryFallbackTests",
+      "class": "ModuleScript",
+      "sha256": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+      "utf8Bytes": 24698,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/EconomyTests",
+      "class": "ModuleScript",
+      "sha256": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6",
+      "utf8Bytes": 14395,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackBattleTests",
+      "class": "ModuleScript",
+      "sha256": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50",
+      "utf8Bytes": 36838,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackConstructionTests",
+      "class": "ModuleScript",
+      "sha256": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2",
+      "utf8Bytes": 15520,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackMultiplayerTests",
+      "class": "ModuleScript",
+      "sha256": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7",
+      "utf8Bytes": 19743,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackRepairTests",
+      "class": "ModuleScript",
+      "sha256": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5",
+      "utf8Bytes": 19596,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackRules",
+      "class": "ModuleScript",
+      "sha256": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941",
+      "utf8Bytes": 5641,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FeedbackTests",
+      "class": "ModuleScript",
+      "sha256": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D",
+      "utf8Bytes": 18275,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationRules",
+      "class": "ModuleScript",
+      "sha256": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47",
+      "utf8Bytes": 7794,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/FormationTests",
+      "class": "ModuleScript",
+      "sha256": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426",
+      "utf8Bytes": 18903,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/Grid",
+      "class": "ModuleScript",
+      "sha256": "ED43D87B3C50ECDBDAFAEF92E03C528FEADBB1CD360B6A99E0CB30898952D8BF",
+      "utf8Bytes": 1072,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/HUDTests",
+      "class": "ModuleScript",
+      "sha256": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C",
+      "utf8Bytes": 11287,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyFlowTests",
+      "class": "ModuleScript",
+      "sha256": "89840FBEEB2B9BDC69E0859364693CC2CBBE6FB657E5D8FE7EF8E4581732EC06",
+      "utf8Bytes": 13016,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/LobbyTests",
+      "class": "ModuleScript",
+      "sha256": "5D001B4F9B853AA85BEF435AA057BE643ACC4FAB6A4F3344A91B2087553AEF8E",
+      "utf8Bytes": 5666,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MapTests",
+      "class": "ModuleScript",
+      "sha256": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450",
+      "utf8Bytes": 14886,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MatchReportFlowTests",
+      "class": "ModuleScript",
+      "sha256": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803",
+      "utf8Bytes": 20901,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MatchReportTests",
+      "class": "ModuleScript",
+      "sha256": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86",
+      "utf8Bytes": 11999,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MotionRules",
+      "class": "ModuleScript",
+      "sha256": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11",
+      "utf8Bytes": 2142,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/MultiplayerTests",
+      "class": "ModuleScript",
+      "sha256": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4",
+      "utf8Bytes": 10947,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/NaturalVictoryTests",
+      "class": "ModuleScript",
+      "sha256": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "utf8Bytes": 10915,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/PerformanceObserver",
+      "class": "ModuleScript",
+      "sha256": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+      "utf8Bytes": 19814,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ProductionTests",
+      "class": "ModuleScript",
+      "sha256": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625",
+      "utf8Bytes": 10920,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ProgressionTests",
+      "class": "ModuleScript",
+      "sha256": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A",
+      "utf8Bytes": 14166,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ReleaseTests",
+      "class": "ModuleScript",
+      "sha256": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49",
+      "utf8Bytes": 4070,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/ResearchCombatTests",
+      "class": "ModuleScript",
+      "sha256": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "utf8Bytes": 8515,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/SelectionIcons",
+      "class": "ModuleScript",
+      "sha256": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73",
+      "utf8Bytes": 9003,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/SharedFunctions",
+      "class": "ModuleScript",
+      "sha256": "4B1A28075AE85465F1DB493CA30BBC9DBDCC16D6595B531F1E1F9B116EBB5168",
+      "utf8Bytes": 1808,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/StudioTests",
+      "class": "ModuleScript",
+      "sha256": "E53798F0F6B0A4DF655C907CA68330329AF4B1008365FD1A9BD555A68ED4EDF1",
+      "utf8Bytes": 8873,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/TeamClientRules",
+      "class": "ModuleScript",
+      "sha256": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1",
+      "utf8Bytes": 3918,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/TeamMatchTests",
+      "class": "ModuleScript",
+      "sha256": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+      "utf8Bytes": 29033,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/TeamUITests",
+      "class": "ModuleScript",
+      "sha256": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC",
+      "utf8Bytes": 7174,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/TouchRules",
+      "class": "ModuleScript",
+      "sha256": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C",
+      "utf8Bytes": 3929,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/TouchTests",
+      "class": "ModuleScript",
+      "sha256": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8",
+      "utf8Bytes": 13057,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/Tutorial",
+      "class": "ModuleScript",
+      "sha256": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140",
+      "utf8Bytes": 1513,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitCollisionTests",
+      "class": "ModuleScript",
+      "sha256": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588",
+      "utf8Bytes": 22603,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIconTests",
+      "class": "ModuleScript",
+      "sha256": "207CA08F2005E72610010E4C4A4D7E428709C7724A7201CC1146E3EAC95F059D",
+      "utf8Bytes": 25256,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitIcons",
+      "class": "ModuleScript",
+      "sha256": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7",
+      "utf8Bytes": 18084,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/UnitSelectionPanel",
+      "class": "ModuleScript",
+      "sha256": "0F2730B07728B1DAD29431B645B7B055CF26B88F869BC4D896F11A9AD4F60CEA",
+      "utf8Bytes": 17940,
+      "pass": true
+    },
+    {
+      "path": "ReplicatedStorage/Shared/VisualMotionTests",
+      "class": "ModuleScript",
+      "sha256": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D",
+      "utf8Bytes": 13495,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/CastleSpawner",
+      "class": "Script",
+      "sha256": "22D46FC3B51B8985F0204820CB9E2A1D7B6A6001C7044CE05097C6F73B250BB0",
+      "utf8Bytes": 84,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/GameServer",
+      "class": "Script",
+      "sha256": "E236B25DB4FA75B160A451406FE47DF35695E6B0426CD8207C475146EA912A11",
+      "utf8Bytes": 119639,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/MapGenerator",
+      "class": "Script",
+      "sha256": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E",
+      "utf8Bytes": 4969,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ResourceSpawner",
+      "class": "Script",
+      "sha256": "54AE44261B9C004749BA747A2B4608056A3B9651AB81C081C16D4BB3E7CE4662",
+      "utf8Bytes": 51,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ResourceSystemLoader",
+      "class": "Script",
+      "sha256": "75E4260B3630F043963D760B4FF92C0E4D5ABE168709E362F9CAA4BA0B66AF6B",
+      "utf8Bytes": 88,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/AIWorkerRules",
+      "class": "ModuleScript",
+      "sha256": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE",
+      "utf8Bytes": 1383,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ApproachRules",
+      "class": "ModuleScript",
+      "sha256": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC",
+      "utf8Bytes": 1323,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CivilizationPreferenceRules",
+      "class": "ModuleScript",
+      "sha256": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5",
+      "utf8Bytes": 711,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CivilizationRules",
+      "class": "ModuleScript",
+      "sha256": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234",
+      "utf8Bytes": 2426,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CombatRules",
+      "class": "ModuleScript",
+      "sha256": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761",
+      "utf8Bytes": 959,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CommandRules",
+      "class": "ModuleScript",
+      "sha256": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F",
+      "utf8Bytes": 976,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/CommerceRules",
+      "class": "ModuleScript",
+      "sha256": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43",
+      "utf8Bytes": 2217,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ConstructionRules",
+      "class": "ModuleScript",
+      "sha256": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+      "utf8Bytes": 2751,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/Economy",
+      "class": "ModuleScript",
+      "sha256": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7",
+      "utf8Bytes": 383,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/GameManager",
+      "class": "ModuleScript",
+      "sha256": "4894125DBA405E57BCCF9BF9AA15DA6C9FDE3CBDF883A277DDB6E20209388099",
+      "utf8Bytes": 750,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/GatheringRules",
+      "class": "ModuleScript",
+      "sha256": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270",
+      "utf8Bytes": 1042,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/LobbyRules",
+      "class": "ModuleScript",
+      "sha256": "3671633183D6E296789EA3FD102C104864BA60A1BBE7B170726CD71027C301D2",
+      "utf8Bytes": 3403,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/LobbyWorld",
+      "class": "ModuleScript",
+      "sha256": "C6DECE2042E4A365C0F614B112250D70ED7CBA0FC553A75D067CCC9B52F2A13E",
+      "utf8Bytes": 10787,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/MatchReportRules",
+      "class": "ModuleScript",
+      "sha256": "7584E8F79222CF2E53ECACD79CFA6943F9C4B8C2D7E83E38A85B0CD3B810247E",
+      "utf8Bytes": 8164,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/MatchRules",
+      "class": "ModuleScript",
+      "sha256": "AF1F682EEE94D635AEDE774423C1C3F195E3D2CF3A6E4DD789A37CEAD02615FC",
+      "utf8Bytes": 2749,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/MeleeRules",
+      "class": "ModuleScript",
+      "sha256": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77",
+      "utf8Bytes": 1585,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ModelFactory",
+      "class": "ModuleScript",
+      "sha256": "EF9B53D86F256222AF183DC2B6821DE22C6CF1B48BDBF71620FD1D4E095F8A42",
+      "utf8Bytes": 5814,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ModelFactoryTests",
+      "class": "ModuleScript",
+      "sha256": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3",
+      "utf8Bytes": 8390,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PathRules",
+      "class": "ModuleScript",
+      "sha256": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44",
+      "utf8Bytes": 6317,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/PlayerColorTests",
+      "class": "ModuleScript",
+      "sha256": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106",
+      "utf8Bytes": 15325,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ProductionRules",
+      "class": "ModuleScript",
+      "sha256": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5",
+      "utf8Bytes": 1941,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ProfileRules",
+      "class": "ModuleScript",
+      "sha256": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2",
+      "utf8Bytes": 4018,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/ProfileStore",
+      "class": "ModuleScript",
+      "sha256": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F",
+      "utf8Bytes": 6187,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/SpatialRules",
+      "class": "ModuleScript",
+      "sha256": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C",
+      "utf8Bytes": 1072,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/TeamRules",
+      "class": "ModuleScript",
+      "sha256": "72E10123B9804B8E8C435D77F82E9A859EB87B12D8C61EE7DFD0C4FD226545E8",
+      "utf8Bytes": 8500,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/Telemetry",
+      "class": "ModuleScript",
+      "sha256": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07",
+      "utf8Bytes": 2355,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/UnitCollisionRules",
+      "class": "ModuleScript",
+      "sha256": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8",
+      "utf8Bytes": 10050,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/UnitRules",
+      "class": "ModuleScript",
+      "sha256": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3",
+      "utf8Bytes": 938,
+      "pass": true
+    },
+    {
+      "path": "ServerScriptService/ServerModules/WorldGenerator",
+      "class": "ModuleScript",
+      "sha256": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B",
+      "utf8Bytes": 8760,
+      "pass": true
+    },
+    {
+      "path": "StarterGui/GameUI/GUIManager",
+      "class": "ModuleScript",
+      "sha256": "2E1236D25DD2079978D8040DA0CFAEF0EA0EDE60BBBBA180B1D9D83C2D100D7A",
+      "utf8Bytes": 144156,
+      "pass": true
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/BuildingVisuals",
+      "class": "LocalScript",
+      "sha256": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C",
+      "utf8Bytes": 15031,
+      "pass": true
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/PlayerInput",
+      "class": "LocalScript",
+      "sha256": "3800AC06C99A3A1F8ADF5A168292B5667CC88186AD55C69A1946CF7AEB8C6CE1",
+      "utf8Bytes": 16677,
+      "pass": true
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/RTSClient",
+      "class": "LocalScript",
+      "sha256": "AABB059FFFF280BBD7C772233553BE8F5D070176BA32F176F722EB59B93E8FB5",
+      "utf8Bytes": 27402,
+      "pass": true
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/SoundFeedback",
+      "class": "LocalScript",
+      "sha256": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897",
+      "utf8Bytes": 5033,
+      "pass": true
+    },
+    {
+      "path": "StarterPlayer/StarterPlayerScripts/UnitMotion",
+      "class": "LocalScript",
+      "sha256": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD",
+      "utf8Bytes": 22835,
+      "pass": true
+    }
+  ],
+  "preservation": {
+    "pass": true,
+    "originalItemCount": 7774,
+    "originalReferentsRetained": 7774,
+    "protectedSubtreeCount": 51,
+    "protectedSubtrees": [
+      {
+        "referent": "RBX6BAAAABC996449F7A0EB6D0EFC9E9271",
+        "path": "Workspace/Terrain",
+        "class": "Terrain",
+        "itemCount": 1,
+        "sha256": "EFAE7E4F504D9736E4773057F830F53050F3E4F40F33676425591FB730B96F27",
+        "afterSha256": "EFAE7E4F504D9736E4773057F830F53050F3E4F40F33676425591FB730B96F27",
+        "pass": true
+      },
+      {
+        "referent": "RBXDDC82B2C9EF44053892688C06042A643",
+        "path": "Workspace/SpawnLocation",
+        "class": "SpawnLocation",
+        "itemCount": 2,
+        "sha256": "E1BC40C668ACC5D947C582E7E6E946239A22D570BDA6B2E89656A59D940D2F94",
+        "afterSha256": "E1BC40C668ACC5D947C582E7E6E946239A22D570BDA6B2E89656A59D940D2F94",
+        "pass": true
+      },
+      {
+        "referent": "RBX4256E81A2BCF44269BB3F1B94C38F655",
+        "path": "Workspace/Camera",
+        "class": "Camera",
+        "itemCount": 1,
+        "sha256": "EF942B663F5CA45BE50F57B19A91F77F34BAD56E2F23BC395B37F9D191FC7D43",
+        "afterSha256": "EF942B663F5CA45BE50F57B19A91F77F34BAD56E2F23BC395B37F9D191FC7D43",
+        "pass": true
+      },
+      {
+        "referent": "RBX8A57341CE4664AEB830B7939BD2152F4",
+        "path": "Workspace/Model",
+        "class": "Model",
+        "itemCount": 7613,
+        "sha256": "EE41BF7EF539F4D48C843DF74F7F1A7C2E3FA7F6EE746CE2BB184B9870E6A519",
+        "afterSha256": "EE41BF7EF539F4D48C843DF74F7F1A7C2E3FA7F6EE746CE2BB184B9870E6A519",
+        "pass": true
+      },
+      {
+        "referent": "RBXA87D7CF736814507A81ECCAB4DEC1B21",
+        "path": "Workspace/matchpart1",
+        "class": "Part",
+        "itemCount": 1,
+        "sha256": "D11551C35E837BE8A8358C5DAD013B952E3A6E15C3CD8334F7FC109D9C172E55",
+        "afterSha256": "D11551C35E837BE8A8358C5DAD013B952E3A6E15C3CD8334F7FC109D9C172E55",
+        "pass": true
+      },
+      {
+        "referent": "RBX82C48212161C457C84BF46402D20F941",
+        "path": "TimerService",
+        "class": "TimerService",
+        "itemCount": 1,
+        "sha256": "6A87B3E8DCC13FFED816AABDC57606FB18BA4E3C2B4502E0D5803EF0EBB83309",
+        "afterSha256": "6A87B3E8DCC13FFED816AABDC57606FB18BA4E3C2B4502E0D5803EF0EBB83309",
+        "pass": true
+      },
+      {
+        "referent": "RBX2B114F9FF1044064A50BE42D9CE15101",
+        "path": "CollectionService",
+        "class": "CollectionService",
+        "itemCount": 1,
+        "sha256": "50C026362808D1923BF38FBC4095737EB102393976121BD927B1A95A276B12A6",
+        "afterSha256": "50C026362808D1923BF38FBC4095737EB102393976121BD927B1A95A276B12A6",
+        "pass": true
+      },
+      {
+        "referent": "RBX157855911405493BAD6F144CA43BBC14",
+        "path": "SoundService",
+        "class": "SoundService",
+        "itemCount": 1,
+        "sha256": "2750ABC38A727AF051EC86B75540C04014BFD1536E940FEE172036E68B88783C",
+        "afterSha256": "2750ABC38A727AF051EC86B75540C04014BFD1536E940FEE172036E68B88783C",
+        "pass": true
+      },
+      {
+        "referent": "RBX01AA553D691B4189AC9A98C90BEF91F7",
+        "path": "VideoCaptureService",
+        "class": "VideoCaptureService",
+        "itemCount": 1,
+        "sha256": "86E49A7ADBFF1F634CEDAB89E47A3C04BD586F6D2FA37EB58DFB694BFDBADF73",
+        "afterSha256": "86E49A7ADBFF1F634CEDAB89E47A3C04BD586F6D2FA37EB58DFB694BFDBADF73",
+        "pass": true
+      },
+      {
+        "referent": "RBX879A23F9C86A42779B1C795CCAAA7C7C",
+        "path": "NonReplicatedCSGDictionaryService",
+        "class": "NonReplicatedCSGDictionaryService",
+        "itemCount": 1,
+        "sha256": "E949913010EA5C4921C014F448530395B3854E6E2DAC369AA2E94ED98FC017CB",
+        "afterSha256": "E949913010EA5C4921C014F448530395B3854E6E2DAC369AA2E94ED98FC017CB",
+        "pass": true
+      },
+      {
+        "referent": "RBXCFB2C3393FED447EB4A9ABE3C274298D",
+        "path": "CSGDictionaryService",
+        "class": "CSGDictionaryService",
+        "itemCount": 1,
+        "sha256": "8155F3C95319C881DC2B4A3BC32D2B13224EC46DAC766E86626A10E6D8F55CC0",
+        "afterSha256": "8155F3C95319C881DC2B4A3BC32D2B13224EC46DAC766E86626A10E6D8F55CC0",
+        "pass": true
+      },
+      {
+        "referent": "RBX5C3D65DBF05F40D4B07F4D29350A6DEF",
+        "path": "Chat",
+        "class": "Chat",
+        "itemCount": 1,
+        "sha256": "2307D2C1CA7A2B23E2F3EC3CB57DAAEA4D8997B91CB84B27EDD3D69C44C6E294",
+        "afterSha256": "2307D2C1CA7A2B23E2F3EC3CB57DAAEA4D8997B91CB84B27EDD3D69C44C6E294",
+        "pass": true
+      },
+      {
+        "referent": "RBX979F69FB02EA47349C9B574D4C53B1E2",
+        "path": "Players",
+        "class": "Players",
+        "itemCount": 1,
+        "sha256": "EC41EF73C5EDB846C9C1CC3E0DF0E796A09F20CA0A99B23D1AA0EEDF94CCC914",
+        "afterSha256": "EC41EF73C5EDB846C9C1CC3E0DF0E796A09F20CA0A99B23D1AA0EEDF94CCC914",
+        "pass": true
+      },
+      {
+        "referent": "RBX0B9CF84C6987407AAB8139F54D52331E",
+        "path": "TweenService",
+        "class": "TweenService",
+        "itemCount": 1,
+        "sha256": "05B359D337AABA6F06BFB8654C95E768CA8690CF136306A7DFF649F3EC005F22",
+        "afterSha256": "05B359D337AABA6F06BFB8654C95E768CA8690CF136306A7DFF649F3EC005F22",
+        "pass": true
+      },
+      {
+        "referent": "RBX529DDCFE8CEF4CA8A092318C3D01ED8C",
+        "path": "MaterialService",
+        "class": "MaterialService",
+        "itemCount": 1,
+        "sha256": "423A405AFAC92030D5E31EC897ED420A402278BE8654212831FC592AE6B1D430",
+        "afterSha256": "423A405AFAC92030D5E31EC897ED420A402278BE8654212831FC592AE6B1D430",
+        "pass": true
+      },
+      {
+        "referent": "RBX5150085C1C0C4FFA964D2768063966A3",
+        "path": "TextChatService",
+        "class": "TextChatService",
+        "itemCount": 9,
+        "sha256": "DBA4E5682D32CE22AEA577DE1D7557965FAE1743B7537C1D55BD43F8F9D407EA",
+        "afterSha256": "DBA4E5682D32CE22AEA577DE1D7557965FAE1743B7537C1D55BD43F8F9D407EA",
+        "pass": true
+      },
+      {
+        "referent": "RBX881142797CCB49D4A488EF2494369F19",
+        "path": "PermissionsService",
+        "class": "PermissionsService",
+        "itemCount": 1,
+        "sha256": "47BF1D7BCBCA600DB7B75E4FA565BF86417EE6F1FE69DFDC053CA89AB20F5F34",
+        "afterSha256": "47BF1D7BCBCA600DB7B75E4FA565BF86417EE6F1FE69DFDC053CA89AB20F5F34",
+        "pass": true
+      },
+      {
+        "referent": "RBXB8F2E874A5F249FE8C47476705A52315",
+        "path": "PlayerEmulatorService",
+        "class": "PlayerEmulatorService",
+        "itemCount": 1,
+        "sha256": "3D82FCABB5E6E96A93F5B9EEC802F709F44B66C593F15386B4D98774D2C09B5A",
+        "afterSha256": "3D82FCABB5E6E96A93F5B9EEC802F709F44B66C593F15386B4D98774D2C09B5A",
+        "pass": true
+      },
+      {
+        "referent": "RBXCACA047748D844FBBD8B89C56230FF69",
+        "path": "StudioData",
+        "class": "StudioData",
+        "itemCount": 1,
+        "sha256": "7105D5898154BFEF0565F66836F7D625597C67E5120ACCB913C725ABB65999B4",
+        "afterSha256": "7105D5898154BFEF0565F66836F7D625597C67E5120ACCB913C725ABB65999B4",
+        "pass": true
+      },
+      {
+        "referent": "RBX5C722485F685415E814FF98254A69192",
+        "path": "StarterPlayer/StarterCharacterScripts",
+        "class": "StarterCharacterScripts",
+        "itemCount": 1,
+        "sha256": "E92E501FB17F933E07FE9B0787778164CAE3EF5D54CEAE0AFCFB9CD79C4B9ED3",
+        "afterSha256": "E92E501FB17F933E07FE9B0787778164CAE3EF5D54CEAE0AFCFB9CD79C4B9ED3",
+        "pass": true
+      },
+      {
+        "referent": "RBXE901DBC5B23F4EBF9BDD386565F95882",
+        "path": "StarterPack",
+        "class": "StarterPack",
+        "itemCount": 1,
+        "sha256": "E6D80ADEAF3824935FEA2708547087EBEE60F9C9B5A2532A83027AAE3352212C",
+        "afterSha256": "E6D80ADEAF3824935FEA2708547087EBEE60F9C9B5A2532A83027AAE3352212C",
+        "pass": true
+      },
+      {
+        "referent": "RBX675EE25284E04FAEA69B7A51D55601C5",
+        "path": "LocalizationService",
+        "class": "LocalizationService",
+        "itemCount": 1,
+        "sha256": "09EB461C9972C689D876C3A0B1729DAB7BF4336F4D2CE1CC9E26D3E1F86222FC",
+        "afterSha256": "09EB461C9972C689D876C3A0B1729DAB7BF4336F4D2CE1CC9E26D3E1F86222FC",
+        "pass": true
+      },
+      {
+        "referent": "RBX158333C96C454E2B8FCA43F0FBDFD77F",
+        "path": "Teleport Service",
+        "class": "TeleportService",
+        "itemCount": 1,
+        "sha256": "4DE6AEA4E974C6437B8FAE9B4E0545E52C421A332D69963E7FA458EBBBA4AA52",
+        "afterSha256": "4DE6AEA4E974C6437B8FAE9B4E0545E52C421A332D69963E7FA458EBBBA4AA52",
+        "pass": true
+      },
+      {
+        "referent": "RBXFEBBFC31CC564B189A371DA328557972",
+        "path": "PhysicsService",
+        "class": "PhysicsService",
+        "itemCount": 1,
+        "sha256": "8C708588F6E197E877B5C6DF85C617175F5C8185B6D46AC67247B4F5987BE744",
+        "afterSha256": "8C708588F6E197E877B5C6DF85C617175F5C8185B6D46AC67247B4F5987BE744",
+        "pass": true
+      },
+      {
+        "referent": "RBX5861EAE2BFC64EFBA285B3AEA3BE531B",
+        "path": "InsertService",
+        "class": "InsertService",
+        "itemCount": 2,
+        "sha256": "873E536948C842AA40D2ECD499F323506376FED462980D1A7044CC03CA4C1AF0",
+        "afterSha256": "873E536948C842AA40D2ECD499F323506376FED462980D1A7044CC03CA4C1AF0",
+        "pass": true
+      },
+      {
+        "referent": "RBXF8C96FD130E3410E9DD42DBD6F65E868",
+        "path": "GamePassService",
+        "class": "GamePassService",
+        "itemCount": 1,
+        "sha256": "8083A9905FB851728CEA896499BBD38D7C344D5CF5053112BBFB738D9FCCD18A",
+        "afterSha256": "8083A9905FB851728CEA896499BBD38D7C344D5CF5053112BBFB738D9FCCD18A",
+        "pass": true
+      },
+      {
+        "referent": "RBXCBA8E6B6D92A4B4EA94D374A8ACFCBE9",
+        "path": "Debris",
+        "class": "Debris",
+        "itemCount": 1,
+        "sha256": "65A7A653A593026821E95FE6C8F6D039D4CE829B7A9E2D151B11D8BB6EE37E70",
+        "afterSha256": "65A7A653A593026821E95FE6C8F6D039D4CE829B7A9E2D151B11D8BB6EE37E70",
+        "pass": true
+      },
+      {
+        "referent": "RBX548DC724703A4F34BD19CFD3DE252B51",
+        "path": "CookiesService",
+        "class": "CookiesService",
+        "itemCount": 1,
+        "sha256": "B4C8091E2EE389D347E7CC6AB32E36057559CD605553AD27D0CAE3ADEBB2D566",
+        "afterSha256": "B4C8091E2EE389D347E7CC6AB32E36057559CD605553AD27D0CAE3ADEBB2D566",
+        "pass": true
+      },
+      {
+        "referent": "RBX4D45467F5ED54F58840FB6B01E1D59FF",
+        "path": "Selection",
+        "class": "Selection",
+        "itemCount": 1,
+        "sha256": "F3BB6AE6C4245AEB816C3D5D8C3F24EFC84296DD093870F5E9C2A74482893CDD",
+        "afterSha256": "F3BB6AE6C4245AEB816C3D5D8C3F24EFC84296DD093870F5E9C2A74482893CDD",
+        "pass": true
+      },
+      {
+        "referent": "RBX1F46A3D46C5140C7B57825B7F675F333",
+        "path": "VRService",
+        "class": "VRService",
+        "itemCount": 1,
+        "sha256": "5D9B0BA7FC4D091F12B92DAA6AC5955552BA261DAA9D4D65A6F5F8B1DB629D6C",
+        "afterSha256": "5D9B0BA7FC4D091F12B92DAA6AC5955552BA261DAA9D4D65A6F5F8B1DB629D6C",
+        "pass": true
+      },
+      {
+        "referent": "RBX830BF056319B4199961E7465F9ABF4B7",
+        "path": "ContextActionService",
+        "class": "ContextActionService",
+        "itemCount": 1,
+        "sha256": "8C43BCC219B61E4872067736CA15F87DB5F0DD0563E1C4F3C267675688D59EFA",
+        "afterSha256": "8C43BCC219B61E4872067736CA15F87DB5F0DD0563E1C4F3C267675688D59EFA",
+        "pass": true
+      },
+      {
+        "referent": "RBXF5C9DF75B8E34D8F9AB97BEBA85F41B7",
+        "path": "ScriptService",
+        "class": "ScriptService",
+        "itemCount": 1,
+        "sha256": "F5A6DAEE4135117740C08B7840FF24D732E1FC7EC71093FD0E2DF548EBA768A3",
+        "afterSha256": "F5A6DAEE4135117740C08B7840FF24D732E1FC7EC71093FD0E2DF548EBA768A3",
+        "pass": true
+      },
+      {
+        "referent": "RBX4626628F3B1642F8AC3C4345127453F9",
+        "path": "AssetService",
+        "class": "AssetService",
+        "itemCount": 1,
+        "sha256": "7749AFD1AB08EEED5E8352F8B1A672942C798615AA7BEE7239D6A29AD973EBFB",
+        "afterSha256": "7749AFD1AB08EEED5E8352F8B1A672942C798615AA7BEE7239D6A29AD973EBFB",
+        "pass": true
+      },
+      {
+        "referent": "RBX01D44C7592C34DF09B0ECFFBFC4385AC",
+        "path": "TouchInputService",
+        "class": "TouchInputService",
+        "itemCount": 1,
+        "sha256": "34DABB8E206E39949BD23038D4E1A726C910185B05EA8E691DB93BD29D59227B",
+        "afterSha256": "34DABB8E206E39949BD23038D4E1A726C910185B05EA8E691DB93BD29D59227B",
+        "pass": true
+      },
+      {
+        "referent": "RBX9F046B9907B8408DB8440B8537A058EB",
+        "path": "AvatarSettings",
+        "class": "AvatarSettings",
+        "itemCount": 8,
+        "sha256": "D2910446B90C2940524BADFAD48659A78E3AE21BCF3D4628B9CC4DEF2E94057A",
+        "afterSha256": "D2910446B90C2940524BADFAD48659A78E3AE21BCF3D4628B9CC4DEF2E94057A",
+        "pass": true
+      },
+      {
+        "referent": "RBX7E17A602DEC948E181890882639A75F8",
+        "path": "Packages",
+        "class": "Packages",
+        "itemCount": 1,
+        "sha256": "1DD89075BBECE9B1F5788133D42C314495211F58D6ED5547CC0BF825118FDAD6",
+        "afterSha256": "1DD89075BBECE9B1F5788133D42C314495211F58D6ED5547CC0BF825118FDAD6",
+        "pass": true
+      },
+      {
+        "referent": "RBX7B5CC4DE2A1E4FB78315DBC77E106574",
+        "path": "GuidRegistryService",
+        "class": "GuidRegistryService",
+        "itemCount": 1,
+        "sha256": "8B1D9AE9246264A15F9E9F8D16C345F65BDE05C0E9041105314570A7FEE96A90",
+        "afterSha256": "8B1D9AE9246264A15F9E9F8D16C345F65BDE05C0E9041105314570A7FEE96A90",
+        "pass": true
+      },
+      {
+        "referent": "RBX43634101D3964AEAA15713B96843459F",
+        "path": "LuaWebService",
+        "class": "LuaWebService",
+        "itemCount": 1,
+        "sha256": "5945EA0F137607D91CB72B14207BAB882716A107BEC29EC99323199FAD49B3CF",
+        "afterSha256": "5945EA0F137607D91CB72B14207BAB882716A107BEC29EC99323199FAD49B3CF",
+        "pass": true
+      },
+      {
+        "referent": "RBX6F83EEC43413459E84757237A816B8E1",
+        "path": "ProcessInstancePhysicsService",
+        "class": "ProcessInstancePhysicsService",
+        "itemCount": 1,
+        "sha256": "A0477F890385861B298A0CB633FC31BCBA5A53E9FD67FA4B3CBD901425CB3B63",
+        "afterSha256": "A0477F890385861B298A0CB633FC31BCBA5A53E9FD67FA4B3CBD901425CB3B63",
+        "pass": true
+      },
+      {
+        "referent": "RBX602B4CF3D8B5413BAA28F14F6ACB3E24",
+        "path": "ServerStorage",
+        "class": "ServerStorage",
+        "itemCount": 1,
+        "sha256": "C6D32B2367CB99B7F64894C3FBE318525F491E353D8376941049AD8640446FF6",
+        "afterSha256": "C6D32B2367CB99B7F64894C3FBE318525F491E353D8376941049AD8640446FF6",
+        "pass": true
+      },
+      {
+        "referent": "RBX8C52E2E9760848419CBE7A6B8BE34E69",
+        "path": "ServiceVisibilityService",
+        "class": "ServiceVisibilityService",
+        "itemCount": 1,
+        "sha256": "1955CB5B2BA8ED411DDBE1AD0864A3D0BCF39F068987D0B6E59F68B961A97602",
+        "afterSha256": "1955CB5B2BA8ED411DDBE1AD0864A3D0BCF39F068987D0B6E59F68B961A97602",
+        "pass": true
+      },
+      {
+        "referent": "RBX982F61C8C17A47DFAB2C3D8C717E1564",
+        "path": "HttpService",
+        "class": "HttpService",
+        "itemCount": 1,
+        "sha256": "3C875BA3F50684C2E80E2F065A470ECB2673D00B43A6CA0687C709478B6AB2A6",
+        "afterSha256": "3C875BA3F50684C2E80E2F065A470ECB2673D00B43A6CA0687C709478B6AB2A6",
+        "pass": true
+      },
+      {
+        "referent": "RBX065803B69F6048D2A7CD08BEB46B0AAF",
+        "path": "Lighting",
+        "class": "Lighting",
+        "itemCount": 6,
+        "sha256": "B05A954BBC9A3881FB4B626F8C6EE361F77A8AF7FE3E9667B7CF87BE208C4100",
+        "afterSha256": "B05A954BBC9A3881FB4B626F8C6EE361F77A8AF7FE3E9667B7CF87BE208C4100",
+        "pass": true
+      },
+      {
+        "referent": "RBXE92A4B9E002D465392E9857C812600E3",
+        "path": "Instance",
+        "class": "LodDataService",
+        "itemCount": 1,
+        "sha256": "505A25563BAA2D450F7A26F2E4D6C4CBAF21C11B71425F78B4C3F9709D951E33",
+        "afterSha256": "505A25563BAA2D450F7A26F2E4D6C4CBAF21C11B71425F78B4C3F9709D951E33",
+        "pass": true
+      },
+      {
+        "referent": "RBX910CB950B2A347BFB1740B72F634033B",
+        "path": "ProximityPromptService",
+        "class": "ProximityPromptService",
+        "itemCount": 1,
+        "sha256": "BA301F1B11E2A37FC06BD31FD25A960FA96CB46C70BE4EE86ACB83B21BE4BEF9",
+        "afterSha256": "BA301F1B11E2A37FC06BD31FD25A960FA96CB46C70BE4EE86ACB83B21BE4BEF9",
+        "pass": true
+      },
+      {
+        "referent": "RBXC27795DCB88D4AB08C4AFA48A8350484",
+        "path": "Teams",
+        "class": "Teams",
+        "itemCount": 1,
+        "sha256": "3491DC78A802494849BD974D6FE907D6EF26952CE0F000E783D3ED011B9ED1C6",
+        "afterSha256": "3491DC78A802494849BD974D6FE907D6EF26952CE0F000E783D3ED011B9ED1C6",
+        "pass": true
+      },
+      {
+        "referent": "RBXCF873EC6492747028CC864F9B4B72467",
+        "path": "TestService",
+        "class": "TestService",
+        "itemCount": 1,
+        "sha256": "DFD0E6AA6A8AF4B41D8CEA4D058A52060E20F7AE0DB9107B0788455555CC0D08",
+        "afterSha256": "DFD0E6AA6A8AF4B41D8CEA4D058A52060E20F7AE0DB9107B0788455555CC0D08",
+        "pass": true
+      },
+      {
+        "referent": "RBXF7569F6B1F2D43A0AC944D447C9EF89B",
+        "path": "UGCAvatarService",
+        "class": "UGCAvatarService",
+        "itemCount": 1,
+        "sha256": "862D8B5B1DAEFE3757812D52A43E4EB75365A96B601CD7D6FF203B4AED396E14",
+        "afterSha256": "862D8B5B1DAEFE3757812D52A43E4EB75365A96B601CD7D6FF203B4AED396E14",
+        "pass": true
+      },
+      {
+        "referent": "RBXA16D69D8167A4AFAA8F684FAF0793393",
+        "path": "VideoService",
+        "class": "VideoService",
+        "itemCount": 1,
+        "sha256": "DAF7DB265BC0C9CA5A5CA365B62607134EA8FF079DBDB035C29295934A7D0BAB",
+        "afterSha256": "DAF7DB265BC0C9CA5A5CA365B62607134EA8FF079DBDB035C29295934A7D0BAB",
+        "pass": true
+      },
+      {
+        "referent": "RBX1927C72D9BDD4366964BC024CDFB0DE9",
+        "path": "VoiceChatService",
+        "class": "VoiceChatService",
+        "itemCount": 1,
+        "sha256": "CEF491E68BD9659DA845475AC2A76E62B33AE092D1EE42B0EEBC2561C4771B75",
+        "afterSha256": "CEF491E68BD9659DA845475AC2A76E62B33AE092D1EE42B0EEBC2561C4771B75",
+        "pass": true
+      },
+      {
+        "referent": "RBX7A394409B1DA46019AA3972941E5DCAD",
+        "path": "SerializationService",
+        "class": "SerializationService",
+        "itemCount": 1,
+        "sha256": "96D3B10D7CF309A834A2C20FDEB5B9AD3A9191B2DC51807857D143D280DA199C",
+        "afterSha256": "96D3B10D7CF309A834A2C20FDEB5B9AD3A9191B2DC51807857D143D280DA199C",
+        "pass": true
+      }
+    ],
+    "unmappedPropertiesPreserved": true,
+    "rootMetadataPreserved": true
+  },
+  "rereadVerified": true,
+  "inputFilesUnchanged": true
+}

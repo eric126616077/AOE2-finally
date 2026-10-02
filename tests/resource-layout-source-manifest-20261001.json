@@ -1,0 +1,26 @@
+{
+  "snapshot": "build/AOE2-resource-layout-20261001-1234.rbxlx",
+  "files": [
+    {
+      "sha256": "E311F207F037B3D963F2667ED83754D00EC84427B49323EB620319953A0A990E",
+      "path": "src/ReplicatedStorage/GameData/GameConfig.lua"
+    },
+    {
+      "sha256": "7A004B5102D6A3551C27BC313C18C5BC5B625EE3286407202EAA3CDD9B7505E7",
+      "path": "src/ServerScriptService/ServerModules/WorldGenerator.lua"
+    },
+    {
+      "sha256": "68AFD34265850815B1B6D6125E644BD33D36E4C1CA2DCC79FC8105A84B753FB6",
+      "path": "src/ServerScriptService/MapGenerator.server.lua"
+    },
+    {
+      "sha256": "EADF9DDFB7DB0729DAB2A285E336A9055BAE08A7862283825644316A7E42D5D8",
+      "path": "src/ReplicatedStorage/Shared/MapTests.lua"
+    },
+    {
+      "sha256": "C5E01E70667F85813A5CA0BFDC20E6E1FBED6D3ADACC63E53AC2AD0B73AC5E60",
+      "path": "tests/resource-layout-studio-client.lua"
+    }
+  ],
+  "snapshotHash": "9A2A4E761B69EA462F7BCA0EA191E5E9C78C0CF28E20840739801299DE8EC8ED"
+}

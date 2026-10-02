@@ -1,6 +1,6 @@
 -- Engine-independent limits used by the authority, including repeated target changes.
 local UnitRules = {}
-local actions = {attack=true, gather=true, repair=true}
+local actions = {attack=true, gather=true, repair=true, workFeedback=true}
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
 end

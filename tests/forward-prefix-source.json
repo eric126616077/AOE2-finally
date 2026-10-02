@@ -1,0 +1,30 @@
+[
+  {
+    "file": "base/GameServer.server.lua",
+    "sha256": "56EF8C749EBB0B077F3C90540EE2BE44ED4F0F7AF4E773E1FEFAC0D298127C15"
+  },
+  {
+    "file": "base/PathRules.lua",
+    "sha256": "D344A9515B9A98DA2B58C091FD5F3A6850DEB25067D062C61E20F672C098098B"
+  },
+  {
+    "file": "src/ServerScriptService/GameServer.server.lua",
+    "sha256": "C6710AA707E33C7058567DECC8406518864503EEA1E092FFC16F4856C4207081"
+  },
+  {
+    "file": "src/ServerScriptService/ServerModules/PathRules.lua",
+    "sha256": "4D680443963ED183A74C6C9414685842F87BD323444986B6E6D31007F412BA13"
+  },
+  {
+    "file": "tests/path_prefix.spec.lua",
+    "sha256": "B08B3F2AA76A032E4918E418FF2143C1938343260D60B8B8417E7DBD8B40D8D3"
+  },
+  {
+    "file": "actual-server-delivery-navigation.txt",
+    "sha256": "5A8A7BFA13B55BBFD7518CF80D763ADD9088BFD6321F7CFF87036A28142644B2"
+  },
+  {
+    "file": "actual-client-scout-navigation.txt",
+    "sha256": "28543770CAE194FE77900619C6642DC6B205405E4E35696AAAEE3ABA17583D80"
+  }
+]

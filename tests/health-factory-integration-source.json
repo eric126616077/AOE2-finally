@@ -1,0 +1,62 @@
+[
+  {
+    "new": "56EF8C749EBB0B077F3C90540EE2BE44ED4F0F7AF4E773E1FEFAC0D298127C15",
+    "old": "FDD24474C9CB455C3AB88DC85AC106282E732BC7A31B8C99BC505BB6E4CF37AF",
+    "rel": "src/ServerScriptService/GameServer.server.lua",
+    "from": "AOE2-construction-hp-fix-20260930-210022"
+  },
+  {
+    "new": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+    "old": "1ACCA71F3F3B50D9053D173E58F95AAEC55E56564A486DEA35C97CBDEA201A80",
+    "rel": "src/ServerScriptService/ServerModules/ConstructionRules.lua",
+    "from": "AOE2-construction-hp-fix-20260930-210022"
+  },
+  {
+    "new": "489D302CDDF19C5B1FD3991B2BC2660BB7CEE30A0B4E2BD66BF7DEA08B31356E",
+    "old": null,
+    "rel": "tests/construction_hp.spec.lua",
+    "from": "AOE2-construction-hp-fix-20260930-210022"
+  },
+  {
+    "new": "660B8F998735BF4AFE371546E3D584CB150150AFCDF9EF0C2F3E1EB946CBC945",
+    "old": "1BD441E18A1BFDE16EA3738D912A514B0238D7F6FA941945A87A6CC7EFA37DD2",
+    "rel": "src/ServerScriptService/ServerModules/ModelFactory.lua",
+    "from": "AOE2-factory-guard-20260930-210224"
+  },
+  {
+    "new": "810EFEA8E79A663CA1D5F9CFF01DA278134B7EDF12CCE07CFCA25493CB12B88A",
+    "old": null,
+    "rel": "src/ServerScriptService/ServerModules/ModelFactoryTests.lua",
+    "from": "AOE2-factory-guard-20260930-210224"
+  },
+  {
+    "new": "DA0D44BBAC0C8A9EB0AEDB7D99799B0C9324C1F96C505346A700A767D1AE737A",
+    "old": null,
+    "rel": "tests/model_factory.mocks.lua",
+    "from": "AOE2-factory-guard-20260930-210224"
+  },
+  {
+    "new": "3F8176233CCF5D28A3263777AA0509069A33E81FFAF9E657BDF0E3148C8B88FE",
+    "old": null,
+    "rel": "tests/model_factory.spec.lua",
+    "from": "AOE2-factory-guard-20260930-210224"
+  },
+  {
+    "new": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+    "old": "1DB1D23BDC39EC062D9CBC5FF3CF1A478C5C642063AB9ABB1416DA37DA5D43B1",
+    "rel": "src/ReplicatedStorage/Shared/TeamMatchTests.lua",
+    "from": "AOE2-delivery-fallback-tests-20260930-202110"
+  },
+  {
+    "new": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+    "old": null,
+    "rel": "src/ReplicatedStorage/Shared/PerformanceObserver.lua",
+    "from": "AOE2-performance-observer-20260930-204603"
+  },
+  {
+    "new": "BB493AC0F021E2B959119AC3BF842180C5BE88C1D4686A4403C47EB6D0C68B07",
+    "old": null,
+    "rel": "tests/performance_observer.spec.lua",
+    "from": "AOE2-performance-observer-20260930-204603"
+  }
+]

@@ -1,0 +1,81 @@
+2026-10-01T11:16:09.396Z,114.396355,11e54,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T11:16:09.396Z,114.396355,11e54,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T11:16:09.468Z,114.468651,13f30,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T11:18:18.728Z,243.728943,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 伺服器完成初始化
+2026-10-01T11:18:18.728Z,243.728943,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 測試從新的單人大廳開始
+2026-10-01T11:18:18.728Z,243.728943,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 大廳與戰場完整複製
+2026-10-01T11:18:18.728Z,243.728943,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際 PlayerGui 已掛載大廳
+2026-10-01T11:18:18.728Z,243.728943,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 大廳角色已載入
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 入場使用角色相機
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 大廳廣場已複製
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 入場顯示匹配入口
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際介面提供等價房間：Room1
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 場景提供獨立匹配點：Room1
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新房間先由房主設定：Room1
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際介面提供等價房間：Room2
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 場景提供獨立匹配點：Room2
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新房間先由房主設定：Room2
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際介面提供等價房間：Room3
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 場景提供獨立匹配點：Room3
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新房間先由房主設定：Room3
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際介面提供等價房間：Room4
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 場景提供獨立匹配點：Room4
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新房間先由房主設定：Room4
+2026-10-01T11:18:18.729Z,243.729935,37c8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 入場狀態仍在大廳
+2026-10-01T11:18:19.242Z,244.242950,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 無效匹配點請求不會入隊
+2026-10-01T11:18:19.759Z,244.759705,8ea0,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 未接近傳送門的舊版請求不會入隊
+2026-10-01T11:18:19.875Z,244.875916,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 加入第二個等價匹配點
+2026-10-01T11:18:19.875Z,244.875916,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 第二個匹配點同樣可以設定
+2026-10-01T11:18:19.977Z,244.977875,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 第二個匹配點接受自己的房主設定
+2026-10-01T11:18:20.094Z,245.094284,a8f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 第二個匹配點可以完成設定
+2026-10-01T11:18:20.094Z,245.094284,a8f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 第二個匹配點設定不影響第一個
+2026-10-01T11:18:20.209Z,245.209930,13600,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 空房間重置為待設定的共同預設
+2026-10-01T11:18:22.426Z,247.426086,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 從廣場加入第一個匹配點
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 房主設定精靈從第一頁開始
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 設定精靈一次只顯示第一頁
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 第一頁先設定模式與真人數
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] Studio 檢查接到目前實際 HUD 實例
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際設定精靈可以切換第 2 頁
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 精靈頁碼與目前頁面同步
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 切頁只保留目前表單
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際設定精靈可以切換第 1 頁
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 精靈頁碼與目前頁面同步
+2026-10-01T11:18:22.527Z,247.527161,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 切頁只保留目前表單
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際設定精靈可以切換第 2 頁
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 精靈頁碼與目前頁面同步
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 切頁只保留目前表單
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 單純瀏覽設定頁不改變伺服器配置
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 完成設定前不顯示準備操作
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 設定面板位於客戶端安全畫面內
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 分階段操作存在：NextLobbyPage
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 分階段操作存在：PreviousLobbyPage
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 分階段操作存在：CompleteLobbySetup
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 分階段操作存在：ReadyButton
+2026-10-01T11:18:22.528Z,247.528168,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 分階段操作存在：LeaveQueueButton
+2026-10-01T11:18:23.041Z,248.041565,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 完成設定前不能確認準備
+2026-10-01T11:18:23.143Z,248.143463,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 單人測試設定由伺服器套用
+2026-10-01T11:18:23.143Z,248.143463,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 更改設定需要房主重新確認
+2026-10-01T11:18:23.244Z,248.244843,a8f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 伺服器回覆設定確認
+2026-10-01T11:18:23.244Z,248.244843,a8f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 舊設定版本不能完成房間設定
+2026-10-01T11:18:23.244Z,248.244843,a8f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 過期確認不會進入等待或準備
+2026-10-01T11:18:23.758Z,248.758713,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 偽造房間欄位不覆蓋任何配置
+2026-10-01T11:18:23.758Z,248.758713,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 完成設定前停在第二頁
+2026-10-01T11:18:23.758Z,248.758713,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際 HUD 完成設定操作可送出確認
+2026-10-01T11:18:23.877Z,248.877960,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 房主確認後切換玩家等待面板
+2026-10-01T11:18:23.877Z,248.877960,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 等待階段只顯示名單與準備頁
+2026-10-01T11:18:23.877Z,248.877960,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 完成設定後顯示準備操作
+2026-10-01T11:18:23.877Z,248.877960,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 等待面板不需手動開始戰局
+2026-10-01T11:18:23.877Z,248.877960,13ab4,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 入場介面提供前往戰場的轉場面板
+2026-10-01T11:18:24.464Z,249.464569,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 確認設定並準備後自動進入新戰場
+2026-10-01T11:18:24.464Z,249.464569,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW OBSERVE] StartingReceived=false
+2026-10-01T11:18:24.464Z,249.464569,c2f8,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 開局使用新的戰場版本
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 參戰玩家離開大廳角色
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 開局消耗所選房間的入隊狀態
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 抵達戰場切換 RTS 相機
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新戰場地面真實複製可見
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 房主規則建立對應大小的新地圖
+2026-10-01T11:18:24.577Z,249.577744,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 玩家陣營位於與大廳分離的戰場
+2026-10-01T11:18:24.578Z,249.578735,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 新戰場已有伺服器生成的資源
+2026-10-01T11:18:24.578Z,249.578735,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 城鎮中心與村民具有實際幾何
+2026-10-01T11:18:24.578Z,249.578735,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW PASS] 實際 PlayerGui 顯示 RTS HUD 並收起大廳與轉場
+2026-10-01T11:18:24.578Z,249.578735,13c14,6,Info [FLog::CreatorOutput] [LOBBY_FLOW COMPLETE] 76 checks

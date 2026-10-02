@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/ReplicatedStorage/Shared/BuildMenuRules.lua",
+    "sha256": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/BuildMenuTests.lua",
+    "sha256": "1E91C487C740B3874978F949229A90DC640BA13B510F08555A938984C9ABBF62"
+  },
+  {
+    "path": "tests/build_menu.spec.lua",
+    "sha256": "76EAADF7EECBF5D64D74C9F860C315A6192E0DA597F53532CF4624E2F37F6E33"
+  }
+]

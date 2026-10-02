@@ -1,0 +1,116 @@
+2026-09-30 Asia/Taipei. Actual Studio CLIENT attached to normal Advanced COMPLETE fixture. Server/path/input old frozen VM retained. Test-only Module added through Command Bar with exact payload readback.
+20:52 prerequisite FAIL: one complete Castle was below max by floating dust. 20:58 readonly actual Castle HP=4799.9999999999991 Max=4800. Later normal Order to repair cost one wood and completed. No HP/resource/admin changes.
+21:01:35 retry stopped before building new Camp/Walls: second evacuation move timed out at21:03:40. This is setup movement FAIL, NOT sealed dropoff result. Diagnostic incorrectly prints first worker for all movement, so second unit state still unread. Scene retained.
+2026-09-30T12:50:01.484Z,21664.484375,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK_MODULE READY] 僅新增未執行的測試 ModuleScript；完整 UTF-8 payload 24698 bytes。沒有引擎測試通過聲明。
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 只附加到正常單人 Rich／Small／AI0 沙盒
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 使用完整複製的無角色 RTS
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Warning [FLog::CreatorWarning] Warning: [DELIVERY_FALLBACK FAIL] 保留原對局、牆壁與攜帶資源供診斷；沒有清理或重開
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.DeliveryFallbackTests:25: [DELIVERY_FALLBACK FAIL] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+ReplicatedStorage.Shared.DeliveryFallbackTests:25 function run
+ReplicatedStorage.Shared.DeliveryFallbackTests:360
+ReplicatedStorage.Shared.DeliveryFallbackTests:360 function invoke
+ReplicatedStorage.Shared.DeliveryFallbackTests:367 function RunAttached
+CommandBar:1
+
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Stack Begin
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 363 - function invoke
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 367 - function RunAttached
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'CommandBar', Line 1
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Stack End
+2026-09-30T12:58:12.966Z,22155.966797,0884,6,Info [FLog::CreatorOutput] [DROPOFF_HP_DIAGNOSTIC] TownCenter -216, 13, -216 HP 2400 MAX 2400 DIFF 0 true
+2026-09-30T12:58:12.966Z,22155.966797,0884,6,Info [FLog::CreatorOutput] [DROPOFF_HP_DIAGNOSTIC] LumberCamp -328, 6, -192 HP 800 MAX 800 DIFF 0 true
+2026-09-30T12:58:12.966Z,22155.966797,0884,6,Info [FLog::CreatorOutput] [DROPOFF_HP_DIAGNOSTIC] Market -272, 9.5, -252 HP 1300 MAX 1300 DIFF 0 true
+2026-09-30T12:58:12.966Z,22155.966797,0884,6,Info [FLog::CreatorOutput] [DROPOFF_HP_DIAGNOSTIC] Castle -192, 24, -112 HP 4799.9999999999991 MAX 4800 DIFF 9.0949470177292824e-13 true
+2026-09-30T12:58:12.966Z,22155.966797,0884,6,Info [FLog::CreatorOutput] [DROPOFF_HP_DIAGNOSTIC] TownCenter -144, 13, -184 HP 2400 MAX 2400 DIFF 0 true
+2026-09-30T13:01:35.330Z,22358.330078,8358,6,Info [FLog::CreatorOutput] [DROPOFF_NORMAL_REPAIR] -192, 24, -112 -158.15182495117188, 2.5, -93.82384490966797 WoodBefore 688.5499999999995 WoodAfter 687.5499999999995 HP 4800
+2026-09-30T13:01:35.330Z,22358.330078,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 只附加到正常單人 Rich／Small／AI0 沙盒
+2026-09-30T13:01:35.330Z,22358.330078,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 使用完整複製的無角色 RTS
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 已達四時代
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 TownCenter
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 House
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Mill
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 LumberCamp
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 MiningCamp
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Barracks
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Farm
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 ArcheryRange
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Stable
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Blacksmith
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Market
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Tower
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Wall
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Castle
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 SiegeWorkshop
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Monastery
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 University
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有真正完工 Wonder
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Loom
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Wheelbarrow
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 DoubleBitAxe
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 HorseCollar
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 HeavyPlow
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Forging
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Armor
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Fletching
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 ThumbRing
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Chemistry
+2026-09-30T13:01:35.332Z,22358.332031,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 附加 fixture 有正式研究 Conscription
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 牆壁只在合法時代建造
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:57.777Z,22380.777344,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 沒有其他訓練／研究／施工污染採樣
+2026-09-30T13:01:58.587Z,22381.587891,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 使用正式攜帶容量，不修改科技
+2026-09-30T13:01:58.603Z,22381.603516,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 有限搜尋找到可建完整石牆環且距離較近的合法營地 fixture
+2026-09-30T13:01:58.603Z,22381.603516,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK_PLAN] Tree -64, 0, -120 Camp -8, 0, -120 Far -144, 0, -184 Candidates 1473
+2026-09-30T13:01:58.603Z,22381.603516,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 先移出完整營地／牆壁範圍目的地有正常身體空間
+2026-09-30T13:02:00.378Z,22383.378906,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK WAIT] 先移出完整營地／牆壁範圍正常走到指定外側位置；時代 4；村民 移動；攜帶 0 ；位置 -98.72134399414062, 0, -181.39083862304688；交貨 14428.199999999999；已用 25.0 秒
+2026-09-30T13:02:10.705Z,22393.705078,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 先移出完整營地／牆壁範圍目的地有正常身體空間
+2026-09-30T13:02:25.408Z,22408.408203,6828,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK WAIT] 先移出完整營地／牆壁範圍正常走到指定外側位置；時代 4；村民 待命；攜帶 0 ；位置 -8, 0, -144；交貨 14428.199999999999；已用 50.1 秒
+2026-09-30T13:02:50.449Z,22433.449219,6828,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK WAIT] 先移出完整營地／牆壁範圍正常走到指定外側位置；時代 4；村民 待命；攜帶 0 ；位置 -8, 0, -144；交貨 14428.199999999999；已用 75.1 秒
+2026-09-30T13:03:15.468Z,22458.468750,8358,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK WAIT] 先移出完整營地／牆壁範圍正常走到指定外側位置；時代 4；村民 待命；攜帶 0 ；位置 -8, 0, -144；交貨 14428.199999999999；已用 100.1 秒
+2026-09-30T13:03:40.476Z,22483.476562,0da4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK WAIT] 先移出完整營地／牆壁範圍正常走到指定外側位置；時代 4；村民 待命；攜帶 0 ；位置 -8, 0, -144；交貨 14428.199999999999；已用 125.1 秒
+2026-09-30T13:03:40.748Z,22483.748047,8358,6,Warning [FLog::CreatorWarning] Warning: [DELIVERY_FALLBACK FAIL] 保留原對局、牆壁與攜帶資源供診斷；沒有清理或重開
+2026-09-30T13:03:40.748Z,22483.748047,8358,6,Error [FLog::CreatorError] Error: [DELIVERY_FALLBACK FAIL] 先移出完整營地／牆壁範圍正常走到指定外側位置逾時；時代 4；村民 待命；攜帶 0 ；位置 -8, 0, -144；交貨 14428.199999999999；已用 125.4 秒
+ReplicatedStorage.Shared.DeliveryFallbackTests:60 function waitFor
+ReplicatedStorage.Shared.DeliveryFallbackTests:155 function move
+ReplicatedStorage.Shared.DeliveryFallbackTests:263 function run
+ReplicatedStorage.Shared.DeliveryFallbackTests:360
+ReplicatedStorage.Shared.DeliveryFallbackTests:360 function invoke
+ReplicatedStorage.Shared.DeliveryFallbackTests:367 function RunAttached
+CommandBar:1
+
+2026-09-30T13:03:40.750Z,22483.750000,8358,6,Info [FLog::CreatorOutput] Info: Stack Begin
+2026-09-30T13:03:40.750Z,22483.750000,8358,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 363 - function invoke
+2026-09-30T13:03:40.750Z,22483.750000,8358,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 367 - function RunAttached
+2026-09-30T13:03:40.750Z,22483.750000,8358,6,Info [FLog::CreatorOutput] Info: Script 'CommandBar', Line 1
+2026-09-30T13:03:40.750Z,22483.750000,8358,6,Info [FLog::CreatorOutput] Info: Stack End

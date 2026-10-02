@@ -1,0 +1,254 @@
+2026-09-30 Asia/Taipei. Actual Studio Play through computer-use.
+Desktop Presentation 65 and Gameplay 17; iPhone 17 Pro landscape Presentation 66 and rerun Gameplay 18.
+Retains earlier mobile gameplay timeout; see docs/FEEDBACK.md. Asset string preload error fixed before these completed tests.
+Raw evidence from: 
+C:\Users\user\AppData\Local\Roblox\logs\0.741.19.7411056_20260930T064857Z_Studio_E5615_last.log
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際 PlayerGui 掛載音效開關
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效選單使用 GUI 安全區域
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式 HUD 使用 UIScale
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單全部位於目前實際視窗安全範圍內
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ContinueButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SurrenderButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：EdgeScrollButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：GuidanceButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ContinueButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SurrenderButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：EdgeScrollButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：GuidanceButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SurrenderButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／EdgeScrollButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／GuidanceButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／EdgeScrollButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／GuidanceButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／GuidanceButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／SoundButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／ReducedMotionButton
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效標籤與玩家設定一致
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效與動作 LocalScript 已初始化
+2026-09-30T10:20:58.931Z,12721.931641,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效 LocalScript 提供 Studio 唯讀播放探針
+2026-09-30T10:20:58.932Z,12721.932617,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式播放池有總量與世界音效上限
+2026-09-30T10:20:58.932Z,12721.932617,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效非同步預載完成
+2026-09-30T10:20:58.932Z,12721.932617,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效全部內建資產預載成功
+2026-09-30T10:20:59.021Z,12722.021484,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 每個實際 Sound 都有 IsLoaded 與有效 TimeLength
+2026-09-30T10:20:59.021Z,12722.021484,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 玩家靜音設定同步正式播放池、清理音效與實際標籤
+2026-09-30T10:20:59.021Z,12722.021484,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 本機音效 API 可播放已驗證內建音檔
+2026-09-30T10:20:59.021Z,12722.021484,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 播放後實際保留活動聲音
+2026-09-30T10:20:59.074Z,12722.074219,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Defeat
+2026-09-30T10:20:59.075Z,12722.075195,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Defeat
+2026-09-30T10:20:59.126Z,12722.126953,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Victory
+2026-09-30T10:20:59.126Z,12722.126953,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Victory
+2026-09-30T10:20:59.180Z,12722.180664,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchStart
+2026-09-30T10:20:59.180Z,12722.180664,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchStart
+2026-09-30T10:20:59.233Z,12722.233398,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Train
+2026-09-30T10:20:59.233Z,12722.233398,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Train
+2026-09-30T10:20:59.285Z,12722.285156,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Research
+2026-09-30T10:20:59.285Z,12722.285156,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Research
+2026-09-30T10:20:59.336Z,12722.336914,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：ConstructionComplete
+2026-09-30T10:20:59.337Z,12722.337891,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：ConstructionComplete
+2026-09-30T10:20:59.389Z,12722.389648,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchEnd
+2026-09-30T10:20:59.389Z,12722.389648,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchEnd
+2026-09-30T10:20:59.439Z,12722.439453,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Error
+2026-09-30T10:20:59.439Z,12722.439453,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Error
+2026-09-30T10:20:59.439Z,12722.439453,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際播放可同時保留多個聲音
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音立即清空此 API 的活動播放
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音期間拒絕新增播放
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除靜音後可再次播放
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] StopAll 完整釋放播放額度
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除玩家靜音同步正式播放池與標籤
+2026-09-30T10:20:59.440Z,12722.440430,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST COMPLETE] 65 項檢查；已驗收目前裝置的版面、實際資產載入、多音與靜音；聽感與真人觸控仍需手動驗收
+2026-09-30T10:21:00.373Z,12723.373047,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常大廳流程啟動單人測試局
+2026-09-30T10:21:00.640Z,12723.640625,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 三位初始村民及根零件同步
+2026-09-30T10:21:00.640Z,12723.640625,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常無角色 RTS 沙盒
+2026-09-30T10:21:00.642Z,12723.642578,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 停止村民後由伺服器發布 Idle
+2026-09-30T10:21:00.642Z,12723.642578,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常地圖有足量鄰近採集資源
+2026-09-30T10:21:00.642Z,12723.642578,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 使用伺服器生成的有效資源種類
+2026-09-30T10:21:00.695Z,12723.695312,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式相機可看見採集驗證村民
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際採得資源後才發布 Work 與 LastWork
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集工作種類與伺服器資源一致
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集中的背包尚未增加庫存
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作回饋沒有改變村民攜帶上限
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效腳本依實際採集發布已載入的空間音效
+2026-09-30T10:21:07.651Z,12730.651367,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 可見 fallback 村民隨實際工作改變工具／手臂姿勢
+2026-09-30T10:21:07.708Z,12730.708008,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 減少動態設定將正在工作的零件還原 rest pose
+2026-09-30T10:21:17.886Z,12740.886719,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際交貨增加庫存後才發布 LastDelivery
+2026-09-30T10:21:17.939Z,12740.939453,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集驗證結束可正常停止村民
+2026-09-30T10:21:19.063Z,12742.063477,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 跨過一次正常採集週期仍保持待命時間戳記
+2026-09-30T10:21:19.063Z,12742.063477,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST COMPLETE] 17 項檢查；由正常指令驗收採集、交貨與減少動態；未涵蓋戰鬥、攻城、施工及雙人同步
+2026-09-30T10:24:19.423Z,12922.423828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際 PlayerGui 掛載音效開關
+2026-09-30T10:24:19.423Z,12922.423828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效選單使用 GUI 安全區域
+2026-09-30T10:24:19.423Z,12922.423828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式 HUD 使用 UIScale
+2026-09-30T10:24:19.423Z,12922.423828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單全部位於目前實際視窗安全範圍內
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 觸控音效開關至少 44 × 44 像素
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ContinueButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SurrenderButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：EdgeScrollButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：GuidanceButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ContinueButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SurrenderButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：EdgeScrollButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：GuidanceButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SurrenderButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／EdgeScrollButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／GuidanceButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／EdgeScrollButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／GuidanceButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／GuidanceButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／SoundButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／ReducedMotionButton
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效標籤與玩家設定一致
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效與動作 LocalScript 已初始化
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效 LocalScript 提供 Studio 唯讀播放探針
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式播放池有總量與世界音效上限
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效非同步預載完成
+2026-09-30T10:24:19.424Z,12922.424805,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效全部內建資產預載成功
+2026-09-30T10:24:19.507Z,12922.507812,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 每個實際 Sound 都有 IsLoaded 與有效 TimeLength
+2026-09-30T10:24:19.507Z,12922.507812,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 玩家靜音設定同步正式播放池、清理音效與實際標籤
+2026-09-30T10:24:19.508Z,12922.508789,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 本機音效 API 可播放已驗證內建音檔
+2026-09-30T10:24:19.508Z,12922.508789,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 播放後實際保留活動聲音
+2026-09-30T10:24:19.560Z,12922.560547,6828,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Defeat
+2026-09-30T10:24:19.561Z,12922.561523,6828,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Defeat
+2026-09-30T10:24:19.613Z,12922.613281,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Victory
+2026-09-30T10:24:19.613Z,12922.613281,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Victory
+2026-09-30T10:24:19.664Z,12922.664062,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchStart
+2026-09-30T10:24:19.664Z,12922.664062,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchStart
+2026-09-30T10:24:19.715Z,12922.715820,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Train
+2026-09-30T10:24:19.715Z,12922.715820,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Train
+2026-09-30T10:24:19.766Z,12922.766602,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Research
+2026-09-30T10:24:19.766Z,12922.766602,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Research
+2026-09-30T10:24:19.817Z,12922.817383,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：ConstructionComplete
+2026-09-30T10:24:19.817Z,12922.817383,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：ConstructionComplete
+2026-09-30T10:24:19.869Z,12922.869141,6828,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchEnd
+2026-09-30T10:24:19.869Z,12922.869141,6828,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchEnd
+2026-09-30T10:24:19.918Z,12922.918945,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Error
+2026-09-30T10:24:19.918Z,12922.918945,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Error
+2026-09-30T10:24:19.918Z,12922.918945,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際播放可同時保留多個聲音
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音立即清空此 API 的活動播放
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音期間拒絕新增播放
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除靜音後可再次播放
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] StopAll 完整釋放播放額度
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除玩家靜音同步正式播放池與標籤
+2026-09-30T10:24:19.919Z,12922.919922,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST COMPLETE] 66 項檢查；已驗收目前裝置的版面、實際資產載入、多音與靜音；聽感與真人觸控仍需手動驗收
+2026-09-30T10:24:20.545Z,12923.545898,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常大廳流程啟動單人測試局
+2026-09-30T10:24:20.804Z,12923.804688,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 三位初始村民及根零件同步
+2026-09-30T10:24:20.804Z,12923.804688,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常無角色 RTS 沙盒
+2026-09-30T10:24:20.804Z,12923.804688,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 停止村民後由伺服器發布 Idle
+2026-09-30T10:24:20.805Z,12923.805664,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常地圖有足量鄰近採集資源
+2026-09-30T10:24:20.805Z,12923.805664,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 使用伺服器生成的有效資源種類
+2026-09-30T10:24:20.863Z,12923.863281,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式相機可看見採集驗證村民
+2026-09-30T10:24:27.763Z,12930.763672,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際採得資源後才發布 Work 與 LastWork
+2026-09-30T10:24:27.763Z,12930.763672,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集工作種類與伺服器資源一致
+2026-09-30T10:24:27.763Z,12930.763672,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集中的背包尚未增加庫存
+2026-09-30T10:24:27.763Z,12930.763672,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作回饋沒有改變村民攜帶上限
+2026-09-30T10:24:31.783Z,12934.783203,6828,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.FeedbackTests:26: [FEEDBACK_TEST FAIL] 正式音效腳本依實際採集發布已載入的空間音效；等待逾時
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際 PlayerGui 掛載音效開關
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效選單使用 GUI 安全區域
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式 HUD 使用 UIScale
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單全部位於目前實際視窗安全範圍內
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 觸控音效開關至少 44 × 44 像素
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ContinueButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SurrenderButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：EdgeScrollButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：GuidanceButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：SoundButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式選單掛載設定按鈕：ReducedMotionButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ContinueButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SurrenderButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：EdgeScrollButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：GuidanceButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：SoundButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 滾動後整個設定按鈕可在安全範圍內到達：ReducedMotionButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SurrenderButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／EdgeScrollButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／GuidanceButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／SoundButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：ContinueButton／ReducedMotionButton
+2026-09-30T10:27:20.911Z,13103.911133,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／EdgeScrollButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／GuidanceButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／SoundButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SurrenderButton／ReducedMotionButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／GuidanceButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／SoundButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：EdgeScrollButton／ReducedMotionButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／SoundButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：GuidanceButton／ReducedMotionButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 選單按鈕不互相覆蓋：SoundButton／ReducedMotionButton
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效標籤與玩家設定一致
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 音效 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作 LocalScript 位於實際 PlayerScripts
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效與動作 LocalScript 已初始化
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際音效 LocalScript 提供 Studio 唯讀播放探針
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式播放池有總量與世界音效上限
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效非同步預載完成
+2026-09-30T10:27:20.912Z,13103.912109,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效全部內建資產預載成功
+2026-09-30T10:27:20.996Z,13103.996094,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 每個實際 Sound 都有 IsLoaded 與有效 TimeLength
+2026-09-30T10:27:20.997Z,13103.997070,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 玩家靜音設定同步正式播放池、清理音效與實際標籤
+2026-09-30T10:27:20.997Z,13103.997070,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 本機音效 API 可播放已驗證內建音檔
+2026-09-30T10:27:20.997Z,13103.997070,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 播放後實際保留活動聲音
+2026-09-30T10:27:21.048Z,13104.048828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Defeat
+2026-09-30T10:27:21.048Z,13104.048828,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Defeat
+2026-09-30T10:27:21.099Z,13104.099609,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Victory
+2026-09-30T10:27:21.099Z,13104.099609,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Victory
+2026-09-30T10:27:21.149Z,13104.149414,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchStart
+2026-09-30T10:27:21.150Z,13104.150391,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchStart
+2026-09-30T10:27:21.216Z,13104.216797,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Train
+2026-09-30T10:27:21.216Z,13104.216797,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Train
+2026-09-30T10:27:21.268Z,13104.268555,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Research
+2026-09-30T10:27:21.268Z,13104.268555,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Research
+2026-09-30T10:27:21.320Z,13104.320312,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：ConstructionComplete
+2026-09-30T10:27:21.321Z,13104.321289,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：ConstructionComplete
+2026-09-30T10:27:21.370Z,13104.370117,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：MatchEnd
+2026-09-30T10:27:21.371Z,13104.371094,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：MatchEnd
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 依音效節流間隔準備連續播放：Error
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 連續播放遵守活動聲音上限：Error
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際播放可同時保留多個聲音
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音立即清空此 API 的活動播放
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 靜音期間拒絕新增播放
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除靜音後可再次播放
+2026-09-30T10:27:21.421Z,13104.421875,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] StopAll 完整釋放播放額度
+2026-09-30T10:27:21.423Z,13104.423828,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 解除玩家靜音同步正式播放池與標籤
+2026-09-30T10:27:21.423Z,13104.423828,0884,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST COMPLETE] 66 項檢查；已驗收目前裝置的版面、實際資產載入、多音與靜音；聽感與真人觸控仍需手動驗收
+2026-09-30T10:27:22.055Z,13105.055664,8ea4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常大廳流程啟動單人測試局
+2026-09-30T10:27:22.312Z,13105.312500,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 三位初始村民及根零件同步
+2026-09-30T10:27:22.312Z,13105.312500,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常無角色 RTS 沙盒
+2026-09-30T10:27:22.312Z,13105.312500,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 停止村民後由伺服器發布 Idle
+2026-09-30T10:27:22.313Z,13105.313477,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正常地圖有足量鄰近採集資源
+2026-09-30T10:27:22.313Z,13105.313477,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 使用伺服器生成的有效資源種類
+2026-09-30T10:27:22.365Z,13105.365234,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式相機可看見採集驗證村民
+2026-09-30T10:27:29.350Z,13112.350586,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際採得資源後才發布 Work 與 LastWork
+2026-09-30T10:27:29.350Z,13112.350586,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集工作種類與伺服器資源一致
+2026-09-30T10:27:29.350Z,13112.350586,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集中的背包尚未增加庫存
+2026-09-30T10:27:29.350Z,13112.350586,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 動作回饋沒有改變村民攜帶上限
+2026-09-30T10:27:29.403Z,13112.403320,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式相機聚焦到村民當前工作位置且符合世界音效可聽範圍
+2026-09-30T10:27:30.470Z,13113.470703,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 正式音效腳本依實際採集發布已載入的空間音效
+2026-09-30T10:27:30.472Z,13113.472656,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 可見 fallback 村民隨實際工作改變工具／手臂姿勢
+2026-09-30T10:27:30.525Z,13113.525391,8358,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 減少動態設定將正在工作的零件還原 rest pose
+2026-09-30T10:27:39.729Z,13122.729492,0da4,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 實際交貨增加庫存後才發布 LastDelivery
+2026-09-30T10:27:39.780Z,13122.780273,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 採集驗證結束可正常停止村民
+2026-09-30T10:27:40.895Z,13123.895508,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST PASS] 跨過一次正常採集週期仍保持待命時間戳記
+2026-09-30T10:27:40.895Z,13123.895508,8cb0,6,Info [FLog::CreatorOutput] [FEEDBACK_TEST COMPLETE] 18 項檢查；由正常指令驗收採集、交貨與減少動態；未涵蓋戰鬥、攻城、施工及雙人同步

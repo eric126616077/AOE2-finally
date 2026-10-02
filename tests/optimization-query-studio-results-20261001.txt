@@ -1,0 +1,24 @@
+Source: C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20260930T220944Z_Studio_5CF22_last.log Manifest: tests/optimization-query-final-source-manifest-20261001.json Build: build/AOE2-query-validation-20261001.rbxlx SHA256 9D8F26A9082706E8CB7FF9A647EEB8152CD7AD99BDC7A1927EA566550D981B1C Preview module runs in Command Bar VM; authority checked through actual normal remotes; no actual LocalScript preview-cache claim. Fixture: server-only temporary unknown-name wall; no resource grants, direct unit teleport or spawning. 
+2026-09-30T22:11:32.813Z,108.813133,7024,6,Info [FLog::CreatorOutput] > task.spawn(function() local ok,e=xpcall(function() require(game.ReplicatedStorage.Shared.LobbyTests).Start({expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"}); local p=game.Players.LocalPlayer; local deadline=os.clock()+20; repeat task.wait(.1); assert(os.clock()<deadline,"initial replication timeout") until workspace:GetAttribute("MatchPhase")=="Playing" and workspace:FindFirstChild("Units") and #workspace.Units:GetChildren()>=4 and workspace:FindFirstChild("Buildings") and #workspace.Buildings:GetChildren()>=1 and p.Character==nil and workspace.CurrentCamera.CameraType==Enum.CameraType.Scriptable; print("[QUERY_READY]",workspace:GetAttribute("MatchGeneration"),p:GetAttribute("HomePosition")) end,debug.traceback); if not ok then warn("[QUERY_READY FAIL]",e) end end)
+2026-09-30T22:11:34.010Z,110.010902,9474,6,Info [FLog::CreatorOutput] [QUERY_READY] 1 -216, 0, -216
+2026-09-30T22:12:24.637Z,160.637177,7024,6,Info [FLog::CreatorOutput] [SCENERY_FIXTURE READY] temporary unknown-name wall -152, 0, -168 managed flag nil
+2026-09-30T22:13:13.622Z,209.622696,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 同名資料夾沒有生成場景標記
+2026-09-30T22:13:13.622Z,209.622696,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 自己的村民可開啟建築預覽
+2026-09-30T22:13:13.622Z,209.622696,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 實際預覽模組拒絕未知資料夾牆面
+2026-09-30T22:13:13.999Z,209.999664,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 伺服器沒有在牆面生成工地
+2026-09-30T22:13:14.000Z,210.000671,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 拒絕建築沒有扣 wood
+2026-09-30T22:13:14.000Z,210.000671,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 拒絕建築沒有扣 stone
+2026-09-30T22:13:14.000Z,210.000671,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 拒絕建築沒有扣 gold
+2026-09-30T22:13:14.000Z,210.000671,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 拒絕建築沒有扣 food
+2026-09-30T22:13:14.000Z,210.000671,ba40,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 保留未知牆面的碰撞與實例
+2026-09-30T22:13:17.480Z,213.480942,7024,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 直線目標確實被測試牆面阻擋
+2026-09-30T22:13:26.901Z,222.901352,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 正常 Order 產生多次權威移動更新
+2026-09-30T22:13:26.901Z,222.901352,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 村民走到牆邊外側繞行
+2026-09-30T22:13:26.901Z,222.901352,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 村民完成被牆面阻擋的正常移動命令
+2026-09-30T22:13:26.901Z,222.901352,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION PASS] 繞行完成仍保留未知模型
+2026-09-30T22:13:26.901Z,222.901352,9b9c,6,Info [FLog::CreatorOutput] [SCENERY_COLLISION COMPLETE] {"seconds":9.420479499996873,"rootChanges":78,"generation":1,"maxDetour":23.417633056640626,"samples":152,"checks":14,"complete":true}
+2026-09-30T22:14:53.136Z,309.136993,8018,7 [FLog::Network] Disconnect from 5
+2026-09-30T22:14:53.136Z,309.136993,8018,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|50113
+2026-09-30T22:14:53.136Z,309.136993,8018,7 [FLog::Network] Disconnect from 5
+2026-09-30T22:14:53.136Z,309.136993,8018,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|50113
+2026-09-30T22:14:53.840Z,309.840118,9144,6,Info [FLog::WaypointTelemetry] StopPlaySoloEnd (waypoint #4, session #2): 9.602400000005673 ms since last waypoint, 963.2217999999853 ms since start

@@ -1,0 +1,89 @@
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 正式單位、建築、資源與 Command 遠端存在
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 只使用新局的 3 村民與 1 斥候
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 起始 villager 閒置且沒有攜帶資源
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 起始 villager 閒置且沒有攜帶資源
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 起始 villager 閒置且沒有攜帶資源
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 起始 scout 閒置且沒有攜帶資源
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 碰撞半徑與高度使用共用設定
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 圓柱軸線朝上且尺寸正確
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 己方完工市鎮中心存在
+2026-10-01T06:09:56.056Z,3143.056396,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 找到基地清空區附近界內、沒有靜態障礙的共同測試區
+2026-10-01T06:10:00.744Z,3147.744629,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 四單位各有至少四次 Root 位移並到達分散位置
+2026-10-01T06:10:00.744Z,3147.744629,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 分散就位 有實際 Root 採樣
+2026-10-01T06:10:04.733Z,3151.733887,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 閒置村民不被推移
+2026-10-01T06:10:04.733Z,3151.733887,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 直線目標產生實際側向繞行且沒有重疊
+2026-10-01T06:10:04.734Z,3151.734863,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 繞過閒置村民 有實際 Root 採樣
+2026-10-01T06:10:06.690Z,3153.690674,6760,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 兩村民迎面時繞行並完成交換
+2026-10-01T06:10:06.691Z,3153.691650,6760,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 迎面交換位置 有實際 Root 採樣
+2026-10-01T06:10:06.691Z,3153.691650,6760,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 混合編隊使用正式 FormationRules.plan 產生每單位目的地
+2026-10-01T06:10:06.745Z,3153.745117,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 第 1 個單位的伺服器目的地與正式陣形計算一致
+2026-10-01T06:10:06.745Z,3153.745117,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 第 2 個單位的伺服器目的地與正式陣形計算一致
+2026-10-01T06:10:06.745Z,3153.745117,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 第 3 個單位的伺服器目的地與正式陣形計算一致
+2026-10-01T06:10:06.745Z,3153.745117,dcac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 第 4 個單位的伺服器目的地與正式陣形計算一致
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 混合單位全程最小間距至少為半徑和，含 0.25 studs 複製容差
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 混合群體移動 有實際 Root 採樣
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:10:09.065Z,3156.065186,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 移動後體積與 Root 相對位置、旋轉不變
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 移動後體積與 Root 相對位置、旋轉不變
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞半徑與高度使用共用設定
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 圓柱軸線朝上且尺寸正確
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] villager 移動後體積與 Root 相對位置、旋轉不變
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 碰撞半徑與高度使用共用設定
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 有不可見、可碰撞、可查詢的圓柱
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 圓柱軸線朝上且尺寸正確
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 碰撞體積從地面開始並與 Root 水平對齊
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 動態碰撞體積不阻擋靜態尋路網格
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] scout 移動後體積與 Root 相對位置、旋轉不變
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 每個單位至少五次穩定幀的碰撞體積與 Root 相對位置核對
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 每個單位在 Walk 期間也有至少兩次穩定碰撞體積核對
+2026-10-01T06:10:09.066Z,3156.066406,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 移動前後及途中持續取得 Root 與碰撞體積樣本
+2026-10-01T06:10:14.559Z,3161.559326,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 正常工作指令能在新碰撞體積下採集資源
+2026-10-01T06:10:14.559Z,3161.559326,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 正常採集 有實際 Root 採樣
+2026-10-01T06:10:21.759Z,3168.759033,d83c,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 正常交貨增加伺服器交回資源數量並清空攜帶量
+2026-10-01T06:10:21.759Z,3168.759033,d83c,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 正常交貨 有實際 Root 採樣
+2026-10-01T06:10:21.759Z,3168.759033,d83c,6,Info [FLog::CreatorOutput] [UNIT_COLLISION PASS] 所有已採樣階段的 Root 體積沒有重疊
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 1/14] {"finalUnits":[{"goalZ":-216,"index":1,"animation":"Idle","order":"採集","X":-197.12100219726563,"goalX":-216,"Z":-196.60897827148438,"kind":"villager","goalDistance":27.063411712646486,"formation":"Box"},{"slotZ":-160.3067626953125,"index":2,"animation":"Idle","order":"待命","slotX":-214.39474487304688,"X":-214.39474487304688,"Z":-160.3067626953125,"kind":"villager","formation":"Box"},{"slotZ":-154.39474487304688,"index":3,"animation":"Idle","order":"待命","slotX":-211.6932373046875,"X":-211.6932373046875,"Z":-154.39474487304688,"kind":"villager",
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 2/14] "formation":"Box"},{"slotZ":-157.60525512695313,"index":4,"animation":"Idle","order":"待命","slotX":-220.3067626953125,"X":-220.3067626953125,"Z":-157.60525512695313,"kind":"scout","formation":"Box"}],"minClearance":0.16814947128295899,"complete":true,"cleanupStopped":true,"maxStableColliderAngleError":0.00048828125,"stages":[{"rootChanges":133,"started":0.0006564999930560589,"elapsed":4.688095600009547,"samples":279,"maxLateral":0,"name":"分散就位","finalUnits":[{"slotZ":-144,"goalZ":-144,"index":1,"animation":"Idle","order":"待命","slotX":-240,
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 3/14] "X":-240,"goalX":-240,"Z":-144,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-144,"goalZ":-144,"index":2,"animation":"Idle","order":"待命","slotX":-216,"X":-216,"goalX":-216,"Z":-144,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-126,"goalZ":-126,"index":3,"animation":"Idle","order":"待命","slotX":-198,"X":-198,"goalX":-198,"Z":-126,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-162,"goalZ":-162,"index":4,"animation":"Idle","order":"待命","slotX":-236,"X":-236,"goalX":-236,"Z":-162,"kind":"scout","
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 4/14] goalDistance":0,"formation":"Box"}],"complete":true,"rootChangesByUnit":[33,29,42,29],"minClearance":2},{"rootChanges":36,"started":4.688791900000069,"elapsed":3.9895309999992607,"samples":239,"maxLateral":4.697021484375,"name":"繞過閒置村民","finalUnits":[{"slotZ":-144,"goalZ":-144,"index":1,"animation":"Idle","order":"待命","slotX":-192,"X":-192,"goalX":-192,"Z":-144,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-144,"index":2,"animation":"Idle","order":"待命","slotX":-216,"X":-216,"Z":-144,"kind":"villager","formation":"Box"
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 5/14] },{"slotZ":-126,"index":3,"animation":"Idle","order":"待命","slotX":-198,"X":-198,"Z":-126,"kind":"villager","formation":"Box"},{"slotZ":-162,"index":4,"animation":"Idle","order":"待命","slotX":-236,"X":-236,"Z":-162,"kind":"scout","formation":"Box"}],"complete":true,"lineZ":-144,"rootChangesByUnit":[36,0,0,0],"minClearance":0.3218231201171875},{"rootChanges":34,"started":8.678433299995959,"elapsed":1.956067000006442,"samples":117,"maxLateral":2.35809326171875,"finalUnits":[{"slotZ":-144,"goalZ":-144,"index":1,"animation":"Idle","order":"待命","slo
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 6/14] tX":-216,"X":-216,"goalX":-216,"Z":-144,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-144,"goalZ":-144,"index":2,"animation":"Idle","order":"待命","slotX":-192,"X":-192.06097412109376,"goalX":-192,"Z":-143.98834228515626,"kind":"villager","goalDistance":0.06207854673266411,"formation":"Box"},{"slotZ":-126,"index":3,"animation":"Idle","order":"待命","slotX":-198,"X":-198,"Z":-126,"kind":"villager","formation":"Box"},{"slotZ":-162,"index":4,"animation":"Idle","order":"待命","slotX":-236,"X":-236,"Z":-162,"kind":"scout","formation":"
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 7/14] Box"}],"complete":true,"name":"迎面交換位置","minClearance":0.16814947128295899,"crossingTargets":[{"Z":-144,"X":-222},{"Z":-144,"X":-186}],"bothWorkers":true,"rootChangesByUnit":[17,17,0,0],"lineZ":-144},{"rootChanges":52,"started":10.634611000001314,"elapsed":2.3747199999925217,"samples":142,"maxLateral":0,"name":"混合群體移動","formation":{"forwardX":-0.41561621421463709,"assignment":[4,1,3,2],"key":"Box","spacing":6.5,"forwardZ":-0.9095400829440629},"finalUnits":[{"slotZ":-151.6932373046875,"goalZ":-151.6932373046875,"index":1,"animation"
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 8/14] :"Idle","order":"待命","slotX":-217.60525512695313,"X":-217.60525512695313,"goalX":-217.60525512695313,"Z":-151.6932373046875,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-160.3067626953125,"goalZ":-160.3067626953125,"index":2,"animation":"Idle","order":"待命","slotX":-214.39474487304688,"X":-214.39474487304688,"goalX":-214.39474487304688,"Z":-160.3067626953125,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-154.39474487304688,"goalZ":-154.39474487304688,"index":3,"animation":"Idle","order":"待命","slotX":-211.6932
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 9/14] 373046875,"X":-211.6932373046875,"goalX":-211.6932373046875,"Z":-154.39474487304688,"kind":"villager","goalDistance":0,"formation":"Box"},{"slotZ":-157.60525512695313,"goalZ":-157.60525512695313,"index":4,"animation":"Idle","order":"待命","slotX":-220.3067626953125,"X":-220.3067626953125,"goalX":-220.3067626953125,"Z":-157.60525512695313,"kind":"scout","goalDistance":0,"formation":"Box"}],"complete":true,"rootChangesByUnit":[6,19,21,6],"minClearance":1.500007152557373},{"rootChanges":49,"started":13.011458799999673,"elapsed":5.492228100003558,"samples"
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 10/14] :328,"maxLateral":0,"name":"正常採集","finalUnits":[{"goalZ":-97.7892074584961,"index":1,"animation":"Work","order":"採集","X":-158.21578979492188,"goalX":-150.62318420410157,"Z":-105.14556121826172,"kind":"villager","goalDistance":10.571830749511719,"formation":"Box"},{"slotZ":-160.3067626953125,"index":2,"animation":"Idle","order":"待命","slotX":-214.39474487304688,"X":-214.39474487304688,"Z":-160.3067626953125,"kind":"villager","formation":"Box"},{"slotZ":-154.39474487304688,"index":3,"animation":"Idle","order":"待命","slotX":-211.6932373046
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 11/14] 875,"X":-211.6932373046875,"Z":-154.39474487304688,"kind":"villager","formation":"Box"},{"slotZ":-157.60525512695313,"index":4,"animation":"Idle","order":"待命","slotX":-220.3067626953125,"X":-220.3067626953125,"Z":-157.60525512695313,"kind":"scout","formation":"Box"}],"complete":true,"rootChangesByUnit":[49,0,0,0],"minClearance":1.500007152557373},{"rootChanges":66,"started":18.503749399998925,"elapsed":7.199923399995896,"samples":431,"maxLateral":0,"name":"正常交貨","finalUnits":[{"goalZ":-216,"index":1,"animation":"Idle","order":"採集","X":-19
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 12/14] 7.12100219726563,"goalX":-216,"Z":-196.60897827148438,"kind":"villager","goalDistance":27.063411712646486,"formation":"Box"},{"slotZ":-160.3067626953125,"index":2,"animation":"Idle","order":"待命","slotX":-214.39474487304688,"X":-214.39474487304688,"Z":-160.3067626953125,"kind":"villager","formation":"Box"},{"slotZ":-154.39474487304688,"index":3,"animation":"Idle","order":"待命","slotX":-211.6932373046875,"X":-211.6932373046875,"Z":-154.39474487304688,"kind":"villager","formation":"Box"},{"slotZ":-157.60525512695313,"index":4,"animation":"Idle","orde
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 13/14] r":"待命","slotX":-220.3067626953125,"X":-220.3067626953125,"Z":-157.60525512695313,"kind":"scout","formation":"Box"}],"complete":true,"rootChangesByUnit":[66,0,0,0],"minClearance":1.500007152557373}],"stableColliderSamples":[1328,1470,1472,1500],"movementOnly":false,"checks":74,"scope":"新的單人沙盒起始 3 村民與 1 斥候；客戶端收到的伺服器 Root 複製樣本","replicationTolerance":0.25,"units":[{"height":5,"kind":"villager","radius":2},{"height":5,"kind":"villager","radius":2},{"height":5,"kind":"villager","radius":2},{"height":7
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION JSON 14/14] ,"kind":"scout","radius":3}],"elapsedSeconds":25.82675239999662,"cleanupStopRequested":true,"samples":1536,"work":{"delivered":true,"carried":3,"kind":"food","gathered":true,"deliveredAmount":3},"arena":{"depth":64,"X":-216,"width":76,"Z":-144},"maxStableColliderOffsetError":0,"movingStableColliderSamples":[1132,353,347,225]}
+2026-10-01T06:10:21.884Z,3168.884277,b6ac,6,Info [FLog::CreatorOutput] [UNIT_COLLISION COMPLETE] checks=74 samples=1536 rootChanges=370 elapsed=25.827 work=true/true segments=14

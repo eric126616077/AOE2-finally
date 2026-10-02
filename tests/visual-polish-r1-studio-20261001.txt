@@ -1,0 +1,5 @@
+2026-10-01T10:29:09.032Z,173.032120,078c,6,Info [FLog::CreatorOutput] [玩家改色 COMPLETE] 748 項引擎檢查通過；私有fixtures已清除
+2026-10-01T10:29:09.052Z,173.052063,078c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE COMPLETE] 285項引擎fixture檢查；私有fixture已清除，非使用者真模板驗收
+2026-10-01T10:29:09.052Z,173.052063,078c,6,Info [FLog::CreatorOutput] [VISUAL_POLISH RESOURCE BUDGET] {"Stone":4,"Tree":4,"Berries":8,"Gold":8}
+2026-10-01T10:29:09.052Z,173.052063,078c,6,Info [FLog::CreatorOutput] [VISUAL_POLISH SERVER COMPLETE]
+2026-10-01T10:29:09.815Z,173.815079,ba84,6,Info [FLog::CreatorOutput] [VISUAL_POLISH LOBBY READY]

@@ -1,0 +1,1226 @@
+{
+  "startedUtc": "2026-10-01T18:00:06.2007646+08:00",
+  "completedUtc": "2026-10-01T18:00:31.7146846+08:00",
+  "cliExit": 0,
+  "inputCountBefore": 150,
+  "inputCountAfter": 150,
+  "sourceScriptCount": 94,
+  "sourceUnchanged": true,
+  "changes": [],
+  "build": {
+    "path": "build/AOE2-publish-preflight-20261001-final.rbxlx",
+    "sha256": "D6ACCBE9E17DBA07DA0C153B11FEC4E952A3070C195E729CBDA3A26C9D0C6B4E"
+  },
+  "before": [
+    {
+      "path": "default.project.json",
+      "sha256": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sha256": "6969D474C2B49134724D8D6AA16CA8E7996D63FB4E3B504A1AEF8B241EA58CEC"
+    },
+    {
+      "path": "src\\ReplicatedFirst\\BuildingSystemLoader.client.lua",
+      "sha256": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028"
+    },
+    {
+      "path": "src\\ReplicatedFirst\\ClientLoader.client.lua",
+      "sha256": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\GameData\\GameConfig.lua",
+      "sha256": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\ResourceSystem.lua",
+      "sha256": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+      "sha256": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AIObservationTests.lua",
+      "sha256": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Art.lua",
+      "sha256": "D5AD91BCC36FD6F4152CB76E1A83A5424EA5CC3B1B2A2915C77961A3BF43AFEE"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AudioFeedback.lua",
+      "sha256": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingController.lua",
+      "sha256": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingSystem.client.lua",
+      "sha256": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuRules.lua",
+      "sha256": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuTests.lua",
+      "sha256": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CameraFocus.lua",
+      "sha256": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ClientUnitView.lua",
+      "sha256": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "sha256": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "sha256": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "sha256": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionTests.lua",
+      "sha256": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualRules.lua",
+      "sha256": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualTests.lua",
+      "sha256": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\DeliveryFallbackTests.lua",
+      "sha256": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\EconomyTests.lua",
+      "sha256": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackBattleTests.lua",
+      "sha256": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackConstructionTests.lua",
+      "sha256": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackMultiplayerTests.lua",
+      "sha256": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRepairTests.lua",
+      "sha256": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRules.lua",
+      "sha256": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackTests.lua",
+      "sha256": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationRules.lua",
+      "sha256": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationTests.lua",
+      "sha256": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Grid.lua",
+      "sha256": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\HUDTests.lua",
+      "sha256": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\LobbyTests.lua",
+      "sha256": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MapTests.lua",
+      "sha256": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportFlowTests.lua",
+      "sha256": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportTests.lua",
+      "sha256": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MotionRules.lua",
+      "sha256": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MultiplayerTests.lua",
+      "sha256": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "sha256": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\PerformanceObserver.lua",
+      "sha256": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProductionTests.lua",
+      "sha256": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProgressionTests.lua",
+      "sha256": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ReleaseTests.lua",
+      "sha256": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "sha256": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\SharedFunctions.lua",
+      "sha256": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\StudioTests.lua",
+      "sha256": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamClientRules.lua",
+      "sha256": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamMatchTests.lua",
+      "sha256": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamUITests.lua",
+      "sha256": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchRules.lua",
+      "sha256": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchTests.lua",
+      "sha256": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Tutorial.lua",
+      "sha256": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitCollisionTests.lua",
+      "sha256": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\VisualMotionTests.lua",
+      "sha256": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D"
+    },
+    {
+      "path": "src\\ServerScriptService\\CastleSpawner.server.lua",
+      "sha256": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5"
+    },
+    {
+      "path": "src\\ServerScriptService\\GameServer.server.lua",
+      "sha256": "E089258D7639A0E784D887788F540E366FE264F13047D0AE012370D779BEF05C"
+    },
+    {
+      "path": "src\\ServerScriptService\\MapGenerator.server.lua",
+      "sha256": "68AFD34265850815B1B6D6125E644BD33D36E4C1CA2DCC79FC8105A84B753FB6"
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSpawner.server.lua",
+      "sha256": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578"
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSystemLoader.server.lua",
+      "sha256": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\AIWorkerRules.lua",
+      "sha256": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ApproachRules.lua",
+      "sha256": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationPreferenceRules.lua",
+      "sha256": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationRules.lua",
+      "sha256": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CombatRules.lua",
+      "sha256": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommandRules.lua",
+      "sha256": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommerceRules.lua",
+      "sha256": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ConstructionRules.lua",
+      "sha256": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Economy.lua",
+      "sha256": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GameManager.lua",
+      "sha256": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GatheringRules.lua",
+      "sha256": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyRules.lua",
+      "sha256": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyWorld.lua",
+      "sha256": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchReportRules.lua",
+      "sha256": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchRules.lua",
+      "sha256": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MeleeRules.lua",
+      "sha256": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactory.lua",
+      "sha256": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactoryTests.lua",
+      "sha256": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PathRules.lua",
+      "sha256": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PlayerColorTests.lua",
+      "sha256": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProductionRules.lua",
+      "sha256": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileRules.lua",
+      "sha256": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileStore.lua",
+      "sha256": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\SpatialRules.lua",
+      "sha256": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\TeamRules.lua",
+      "sha256": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Telemetry.lua",
+      "sha256": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitCollisionRules.lua",
+      "sha256": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitRules.lua",
+      "sha256": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\WorldGenerator.lua",
+      "sha256": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B"
+    },
+    {
+      "path": "src\\StarterGui\\GameUI\\GUIManager.lua",
+      "sha256": "5D76CB4D85FC3F393F165FD66F3A2AECA4DE1FB594B30AE8F008D6231007A1C9"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\BuildingVisuals.client.lua",
+      "sha256": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+      "sha256": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\RTSClient.client.lua",
+      "sha256": "96AF27E2B5A6D4F8DA8D64A3CE955087996BD312C42F5C1AAA6EDC5891C6A76C"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\SoundFeedback.client.lua",
+      "sha256": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\UnitMotion.client.lua",
+      "sha256": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD"
+    },
+    {
+      "path": "tests\\ai_workers.spec.lua",
+      "sha256": "B488358E0FB89418501C97AB12240F8E46D77A283922981110D82DF339AF810A"
+    },
+    {
+      "path": "tests\\approach.spec.lua",
+      "sha256": "948F57E7A55EB84843AA3B2A80C989B5594F5CD728DD18679561E72289402E99"
+    },
+    {
+      "path": "tests\\build_menu.spec.lua",
+      "sha256": "76EAADF7EECBF5D64D74C9F860C315A6192E0DA597F53532CF4624E2F37F6E33"
+    },
+    {
+      "path": "tests\\civilization.spec.lua",
+      "sha256": "DF05E0E1481CB74980B6F73C38434CBC819D05996A19E6C3D0E76C41E3220F2D"
+    },
+    {
+      "path": "tests\\combat.spec.lua",
+      "sha256": "CDCE48F6AB037EA43EAFE1BB980086D5A5131550CE0274F495E221C95236D110"
+    },
+    {
+      "path": "tests\\command.spec.lua",
+      "sha256": "75552BBD1300CB7DDE9E27932055206D286DA032CC4696CA95F131206DD7E222"
+    },
+    {
+      "path": "tests\\construction_hp.spec.lua",
+      "sha256": "489D302CDDF19C5B1FD3991B2BC2660BB7CEE30A0B4E2BD66BF7DEA08B31356E"
+    },
+    {
+      "path": "tests\\construction_visuals.spec.lua",
+      "sha256": "C263514EC35E917E6B9D9B7FA7E5D4F27558A0C71B0C573E609AD6A61A2F13BB"
+    },
+    {
+      "path": "tests\\construction.spec.lua",
+      "sha256": "A0C02717563CBF52E678021335EFF2001722F2B3DA4369E2C5B2896F9D58D26E"
+    },
+    {
+      "path": "tests\\core.spec.lua",
+      "sha256": "F3FA61B96555E3A3CD76A8CC3C90F9076FFA08E49A32A16111F06BBC3E08C37B"
+    },
+    {
+      "path": "tests\\delete-server-studio-snippet.lua",
+      "sha256": "AD872062868C1A7379A1188DDDD52454C917C4F6BCD569214E4418BDC56BBB6A"
+    },
+    {
+      "path": "tests\\feedback.spec.lua",
+      "sha256": "2D2D75CA971CA527D32B637AADB213CA2BD67A7600B9168C09E22ED8DFD6A04D"
+    },
+    {
+      "path": "tests\\formation.spec.lua",
+      "sha256": "5CA1ED25FECB8DB504B032C889FD71BBED557DC0C6E7FE8205146F08D06D87FE"
+    },
+    {
+      "path": "tests\\gathering.spec.lua",
+      "sha256": "F3A12BF82B18AA65CBD0BB3804E601EDFAE2EE5FECE732586DC5579BB2902DF8"
+    },
+    {
+      "path": "tests\\lobby.spec.lua",
+      "sha256": "DBC4EF193AC45BBF4BB5134A3234E6CBDBEF891DC816D5A6B6A594B2BA3B0CDF"
+    },
+    {
+      "path": "tests\\LobbyCleanupFixture.lua",
+      "sha256": "5CF16CBF9AC661ED1A88046BB1B04CD4B82611AC0769DCE8EC8B7FA0A547456B"
+    },
+    {
+      "path": "tests\\LobbyCleanupTests.lua",
+      "sha256": "B7D182433DC49539545D6B17C271B1287D8512CFEBA45E26BCB886CA9A9C750A"
+    },
+    {
+      "path": "tests\\match_report.spec.lua",
+      "sha256": "9B6C666731967A0CA43476F46B6CE8FD630950BCD0D33E34F85BB35381834BC9"
+    },
+    {
+      "path": "tests\\match.spec.lua",
+      "sha256": "ACF26C74F882155E1816D0FDBF0A8BD07E934972B1B6ED4608F3FBD83483C8D8"
+    },
+    {
+      "path": "tests\\melee.spec.lua",
+      "sha256": "93AFA88226C9EAF7F97DC83AEB659EE385AC6F694081EF8742BACD015A248220"
+    },
+    {
+      "path": "tests\\model_factory.mocks.lua",
+      "sha256": "F484253D72F8EEA1C08E79970787E61EBC59EF2F8338EADACC391E89ED28D7C1"
+    },
+    {
+      "path": "tests\\model_factory.spec.lua",
+      "sha256": "71232BC4AFB047EA43937A5C6B03DE97EEFE48A92B9E628EE6F44C6BFC9485A2"
+    },
+    {
+      "path": "tests\\motion.spec.lua",
+      "sha256": "1808F68D3BF88F0192EC5DF1E78F250182E785D1542D7A0711C9340D32DF5841"
+    },
+    {
+      "path": "tests\\movement_step.mocks.lua",
+      "sha256": "BD14506898EAFFDA8DB716339AC6E7A6863D9B6A8F9E4CA329AAEE3703D83E48"
+    },
+    {
+      "path": "tests\\movement_step.spec.lua",
+      "sha256": "35C97B39947095AD3E806D8865EB4B8BDF30581DEF178BBD3DE8FF3B728B756A"
+    },
+    {
+      "path": "tests\\MultiplayerLifecycleTests.lua",
+      "sha256": "B3578569F2BAB981E8C1D84842E4F95CD196CDC9A397AA2CB487D6DE87F22F2C"
+    },
+    {
+      "path": "tests\\MultiplayerLifecycleTestsR2.lua",
+      "sha256": "D1BE0C0B6B041BFAC7FD67BC793319016EBAA78D0F8871F97FE746619A747BCA"
+    },
+    {
+      "path": "tests\\obstacle_filters.mocks.lua",
+      "sha256": "656E635E81DC355C461C0CF0695845481877A99D4D587E4881DD2377AAB1A87B"
+    },
+    {
+      "path": "tests\\obstacle_filters.spec.lua",
+      "sha256": "57C5A9638AB6AB0D2C5F714445F2F82C1494502B56F1B12474864268D04FB740"
+    },
+    {
+      "path": "tests\\path_prefix.spec.lua",
+      "sha256": "B08B3F2AA76A032E4918E418FF2143C1938343260D60B8B8417E7DBD8B40D8D3"
+    },
+    {
+      "path": "tests\\path.spec.lua",
+      "sha256": "44E2B93DF07D309296D4F6B4C95683259BC5B2EC3DA7BBDE68213EDD7D870859"
+    },
+    {
+      "path": "tests\\performance_observer.spec.lua",
+      "sha256": "BB493AC0F021E2B959119AC3BF842180C5BE88C1D4686A4403C47EB6D0C68B07"
+    },
+    {
+      "path": "tests\\PerformanceLoadTests.lua",
+      "sha256": "928AAAF6D5C2D08AC625C745FE78E0D499ABE95809C491F8627B6138403E72C0"
+    },
+    {
+      "path": "tests\\PerformanceServerProbe.lua",
+      "sha256": "B51B073AEE634C242303B06F35C390F927ACCFEA7673BBBD11D1906AF31B31D7"
+    },
+    {
+      "path": "tests\\production.spec.lua",
+      "sha256": "F164F392481F271A768376131FFFF3BC97013661CFC27A9071B668B8F7F167A0"
+    },
+    {
+      "path": "tests\\profile.spec.lua",
+      "sha256": "06F1EFF783CB0BC337642AD9C42C746A834A54FF05D8EA53CFCD066D3CAC05BB"
+    },
+    {
+      "path": "tests\\resource_cleanup.mocks.lua",
+      "sha256": "FAB6DE885C5AB0E0B7CF8B878EBF85E35E9F0122D84541EE2CDDD16F688CA2FC"
+    },
+    {
+      "path": "tests\\resource_cleanup.spec.lua",
+      "sha256": "1A3224ACC29DC5153BC99043A123EAB46C72082C7B69BD73A40B08F04CEBD760"
+    },
+    {
+      "path": "tests\\resource-layout-studio-client.lua",
+      "sha256": "2094BC3FB8FE4D72CB0C99D5C204F2F141AB62A317597AC4780A7D1FE72B7392"
+    },
+    {
+      "path": "tests\\SceneryCollisionFixture.lua",
+      "sha256": "E5E2A57C4285538EF33ECF678FD4EDA1D4D8407AFBBCA9A36E9E9E7119C00486"
+    },
+    {
+      "path": "tests\\SceneryCollisionTests.lua",
+      "sha256": "EF9023A53A8C638C344BA99F606510044A76CC38EFF094ECDE9FFDD1162E779C"
+    },
+    {
+      "path": "tests\\server_rules.spec.lua",
+      "sha256": "0AA007AAE982FC58BF79FA5F9F0C4557F31A2B537173A1A3C55269CFE145FBA1"
+    },
+    {
+      "path": "tests\\studio-feedback-coordinator.server.lua",
+      "sha256": "6291AFBB506C7769DF291C779199BCF5C0F4B13D42ACD931EF28193137DD420D"
+    },
+    {
+      "path": "tests\\studio-feedback-harness.client.lua",
+      "sha256": "8040265301EAE24657D52D0A15F334EF8302B1E1DDDF4C286B27860D1E8C15FC"
+    },
+    {
+      "path": "tests\\team_client.spec.lua",
+      "sha256": "14E1D921EB84C69278DBBFDAFD6B3C6BD5F98536CB47C674C715AAE44BD441C3"
+    },
+    {
+      "path": "tests\\team_lifecycle.spec.lua",
+      "sha256": "650A1F2CCBC346B6F346663A90E6192E7E84E511CA406363F604A93DC56F07E6"
+    },
+    {
+      "path": "tests\\team.spec.lua",
+      "sha256": "A601BA8BDD25DEE04C22B19577C868CF349F54E09E73956A3B18EAD5A8A57DFF"
+    },
+    {
+      "path": "tests\\touch.spec.lua",
+      "sha256": "CEC18812A3B917E84768C64169CF4FCA7B494F15BC3D45D3BFA7C36CAA235F17"
+    },
+    {
+      "path": "tests\\tutorial.spec.lua",
+      "sha256": "8AE004A154FAFB98D1BE4611AA6B01B5453A1755AB13D0002D94264133D1517B"
+    },
+    {
+      "path": "tests\\ui-mobile-production-observe.lua",
+      "sha256": "1F01DD72E352CE5485EB5E6E2F9E17DB98561E92CA018691ED6A29194580EC8D"
+    },
+    {
+      "path": "tests\\unit_collision.spec.lua",
+      "sha256": "3C43CB861425777AC7989386DFF07DB7F69B2DC5AF73D563B4D6285B7CDBF464"
+    },
+    {
+      "path": "tests\\UnitCollisionServerProbe.server.lua",
+      "sha256": "7D9556E02256A92DBB67900FB3E38F886C42382FBEDF0DF9BA1533A31CE1A7FD"
+    },
+    {
+      "path": "tests\\villager-build-harness.client.lua",
+      "sha256": "D807969A748FCA920D7E25D56E3D22A44435CC4924CE8ACDCEF80B5961696D4A"
+    },
+    {
+      "path": "tests\\world.spec.lua",
+      "sha256": "358FD2601469B06055050F399FA20677512BA7D99F6D88C5F06CB9FF97C34AC1"
+    }
+  ],
+  "after": [
+    {
+      "path": "default.project.json",
+      "sha256": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sha256": "6969D474C2B49134724D8D6AA16CA8E7996D63FB4E3B504A1AEF8B241EA58CEC"
+    },
+    {
+      "path": "src\\ReplicatedFirst\\BuildingSystemLoader.client.lua",
+      "sha256": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028"
+    },
+    {
+      "path": "src\\ReplicatedFirst\\ClientLoader.client.lua",
+      "sha256": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\GameData\\GameConfig.lua",
+      "sha256": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\ResourceSystem.lua",
+      "sha256": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+      "sha256": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AIObservationTests.lua",
+      "sha256": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Art.lua",
+      "sha256": "D5AD91BCC36FD6F4152CB76E1A83A5424EA5CC3B1B2A2915C77961A3BF43AFEE"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AudioFeedback.lua",
+      "sha256": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingController.lua",
+      "sha256": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingSystem.client.lua",
+      "sha256": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuRules.lua",
+      "sha256": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuTests.lua",
+      "sha256": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CameraFocus.lua",
+      "sha256": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ClientUnitView.lua",
+      "sha256": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "sha256": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "sha256": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "sha256": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionTests.lua",
+      "sha256": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualRules.lua",
+      "sha256": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualTests.lua",
+      "sha256": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\DeliveryFallbackTests.lua",
+      "sha256": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\EconomyTests.lua",
+      "sha256": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackBattleTests.lua",
+      "sha256": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackConstructionTests.lua",
+      "sha256": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackMultiplayerTests.lua",
+      "sha256": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRepairTests.lua",
+      "sha256": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRules.lua",
+      "sha256": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackTests.lua",
+      "sha256": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationRules.lua",
+      "sha256": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationTests.lua",
+      "sha256": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Grid.lua",
+      "sha256": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\HUDTests.lua",
+      "sha256": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\LobbyTests.lua",
+      "sha256": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MapTests.lua",
+      "sha256": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportFlowTests.lua",
+      "sha256": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportTests.lua",
+      "sha256": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MotionRules.lua",
+      "sha256": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MultiplayerTests.lua",
+      "sha256": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "sha256": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\PerformanceObserver.lua",
+      "sha256": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProductionTests.lua",
+      "sha256": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProgressionTests.lua",
+      "sha256": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ReleaseTests.lua",
+      "sha256": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "sha256": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\SharedFunctions.lua",
+      "sha256": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\StudioTests.lua",
+      "sha256": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamClientRules.lua",
+      "sha256": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamMatchTests.lua",
+      "sha256": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamUITests.lua",
+      "sha256": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchRules.lua",
+      "sha256": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchTests.lua",
+      "sha256": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Tutorial.lua",
+      "sha256": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitCollisionTests.lua",
+      "sha256": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588"
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\VisualMotionTests.lua",
+      "sha256": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D"
+    },
+    {
+      "path": "src\\ServerScriptService\\CastleSpawner.server.lua",
+      "sha256": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5"
+    },
+    {
+      "path": "src\\ServerScriptService\\GameServer.server.lua",
+      "sha256": "E089258D7639A0E784D887788F540E366FE264F13047D0AE012370D779BEF05C"
+    },
+    {
+      "path": "src\\ServerScriptService\\MapGenerator.server.lua",
+      "sha256": "68AFD34265850815B1B6D6125E644BD33D36E4C1CA2DCC79FC8105A84B753FB6"
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSpawner.server.lua",
+      "sha256": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578"
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSystemLoader.server.lua",
+      "sha256": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\AIWorkerRules.lua",
+      "sha256": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ApproachRules.lua",
+      "sha256": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationPreferenceRules.lua",
+      "sha256": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationRules.lua",
+      "sha256": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CombatRules.lua",
+      "sha256": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommandRules.lua",
+      "sha256": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommerceRules.lua",
+      "sha256": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ConstructionRules.lua",
+      "sha256": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Economy.lua",
+      "sha256": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GameManager.lua",
+      "sha256": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GatheringRules.lua",
+      "sha256": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyRules.lua",
+      "sha256": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyWorld.lua",
+      "sha256": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchReportRules.lua",
+      "sha256": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchRules.lua",
+      "sha256": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MeleeRules.lua",
+      "sha256": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactory.lua",
+      "sha256": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactoryTests.lua",
+      "sha256": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PathRules.lua",
+      "sha256": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PlayerColorTests.lua",
+      "sha256": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProductionRules.lua",
+      "sha256": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileRules.lua",
+      "sha256": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileStore.lua",
+      "sha256": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\SpatialRules.lua",
+      "sha256": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\TeamRules.lua",
+      "sha256": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Telemetry.lua",
+      "sha256": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitCollisionRules.lua",
+      "sha256": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitRules.lua",
+      "sha256": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3"
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\WorldGenerator.lua",
+      "sha256": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B"
+    },
+    {
+      "path": "src\\StarterGui\\GameUI\\GUIManager.lua",
+      "sha256": "5D76CB4D85FC3F393F165FD66F3A2AECA4DE1FB594B30AE8F008D6231007A1C9"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\BuildingVisuals.client.lua",
+      "sha256": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+      "sha256": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\RTSClient.client.lua",
+      "sha256": "96AF27E2B5A6D4F8DA8D64A3CE955087996BD312C42F5C1AAA6EDC5891C6A76C"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\SoundFeedback.client.lua",
+      "sha256": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897"
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\UnitMotion.client.lua",
+      "sha256": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD"
+    },
+    {
+      "path": "tests\\ai_workers.spec.lua",
+      "sha256": "B488358E0FB89418501C97AB12240F8E46D77A283922981110D82DF339AF810A"
+    },
+    {
+      "path": "tests\\approach.spec.lua",
+      "sha256": "948F57E7A55EB84843AA3B2A80C989B5594F5CD728DD18679561E72289402E99"
+    },
+    {
+      "path": "tests\\build_menu.spec.lua",
+      "sha256": "76EAADF7EECBF5D64D74C9F860C315A6192E0DA597F53532CF4624E2F37F6E33"
+    },
+    {
+      "path": "tests\\civilization.spec.lua",
+      "sha256": "DF05E0E1481CB74980B6F73C38434CBC819D05996A19E6C3D0E76C41E3220F2D"
+    },
+    {
+      "path": "tests\\combat.spec.lua",
+      "sha256": "CDCE48F6AB037EA43EAFE1BB980086D5A5131550CE0274F495E221C95236D110"
+    },
+    {
+      "path": "tests\\command.spec.lua",
+      "sha256": "75552BBD1300CB7DDE9E27932055206D286DA032CC4696CA95F131206DD7E222"
+    },
+    {
+      "path": "tests\\construction_hp.spec.lua",
+      "sha256": "489D302CDDF19C5B1FD3991B2BC2660BB7CEE30A0B4E2BD66BF7DEA08B31356E"
+    },
+    {
+      "path": "tests\\construction_visuals.spec.lua",
+      "sha256": "C263514EC35E917E6B9D9B7FA7E5D4F27558A0C71B0C573E609AD6A61A2F13BB"
+    },
+    {
+      "path": "tests\\construction.spec.lua",
+      "sha256": "A0C02717563CBF52E678021335EFF2001722F2B3DA4369E2C5B2896F9D58D26E"
+    },
+    {
+      "path": "tests\\core.spec.lua",
+      "sha256": "F3FA61B96555E3A3CD76A8CC3C90F9076FFA08E49A32A16111F06BBC3E08C37B"
+    },
+    {
+      "path": "tests\\delete-server-studio-snippet.lua",
+      "sha256": "AD872062868C1A7379A1188DDDD52454C917C4F6BCD569214E4418BDC56BBB6A"
+    },
+    {
+      "path": "tests\\feedback.spec.lua",
+      "sha256": "2D2D75CA971CA527D32B637AADB213CA2BD67A7600B9168C09E22ED8DFD6A04D"
+    },
+    {
+      "path": "tests\\formation.spec.lua",
+      "sha256": "5CA1ED25FECB8DB504B032C889FD71BBED557DC0C6E7FE8205146F08D06D87FE"
+    },
+    {
+      "path": "tests\\gathering.spec.lua",
+      "sha256": "F3A12BF82B18AA65CBD0BB3804E601EDFAE2EE5FECE732586DC5579BB2902DF8"
+    },
+    {
+      "path": "tests\\lobby.spec.lua",
+      "sha256": "DBC4EF193AC45BBF4BB5134A3234E6CBDBEF891DC816D5A6B6A594B2BA3B0CDF"
+    },
+    {
+      "path": "tests\\LobbyCleanupFixture.lua",
+      "sha256": "5CF16CBF9AC661ED1A88046BB1B04CD4B82611AC0769DCE8EC8B7FA0A547456B"
+    },
+    {
+      "path": "tests\\LobbyCleanupTests.lua",
+      "sha256": "B7D182433DC49539545D6B17C271B1287D8512CFEBA45E26BCB886CA9A9C750A"
+    },
+    {
+      "path": "tests\\match_report.spec.lua",
+      "sha256": "9B6C666731967A0CA43476F46B6CE8FD630950BCD0D33E34F85BB35381834BC9"
+    },
+    {
+      "path": "tests\\match.spec.lua",
+      "sha256": "ACF26C74F882155E1816D0FDBF0A8BD07E934972B1B6ED4608F3FBD83483C8D8"
+    },
+    {
+      "path": "tests\\melee.spec.lua",
+      "sha256": "93AFA88226C9EAF7F97DC83AEB659EE385AC6F694081EF8742BACD015A248220"
+    },
+    {
+      "path": "tests\\model_factory.mocks.lua",
+      "sha256": "F484253D72F8EEA1C08E79970787E61EBC59EF2F8338EADACC391E89ED28D7C1"
+    },
+    {
+      "path": "tests\\model_factory.spec.lua",
+      "sha256": "71232BC4AFB047EA43937A5C6B03DE97EEFE48A92B9E628EE6F44C6BFC9485A2"
+    },
+    {
+      "path": "tests\\motion.spec.lua",
+      "sha256": "1808F68D3BF88F0192EC5DF1E78F250182E785D1542D7A0711C9340D32DF5841"
+    },
+    {
+      "path": "tests\\movement_step.mocks.lua",
+      "sha256": "BD14506898EAFFDA8DB716339AC6E7A6863D9B6A8F9E4CA329AAEE3703D83E48"
+    },
+    {
+      "path": "tests\\movement_step.spec.lua",
+      "sha256": "35C97B39947095AD3E806D8865EB4B8BDF30581DEF178BBD3DE8FF3B728B756A"
+    },
+    {
+      "path": "tests\\MultiplayerLifecycleTests.lua",
+      "sha256": "B3578569F2BAB981E8C1D84842E4F95CD196CDC9A397AA2CB487D6DE87F22F2C"
+    },
+    {
+      "path": "tests\\MultiplayerLifecycleTestsR2.lua",
+      "sha256": "D1BE0C0B6B041BFAC7FD67BC793319016EBAA78D0F8871F97FE746619A747BCA"
+    },
+    {
+      "path": "tests\\obstacle_filters.mocks.lua",
+      "sha256": "656E635E81DC355C461C0CF0695845481877A99D4D587E4881DD2377AAB1A87B"
+    },
+    {
+      "path": "tests\\obstacle_filters.spec.lua",
+      "sha256": "57C5A9638AB6AB0D2C5F714445F2F82C1494502B56F1B12474864268D04FB740"
+    },
+    {
+      "path": "tests\\path_prefix.spec.lua",
+      "sha256": "B08B3F2AA76A032E4918E418FF2143C1938343260D60B8B8417E7DBD8B40D8D3"
+    },
+    {
+      "path": "tests\\path.spec.lua",
+      "sha256": "44E2B93DF07D309296D4F6B4C95683259BC5B2EC3DA7BBDE68213EDD7D870859"
+    },
+    {
+      "path": "tests\\performance_observer.spec.lua",
+      "sha256": "BB493AC0F021E2B959119AC3BF842180C5BE88C1D4686A4403C47EB6D0C68B07"
+    },
+    {
+      "path": "tests\\PerformanceLoadTests.lua",
+      "sha256": "928AAAF6D5C2D08AC625C745FE78E0D499ABE95809C491F8627B6138403E72C0"
+    },
+    {
+      "path": "tests\\PerformanceServerProbe.lua",
+      "sha256": "B51B073AEE634C242303B06F35C390F927ACCFEA7673BBBD11D1906AF31B31D7"
+    },
+    {
+      "path": "tests\\production.spec.lua",
+      "sha256": "F164F392481F271A768376131FFFF3BC97013661CFC27A9071B668B8F7F167A0"
+    },
+    {
+      "path": "tests\\profile.spec.lua",
+      "sha256": "06F1EFF783CB0BC337642AD9C42C746A834A54FF05D8EA53CFCD066D3CAC05BB"
+    },
+    {
+      "path": "tests\\resource_cleanup.mocks.lua",
+      "sha256": "FAB6DE885C5AB0E0B7CF8B878EBF85E35E9F0122D84541EE2CDDD16F688CA2FC"
+    },
+    {
+      "path": "tests\\resource_cleanup.spec.lua",
+      "sha256": "1A3224ACC29DC5153BC99043A123EAB46C72082C7B69BD73A40B08F04CEBD760"
+    },
+    {
+      "path": "tests\\resource-layout-studio-client.lua",
+      "sha256": "2094BC3FB8FE4D72CB0C99D5C204F2F141AB62A317597AC4780A7D1FE72B7392"
+    },
+    {
+      "path": "tests\\SceneryCollisionFixture.lua",
+      "sha256": "E5E2A57C4285538EF33ECF678FD4EDA1D4D8407AFBBCA9A36E9E9E7119C00486"
+    },
+    {
+      "path": "tests\\SceneryCollisionTests.lua",
+      "sha256": "EF9023A53A8C638C344BA99F606510044A76CC38EFF094ECDE9FFDD1162E779C"
+    },
+    {
+      "path": "tests\\server_rules.spec.lua",
+      "sha256": "0AA007AAE982FC58BF79FA5F9F0C4557F31A2B537173A1A3C55269CFE145FBA1"
+    },
+    {
+      "path": "tests\\studio-feedback-coordinator.server.lua",
+      "sha256": "6291AFBB506C7769DF291C779199BCF5C0F4B13D42ACD931EF28193137DD420D"
+    },
+    {
+      "path": "tests\\studio-feedback-harness.client.lua",
+      "sha256": "8040265301EAE24657D52D0A15F334EF8302B1E1DDDF4C286B27860D1E8C15FC"
+    },
+    {
+      "path": "tests\\team_client.spec.lua",
+      "sha256": "14E1D921EB84C69278DBBFDAFD6B3C6BD5F98536CB47C674C715AAE44BD441C3"
+    },
+    {
+      "path": "tests\\team_lifecycle.spec.lua",
+      "sha256": "650A1F2CCBC346B6F346663A90E6192E7E84E511CA406363F604A93DC56F07E6"
+    },
+    {
+      "path": "tests\\team.spec.lua",
+      "sha256": "A601BA8BDD25DEE04C22B19577C868CF349F54E09E73956A3B18EAD5A8A57DFF"
+    },
+    {
+      "path": "tests\\touch.spec.lua",
+      "sha256": "CEC18812A3B917E84768C64169CF4FCA7B494F15BC3D45D3BFA7C36CAA235F17"
+    },
+    {
+      "path": "tests\\tutorial.spec.lua",
+      "sha256": "8AE004A154FAFB98D1BE4611AA6B01B5453A1755AB13D0002D94264133D1517B"
+    },
+    {
+      "path": "tests\\ui-mobile-production-observe.lua",
+      "sha256": "1F01DD72E352CE5485EB5E6E2F9E17DB98561E92CA018691ED6A29194580EC8D"
+    },
+    {
+      "path": "tests\\unit_collision.spec.lua",
+      "sha256": "3C43CB861425777AC7989386DFF07DB7F69B2DC5AF73D563B4D6285B7CDBF464"
+    },
+    {
+      "path": "tests\\UnitCollisionServerProbe.server.lua",
+      "sha256": "7D9556E02256A92DBB67900FB3E38F886C42382FBEDF0DF9BA1533A31CE1A7FD"
+    },
+    {
+      "path": "tests\\villager-build-harness.client.lua",
+      "sha256": "D807969A748FCA920D7E25D56E3D22A44435CC4924CE8ACDCEF80B5961696D4A"
+    },
+    {
+      "path": "tests\\world.spec.lua",
+      "sha256": "358FD2601469B06055050F399FA20677512BA7D99F6D88C5F06CB9FF97C34AC1"
+    }
+  ],
+  "buildInspection": {
+    "mappedScriptCount": 94,
+    "serverScripts": 5,
+    "clientLocalScripts": 8,
+    "moduleScripts": 81,
+    "streamingEnabled": "false",
+    "artSha256": "D5AD91BCC36FD6F4152CB76E1A83A5424EA5CC3B1B2A2915C77961A3BF43AFEE"
+  }
+}

@@ -1,0 +1,4 @@
+SIZE	Small	maps	100	failures	0
+SIZE	Medium	maps	20	failures	0
+SIZE	Large	maps	20	failures	0
+STRESS	140	failures	0	slowest	0.43637770001078025

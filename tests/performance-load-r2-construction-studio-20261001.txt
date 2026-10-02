@@ -1,0 +1,47 @@
+2026-09-30T21:48:59.018Z,2030.018066,6470,6,Info [FLog::CreatorOutput] [LOAD_R2_FRESH_CONSTRUCTION_START] 1
+2026-09-30T21:48:59.133Z,2030.133911,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民收到村民限制回覆
+2026-09-30T21:48:59.133Z,2030.133911,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民不建立工地、不扣資源
+2026-09-30T21:48:59.249Z,2030.249146,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊收到村民限制回覆
+2026-09-30T21:48:59.249Z,2030.249146,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊不建立工地、不扣資源
+2026-09-30T21:48:59.351Z,2030.351440,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選收到村民限制回覆
+2026-09-30T21:48:59.351Z,2030.351440,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選不建立工地、不扣資源
+2026-09-30T21:48:59.453Z,2030.453369,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋由伺服器建立工地
+2026-09-30T21:48:59.453Z,2030.453369,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 重複村民只扣一次建造成本
+2026-09-30T21:48:59.453Z,2030.453369,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 指定遠於舊 80 studs 限制的工地仍可建立
+2026-09-30T21:48:59.453Z,2030.453369,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工房屋不增加人口
+2026-09-30T21:48:59.554Z,2030.554321,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前施工村民停止
+2026-09-30T21:49:00.422Z,2031.422119,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前觀察停工期間
+2026-09-30T21:49:00.422Z,2031.422119,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前停止後保留進度且不自行完工
+2026-09-30T21:49:00.422Z,2031.422119,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 遠距村民尚未到場時沒有施工進度
+2026-09-30T21:49:07.928Z,2038.928955,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民實際走到遠方工地後才開始施工
+2026-09-30T21:49:07.928Z,2038.928955,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 軍隊不能協助施工、重複村民不重算
+2026-09-30T21:49:08.031Z,2039.031128,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後施工村民停止
+2026-09-30T21:49:08.882Z,2039.882812,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後觀察停工期間
+2026-09-30T21:49:08.883Z,2039.883789,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後停止後保留進度且不自行完工
+2026-09-30T21:49:16.539Z,2047.539795,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民可繼續完成停工房屋
+2026-09-30T21:49:16.539Z,2047.539795,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋完工才啟用人口
+2026-09-30T21:49:16.656Z,2047.656494,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營由伺服器建立工地
+2026-09-30T21:49:16.772Z,2047.772217,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前施工村民停止
+2026-09-30T21:49:17.623Z,2048.623047,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前觀察停工期間
+2026-09-30T21:49:17.623Z,2048.623047,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前停止後保留進度且不自行完工
+2026-09-30T21:49:17.724Z,2048.724365,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工兵營拒絕訓練
+2026-09-30T21:49:17.724Z,2048.724365,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工訓練請求不扣款、不排入佇列
+2026-09-30T21:49:29.314Z,2060.314941,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 多名村民前往並完成兵營
+2026-09-30T21:49:29.415Z,2060.415771,cb44,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營完工後才可訓練
+2026-09-30T21:49:29.531Z,2060.531494,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田由伺服器建立工地
+2026-09-30T21:49:29.647Z,2060.647949,3110,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前施工村民停止
+2026-09-30T21:49:30.531Z,2061.531738,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前觀察停工期間
+2026-09-30T21:49:30.531Z,2061.531738,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前停止後保留進度且不自行完工
+2026-09-30T21:49:30.531Z,2061.531738,a6ec,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工農田不提供可採集資源
+2026-09-30T21:49:40.288Z,2071.288574,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民完成農田
+2026-09-30T21:49:40.288Z,2071.288574,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田完工才啟用食物
+2026-09-30T21:49:40.288Z,2071.288574,2fb4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION COMPLETE] 36 項施工引擎檢查通過
+2026-09-30T21:49:40.288Z,2071.288574,2fb4,6,Info [FLog::CreatorOutput] [LOAD_R2_FRESH_CONSTRUCTION_RESULT] true 36
+2026-09-30T21:51:14.604Z,2165.604736,2fb4,6,Info [FLog::CreatorOutput] [LOAD_R2_CONSTRUCTION_CENSUS] {"complete":true,"queue":0,"kinds":{"House":true,"Barracks":true,"TownCenter":true,"Farm":true}}
+2026-09-30T21:51:15.468Z,2166.468994,a6ec,6,Info [FLog::CreatorOutput] [LOAD_R2_RESET] {"avatar":true,"camera":"Custom","buildings":0,"label":"fresh Construction","phase":"Lobby","resourcesZero":true,"generation":2,"units":0}
+2026-09-30T21:51:15.468Z,2166.468994,a6ec,6,Info [FLog::CreatorOutput] [LOAD_R2_FINAL_CLEANUP] true
+2026-09-30T21:51:25.524Z,2176.524658,bfa4,6,Info [FLog::PlaySoloManager] stopPlaySoloImpl: PlaceStateTransitionStatus becomes StopPlaySolo with playtest running
+2026-09-30T21:51:25.764Z,2176.764893,2fb4,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|51412
+2026-09-30T21:51:25.764Z,2176.764893,2fb4,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|51412
+2026-09-30T21:51:26.222Z,2177.222900,3110,6,Info [DFLog::RbxTransportDummyServer] Server stopped with reason: RCC: 288 (DisconnectServerShutdown)
+2026-09-30T21:51:26.429Z,2177.429932,bfa4,6,Info [FLog::WaypointTelemetry] StopPlaySoloEnd (waypoint #4, session #4): 7.281499999862717 ms since last waypoint, 904.4607000000724 ms since start

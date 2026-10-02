@@ -18,6 +18,26 @@ for key, values in pairs({size={"huge",42},aiCount={-1,4,1.5,math.huge,0/0},diff
  end
 end
 expect(not MatchRules.settings(settings,2),"more than four factions accepted")
+expect(result.teamMode=="FFA","existing settings lost FFA compatibility")
+local teamsSettings=table.clone(settings); teamsSettings.aiCount=2; teamsSettings.teamMode="Teams"
+expect(MatchRules.settings(teamsSettings,2).teamMode=="Teams","valid mixed 2v2 settings rejected")
+teamsSettings.aiCount=0
+expect(MatchRules.settings(teamsSettings,2).teamMode=="Teams","valid 1v1 settings rejected")
+expect(MatchRules.settings(teamsSettings,4).teamMode=="Teams","valid human 2v2 settings rejected")
+expect(not MatchRules.settings(teamsSettings,3),"unequal three-faction team settings accepted")
+teamsSettings.teamMode="CoopAI"
+expect(not MatchRules.settings(teamsSettings,2),"coop without AI opponents accepted")
+teamsSettings.aiCount=2
+expect(MatchRules.settings(teamsSettings,2).teamMode=="CoopAI","cooperating humans and AI settings rejected")
+expect(not MatchRules.settings(teamsSettings,1.5),"fractional human count accepted")
+for _,mode in ipairs({"", "teams", "Unknown",true,1,math.huge}) do
+ local invalid=table.clone(settings); invalid.teamMode=mode
+ expect(not MatchRules.settings(invalid,1),"unknown team mode accepted")
+end
+for key,value in pairs({teamId=1,teamById={[1]=1},roster={{id=1,ai=false}},resources={food=999},damageMultiplier=2}) do
+ local invalid=table.clone(settings); invalid[key]=value
+ expect(not MatchRules.settings(invalid,1),"manual team or gameplay setting accepted")
+end
 local sandbox=table.clone(settings)
 sandbox.aiCount=0
 expect(MatchRules.settings(sandbox,1)~=nil,"solo sandbox rejected")
@@ -33,6 +53,24 @@ winner,ended=MatchRules.winner({faction,{id=2}})
 expect(not winner and not ended,"multiple surviving factions ended match")
 winner,ended=MatchRules.winner({})
 expect(not winner and ended,"no survivors should produce a draw")
+winner,ended=MatchRules.winner({faction},1)
+expect(not winner and not ended,"single-side sandbox should keep playing with its survivor")
+winner,ended=MatchRules.winner({},1)
+expect(not winner and ended,"empty sandbox should end when its participant leaves")
+winner,ended=MatchRules.winner({faction},2)
+expect(winner==faction and ended,"two-side match should end with its last survivor")
+winner,ended=MatchRules.winner({faction},4)
+expect(winner==faction and ended,"four-side match should end with its last survivor")
+winner,ended=MatchRules.winner({faction,{id=2}},4)
+expect(not winner and not ended,"four-side match with multiple survivors should keep playing")
+winner,ended=MatchRules.winner({},4)
+expect(not winner and ended,"match with no survivors should end without a winner")
+for _,invalid in ipairs({math.huge,-math.huge,0/0,false,"1"}) do
+ winner,ended=MatchRules.winner({faction},invalid)
+ expect(not winner and not ended,"invalid starting-side count should not resolve victory")
+end
+winner,ended=MatchRules.winner(false,2)
+expect(not winner and not ended,"invalid survivor list should not resolve victory")
 -- Data integrity matters because cost and counter values are accepted only from this config.
 for kind,data in pairs(Config.Buildings) do
  expect(data.name~=nil and data.hp>0 and data.size.X>0 and data.size.Y>0,"invalid building definition "..kind)

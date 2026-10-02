@@ -1,0 +1,34 @@
+[
+  {
+    "path": "src/StarterGui/GameUI/GUIManager.lua",
+    "sha256": "AF3B1C49501E53E44A2C6026999CBA2EF59E602429EDFA2FA9CF49B9A10C2C1B"
+  },
+  {
+    "path": "src/StarterPlayer/StarterPlayerScripts/RTSClient.client.lua",
+    "sha256": "96AF27E2B5A6D4F8DA8D64A3CE955087996BD312C42F5C1AAA6EDC5891C6A76C"
+  },
+  {
+    "path": "src/ReplicatedStorage/GameData/GameConfig.lua",
+    "sha256": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/BuildMenuRules.lua",
+    "sha256": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/BuildMenuTests.lua",
+    "sha256": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/HUDTests.lua",
+    "sha256": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C"
+  },
+  {
+    "path": "tests/villager-build-harness.client.lua",
+    "sha256": "D807969A748FCA920D7E25D56E3D22A44435CC4924CE8ACDCEF80B5961696D4A"
+  },
+  {
+    "path": "villager-pages-validation.project.json",
+    "sha256": "0CD529ADA3DD65F32A3EC2B160F77294FD8F908F16D6EDA276C7A927AEAA515A"
+  }
+]

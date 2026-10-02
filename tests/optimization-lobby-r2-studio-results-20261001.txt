@@ -1,0 +1,166 @@
+Original log: C:\Users\user\AppData\Local\Roblox\logs\0.741.19.7411056_20260930T223624Z_Studio_8AE4B_last.log
+Source manifest: tests/optimization-lobby-r2-source-manifest-20261001.json; matched 94/94
+Default build SHA256: EECCAC08521CB465450E20B08532A6CB082C9BACBE9E60236F194946768D8AFE
+Validation build SHA256: DC760287ACABD15CF1EB92B88C32B69DDB82897D46825913054A6EF086A252B2
+Client received-parts census only; single-player normal restart lifecycle.
+
+2026-09-30T22:40:45.444Z,261.444489,c208,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:40:45.444Z,261.444489,c208,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:40:45.585Z,261.585510,1260,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:41:40.877Z,316.877411,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP_FIXTURE READY] temporary unknown direct/nested resource, scenery and template
+2026-09-30T22:42:22.434Z,358.434296,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:22.434Z,358.434296,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:22.434Z,358.434296,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:22.434Z,358.434296,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:23.505Z,359.505280,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常新局取得新 generation
+2026-09-30T22:42:23.505Z,359.505280,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 地面尺寸正確
+2026-09-30T22:42:23.505Z,359.505280,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 同尺寸或不同尺寸新局皆有一份生成場景
+2026-09-30T22:42:23.506Z,359.506287,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:23.506Z,359.506287,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:23.506Z,359.506287,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:23.506Z,359.506287,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:23.509Z,359.509277,5228,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":6775,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":420,"resourceParts":2468,"completeVisualReplicationProven":false,"size":768}
+2026-09-30T22:42:23.509Z,359.509277,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 新局資源正常完整計數與道路／占地規則
+2026-09-30T22:42:23.622Z,359.622742,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 讀實際 PlayerGui 的生成小地圖節點
+2026-09-30T22:42:23.622Z,359.622742,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常初始資源與人口沒有改寫
+2026-09-30T22:42:23.723Z,359.723907,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 結果畫面仍保留戰場資源以便觀戰
+2026-09-30T22:42:24.567Z,360.567841,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳不保留上一局生成資源零件
+2026-09-30T22:42:24.567Z,360.567841,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 實際 PlayerGui 回大廳清除隱藏小地圖節點
+2026-09-30T22:42:24.567Z,360.567841,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 上一局所有生成資源模型皆移除
+2026-09-30T22:42:24.567Z,360.567841,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 food
+2026-09-30T22:42:24.567Z,360.567841,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 wood
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 gold
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 stone
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 Population
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 低數量場景保留供同尺寸新局使用
+2026-09-30T22:42:24.568Z,360.568848,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP CYCLE] {"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":1,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"}
+2026-09-30T22:42:24.851Z,360.851471,c208,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:24.851Z,360.851471,c208,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:25.099Z,361.099548,b2c0,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:25.635Z,361.635864,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常新局取得新 generation
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 地面尺寸正確
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 同尺寸或不同尺寸新局皆有一份生成場景
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:25.636Z,361.636871,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:25.639Z,361.639893,c7d8,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":6775,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":420,"resourceParts":2468,"completeVisualReplicationProven":false,"size":768}
+2026-09-30T22:42:25.639Z,361.639893,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 新局資源正常完整計數與道路／占地規則
+2026-09-30T22:42:25.972Z,361.972748,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 讀實際 PlayerGui 的生成小地圖節點
+2026-09-30T22:42:25.972Z,361.972748,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常初始資源與人口沒有改寫
+2026-09-30T22:42:26.092Z,362.092621,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 結果畫面仍保留戰場資源以便觀戰
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳不保留上一局生成資源零件
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 實際 PlayerGui 回大廳清除隱藏小地圖節點
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 上一局所有生成資源模型皆移除
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 food
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 wood
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 gold
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 stone
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 Population
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 低數量場景保留供同尺寸新局使用
+2026-09-30T22:42:26.973Z,362.973297,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP CYCLE] {"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":3,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"}
+2026-09-30T22:42:27.263Z,363.263672,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:27.263Z,363.263672,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:27.454Z,363.454041,1260,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常新局取得新 generation
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 地面尺寸正確
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 同尺寸或不同尺寸新局皆有一份生成場景
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:28.122Z,364.122070,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:28.130Z,364.130035,afd8,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":1100,"checks":17359,"sizeName":"Large","shadowParts":1100,"sceneryParts":62,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":1100,"resourceParts":6204,"completeVisualReplicationProven":false,"size":1536}
+2026-09-30T22:42:28.130Z,364.130035,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 新局資源正常完整計數與道路／占地規則
+2026-09-30T22:42:28.462Z,364.462799,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 讀實際 PlayerGui 的生成小地圖節點
+2026-09-30T22:42:28.462Z,364.462799,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常初始資源與人口沒有改寫
+2026-09-30T22:42:28.565Z,364.565796,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 結果畫面仍保留戰場資源以便觀戰
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳不保留上一局生成資源零件
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 實際 PlayerGui 回大廳清除隱藏小地圖節點
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 上一局所有生成資源模型皆移除
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 food
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 wood
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 gold
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 stone
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 Population
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:29.422Z,365.422272,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:29.424Z,365.424255,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 低數量場景保留供同尺寸新局使用
+2026-09-30T22:42:29.424Z,365.424255,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP CYCLE] {"beforeDots":1106,"mapChecks":17359,"afterNodes":0,"afterDots":0,"generation":5,"afterParts":0,"beforeParts":6204,"beforeNodes":1100,"size":"Large"}
+2026-09-30T22:42:29.761Z,365.761932,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:29.761Z,365.761932,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:29.910Z,365.910278,b2c0,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常新局取得新 generation
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 地面尺寸正確
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 同尺寸或不同尺寸新局皆有一份生成場景
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:30.306Z,366.306702,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:30.314Z,366.314880,c7d8,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":1100,"checks":17359,"sizeName":"Large","shadowParts":1100,"sceneryParts":62,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":1100,"resourceParts":6204,"completeVisualReplicationProven":false,"size":1536}
+2026-09-30T22:42:30.314Z,366.314880,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 新局資源正常完整計數與道路／占地規則
+2026-09-30T22:42:30.315Z,366.315857,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 讀實際 PlayerGui 的生成小地圖節點
+2026-09-30T22:42:30.315Z,366.315857,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常初始資源與人口沒有改寫
+2026-09-30T22:42:42.613Z,378.613800,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] Large 同尺寸重開後正常建造與扣款
+2026-09-30T22:42:48.999Z,384.999237,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 重新生成資源可正常指派並實際採集
+2026-09-30T22:42:49.522Z,385.522827,c7d8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 結果畫面仍保留戰場資源以便觀戰
+2026-09-30T22:42:50.366Z,386.366211,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳不保留上一局生成資源零件
+2026-09-30T22:42:50.366Z,386.366211,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 實際 PlayerGui 回大廳清除隱藏小地圖節點
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 上一局所有生成資源模型皆移除
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 food
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 wood
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 gold
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 stone
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 Population
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 低數量場景保留供同尺寸新局使用
+2026-09-30T22:42:50.367Z,386.367188,5228,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP CYCLE] {"beforeDots":1106,"mapChecks":17359,"afterNodes":0,"afterDots":0,"generation":7,"afterParts":0,"beforeParts":6204,"beforeNodes":1100,"size":"Large"}
+2026-09-30T22:42:50.685Z,386.685883,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:50.685Z,386.685883,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:50.912Z,386.912720,b2c0,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常新局取得新 generation
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 地面尺寸正確
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 同尺寸或不同尺寸新局皆有一份生成場景
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:51.083Z,387.083466,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:51.085Z,387.085449,afd8,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":6775,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":420,"resourceParts":2468,"completeVisualReplicationProven":false,"size":768}
+2026-09-30T22:42:51.085Z,387.085449,afd8,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 新局資源正常完整計數與道路／占地規則
+2026-09-30T22:42:51.397Z,387.397583,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 讀實際 PlayerGui 的生成小地圖節點
+2026-09-30T22:42:51.398Z,387.398590,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 正常初始資源與人口沒有改寫
+2026-09-30T22:42:51.518Z,387.518616,c544,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 結果畫面仍保留戰場資源以便觀戰
+2026-09-30T22:42:52.416Z,388.416748,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳不保留上一局生成資源零件
+2026-09-30T22:42:52.416Z,388.416748,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 實際 PlayerGui 回大廳清除隱藏小地圖節點
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 上一局所有生成資源模型皆移除
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 food
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 wood
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 gold
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 stone
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 大廳清空玩家 Population
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 低數量場景保留供同尺寸新局使用
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP CYCLE] {"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":9,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"}
+2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP COMPLETE] {"checks":126,"cycles":[{"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":1,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"},{"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":3,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"},{"beforeDots":1106,"mapChecks":17359,"afterNodes":0,"afterDots":0,"generation":5,"afterParts":0,"beforeParts":6204,"beforeNodes":1100,"size":"Large"},{"beforeDots":1106,"mapChecks":17359,"afterNodes":0,"afterDots":0,"generation":7,"afterParts":0,"beforeParts":6204,"beforeNodes":1100,"size":"Large"},{"beforeDots":426,"mapChecks":6775,"afterNodes":0,"afterDots":0,"generation":9,"afterParts":0,"beforeParts":2468,"beforeNodes":420,"size":"Small"}],"complete":true}
+2026-09-30T22:42:52.598Z,388.598328,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:52.598Z,388.598328,c8cc,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:42:52.817Z,388.817169,1260,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-09-30T22:43:25.426Z,421.426727,b870,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|58431
+2026-09-30T22:43:25.426Z,421.426727,b870,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|58431
+
+Root computer-use cleanup observation: Stop at 06:43:26; both owned lobby validation windows closed with observed Do Not Save; subsequent sky inventory contained only original user window 75959444 (帝國鍛造坊：測試版). No publish or original-place write action. Later independent multiplayer validation is separate.

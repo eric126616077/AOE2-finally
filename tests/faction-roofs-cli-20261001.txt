@@ -1,0 +1,6 @@
+Faction roof color verification — 2026-10-01
+Art.lua SHA256: D5AD91BCC36FD6F4152CB76E1A83A5424EA5CC3B1B2A2915C77961A3BF43AFEE
+PASS: Luau compile Art.lua, ModelFactory.lua, PlayerColorTests.lua (exit 0).
+PASS: .\rojo.exe build default.project.json -o build/AOE2.rbxlx (exit 0).
+Full CLI regression not repeated for this whitelist edit.
+Studio Play and imported textured roofs remain unverified.

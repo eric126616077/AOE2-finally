@@ -1,0 +1,3161 @@
+{
+  "capturedUtc": "2026-09-30T21:42:50.1580133Z",
+  "sourceManifest": "tests/performance-load-source-manifest-20261001-r2.json",
+  "originalLog": "C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20260930T211509Z_Studio_EB6AA_last.log",
+  "scope": "Fixed-view Studio single-player Small 4/10/20 units, 30-second idle/move/stop observations; focus Unknown, not a performance acceptance or prior-version improvement measurement.",
+  "measurements": [
+    {
+      "units": 4,
+      "mode": "idle",
+      "effectiveFPS": 49.997364118451536,
+      "p95Ms": 20.5,
+      "worstMs": 21.888000890612602,
+      "below30Fraction": 0,
+      "minimumVisible": 4,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 4,
+      "mode": "move",
+      "effectiveFPS": 49.99621638277344,
+      "p95Ms": 20.5,
+      "worstMs": 21.990399807691574,
+      "below30Fraction": 0,
+      "minimumVisible": 4,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0.9827586206896551,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 4,
+      "mode": "stop",
+      "effectiveFPS": 49.99988356867134,
+      "p95Ms": 20.5,
+      "worstMs": 21.984800696372986,
+      "below30Fraction": 0,
+      "minimumVisible": 4,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 10,
+      "mode": "idle",
+      "effectiveFPS": 49.96743094902806,
+      "p95Ms": 21,
+      "worstMs": 24.095799773931503,
+      "below30Fraction": 0,
+      "minimumVisible": 10,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 10,
+      "mode": "move",
+      "effectiveFPS": 49.94929375753754,
+      "p95Ms": 21,
+      "worstMs": 24.394499137997627,
+      "below30Fraction": 0,
+      "minimumVisible": 10,
+      "minimumMoving": 9,
+      "movingSampleFraction": 1,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 10,
+      "mode": "stop",
+      "effectiveFPS": 49.97783995765905,
+      "p95Ms": 21,
+      "worstMs": 25.557799264788628,
+      "below30Fraction": 0,
+      "minimumVisible": 10,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 20,
+      "mode": "idle",
+      "effectiveFPS": 49.97113650011907,
+      "p95Ms": 21,
+      "worstMs": 25.475099682807922,
+      "below30Fraction": 0,
+      "minimumVisible": 20,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 20,
+      "mode": "move",
+      "effectiveFPS": 49.9473723946443,
+      "p95Ms": 21,
+      "worstMs": 24.77549947798252,
+      "below30Fraction": 0,
+      "minimumVisible": 20,
+      "minimumMoving": 19,
+      "movingSampleFraction": 1,
+      "viewport": [
+        1610,
+        638
+      ]
+    },
+    {
+      "units": 20,
+      "mode": "stop",
+      "effectiveFPS": 49.972552444829034,
+      "p95Ms": 21,
+      "worstMs": 23.756500333547592,
+      "below30Fraction": 0,
+      "minimumVisible": 20,
+      "minimumMoving": 0,
+      "movingSampleFraction": 0,
+      "viewport": [
+        1610,
+        638
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "kind": "INCOMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 4,
+        "error": "ReplicatedStorage.PerformanceValidation.Load:293: 相機或視窗改變，配對樣本無效\nReplicatedStorage.PerformanceValidation.Load:293\nReplicatedStorage.PerformanceValidation.Load:289\nReplicatedStorage.Performance",
+        "cleanup": "停止本人單位；正常建築、已生成單位與未完生產保留"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.001054408205285,
+          "worstDeltaMs": 21.888000890612602,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.997364118451536,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.68713264393567,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.001054408205285,
+          "worstDeltaMs": 21.888000890612602,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.997364118451536,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.68713264393567,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.002372100003413,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "idle",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 4,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 4,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 736.4163208007812,
+          "last": 736.4163208007812,
+          "mean": 736.9898681640624,
+          "worst": 737.6986083984375,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 737.6986083984375,
+          "missingSamples": 0,
+          "first": 737.4281616210938,
+          "lastMinusFirst": -1.0118408203125
+        },
+        "mode": "idle",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2815.44921875,
+          "last": 2815.47265625,
+          "mean": 2815.481445312499,
+          "worst": 2815.53515625,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2815.53515625,
+          "missingSamples": 0,
+          "first": 2815.53515625,
+          "lastMinusFirst": -0.0625
+        },
+        "mode": "idle",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51558,
+          "last": 51558,
+          "mean": 51558,
+          "worst": 51558,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51558,
+          "missingSamples": 0,
+          "first": 51558,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 157815,
+          "last": 157815,
+          "mean": 157815,
+          "worst": 157815,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 157815,
+          "missingSamples": 0,
+          "first": 157815,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.3912149667739868,
+          "last": 0.4558759927749634,
+          "mean": 0.4690956771373749,
+          "worst": 0.5315744876861572,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.5315744876861572,
+          "missingSamples": 0,
+          "first": 0.5145618915557861,
+          "lastMinusFirst": -0.058685898780822754
+        },
+        "mode": "idle",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.018764199689030647,
+          "last": 0.018764199689030647,
+          "mean": 0.019852162688039247,
+          "worst": 0.02038400061428547,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02038400061428547,
+          "missingSamples": 0,
+          "first": 0.019883999601006508,
+          "lastMinusFirst": -0.0011197999119758606
+        },
+        "mode": "idle",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.66445922851562,
+          "last": 147.66445922851562,
+          "mean": 147.66445922851565,
+          "worst": 147.66445922851562,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.66445922851562,
+          "missingSamples": 0,
+          "first": 147.66445922851562,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 4,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "idle",
+        "serverCPUMeasured": false,
+        "seconds": 30.00235490000341
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.001513561425366,
+          "worstDeltaMs": 21.990399807691574,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.99621638277344,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.47438922189265,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.001513561425366,
+          "worstDeltaMs": 21.990399807691574,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.99621638277344,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.47438922189265,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.00194709999778,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "move",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 4,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 4,
+          "movingSampleFraction": 0.9827586206896551
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 736.81103515625,
+          "last": 738.1746215820312,
+          "mean": 737.5886917114259,
+          "worst": 738.1746215820312,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 738.1746215820312,
+          "missingSamples": 0,
+          "first": 737.00244140625,
+          "lastMinusFirst": 1.17218017578125
+        },
+        "mode": "move",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2815.48046875,
+          "last": 2815.546875,
+          "mean": 2815.521240234375,
+          "worst": 2815.546875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2815.546875,
+          "missingSamples": 0,
+          "first": 2815.48046875,
+          "lastMinusFirst": 0.06640625
+        },
+        "mode": "move",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51558,
+          "last": 51558,
+          "mean": 51558,
+          "worst": 51558,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51558,
+          "missingSamples": 0,
+          "first": 51558,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 157803,
+          "last": 157815,
+          "mean": 157812,
+          "worst": 157815,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 157815,
+          "missingSamples": 0,
+          "first": 157815,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2.6112053394317627,
+          "last": 7.676894187927246,
+          "mean": 6.779231980443002,
+          "worst": 8.002466201782227,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 8.002466201782227,
+          "missingSamples": 0,
+          "first": 2.6112053394317627,
+          "lastMinusFirst": 5.065688848495483
+        },
+        "mode": "move",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.018747400492429733,
+          "last": 0.019969899207353592,
+          "mean": 0.019898637547157705,
+          "worst": 0.020183000713586807,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.020183000713586807,
+          "missingSamples": 0,
+          "first": 0.020183000713586807,
+          "lastMinusFirst": -0.00021310150623321533
+        },
+        "mode": "move",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.6772918701172,
+          "last": 147.6804656982422,
+          "mean": 147.67855072021484,
+          "worst": 147.6804656982422,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.6804656982422,
+          "missingSamples": 0,
+          "first": 147.6787567138672,
+          "lastMinusFirst": 0.001708984375
+        },
+        "mode": "move",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 4,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "move",
+        "serverCPUMeasured": false,
+        "seconds": 30.00192799999786
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.00004657263991,
+          "worstDeltaMs": 21.984800696372986,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1499,
+          "effectiveFPS": 49.99988356867134,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.48597068541896,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.00004657263991,
+          "worstDeltaMs": 21.984800696372986,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1499,
+          "effectiveFPS": 49.99988356867134,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 45.48597068541896,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 20.5
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.000618300000497,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "stop",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 4,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 4,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 4
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 737.1859130859375,
+          "last": 738.7601928710938,
+          "mean": 737.8766517639161,
+          "worst": 738.7601928710938,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 738.7601928710938,
+          "missingSamples": 0,
+          "first": 737.2118530273438,
+          "lastMinusFirst": 1.54833984375
+        },
+        "mode": "stop",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2815.58203125,
+          "last": 2815.9453125,
+          "mean": 2815.8530273437505,
+          "worst": 2815.9453125,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2815.9453125,
+          "missingSamples": 0,
+          "first": 2815.58203125,
+          "lastMinusFirst": 0.36328125
+        },
+        "mode": "stop",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51558,
+          "last": 51558,
+          "mean": 51558,
+          "worst": 51558,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51558,
+          "missingSamples": 0,
+          "first": 51558,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 157803,
+          "last": 157803,
+          "mean": 157803.00000000003,
+          "worst": 157803,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 157803,
+          "missingSamples": 0,
+          "first": 157803,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.4147885739803314,
+          "last": 0.471449077129364,
+          "mean": 0.7627709321677686,
+          "worst": 4.741278171539307,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 4.741278171539307,
+          "missingSamples": 0,
+          "first": 4.741278171539307,
+          "lastMinusFirst": -4.269829094409943
+        },
+        "mode": "stop",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.01862099952995777,
+          "last": 0.018697500228881836,
+          "mean": 0.01983715011738241,
+          "worst": 0.02031790092587471,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02031790092587471,
+          "missingSamples": 0,
+          "first": 0.019942499697208405,
+          "lastMinusFirst": -0.0012449994683265686
+        },
+        "mode": "stop",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.67434692382812,
+          "last": 147.67434692382812,
+          "mean": 147.67521953582764,
+          "worst": 147.6790008544922,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.6790008544922,
+          "missingSamples": 0,
+          "first": 147.6790008544922,
+          "lastMinusFirst": -0.0046539306640625
+        },
+        "mode": "stop",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 4,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "stop",
+        "serverCPUMeasured": false,
+        "seconds": 30.00060200000007
+      },
+      "generation": 1
+    },
+    {
+      "kind": "HOUSE",
+      "probe": "ClientLoad",
+      "data": {
+        "populationCap": 10,
+        "actualUnits": 4,
+        "paidWood": 25,
+        "complete": true
+      },
+      "generation": 1
+    },
+    {
+      "kind": "PREPARED",
+      "probe": "ClientLoad",
+      "data": {
+        "wood": 1175,
+        "actualUnits": 10,
+        "populationCap": 10,
+        "targetUnits": 10,
+        "trainedVillagers": 6,
+        "food": 900,
+        "evidence": "正常扣款、村民施工、伺服器生產與集結；未直接生成",
+        "builtHouses": 1
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.013036111864608,
+          "worstDeltaMs": 24.095799773931503,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.96743094902806,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 41.50100886387133,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.013036111864608,
+          "worstDeltaMs": 24.095799773931503,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.96743094902806,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 41.50100886387133,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.019035699995584,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "idle",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 10,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 10,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 746.353515625,
+          "last": 747.0921020507812,
+          "mean": 750.6507034301759,
+          "worst": 772.5206298828125,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 772.5206298828125,
+          "missingSamples": 0,
+          "first": 772.5206298828125,
+          "lastMinusFirst": -25.42852783203125
+        },
+        "mode": "idle",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2869.7421875,
+          "last": 2869.796875,
+          "mean": 2869.7497558593755,
+          "worst": 2869.796875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2869.796875,
+          "missingSamples": 0,
+          "first": 2869.7421875,
+          "lastMinusFirst": 0.0546875
+        },
+        "mode": "idle",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51673,
+          "last": 51673,
+          "mean": 51673.000000000015,
+          "worst": 51673,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51673,
+          "missingSamples": 0,
+          "first": 51673,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 161375,
+          "last": 161375,
+          "mean": 161374.99999999997,
+          "worst": 161375,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 161375,
+          "missingSamples": 0,
+          "first": 161375,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.38529065251350403,
+          "last": 0.5237685441970825,
+          "mean": 0.5429710038006303,
+          "worst": 1.5757685899734497,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 1.5757685899734497,
+          "missingSamples": 0,
+          "first": 1.5757685899734497,
+          "lastMinusFirst": -1.0520000457763672
+        },
+        "mode": "idle",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.018779100850224495,
+          "last": 0.02113419957458973,
+          "mean": 0.020045768585987396,
+          "worst": 0.02113419957458973,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02113419957458973,
+          "missingSamples": 0,
+          "first": 0.019974900409579277,
+          "lastMinusFirst": 0.0011592991650104523
+        },
+        "mode": "idle",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.58026123046875,
+          "last": 147.58026123046875,
+          "mean": 147.69526004791265,
+          "worst": 147.72618103027344,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.72618103027344,
+          "missingSamples": 0,
+          "first": 147.72618103027344,
+          "lastMinusFirst": -0.1459197998046875
+        },
+        "mode": "idle",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 10,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "idle",
+        "serverCPUMeasured": false,
+        "seconds": 30.019018799997866
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.020303086849875,
+          "worstDeltaMs": 24.394499137997627,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1497,
+          "effectiveFPS": 49.94929375753754,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 40.99284819676289,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.020303086849875,
+          "worstDeltaMs": 24.394499137997627,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1497,
+          "effectiveFPS": 49.94929375753754,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 40.99284819676289,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.010894999999437,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "move",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 10,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 9,
+          "samples": 60,
+          "everVisible": 10,
+          "movingSampleFraction": 1
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 741.93603515625,
+          "last": 742.6001586914062,
+          "mean": 743.7074279785156,
+          "worst": 747.8623046875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 747.8623046875,
+          "missingSamples": 0,
+          "first": 747.8623046875,
+          "lastMinusFirst": -5.26214599609375
+        },
+        "mode": "move",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2869.8125,
+          "last": 2869.9296875,
+          "mean": 2869.8388671875005,
+          "worst": 2869.9296875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2869.9296875,
+          "missingSamples": 0,
+          "first": 2869.8125,
+          "lastMinusFirst": 0.1171875
+        },
+        "mode": "move",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51673,
+          "last": 51673,
+          "mean": 51673.000000000015,
+          "worst": 51673,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51673,
+          "missingSamples": 0,
+          "first": 51673,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 161375,
+          "last": 161375,
+          "mean": 161374.99999999997,
+          "worst": 161375,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 161375,
+          "missingSamples": 0,
+          "first": 161375,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 6.4192023277282715,
+          "last": 18.969852447509766,
+          "mean": 16.18706378340721,
+          "worst": 19.138710021972656,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 19.138710021972656,
+          "missingSamples": 0,
+          "first": 6.4192023277282715,
+          "lastMinusFirst": 12.550650119781494
+        },
+        "mode": "move",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.019589200615882874,
+          "last": 0.02020989917218685,
+          "mean": 0.020075025036931045,
+          "worst": 0.021358000114560127,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.021358000114560127,
+          "missingSamples": 0,
+          "first": 0.019910600036382675,
+          "lastMinusFirst": 0.00029929913580417633
+        },
+        "mode": "move",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.5909881591797,
+          "last": 147.5926971435547,
+          "mean": 147.59188079833984,
+          "worst": 147.5926971435547,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.5926971435547,
+          "missingSamples": 0,
+          "first": 147.5924530029297,
+          "lastMinusFirst": 0.000244140625
+        },
+        "mode": "move",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 10,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "move",
+        "serverCPUMeasured": false,
+        "seconds": 30.01087700000062
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.008867947218096,
+          "worstDeltaMs": 25.557799264788628,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.97783995765905,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 39.126999536995164,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.008867947218096,
+          "worstDeltaMs": 25.557799264788628,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.97783995765905,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 39.126999536995164,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.01291630000196,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "stop",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 10,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 10,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 10
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 742.20849609375,
+          "last": 743.3135986328125,
+          "mean": 742.7646484375,
+          "worst": 743.3410034179688,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 743.3410034179688,
+          "missingSamples": 0,
+          "first": 742.20849609375,
+          "lastMinusFirst": 1.1051025390625
+        },
+        "mode": "stop",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2869.9296875,
+          "last": 2870.5,
+          "mean": 2870.251953125,
+          "worst": 2870.515625,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2870.515625,
+          "missingSamples": 0,
+          "first": 2869.9296875,
+          "lastMinusFirst": 0.5703125
+        },
+        "mode": "stop",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51673,
+          "last": 51673,
+          "mean": 51673.000000000015,
+          "worst": 51673,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51673,
+          "missingSamples": 0,
+          "first": 51673,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 161375,
+          "last": 161375,
+          "mean": 161374.99999999997,
+          "worst": 161375,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 161375,
+          "missingSamples": 0,
+          "first": 161375,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.4130646288394928,
+          "last": 0.4285663962364197,
+          "mean": 1.0581056009978058,
+          "worst": 9.126446723937988,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 9.126446723937988,
+          "missingSamples": 0,
+          "first": 9.126446723937988,
+          "lastMinusFirst": -8.697880327701569
+        },
+        "mode": "stop",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.019247600808739662,
+          "last": 0.01997240073978901,
+          "mean": 0.01994488737545908,
+          "worst": 0.020186999812722206,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.020186999812722206,
+          "missingSamples": 0,
+          "first": 0.020186999812722206,
+          "lastMinusFirst": -0.00021459907293319702
+        },
+        "mode": "stop",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.58209228515625,
+          "last": 147.58209228515625,
+          "mean": 147.58408069610593,
+          "worst": 147.5926971435547,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.5926971435547,
+          "missingSamples": 0,
+          "first": 147.5926971435547,
+          "lastMinusFirst": -0.0106048583984375
+        },
+        "mode": "stop",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 10,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "stop",
+        "serverCPUMeasured": false,
+        "seconds": 30.012898900000437
+      },
+      "generation": 1
+    },
+    {
+      "kind": "HOUSE",
+      "probe": "ClientLoad",
+      "data": {
+        "populationCap": 15,
+        "actualUnits": 10,
+        "paidWood": 25,
+        "complete": true
+      },
+      "generation": 1
+    },
+    {
+      "kind": "HOUSE",
+      "probe": "ClientLoad",
+      "data": {
+        "populationCap": 20,
+        "actualUnits": 10,
+        "paidWood": 25,
+        "complete": true
+      },
+      "generation": 1
+    },
+    {
+      "kind": "PREPARED",
+      "probe": "ClientLoad",
+      "data": {
+        "wood": 1125,
+        "actualUnits": 20,
+        "populationCap": 20,
+        "targetUnits": 20,
+        "trainedVillagers": 10,
+        "food": 400,
+        "evidence": "正常扣款、村民施工、伺服器生產與集結；未直接生成",
+        "builtHouses": 2
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.01155206861499,
+          "worstDeltaMs": 25.475099682807922,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.97113650011907,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 39.25401715600972,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "idle",
+        "frames": {
+          "meanDeltaMs": 20.01155206861499,
+          "worstDeltaMs": 25.475099682807922,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.97113650011907,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 39.25401715600972,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.0164081000039,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "idle",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 20,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 20,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 738.6795043945312,
+          "last": 739.734375,
+          "mean": 739.2722396850588,
+          "worst": 739.805908203125,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 739.805908203125,
+          "missingSamples": 0,
+          "first": 739.5380249023438,
+          "lastMinusFirst": 0.19635009765625
+        },
+        "mode": "idle",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2873.37109375,
+          "last": 2873.66796875,
+          "mean": 2873.6274414062505,
+          "worst": 2873.671875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2873.671875,
+          "missingSamples": 0,
+          "first": 2873.37109375,
+          "lastMinusFirst": 0.296875
+        },
+        "mode": "idle",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51873,
+          "last": 51873,
+          "mean": 51873,
+          "worst": 51873,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51873,
+          "missingSamples": 0,
+          "first": 51873,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 167307,
+          "last": 167307,
+          "mean": 167307,
+          "worst": 167307,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 167307,
+          "missingSamples": 0,
+          "first": 167307,
+          "lastMinusFirst": 0
+        },
+        "mode": "idle",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.40246713161468506,
+          "last": 0.41423341631889343,
+          "mean": 0.544317688792944,
+          "worst": 1.5848217010498047,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 1.5848217010498047,
+          "missingSamples": 0,
+          "first": 1.5848217010498047,
+          "lastMinusFirst": -1.1705882847309113
+        },
+        "mode": "idle",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.018556099385023117,
+          "last": 0.02117609977722168,
+          "mean": 0.020088337361812595,
+          "worst": 0.02135469950735569,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02135469950735569,
+          "missingSamples": 0,
+          "first": 0.019953100010752678,
+          "lastMinusFirst": 0.0012229997664690018
+        },
+        "mode": "idle",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.64039611816406,
+          "last": 147.64039611816406,
+          "mean": 147.6406440734863,
+          "worst": 147.64138793945312,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.64138793945312,
+          "missingSamples": 0,
+          "first": 147.64138793945312,
+          "lastMinusFirst": -0.0009918212890625
+        },
+        "mode": "idle",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 20,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "idle",
+        "serverCPUMeasured": false,
+        "seconds": 30.01638990000356
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.02107322280735,
+          "worstDeltaMs": 24.77549947798252,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1497,
+          "effectiveFPS": 49.9473723946443,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 40.36245569493683,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "move",
+        "frames": {
+          "meanDeltaMs": 20.02107322280735,
+          "worstDeltaMs": 24.77549947798252,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1497,
+          "effectiveFPS": 49.9473723946443,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 40.36245569493683,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.011659299998428,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "move",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 20,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 19,
+          "samples": 60,
+          "everVisible": 20,
+          "movingSampleFraction": 1
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 739.6837158203125,
+          "last": 741.2090454101562,
+          "mean": 740.4501457214357,
+          "worst": 741.2090454101562,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 741.2090454101562,
+          "missingSamples": 0,
+          "first": 740.0154418945312,
+          "lastMinusFirst": 1.193603515625
+        },
+        "mode": "move",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2873.66796875,
+          "last": 2873.76953125,
+          "mean": 2873.707275390625,
+          "worst": 2873.76953125,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2873.76953125,
+          "missingSamples": 0,
+          "first": 2873.66796875,
+          "lastMinusFirst": 0.1015625
+        },
+        "mode": "move",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51873,
+          "last": 51873,
+          "mean": 51873,
+          "worst": 51873,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51873,
+          "missingSamples": 0,
+          "first": 51873,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 167295,
+          "last": 167307,
+          "mean": 167304.75,
+          "worst": 167307,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 167307,
+          "missingSamples": 0,
+          "first": 167307,
+          "lastMinusFirst": 0
+        },
+        "mode": "move",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 7.582761287689209,
+          "last": 37.440773010253906,
+          "mean": 32.018366783857346,
+          "worst": 38.240787506103516,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 38.240787506103516,
+          "missingSamples": 0,
+          "first": 7.582761287689209,
+          "lastMinusFirst": 29.858011722564697
+        },
+        "mode": "move",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.0197346992790699,
+          "last": 0.019921500235795975,
+          "mean": 0.020002281176857647,
+          "worst": 0.02026369981467724,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02026369981467724,
+          "missingSamples": 0,
+          "first": 0.020231299102306366,
+          "lastMinusFirst": -0.00030979886651039124
+        },
+        "mode": "move",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.6904296875,
+          "last": 147.692138671875,
+          "mean": 147.691276550293,
+          "worst": 147.692138671875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.692138671875,
+          "missingSamples": 0,
+          "first": 147.691162109375,
+          "lastMinusFirst": 0.0009765625
+        },
+        "mode": "move",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 20,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "move",
+        "serverCPUMeasured": false,
+        "seconds": 30.011643300000287
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.01098505232498,
+          "worstDeltaMs": 23.756500333547592,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.972552444829034,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 42.093742174130604,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Focused"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "invalidFrames": 0,
+          "missing": "沒有有效 RenderStepped delta",
+          "validFrames": 0,
+          "p95ResolutionMs": 0.5,
+          "p95UpperBoundMs": false
+        },
+        "focus": "Background"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS_FRAMES",
+      "probe": "ClientLoad",
+      "data": {
+        "mode": "stop",
+        "frames": {
+          "meanDeltaMs": 20.01098505232498,
+          "worstDeltaMs": 23.756500333547592,
+          "below30Fraction": 0,
+          "below15Fraction": 0,
+          "validFrames": 1498,
+          "effectiveFPS": 49.972552444829034,
+          "p95ResolutionMs": 0.5,
+          "worstInstantaneousFPS": 42.093742174130604,
+          "invalidFrames": 0,
+          "p95UpperBoundMs": 21
+        },
+        "focus": "Unknown"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "FOCUS",
+      "probe": "ClientLoad",
+      "data": {
+        "visibilityMeasured": false,
+        "throttlingCauseProven": false,
+        "stateSource": "UserInputService.WindowFocused/WindowFocusReleased；首個事件前未知",
+        "secondsByState": {
+          "Unknown": 30.017281000000366,
+          "Background": 0,
+          "Focused": 0
+        },
+        "initialState": "Unknown",
+        "eventCount": 0,
+        "knownTimeFraction": 0,
+        "firstEventAtSeconds": false,
+        "currentState": "Unknown",
+        "unattributedTransitionFrames": 0
+      },
+      "generation": 1
+    },
+    {
+      "kind": "LOAD",
+      "probe": "ClientLoad",
+      "data": {
+        "camera": {
+          "viewport": [
+            1610,
+            638
+          ],
+          "fov": 50,
+          "position": [
+            -168,
+            160,
+            -48
+          ]
+        },
+        "mode": "stop",
+        "load": {
+          "sampleIntervalSeconds": 0.5,
+          "minimumVisible": 20,
+          "continuousAllMovingProven": false,
+          "minimumMoving": 0,
+          "samples": 59,
+          "everVisible": 20,
+          "movingSampleFraction": 0
+        },
+        "actualUnits": 20
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 23,
+          "last": 23,
+          "mean": 23.000000000000004,
+          "worst": 23,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 23,
+          "missingSamples": 0,
+          "first": 23,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneDrawcalls"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 739.6142578125,
+          "last": 739.9873046875,
+          "mean": 740.0279083251953,
+          "worst": 740.5845336914062,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 740.5845336914062,
+          "missingSamples": 0,
+          "first": 739.7850952148438,
+          "lastMinusFirst": 0.20220947265625
+        },
+        "mode": "stop",
+        "name": "LuaHeapMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 2873.4765625,
+          "last": 2873.4765625,
+          "mean": 2873.6132812499995,
+          "worst": 2873.7734375,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 2873.7734375,
+          "missingSamples": 0,
+          "first": 2873.7734375,
+          "lastMinusFirst": -0.296875
+        },
+        "mode": "stop",
+        "name": "totalMemoryMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 51873,
+          "last": 51873,
+          "mean": 51873,
+          "worst": 51873,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 51873,
+          "missingSamples": 0,
+          "first": 51873,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "instanceCount"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0,
+          "last": 0,
+          "mean": 0,
+          "worst": 0,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0,
+          "missingSamples": 0,
+          "first": 0,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "dataReceiveKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 167307,
+          "last": 167307,
+          "mean": 167307,
+          "worst": 167307,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 167307,
+          "missingSamples": 0,
+          "first": 167307,
+          "lastMinusFirst": 0
+        },
+        "mode": "stop",
+        "name": "sceneTriangles"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.41146963834762573,
+          "last": 0.47148433327674866,
+          "mean": 1.5105217806994915,
+          "worst": 15.586140632629395,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 15.586140632629395,
+          "missingSamples": 0,
+          "first": 15.586140632629395,
+          "lastMinusFirst": -15.114656299352646
+        },
+        "mode": "stop",
+        "name": "dataSendKbps"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 0.019701899960637093,
+          "last": 0.019847000017762184,
+          "mean": 0.020057381480000917,
+          "worst": 0.02102700062096119,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 0.02102700062096119,
+          "missingSamples": 0,
+          "first": 0.01987849920988083,
+          "lastMinusFirst": -3.1499192118644714E-05
+        },
+        "mode": "stop",
+        "name": "frameTimeSeconds"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "METRIC",
+      "probe": "ClientLoad",
+      "data": {
+        "value": {
+          "minimum": 147.67161560058594,
+          "last": 147.67161560058594,
+          "mean": 147.6754636764526,
+          "worst": 147.692138671875,
+          "samples": 16,
+          "invalidInputs": 0,
+          "p95": 147.692138671875,
+          "missingSamples": 0,
+          "first": 147.692138671875,
+          "lastMinusFirst": -0.0205230712890625
+        },
+        "mode": "stop",
+        "name": "InstancesMb"
+      },
+      "generation": 1
+    },
+    {
+      "kind": "COMPLETE",
+      "probe": "ClientLoad",
+      "data": {
+        "actualUnits": 20,
+        "performanceAccepted": false,
+        "baselineImprovementProven": false,
+        "mode": "stop",
+        "serverCPUMeasured": false,
+        "seconds": 30.017264800000703
+      },
+      "generation": 1
+    }
+  ]
+}

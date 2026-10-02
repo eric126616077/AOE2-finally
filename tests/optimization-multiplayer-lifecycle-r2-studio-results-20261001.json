@@ -1,0 +1,1631 @@
+{
+  "schemaVersion": 2,
+  "capturedUtc": "2026-09-30T23:42:33.8796634+00:00",
+  "complete": true,
+  "acceptedScope": "R2 two-client normal walking, multiplayer commands and true player-removal lifecycle",
+  "performanceAccepted": false,
+  "sourceManifest": "C:\\Users\\user\\Desktop\\AOE2-finally\\tests\\optimization-multiplayer-lifecycle-r2-source-manifest-20261001.json",
+  "sourceManifestSha256": "D675B4002A567DD284A4130B7DBB114006DEDCD1E7CCA1FE1B8637778C3FFCEB",
+  "baselineManifest": "C:\\Users\\user\\Desktop\\AOE2-finally\\tests\\optimization-lobby-r2-source-manifest-20261001.json",
+  "baselineManifestSha256": "4EFBE9CA5C821D17DB546339890E6A8025EBF05BBE82613869888E7D3A1855DF",
+  "baselineFilesMatched": 94,
+  "sourceFilesMatched": 96,
+  "preservedV1FilesMatched": 4,
+  "defaultBuild": "C:\\Users\\user\\Desktop\\AOE2-finally\\build\\AOE2.rbxlx",
+  "defaultBuildSha256": "EECCAC08521CB465450E20B08532A6CB082C9BACBE9E60236F194946768D8AFE",
+  "validationBuild": "C:\\Users\\user\\Desktop\\AOE2-finally\\build\\AOE2-multiplayer-lifecycle-20261001-r2.rbxlx",
+  "validationBuildSha256": "B135EA4D01AB063C535ACA00E3BFE396D013DB0536E1F1F6E71C9FC2D3ECB80A",
+  "parserPath": "C:\\Users\\user\\Desktop\\AOE2-finally\\tests\\optimization-multiplayer-lifecycle-r2-evidence-parser.ps1",
+  "parserSha256": "8B2D8D63245408DCA5B4D08D0A563A350D27C46978A4875F041A1266E0DB7138",
+  "logs": [
+    {
+      "role": "server",
+      "path": "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T233124Z_Studio_15AB1_last.log",
+      "snapshotBytes": 278233,
+      "snapshotSha256": "E84FBD31043B202AEB082B4B4F1379AEDF0F29807FE0B6A34DD9176D76578249",
+      "linesRead": 2036,
+      "reports": 13,
+      "records": 41
+    },
+    {
+      "role": "host",
+      "path": "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T233130Z_Studio_D9700_last.log",
+      "snapshotBytes": 241602,
+      "snapshotSha256": "E209431C45AB80A4CA136FB8D91FA419C04F99A4F7064FAF92FBF1A5480C9210",
+      "linesRead": 1828,
+      "reports": 5,
+      "records": 12
+    },
+    {
+      "role": "peer",
+      "path": "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T233131Z_Studio_56565_last.log",
+      "snapshotBytes": 240776,
+      "snapshotSha256": "4337227419463F44706C452286A98E01EF1E8BB4CDD0CAE687A96B0098E96F39",
+      "linesRead": 1818,
+      "reports": 8,
+      "records": 19
+    }
+  ],
+  "reportCount": 26,
+  "recordCount": 72,
+  "serverReport": {
+    "initial": {
+      "winnerId": 0,
+      "winnerTeamId": 0,
+      "resourceNodeCount": 0,
+      "managedBuildings": 0,
+      "aiCount": 0,
+      "managedUnits": 0,
+      "victimBuildings": 0,
+      "players": 2,
+      "lobbyPlayers": 0,
+      "phase": "Lobby",
+      "factionCount": 0,
+      "victimUnits": 0,
+      "matchTime": 0,
+      "resourceNodes": 0,
+      "generation": 0,
+      "resourceParts": 0,
+      "hostUserId": 0,
+      "peerUnits": 0,
+      "peerBuildings": 0
+    },
+    "peerCleanupAcknowledged": true,
+    "playerNames": {
+      "host": "Player1",
+      "peer": "Player2"
+    },
+    "clientStages": [
+      {
+        "data": {
+          "checks": 5
+        },
+        "role": "host",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      },
+      {
+        "data": {
+          "checks": 5
+        },
+        "role": "peer",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      },
+      {
+        "data": {
+          "checks": 6,
+          "walk": {
+            "initial": {
+              "y": 3.0682032108306885,
+              "x": -1.3721204996109009,
+              "z": 2102.221923828125
+            },
+            "priority": 101,
+            "queuedClient": {
+              "y": 4,
+              "x": 0,
+              "z": 2053
+            },
+            "distanceMoved": 49.24986267089844
+          }
+        },
+        "role": "host",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      },
+      {
+        "data": {
+          "checks": 6,
+          "walk": {
+            "initial": {
+              "y": 3.0682032108306885,
+              "x": 0.06940519064664841,
+              "z": 2100.878173828125
+            },
+            "priority": 101,
+            "queuedClient": {
+              "y": 4,
+              "x": 6.123233998228043E-16,
+              "z": 2043
+            },
+            "distanceMoved": 57.88571548461914
+          }
+        },
+        "role": "peer",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      },
+      {
+        "data": {
+          "checks": 8
+        },
+        "role": "peer",
+        "stage": "PEER_QUEUED",
+        "checks": 8
+      },
+      {
+        "data": {
+          "checks": 11,
+          "sharedHostCompleted": true,
+          "census": {
+            "winnerId": 0,
+            "winnerTeamId": 0,
+            "resourceNodeCount": 420,
+            "managedBuildings": 3,
+            "aiCount": 0,
+            "managedUnits": 9,
+            "victimBuildings": 2,
+            "players": 2,
+            "lobbyPlayers": 2,
+            "phase": "Playing",
+            "factionCount": 2,
+            "victimUnits": 5,
+            "peerBuildings": 1,
+            "resourceNodes": 420,
+            "generation": 1,
+            "resourceParts": 2468,
+            "peerUnits": 4,
+            "matchTime": 20,
+            "hostUserId": -1
+          },
+          "normalStopConfirmed": true
+        },
+        "role": "host",
+        "stage": "HOST_READY",
+        "checks": 11
+      },
+      {
+        "data": {
+          "checks": 11,
+          "complete": true
+        },
+        "role": "host",
+        "stage": "CLIENT_DONE",
+        "checks": 11
+      },
+      {
+        "data": {
+          "sharedOwnershipCompleted": true,
+          "census": {
+            "winnerId": 0,
+            "winnerTeamId": 0,
+            "resourceNodeCount": 420,
+            "managedBuildings": 3,
+            "aiCount": 0,
+            "managedUnits": 9,
+            "victimBuildings": 2,
+            "players": 2,
+            "lobbyPlayers": 2,
+            "phase": "Playing",
+            "factionCount": 2,
+            "victimUnits": 5,
+            "peerBuildings": 1,
+            "resourceNodes": 420,
+            "generation": 1,
+            "resourceParts": 2468,
+            "peerUnits": 4,
+            "matchTime": 22,
+            "hostUserId": -1
+          },
+          "checks": 10
+        },
+        "role": "peer",
+        "stage": "OWNERSHIP_READY",
+        "checks": 10
+      },
+      {
+        "data": {
+          "checks": 10,
+          "victimUserId": -1,
+          "eventArmed": true
+        },
+        "role": "peer",
+        "stage": "CLEANUP_ARMED",
+        "checks": 10
+      },
+      {
+        "data": {
+          "playerRemovingSeen": true,
+          "census": {
+            "winnerId": -2,
+            "winnerTeamId": 1,
+            "resourceNodeCount": 420,
+            "managedBuildings": 1,
+            "aiCount": 0,
+            "managedUnits": 4,
+            "victimBuildings": 0,
+            "players": 1,
+            "lobbyPlayers": 2,
+            "phase": "Ended",
+            "factionCount": 2,
+            "victimUnits": 0,
+            "peerBuildings": 1,
+            "resourceNodes": 420,
+            "generation": 1,
+            "resourceParts": 2468,
+            "peerUnits": 4,
+            "matchTime": 23,
+            "hostUserId": -2
+          },
+          "checks": 14
+        },
+        "role": "peer",
+        "stage": "PEER_CLEANUP",
+        "checks": 14
+      },
+      {
+        "data": {
+          "checks": 14,
+          "complete": true
+        },
+        "role": "peer",
+        "stage": "CLIENT_DONE",
+        "checks": 14
+      }
+    ],
+    "complete": true,
+    "before": {
+      "winnerId": 0,
+      "winnerTeamId": 0,
+      "resourceNodeCount": 420,
+      "managedBuildings": 3,
+      "aiCount": 0,
+      "managedUnits": 9,
+      "victimBuildings": 2,
+      "players": 2,
+      "lobbyPlayers": 2,
+      "phase": "Playing",
+      "factionCount": 2,
+      "victimUnits": 5,
+      "matchTime": 22,
+      "resourceNodes": 420,
+      "generation": 1,
+      "resourceParts": 2468,
+      "hostUserId": -1,
+      "peerUnits": 4,
+      "peerBuildings": 1
+    },
+    "afterHost": {
+      "winnerId": -2,
+      "winnerTeamId": 1,
+      "resourceNodeCount": 420,
+      "managedBuildings": 1,
+      "aiCount": 0,
+      "managedUnits": 4,
+      "victimBuildings": 0,
+      "players": 1,
+      "lobbyPlayers": 2,
+      "phase": "Ended",
+      "factionCount": 2,
+      "victimUnits": 0,
+      "matchTime": 23,
+      "resourceNodes": 420,
+      "generation": 1,
+      "resourceParts": 2468,
+      "hostUserId": -2,
+      "peerUnits": 4,
+      "peerBuildings": 1
+    },
+    "serverSpawn": {
+      "host": {
+        "y": 3.0703125,
+        "x": -1.375,
+        "z": 2102.21875
+      },
+      "peer": {
+        "y": 3.0703125,
+        "x": 0.0703125,
+        "z": 2100.875
+      }
+    },
+    "lastKickIssued": true,
+    "firstKickIssued": true,
+    "checks": 36,
+    "scope": "server instances/public lifecycle attributes; no private cache, FPS or memory claim",
+    "playersUserId": {
+      "host": -1,
+      "peer": -2
+    },
+    "clientComplete": {
+      "host": true,
+      "peer": true
+    },
+    "playerRemovingSeen": {
+      "host": true,
+      "peer": true
+    },
+    "serverQueue": {
+      "host": {
+        "y": 4,
+        "x": 0,
+        "z": 2053,
+        "players": 1,
+        "anchored": true,
+        "queued": true,
+        "joinOrder": 3
+      },
+      "peer": {
+        "y": 4,
+        "x": 6.123233998228043E-16,
+        "z": 2043,
+        "players": 2,
+        "anchored": true,
+        "queued": true,
+        "joinOrder": 4
+      }
+    },
+    "generatedReferencesRemoved": 420,
+    "session": "db1d36ef-ff7f-4068-bf92-ff0bcecab43d",
+    "afterLast": {
+      "winnerId": 0,
+      "winnerTeamId": 0,
+      "resourceNodeCount": 0,
+      "managedBuildings": 0,
+      "aiCount": 0,
+      "managedUnits": 0,
+      "victimBuildings": 0,
+      "players": 0,
+      "lobbyPlayers": 0,
+      "phase": "Lobby",
+      "factionCount": 0,
+      "victimUnits": 0,
+      "matchTime": 0,
+      "resourceNodes": 0,
+      "generation": 2,
+      "resourceParts": 0,
+      "hostUserId": 0,
+      "peerUnits": 0,
+      "peerBuildings": 0
+    }
+  },
+  "hostReport": {
+    "checks": 11,
+    "scope": "actual client Humanoid walking, replicated instances and normal RTS commands",
+    "complete": true,
+    "before": {
+      "winnerId": 0,
+      "winnerTeamId": 0,
+      "resourceNodeCount": 420,
+      "managedBuildings": 3,
+      "aiCount": 0,
+      "managedUnits": 9,
+      "victimBuildings": 2,
+      "players": 2,
+      "lobbyPlayers": 2,
+      "phase": "Playing",
+      "factionCount": 2,
+      "victimUnits": 5,
+      "matchTime": 20,
+      "resourceNodes": 420,
+      "generation": 1,
+      "resourceParts": 2468,
+      "hostUserId": -1,
+      "peerUnits": 4,
+      "peerBuildings": 1
+    },
+    "role": "host",
+    "normalStopConfirmed": true,
+    "sharedHostCompleted": true,
+    "hostUserId": -1,
+    "playerUserId": -1,
+    "peerUserId": -2,
+    "walk": {
+      "distanceMoved": 49.24986267089844,
+      "queuedClient": {
+        "y": 4,
+        "x": 0,
+        "z": 2053
+      },
+      "priority": 101,
+      "serverConfirmed": true,
+      "initial": {
+        "y": 3.0682032108306885,
+        "x": -1.3721204996109009,
+        "z": 2102.221923828125
+      }
+    }
+  },
+  "peerReport": {
+    "checks": 14,
+    "scope": "actual client Humanoid walking, replicated instances and normal RTS commands",
+    "afterHost": {
+      "winnerId": -2,
+      "winnerTeamId": 1,
+      "resourceNodeCount": 420,
+      "managedBuildings": 1,
+      "aiCount": 0,
+      "managedUnits": 4,
+      "victimBuildings": 0,
+      "players": 1,
+      "lobbyPlayers": 2,
+      "phase": "Ended",
+      "factionCount": 2,
+      "victimUnits": 0,
+      "matchTime": 23,
+      "resourceNodes": 420,
+      "generation": 1,
+      "resourceParts": 2468,
+      "hostUserId": -2,
+      "peerUnits": 4,
+      "peerBuildings": 1
+    },
+    "complete": true,
+    "before": {
+      "winnerId": 0,
+      "winnerTeamId": 0,
+      "resourceNodeCount": 420,
+      "managedBuildings": 3,
+      "aiCount": 0,
+      "managedUnits": 9,
+      "victimBuildings": 2,
+      "players": 2,
+      "lobbyPlayers": 2,
+      "phase": "Playing",
+      "factionCount": 2,
+      "victimUnits": 5,
+      "matchTime": 22,
+      "resourceNodes": 420,
+      "generation": 1,
+      "resourceParts": 2468,
+      "hostUserId": -1,
+      "peerUnits": 4,
+      "peerBuildings": 1
+    },
+    "role": "peer",
+    "playerRemovingSeen": true,
+    "sharedOwnershipCompleted": true,
+    "hostUserId": -1,
+    "playerUserId": -2,
+    "peerUserId": -2,
+    "walk": {
+      "distanceMoved": 57.88571548461914,
+      "queuedClient": {
+        "y": 4,
+        "x": 6.123233998228043E-16,
+        "z": 2043
+      },
+      "priority": 101,
+      "serverConfirmed": true,
+      "initial": {
+        "y": 3.0682032108306885,
+        "x": 0.06940519064664841,
+        "z": 2100.878173828125
+      }
+    }
+  },
+  "reassembledReports": [
+    {
+      "source": "host",
+      "reportId": "875c251c-576a-45ce-84ff-377efb54bac1",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1168,
+      "summaryTimestampUtc": "2026-09-30T23:32:34.9440000+00:00",
+      "chunkLines": [
+        1167
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 5,
+        "role": "host",
+        "reportId": "875c251c-576a-45ce-84ff-377efb54bac1"
+      },
+      "report": {
+        "role": "host",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      }
+    },
+    {
+      "source": "host",
+      "reportId": "1accebe9-30cc-4762-9746-c09c665b7761",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1170,
+      "summaryTimestampUtc": "2026-09-30T23:32:37.2420000+00:00",
+      "chunkLines": [
+        1169
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 6,
+        "role": "host",
+        "reportId": "1accebe9-30cc-4762-9746-c09c665b7761"
+      },
+      "report": {
+        "role": "host",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      }
+    },
+    {
+      "source": "host",
+      "reportId": "caaf99d3-2fa9-4e00-80c7-cca39f52c1d3",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1215,
+      "summaryTimestampUtc": "2026-09-30T23:33:01.1760000+00:00",
+      "chunkLines": [
+        1214
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 11,
+        "role": "host",
+        "reportId": "caaf99d3-2fa9-4e00-80c7-cca39f52c1d3"
+      },
+      "report": {
+        "role": "host",
+        "stage": "HOST_READY",
+        "checks": 11
+      }
+    },
+    {
+      "source": "host",
+      "reportId": "077a4a03-3e21-4f81-a486-5993d605a217",
+      "stage": "CLIENT_COMPLETE",
+      "chunks": 3,
+      "utf8Bytes": 768,
+      "summaryLine": 1219,
+      "summaryTimestampUtc": "2026-09-30T23:33:01.1760000+00:00",
+      "chunkLines": [
+        1216,
+        1217,
+        1218
+      ],
+      "summary": {
+        "bytes": 768,
+        "chunks": 3,
+        "checks": 11,
+        "complete": true,
+        "role": "host",
+        "reportId": "077a4a03-3e21-4f81-a486-5993d605a217",
+        "hostUserId": -1,
+        "peerUserId": -2
+      },
+      "report": {
+        "checks": 11,
+        "scope": "actual client Humanoid walking, replicated instances and normal RTS commands",
+        "complete": true,
+        "before": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 420,
+          "managedBuildings": 3,
+          "aiCount": 0,
+          "managedUnits": 9,
+          "victimBuildings": 2,
+          "players": 2,
+          "lobbyPlayers": 2,
+          "phase": "Playing",
+          "factionCount": 2,
+          "victimUnits": 5,
+          "matchTime": 20,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -1,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "role": "host",
+        "normalStopConfirmed": true,
+        "sharedHostCompleted": true,
+        "hostUserId": -1,
+        "playerUserId": -1,
+        "peerUserId": -2,
+        "walk": {
+          "distanceMoved": 49.24986267089844,
+          "queuedClient": {
+            "y": 4,
+            "x": 0,
+            "z": 2053
+          },
+          "priority": 101,
+          "serverConfirmed": true,
+          "initial": {
+            "y": 3.0682032108306885,
+            "x": -1.3721204996109009,
+            "z": 2102.221923828125
+          }
+        }
+      }
+    },
+    {
+      "source": "host",
+      "reportId": "13157a23-84fc-4304-967f-ce5aba9b3639",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 49,
+      "summaryLine": 1221,
+      "summaryTimestampUtc": "2026-09-30T23:33:01.1760000+00:00",
+      "chunkLines": [
+        1220
+      ],
+      "summary": {
+        "bytes": 49,
+        "chunks": 1,
+        "checks": 11,
+        "role": "host",
+        "reportId": "13157a23-84fc-4304-967f-ce5aba9b3639"
+      },
+      "report": {
+        "role": "host",
+        "stage": "CLIENT_DONE",
+        "checks": 11
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "9048a6e9-aa66-4a39-9853-a5f6b528ea6a",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1164,
+      "summaryTimestampUtc": "2026-09-30T23:32:34.9460000+00:00",
+      "chunkLines": [
+        1163
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 5,
+        "role": "peer",
+        "reportId": "9048a6e9-aa66-4a39-9853-a5f6b528ea6a"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "6027223e-868e-4cd2-b97a-2cfa2d6167b4",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1171,
+      "summaryTimestampUtc": "2026-09-30T23:32:39.6750000+00:00",
+      "chunkLines": [
+        1170
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 6,
+        "role": "peer",
+        "reportId": "6027223e-868e-4cd2-b97a-2cfa2d6167b4"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "358f7ab4-7c89-4b0d-a4e3-6d78c63a3841",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1175,
+      "summaryTimestampUtc": "2026-09-30T23:32:39.9080000+00:00",
+      "chunkLines": [
+        1174
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 8,
+        "role": "peer",
+        "reportId": "358f7ab4-7c89-4b0d-a4e3-6d78c63a3841"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "PEER_QUEUED",
+        "checks": 8
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "d6253d3d-a0aa-4ec6-bbf5-2d002d62a806",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 53,
+      "summaryLine": 1208,
+      "summaryTimestampUtc": "2026-09-30T23:33:02.6930000+00:00",
+      "chunkLines": [
+        1207
+      ],
+      "summary": {
+        "bytes": 53,
+        "chunks": 1,
+        "checks": 10,
+        "role": "peer",
+        "reportId": "d6253d3d-a0aa-4ec6-bbf5-2d002d62a806"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "OWNERSHIP_READY",
+        "checks": 10
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "6be19295-7d98-4882-8b00-c6fc305f9d5f",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1210,
+      "summaryTimestampUtc": "2026-09-30T23:33:02.6930000+00:00",
+      "chunkLines": [
+        1209
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 10,
+        "role": "peer",
+        "reportId": "6be19295-7d98-4882-8b00-c6fc305f9d5f"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLEANUP_ARMED",
+        "checks": 10
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "a98d3b31-b590-4f82-8d0e-603858db70a8",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 50,
+      "summaryLine": 1217,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.8750000+00:00",
+      "chunkLines": [
+        1216
+      ],
+      "summary": {
+        "bytes": 50,
+        "chunks": 1,
+        "checks": 14,
+        "role": "peer",
+        "reportId": "a98d3b31-b590-4f82-8d0e-603858db70a8"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "PEER_CLEANUP",
+        "checks": 14
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "e936b03a-4369-449b-9081-7922d224e3fa",
+      "stage": "CLIENT_COMPLETE",
+      "chunks": 4,
+      "utf8Bytes": 1128,
+      "summaryLine": 1222,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.9070000+00:00",
+      "chunkLines": [
+        1218,
+        1219,
+        1220,
+        1221
+      ],
+      "summary": {
+        "bytes": 1128,
+        "chunks": 4,
+        "checks": 14,
+        "complete": true,
+        "role": "peer",
+        "reportId": "e936b03a-4369-449b-9081-7922d224e3fa",
+        "hostUserId": -1,
+        "peerUserId": -2
+      },
+      "report": {
+        "checks": 14,
+        "scope": "actual client Humanoid walking, replicated instances and normal RTS commands",
+        "afterHost": {
+          "winnerId": -2,
+          "winnerTeamId": 1,
+          "resourceNodeCount": 420,
+          "managedBuildings": 1,
+          "aiCount": 0,
+          "managedUnits": 4,
+          "victimBuildings": 0,
+          "players": 1,
+          "lobbyPlayers": 2,
+          "phase": "Ended",
+          "factionCount": 2,
+          "victimUnits": 0,
+          "matchTime": 23,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -2,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "complete": true,
+        "before": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 420,
+          "managedBuildings": 3,
+          "aiCount": 0,
+          "managedUnits": 9,
+          "victimBuildings": 2,
+          "players": 2,
+          "lobbyPlayers": 2,
+          "phase": "Playing",
+          "factionCount": 2,
+          "victimUnits": 5,
+          "matchTime": 22,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -1,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "role": "peer",
+        "playerRemovingSeen": true,
+        "sharedOwnershipCompleted": true,
+        "hostUserId": -1,
+        "playerUserId": -2,
+        "peerUserId": -2,
+        "walk": {
+          "distanceMoved": 57.88571548461914,
+          "queuedClient": {
+            "y": 4,
+            "x": 6.123233998228043E-16,
+            "z": 2043
+          },
+          "priority": 101,
+          "serverConfirmed": true,
+          "initial": {
+            "y": 3.0682032108306885,
+            "x": 0.06940519064664841,
+            "z": 2100.878173828125
+          }
+        }
+      }
+    },
+    {
+      "source": "peer",
+      "reportId": "02c374fd-b06f-4cb6-8b35-61d43e2b64b5",
+      "stage": "CLIENT_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 49,
+      "summaryLine": 1224,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.9070000+00:00",
+      "chunkLines": [
+        1223
+      ],
+      "summary": {
+        "bytes": 49,
+        "chunks": 1,
+        "checks": 14,
+        "role": "peer",
+        "reportId": "02c374fd-b06f-4cb6-8b35-61d43e2b64b5"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLIENT_DONE",
+        "checks": 14
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "bd78f44c-b2b1-4239-9a08-dbba2f8d4ef9",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1314,
+      "summaryTimestampUtc": "2026-09-30T23:32:34.5580000+00:00",
+      "chunkLines": [
+        1313
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 5,
+        "role": "host",
+        "reportId": "bd78f44c-b2b1-4239-9a08-dbba2f8d4ef9"
+      },
+      "report": {
+        "role": "host",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "7415fa7e-c572-453a-a105-8d2ee5d84d19",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1316,
+      "summaryTimestampUtc": "2026-09-30T23:32:34.5750000+00:00",
+      "chunkLines": [
+        1315
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 5,
+        "role": "peer",
+        "reportId": "7415fa7e-c572-453a-a105-8d2ee5d84d19"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLIENT_STARTED",
+        "checks": 5
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "5ec41009-ac23-4235-b53f-9fe6addf4398",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1318,
+      "summaryTimestampUtc": "2026-09-30T23:32:36.8460000+00:00",
+      "chunkLines": [
+        1317
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 6,
+        "role": "host",
+        "reportId": "5ec41009-ac23-4235-b53f-9fe6addf4398"
+      },
+      "report": {
+        "role": "host",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "5c1e6e82-2226-4e80-8793-bcd1312d2948",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1325,
+      "summaryTimestampUtc": "2026-09-30T23:32:39.2990000+00:00",
+      "chunkLines": [
+        1324
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 6,
+        "role": "peer",
+        "reportId": "5c1e6e82-2226-4e80-8793-bcd1312d2948"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "WALK_QUEUED",
+        "checks": 6
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "371587f9-bb23-4304-b98d-ab0d4b694a52",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1328,
+      "summaryTimestampUtc": "2026-09-30T23:32:39.5830000+00:00",
+      "chunkLines": [
+        1327
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 8,
+        "role": "peer",
+        "reportId": "371587f9-bb23-4304-b98d-ab0d4b694a52"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "PEER_QUEUED",
+        "checks": 8
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "6c6a5c9b-8599-413c-a038-cbec41e5751a",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 48,
+      "summaryLine": 1350,
+      "summaryTimestampUtc": "2026-09-30T23:33:00.7830000+00:00",
+      "chunkLines": [
+        1349
+      ],
+      "summary": {
+        "bytes": 48,
+        "chunks": 1,
+        "checks": 11,
+        "role": "host",
+        "reportId": "6c6a5c9b-8599-413c-a038-cbec41e5751a"
+      },
+      "report": {
+        "role": "host",
+        "stage": "HOST_READY",
+        "checks": 11
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "4573d02b-088f-46ea-ba60-1ac78854d00e",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 49,
+      "summaryLine": 1352,
+      "summaryTimestampUtc": "2026-09-30T23:33:00.7830000+00:00",
+      "chunkLines": [
+        1351
+      ],
+      "summary": {
+        "bytes": 49,
+        "chunks": 1,
+        "checks": 11,
+        "role": "host",
+        "reportId": "4573d02b-088f-46ea-ba60-1ac78854d00e"
+      },
+      "report": {
+        "role": "host",
+        "stage": "CLIENT_DONE",
+        "checks": 11
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "b9e70497-fb0d-41ca-9a1e-b4da14332669",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 53,
+      "summaryLine": 1359,
+      "summaryTimestampUtc": "2026-09-30T23:33:02.3240000+00:00",
+      "chunkLines": [
+        1358
+      ],
+      "summary": {
+        "bytes": 53,
+        "chunks": 1,
+        "checks": 10,
+        "role": "peer",
+        "reportId": "b9e70497-fb0d-41ca-9a1e-b4da14332669"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "OWNERSHIP_READY",
+        "checks": 10
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "5aedfc3b-c8a6-4428-913f-29173b031e04",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 51,
+      "summaryLine": 1361,
+      "summaryTimestampUtc": "2026-09-30T23:33:02.3240000+00:00",
+      "chunkLines": [
+        1360
+      ],
+      "summary": {
+        "bytes": 51,
+        "chunks": 1,
+        "checks": 10,
+        "role": "peer",
+        "reportId": "5aedfc3b-c8a6-4428-913f-29173b031e04"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLEANUP_ARMED",
+        "checks": 10
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "1d540522-c7b5-4d6f-ab6e-1ac0621231f4",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 50,
+      "summaryLine": 1367,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.4980000+00:00",
+      "chunkLines": [
+        1366
+      ],
+      "summary": {
+        "bytes": 50,
+        "chunks": 1,
+        "checks": 14,
+        "role": "peer",
+        "reportId": "1d540522-c7b5-4d6f-ab6e-1ac0621231f4"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "PEER_CLEANUP",
+        "checks": 14
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "0f6dc066-8748-4893-9c8d-4cb521c2470c",
+      "stage": "SERVER_STAGE",
+      "chunks": 1,
+      "utf8Bytes": 49,
+      "summaryLine": 1369,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.5330000+00:00",
+      "chunkLines": [
+        1368
+      ],
+      "summary": {
+        "bytes": 49,
+        "chunks": 1,
+        "checks": 14,
+        "role": "peer",
+        "reportId": "0f6dc066-8748-4893-9c8d-4cb521c2470c"
+      },
+      "report": {
+        "role": "peer",
+        "stage": "CLIENT_DONE",
+        "checks": 14
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "24f4ac03-22d1-4ceb-a68a-d198d9722d5d",
+      "stage": "BEFORE_LAST_KICK",
+      "chunks": 3,
+      "utf8Bytes": 702,
+      "summaryLine": 1373,
+      "summaryTimestampUtc": "2026-09-30T23:33:03.6260000+00:00",
+      "chunkLines": [
+        1370,
+        1371,
+        1372
+      ],
+      "summary": {
+        "bytes": 702,
+        "chunks": 3,
+        "reportId": "24f4ac03-22d1-4ceb-a68a-d198d9722d5d"
+      },
+      "report": {
+        "before": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 420,
+          "managedBuildings": 3,
+          "aiCount": 0,
+          "managedUnits": 9,
+          "victimBuildings": 2,
+          "players": 2,
+          "lobbyPlayers": 2,
+          "phase": "Playing",
+          "factionCount": 2,
+          "victimUnits": 5,
+          "matchTime": 22,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -1,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "afterHost": {
+          "winnerId": -2,
+          "winnerTeamId": 1,
+          "resourceNodeCount": 420,
+          "managedBuildings": 1,
+          "aiCount": 0,
+          "managedUnits": 4,
+          "victimBuildings": 0,
+          "players": 1,
+          "lobbyPlayers": 2,
+          "phase": "Ended",
+          "factionCount": 2,
+          "victimUnits": 0,
+          "matchTime": 23,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -2,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "peerCleanupAcknowledged": true
+      }
+    },
+    {
+      "source": "server",
+      "reportId": "aa312226-123c-4ed9-b152-f4d27ad21e7c",
+      "stage": "COMPLETE",
+      "chunks": 14,
+      "utf8Bytes": 4457,
+      "summaryLine": 1392,
+      "summaryTimestampUtc": "2026-09-30T23:33:04.7160000+00:00",
+      "chunkLines": [
+        1378,
+        1379,
+        1380,
+        1381,
+        1382,
+        1383,
+        1384,
+        1385,
+        1386,
+        1387,
+        1388,
+        1389,
+        1390,
+        1391
+      ],
+      "summary": {
+        "bytes": 4457,
+        "chunks": 14,
+        "checks": 36,
+        "complete": true,
+        "afterNodes": 0,
+        "reportId": "aa312226-123c-4ed9-b152-f4d27ad21e7c",
+        "generation": 2,
+        "hostUserId": -1,
+        "afterParts": 0,
+        "peerUserId": -2
+      },
+      "report": {
+        "initial": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 0,
+          "managedBuildings": 0,
+          "aiCount": 0,
+          "managedUnits": 0,
+          "victimBuildings": 0,
+          "players": 2,
+          "lobbyPlayers": 0,
+          "phase": "Lobby",
+          "factionCount": 0,
+          "victimUnits": 0,
+          "matchTime": 0,
+          "resourceNodes": 0,
+          "generation": 0,
+          "resourceParts": 0,
+          "hostUserId": 0,
+          "peerUnits": 0,
+          "peerBuildings": 0
+        },
+        "peerCleanupAcknowledged": true,
+        "playerNames": {
+          "host": "Player1",
+          "peer": "Player2"
+        },
+        "clientStages": [
+          {
+            "data": {
+              "checks": 5
+            },
+            "role": "host",
+            "stage": "CLIENT_STARTED",
+            "checks": 5
+          },
+          {
+            "data": {
+              "checks": 5
+            },
+            "role": "peer",
+            "stage": "CLIENT_STARTED",
+            "checks": 5
+          },
+          {
+            "data": {
+              "checks": 6,
+              "walk": {
+                "initial": {
+                  "y": 3.0682032108306885,
+                  "x": -1.3721204996109009,
+                  "z": 2102.221923828125
+                },
+                "priority": 101,
+                "queuedClient": {
+                  "y": 4,
+                  "x": 0,
+                  "z": 2053
+                },
+                "distanceMoved": 49.24986267089844
+              }
+            },
+            "role": "host",
+            "stage": "WALK_QUEUED",
+            "checks": 6
+          },
+          {
+            "data": {
+              "checks": 6,
+              "walk": {
+                "initial": {
+                  "y": 3.0682032108306885,
+                  "x": 0.06940519064664841,
+                  "z": 2100.878173828125
+                },
+                "priority": 101,
+                "queuedClient": {
+                  "y": 4,
+                  "x": 6.123233998228043E-16,
+                  "z": 2043
+                },
+                "distanceMoved": 57.88571548461914
+              }
+            },
+            "role": "peer",
+            "stage": "WALK_QUEUED",
+            "checks": 6
+          },
+          {
+            "data": {
+              "checks": 8
+            },
+            "role": "peer",
+            "stage": "PEER_QUEUED",
+            "checks": 8
+          },
+          {
+            "data": {
+              "checks": 11,
+              "sharedHostCompleted": true,
+              "census": {
+                "winnerId": 0,
+                "winnerTeamId": 0,
+                "resourceNodeCount": 420,
+                "managedBuildings": 3,
+                "aiCount": 0,
+                "managedUnits": 9,
+                "victimBuildings": 2,
+                "players": 2,
+                "lobbyPlayers": 2,
+                "phase": "Playing",
+                "factionCount": 2,
+                "victimUnits": 5,
+                "peerBuildings": 1,
+                "resourceNodes": 420,
+                "generation": 1,
+                "resourceParts": 2468,
+                "peerUnits": 4,
+                "matchTime": 20,
+                "hostUserId": -1
+              },
+              "normalStopConfirmed": true
+            },
+            "role": "host",
+            "stage": "HOST_READY",
+            "checks": 11
+          },
+          {
+            "data": {
+              "checks": 11,
+              "complete": true
+            },
+            "role": "host",
+            "stage": "CLIENT_DONE",
+            "checks": 11
+          },
+          {
+            "data": {
+              "sharedOwnershipCompleted": true,
+              "census": {
+                "winnerId": 0,
+                "winnerTeamId": 0,
+                "resourceNodeCount": 420,
+                "managedBuildings": 3,
+                "aiCount": 0,
+                "managedUnits": 9,
+                "victimBuildings": 2,
+                "players": 2,
+                "lobbyPlayers": 2,
+                "phase": "Playing",
+                "factionCount": 2,
+                "victimUnits": 5,
+                "peerBuildings": 1,
+                "resourceNodes": 420,
+                "generation": 1,
+                "resourceParts": 2468,
+                "peerUnits": 4,
+                "matchTime": 22,
+                "hostUserId": -1
+              },
+              "checks": 10
+            },
+            "role": "peer",
+            "stage": "OWNERSHIP_READY",
+            "checks": 10
+          },
+          {
+            "data": {
+              "checks": 10,
+              "victimUserId": -1,
+              "eventArmed": true
+            },
+            "role": "peer",
+            "stage": "CLEANUP_ARMED",
+            "checks": 10
+          },
+          {
+            "data": {
+              "playerRemovingSeen": true,
+              "census": {
+                "winnerId": -2,
+                "winnerTeamId": 1,
+                "resourceNodeCount": 420,
+                "managedBuildings": 1,
+                "aiCount": 0,
+                "managedUnits": 4,
+                "victimBuildings": 0,
+                "players": 1,
+                "lobbyPlayers": 2,
+                "phase": "Ended",
+                "factionCount": 2,
+                "victimUnits": 0,
+                "peerBuildings": 1,
+                "resourceNodes": 420,
+                "generation": 1,
+                "resourceParts": 2468,
+                "peerUnits": 4,
+                "matchTime": 23,
+                "hostUserId": -2
+              },
+              "checks": 14
+            },
+            "role": "peer",
+            "stage": "PEER_CLEANUP",
+            "checks": 14
+          },
+          {
+            "data": {
+              "checks": 14,
+              "complete": true
+            },
+            "role": "peer",
+            "stage": "CLIENT_DONE",
+            "checks": 14
+          }
+        ],
+        "complete": true,
+        "before": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 420,
+          "managedBuildings": 3,
+          "aiCount": 0,
+          "managedUnits": 9,
+          "victimBuildings": 2,
+          "players": 2,
+          "lobbyPlayers": 2,
+          "phase": "Playing",
+          "factionCount": 2,
+          "victimUnits": 5,
+          "matchTime": 22,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -1,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "afterHost": {
+          "winnerId": -2,
+          "winnerTeamId": 1,
+          "resourceNodeCount": 420,
+          "managedBuildings": 1,
+          "aiCount": 0,
+          "managedUnits": 4,
+          "victimBuildings": 0,
+          "players": 1,
+          "lobbyPlayers": 2,
+          "phase": "Ended",
+          "factionCount": 2,
+          "victimUnits": 0,
+          "matchTime": 23,
+          "resourceNodes": 420,
+          "generation": 1,
+          "resourceParts": 2468,
+          "hostUserId": -2,
+          "peerUnits": 4,
+          "peerBuildings": 1
+        },
+        "serverSpawn": {
+          "host": {
+            "y": 3.0703125,
+            "x": -1.375,
+            "z": 2102.21875
+          },
+          "peer": {
+            "y": 3.0703125,
+            "x": 0.0703125,
+            "z": 2100.875
+          }
+        },
+        "lastKickIssued": true,
+        "firstKickIssued": true,
+        "checks": 36,
+        "scope": "server instances/public lifecycle attributes; no private cache, FPS or memory claim",
+        "playersUserId": {
+          "host": -1,
+          "peer": -2
+        },
+        "clientComplete": {
+          "host": true,
+          "peer": true
+        },
+        "playerRemovingSeen": {
+          "host": true,
+          "peer": true
+        },
+        "serverQueue": {
+          "host": {
+            "y": 4,
+            "x": 0,
+            "z": 2053,
+            "players": 1,
+            "anchored": true,
+            "queued": true,
+            "joinOrder": 3
+          },
+          "peer": {
+            "y": 4,
+            "x": 6.123233998228043E-16,
+            "z": 2043,
+            "players": 2,
+            "anchored": true,
+            "queued": true,
+            "joinOrder": 4
+          }
+        },
+        "generatedReferencesRemoved": 420,
+        "session": "db1d36ef-ff7f-4068-bf92-ff0bcecab43d",
+        "afterLast": {
+          "winnerId": 0,
+          "winnerTeamId": 0,
+          "resourceNodeCount": 0,
+          "managedBuildings": 0,
+          "aiCount": 0,
+          "managedUnits": 0,
+          "victimBuildings": 0,
+          "players": 0,
+          "lobbyPlayers": 0,
+          "phase": "Lobby",
+          "factionCount": 0,
+          "victimUnits": 0,
+          "matchTime": 0,
+          "resourceNodes": 0,
+          "generation": 2,
+          "resourceParts": 0,
+          "hostUserId": 0,
+          "peerUnits": 0,
+          "peerBuildings": 0
+        }
+      }
+    }
+  ],
+  "limits": [
+    "僅接受此次隔離 Studio Server & Clients 雙人工作流程；不等同完整遊戲或所有機型驗證。",
+    "來源與兩份 build 在解析時吻合 manifest；原始日誌沒有執行中 VM source hash，不能單憑 parser 證明載入的 place 身分。",
+    "resourceParts 是各 VM 實例／客戶端收到的 census；沒有把客戶端零件數當作完整視覺複製或伺服器記憶體證據。",
+    "未知模型 metadata、正常成本／所有權與命令檢查由 hash 對應 helper/Shared tests 的完成斷言支持；沒有另造逐項結果。",
+    "不包含 FPS、CPU、記憶體、滿人口效能、聲音聽感或全部建築畫面驗證。",
+    "跨 VM UTC 時鐘可能有偏移；CLIENT_DONE 採各原始日誌行序與 server 接受順序核對，沒有假設跨日誌同秒順序。"
+  ]
+}

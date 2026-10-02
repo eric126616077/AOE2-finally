@@ -1,0 +1,32 @@
+DATE 2026-10-01
+SourceWorldSHA256 3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B
+SourceConfigSHA256 E03C724CC6AEF44E6534986D3B7953B722C40E4BCDD1413A1DC2A10938E72877
+Evaluated snapshot: fresh production modules with complete-plan retry16, grid13/min12.5, jitter0.25/tilt2degrees; only engine constructors and require replaced; no shape/config alterations
+Seeds: Park-Miller state initialized1234567, advanced by state*48271 mod2147483647 once per map, positive31-bit seeds
+RNG shim: state=floor(abs(seed)) mod2147483646+1; Park-Miller recurrence; NextInteger=floor(unit*range); NextNumber=unit; unit=(state-1)/2147483646
+Checks: generation success and exact default Small budget760; no repeated pairwise geometry checks
+SCOPE pure production generator logic only; does not claim Roblox engine Random parity or Studio Play success
+PROGRESS seeds=50 failures=0 seconds=15.102
+PROGRESS seeds=100 failures=0 seconds=31.454
+PROGRESS seeds=150 failures=0 seconds=52.231
+PROGRESS seeds=200 failures=0 seconds=75.890
+PROGRESS seeds=250 failures=0 seconds=98.532
+PROGRESS seeds=300 failures=0 seconds=118.609
+PROGRESS seeds=350 failures=0 seconds=139.175
+PROGRESS seeds=400 failures=0 seconds=161.625
+PROGRESS seeds=450 failures=0 seconds=185.371
+PROGRESS seeds=500 failures=0 seconds=200.405
+PROGRESS seeds=550 failures=0 seconds=215.409
+PROGRESS seeds=600 failures=0 seconds=229.904
+PROGRESS seeds=650 failures=0 seconds=244.340
+PROGRESS seeds=700 failures=0 seconds=258.298
+PROGRESS seeds=750 failures=0 seconds=273.506
+PROGRESS seeds=800 failures=0 seconds=287.762
+PROGRESS seeds=850 failures=0 seconds=301.618
+PROGRESS seeds=900 failures=0 seconds=315.418
+PROGRESS seeds=950 failures=0 seconds=329.398
+PROGRESS seeds=1000 failures=0 seconds=343.548
+RESULT seeds=1000 size=Small target=760 failures=0 budgetMismatches=0 minSeed=3639549 maxSeed=2146304516 seconds=343.548 slowest=1.195 slowestSeed=865039620
+SCOPE fresh production WorldGenerator and GameConfig; Park-Miller RNG shim; no Roblox Random parity, engine navigation, visual replication, or Studio claim
+POST_RUN_CURRENT_CONFIG_SHA256 4A3A0E014746E26578078BC22DFA9E217ABC7581EC072D3CA01758EC0B3B9971
+POST_RUN_AUDIT WorldGenerator source hash still matches evaluated snapshot. Current Config.Map text is identical after normalizing CRLF/LF. The only Config source additions during the run are Config.Formations and its comment; map generation inputs and UnitCollision remain unchanged. This stress evaluates resource generation, not the new formation feature.

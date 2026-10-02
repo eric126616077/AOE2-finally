@@ -1,0 +1,161 @@
+2026-09-30T20:32:52.933Z,186.933487,a2b0,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"nodes":420,"queryParts":420,"sceneryParts":38,"checks":6755,"sizeName":"Small","resourceParts":2468,"shadowParts":420,"size":768}
+2026-09-30T20:32:52.944Z,186.944473,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 未選取村民時不顯示建築圖示
+2026-09-30T20:32:52.983Z,186.983429,0134,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 選取村民顯示建築指令
+2026-09-30T20:32:52.983Z,186.983429,0134,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面第一頁顯示十二個建築，減少換頁
+2026-09-30T20:32:52.983Z,186.983429,0134,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面指令格使用兩列
+2026-09-30T20:32:53.019Z,187.019638,b518,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城顯示訓練，隱藏村民建築
+2026-09-30T20:32:53.019Z,187.019638,b518,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產建築顯示佇列與集合點
+2026-09-30T20:32:53.019Z,187.019638,b518,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 完工狀態明確顯示
+2026-09-30T20:32:53.055Z,187.055679,0ab4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城科技頁顯示織布機
+2026-09-30T20:32:53.090Z,187.090729,a2b0,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 中立資源只顯示資訊
+2026-09-30T20:32:53.125Z,187.125351,0134,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 己方村民可開啟刪除確認
+2026-09-30T20:32:53.162Z,187.162262,0ab4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除確認阻擋世界輸入
+2026-09-30T20:32:53.195Z,187.195190,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 變更選取立即取消刪除快照
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板不穿透
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 緊鄰底部面板的地面可點擊
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 保留安全區域與UIScale
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 顯示於實際PlayerGui
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 顯示於實際PlayerGui
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 顯示於實際PlayerGui
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 顯示於實際PlayerGui
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源列與指令面板間保留戰場
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 閒置村民數由真實單位更新
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令與選取面板不重疊
+2026-09-30T20:32:53.197Z,187.197189,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 選取與小地圖不重疊
+2026-09-30T20:32:53.198Z,187.198181,90c8,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 23 checks
+2026-09-30T20:32:53.198Z,187.198181,90c8,6,Info [FLog::CreatorOutput] [UI_PHASE1 COMPLETE]
+2026-09-30T20:35:23.729Z,337.729065,b518,6,Info [FLog::CreatorOutput] [PERF_OBSERVATION ARMED] 唯讀、有總期限；單位由正常玩法產生；重開／退出由真人正常執行。
+2026-09-30T20:35:23.730Z,337.730042,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 實際 PlayerScripts UnitMotion 與讀取探針已就緒
+2026-09-30T20:35:23.730Z,337.730042,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 正式單位、建築、資源與 Command 遠端存在
+2026-09-30T20:35:23.730Z,337.730042,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 未追蹤且沒有 PrimaryPart 的模型使用 GetPivot fallback
+2026-09-30T20:35:23.730Z,337.730042,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 未追蹤模型使用 PrimaryPart 的位置與轉向 fallback
+2026-09-30T20:35:23.730Z,337.730042,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 找到己方閒置村民與 X、Z 各 40 studs 的無碰撞界內路段
+2026-09-30T20:35:23.731Z,337.731049,b518,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 從真實遊戲快取讀取可見 Body、GetFrame 與原始 rest offset
+2026-09-30T20:35:27.136Z,341.136383,0134,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] X 軸由伺服器實際移動約 40 studs
+2026-09-30T20:35:27.136Z,341.136383,0134,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] X 軸 Root 樣本之間有多個實際 Body 位移 render frames
+2026-09-30T20:35:27.136Z,341.136383,0134,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] X 軸真實 GetFrame 與 Body rest offset 的位置、轉向一致
+2026-09-30T20:35:27.136Z,341.136383,0134,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] X 軸呈現與權威 Root 偏差維持在短延遲範圍
+2026-09-30T20:35:27.136Z,341.136383,0134,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] X 軸停止後對齊 Root，且呈現樣本數受限
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] Z 軸由伺服器實際移動約 40 studs
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] Z 軸 Root 樣本之間有多個實際 Body 位移 render frames
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] Z 軸真實 GetFrame 與 Body rest offset 的位置、轉向一致
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] Z 軸呈現與權威 Root 偏差維持在短延遲範圍
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] Z 軸停止後對齊 Root，且呈現樣本數受限
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 真實 LocalScript 的 Root 樣本與外觀寫入診斷都有增加
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION PASS] 整合檢查在 45 秒總期限內完成
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION OBSERVED] {"visualIntermediateFrames":294,"rootChanges":52,"checks":18,"legs":[{"maxBodyAnchorError":0,"maxRootDeviation":1.530120849609375,"rootChanges":26,"maxSamples":6,"samples":204,"intermediateFrames":147,"axis":"X"},{"maxBodyAnchorError":0,"maxRootDeviation":1.483856201171875,"rootChanges":26,"maxSamples":6,"samples":204,"intermediateFrames":147,"axis":"Z"}],"maxRenderDelta":0.024426400661468507,"renderSamples":408,"maxBodyAnchorError":0,"maxRootDeviation":1.530120849609375,"elapsedSeconds":6.809576100000413,"maxBodyRotationError":0,"finalStats":{"visible":4,"tracked":4,"maxSamples":6,"maxDetailed":96,"detailed":4,"totalPartWrites":3859,"rootSamples":56,"delay":0.12,"partWrites":0},"initialStats":{"visible":4,"tracked":4,"maxSamples":6,"maxDetailed":96,"detailed":4,"totalPartWrites":53,"rootSamples":4,"delay":0.12,"partWrites":0},"scope":"單一村民短路徑；未驗證大規模效能"}
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6,Info [FLog::CreatorOutput] [VISUAL_MOTION COMPLETE] 18 項檢查；僅驗證短路徑呈現，大規模效能尚未驗證
+2026-09-30T20:35:30.540Z,344.540131,0ab4,6 [FLog::Output] [UI_SUITE RESULT] VisualMotionTests true table: 0x95a592c69935b3ff
+2026-09-30T20:35:30.542Z,344.542145,0ab4,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正式無角色沙盒已開始
+2026-09-30T20:35:30.542Z,344.542145,0ab4,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正式施工 LocalScript 及唯讀探針初始化完成
+2026-09-30T20:35:30.542Z,344.542145,0ab4,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正式村民已複製
+2026-09-30T20:35:30.542Z,344.542145,0ab4,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正常停止測試村民
+2026-09-30T20:35:30.542Z,344.542145,0ab4,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正式資源足以建立房屋
+2026-09-30T20:35:30.612Z,344.612701,9a84,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正常指令建立伺服器房屋工地
+2026-09-30T20:35:30.612Z,344.612701,9a84,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 工地扣款一次且尚未完工
+2026-09-30T20:35:30.677Z,344.677979,90c8,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正式相機看見地基、鷹架與施工狀態牌
+2026-09-30T20:35:30.677Z,344.677979,90c8,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 尚未施工的外牆或屋頂尚未揭露
+2026-09-30T20:35:33.382Z,347.382080,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 村民到場後進入鷹架階段
+2026-09-30T20:35:33.382Z,347.382080,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 實際世界狀態牌顯示施工百分比
+2026-09-30T20:35:33.513Z,347.513550,b518,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正常停止施工
+2026-09-30T20:35:33.513Z,347.513550,b518,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 停工牌明確提示等待村民
+2026-09-30T20:35:38.149Z,352.149750,90c8,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 減少動態仍依正式進度揭露外牆與屋頂
+2026-09-30T20:35:38.149Z,352.149750,90c8,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 施工與完工效果維持數量上限
+2026-09-30T20:35:38.149Z,352.149750,90c8,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 正常施工依序經過鷹架、外牆與屋頂階段
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 房屋真正完工
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工還原外觀並清除鷹架與施工牌
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Foundation
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Walls
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Roof
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Roof
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Ridge
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Beam
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Beam
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Door
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Window
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Window
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：StoneCourse
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Lintel
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：WindowSill
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Shutter
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Shutter
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：WindowSill
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Shutter
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Shutter
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：DoorBrace
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：DoorBrace
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 完工零件還原原始本機透明度：Chimney
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 視覺施工未移動或修改權威占地
+2026-09-30T20:35:40.652Z,354.652008,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 減少動態仍可看到真正完工提示
+2026-09-30T20:35:42.444Z,356.444427,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL PASS] 短暫完工牌到期清理
+2026-09-30T20:35:42.444Z,356.444427,0134,6,Info [FLog::CreatorOutput] [CONSTRUCTION_VISUAL COMPLETE] 42 項檢查；正式地基、鷹架、牆面、屋頂、停工、完工與減少動態
+2026-09-30T20:35:42.444Z,356.444427,0134,6,Info [FLog::CreatorOutput] [UI_SUITE RESULT] ConstructionVisualTests true 42
+2026-09-30T20:35:42.445Z,356.445435,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 初始村民停止，隔離訓練退款的資源變化
+2026-09-30T20:35:42.496Z,356.496979,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 房屋由伺服器建立
+2026-09-30T20:35:49.451Z,363.451691,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 房屋由村民完工
+2026-09-30T20:35:49.501Z,363.501709,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 三名村民進入同一生產佇列
+2026-09-30T20:35:49.501Z,363.501709,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 佇列由伺服器扣款並預留人口
+2026-09-30T20:35:49.501Z,363.501709,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] HUD 可讀取逐格佇列種類
+2026-09-30T20:35:49.553Z,363.553131,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消訓練推進佇列版本
+2026-09-30T20:35:49.553Z,363.553131,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消中間項退回全部成本並移除尾部卡片
+2026-09-30T20:35:49.605Z,363.605316,a2b0,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消訓練推進佇列版本
+2026-09-30T20:35:49.605Z,363.605316,a2b0,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消正在訓練項後下一項繼續
+2026-09-30T20:35:49.669Z,363.669434,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 舊版按鈕收到拒絕回覆
+2026-09-30T20:35:49.669Z,363.669434,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 舊版按鈕不多退資源、不取消其他單位
+2026-09-30T20:35:49.720Z,363.720978,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消訓練推進佇列版本
+2026-09-30T20:35:49.720Z,363.720978,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 取消最後項清空進度、退回全部訓練成本
+2026-09-30T20:35:49.720Z,363.720978,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 退款同步釋放預留人口
+2026-09-30T20:35:49.772Z,363.772644,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 重複退款請求收到拒絕回覆
+2026-09-30T20:35:49.772Z,363.772644,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 重複退款請求不多退資源、不取消其他單位
+2026-09-30T20:35:49.824Z,363.824738,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 非法佇列索引收到拒絕回覆
+2026-09-30T20:35:49.824Z,363.824738,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 非法佇列索引不多退資源、不取消其他單位
+2026-09-30T20:35:49.875Z,363.875031,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 市鎮中心可設定樹木集合點
+2026-09-30T20:35:49.876Z,363.876038,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 集合點位置與資源名稱可供 HUD 顯示
+2026-09-30T20:35:53.858Z,367.858459,b518,6,Info [FLog::CreatorOutput] [PERF_OBSERVATION SAMPLE] {"actors":[{"ai":false,"populationCap":15,"buildings":3,"active":true,"id":1261977619,"population":5,"queue":1,"units":4}],"actualUnits":4,"elapsed":30.12971480000124,"frames":{"meanDeltaMs":16.694052371004405,"worstDeltaMs":26.868799701333047,"below30Fraction":0,"below15Fraction":0,"worstInstantaneousFPS":37.217888819588278,"effectiveFPS":59.90157319362924,"p95ResolutionMs":0.5,"validFrames":1804,"invalidFrames":0,"p95UpperBoundMs":17.5},"missing":[],"stats":{"sceneDrawcalls":33,"LuaHeapMb":728.61181640625,"totalMemoryMb":2738.7265625,"instanceCount":51671,"dataReceiveKbps":0,"sceneTriangles":173399,"dataSendKbps":0.42571428418159487,"frameTimeSeconds":0.01656850054860115,"InstancesMb":147.5606689453125},"restarts":0,"generation":1,"observedFourBy200":false,"configuredFourBy200":false,"focus":"Unknown","phase":"Playing"}
+2026-09-30T20:35:59.896Z,373.896515,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 村民由伺服器完成訓練
+2026-09-30T20:35:59.896Z,373.896515,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 非生產建築不能設定集合點
+2026-09-30T20:35:59.896Z,373.896515,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 新村民自動接到採集指令
+2026-09-30T20:36:08.736Z,382.736176,0134,6,Info [FLog::CreatorOutput] [PERF_OBSERVATION FINISHED] 只完成限定時間觀測；不是壓力／真機效能PASS {"latest":{"actors":[{"ai":false,"units":5,"populationCap":15,"active":true,"id":1261977619,"buildings":3,"population":5,"queue":0}],"stats":{"sceneDrawcalls":33,"frameTimeSeconds":0.016444800421595575,"totalMemoryMb":2739.6328125,"instanceCount":51668,"dataReceiveKbps":0,"sceneTriangles":173951,"dataSendKbps":2.2666549682617189,"LuaHeapMb":728.9677124023438,"InstancesMb":147.5592498779297},"configuration":{"aiCount":0,"size":"Small","phase":"Playing","factions":1,"populationLimit":100,"teamMode":"FFA"},"focus":"Unknown","phase":"Playing","missing":[],"orders":{"採集":1,"待命":4},"owners":{"1261977619":{"units":5,"buildings":3,"queue":0}},"generation":1,"camera":{"viewport":[1610,680],"position":[-144,160,-32]},"restartClearFacts":false,"memoryTrackingEnabled":true,"configuredFourBy200":false,"observedFourBy200":false,"managed":{"unattributedUnit
+2026-09-30T20:36:14.297Z,388.297028,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 集合點村民實際採到資源
+2026-09-30T20:36:14.352Z,388.352112,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 清除集合點同步清除 HUD 狀態
+2026-09-30T20:36:14.404Z,388.404724,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 地面集合點由伺服器保存
+2026-09-30T20:36:14.456Z,388.456207,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 地圖邊界外集合點收到拒絕回覆
+2026-09-30T20:36:14.456Z,388.456207,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 地圖邊界外集合點保留原集合點且不扣資源
+2026-09-30T20:36:14.508Z,388.508118,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 錯誤集合點型別收到拒絕回覆
+2026-09-30T20:36:14.508Z,388.508118,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 錯誤集合點型別保留原集合點且不扣資源
+2026-09-30T20:36:24.509Z,398.509918,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 村民由伺服器完成訓練
+2026-09-30T20:36:26.845Z,400.845764,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 新單位實際走到地面集合點
+2026-09-30T20:36:26.845Z,400.845764,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 訓練完成清除佇列卡片
+2026-09-30T20:36:26.895Z,400.895752,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 已完成訓練的舊按鈕收到拒絕回覆
+2026-09-30T20:36:26.895Z,400.895752,0134,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 已完成訓練的舊按鈕不多退資源、不取消其他單位
+2026-09-30T20:36:26.947Z,400.947083,90c8,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 兵營由伺服器建立
+2026-09-30T20:36:36.615Z,410.615601,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 兵營由村民完工
+2026-09-30T20:36:36.682Z,410.682159,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 兵營可設定地面集合點
+2026-09-30T20:36:50.795Z,424.795288,0ab4,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 步兵由伺服器完成訓練
+2026-09-30T20:36:52.212Z,426.212158,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION PASS] 新軍隊實際走到生產建築集合點
+2026-09-30T20:36:52.212Z,426.212158,b518,6,Info [FLog::CreatorOutput] [RTS_PRODUCTION COMPLETE] 41 項訓練退款／集合點檢查通過。
+2026-09-30T20:36:52.212Z,426.212158,b518,6,Info [FLog::CreatorOutput] [UI_SUITE RESULT] ProductionTests true 41
+2026-09-30T20:36:52.212Z,426.212158,b518,6,Info [FLog::CreatorOutput] [UI_SUITE FINISHED]
+2026-09-30T20:38:01.803Z,495.803009,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 己方存活村民與其他單位存在
+2026-09-30T20:38:01.878Z,495.878906,0ab4,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 舊對局 generation 整批拒絕且不刪己方村民
+2026-09-30T20:38:01.878Z,495.878906,0ab4,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 舊對局 generation 不改 wood
+2026-09-30T20:38:01.878Z,495.878906,0ab4,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 舊對局 generation 不改 stone
+2026-09-30T20:38:01.878Z,495.878906,0ab4,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 舊對局 generation 不改 gold
+2026-09-30T20:38:01.878Z,495.878906,0ab4,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 舊對局 generation 不改 food
+2026-09-30T20:38:01.945Z,495.945648,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 重複模型 整批拒絕且不刪己方村民
+2026-09-30T20:38:01.945Z,495.945648,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 重複模型 不改 wood
+2026-09-30T20:38:01.945Z,495.945648,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 重複模型 不改 stone
+2026-09-30T20:38:01.945Z,495.945648,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 重複模型 不改 gold
+2026-09-30T20:38:01.945Z,495.945648,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 重複模型 不改 food
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 含中立資源的混合選取 整批拒絕且不刪己方村民
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 含中立資源的混合選取 不改 wood
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 含中立資源的混合選取 不改 stone
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 含中立資源的混合選取 不改 gold
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 含中立資源的混合選取 不改 food
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 一棟測試房屋所需木材足夠
+2026-09-30T20:38:02.013Z,496.013672,9a84,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 找到正式無占用且在地圖內的房屋位置
+2026-09-30T20:38:02.083Z,496.083221,0134,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 正常工地扣款一次，尚未完工
+2026-09-30T20:38:02.148Z,496.148315,b518,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 取消工地不退款
+2026-09-30T20:38:02.215Z,496.215363,b518,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 正常刪除村民清理單位與人口
+2026-09-30T20:38:02.215Z,496.215363,b518,6,Info [FLog::CreatorOutput] [DELETE_SERVER PASS] 其餘沙盒對局持續運作
+2026-09-30T20:38:02.215Z,496.215363,b518,6,Info [FLog::CreatorOutput] [DELETE_SERVER COMPLETE] 22 項；單人無模型，未驗真正敵方／跨客戶端

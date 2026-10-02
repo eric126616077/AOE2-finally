@@ -1,0 +1,77 @@
+{
+  "created": "2026-10-01T19:24:23.4062932+08:00",
+  "files": [
+    {
+      "path": "default.project.json",
+      "sha256": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64"
+    },
+    {
+      "path": "src/ReplicatedStorage/GameData/GameConfig.lua",
+      "sha256": "5CDB50902C86B814A27A4A48031894650983A452BD60BC1E2624D79B404543D3"
+    },
+    {
+      "path": "src/ServerScriptService/GameServer.server.lua",
+      "sha256": "53388ADF7A3DEF341AABFA719318A3ABBAC6292AA5AC893500CBDCC13F674BD6"
+    },
+    {
+      "path": "src/ServerScriptService/ServerModules/LobbyRules.lua",
+      "sha256": "99BD09DFA2B872C60258B4F9ADE70010AD85448B01944EBC0A4FA553595CEB61"
+    },
+    {
+      "path": "src/ServerScriptService/ServerModules/LobbyWorld.lua",
+      "sha256": "C6DECE2042E4A365C0F614B112250D70ED7CBA0FC553A75D067CCC9B52F2A13E"
+    },
+    {
+      "path": "src/StarterGui/GameUI/GUIManager.lua",
+      "sha256": "40A798736B12A3511A9EDF4498AC9947DB9912FCCE706A68AD85254E26E95B7E"
+    },
+    {
+      "path": "src/StarterPlayer/StarterPlayerScripts/PlayerInput.client.lua",
+      "sha256": "7D8DEE8BEB42C39915692D441A0036FE432B75840AA3936FDD608F26677216DA"
+    },
+    {
+      "path": "src/StarterPlayer/StarterPlayerScripts/RTSClient.client.lua",
+      "sha256": "AABB059FFFF280BBD7C772233553BE8F5D070176BA32F176F722EB59B93E8FB5"
+    },
+    {
+      "path": "src/ReplicatedStorage/Shared/LobbyFlowTests.lua",
+      "sha256": "09F96FBF5EB469B1A1388C61A3C657F614058F5E95EC7B7AFF348F84B5201954"
+    },
+    {
+      "path": "src/ReplicatedStorage/Shared/LobbyTests.lua",
+      "sha256": "CD9E2FA1F70D998E35A69C4E0ED52561121763D29162E4919AF13B345E3435B0"
+    },
+    {
+      "path": "tests/lobby-story-harness.client.lua",
+      "sha256": "126898AF443E295156E0FF7D6AC4BD5C2D8D8CCDBB7D55E10F883AD9BC661388"
+    },
+    {
+      "path": "tests/lobby-story-leave-probe.server.lua",
+      "sha256": "6974670AA83FA34D53764180578CA71BE7B082214867CFC5E480C72C37AD3265"
+    },
+    {
+      "path": "lobby-story-validation.project.json",
+      "sha256": "EDBF5359A8CE2D247CA849004DA34FE7E299317A7F31ED2F64F7F2F9FB116D57"
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "sha256": "03654455A2879B4C768E0D8DE1F17F093FC32A1F26BBE89F506BEF72379F4554"
+    },
+    {
+      "path": "tests/lobby.spec.lua",
+      "sha256": "C7A4F17F8614D7906667C409E2CD8F43546DFF9A40BDB8809B7D0776D60F1E47"
+    },
+    {
+      "path": "tests/lobby_rooms.spec.lua",
+      "sha256": "AED262E3EDD4B8DFAE517B900D517C8131A9CA603425621BD58A9BB94FCAD523"
+    },
+    {
+      "path": "tests/lobby_rooms.mocks.lua",
+      "sha256": "00F5A82C1E8BF403A4617B121233ACB7CFDE92833AA175DD1225A2F9E2E99F64"
+    }
+  ],
+  "soloStudioLog": "0.741.19.7411056_20261001T111415Z_Studio_918DB_last.log",
+  "soloChecks": 76,
+  "inputChecks": 26,
+  "constructionChecks": 36
+}

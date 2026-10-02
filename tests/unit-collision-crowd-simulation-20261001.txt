@@ -1,0 +1,9 @@
+baseline	4	0	complete	4	active	4	ticks	20	maxRemaining	0	distance	111.36426715962367	minGap	0.5	maxStep	1.4000000000000008
+baseline	4	1	complete	4	active	4	ticks	20	maxRemaining	0	distance	109.64537700593772	minGap	0.5	maxStep	1.4000000000000006
+baseline	4	2	complete	4	active	4	ticks	20	maxRemaining	0	distance	108.35046836939405	minGap	0.5	maxStep	1.4000000000000004
+baseline	4	3	complete	4	active	4	ticks	20	maxRemaining	0	distance	107.54531107446846	minGap	0.5	maxStep	1.4000000000000006
+baseline	4	4	complete	4	active	4	ticks	20	maxRemaining	0	distance	107.27207793864228	minGap	0.5	maxStep	1.4000000000000024
+baseline	4	5	complete	4	active	4	ticks	20	maxRemaining	0	distance	107.54531107446851	minGap	0.5	maxStep	1.4000000000000006
+baseline	4	6	complete	4	active	4	ticks	20	maxRemaining	0	distance	108.35046836939402	minGap	0.5	maxStep	1.4000000000000006
+baseline	4	7	complete	4	active	4	ticks	20	maxRemaining	0	distance	109.64537700593772	minGap	0.5	maxStep	1.4000000000000006
+baseline	20	0	complete	18	active	2	ticks	1500	maxRemaining	14.158031138274673	distance	1532.2553617492385	minGap	0.05279018967547522	maxStep	1.400000000000006

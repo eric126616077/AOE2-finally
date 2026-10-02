@@ -1,0 +1,10 @@
+Compiled 20 KLOC into 1267 KB bytecode (read 0.01s, parse 0.01s, compile 0.03s)
+./build/core-tests.luau:1: Expected identifier when parsing expression, got Unicode character U+feff
+stacktrace:
+Core tests failed.
+At C:\Users\user\Desktop\AOE2-finally\scripts\verify.ps1:29 char:32
++     if ($LASTEXITCODE -ne 0) { throw 'Core tests failed.' }
++                                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Core tests failed.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Core tests failed.
+ 

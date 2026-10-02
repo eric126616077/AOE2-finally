@@ -1,0 +1,46 @@
+[
+  {
+    "path": "src/ReplicatedStorage/GameData/GameConfig.lua",
+    "sha256": "E03C724CC6AEF44E6534986D3B7953B722C40E4BCDD1413A1DC2A10938E72877"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/WorldGenerator.lua",
+    "sha256": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/ModelFactory.lua",
+    "sha256": "CEB00DB3121AAC33535F79FA920A665EA06D2B369FF9D995E5C8737EAA1A7532"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/Art.lua",
+    "sha256": "EB2F995B52D993B549D71BFE31CFDBE5198899DFBAD3529E8B841F0020DACDB9"
+  },
+  {
+    "path": "src/ReplicatedStorage/Shared/MapTests.lua",
+    "sha256": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450"
+  },
+  {
+    "path": "src/ServerScriptService/GameServer.server.lua",
+    "sha256": "2F2BC229B02DB047E94C8AC234F7B375961A2CAC4DF48519B608524607FE8FC5"
+  },
+  {
+    "path": "tests/world.spec.lua",
+    "sha256": "358FD2601469B06055050F399FA20677512BA7D99F6D88C5F06CB9FF97C34AC1"
+  },
+  {
+    "path": "tests/resource-layout-studio-client.lua",
+    "sha256": "2094BC3FB8FE4D72CB0C99D5C204F2F141AB62A317597AC4780A7D1FE72B7392"
+  },
+  {
+    "path": "build/DenseResources.client.lua",
+    "sha256": "2094BC3FB8FE4D72CB0C99D5C204F2F141AB62A317597AC4780A7D1FE72B7392"
+  },
+  {
+    "path": "build/AOE2-dense-resources-20261001-1319.rbxlx",
+    "sha256": "43D88AC4199727F8D1C00B38290FB97F221F737CF090EF6D1EA53ADB155EEDE3"
+  },
+  {
+    "path": "build/AOE2-dense-resources-validation-20261001-1322.rbxlx",
+    "sha256": "01CB01E006BAE0E201A8E575A3C7081B60A3F1021FA9CE48D9FD163A96211E0D"
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "name": "Villager build pages validation",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedFirst": {
+      "$className": "ReplicatedFirst",
+      "$path": "src/ReplicatedFirst"
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "GameData": {
+        "$path": "src/ReplicatedStorage/GameData"
+      },
+      "Shared": {
+        "$path": "src/ReplicatedStorage/Shared"
+      },
+      "ResourceSystem": {
+        "$path": "src/ReplicatedStorage/ResourceSystem.lua"
+      },
+      "$ignoreUnknownInstances": true
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$path": "src/ServerScriptService"
+    },
+    "StarterGui": {
+      "GameUI": {
+        "$path": "src/StarterGui/GameUI"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$path": "src/StarterPlayer/StarterPlayerScripts",
+        "BuildMenuHarness": {
+          "$path": "tests/villager-build-harness.client.lua"
+        }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$ignoreUnknownInstances": true,
+      "$properties": {
+        "StreamingEnabled": false
+      },
+      "AOE2_Ground": {
+        "$className": "Part",
+        "$properties": {
+          "Position": [
+            0,
+            -0.5,
+            0
+          ],
+          "Anchored": true,
+          "Locked": true,
+          "Material": "Grass",
+          "Size": [
+            1024,
+            1,
+            1024
+          ],
+          "Color": [
+            0.36,
+            0.46,
+            0.28
+          ]
+        }
+      }
+    }
+  }
+}

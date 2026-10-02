@@ -1,0 +1,13 @@
+2026-10-01T04:38:17.546Z,193.546097,6fa0,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":270925,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"clusters":48,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","slotCounts":[105,105,105,105],"seed":1084701041,"nodes":420,"resourceParts":2308,"completeVisualReplicationProven":false,"size":768}
+2026-10-01T04:38:17.547Z,193.547089,6fa0,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT ROUND] 1 Small 1084701041 420 48
+2026-10-01T04:38:40.525Z,216.525543,6c70,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT GATHER PASS] food 1200 1210 400 390
+2026-10-01T04:38:59.066Z,235.066025,6c70,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT GATHER PASS] wood 1200 1210 500 490
+2026-10-01T04:39:26.633Z,262.633636,7db4,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT GATHER PASS] gold 800 810 800 790
+2026-10-01T04:39:48.235Z,284.235321,6c70,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT GATHER PASS] stone 600 610 650 640
+2026-10-01T04:39:50.133Z,286.133453,5de0,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":271268,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"clusters":54,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","slotCounts":[105,105,105,105],"seed":1459130858,"nodes":420,"resourceParts":2420,"completeVisualReplicationProven":false,"size":768}
+2026-10-01T04:39:50.133Z,286.133453,5de0,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT ROUND] 2 Small 1459130858 420 54
+2026-10-01T04:39:51.772Z,287.772156,a728,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":680,"checks":701925,"sizeName":"Medium","shadowParts":680,"sceneryParts":46,"clusters":48,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","slotCounts":[170,170,170,170],"seed":589677430,"nodes":680,"resourceParts":3704,"completeVisualReplicationProven":false,"size":1024}
+2026-10-01T04:39:51.773Z,287.773163,a728,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT ROUND] 3 Medium 589677430 680 48
+2026-10-01T04:39:54.048Z,290.048950,7db4,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":1100,"checks":1828879,"sizeName":"Large","shadowParts":1100,"sceneryParts":62,"clusters":92,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","slotCounts":[275,275,275,275],"seed":681582000,"nodes":1100,"resourceParts":6396,"completeVisualReplicationProven":false,"size":1536}
+2026-10-01T04:39:54.050Z,290.050934,7db4,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT ROUND] 4 Large 681582000 1100 92
+2026-10-01T04:39:54.370Z,290.370453,6fa0,6,Info [FLog::CreatorOutput] [RESOURCE_LAYOUT COMPLETE] 四局地圖、同尺寸隨機重開、四資源真採集交貨與清理完成

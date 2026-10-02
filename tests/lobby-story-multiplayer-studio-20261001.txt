@@ -1,0 +1,27 @@
+2026-10-01T11:24:07.648Z,11.648289,5448,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS equivalent stations have independent hosts
+2026-10-01T11:24:08.198Z,12.198460,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS battle ground/resources replicated
+2026-10-01T11:24:08.198Z,12.198460,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS automatic departure to fresh battlefield Room1
+2026-10-01T11:24:08.198Z,12.198460,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS active battle preserved other waiting room
+2026-10-01T11:24:08.962Z,12.962317,8a80,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS waiting client keeps its lobby character, camera and HUD state
+2026-10-01T11:24:10.180Z,14.180406,5448,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS battle ground/resources replicated
+2026-10-01T11:24:10.180Z,14.180406,5448,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS automatic departure to fresh battlefield Room3
+2026-10-01T11:24:10.180Z,14.180406,5448,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS each match gets a fresh generation
+2026-10-01T11:24:10.180Z,14.180406,5448,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] SYNC generation=5 seed=85791425
+2026-10-01T11:24:10.865Z,14.865065,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS surrender cleans departing faction on both clients
+2026-10-01T11:24:10.865Z,14.865065,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] PASS opponent could not delete host's house
+2026-10-01T11:24:10.865Z,14.865065,108d0,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player1] COMPLETE 10 checks
+2026-10-01T11:24:07.623Z,10.623255,da80,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS equivalent stations have independent hosts
+2026-10-01T11:24:08.252Z,11.252921,da80,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS second client remains in its own waiting panel
+2026-10-01T11:24:08.917Z,11.917831,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS battle ground/resources replicated
+2026-10-01T11:24:08.917Z,11.917831,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS automatic departure to fresh battlefield Room2
+2026-10-01T11:24:10.179Z,13.179565,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS battle ground/resources replicated
+2026-10-01T11:24:10.179Z,13.179565,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS automatic departure to fresh battlefield Room3
+2026-10-01T11:24:10.179Z,13.179565,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS each match gets a fresh generation
+2026-10-01T11:24:10.179Z,13.179565,9658,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] SYNC generation=5 seed=85791425
+2026-10-01T11:24:10.276Z,13.276583,c808,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS server cost is independently synchronized
+2026-10-01T11:24:10.794Z,13.794738,c808,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS other player's delete request is rejected
+2026-10-01T11:24:10.899Z,13.899468,da80,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] PASS local surrender cleans owned instances
+2026-10-01T11:24:10.899Z,13.899468,da80,6,Info [FLog::CreatorOutput] [LOBBY_STORY Player2] COMPLETE 10 checks
+2026-10-01T11:24:10.857Z,22.857170,13e20,6,Info [FLog::CreatorOutput] [LOBBY_STORY SERVER] LEAVE Player1 owned=0 online=1
+2026-10-01T11:24:11.030Z,23.030600,824c,6,Info [FLog::CreatorOutput] [LOBBY_STORY SERVER] LEAVE Player2 owned=0 online=0
+2026-10-01T11:24:11.039Z,23.039612,13e20,6,Info [FLog::CreatorOutput] [LOBBY_STORY SERVER] EMPTY_ARENA_RESET PASS

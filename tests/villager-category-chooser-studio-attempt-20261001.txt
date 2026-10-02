@@ -1,0 +1,9 @@
+Villager category chooser supplementary Studio attempt, 2026-10-01 (Asia/Taipei)
+Snapshot prepared: build/AOE2-villager-category-chooser-20261001.rbxlx
+The map-validation chat released Studio. Formation and unit-collision chats were still active and also used native UI.
+Native helper returned: Computer Use helper already has an active request (twice).
+Old villager-pages validation Play was stopped successfully. No new chooser Play was started.
+A subsequent maximize action failed: call get_window_state before using this window.
+Stopped issuing native input to avoid interference between concurrent tests.
+Result: supplementary chooser Studio validation remains unverified. Prior old-tab Play checks are not evidence for the new chooser flow.
+CLI syntax, full verify, 198 build menu rules, default Rojo build, and chooser validation snapshot build passed in the preceding implementation turn.

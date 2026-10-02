@@ -1,0 +1,8 @@
+Source: C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20260930T223100Z_Studio_2170A_last.log Historical helper build SHA256 C05476CD241E1DD845767911FA2CDF0CF0E5DE1E25B79C62FF2DEFB3D67E06A9 Source manifest: optimization-lobby-final-source-manifest-20261001.json 
+2026-09-30T22:33:38.763Z,157.763153,52f4,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP_FIXTURE READY] temporary unknown direct/nested resource, scenery and template
+2026-09-30T22:34:28.436Z,207.436005,c9f4,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留未知直接資源模型
+2026-09-30T22:34:28.436Z,207.436005,c9f4,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 不遞迴刪除未知資料夾的巢狀模型
+2026-09-30T22:34:28.436Z,207.436005,c9f4,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留同名未知場景
+2026-09-30T22:34:28.436Z,207.436005,c9f4,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP PASS] 保留 ReplicatedStorage 原有模型模板
+2026-09-30T22:34:29.469Z,208.469360,9638,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP INCOMPLETE] {"failure":"ReplicatedStorage.LobbyCleanupValidation.Tests:76: attempt to compare nil < number\nReplicatedStorage.LobbyCleanupValidation.Tests:76\nReplicatedStorage.LobbyCleanupValidation.Tests:62 function Run\nCommandBar:1\nCommandBar:1\n","checks":4,"cycles":[],"complete":false}
+2026-09-30T22:34:29.470Z,208.470367,9638,6,Warning [FLog::CreatorWarning] Warning: [LOBBY_CLEANUP_CLIENT ERROR] ReplicatedStorage.LobbyCleanupValidation.Tests:76: attempt to compare nil < number

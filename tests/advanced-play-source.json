@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterGui\\GameUI\\GUIManager.lua",
+    "Hash": "B142AD6AFB43626BC80CD5DCFB15BE23A26D1B3DC8AE23480B6D45950FF17C1A"
+  },
+  {
+    "Path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\GameServer.server.lua",
+    "Hash": "DD60670055676E26612D2D25253145F727DAA2BACF56E776A8DFBE3F64B24CE8"
+  },
+  {
+    "Path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+    "Hash": "076D767D16E400A4B1D6E94E4AABDF7C75D699EFDB2199281E72F3203C687EAD"
+  },
+  {
+    "Path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+    "Hash": "3579B2B838D1522845B8E2ECECADCB446EDD5B130665D5AD20B3AFE1FF86F99E"
+  }
+]

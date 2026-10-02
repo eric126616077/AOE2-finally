@@ -1,0 +1,26 @@
+DATE 2026-10-01
+SourceWorldSHA256 33BE15E2E61B3DCAC0FF1457B8265633631D9D0B1BD0FE233F89906DC2325C7F
+SourceConfigSHA256 B784B3E3F8CE656CF1B081249FA32F9FD1873AF4371B379E363C1678F995D0C0
+Evaluated snapshot: fresh production modules; only engine constructors and require replaced; no shape/config alterations
+Seeds: Park-Miller state initialized 1234567, advanced by state*48271 mod2147483647 once per map, positive31-bit seeds
+RNG shim: state=floor(abs(seed)) mod2147483646+1; Park-Miller recurrence; NextInteger=floor(unit*range); NextNumber=unit; unit=(state-1)/2147483646
+Checks: generation success and exact default Small budget760; no repeated pairwise geometry checks
+SCOPE pure production generator logic only; does not claim Roblox engine Random parity or Studio Play success
+PROGRESS seeds=50 failures=0 seconds=12.464
+PROGRESS seeds=100 failures=0 seconds=25.524
+PROGRESS seeds=150 failures=0 seconds=37.250
+PROGRESS seeds=200 failures=0 seconds=49.509
+PROGRESS seeds=250 failures=0 seconds=61.904
+PROGRESS seeds=300 failures=0 seconds=73.531
+PROGRESS seeds=350 failures=0 seconds=85.397
+PROGRESS seeds=400 failures=0 seconds=97.794
+PROGRESS seeds=450 failures=0 seconds=110.402
+FAIL index=471 seed=1285718370 created=0 error=C:/Users/user/AppData/Local/Temp/aoe2-production-dense-small1000-stress.luau:288: 無法配置中立資源：Tree
+PROGRESS seeds=500 failures=1 seconds=122.642
+PROGRESS seeds=550 failures=1 seconds=134.343
+PROGRESS seeds=600 failures=1 seconds=145.795
+PROGRESS seeds=650 failures=1 seconds=157.941
+PROGRESS seeds=700 failures=1 seconds=171.728
+PROGRESS seeds=750 failures=1 seconds=184.569
+PROGRESS seeds=800 failures=1 seconds=197.821
+INTERRUPTED_ON_PARENT_REQUEST: original single-plan production snapshot retained as historical FAIL. Last reported progress: 800 maps, 1 failure at index471 seed1285718370 created0. Intended1000-map run was stopped because source changed to complete-plan retries and 13-stud spacing. No final1000 PASS claim.

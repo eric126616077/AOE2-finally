@@ -1,0 +1,21 @@
+{
+  "createdUtc": "2026-09-30T10:30:06.3683024Z",
+  "sourceState": "Dirty working tree preserves existing changes; no commit or publish",
+  "backup": "C:/Users/user/AppData/Local/Temp/AOE2-before-feedback-20260930-180021",
+  "cliEvidence": "tests/latest-feedback-cli-results.txt",
+  "studioEvidence": "tests/latest-feedback-studio-results.txt",
+  "buildHash": "478E250275EC62C7ABD2197154E15930B89FE72606DEA5639F7B6CC4D45CE17B",
+  "feedbackBuildHash": "478E250275EC62C7ABD2197154E15930B89FE72606DEA5639F7B6CC4D45CE17B",
+  "sourceHashes": {
+    "src/ReplicatedStorage/Shared/FeedbackRules.lua": "8B3612F14D711377221137D0985F5DCEDA98315B6F4D06E132B3669355E20657",
+    "src/StarterPlayer/StarterPlayerScripts/SoundFeedback.client.lua": "F8EAF320B6FBC47E3C01B619D36B339255C98A7682B637C62CEB8721B239CF08",
+    "src/StarterGui/GameUI/GUIManager.lua": "93AACA3350728D71F716853EC866FCF0B34E53F604F87C1F6D9925771B294468",
+    "default.project.json": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64",
+    "src/ReplicatedStorage/Shared/AudioFeedback.lua": "130BDAF1D7CE7463B08040D40B9D802CF71EB70C0DB64C87A94899781664C08F",
+    "scripts/verify.ps1": "470CF9F590800F498E7B67B7871CB4F543770845FBBFCC444DA587BBCB3777D7",
+    "src/StarterPlayer/StarterPlayerScripts/UnitMotion.client.lua": "E10111BA29E130DACD2BDCE152A6A5CECB515EE9BA477F18216134463AF5C649",
+    "src/ServerScriptService/GameServer.server.lua": "C9BA06C53A5ECCADBCEFE3FA4E0CEB56177F671F31C5DA05795A5CDFF2FAF68D",
+    "src/StarterPlayer/StarterPlayerScripts/RTSClient.client.lua": "E0CAC70F0AAB89254739FF7F5B6E67CF65D0072B9BF8F23EDFBE080BA5963475",
+    "src/ReplicatedStorage/Shared/FeedbackTests.lua": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D"
+  }
+}

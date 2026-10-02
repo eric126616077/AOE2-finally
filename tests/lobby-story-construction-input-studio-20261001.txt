@@ -1,0 +1,65 @@
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 ControlModule.controlsEnabled=false，全部預設角色移動控制停用
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際作用中的預設控制器未啟用
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 此版面未顯示折疊新手提示
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-10-01T11:20:49.287Z,394.287598,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-10-01T11:20:49.289Z,394.289581,8ea0,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 26 checks; 裝置實際手勢仍需手動驗收
+2026-10-01T11:20:49.393Z,394.393311,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民收到村民限制回覆
+2026-10-01T11:20:49.393Z,394.393311,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民不建立工地、不扣資源
+2026-10-01T11:20:49.510Z,394.510254,a8f8,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊收到村民限制回覆
+2026-10-01T11:20:49.510Z,394.510254,a8f8,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊不建立工地、不扣資源
+2026-10-01T11:20:49.629Z,394.629364,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選收到村民限制回覆
+2026-10-01T11:20:49.629Z,394.629364,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選不建立工地、不扣資源
+2026-10-01T11:20:49.746Z,394.746246,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋由伺服器建立工地
+2026-10-01T11:20:49.746Z,394.746246,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 重複村民只扣一次建造成本
+2026-10-01T11:20:49.746Z,394.746246,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 指定遠於舊 80 studs 限制的工地仍可建立
+2026-10-01T11:20:49.746Z,394.746246,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工房屋不增加人口
+2026-10-01T11:20:49.863Z,394.863586,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前施工村民停止
+2026-10-01T11:20:50.779Z,395.779846,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前觀察停工期間
+2026-10-01T11:20:50.779Z,395.779846,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前停止後保留進度且不自行完工
+2026-10-01T11:20:50.779Z,395.779846,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 遠距村民尚未到場時沒有施工進度
+2026-10-01T11:20:58.963Z,403.963013,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民實際走到遠方工地後才開始施工
+2026-10-01T11:20:58.963Z,403.963013,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 軍隊不能協助施工、重複村民不重算
+2026-10-01T11:20:59.080Z,404.080627,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後施工村民停止
+2026-10-01T11:20:59.979Z,404.979370,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後觀察停工期間
+2026-10-01T11:20:59.979Z,404.979370,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後停止後保留進度且不自行完工
+2026-10-01T11:21:07.628Z,412.628296,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民可繼續完成停工房屋
+2026-10-01T11:21:07.628Z,412.628296,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋完工才啟用人口
+2026-10-01T11:21:07.743Z,412.743347,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營由伺服器建立工地
+2026-10-01T11:21:07.844Z,412.844879,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前施工村民停止
+2026-10-01T11:21:08.716Z,413.716858,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前觀察停工期間
+2026-10-01T11:21:08.716Z,413.716858,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前停止後保留進度且不自行完工
+2026-10-01T11:21:08.816Z,413.816681,c2f8,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工兵營拒絕訓練
+2026-10-01T11:21:08.816Z,413.816681,c2f8,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工訓練請求不扣款、不排入佇列
+2026-10-01T11:21:31.060Z,436.060760,a8f8,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 多名村民前往並完成兵營
+2026-10-01T11:21:31.179Z,436.179352,13ab4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營完工後才可訓練
+2026-10-01T11:21:31.295Z,436.295654,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田由伺服器建立工地
+2026-10-01T11:21:31.398Z,436.398590,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前施工村民停止
+2026-10-01T11:21:32.287Z,437.287903,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前觀察停工期間
+2026-10-01T11:21:32.287Z,437.287903,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前停止後保留進度且不自行完工
+2026-10-01T11:21:32.287Z,437.287903,8ea0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工農田不提供可採集資源
+2026-10-01T11:21:46.169Z,451.169708,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民完成農田
+2026-10-01T11:21:46.169Z,451.169708,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田完工才啟用食物
+2026-10-01T11:21:46.169Z,451.169708,13c14,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION COMPLETE] 36 項施工引擎檢查通過

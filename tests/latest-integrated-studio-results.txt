@@ -1,0 +1,417 @@
+整合版新 Play；桌面單人；原始日誌 UTC，畫面時間 UTC+8。
+Source：tests/integrated-path-team-source.json
+19:13:36–19:14:16 Flow COMPLETE：92 事實/控制與 54 正式 UI；40.5 秒。
+House/food 精確座標未在本局另印；只能證明未改操作流程交貨成功。
+初始與 Restart 仍有官方 Player:Move nocharacter/nohumanoid 警告；後續完整角色判斷待驗。
+--- 原始日誌 ---
+2026-09-30T11:11:45.980Z,15768.980469,0da4,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-09-30T11:11:47.514Z,15770.514648,8358,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no humanoid.
+2026-09-30T11:13:36.020Z,15879.020508,0da4,6,Info [FLog::CreatorOutput] > task.spawn(function() require(game.ReplicatedStorage.Shared.MatchReportFlowTests).Run({deadlineSeconds=420}) end)
+2026-09-30T11:13:36.025Z,15879.025391,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 只在新的單人大廳執行，不與其他測試共用對局
+2026-09-30T11:13:36.025Z,15879.025391,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新 Play 尚無前局報告或戰敗狀態
+2026-09-30T11:13:36.025Z,15879.025391,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 從實際 PlayerInput 探針取得並保留接管前控制初值
+2026-09-30T11:13:36.928Z,15879.928711,0884,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-09-30T11:13:37.192Z,15880.192383,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新局正式 JSON 為 nil，沒有沿用前局報告
+2026-09-30T11:13:37.193Z,15880.193359,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式沙盒只有一個真人陣營，沒有 AI 或旁觀者經濟
+2026-09-30T11:13:37.193Z,15880.193359,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始模型只有免費市鎮中心、村民與斥候
+2026-09-30T11:13:37.193Z,15880.193359,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式交貨與訓練事實在每個新局皆為零
+2026-09-30T11:13:37.193Z,15880.193359,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅向進行中的真人陣營提出正常投降
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 實際報告符合 Snapshot 版本與公開欄位，沒有內部事件或去重資料
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 報告具有有效的伺服器對局識別
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正常投降的報告結果為戰敗
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 存活時長有限、為正且不超過真實開局流程時間
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesDelivered
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesSpent
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsCompleted
+2026-09-30T11:13:37.263Z,15880.263672,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：villagersTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：militaryTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：damageDealt
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式 Snapshot 包含所有計數與資源標籤
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降清場沒有自行花費或發放資源
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsCompleted
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：villagersTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：militaryTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：damageDealt
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：unitsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：unitsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：food
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：wood
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：gold
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：stone
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 先由正常戰敗／結束取得正式報告
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際複製報告具有版本與已定勝負
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式結果視窗顯示已送達的資料
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_food
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_food
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_wood
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_wood
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_gold
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_gold
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_stone
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_stone
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsCompleted
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_villagersTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_militaryTrained
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_damageDealt
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsKilled
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsLost
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 勝負呈現在實際結果標題
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 存活時長精確文字與正式報告秒數一致
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 觀戰／重開使用至少 44 個畫面像素的點擊區
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際數據內容可垂直捲動
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 捲動數據與固定底部按鈕不重疊
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 固定按鈕留在結果容器內
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 結果容器位於目前畫面安全範圍內
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式覆盤視窗攔截世界指令
+2026-09-30T11:13:37.264Z,15880.264648,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST COMPLETE] 27 checks; 唯讀正式屬性與 PlayerGui
+2026-09-30T11:13:37.560Z,15880.560547,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_CLEAR COMPLETE] 正式 JSON、可見數據與欄位標記已清空；沒有填零代替報告
+2026-09-30T11:13:37.561Z,15880.561523,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 唯讀檢查實際 PlayerGui 清除前局數據與欄位標記
+2026-09-30T11:13:38.026Z,15881.026367,0da4,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no humanoid.
+2026-09-30T11:13:38.039Z,15881.039062,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開後 actual 控制探針與初值一致，不重建 PlayerModule
+2026-09-30T11:13:38.039Z,15881.039062,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開將正式遊戲累計事實清零
+2026-09-30T11:13:38.946Z,15881.946289,8358,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新局正式 JSON 為 nil，沒有沿用前局報告
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式沙盒只有一個真人陣營，沒有 AI 或旁觀者經濟
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始模型只有免費市鎮中心、村民與斥候
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式交貨與訓練事實在每個新局皆為零
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T11:13:39.101Z,15882.101562,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 在真實地圖障礙與邊界內找到合法房屋空地
+2026-09-30T11:13:39.213Z,15882.213867,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 房屋先成為工地，沒有跳過施工
+2026-09-30T11:13:44.521Z,15887.521484,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 已觀察到真實村民施工進度與完工
+2026-09-30T11:13:44.521Z,15887.521484,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 真實完工建築新增一棟，僅扣木材 25
+2026-09-30T11:13:44.572Z,15887.572266,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 扣款與入列時尚未憑空生成村民
+2026-09-30T11:13:54.552Z,15897.552734,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新增實例、正式訓練事實與食物 50 扣款一致
+2026-09-30T11:13:54.552Z,15897.552734,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅一名村民前往最近的真實食物資源，交貨尚為零
+2026-09-30T11:14:01.085Z,15904.085938,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PROGRESS] 真實採集、攜帶、返回市鎮中心並交貨；已用 25.1 秒；階段 Playing
+2026-09-30T11:14:15.603Z,15918.603516,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 已觀察到一次真實食物攜帶與交貨，數量等於原始攜帶容量
+2026-09-30T11:14:15.603Z,15918.603516,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 真實食物堆減少量等於已交貨與尚攜帶量
+2026-09-30T11:14:15.603Z,15918.603516,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 獨立餘額證明食物淨支出 50、木材淨支出 25，沒有其他資源變動
+2026-09-30T11:14:15.603Z,15918.603516,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降前真實模型仍只有一棟新增房屋與一個新增村民
+2026-09-30T11:14:15.603Z,15918.603516,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅向進行中的真人陣營提出正常投降
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 實際報告符合 Snapshot 版本與公開欄位，沒有內部事件或去重資料
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 報告具有有效的伺服器對局識別
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正常投降的報告結果為戰敗
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 存活時長有限、為正且不超過真實開局流程時間
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesDelivered
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesSpent
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsCompleted
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：villagersTrained
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：militaryTrained
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：damageDealt
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsKilled
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsKilled
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsLost
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsLost
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式 Snapshot 包含所有計數與資源標籤
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降清場沒有自行花費或發放資源
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 第二局使用不同報告識別，沒有沿用前局快照
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：food
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：food
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：wood
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：wood
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：gold
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：gold
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：stone
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：stone
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤生產與完工房屋、新增村民實例相符，免費初始模型不計
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：damageDealt
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：unitsKilled
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：buildingsKilled
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：unitsLost
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：buildingsLost
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 先由正常戰敗／結束取得正式報告
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際複製報告具有版本與已定勝負
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式結果視窗顯示已送達的資料
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_food
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_food
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_wood
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_wood
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_gold
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_gold
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_stone
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_stone
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsCompleted
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_villagersTrained
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_militaryTrained
+2026-09-30T11:14:15.727Z,15918.727539,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_damageDealt
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsKilled
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsKilled
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsLost
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsLost
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 勝負呈現在實際結果標題
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 存活時長精確文字與正式報告秒數一致
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 觀戰／重開使用至少 44 個畫面像素的點擊區
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際數據內容可垂直捲動
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 捲動數據與固定底部按鈕不重疊
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 固定按鈕留在結果容器內
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 結果容器位於目前畫面安全範圍內
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式覆盤視窗攔截世界指令
+2026-09-30T11:14:15.728Z,15918.728516,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST COMPLETE] 27 checks; 唯讀正式屬性與 PlayerGui
+2026-09-30T11:14:16.024Z,15919.024414,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_CLEAR COMPLETE] 正式 JSON、可見數據與欄位標記已清空；沒有填零代替報告
+2026-09-30T11:14:16.025Z,15919.025391,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 唯讀檢查實際 PlayerGui 清除前局數據與欄位標記
+2026-09-30T11:14:16.456Z,15919.456055,0da4,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no humanoid.
+2026-09-30T11:14:16.495Z,15919.495117,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開後 actual 控制探針與初值一致，不重建 PlayerModule
+2026-09-30T11:14:16.495Z,15919.495117,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開將正式遊戲累計事實清零
+2026-09-30T11:14:16.495Z,15919.495117,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW COMPLETE] 92 事實／控制檢查；54 正式 UI 檢查；兩局正常開局、投降與重開；40.5 秒
+
+=== 2026-09-30 19:18-19:46 Advanced original farm and wood path evidence ===
+Advanced full run remains FAIL, wood first-positive timeout at383.9 seconds. Actual Farm(-228,-156) adjacent Barracks(-204,-156) normal completion passed. Diagnostics read only after automatic test Stop; no model/HP/resource writes.
+
+2026-09-30T11:18:06.359Z,16149.359375,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 只在新單人 Studio 大廳開始，不挪用既有對局
+2026-09-30T11:18:06.359Z,16149.359375,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED START] 4 時代／18 種建築／11 科技／真實四資源；期限 1800 秒
+2026-09-30T11:18:07.527Z,16150.527344,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 沒有 AI 干擾，使用正常無角色 RTS
+2026-09-30T11:18:07.527Z,16150.527344,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 使用正式 Rich 開局，沒有增加任何測試資源
+2026-09-30T11:18:09.253Z,16152.253906,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 初始主城不能代替兩種黑暗時代前置被拒絕、不扣任何資源
+2026-09-30T11:18:10.953Z,16153.953125,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 市鎮中心時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:12.669Z,16155.669922,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 射箭場時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:14.370Z,16157.370117,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 馬廄時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:16.072Z,16159.072266,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵工廠時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:17.804Z,16160.804688,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 市集時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:19.453Z,16162.453125,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 瞭望塔時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:21.170Z,16164.170898,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 石牆時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:22.852Z,16165.852539,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 城堡時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:24.570Z,16167.570312,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 攻城器械廠時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:26.288Z,16169.288086,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 修道院時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:27.986Z,16170.986328,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 大學時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:29.703Z,16172.703125,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 世界奇觀時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:31.371Z,16174.371094,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 手推車時代不足被拒絕、不扣任何資源
+2026-09-30T11:18:32.204Z,16175.204102,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊建立工地且正確扣款，不能立即完工
+2026-09-30T11:18:36.489Z,16179.489258,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 磨坊正常行走施工；時代 1；資源 1200.0/1100.0/800.0/600.0；已用 30.1 秒
+2026-09-30T11:18:43.072Z,16186.072266,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊由真實村民按正常施工計時完成
+2026-09-30T11:18:44.288Z,16187.288086,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊建立工地且正確扣款，不能立即完工
+2026-09-30T11:18:52.641Z,16195.641602,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊由真實村民按正常施工計時完成
+2026-09-30T11:18:54.744Z,16197.744141,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兩座同類磨坊不是兩種前置被拒絕、不扣任何資源
+2026-09-30T11:18:55.542Z,16198.542969,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 伐木場建立工地且正確扣款，不能立即完工
+2026-09-30T11:19:06.641Z,16209.641602,6828,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 伐木場正常行走施工；時代 1；資源 1220.0/900.0/800.0/600.0；已用 60.3 秒
+2026-09-30T11:19:13.375Z,16216.375977,29b4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 伐木場由真實村民按正常施工計時完成
+2026-09-30T11:19:14.592Z,16217.592773,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地建立工地且正確扣款，不能立即完工
+2026-09-30T11:19:36.641Z,16239.641602,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 採礦營地正常行走施工；時代 1；資源 1250.0/800.0/800.0/600.0；已用 90.3 秒
+2026-09-30T11:19:37.425Z,16240.425781,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地由真實村民按正常施工計時完成
+2026-09-30T11:19:38.626Z,16241.626953,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地建立工地且正確扣款，不能立即完工
+2026-09-30T11:19:47.994Z,16250.994141,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地由真實村民按正常施工計時完成
+2026-09-30T11:19:49.209Z,16252.209961,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵營建立工地且正確扣款，不能立即完工
+2026-09-30T11:20:06.725Z,16269.725586,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 兵營正常行走施工；時代 1；資源 1250.0/535.0/800.0/600.0；已用 120.4 秒
+2026-09-30T11:20:11.708Z,16274.708984,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵營由真實村民按正常施工計時完成
+2026-09-30T11:20:12.926Z,16275.926758,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 農田建立工地且正確扣款，不能立即完工
+2026-09-30T11:20:19.043Z,16282.043945,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 農田由真實村民按正常施工計時完成
+2026-09-30T11:20:20.291Z,16283.291992,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋建立工地且正確扣款，不能立即完工
+2026-09-30T11:20:27.145Z,16290.145508,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋由真實村民按正常施工計時完成
+2026-09-30T11:20:28.361Z,16291.361328,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋建立工地且正確扣款，不能立即完工
+2026-09-30T11:20:34.695Z,16297.695312,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋由真實村民按正常施工計時完成
+2026-09-30T11:20:35.946Z,16298.946289,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋建立工地且正確扣款，不能立即完工
+2026-09-30T11:20:36.831Z,16299.831055,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 房屋正常行走施工；時代 1；資源 1250.0/410.0/800.0/600.0；已用 150.5 秒
+2026-09-30T11:20:42.564Z,16305.564453,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 房屋由真實村民按正常施工計時完成
+2026-09-30T11:20:43.781Z,16306.781250,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:20:53.768Z,16316.768555,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:20:54.750Z,16317.750977,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:04.583Z,16327.583984,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:21:05.533Z,16328.533203,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:06.868Z,16329.868164,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 村民真實訓練與出口；時代 1；資源 1113.0/436.0/800.0/600.0；已用 180.5 秒
+2026-09-30T11:21:15.454Z,16338.454102,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:21:16.404Z,16339.404297,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:26.353Z,16349.353516,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:21:27.318Z,16350.318359,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:36.903Z,16359.903320,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 村民真實訓練與出口；時代 1；資源 1083.0/506.0/800.0/670.0；已用 210.5 秒
+2026-09-30T11:21:37.372Z,16360.372070,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:21:38.323Z,16361.323242,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:48.309Z,16371.309570,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:21:49.260Z,16372.260742,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:21:59.113Z,16382.113281,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:00.095Z,16383.095703,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:22:06.964Z,16389.964844,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 村民真實訓練與出口；時代 1；資源 1013.0/576.0/800.0/770.0；已用 240.6 秒
+2026-09-30T11:22:10.044Z,16393.044922,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:11.029Z,16394.029297,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:22:20.845Z,16403.845703,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:21.796Z,16404.796875,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:22:31.714Z,16414.714844,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:32.681Z,16415.681641,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:22:37.082Z,16420.082031,6828,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 村民真實訓練與出口；時代 1；資源 963.0/636.0/800.0/900.0；已用 270.7 秒
+2026-09-30T11:22:42.568Z,16425.568359,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:43.552Z,16426.552734,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:22:53.521Z,16436.521484,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:22:54.488Z,16437.488281,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民訓練只扣正常成本
+2026-09-30T11:23:04.408Z,16447.408203,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 村民由伺服器生成己方實例
+2026-09-30T11:23:04.408Z,16447.408203,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 經濟使用正常訓練的 16 村民
+2026-09-30T11:23:07.259Z,16450.259766,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] food抵達並採集；時代 1；資源 989.0/696.0/800.0/1080.0；已用 300.9 秒
+2026-09-30T11:23:09.193Z,16452.193359,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] food實際單次採集量符合科技效果
+2026-09-30T11:23:12.343Z,16455.343750,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] food真實節點資源減少，攜帶上限有效
+2026-09-30T11:23:14.279Z,16457.279297,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] food由村民正常交貨增加庫存
+2026-09-30T11:23:37.332Z,16480.332031,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] wood抵達並採集；時代 1；資源 999.0/696.0/800.0/1080.0；已用 331.0 秒
+2026-09-30T11:24:07.447Z,16510.447266,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] wood抵達並採集；時代 1；資源 999.0/696.0/800.0/1080.0；已用 361.1 秒
+2026-09-30T11:29:50.023Z,16853.023438,0da4,6,Info [FLog::CreatorOutput] > local p=game.Players.LocalPlayer; local ws={}; for _,u in ipairs(workspace.Units:GetChildren()) do if u:GetAttribute("OwnerId")==p.UserId and u:GetAttribute("UnitType")=="villager" then table.insert(ws,u) end end; local w=ws[1]; print("[WOOD_DIAG_WORKER]",w:GetPivot().Position,w:GetAttribute("Order"),w:GetAttribute("Carrying"),w:GetAttribute("CarryType"),w:GetAttribute("LastWorkAt")); local near={}; for _,m in ipairs(workspace.Resources:GetChildren()) do if m:GetAttribute("ResourceType")=="wood" and (m:GetAttribute("Amount") or 0)>=30 then table.insert(near,{m=m,d=(m:GetPivot().Position-w:GetPivot().Position).Magnitude}) end end; table.sort(near,function(a,b) return a.d<b.d end); for i=1,math.min(8,#near) do local m=near[i].m; print("[WOOD_DIAG_TREE]",i,m:GetPivot().Position,m.PrimaryPart.Size,m:GetAttribute("Amount")); for _,part in ipairs(m:GetDescendants()) do if part:IsA("BasePart") and part.CanCollide then print("[WOOD_DIAG_COLLI
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_WORKER] -253.794921875, 2.5, -173.57557678222656 待命 0  nil
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 1 -304, 9, -120 8, 18, 8 500
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 1 Footprint -304, 9, -120 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 2 -320, 9, -136 8, 18, 8 490
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 2 Footprint -320, 9, -136 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 3 -288, 9, -104 8, 18, 8 500
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 3 Footprint -288, 9, -104 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 4 -272, 9, -96 8, 18, 8 490
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 4 Footprint -272, 9, -96 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 5 -320, 9, -120 8, 18, 8 500
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 5 Footprint -320, 9, -120 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 6 -304, 9, -104 8, 18, 8 500
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 6 Footprint -304, 9, -104 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 7 -344, 9, -176 8, 18, 8 215
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 7 Footprint -344, 9, -176 8, 18, 8
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_TREE] 8 -344, 9, -192 8, 18, 8 500
+2026-09-30T11:29:50.025Z,16853.025391,8cb0,6,Info [FLog::CreatorOutput] [WOOD_DIAG_COLLIDER] 8 Footprint -344, 9, -192 8, 18, 8
+2026-09-30T11:33:44.144Z,17087.144531,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_START] -253.794921875, 0, -173.57557678222656
+2026-09-30T11:33:44.144Z,17087.144531,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 1 -297.70001220703125, 0, -120 0
+2026-09-30T11:33:44.177Z,17087.177734,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 1 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.259Z,17087.259766,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 1 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.363Z,17087.363281,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 1 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.363Z,17087.363281,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 2 -297.70001220703125, 0, -117.39045715332031 0
+2026-09-30T11:33:44.464Z,17087.464844,8358,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 2 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.562Z,17087.562500,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 2 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.664Z,17087.664062,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 2 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.664Z,17087.664062,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 3 -297.70001220703125, 0, -113.69999694824219 0
+2026-09-30T11:33:44.763Z,17087.763672,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 3 2 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.865Z,17087.865234,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 3 3 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.964Z,17087.964844,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 3 4 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:44.964Z,17087.964844,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 4 -301.39044189453125, 0, -113.69999694824219 0
+2026-09-30T11:33:45.064Z,17088.064453,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 4 2 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.166Z,17088.166016,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 4 3 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.265Z,17088.265625,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 4 4 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.265Z,17088.265625,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 5 -304, 0, -113.69999694824219 0
+2026-09-30T11:33:45.365Z,17088.365234,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 5 2 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.466Z,17088.466797,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 5 3 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.568Z,17088.568359,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 5 4 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.568Z,17088.568359,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 6 -306.60955810546875, 0, -113.69999694824219 0
+2026-09-30T11:33:45.667Z,17088.667969,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 6 2 true Enum.PathStatus.Success 20 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.767Z,17088.767578,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 6 3 true Enum.PathStatus.Success 20 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.869Z,17088.869141,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 6 4 true Enum.PathStatus.Success 20 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:45.869Z,17088.869141,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 7 -310.29998779296875, 0, -113.69999694824219 0
+2026-09-30T11:33:45.968Z,17088.968750,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 7 2 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.070Z,17089.070312,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 7 3 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.169Z,17089.169922,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 7 4 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.169Z,17089.169922,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 8 -310.29998779296875, 0, -117.39045715332031 0
+2026-09-30T11:33:46.269Z,17089.269531,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 8 2 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.369Z,17089.369141,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 8 3 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.470Z,17089.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 8 4 true Enum.PathStatus.Success 19 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.470Z,17089.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 9 -310.29998779296875, 0, -120 0
+2026-09-30T11:33:46.574Z,17089.574219,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 9 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.673Z,17089.673828,6828,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 9 3 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.773Z,17089.773438,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 9 4 true Enum.PathStatus.Success 18 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.773Z,17089.773438,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 10 -310.29998779296875, 0, -122.60954284667969 0
+2026-09-30T11:33:46.873Z,17089.873047,0da4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 10 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:46.972Z,17089.972656,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 10 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.074Z,17090.074219,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 10 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.074Z,17090.074219,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 11 -310.29998779296875, 0, -126.30000305175781 0
+2026-09-30T11:33:47.171Z,17090.171875,0da4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 11 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.273Z,17090.273438,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 11 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.373Z,17090.373047,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 11 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.373Z,17090.373047,8cb0,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 12 -306.60955810546875, 0, -126.30000305175781 0
+2026-09-30T11:33:47.472Z,17090.472656,0da4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 12 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.572Z,17090.572266,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 12 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.673Z,17090.673828,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 12 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.673Z,17090.673828,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 13 -304, 0, -126.30000305175781 0
+2026-09-30T11:33:47.773Z,17090.773438,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 13 2 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.873Z,17090.873047,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 13 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.974Z,17090.974609,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 13 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:47.974Z,17090.974609,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 14 -301.39044189453125, 0, -126.30000305175781 0
+2026-09-30T11:33:48.074Z,17091.074219,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 14 2 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.175Z,17091.175781,0da4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 14 3 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.275Z,17091.275391,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 14 4 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.275Z,17091.275391,8ea4,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 15 -297.70001220703125, 0, -126.30000305175781 0
+2026-09-30T11:33:48.375Z,17091.375000,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 15 2 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.474Z,17091.474609,0da4,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 15 3 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.576Z,17091.576172,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 15 4 true Enum.PathStatus.Success 16 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.576Z,17091.576172,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_CANDIDATE] 16 -297.70001220703125, 0, -122.60954284667969 0
+2026-09-30T11:33:48.673Z,17091.673828,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 16 2 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.759Z,17091.759766,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 16 3 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:33:48.861Z,17091.861328,0884,6,Info [FLog::CreatorOutput] [WOOD_PATH_RESULT] 16 4 true Enum.PathStatus.Success 17 Workspace.Buildings.House.Footprint segment 2
+2026-09-30T11:35:45.191Z,17208.191406,0da4,6,Info [FLog::CreatorOutput] > task.spawn(function() local start=Vector3.new(-253.794921875,0,-173.57557678222656); local goal=Vector3.new(-297.7,0,-120); local rp=RaycastParams.new(); rp.RespectCanCollide=true; rp.FilterType=Enum.RaycastFilterType.Exclude; rp.FilterDescendantsInstances={workspace.Units,workspace:FindFirstChild("AOE2_Ground"),workspace:FindFirstChild("RTSScenery")}; for _,r in ipairs({2,3,4}) do local path=game:GetService("PathfindingService"):CreatePath({AgentRadius=r,AgentHeight=5,AgentCanJump=false,WaypointSpacing=8}); path:ComputeAsync(start+Vector3.new(0,2,0),goal+Vector3.new(0,2,0)); print("[WOOD_PREFIX_STATUS]",r,path.Status); local previous=start; for i,wp in ipairs(path:GetWaypoints()) do local pos=Vector3.new(wp.Position.X,0,wp.Position.Z); local delta=pos-previous; local hit=delta.Magnitude>0.01 and workspace:Blockcast(CFrame.new(previous+Vector3.new(0,2.5,0)),Vector3.new(3.6,4,3.6),delta,rp); print("[WOOD_PREFIX_WAYPOINT]",r,i,pos,hit a
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_STATUS] 2 Enum.PathStatus.Success
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 1 -253.794921875, 0, -173.57557678222656 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 2 -256.98138427734375, 0, -180.91360473632812 Workspace.Buildings.House.Footprint
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 3 -260.1678161621094, 0, -188.2516326904297 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 4 -262.7308044433594, 0, -194.15386962890625 Workspace.Buildings.House.Footprint
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 5 -270.73040771484375, 0, -194.07461547851562 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 6 -278.7300109863281, 0, -193.99534606933594 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 7 -281.5423889160156, 0, -193.9674835205078 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 8 -283.2496643066406, 0, -186.1517791748047 Workspace.Buildings.House.Footprint
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 9 -284.9569396972656, 0, -178.33607482910156 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 10 -286.6642150878906, 0, -170.52037048339844 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 11 -288.3714904785156, 0, -162.7046661376953 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 12 -290.0787658691406, 0, -154.8889617919922 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 13 -291.7860412597656, 0, -147.07325744628906 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 14 -293.4933166503906, 0, -139.25755310058594 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 15 -295.20062255859375, 0, -131.4418487548828 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 16 -296.90789794921875, 0, -123.62614440917969 clear
+2026-09-30T11:35:45.275Z,17208.275391,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 2 17 -297.70001220703125, 0, -120 clear
+2026-09-30T11:35:45.363Z,17208.363281,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_STATUS] 3 Enum.PathStatus.Success
+2026-09-30T11:35:45.363Z,17208.363281,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 1 -253.794921875, 0, -173.57557678222656 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 2 -256.7217712402344, 0, -181.0209503173828 Workspace.Buildings.House.Footprint
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 3 -259.64862060546875, 0, -188.46632385253906 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 4 -262.22314453125, 0, -195.01541137695312 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 5 -270.22247314453125, 0, -194.9107208251953 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 6 -278.2218017578125, 0, -194.80601501464844 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 7 -282.15936279296875, 0, -194.75448608398438 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 8 -283.78765869140625, 0, -186.9219512939453 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 9 -285.41595458984375, 0, -179.08941650390625 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 10 -287.04425048828125, 0, -171.2568817138672 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 11 -288.67254638671875, 0, -163.42434692382812 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 12 -290.30084228515625, 0, -155.59181213378906 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 13 -291.92913818359375, 0, -147.75927734375 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 14 -293.55743408203125, 0, -139.92674255371094 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 15 -295.18572998046875, 0, -132.09420776367188 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 16 -296.8140563964844, 0, -124.26167297363281 clear
+2026-09-30T11:35:45.365Z,17208.365234,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 3 17 -297.70001220703125, 0, -120 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_STATUS] 4 Enum.PathStatus.Success
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 1 -253.794921875, 0, -173.57557678222656 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 2 -256.47235107421875, 0, -181.11424255371094 Workspace.Buildings.House.Footprint
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 3 -259.1497802734375, 0, -188.6529083251953 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 4 -261.7154541015625, 0, -195.87696838378906 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 5 -269.7144470214844, 0, -195.7495574951172 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 6 -277.71343994140625, 0, -195.62213134765625 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 7 -282.77630615234375, 0, -195.54148864746094 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 8 -284.3267822265625, 0, -187.69317626953125 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 9 -285.87725830078125, 0, -179.84486389160156 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 10 -287.427734375, 0, -171.99655151367188 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 11 -288.97821044921875, 0, -164.1482391357422 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 12 -290.5286865234375, 0, -156.2999267578125 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 13 -292.0791931152344, 0, -148.4516143798828 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 14 -293.6296691894531, 0, -140.60330200195312 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 15 -295.18017578125, 0, -132.75498962402344 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 16 -296.73065185546875, 0, -124.90667724609375 clear
+2026-09-30T11:35:45.470Z,17208.470703,0884,6,Info [FLog::CreatorOutput] [WOOD_PREFIX_WAYPOINT] 4 17 -297.70001220703125, 0, -120 clear
+2026-09-30T11:45:37.267Z,17800.267578,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 2 1 -253.794921875, 0, -173.57557678222656 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.267Z,17800.267578,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 2 2 -256.98138427734375, 0, -180.91360473632812 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.267Z,17800.267578,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 2 3 -260.1678161621094, 0, -188.2516326904297 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.267Z,17800.267578,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 2 4 -262.7308044433594, 0, -194.15386962890625 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.267Z,17800.267578,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, 0 2 Enum.PathStatus.Success 17 2:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:37.371Z,17800.371094,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 3 1 -253.794921875, 0, -173.57557678222656 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.371Z,17800.371094,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 3 2 -256.7217712402344, 0, -181.0209503173828 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.371Z,17800.371094,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 3 3 -259.64862060546875, 0, -188.46632385253906 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.371Z,17800.371094,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 3 4 -262.22314453125, 0, -195.01541137695312 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.371Z,17800.371094,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, 0 3 Enum.PathStatus.Success 17 2:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:37.474Z,17800.474609,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 4 1 -253.794921875, 0, -173.57557678222656 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.476Z,17800.476562,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 4 2 -256.47235107421875, 0, -181.11424255371094 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.476Z,17800.476562,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 4 3 -259.1497802734375, 0, -188.6529083251953 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.476Z,17800.476562,0884,6,Info [FLog::CreatorOutput] [WOOD_RAW] 4 4 -261.7154541015625, 0, -195.87696838378906 Enum.PathWaypointAction.Walk
+2026-09-30T11:45:37.476Z,17800.476562,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, 0 4 Enum.PathStatus.Success 17 2:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:37.574Z,17800.574219,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, -8 2 Enum.PathStatus.Success 16 3:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:37.673Z,17800.673828,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, -8 3 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:37.773Z,17800.773438,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 0, 0, -8 4 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:37.875Z,17800.875000,0884,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 3, 0, -5 2 Enum.PathStatus.Success 17 4:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:37.974Z,17800.974609,0da4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 3, 0, -5 3 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:38.060Z,17801.060547,8cb0,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 3, 0, -5 4 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:38.162Z,17801.162109,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, 0 2 Enum.PathStatus.Success 18 5:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:38.261Z,17801.261719,0da4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, 0 3 Enum.PathStatus.Success 18 clear
+2026-09-30T11:45:38.361Z,17801.361328,29b4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, 0 4 Enum.PathStatus.Success 18 clear
+2026-09-30T11:45:38.460Z,17801.460938,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, -8 2 Enum.PathStatus.Success 17 4:Workspace.Buildings.House.Footprint
+2026-09-30T11:45:38.560Z,17801.560547,6828,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, -8 3 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:38.660Z,17801.660156,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_RESULT] 8, 0, -8 4 Enum.PathStatus.Success 17 clear
+2026-09-30T11:45:38.660Z,17801.660156,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_UNSAFE] 0, 0, 8 Workspace.Buildings.House.Footprint 1
+2026-09-30T11:45:38.660Z,17801.660156,8ea4,6,Info [FLog::CreatorOutput] [WOOD_ESCAPE_UNSAFE] 8, 0, 8 Workspace.Buildings.House.Footprint 1

@@ -1,0 +1,160 @@
+=== Fresh 2026-09-30 20:10 committed-character events source ===
+Source: tests/escape-events-source.json. Studio desktop solo freshLobby, 2normalRichSmallAI0 games. Flow COMPLETE92facts/control+54actualPlayerGui in40.4s; 2Restart exactcontrolinitialrestore. Initial defaultPlayerModule noCharacter warning remains; noRestart noHumanoid warnings observed. Prefix wood Advanced not yet run.
+
+2026-09-30T12:10:47.117Z,19310.117188,0da4,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-09-30T12:11:39.037Z,19362.037109,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 只在新的單人大廳執行，不與其他測試共用對局
+2026-09-30T12:11:39.037Z,19362.037109,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新 Play 尚無前局報告或戰敗狀態
+2026-09-30T12:11:39.037Z,19362.037109,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 從實際 PlayerInput 探針取得並保留接管前控制初值
+2026-09-30T12:11:39.927Z,19362.927734,0884,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-09-30T12:11:40.201Z,19363.201172,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新局正式 JSON 為 nil，沒有沿用前局報告
+2026-09-30T12:11:40.201Z,19363.201172,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式沙盒只有一個真人陣營，沒有 AI 或旁觀者經濟
+2026-09-30T12:11:40.201Z,19363.201172,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始模型只有免費市鎮中心、村民與斥候
+2026-09-30T12:11:40.201Z,19363.201172,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式交貨與訓練事實在每個新局皆為零
+2026-09-30T12:11:40.201Z,19363.201172,8ea4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅向進行中的真人陣營提出正常投降
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 實際報告符合 Snapshot 版本與公開欄位，沒有內部事件或去重資料
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 報告具有有效的伺服器對局識別
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正常投降的報告結果為戰敗
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 存活時長有限、為正且不超過真實開局流程時間
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesDelivered
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesSpent
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsCompleted
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：villagersTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：militaryTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：damageDealt
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式 Snapshot 包含所有計數與資源標籤
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降清場沒有自行花費或發放資源
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsCompleted
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：villagersTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：militaryTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：damageDealt
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：unitsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：unitsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費開局與投降清場不算覆盤計數：buildingsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：food
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：wood
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：gold
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 免費資源與清場沒有交貨或支出：stone
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 先由正常戰敗／結束取得正式報告
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際複製報告具有版本與已定勝負
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式結果視窗顯示已送達的資料
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_food
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_food
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_wood
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_wood
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_gold
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_gold
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_stone
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_stone
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsCompleted
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_villagersTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_militaryTrained
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_damageDealt
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsKilled
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsLost
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 勝負呈現在實際結果標題
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 存活時長精確文字與正式報告秒數一致
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 觀戰／重開使用至少 44 個畫面像素的點擊區
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際數據內容可垂直捲動
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 捲動數據與固定底部按鈕不重疊
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 固定按鈕留在結果容器內
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 結果容器位於目前畫面安全範圍內
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式覆盤視窗攔截世界指令
+2026-09-30T12:11:40.263Z,19363.263672,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST COMPLETE] 27 checks; 唯讀正式屬性與 PlayerGui
+2026-09-30T12:11:40.644Z,19363.644531,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_CLEAR COMPLETE] 正式 JSON、可見數據與欄位標記已清空；沒有填零代替報告
+2026-09-30T12:11:40.644Z,19363.644531,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 唯讀檢查實際 PlayerGui 清除前局數據與欄位標記
+2026-09-30T12:11:41.064Z,19364.064453,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開後 actual 控制探針與初值一致，不重建 PlayerModule
+2026-09-30T12:11:41.064Z,19364.064453,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開將正式遊戲累計事實清零
+2026-09-30T12:11:41.652Z,19364.652344,0884,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-09-30T12:11:41.718Z,19364.718750,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新局正式 JSON 為 nil，沒有沿用前局報告
+2026-09-30T12:11:41.718Z,19364.718750,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式沙盒只有一個真人陣營，沒有 AI 或旁觀者經濟
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始模型只有免費市鎮中心、村民與斥候
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式交貨與訓練事實在每個新局皆為零
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 初始真實村民待命且可施工
+2026-09-30T12:11:41.720Z,19364.720703,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 在真實地圖障礙與邊界內找到合法房屋空地
+2026-09-30T12:11:41.900Z,19364.900391,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW_GEOMETRY] House -184, 7, -184 TownCenter -216, 13, -216
+2026-09-30T12:11:41.900Z,19364.900391,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 房屋先成為工地，沒有跳過施工
+2026-09-30T12:11:47.261Z,19370.261719,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 已觀察到真實村民施工進度與完工
+2026-09-30T12:11:47.261Z,19370.261719,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 真實完工建築新增一棟，僅扣木材 25
+2026-09-30T12:11:47.314Z,19370.314453,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 扣款與入列時尚未憑空生成村民
+2026-09-30T12:11:57.250Z,19380.250000,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 新增實例、正式訓練事實與食物 50 扣款一致
+2026-09-30T12:11:57.250Z,19380.250000,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅一名村民前往最近的真實食物資源，交貨尚為零
+2026-09-30T12:11:57.250Z,19380.250000,0da4,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW_GEOMETRY] Food -152, 2.5, -104 Worker -196.617919921875, 2.5, -188.24411010742188
+2026-09-30T12:12:04.072Z,19387.072266,8358,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PROGRESS] 真實採集、攜帶、返回市鎮中心並交貨；已用 25.0 秒；階段 Playing
+2026-09-30T12:12:18.421Z,19401.421875,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 已觀察到一次真實食物攜帶與交貨，數量等於原始攜帶容量
+2026-09-30T12:12:18.421Z,19401.421875,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 真實食物堆減少量等於已交貨與尚攜帶量
+2026-09-30T12:12:18.421Z,19401.421875,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 獨立餘額證明食物淨支出 50、木材淨支出 25，沒有其他資源變動
+2026-09-30T12:12:18.421Z,19401.421875,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降前真實模型仍只有一棟新增房屋與一個新增村民
+2026-09-30T12:12:18.421Z,19401.421875,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 僅向進行中的真人陣營提出正常投降
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 實際報告符合 Snapshot 版本與公開欄位，沒有內部事件或去重資料
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 報告具有有效的伺服器對局識別
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正常投降的報告結果為戰敗
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 存活時長有限、為正且不超過真實開局流程時間
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesDelivered
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式報告四資源欄位有限且非負：resourcesSpent
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsCompleted
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：villagersTrained
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：militaryTrained
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：damageDealt
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：unitsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式計數欄位型別有效：buildingsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 正式 Snapshot 包含所有計數與資源標籤
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 投降清場沒有自行花費或發放資源
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 第二局使用不同報告識別，沒有沿用前局快照
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：food
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：food
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：wood
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：wood
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：gold
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：gold
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤淨支出與獨立真實扣款一致：stone
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤交貨與正式 DeliveredResources、實際餘額一致：stone
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 覆盤生產與完工房屋、新增村民實例相符，免費初始模型不計
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：damageDealt
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：unitsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：buildingsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：unitsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 沒有真實戰鬥，投降清場不產生戰鬥數據：buildingsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 先由正常戰敗／結束取得正式報告
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際複製報告具有版本與已定勝負
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式結果視窗顯示已送達的資料
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_food
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_food
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_wood
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_wood
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_gold
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_gold
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportDelivered_stone
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportSpent_stone
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsCompleted
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_villagersTrained
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_militaryTrained
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_damageDealt
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsKilled
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_unitsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式 JSON 對應到實際數值與精確文字：ReportValue_buildingsLost
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 勝負呈現在實際結果標題
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 存活時長精確文字與正式報告秒數一致
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 觀戰／重開使用至少 44 個畫面像素的點擊區
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 實際數據內容可垂直捲動
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 捲動數據與固定底部按鈕不重疊
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 固定按鈕留在結果容器內
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 結果容器位於目前畫面安全範圍內
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST PASS] 正式覆盤視窗攔截世界指令
+2026-09-30T12:12:18.535Z,19401.535156,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_TEST COMPLETE] 27 checks; 唯讀正式屬性與 PlayerGui
+2026-09-30T12:12:18.937Z,19401.937500,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_CLEAR COMPLETE] 正式 JSON、可見數據與欄位標記已清空；沒有填零代替報告
+2026-09-30T12:12:18.937Z,19401.937500,8cb0,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 唯讀檢查實際 PlayerGui 清除前局數據與欄位標記
+2026-09-30T12:12:19.462Z,19402.462891,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開後 actual 控制探針與初值一致，不重建 PlayerModule
+2026-09-30T12:12:19.462Z,19402.462891,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW PASS] 重開將正式遊戲累計事實清零
+2026-09-30T12:12:19.462Z,19402.462891,0884,6,Info [FLog::CreatorOutput] [MATCH_REPORT_FLOW COMPLETE] 92 事實／控制檢查；54 正式 UI 檢查；兩局正常開局、投降與重開；40.4 秒

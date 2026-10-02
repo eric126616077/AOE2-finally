@@ -1,0 +1,224 @@
+2026-10-01T05:45:48.916Z,109.916397,121c8,6,Info [FLog::CreatorOutput] > task.spawn(function() require(game.ReplicatedStorage.Shared.LobbyTests).Start({expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"}); local limit=os.clock()+20; repeat task.wait(.1) until (workspace:GetAttribute("MatchPhase")=="Playing" and workspace:GetAttribute("Sandbox")==true and #workspace.Units:GetChildren()>=4) or os.clock()>limit; assert(workspace:GetAttribute("Sandbox")==true,"waiting sandbox replication"); local report=require(game.ReplicatedStorage.Shared.FormationTests).Run(); assert(report.complete,report.error or "formation tests incomplete") end)
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] RTS 使用完整複製
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 正式 Units 與 Command 遠端存在
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 新局至少有 4 個己方有效單位
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 測試前受選單位全部待命
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 測試前沒有攜帶資源
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 測試前沒有攜帶資源
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 測試前沒有攜帶資源
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 測試前沒有攜帶資源
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 己方基地已複製
+2026-10-01T05:45:50.445Z,111.445503,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 找到沒有靜態障礙且保留邊界空間的測試區
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 方向為單位向量
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 方向為單位向量
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 方向為單位向量
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 方向為單位向量
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.502Z,111.502998,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.503Z,111.503990,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 目的地沒有重疊
+2026-10-01T05:45:50.503Z,111.503990,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 受選單位共用方向
+2026-10-01T05:45:50.503Z,111.503990,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 受選單位共用方向
+2026-10-01T05:45:50.503Z,111.503990,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 受選單位共用方向
+2026-10-01T05:45:50.503Z,111.503990,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 受選單位共用方向
+2026-10-01T05:45:53.986Z,114.986488,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 移動完成並保留已到達的隊形位置
+2026-10-01T05:45:53.986Z,114.986488,121c8,6,Info [FLog::CreatorOutput] [FORMATION SNAPSHOT] {"ownerId":1261977619,"observerId":1261977619,"generation":1,"phase":"Playing","context":"CLIENT","units":[{"forwardX":-0.3650875288184562,"formation":"Box","order":"待命","kind":"villager","forwardZ":0.9309731984870633,"slot":{"Y":0,"X":-232.2122039794922,"Z":-142.16087341308595}},{"forwardX":-0.3650875288184562,"formation":"Box","order":"待命","kind":"villager","forwardZ":0.9309731984870633,"slot":{"Y":0,"X":-229.83912658691407,"Z":-148.2122039794922}},{"forwardX":-0.3650875288184562,"formation":"Box","order":"待命","kind":"scout","forwardZ":0.9309731984870633,"slot":{"Y":0,"X":-226.16087341308595,"Z":-139.7877960205078}},{"forwardX":-0.3650875288184562,"formation":"Box","order":"待命","kind":"villager","forwardZ":0.9309731984870633,"slot":{"Y":0,"X":-223.7877960205078,"Z":-145.83912658691407}}]}
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 方向為單位向量
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 方向為單位向量
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 方向為單位向量
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 方向為單位向量
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 目的地沒有重疊
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 受選單位共用方向
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 受選單位共用方向
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 受選單位共用方向
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 受選單位共用方向
+2026-10-01T05:45:54.042Z,115.042076,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 橫列沿行進方向的側邊展開
+2026-10-01T05:45:56.135Z,117.135681,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 移動完成並保留已到達的隊形位置
+2026-10-01T05:45:56.135Z,117.135681,121c8,6,Info [FLog::CreatorOutput] [FORMATION SNAPSHOT] {"ownerId":1261977619,"observerId":1261977619,"generation":1,"phase":"Playing","context":"CLIENT","units":[{"forwardX":1,"formation":"Line","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-204,"Z":-153.75}},{"forwardX":1,"formation":"Line","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-204,"Z":-147.25}},{"forwardX":1,"formation":"Line","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-204,"Z":-140.75}},{"forwardX":1,"formation":"Line","order":"待命","kind":"scout","forwardZ":0,"slot":{"Y":0,"X":-204,"Z":-134.25}}]}
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 方向為單位向量
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 方向為單位向量
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 方向為單位向量
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 方向為單位向量
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 目的地沒有重疊
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 受選單位共用方向
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 受選單位共用方向
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 受選單位共用方向
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 受選單位共用方向
+2026-10-01T05:45:56.189Z,117.189354,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 縱隊沿行進方向前後展開
+2026-10-01T05:45:58.403Z,119.403137,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 移動完成並保留已到達的隊形位置
+2026-10-01T05:45:58.404Z,119.404137,13054,6,Info [FLog::CreatorOutput] [FORMATION SNAPSHOT] {"ownerId":1261977619,"observerId":1261977619,"generation":1,"phase":"Playing","context":"CLIENT","units":[{"forwardX":-0.9999999988928287,"formation":"Column","order":"待命","kind":"scout","forwardZ":0.00004705680355092504,"slot":{"Y":0,"X":-237.75,"Z":-143.99954223632813}},{"forwardX":-0.9999999988928287,"formation":"Column","order":"待命","kind":"villager","forwardZ":0.00004705680355092504,"slot":{"Y":0,"X":-231.25,"Z":-143.99984741210938}},{"forwardX":-0.9999999988928287,"formation":"Column","order":"待命","kind":"villager","forwardZ":0.00004705680355092504,"slot":{"Y":0,"X":-224.75,"Z":-144.00015258789063}},{"forwardX":-0.9999999988928287,"formation":"Column","order":"待命","kind":"villager","forwardZ":0.00004705680355092504,"slot":{"Y":0,"X":-218.25,"Z":-144.00045776367188}}]}
+2026-10-01T05:45:58.456Z,119.456245,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:58.456Z,119.456245,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 方向為單位向量
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 方向為單位向量
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 方向為單位向量
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 方向為單位向量
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 目的地沒有重疊
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 受選單位共用方向
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 受選單位共用方向
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 受選單位共用方向
+2026-10-01T05:45:58.457Z,119.457237,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 受選單位共用方向
+2026-10-01T05:46:00.483Z,121.483673,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 移動完成並保留已到達的隊形位置
+2026-10-01T05:46:00.484Z,121.484665,121c8,6,Info [FLog::CreatorOutput] [FORMATION SNAPSHOT] {"ownerId":1261977619,"observerId":1261977619,"generation":1,"phase":"Playing","context":"CLIENT","units":[{"forwardX":0.9999999856587362,"formation":"Wedge","order":"待命","kind":"villager","forwardZ":-0.00016935916730376305,"slot":{"Y":0,"X":-205.6260986328125,"Z":-150.49972534179688}},{"forwardX":0.9999999856587362,"formation":"Wedge","order":"待命","kind":"villager","forwardZ":-0.00016935916730376305,"slot":{"Y":0,"X":-205.625,"Z":-143.99972534179688}},{"forwardX":0.9999999856587362,"formation":"Wedge","order":"待命","kind":"scout","forwardZ":-0.00016935916730376305,"slot":{"Y":0,"X":-205.6239013671875,"Z":-137.49972534179688}},{"forwardX":0.9999999856587362,"formation":"Wedge","order":"待命","kind":"villager","forwardZ":-0.00016935916730376305,"slot":{"Y":0,"X":-199.125,"Z":-144.00082397460938}}]}
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 方向為單位向量
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 方向為單位向量
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 方向為單位向量
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地有限且碰撞體積沒有超出地圖
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 方向為單位向量
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 目的地沒有重疊
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 受選單位共用方向
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 受選單位共用方向
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 受選單位共用方向
+2026-10-01T05:46:00.541Z,121.541229,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 受選單位共用方向
+2026-10-01T05:46:03.219Z,124.219658,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 移動完成並保留已到達的隊形位置
+2026-10-01T05:46:03.220Z,124.220657,13054,6,Info [FLog::CreatorOutput] [FORMATION SNAPSHOT] {"ownerId":1261977619,"observerId":1261977619,"generation":1,"phase":"Playing","context":"CLIENT","units":[{"forwardX":-1,"formation":"Spread","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-233.85000610351563,"Z":-149.85000610351563}},{"forwardX":-1,"formation":"Spread","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-233.85000610351563,"Z":-138.14999389648438}},{"forwardX":-1,"formation":"Spread","order":"待命","kind":"villager","forwardZ":0,"slot":{"Y":0,"X":-222.14999389648438,"Z":-149.85000610351563}},{"forwardX":-1,"formation":"Spread","order":"待命","kind":"scout","forwardZ":0,"slot":{"Y":0,"X":-222.14999389648438,"Z":-138.14999389648438}}]}
+2026-10-01T05:46:03.220Z,124.220657,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 方陣、橫列、楔形、分散具有不同的實際群體幾何
+2026-10-01T05:46:03.872Z,124.872437,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Formation 命令能切換偏好並重排現有選取
+2026-10-01T05:46:03.925Z,124.925804,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Stop 保留隊形偏好
+2026-10-01T05:46:03.925Z,124.925804,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Stop 保留隊形偏好
+2026-10-01T05:46:03.925Z,124.925804,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Stop 保留隊形偏好
+2026-10-01T05:46:03.925Z,124.925804,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Stop 保留隊形偏好
+2026-10-01T05:46:04.426Z,125.426857,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] Stop 後單位保持靜止
+2026-10-01T05:46:06.635Z,127.635857,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 沒有指定 key 的一般移動沿用已保存的 Column 偏好
+2026-10-01T05:46:07.301Z,128.301529,df30,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複選取 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:07.301Z,128.301529,df30,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複選取 不扣除 wood
+2026-10-01T05:46:07.301Z,128.301529,df30,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複選取 不扣除 stone
+2026-10-01T05:46:07.301Z,128.301529,df30,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複選取 不扣除 gold
+2026-10-01T05:46:07.301Z,128.301529,df30,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複選取 不扣除 food
+2026-10-01T05:46:07.756Z,128.756149,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非陣列表格 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:07.756Z,128.756149,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非陣列表格 不扣除 wood
+2026-10-01T05:46:07.756Z,128.756149,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非陣列表格 不扣除 stone
+2026-10-01T05:46:07.756Z,128.756149,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非陣列表格 不扣除 gold
+2026-10-01T05:46:07.756Z,128.756149,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非陣列表格 不扣除 food
+2026-10-01T05:46:08.212Z,129.212067,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集陣列包含非法成員 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:08.212Z,129.212067,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集陣列包含非法成員 不扣除 wood
+2026-10-01T05:46:08.212Z,129.212067,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集陣列包含非法成員 不扣除 stone
+2026-10-01T05:46:08.212Z,129.212067,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集陣列包含非法成員 不扣除 gold
+2026-10-01T05:46:08.212Z,129.212067,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集陣列包含非法成員 不扣除 food
+2026-10-01T05:46:08.665Z,129.665909,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 空選取 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:08.665Z,129.665909,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 空選取 不扣除 wood
+2026-10-01T05:46:08.665Z,129.665909,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 空選取 不扣除 stone
+2026-10-01T05:46:08.665Z,129.665909,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 空選取 不扣除 gold
+2026-10-01T05:46:08.665Z,129.665909,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 空選取 不扣除 food
+2026-10-01T05:46:09.121Z,130.121994,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法隊形 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:09.121Z,130.121994,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法隊形 不扣除 wood
+2026-10-01T05:46:09.121Z,130.121994,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法隊形 不扣除 stone
+2026-10-01T05:46:09.121Z,130.121994,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法隊形 不扣除 gold
+2026-10-01T05:46:09.121Z,130.121994,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法隊形 不扣除 food
+2026-10-01T05:46:09.573Z,130.573578,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤隊形型別 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:09.573Z,130.573578,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤隊形型別 不扣除 wood
+2026-10-01T05:46:09.573Z,130.573578,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤隊形型別 不扣除 stone
+2026-10-01T05:46:09.573Z,130.573578,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤隊形型別 不扣除 gold
+2026-10-01T05:46:09.573Z,130.573578,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤隊形型別 不扣除 food
+2026-10-01T05:46:10.029Z,131.029053,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複移動選取 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:10.029Z,131.029053,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複移動選取 不扣除 wood
+2026-10-01T05:46:10.029Z,131.029053,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複移動選取 不扣除 stone
+2026-10-01T05:46:10.029Z,131.029053,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複移動選取 不扣除 gold
+2026-10-01T05:46:10.029Z,131.029053,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 重複移動選取 不扣除 food
+2026-10-01T05:46:10.484Z,131.484177,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集移動選取包含非法成員 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:10.484Z,131.484177,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集移動選取包含非法成員 不扣除 wood
+2026-10-01T05:46:10.484Z,131.484177,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集移動選取包含非法成員 不扣除 stone
+2026-10-01T05:46:10.484Z,131.484177,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集移動選取包含非法成員 不扣除 gold
+2026-10-01T05:46:10.484Z,131.484177,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 密集移動選取包含非法成員 不扣除 food
+2026-10-01T05:46:10.936Z,131.936050,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤移動目標型別 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:10.936Z,131.936050,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤移動目標型別 不扣除 wood
+2026-10-01T05:46:10.937Z,131.937057,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤移動目標型別 不扣除 stone
+2026-10-01T05:46:10.937Z,131.937057,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤移動目標型別 不扣除 gold
+2026-10-01T05:46:10.937Z,131.937057,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] 錯誤移動目標型別 不扣除 food
+2026-10-01T05:46:11.389Z,132.389816,10a5c,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法移動隊形 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:11.389Z,132.389816,10a5c,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法移動隊形 不扣除 wood
+2026-10-01T05:46:11.389Z,132.389816,10a5c,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法移動隊形 不扣除 stone
+2026-10-01T05:46:11.389Z,132.389816,10a5c,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法移動隊形 不扣除 gold
+2026-10-01T05:46:11.389Z,132.389816,10a5c,6,Info [FLog::CreatorOutput] [FORMATION PASS] 非法移動隊形 不扣除 food
+2026-10-01T05:46:11.844Z,132.844833,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] NaN 移動位置 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:11.844Z,132.844833,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] NaN 移動位置 不扣除 wood
+2026-10-01T05:46:11.844Z,132.844833,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] NaN 移動位置 不扣除 stone
+2026-10-01T05:46:11.844Z,132.844833,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] NaN 移動位置 不扣除 gold
+2026-10-01T05:46:11.844Z,132.844833,124dc,6,Info [FLog::CreatorOutput] [FORMATION PASS] NaN 移動位置 不扣除 food
+2026-10-01T05:46:12.298Z,133.298538,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 無限移動位置 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:12.298Z,133.298538,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 無限移動位置 不扣除 wood
+2026-10-01T05:46:12.298Z,133.298538,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 無限移動位置 不扣除 stone
+2026-10-01T05:46:12.298Z,133.298538,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 無限移動位置 不扣除 gold
+2026-10-01T05:46:12.298Z,133.298538,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 無限移動位置 不扣除 food
+2026-10-01T05:46:12.750Z,133.750854,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 地圖外移動位置 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:12.750Z,133.750854,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 地圖外移動位置 不扣除 wood
+2026-10-01T05:46:12.750Z,133.750854,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 地圖外移動位置 不扣除 stone
+2026-10-01T05:46:12.750Z,133.750854,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 地圖外移動位置 不扣除 gold
+2026-10-01T05:46:12.750Z,133.750854,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] 地圖外移動位置 不扣除 food
+2026-10-01T05:46:13.204Z,134.204575,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 混合建築選取 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:13.204Z,134.204575,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 混合建築選取 不扣除 wood
+2026-10-01T05:46:13.204Z,134.204575,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 混合建築選取 不扣除 stone
+2026-10-01T05:46:13.204Z,134.204575,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 混合建築選取 不扣除 gold
+2026-10-01T05:46:13.204Z,134.204575,12010,6,Info [FLog::CreatorOutput] [FORMATION PASS] 混合建築選取 不扣除 food
+2026-10-01T05:46:13.660Z,134.660126,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 超量選取 沒有改變任何己方隊形、指令或位置
+2026-10-01T05:46:13.660Z,134.660126,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 超量選取 不扣除 wood
+2026-10-01T05:46:13.660Z,134.660126,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 超量選取 不扣除 stone
+2026-10-01T05:46:13.660Z,134.660126,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 超量選取 不扣除 gold
+2026-10-01T05:46:13.660Z,134.660126,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] 超量選取 不扣除 food
+2026-10-01T05:46:13.713Z,134.713821,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 邊角調整仍在地圖內
+2026-10-01T05:46:13.713Z,134.713821,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 邊角調整仍在地圖內
+2026-10-01T05:46:13.713Z,134.713821,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 邊角調整仍在地圖內
+2026-10-01T05:46:13.713Z,134.713821,13054,6,Info [FLog::CreatorOutput] [FORMATION PASS] Box 邊角調整仍在地圖內
+2026-10-01T05:46:14.116Z,135.116226,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 邊角調整仍在地圖內
+2026-10-01T05:46:14.116Z,135.116226,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 邊角調整仍在地圖內
+2026-10-01T05:46:14.116Z,135.116226,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 邊角調整仍在地圖內
+2026-10-01T05:46:14.116Z,135.116226,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Line 邊角調整仍在地圖內
+2026-10-01T05:46:14.523Z,135.523834,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 邊角調整仍在地圖內
+2026-10-01T05:46:14.523Z,135.523834,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 邊角調整仍在地圖內
+2026-10-01T05:46:14.523Z,135.523834,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 邊角調整仍在地圖內
+2026-10-01T05:46:14.523Z,135.523834,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Column 邊角調整仍在地圖內
+2026-10-01T05:46:14.945Z,135.945343,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 邊角調整仍在地圖內
+2026-10-01T05:46:14.945Z,135.945343,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 邊角調整仍在地圖內
+2026-10-01T05:46:14.945Z,135.945343,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 邊角調整仍在地圖內
+2026-10-01T05:46:14.945Z,135.945343,121c8,6,Info [FLog::CreatorOutput] [FORMATION PASS] Wedge 邊角調整仍在地圖內
+2026-10-01T05:46:15.347Z,136.347778,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 邊角調整仍在地圖內
+2026-10-01T05:46:15.347Z,136.347778,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 邊角調整仍在地圖內
+2026-10-01T05:46:15.347Z,136.347778,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 邊角調整仍在地圖內
+2026-10-01T05:46:15.347Z,136.347778,13228,6,Info [FLog::CreatorOutput] [FORMATION PASS] Spread 邊角調整仍在地圖內
+2026-10-01T05:46:15.718Z,136.718811,13228,6,Info [FLog::CreatorOutput] [FORMATION COMPLETE] {"ownershipCovered":false,"checks":210,"scope":"正常 Command 遠端與客戶端收到的伺服器單位複製；未宣稱雙人同步","complete":true,"cleanupStopped":true,"rejections":["重複選取","非陣列表格","密集陣列包含非法成員","空選取","非法隊形","錯誤隊形型別","重複移動選取","密集移動選取包含非法成員","錯誤移動目標型別","非法移動隊形","NaN 移動位置","無限移動位置","地圖外移動位置","混合建築選取","超量選取"],"generation":1,"formations":["Box","Line","Column","Wedge","Spread"],"elapsedSeconds":25.27271489999839,"ownershipOmittedReason":"單人沙盒沒有外方單位；仍需真正雙人新局檢查所有權","ownerId":1261977619}
+2026-10-01T05:49:51.752Z,352.752747,121c8,6,Info [FLog::CreatorOutput] > local p=game.Players.LocalPlayer; local s=p.PlayerGui.AOE2_MainGUI; local a={}; for _,u in workspace.Units:GetChildren() do if u:GetAttribute("OwnerId")==p.UserId then table.insert(a,u) end end; assert(s.RTSSelectionProbe:Invoke(a)); assert(s.RTSHUDProbe:Invoke("tab","formation")); for _,k in {"Box","Line","Column","Wedge","Spread"} do local b=s:FindFirstChild("Command_Formation_"..k,true); assert(b and b.Visible and b.Parent.Visible); print("[FORMATION_UI_CARD]",k,b:GetAttribute("FormationActive"),b.AbsolutePosition,b.AbsoluteSize) end; assert(not s:FindFirstChild("BuildPage_economy",true).Visible); assert(s:FindFirstChild("FormationButton",true).Visible); print("[FORMATION_UI_COMPLETE]",s.RTSHUDProbe:Invoke().tab)
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_CARD] Box false 5.79999924, 61.5999832 18.3999996, 14
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_CARD] Line false 25.3999977, 61.5999832 18.3999996, 14
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_CARD] Column false 45, 61.5999832 18.3999996, 14
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_CARD] Wedge false 64.5999985, 61.5999832 18.3999996, 14
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_CARD] Spread true 84.1999969, 61.5999832 18.3999996, 14
+2026-10-01T05:49:51.758Z,352.758759,10a5c,6,Info [FLog::CreatorOutput] [FORMATION_UI_COMPLETE] formation

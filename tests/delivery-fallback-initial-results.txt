@@ -1,0 +1,15 @@
+2026-09-30T12:50:01.478Z,21664.478516,0da4,6,Info [FLog::CreatorOutput] > -- CLIENT Command Bar only. Adds one inactive test ModuleScript; does not run it.
+2026-09-30T12:50:01.484Z,21664.484375,0884,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK_MODULE READY] 僅新增未執行的測試 ModuleScript；完整 UTF-8 payload 24698 bytes。沒有引擎測試通過聲明。
+2026-09-30T12:52:12.957Z,21795.957031,0da4,6,Info [FLog::CreatorOutput] > task.spawn(function() require(game.ReplicatedStorage.Shared.DeliveryFallbackTests).RunAttached({deadlineSeconds=900,requireAdvancedFixture=true}) end)
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 只附加到正常單人 Rich／Small／AI0 沙盒
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 使用完整複製的無角色 RTS
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] [DELIVERY_FALLBACK PASS] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Warning [FLog::CreatorWarning] Warning: [DELIVERY_FALLBACK FAIL] 保留原對局、牆壁與攜帶資源供診斷；沒有清理或重開
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.DeliveryFallbackTests:25: [DELIVERY_FALLBACK FAIL] 所有既有木材倉庫均完好；自動最近倉庫與手動正控制候選一致
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Stack Begin
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 363 - function invoke
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'ReplicatedStorage.Shared.DeliveryFallbackTests', Line 367 - function RunAttached
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Script 'CommandBar', Line 1
+2026-09-30T12:52:12.962Z,21795.962891,8ea4,6,Info [FLog::CreatorOutput] Info: Stack End

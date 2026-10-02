@@ -1,0 +1,70 @@
+{
+  "Run": "feedback-real-clients-20260930-r1",
+  "Outcome": "failed-before-combat",
+  "Note": "Actual two-client normal gather/delivery and sound/motion passed; both normal scout cross-map attack waits timed out after 100 seconds. No attack or mute evidence in this run.",
+  "SourceBeforeDiagnosticsSHA256": "6CFC03D42A795AA41F80B1EA216BF2ADCE2FBA82938328B80094A31B9F8D39F7",
+  "HostPulseCount": 5,
+  "PeerPulseCount": 5,
+  "MatchedPeerPulses": 5,
+  "Pairs": [
+    {
+      "Owner": -2,
+      "Kind": "villager",
+      "Attribute": "LastWork",
+      "ExactServerValue": "42.387299",
+      "Matched": true,
+      "HostUtc": "2026-09-30T13:34:32.448Z",
+      "PeerUtc": "2026-09-30T13:34:32.465Z",
+      "HostAudioEnabled": true,
+      "PeerAudioEnabled": true
+    },
+    {
+      "Owner": -2,
+      "Kind": "villager",
+      "Attribute": "LastWork",
+      "ExactServerValue": "43.455144",
+      "Matched": true,
+      "HostUtc": "2026-09-30T13:34:33.514Z",
+      "PeerUtc": "2026-09-30T13:34:33.532Z",
+      "HostAudioEnabled": true,
+      "PeerAudioEnabled": true
+    },
+    {
+      "Owner": -2,
+      "Kind": "villager",
+      "Attribute": "LastWork",
+      "ExactServerValue": "44.521172",
+      "Matched": true,
+      "HostUtc": "2026-09-30T13:34:34.582Z",
+      "PeerUtc": "2026-09-30T13:34:34.599Z",
+      "HostAudioEnabled": true,
+      "PeerAudioEnabled": true
+    },
+    {
+      "Owner": -2,
+      "Kind": "villager",
+      "Attribute": "LastWork",
+      "ExactServerValue": "45.604494",
+      "Matched": true,
+      "HostUtc": "2026-09-30T13:34:35.667Z",
+      "PeerUtc": "2026-09-30T13:34:35.681Z",
+      "HostAudioEnabled": true,
+      "PeerAudioEnabled": true
+    },
+    {
+      "Owner": -2,
+      "Kind": "villager",
+      "Attribute": "LastDelivery",
+      "ExactServerValue": "52.437189",
+      "Matched": true,
+      "HostUtc": "2026-09-30T13:34:42.501Z",
+      "PeerUtc": "2026-09-30T13:34:42.516Z",
+      "HostAudioEnabled": true,
+      "PeerAudioEnabled": true
+    }
+  ],
+  "Sources": [
+    "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T133354Z_Studio_A7AAE_last.log",
+    "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T133355Z_Studio_9589E_last.log"
+  ]
+}

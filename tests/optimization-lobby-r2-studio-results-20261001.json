@@ -1,0 +1,78 @@
+{
+  "capturedUtc": "2026-09-30T22:48:22.3660076Z",
+  "originalLog": "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20260930T223624Z_Studio_8AE4B_last.log",
+  "sourceManifest": "tests/optimization-lobby-r2-source-manifest-20261001.json",
+  "sourceFilesMatched": 94,
+  "defaultBuild": "build/AOE2.rbxlx",
+  "defaultBuildSha256": "EECCAC08521CB465450E20B08532A6CB082C9BACBE9E60236F194946768D8AFE",
+  "validationBuild": "build/AOE2-lobby-cleanup-studio-20261001-r2.rbxlx",
+  "validationBuildSha256": "DC760287ACABD15CF1EB92B88C32B69DDB82897D46825913054A6EF086A252B2",
+  "completeLogLine": "2026-09-30T22:42:52.417Z,388.417755,8b50,6,Info [FLog::CreatorOutput] [LOBBY_CLEANUP COMPLETE] {\"checks\":126,\"cycles\":[{\"beforeDots\":426,\"mapChecks\":6775,\"afterNodes\":0,\"afterDots\":0,\"generation\":1,\"afterParts\":0,\"beforeParts\":2468,\"beforeNodes\":420,\"size\":\"Small\"},{\"beforeDots\":426,\"mapChecks\":6775,\"afterNodes\":0,\"afterDots\":0,\"generation\":3,\"afterParts\":0,\"beforeParts\":2468,\"beforeNodes\":420,\"size\":\"Small\"},{\"beforeDots\":1106,\"mapChecks\":17359,\"afterNodes\":0,\"afterDots\":0,\"generation\":5,\"afterParts\":0,\"beforeParts\":6204,\"beforeNodes\":1100,\"size\":\"Large\"},{\"beforeDots\":1106,\"mapChecks\":17359,\"afterNodes\":0,\"afterDots\":0,\"generation\":7,\"afterParts\":0,\"beforeParts\":6204,\"beforeNodes\":1100,\"size\":\"Large\"},{\"beforeDots\":426,\"mapChecks\":6775,\"afterNodes\":0,\"afterDots\":0,\"generation\":9,\"afterParts\":0,\"beforeParts\":2468,\"beforeNodes\":420,\"size\":\"Small\"}],\"complete\":true}",
+  "report": {
+    "checks": 126,
+    "cycles": [
+      {
+        "beforeDots": 426,
+        "mapChecks": 6775,
+        "afterNodes": 0,
+        "afterDots": 0,
+        "generation": 1,
+        "afterParts": 0,
+        "beforeParts": 2468,
+        "beforeNodes": 420,
+        "size": "Small"
+      },
+      {
+        "beforeDots": 426,
+        "mapChecks": 6775,
+        "afterNodes": 0,
+        "afterDots": 0,
+        "generation": 3,
+        "afterParts": 0,
+        "beforeParts": 2468,
+        "beforeNodes": 420,
+        "size": "Small"
+      },
+      {
+        "beforeDots": 1106,
+        "mapChecks": 17359,
+        "afterNodes": 0,
+        "afterDots": 0,
+        "generation": 5,
+        "afterParts": 0,
+        "beforeParts": 6204,
+        "beforeNodes": 1100,
+        "size": "Large"
+      },
+      {
+        "beforeDots": 1106,
+        "mapChecks": 17359,
+        "afterNodes": 0,
+        "afterDots": 0,
+        "generation": 7,
+        "afterParts": 0,
+        "beforeParts": 6204,
+        "beforeNodes": 1100,
+        "size": "Large"
+      },
+      {
+        "beforeDots": 426,
+        "mapChecks": 6775,
+        "afterNodes": 0,
+        "afterDots": 0,
+        "generation": 9,
+        "afterParts": 0,
+        "beforeParts": 2468,
+        "beforeNodes": 420,
+        "size": "Small"
+      }
+    ],
+    "complete": true
+  },
+  "limits": [
+    "Single-player Studio Play; no multiplayer, player-leave, full population or device FPS claim.",
+    "beforeParts is the client received-parts census, not proof of complete visual replication or server memory.",
+    "Unknown fixture identity, parent and management flags are checked; not all material/color/CFrame metadata.",
+    "Studio also logged avatar animation asset 96806611330323 load failures; this run does not claim a clean external avatar asset load."
+  ]
+}

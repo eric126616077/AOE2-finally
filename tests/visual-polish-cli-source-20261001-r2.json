@@ -1,0 +1,2023 @@
+{
+  "exitCode": 0,
+  "runtime": "PowerShell7.6.5",
+  "checkedSourceRoot": "src",
+  "project": "default.project.json",
+  "verifier": "scripts/verify.ps1",
+  "frozenManifest": "tests/visual-polish-source-manifest-20261001-r2.json",
+  "before": [
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedFirst\\BuildingSystemLoader.client.lua",
+      "length": 50,
+      "hash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedFirst\\ClientLoader.client.lua",
+      "length": 204,
+      "hash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\GameData\\GameConfig.lua",
+      "length": 15414,
+      "hash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\ResourceSystem.lua",
+      "length": 6997,
+      "hash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+      "length": 31328,
+      "hash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AIObservationTests.lua",
+      "length": 14908,
+      "hash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Art.lua",
+      "length": 41904,
+      "hash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AudioFeedback.lua",
+      "length": 8505,
+      "hash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildingController.lua",
+      "length": 6693,
+      "hash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildingSystem.client.lua",
+      "length": 84,
+      "hash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildMenuRules.lua",
+      "length": 1182,
+      "hash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildMenuTests.lua",
+      "length": 12950,
+      "hash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CameraFocus.lua",
+      "length": 1265,
+      "hash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ClientUnitView.lua",
+      "length": 522,
+      "hash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "length": 40850,
+      "hash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "length": 14958,
+      "hash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "length": 7700,
+      "hash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionTests.lua",
+      "length": 8444,
+      "hash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionVisualRules.lua",
+      "length": 821,
+      "hash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionVisualTests.lua",
+      "length": 8529,
+      "hash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\DeliveryFallbackTests.lua",
+      "length": 24698,
+      "hash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\EconomyTests.lua",
+      "length": 14395,
+      "hash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackBattleTests.lua",
+      "length": 36838,
+      "hash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackConstructionTests.lua",
+      "length": 15520,
+      "hash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackMultiplayerTests.lua",
+      "length": 19743,
+      "hash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackRepairTests.lua",
+      "length": 19596,
+      "hash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackRules.lua",
+      "length": 5641,
+      "hash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackTests.lua",
+      "length": 18275,
+      "hash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FormationRules.lua",
+      "length": 7794,
+      "hash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FormationTests.lua",
+      "length": 18903,
+      "hash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Grid.lua",
+      "length": 1073,
+      "hash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\HUDTests.lua",
+      "length": 11287,
+      "hash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\LobbyTests.lua",
+      "length": 4066,
+      "hash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MapTests.lua",
+      "length": 14886,
+      "hash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MatchReportFlowTests.lua",
+      "length": 20901,
+      "hash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MatchReportTests.lua",
+      "length": 11999,
+      "hash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MotionRules.lua",
+      "length": 2142,
+      "hash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MultiplayerTests.lua",
+      "length": 10947,
+      "hash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "length": 10915,
+      "hash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\PerformanceObserver.lua",
+      "length": 19814,
+      "hash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ProductionTests.lua",
+      "length": 10920,
+      "hash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ProgressionTests.lua",
+      "length": 14166,
+      "hash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ReleaseTests.lua",
+      "length": 4070,
+      "hash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "length": 8515,
+      "hash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\SelectionIcons.lua",
+      "length": 9003,
+      "hash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\SharedFunctions.lua",
+      "length": 1882,
+      "hash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\StudioTests.lua",
+      "length": 8874,
+      "hash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamClientRules.lua",
+      "length": 3918,
+      "hash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamMatchTests.lua",
+      "length": 29033,
+      "hash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamUITests.lua",
+      "length": 7174,
+      "hash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TouchRules.lua",
+      "length": 3929,
+      "hash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TouchTests.lua",
+      "length": 13057,
+      "hash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Tutorial.lua",
+      "length": 1513,
+      "hash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitCollisionTests.lua",
+      "length": 22603,
+      "hash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitIcons.lua",
+      "length": 18084,
+      "hash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitIconTests.lua",
+      "length": 20298,
+      "hash": "4DACD4D5478282BC0E1F7DC5887FB9A442D8B595EDEE43A7DB2E72249497BEA1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitSelectionPanel.lua",
+      "length": 12012,
+      "hash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\VisualMotionTests.lua",
+      "length": 13495,
+      "hash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\CastleSpawner.server.lua",
+      "length": 85,
+      "hash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\GameServer.server.lua",
+      "length": 113200,
+      "hash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\MapGenerator.server.lua",
+      "length": 4969,
+      "hash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ResourceSpawner.server.lua",
+      "length": 52,
+      "hash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ResourceSystemLoader.server.lua",
+      "length": 89,
+      "hash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\AIWorkerRules.lua",
+      "length": 1383,
+      "hash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ApproachRules.lua",
+      "length": 1323,
+      "hash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CivilizationPreferenceRules.lua",
+      "length": 711,
+      "hash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CivilizationRules.lua",
+      "length": 2426,
+      "hash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CombatRules.lua",
+      "length": 959,
+      "hash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CommandRules.lua",
+      "length": 976,
+      "hash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CommerceRules.lua",
+      "length": 2217,
+      "hash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ConstructionRules.lua",
+      "length": 2751,
+      "hash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\Economy.lua",
+      "length": 383,
+      "hash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\GameManager.lua",
+      "length": 786,
+      "hash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\GatheringRules.lua",
+      "length": 1042,
+      "hash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\LobbyRules.lua",
+      "length": 3065,
+      "hash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\LobbyWorld.lua",
+      "length": 9562,
+      "hash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MatchReportRules.lua",
+      "length": 8331,
+      "hash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MatchRules.lua",
+      "length": 2809,
+      "hash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MeleeRules.lua",
+      "length": 1585,
+      "hash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ModelFactory.lua",
+      "length": 5815,
+      "hash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ModelFactoryTests.lua",
+      "length": 8390,
+      "hash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\PathRules.lua",
+      "length": 6317,
+      "hash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\PlayerColorTests.lua",
+      "length": 15325,
+      "hash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProductionRules.lua",
+      "length": 1941,
+      "hash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProfileRules.lua",
+      "length": 4018,
+      "hash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProfileStore.lua",
+      "length": 6187,
+      "hash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\SpatialRules.lua",
+      "length": 1072,
+      "hash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\TeamRules.lua",
+      "length": 8680,
+      "hash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\Telemetry.lua",
+      "length": 2355,
+      "hash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\UnitCollisionRules.lua",
+      "length": 10050,
+      "hash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\UnitRules.lua",
+      "length": 938,
+      "hash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\WorldGenerator.lua",
+      "length": 8760,
+      "hash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterGui\\GameUI\\GUIManager.lua",
+      "length": 132118,
+      "hash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\BuildingVisuals.client.lua",
+      "length": 15031,
+      "hash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+      "length": 15760,
+      "hash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\RTSClient.client.lua",
+      "length": 27177,
+      "hash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\SoundFeedback.client.lua",
+      "length": 5033,
+      "hash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\UnitMotion.client.lua",
+      "length": 22835,
+      "hash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\default.project.json",
+      "length": 1600,
+      "hash": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\scripts\\verify.ps1",
+      "length": 16744,
+      "hash": "6969D474C2B49134724D8D6AA16CA8E7996D63FB4E3B504A1AEF8B241EA58CEC"
+    }
+  ],
+  "after": [
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedFirst\\BuildingSystemLoader.client.lua",
+      "length": 50,
+      "hash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedFirst\\ClientLoader.client.lua",
+      "length": 204,
+      "hash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\GameData\\GameConfig.lua",
+      "length": 15414,
+      "hash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\ResourceSystem.lua",
+      "length": 6997,
+      "hash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+      "length": 31328,
+      "hash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AIObservationTests.lua",
+      "length": 14908,
+      "hash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Art.lua",
+      "length": 41904,
+      "hash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\AudioFeedback.lua",
+      "length": 8505,
+      "hash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildingController.lua",
+      "length": 6693,
+      "hash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildingSystem.client.lua",
+      "length": 84,
+      "hash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildMenuRules.lua",
+      "length": 1182,
+      "hash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\BuildMenuTests.lua",
+      "length": 12950,
+      "hash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CameraFocus.lua",
+      "length": 1265,
+      "hash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ClientUnitView.lua",
+      "length": 522,
+      "hash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "length": 40850,
+      "hash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "length": 14958,
+      "hash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "length": 7700,
+      "hash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionTests.lua",
+      "length": 8444,
+      "hash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionVisualRules.lua",
+      "length": 821,
+      "hash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ConstructionVisualTests.lua",
+      "length": 8529,
+      "hash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\DeliveryFallbackTests.lua",
+      "length": 24698,
+      "hash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\EconomyTests.lua",
+      "length": 14395,
+      "hash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackBattleTests.lua",
+      "length": 36838,
+      "hash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackConstructionTests.lua",
+      "length": 15520,
+      "hash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackMultiplayerTests.lua",
+      "length": 19743,
+      "hash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackRepairTests.lua",
+      "length": 19596,
+      "hash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackRules.lua",
+      "length": 5641,
+      "hash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FeedbackTests.lua",
+      "length": 18275,
+      "hash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FormationRules.lua",
+      "length": 7794,
+      "hash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\FormationTests.lua",
+      "length": 18903,
+      "hash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Grid.lua",
+      "length": 1073,
+      "hash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\HUDTests.lua",
+      "length": 11287,
+      "hash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\LobbyTests.lua",
+      "length": 4066,
+      "hash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MapTests.lua",
+      "length": 14886,
+      "hash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MatchReportFlowTests.lua",
+      "length": 20901,
+      "hash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MatchReportTests.lua",
+      "length": 11999,
+      "hash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MotionRules.lua",
+      "length": 2142,
+      "hash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\MultiplayerTests.lua",
+      "length": 10947,
+      "hash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "length": 10915,
+      "hash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\PerformanceObserver.lua",
+      "length": 19814,
+      "hash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ProductionTests.lua",
+      "length": 10920,
+      "hash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ProgressionTests.lua",
+      "length": 14166,
+      "hash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ReleaseTests.lua",
+      "length": 4070,
+      "hash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "length": 8515,
+      "hash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\SelectionIcons.lua",
+      "length": 9003,
+      "hash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\SharedFunctions.lua",
+      "length": 1882,
+      "hash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\StudioTests.lua",
+      "length": 8874,
+      "hash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamClientRules.lua",
+      "length": 3918,
+      "hash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamMatchTests.lua",
+      "length": 29033,
+      "hash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TeamUITests.lua",
+      "length": 7174,
+      "hash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TouchRules.lua",
+      "length": 3929,
+      "hash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\TouchTests.lua",
+      "length": 13057,
+      "hash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\Tutorial.lua",
+      "length": 1513,
+      "hash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitCollisionTests.lua",
+      "length": 22603,
+      "hash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitIcons.lua",
+      "length": 18084,
+      "hash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitIconTests.lua",
+      "length": 25256,
+      "hash": "207CA08F2005E72610010E4C4A4D7E428709C7724A7201CC1146E3EAC95F059D"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitSelectionPanel.lua",
+      "length": 12012,
+      "hash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\VisualMotionTests.lua",
+      "length": 13495,
+      "hash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\CastleSpawner.server.lua",
+      "length": 85,
+      "hash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\GameServer.server.lua",
+      "length": 113200,
+      "hash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\MapGenerator.server.lua",
+      "length": 4969,
+      "hash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ResourceSpawner.server.lua",
+      "length": 52,
+      "hash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ResourceSystemLoader.server.lua",
+      "length": 89,
+      "hash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\AIWorkerRules.lua",
+      "length": 1383,
+      "hash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ApproachRules.lua",
+      "length": 1323,
+      "hash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CivilizationPreferenceRules.lua",
+      "length": 711,
+      "hash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CivilizationRules.lua",
+      "length": 2426,
+      "hash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CombatRules.lua",
+      "length": 959,
+      "hash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CommandRules.lua",
+      "length": 976,
+      "hash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\CommerceRules.lua",
+      "length": 2217,
+      "hash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ConstructionRules.lua",
+      "length": 2751,
+      "hash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\Economy.lua",
+      "length": 383,
+      "hash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\GameManager.lua",
+      "length": 786,
+      "hash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\GatheringRules.lua",
+      "length": 1042,
+      "hash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\LobbyRules.lua",
+      "length": 3065,
+      "hash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\LobbyWorld.lua",
+      "length": 9562,
+      "hash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MatchReportRules.lua",
+      "length": 8331,
+      "hash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MatchRules.lua",
+      "length": 2809,
+      "hash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\MeleeRules.lua",
+      "length": 1585,
+      "hash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ModelFactory.lua",
+      "length": 5815,
+      "hash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ModelFactoryTests.lua",
+      "length": 8390,
+      "hash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\PathRules.lua",
+      "length": 6317,
+      "hash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\PlayerColorTests.lua",
+      "length": 15325,
+      "hash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProductionRules.lua",
+      "length": 1941,
+      "hash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProfileRules.lua",
+      "length": 4018,
+      "hash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\ProfileStore.lua",
+      "length": 6187,
+      "hash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\SpatialRules.lua",
+      "length": 1072,
+      "hash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\TeamRules.lua",
+      "length": 8680,
+      "hash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\Telemetry.lua",
+      "length": 2355,
+      "hash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\UnitCollisionRules.lua",
+      "length": 10050,
+      "hash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\UnitRules.lua",
+      "length": 938,
+      "hash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ServerScriptService\\ServerModules\\WorldGenerator.lua",
+      "length": 8760,
+      "hash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterGui\\GameUI\\GUIManager.lua",
+      "length": 132118,
+      "hash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\BuildingVisuals.client.lua",
+      "length": 15031,
+      "hash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+      "length": 15760,
+      "hash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\RTSClient.client.lua",
+      "length": 27177,
+      "hash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\SoundFeedback.client.lua",
+      "length": 5033,
+      "hash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\StarterPlayer\\StarterPlayerScripts\\UnitMotion.client.lua",
+      "length": 22835,
+      "hash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\default.project.json",
+      "length": 1600,
+      "hash": "F154823CFF35F15815A242C93F4B45A779494C1C54C746D7ED108ED27E2CDB64"
+    },
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\scripts\\verify.ps1",
+      "length": 16744,
+      "hash": "6969D474C2B49134724D8D6AA16CA8E7996D63FB4E3B504A1AEF8B241EA58CEC"
+    }
+  ],
+  "changedDuringRun": [
+    {
+      "path": "C:\\Users\\user\\Desktop\\AOE2-finally\\src\\ReplicatedStorage\\Shared\\UnitIconTests.lua",
+      "before": "4DACD4D5478282BC0E1F7DC5887FB9A442D8B595EDEE43A7DB2E72249497BEA1",
+      "after": "207CA08F2005E72610010E4C4A4D7E428709C7724A7201CC1146E3EAC95F059D"
+    }
+  ],
+  "frozenSnapshotComparison": [
+    {
+      "path": "src\\ReplicatedFirst\\BuildingSystemLoader.client.lua",
+      "manifestHash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028",
+      "frozenFileHash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028",
+      "beforeSourceHash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028",
+      "afterSourceHash": "2FF7DFFF342A092B5EA808285EA5ECF31CEF98B561015D95BD498B6BD3B44028",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedFirst\\ClientLoader.client.lua",
+      "manifestHash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF",
+      "frozenFileHash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF",
+      "beforeSourceHash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF",
+      "afterSourceHash": "3B77093D37EE037BC8D0982C27B0EFCEE266B7139716F66CD8FF226DFD5378FF",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\GameData\\GameConfig.lua",
+      "manifestHash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44",
+      "frozenFileHash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44",
+      "beforeSourceHash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44",
+      "afterSourceHash": "E826CE271DD01685660122E23C54594C39C40FF9D3FA50CD668341385EBB3C44",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\ResourceSystem.lua",
+      "manifestHash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED",
+      "frozenFileHash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED",
+      "beforeSourceHash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED",
+      "afterSourceHash": "E23655AC45460EDE8F86F546D6C3DA2AC118A2D2E02F84EA09F7084764EE66ED",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AdvancedTests.lua",
+      "manifestHash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B",
+      "frozenFileHash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B",
+      "beforeSourceHash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B",
+      "afterSourceHash": "6CF7920C8EC671684186D508AC2C9FCBFF31F6F5F775D2210E9AC82CB73ECE9B",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AIObservationTests.lua",
+      "manifestHash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857",
+      "frozenFileHash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857",
+      "beforeSourceHash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857",
+      "afterSourceHash": "119A2C2A2DC69BC1CC69891178F49964A8FB4D5F5E81C98F9067AA1569803857",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Art.lua",
+      "manifestHash": "6DD18BE52271AB8106620F5F2AEBC8D72A70C45474E09B1F4C49637427C80C13",
+      "frozenFileHash": "6DD18BE52271AB8106620F5F2AEBC8D72A70C45474E09B1F4C49637427C80C13",
+      "beforeSourceHash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1",
+      "afterSourceHash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": false,
+      "afterSourceMatches": false
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\AudioFeedback.lua",
+      "manifestHash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E",
+      "frozenFileHash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E",
+      "beforeSourceHash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E",
+      "afterSourceHash": "B1B989E548F3C555B9A56A00D6D487FE58A443C086CDB8D7827D71C2727D187E",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingController.lua",
+      "manifestHash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE",
+      "frozenFileHash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE",
+      "beforeSourceHash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE",
+      "afterSourceHash": "A6D6422D5025B5DA26A597C74CB71D6AF97C411066FA393A770900398D55B5EE",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildingSystem.client.lua",
+      "manifestHash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8",
+      "frozenFileHash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8",
+      "beforeSourceHash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8",
+      "afterSourceHash": "40D9CF7C6335EB438E56EAE803005D1209C1AD5261A00DFDCB84911B4BB8C2A8",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuRules.lua",
+      "manifestHash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030",
+      "frozenFileHash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030",
+      "beforeSourceHash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030",
+      "afterSourceHash": "371250D672BF73B574617908BB73DF9398C026BBABCFD7D072277F5A62C97030",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\BuildMenuTests.lua",
+      "manifestHash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A",
+      "frozenFileHash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A",
+      "beforeSourceHash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A",
+      "afterSourceHash": "6DDC4117823091C3F426F02268C31E579FD5CEDF476D96B90004458A144B9C5A",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CameraFocus.lua",
+      "manifestHash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764",
+      "frozenFileHash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764",
+      "beforeSourceHash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764",
+      "afterSourceHash": "A7C7D0EE83D72E1109B03DD2D64BD773B3C0CC2C915DE0489DB0AB00F0023764",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ClientUnitView.lua",
+      "manifestHash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13",
+      "frozenFileHash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13",
+      "beforeSourceHash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13",
+      "afterSourceHash": "9422BB76593A3B3BB5362A8981FDDE5BDC966182DB738DB38D509E7A30950E13",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "manifestHash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "frozenFileHash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "beforeSourceHash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "afterSourceHash": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "manifestHash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "frozenFileHash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "beforeSourceHash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "afterSourceHash": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "manifestHash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "frozenFileHash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "beforeSourceHash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "afterSourceHash": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionTests.lua",
+      "manifestHash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B",
+      "frozenFileHash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B",
+      "beforeSourceHash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B",
+      "afterSourceHash": "70AE9C797F187AA80F2E69DCAEE73245CD6DF63FCD711D88AC7580C9E69DB88B",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualRules.lua",
+      "manifestHash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205",
+      "frozenFileHash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205",
+      "beforeSourceHash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205",
+      "afterSourceHash": "D2F35171B144DA492FD3BCEBE88E060FF3D1E20552554EA15D38642837B3E205",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ConstructionVisualTests.lua",
+      "manifestHash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED",
+      "frozenFileHash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED",
+      "beforeSourceHash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED",
+      "afterSourceHash": "53CA90C7BC4FAAB34A090661AE5061ECB093FB78900B5135B8BB71F83F4172ED",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\DeliveryFallbackTests.lua",
+      "manifestHash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+      "frozenFileHash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+      "beforeSourceHash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+      "afterSourceHash": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\EconomyTests.lua",
+      "manifestHash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6",
+      "frozenFileHash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6",
+      "beforeSourceHash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6",
+      "afterSourceHash": "754F55F3C58FE02A7FBC9836B379AAF55FFC677A21B610EE6734B5440E1955C6",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackBattleTests.lua",
+      "manifestHash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50",
+      "frozenFileHash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50",
+      "beforeSourceHash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50",
+      "afterSourceHash": "860FAF1CA6A0B103DEA07DB3E32182DB8C2FA315D234F73067E3152C0E43AC50",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackConstructionTests.lua",
+      "manifestHash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2",
+      "frozenFileHash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2",
+      "beforeSourceHash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2",
+      "afterSourceHash": "9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackMultiplayerTests.lua",
+      "manifestHash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7",
+      "frozenFileHash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7",
+      "beforeSourceHash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7",
+      "afterSourceHash": "68B1C60BCFE1CE4194E48B4B7DD815988CE4D0FC15DA7FDB74974580355A22F7",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRepairTests.lua",
+      "manifestHash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5",
+      "frozenFileHash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5",
+      "beforeSourceHash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5",
+      "afterSourceHash": "5E596CADF9DBE1476E8E089F3D5762A366562EB0E812E345FC0AE00B6ABB45F5",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackRules.lua",
+      "manifestHash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941",
+      "frozenFileHash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941",
+      "beforeSourceHash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941",
+      "afterSourceHash": "69F820CAE09996692558D1F9951B55F8F6E809A31DC412CEB88C04D786856941",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FeedbackTests.lua",
+      "manifestHash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D",
+      "frozenFileHash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D",
+      "beforeSourceHash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D",
+      "afterSourceHash": "16EEDF1FF427597BADAC558FED5CCDC98205E610589D31BA32B023C95EFD2A1D",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationRules.lua",
+      "manifestHash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47",
+      "frozenFileHash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47",
+      "beforeSourceHash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47",
+      "afterSourceHash": "FFB24EB894CE75011AE9425829ADAD9654CD94953421C72AF6EA0A55620BCC47",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\FormationTests.lua",
+      "manifestHash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426",
+      "frozenFileHash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426",
+      "beforeSourceHash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426",
+      "afterSourceHash": "572617A9A14EF0B0EC7645FDE37A664DEEDC9055F5F9F73B43E3BACAF0394426",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Grid.lua",
+      "manifestHash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A",
+      "frozenFileHash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A",
+      "beforeSourceHash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A",
+      "afterSourceHash": "3B02B530304CD98E2D7AC14F70200FBC80589B4192B76F5B8431C42F869A160A",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\HUDTests.lua",
+      "manifestHash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C",
+      "frozenFileHash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C",
+      "beforeSourceHash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C",
+      "afterSourceHash": "0607624FCEF32E2D37E16DFFF4D5A7DBA3C7389DEC60985495B1DD91E4A1042C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\LobbyTests.lua",
+      "manifestHash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8",
+      "frozenFileHash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8",
+      "beforeSourceHash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8",
+      "afterSourceHash": "A6AADF04E162911E965D4BA6C7ED6BD4154E5E921BE587C8A0DB23CBF463F9E8",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MapTests.lua",
+      "manifestHash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450",
+      "frozenFileHash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450",
+      "beforeSourceHash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450",
+      "afterSourceHash": "D821395AE231143847FE54E956D0FA13C846A2DE363F55E24360F1475B3EF450",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportFlowTests.lua",
+      "manifestHash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803",
+      "frozenFileHash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803",
+      "beforeSourceHash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803",
+      "afterSourceHash": "2391263877B6AE6901AC23F9D3606880FD99745DBA94F45C897E8BF23F327803",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MatchReportTests.lua",
+      "manifestHash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86",
+      "frozenFileHash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86",
+      "beforeSourceHash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86",
+      "afterSourceHash": "4B9A07E7A8BF55432A87B6F0B2D881954C28BFD735C3F9137489DA9FB2787A86",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MotionRules.lua",
+      "manifestHash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11",
+      "frozenFileHash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11",
+      "beforeSourceHash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11",
+      "afterSourceHash": "4E7B188AC54ACFF8933B3785AFCD2858296E4E53FCB6375D9039FD6213F86E11",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\MultiplayerTests.lua",
+      "manifestHash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4",
+      "frozenFileHash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4",
+      "beforeSourceHash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4",
+      "afterSourceHash": "7B05ABD15D9E835F52B8FF03A709385D394C171C761CBE5E3C51DC732C84AFC4",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "manifestHash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "frozenFileHash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "beforeSourceHash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "afterSourceHash": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\PerformanceObserver.lua",
+      "manifestHash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+      "frozenFileHash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+      "beforeSourceHash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+      "afterSourceHash": "267954F6568CD2A7C2F005F5360D17848874AD8C9B23F2ED77BF1EBE04151160",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProductionTests.lua",
+      "manifestHash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625",
+      "frozenFileHash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625",
+      "beforeSourceHash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625",
+      "afterSourceHash": "2AF79E3AE371449E3C16B15FB501B2E0D425D337EE4D8874F796703E4D2B3625",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ProgressionTests.lua",
+      "manifestHash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A",
+      "frozenFileHash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A",
+      "beforeSourceHash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A",
+      "afterSourceHash": "B9D1AA41181202C6F4839040BC9D87EBA7FDDCBF28D3E91405743ECEE8375D6A",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ReleaseTests.lua",
+      "manifestHash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49",
+      "frozenFileHash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49",
+      "beforeSourceHash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49",
+      "afterSourceHash": "8D8833FC3E300570AAC0B42DC0328F9103DD8E1C7CEDA78F7F1D672BB02AAA49",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "manifestHash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "frozenFileHash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "beforeSourceHash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "afterSourceHash": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\SelectionIcons.lua",
+      "manifestHash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73",
+      "frozenFileHash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73",
+      "beforeSourceHash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73",
+      "afterSourceHash": "D7DB247CA93B159408B517E3509E6662FDFD867627402B9FA41961135D0F3E73",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\SharedFunctions.lua",
+      "manifestHash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C",
+      "frozenFileHash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C",
+      "beforeSourceHash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C",
+      "afterSourceHash": "48AD25C53A0556557ECA7A44BE4004BC8F30AEE5331635245BD372273728FF4C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\StudioTests.lua",
+      "manifestHash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A",
+      "frozenFileHash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A",
+      "beforeSourceHash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A",
+      "afterSourceHash": "36DDB25DE0B8913B915FF59F3C1834B40620831ECCE23E9DFFF63763BBC10F8A",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamClientRules.lua",
+      "manifestHash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1",
+      "frozenFileHash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1",
+      "beforeSourceHash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1",
+      "afterSourceHash": "8F5C60A67818E772587E0B2352CF7DB0FF27416FEEF9FCEDFCE2E2550C2874D1",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamMatchTests.lua",
+      "manifestHash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+      "frozenFileHash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+      "beforeSourceHash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+      "afterSourceHash": "A0B4DB871DA590BF4962A2AE67911D04BAEEA1F304C737DB0AAB7E32822D320E",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TeamUITests.lua",
+      "manifestHash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC",
+      "frozenFileHash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC",
+      "beforeSourceHash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC",
+      "afterSourceHash": "8E47448B1DFD64584FFD01E927DB85521391DF3DB1BE3C1D078CBDF8141F1BCC",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchRules.lua",
+      "manifestHash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C",
+      "frozenFileHash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C",
+      "beforeSourceHash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C",
+      "afterSourceHash": "1B2A92641F33527DA7C5837F9BD07C50212BE9DD39B1B74641A08AEE2E97AD6C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\TouchTests.lua",
+      "manifestHash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8",
+      "frozenFileHash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8",
+      "beforeSourceHash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8",
+      "afterSourceHash": "8E4DE07601D47176D3407725F47257A9D43E30B7B06C6A6A31C21314168186D8",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Tutorial.lua",
+      "manifestHash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140",
+      "frozenFileHash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140",
+      "beforeSourceHash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140",
+      "afterSourceHash": "CD6DA7662D2F96CD95C96504696A29FD9541F7BFE308CB1F47A27C0EE0F2C140",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitCollisionTests.lua",
+      "manifestHash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588",
+      "frozenFileHash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588",
+      "beforeSourceHash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588",
+      "afterSourceHash": "81887BCC9245072EEEAECDCEB8212339AD402F92387EB273C19A421FA7C43588",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitIcons.lua",
+      "manifestHash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7",
+      "frozenFileHash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7",
+      "beforeSourceHash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7",
+      "afterSourceHash": "96859EA9FBD452FAEA6F873D357BECEC354C3D6A7958B8CA225CE17E0E67F6C7",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitIconTests.lua",
+      "manifestHash": "CB64DADF61760F410EC0702A236E28D597EBDF3E19E1ED5EAB380FA74C9A2E93",
+      "frozenFileHash": "CB64DADF61760F410EC0702A236E28D597EBDF3E19E1ED5EAB380FA74C9A2E93",
+      "beforeSourceHash": "4DACD4D5478282BC0E1F7DC5887FB9A442D8B595EDEE43A7DB2E72249497BEA1",
+      "afterSourceHash": "207CA08F2005E72610010E4C4A4D7E428709C7724A7201CC1146E3EAC95F059D",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": false,
+      "afterSourceMatches": false
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitSelectionPanel.lua",
+      "manifestHash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF",
+      "frozenFileHash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF",
+      "beforeSourceHash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF",
+      "afterSourceHash": "54D7FD747364B70406D7D5B79DB6A03D7B327D16417867549CF24D33D45102EF",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\VisualMotionTests.lua",
+      "manifestHash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D",
+      "frozenFileHash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D",
+      "beforeSourceHash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D",
+      "afterSourceHash": "8665CAED5982D1F7207E7499B387997181DA8C6DA36C6CB744B7B0B832FB711D",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\CastleSpawner.server.lua",
+      "manifestHash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5",
+      "frozenFileHash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5",
+      "beforeSourceHash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5",
+      "afterSourceHash": "92E8913EE73E2341A249366E306E273001BFA5B497C9E333D365976C655FB5E5",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\GameServer.server.lua",
+      "manifestHash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00",
+      "frozenFileHash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00",
+      "beforeSourceHash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00",
+      "afterSourceHash": "1468DCA88AA0B98124A8AE4EE58EB69AF48327637ACA7D07E7C1BD3F58F8DB00",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\MapGenerator.server.lua",
+      "manifestHash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E",
+      "frozenFileHash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E",
+      "beforeSourceHash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E",
+      "afterSourceHash": "E31F5542F4334695183FBDEC16B86E4589766C47D5F645D1FFD7C6B9BAD5969E",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSpawner.server.lua",
+      "manifestHash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578",
+      "frozenFileHash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578",
+      "beforeSourceHash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578",
+      "afterSourceHash": "581A542F82E6642276A8F783C978DDDBCF537E6C696C50EF520DE3CF4059F578",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ResourceSystemLoader.server.lua",
+      "manifestHash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A",
+      "frozenFileHash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A",
+      "beforeSourceHash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A",
+      "afterSourceHash": "9E30EB7A8DAEC5E11CAAF516083A44160EEFAACCFF028EC83237F9AA576A945A",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\AIWorkerRules.lua",
+      "manifestHash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE",
+      "frozenFileHash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE",
+      "beforeSourceHash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE",
+      "afterSourceHash": "E61E64B38B3F7A266A72991BE07100BEEF220E4573689FB7A8FC8A81D190B8CE",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ApproachRules.lua",
+      "manifestHash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC",
+      "frozenFileHash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC",
+      "beforeSourceHash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC",
+      "afterSourceHash": "55012CEB91710AF792A25F70B74E2E0119ABD490782EC65CF3E28169C3F2FAFC",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationPreferenceRules.lua",
+      "manifestHash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5",
+      "frozenFileHash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5",
+      "beforeSourceHash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5",
+      "afterSourceHash": "EB6F08ACEE865C3849409B4878ADDB48924F2C87CBE8DD1F75A7D6E1CF4606A5",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CivilizationRules.lua",
+      "manifestHash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234",
+      "frozenFileHash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234",
+      "beforeSourceHash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234",
+      "afterSourceHash": "F843148B23B401362F1915A090AFA33F80CD42B594DFE669441DD93AE4363234",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CombatRules.lua",
+      "manifestHash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761",
+      "frozenFileHash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761",
+      "beforeSourceHash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761",
+      "afterSourceHash": "8AB3CCB5B11CEE3F289F3932464D6277C36892B0B765F12E78FCD4AE47D15761",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommandRules.lua",
+      "manifestHash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F",
+      "frozenFileHash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F",
+      "beforeSourceHash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F",
+      "afterSourceHash": "7C7D98B5A68F38FAB25CB9187EE1BAFCC2F02F15060C35E3E2C598165961275F",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\CommerceRules.lua",
+      "manifestHash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43",
+      "frozenFileHash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43",
+      "beforeSourceHash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43",
+      "afterSourceHash": "006B9C86BFA810F8004F6299CB6FA8E7F71E487A8233A4A1DA6CE301F32B7C43",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ConstructionRules.lua",
+      "manifestHash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+      "frozenFileHash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+      "beforeSourceHash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+      "afterSourceHash": "B96E25302563DA708CEA553D50774C29A4A582BC79957F23D1CEED0EABBAE7E6",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Economy.lua",
+      "manifestHash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7",
+      "frozenFileHash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7",
+      "beforeSourceHash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7",
+      "afterSourceHash": "87BF63128D814DBB9342E0BF12FBEFDC8BF33848BA2D12CC8964A2C9DCB576B7",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GameManager.lua",
+      "manifestHash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170",
+      "frozenFileHash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170",
+      "beforeSourceHash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170",
+      "afterSourceHash": "6524820122AFB6733F7721EA1B9B4901DDADCADB2C41C46FE4FBB4197B5EC170",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\GatheringRules.lua",
+      "manifestHash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270",
+      "frozenFileHash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270",
+      "beforeSourceHash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270",
+      "afterSourceHash": "406A768DA34F83CB9CE62C7AE19DEDE768BF8784FBB8ED316E19D2824BE2E270",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyRules.lua",
+      "manifestHash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD",
+      "frozenFileHash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD",
+      "beforeSourceHash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD",
+      "afterSourceHash": "D229271B67C4F895F3A1D0024436080692A1315AC803A0B6118AEB134FE244BD",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\LobbyWorld.lua",
+      "manifestHash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681",
+      "frozenFileHash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681",
+      "beforeSourceHash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681",
+      "afterSourceHash": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchReportRules.lua",
+      "manifestHash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F",
+      "frozenFileHash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F",
+      "beforeSourceHash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F",
+      "afterSourceHash": "A11622AC13162A101478C6F021A17542C49D0707602BA79C86C7640E99BD014F",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MatchRules.lua",
+      "manifestHash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C",
+      "frozenFileHash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C",
+      "beforeSourceHash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C",
+      "afterSourceHash": "B067296F909906B8EABE74E2FBDCF629F8C2FDFDAC5155609E75DBE7B750675C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\MeleeRules.lua",
+      "manifestHash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77",
+      "frozenFileHash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77",
+      "beforeSourceHash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77",
+      "afterSourceHash": "A8B44763DDE1D0A67BECA4EF6BE90EF599513A098B475C5F733D8BE7DF6A9E77",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactory.lua",
+      "manifestHash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3",
+      "frozenFileHash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3",
+      "beforeSourceHash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3",
+      "afterSourceHash": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ModelFactoryTests.lua",
+      "manifestHash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3",
+      "frozenFileHash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3",
+      "beforeSourceHash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3",
+      "afterSourceHash": "2E291CCAAA5FD89E5A4C4E68F7E6B6E817F6F342A1AE71A4B2D468681A26A7A3",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PathRules.lua",
+      "manifestHash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44",
+      "frozenFileHash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44",
+      "beforeSourceHash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44",
+      "afterSourceHash": "1FD530A79B34490D3E21CA92B8A88372019FAC540759440F08B514783B29AA44",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\PlayerColorTests.lua",
+      "manifestHash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106",
+      "frozenFileHash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106",
+      "beforeSourceHash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106",
+      "afterSourceHash": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProductionRules.lua",
+      "manifestHash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5",
+      "frozenFileHash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5",
+      "beforeSourceHash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5",
+      "afterSourceHash": "BEA4B0F43C3FD127F8A03FBD7046C1BAC997AA7219D50EC49932BC010FD3D1C5",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileRules.lua",
+      "manifestHash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2",
+      "frozenFileHash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2",
+      "beforeSourceHash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2",
+      "afterSourceHash": "D28FBA914A52B5FC94A96BDC4327232095B994825F78B01664099B7583F06FB2",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\ProfileStore.lua",
+      "manifestHash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F",
+      "frozenFileHash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F",
+      "beforeSourceHash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F",
+      "afterSourceHash": "886BA541F732477EECBDD2A8B1E4AF2D2D260B11215E2CC3EDF60985CC43666F",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\SpatialRules.lua",
+      "manifestHash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C",
+      "frozenFileHash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C",
+      "beforeSourceHash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C",
+      "afterSourceHash": "BA583F7C7822D3651830188BF10AF54D5DA4BD5DF0159D7FF004AF6A1777826C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\TeamRules.lua",
+      "manifestHash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63",
+      "frozenFileHash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63",
+      "beforeSourceHash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63",
+      "afterSourceHash": "C8D18116D5951D7DCC35386435382A2A1C8BB3C6A9AC49409FFE341EBC0B6A63",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\Telemetry.lua",
+      "manifestHash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07",
+      "frozenFileHash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07",
+      "beforeSourceHash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07",
+      "afterSourceHash": "CC2907128412BC1F032FF7DDC7060629608E1242B589DE215CE0F2BAEA0AFB07",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitCollisionRules.lua",
+      "manifestHash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8",
+      "frozenFileHash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8",
+      "beforeSourceHash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8",
+      "afterSourceHash": "D28586355F7473D341302032B578B05D980DA24F54968D788CE20A21CA5779C8",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\UnitRules.lua",
+      "manifestHash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3",
+      "frozenFileHash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3",
+      "beforeSourceHash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3",
+      "afterSourceHash": "4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\ServerScriptService\\ServerModules\\WorldGenerator.lua",
+      "manifestHash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B",
+      "frozenFileHash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B",
+      "beforeSourceHash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B",
+      "afterSourceHash": "3629FE033A99249A1380C0D1E4C897B0EA3BFBD3FF504EF66787E737AA70432B",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterGui\\GameUI\\GUIManager.lua",
+      "manifestHash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E",
+      "frozenFileHash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E",
+      "beforeSourceHash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E",
+      "afterSourceHash": "F9A75E049F508D6F33579A98DAB242ECC8C807E2762F5EF4FCACA1A92A5B038E",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\BuildingVisuals.client.lua",
+      "manifestHash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C",
+      "frozenFileHash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C",
+      "beforeSourceHash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C",
+      "afterSourceHash": "12CC66B3FC545844949E8F87CF0EC280F76768A4408DB20BA4005BAC7726666C",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\PlayerInput.client.lua",
+      "manifestHash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE",
+      "frozenFileHash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE",
+      "beforeSourceHash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE",
+      "afterSourceHash": "BA23D6FE0598823D18445CFE7FD240D261D91E03ACA937E2A53B96FEF6D729CE",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\RTSClient.client.lua",
+      "manifestHash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1",
+      "frozenFileHash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1",
+      "beforeSourceHash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1",
+      "afterSourceHash": "E6F2F44B126E5CD9474AA9CCBC85D2D6072A91961FDCB9D5075498DE0FDD34B1",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\SoundFeedback.client.lua",
+      "manifestHash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897",
+      "frozenFileHash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897",
+      "beforeSourceHash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897",
+      "afterSourceHash": "634B4A88ADC31A24840B9A34317B6F678A9F58EFEDD7067E783C97BCC9025897",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    },
+    {
+      "path": "src\\StarterPlayer\\StarterPlayerScripts\\UnitMotion.client.lua",
+      "manifestHash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD",
+      "frozenFileHash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD",
+      "beforeSourceHash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD",
+      "afterSourceHash": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": true,
+      "afterSourceMatches": true
+    }
+  ],
+  "frozenSnapshotMismatches": [
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\Art.lua",
+      "manifestHash": "6DD18BE52271AB8106620F5F2AEBC8D72A70C45474E09B1F4C49637427C80C13",
+      "frozenFileHash": "6DD18BE52271AB8106620F5F2AEBC8D72A70C45474E09B1F4C49637427C80C13",
+      "beforeSourceHash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1",
+      "afterSourceHash": "2979E74A4A3DBA3621E94299AF558444AEFE201599389A0C21CE6D2C5C714CF1",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": false,
+      "afterSourceMatches": false
+    },
+    {
+      "path": "src\\ReplicatedStorage\\Shared\\UnitIconTests.lua",
+      "manifestHash": "CB64DADF61760F410EC0702A236E28D597EBDF3E19E1ED5EAB380FA74C9A2E93",
+      "frozenFileHash": "CB64DADF61760F410EC0702A236E28D597EBDF3E19E1ED5EAB380FA74C9A2E93",
+      "beforeSourceHash": "4DACD4D5478282BC0E1F7DC5887FB9A442D8B595EDEE43A7DB2E72249497BEA1",
+      "afterSourceHash": "207CA08F2005E72610010E4C4A4D7E428709C7724A7201CC1146E3EAC95F059D",
+      "frozenFileMatches": true,
+      "beforeSourceMatches": false,
+      "afterSourceMatches": false
+    }
+  ]
+}

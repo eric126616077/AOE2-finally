@@ -1,0 +1,289 @@
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 工廠返回孤立Model、不生成遊戲單位或建築
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地尺寸與PrimaryPart正確
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地旗標正確
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地位置正確
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 回退或複製後有實際幾何
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 缺模板使用替代外觀
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 工廠返回孤立Model、不生成遊戲單位或建築
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地尺寸與PrimaryPart正確
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地旗標正確
+2026-10-01T06:09:04.236Z,3091.236328,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地位置正確
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 回退或複製後有實際幾何
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] Archivable=false根模板回退成功
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 PrimaryPart 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Parent 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Archivable 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Name 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Parent 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CFrame 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Transparency 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Name 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Anchored 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Color 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Archivable 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Size 保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.237Z,3091.237305,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Parent 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CFrame 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Transparency 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Name 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Anchored 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Color 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Archivable 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Size 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Enabled 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Parent 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Archivable 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Name 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Parent 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Archivable 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Name 保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture實例數未變
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 工廠返回孤立Model、不生成遊戲單位或建築
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地尺寸與PrimaryPart正確
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地旗標正確
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地位置正確
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 回退或複製後有實際幾何
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 所有BasePart不可複製時回退成功
+2026-10-01T06:09:04.238Z,3091.238281,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 PrimaryPart 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Parent 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Archivable 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Name 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Parent 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CFrame 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Transparency 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Name 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Anchored 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Color 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Archivable 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Size 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Parent 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CFrame 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Transparency 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Name 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Anchored 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Color 保留
+2026-10-01T06:09:04.239Z,3091.239258,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Archivable 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Size 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Enabled 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Parent 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Archivable 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Name 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Parent 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Archivable 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Name 保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture實例數未變
+2026-10-01T06:09:04.240Z,3091.240234,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 工廠返回孤立Model、不生成遊戲單位或建築
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地尺寸與PrimaryPart正確
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地旗標正確
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 正式占地位置正確
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 回退或複製後有實際幾何
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 可用模板複製且只調整複製品
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 複製品BaseScript已移除
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 未執行的ModuleScript保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 透明複製幾何不擋射線
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 PrimaryPart 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Parent 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Archivable 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture House 的 Name 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Parent 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CFrame 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Transparency 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Name 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Anchored 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Color 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Archivable 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateGeometry 的 Size 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanQuery 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanCollide 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Parent 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CFrame 保留
+2026-10-01T06:09:04.241Z,3091.241211,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 CanTouch 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Transparency 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Name 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Anchored 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Color 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Archivable 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture PrivateHiddenGeometry 的 Size 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Enabled 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Parent 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Archivable 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture DisabledPrivateScript 的 Name 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Parent 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Archivable 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture UnrequiredPrivateModule 的 Name 保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture標記保留
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 原fixture實例數未變
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry保留原Root與PrimaryPart
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry具有圓柱碰撞體積
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry碰撞旗標正確
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry碰撞體積透明且不投影
+2026-10-01T06:09:04.242Z,3091.242188,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry碰撞尺寸使用共用設定
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry碰撞底面貼合地面
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry圓柱X軸保持垂直
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry碰撞屬性一致
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry裝飾部件不參與碰撞
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry恰有一個實體碰撞部件
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry移動轉向時體積跟隨Root
+2026-10-01T06:09:04.243Z,3091.243164,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry轉向後圓柱仍垂直
+2026-10-01T06:09:04.244Z,3091.244141,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] infantry引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman保留原Root與PrimaryPart
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman具有圓柱碰撞體積
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman碰撞旗標正確
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman碰撞體積透明且不投影
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman碰撞尺寸使用共用設定
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman碰撞底面貼合地面
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman圓柱X軸保持垂直
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman碰撞屬性一致
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman裝飾部件不參與碰撞
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman恰有一個實體碰撞部件
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman移動轉向時體積跟隨Root
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman轉向後圓柱仍垂直
+2026-10-01T06:09:04.245Z,3091.245117,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] spearman引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout保留原Root與PrimaryPart
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout具有圓柱碰撞體積
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout碰撞旗標正確
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout碰撞體積透明且不投影
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout碰撞尺寸使用共用設定
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout碰撞底面貼合地面
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout圓柱X軸保持垂直
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout碰撞屬性一致
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout裝飾部件不參與碰撞
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout恰有一個實體碰撞部件
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout移動轉向時體積跟隨Root
+2026-10-01T06:09:04.246Z,3091.246094,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout轉向後圓柱仍垂直
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] scout引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer保留原Root與PrimaryPart
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer具有圓柱碰撞體積
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer碰撞旗標正確
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer碰撞體積透明且不投影
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer碰撞尺寸使用共用設定
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer碰撞底面貼合地面
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer圓柱X軸保持垂直
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer碰撞屬性一致
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer裝飾部件不參與碰撞
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer恰有一個實體碰撞部件
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer移動轉向時體積跟隨Root
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer轉向後圓柱仍垂直
+2026-10-01T06:09:04.247Z,3091.247070,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] archer引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet保留原Root與PrimaryPart
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet具有圓柱碰撞體積
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet碰撞旗標正確
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet碰撞體積透明且不投影
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet碰撞尺寸使用共用設定
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet碰撞底面貼合地面
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet圓柱X軸保持垂直
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet碰撞屬性一致
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet裝飾部件不參與碰撞
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet恰有一個實體碰撞部件
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet移動轉向時體積跟隨Root
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet轉向後圓柱仍垂直
+2026-10-01T06:09:04.248Z,3091.248047,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] trebuchet引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry保留原Root與PrimaryPart
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry具有圓柱碰撞體積
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry碰撞旗標正確
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry碰撞體積透明且不投影
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry碰撞尺寸使用共用設定
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry碰撞底面貼合地面
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry圓柱X軸保持垂直
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry碰撞屬性一致
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry裝飾部件不參與碰撞
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry恰有一個實體碰撞部件
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry移動轉向時體積跟隨Root
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry轉向後圓柱仍垂直
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] cavalry引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.249Z,3091.249023,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel保留原Root與PrimaryPart
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel具有圓柱碰撞體積
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel碰撞旗標正確
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel碰撞體積透明且不投影
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel碰撞尺寸使用共用設定
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel碰撞底面貼合地面
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel圓柱X軸保持垂直
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel碰撞屬性一致
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.250Z,3091.250000,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel裝飾部件不參與碰撞
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel恰有一個實體碰撞部件
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel移動轉向時體積跟隨Root
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel轉向後圓柱仍垂直
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] mangonel引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram保留原Root與PrimaryPart
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram具有圓柱碰撞體積
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram碰撞旗標正確
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram碰撞體積透明且不投影
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram碰撞尺寸使用共用設定
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram碰撞底面貼合地面
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram圓柱X軸保持垂直
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram碰撞屬性一致
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram裝飾部件不參與碰撞
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram恰有一個實體碰撞部件
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram移動轉向時體積跟隨Root
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram轉向後圓柱仍垂直
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] ram引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher保留原Root與PrimaryPart
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher具有圓柱碰撞體積
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher碰撞旗標正確
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher碰撞體積透明且不投影
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher碰撞尺寸使用共用設定
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher碰撞底面貼合地面
+2026-10-01T06:09:04.250Z,3091.250977,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher圓柱X軸保持垂直
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher碰撞屬性一致
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher裝飾部件不參與碰撞
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher恰有一個實體碰撞部件
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher移動轉向時體積跟隨Root
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher轉向後圓柱仍垂直
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] skirmisher引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager保留原Root與PrimaryPart
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager具有圓柱碰撞體積
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager碰撞旗標正確
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager碰撞體積透明且不投影
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager碰撞尺寸使用共用設定
+2026-10-01T06:09:04.251Z,3091.251953,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager碰撞底面貼合地面
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager圓柱X軸保持垂直
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager碰撞屬性一致
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager動態體積不阻擋靜態尋路網格
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager裝飾部件不參與碰撞
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager恰有一個實體碰撞部件
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager移動轉向時體積跟隨Root
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager轉向後圓柱仍垂直
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] villager引擎射線命中正確碰撞頂面
+2026-10-01T06:09:04.252Z,3091.252930,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE PASS] 所有設定單位均已驗證碰撞體積
+2026-10-01T06:09:04.254Z,3091.254150,d83c,6,Info [FLog::CreatorOutput] [FACTORY_FIXTURE COMPLETE] 285項引擎fixture檢查；私有fixture已清除，非使用者真模板驗收
+2026-10-01T06:09:04.254Z,3091.254150,d83c,6,Info [FLog::CreatorOutput] [UC95] {"ok":true,"probe":"UC95","stage":"FIXTURE","checks":285}
+2026-10-01T06:09:55.816Z,3142.816406,d858,6,Info [FLog::CreatorOutput] [UC95] {"factory":285,"seconds":95,"generation":1,"probe":"UC95","stage":"START","units":4}
+2026-10-01T06:11:30.820Z,3237.820801,6760,6,Info [FLog::CreatorOutput] [UC95] {"ok":true,"seconds":95.004,"minGap":0.168,"checks":397129,"samples":5673,"reason":"complete","moving":[35,207,65,63],"factory":285,"kinds":["scout","villager","villager","villager"],"probe":"UC95","stage":"FINAL","violations":0}

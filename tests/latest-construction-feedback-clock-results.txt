@@ -1,0 +1,11 @@
+BEFORE FIX regression on actual UnitRules (expected failure)
+Exit code: 1
+./tests/construction.spec.lua:6: successful construction cannot publish its first work-feedback pulse
+stacktrace:
+[C] function assert
+./tests/construction.spec.lua:6 function expect
+./tests/construction.spec.lua:66
+
+AFTER FIX regression on actual UnitRules
+Exit code: 0
+PASS: 76 construction selection / worker authority / pause-resume / feedback-clock checks

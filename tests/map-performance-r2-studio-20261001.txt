@@ -1,0 +1,10 @@
+2026-09-30T21:19:14.841Z,245.841385,a6ec,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":420,"checks":6775,"sizeName":"Small","shadowParts":420,"sceneryParts":38,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":420,"resourceParts":2468,"completeVisualReplicationProven":false,"size":768}
+2026-09-30T21:45:55.904Z,1846.904907,3110,6,Info [FLog::CreatorOutput] [LOAD_R2_CLEANUP_JSON] {"wood":1125,"food":400,"observerRunning":false,"units":20,"loadRunning":false,"buildings":4,"cap":20,"maximumRootDisplacement":0,"population":20,"queue":0}
+2026-09-30T21:46:50.617Z,1901.617432,be9c,6,Info [FLog::CreatorOutput] [LOAD_R2_RESET] {"avatar":true,"camera":"Custom","buildings":0,"label":"20 after load","phase":"Lobby","resourcesZero":true,"generation":2,"units":0}
+2026-09-30T21:46:51.715Z,1902.715210,3110,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":680,"checks":10803,"sizeName":"Medium","shadowParts":680,"sceneryParts":46,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":680,"resourceParts":3880,"completeVisualReplicationProven":false,"size":1024}
+2026-09-30T21:46:51.715Z,1902.715210,3110,6,Info [FLog::CreatorOutput] [LOAD_R2_MAP_DONE] Medium
+2026-09-30T21:46:52.405Z,1903.405396,6470,6,Info [FLog::CreatorOutput] [LOAD_R2_RESET] {"avatar":true,"camera":"Custom","buildings":0,"label":"Medium","phase":"Lobby","resourcesZero":true,"generation":4,"units":0}
+2026-09-30T21:46:53.561Z,1904.561279,2fb4,6,Info [FLog::CreatorOutput] [MAP_TEST COMPLETE] {"queryParts":1100,"checks":17359,"sizeName":"Large","shadowParts":1100,"sceneryParts":62,"resourcePartCountScope":"本次採樣收到的部件；沒有伺服器外觀部件總數可核對","nodes":1100,"resourceParts":6204,"completeVisualReplicationProven":false,"size":1536}
+2026-09-30T21:46:53.561Z,1904.561279,2fb4,6,Info [FLog::CreatorOutput] [LOAD_R2_MAP_DONE] Large
+2026-09-30T21:46:54.247Z,1905.247681,6470,6,Info [FLog::CreatorOutput] [LOAD_R2_RESET] {"avatar":true,"camera":"Custom","buildings":0,"label":"Large","phase":"Lobby","resourcesZero":true,"generation":6,"units":0}
+2026-09-30T21:46:54.247Z,1905.247681,6470,6,Info [FLog::CreatorOutput] [LOAD_R2_MAP_SEQUENCE] true

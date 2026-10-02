@@ -69,8 +69,20 @@ function Tests.RunHost()
  local player,command = context()
  check(#Players:GetPlayers()==2, "兩名真實 Studio 玩家已加入")
  check(workspace:GetAttribute("MatchPhase")=="Lobby", "雙人測試從新大廳開始")
+ require(RS.Shared.LobbyTests).Join()
  check(workspace:GetAttribute("HostUserId")==player.UserId, "此客戶端是房主")
- command:FireServer("StartMatch", {size="Small", aiCount=0, difficulty="Easy", population=100, startingResources="Rich", victory="Conquest"})
+ local revision=workspace:GetAttribute("LobbySettingsRevision")
+ command:FireServer("LobbySettings", {expectedPlayers=2,size="Small", aiCount=0, difficulty="Easy", population=100, startingResources="Rich", victory="Conquest"})
+ awaitCondition(function() return workspace:GetAttribute("LobbyExpectedPlayers")==2 and workspace:GetAttribute("LobbySettingsRevision")~=revision end,5,"房主設定雙人集合")
+ print("[RTS_MULTI WAIT] 請在第二客戶端呼叫 JoinLobby，兩人準備後自動繼續測試。")
+ awaitCondition(function() return workspace:GetAttribute("LobbyPlayers")==2 end,120,"兩人進入傳送門集合")
+ command:FireServer("LobbyReady",true,workspace:GetAttribute("LobbySettingsRevision"))
+ awaitCondition(function() return player:GetAttribute("LobbyReady")==true end,5,"房主準備經伺服器確認")
+ awaitCondition(function()
+  for _,participant in ipairs(Players:GetPlayers()) do if not participant:GetAttribute("LobbyReady") then return false end end
+  return true
+ end,120,"兩名玩家都已準備")
+ command:FireServer("StartMatch")
  awaitCondition(function()
   if workspace:GetAttribute("MatchPhase")~="Playing" then return false end
   for _,participant in ipairs(Players:GetPlayers()) do
@@ -82,7 +94,7 @@ function Tests.RunHost()
  check(not workspace.StreamingEnabled, "兩端使用完整場景複製")
  local pos=clearHouseLocation(player)
  local oldWood=player:GetAttribute("wood")
- command:FireServer("Build","House",pos)
+ command:FireServer("Build","House",pos,{owned(workspace.Units,player.UserId,"villager")[1]})
  local house
  awaitCondition(function()
   for _,candidate in ipairs(owned(workspace.Buildings,player.UserId,"House")) do
@@ -100,6 +112,15 @@ function Tests.RunHost()
  check(player:GetAttribute("food")==oldFood-50, "房主訓練扣款同步")
  print("[RTS_MULTI HOST READY] 可在第二客戶端執行 RunOwnership，再於存留客戶端呼叫 ObserveCleanupClient 後關閉另一玩家。")
  return true
+end
+
+function Tests.JoinLobby()
+ local player,command=context()
+ require(RS.Shared.LobbyTests).Join()
+ command:FireServer("LobbyReady",true,workspace:GetAttribute("LobbySettingsRevision"))
+ awaitCondition(function() return player:GetAttribute("LobbyReady")==true end,5,"第二玩家準備經伺服器確認")
+ print("[RTS_MULTI QUEUED] 已集合與準備，等待房主開始。")
+ return player:GetAttribute("LobbyQueued")
 end
 
 -- 大廳時驗證非房主不能開局；對局時驗證跨玩家所有權與拒絕非法請求。

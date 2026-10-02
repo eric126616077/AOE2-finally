@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/ReplicatedStorage/Shared/Art.lua",
+    "sha256": "EB2F995B52D993B549D71BFE31CFDBE5198899DFBAD3529E8B841F0020DACDB9"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/ModelFactory.lua",
+    "sha256": "CEB00DB3121AAC33535F79FA920A665EA06D2B369FF9D995E5C8737EAA1A7532"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/LobbyWorld.lua",
+    "sha256": "6A2622B033E186256569D49B66222428C26681FCBA1007AB069148CDDD4FD681"
+  },
+  {
+    "path": "src/StarterGui/GameUI/GUIManager.lua",
+    "sha256": "44181150D4C1C342858287D682212466EA9358B3FE4CD079628DBE96940FA3C5"
+  },
+  {
+    "path": "src/StarterPlayer/StarterPlayerScripts/RTSClient.client.lua",
+    "sha256": "9AE20EEEB9E802D76E102BE551B8262184B39E81C1284AE93110CDF47EF9F091"
+  }
+]

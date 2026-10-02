@@ -1,0 +1,756 @@
+2026-10-01T05:15:41.516Z,87.516808,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 短暫通知關閉後驗收可見地面
+2026-10-01T05:15:41.547Z,87.547539,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 移除整塊選取資訊面板
+2026-10-01T05:15:41.548Z,87.548531,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 空選取不再顯示建立你的帝國面板文字
+2026-10-01T05:15:41.548Z,87.548531,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 未選取村民時不顯示建築圖示
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 選取村民顯示分類建築指令
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 村民顯示建造分類：economy
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 村民顯示建造分類：military
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 村民顯示建造分類：defense
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 村民建造分類取代生產與科技頁
+2026-10-01T05:15:41.584Z,87.584213,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 村民預設經濟頁，共三頁
+2026-10-01T05:15:41.585Z,87.585205,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 經濟頁只顯示經濟建築
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城顯示訓練，隱藏村民建築
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產建築顯示佇列與集合點
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產佇列搬入指令面板
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除控制搬入指令面板
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面己方建築顯示刪除控制
+2026-10-01T05:15:41.623Z,87.623993,df9c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 完工狀態明確顯示
+2026-10-01T05:15:41.664Z,87.664047,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城科技頁顯示織布機
+2026-10-01T05:15:41.664Z,87.664047,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 科技指令限於第一列，保留佇列與選取摘要空間
+2026-10-01T05:15:41.703Z,87.703102,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 從主城科技切到村民，自動返回建築頁
+2026-10-01T05:15:41.737Z,87.737732,dc4c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 中立資源只顯示資訊
+2026-10-01T05:15:41.772Z,87.772942,dcb8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 己方村民可開啟刪除確認
+2026-10-01T05:15:41.808Z,87.808159,df00,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除確認阻擋世界輸入
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 變更選取立即取消刪除快照
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板不穿透
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 緊鄰底部面板的地面可點擊
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 保留安全區域與UIScale
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 顯示於實際PlayerGui
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 點擊不穿透
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 顯示於實際PlayerGui
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 點擊不穿透
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 顯示於實際PlayerGui
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 點擊不穿透
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 顯示於實際PlayerGui
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 點擊不穿透
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面資源列使用 Roblox 頂列安全區域
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 整條資源列位於 CoreGui 可用頂列範圍
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面資源列與 Roblox 按鈕同一行
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 頂列下鄰可見地面不被資源列攔截
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源列與指令面板間保留戰場
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 閒置村民數由真實單位更新
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板與小地圖之間保留地面
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 移除選取面板後原區域地面可點擊
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 停用頂列後原資源卡位置不攔截世界輸入
+2026-10-01T05:15:41.843Z,87.843010,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 恢復頂列後資源卡重新攔截世界輸入
+2026-10-01T05:15:41.845Z,87.845001,dd34,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 45 checks
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 共用設定包含三個建造分類
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類順序與文字：經濟
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類項目數：經濟
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：House
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Mill
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：LumberCamp
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：MiningCamp
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Farm
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Market
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：TownCenter
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類順序與文字：軍事
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類項目數：軍事
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Barracks
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：ArcheryRange
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Stable
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Blacksmith
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：SiegeWorkshop
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類順序與文字：防禦
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 分類項目數：防禦
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Tower
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Wall
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Castle
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Monastery
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：University
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 建築只屬於指定分類：Wonder
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：TownCenter
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：House
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Mill
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：LumberCamp
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：MiningCamp
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Barracks
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Farm
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：ArcheryRange
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Stable
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Blacksmith
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Market
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Tower
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Wall
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Castle
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：SiegeWorkshop
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Monastery
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：University
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 每種可建建築都有分類：Wonder
+2026-10-01T05:15:41.845Z,87.845993,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 三頁包含目前十八種建築
+2026-10-01T05:15:41.944Z,87.944702,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 正確切到經濟頁
+2026-10-01T05:15:41.944Z,87.944702,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:41.944Z,87.944702,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:41.944Z,87.944702,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 分類規則項目數：經濟
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_House
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Mill
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_LumberCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_MiningCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Farm
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 實際指令數：經濟
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：House
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：House
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：House
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：House
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Mill
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Mill
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Mill
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Mill
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：LumberCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：LumberCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：LumberCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：LumberCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：MiningCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：MiningCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：MiningCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：MiningCamp
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Farm
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Farm
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Farm
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Farm
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Market
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:41.945Z,87.945709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:41.946Z,87.946709,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 正確切到軍事頁
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 分類規則項目數：軍事
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Barracks
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_ArcheryRange
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Stable
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Blacksmith
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 實際指令數：軍事
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Barracks
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Barracks
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Barracks
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Barracks
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：ArcheryRange
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：ArcheryRange
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：ArcheryRange
+2026-10-01T05:15:41.981Z,87.981865,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：ArcheryRange
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：ArcheryRange
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：ArcheryRange
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：ArcheryRange
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：ArcheryRange
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Stable
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Blacksmith
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:41.982Z,87.982864,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 正確切到防禦頁
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.044Z,88.044830,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 分類規則項目數：防禦
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 1 實際指令數：防禦
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Tower
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Wall
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.045Z,88.045837,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 正確切到經濟頁
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 分類規則項目數：經濟
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_House
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Mill
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_LumberCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_MiningCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Farm
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Market
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 實際指令數：經濟
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：House
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：House
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：House
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：House
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Mill
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Mill
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Mill
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Mill
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：LumberCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：LumberCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：LumberCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：LumberCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：MiningCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：MiningCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：MiningCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：MiningCamp
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Farm
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Farm
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Farm
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Farm
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Market
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Market
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Market
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Market
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：TownCenter
+2026-10-01T05:15:42.158Z,88.158226,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：TownCenter
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：TownCenter
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.159Z,88.159225,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 桌面第七項位於同頁第二列
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 正確切到軍事頁
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 分類規則項目數：軍事
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Barracks
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_ArcheryRange
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Stable
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Blacksmith
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_SiegeWorkshop
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 實際指令數：軍事
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Barracks
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Barracks
+2026-10-01T05:15:42.194Z,88.194092,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Barracks
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Barracks
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：ArcheryRange
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：ArcheryRange
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：ArcheryRange
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：ArcheryRange
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Stable
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Stable
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Stable
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Stable
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Blacksmith
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Blacksmith
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Blacksmith
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Blacksmith
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：SiegeWorkshop
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.195Z,88.195091,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 正確切到防禦頁
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 分類規則項目數：防禦
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Tower
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wall
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Monastery
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_University
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 2 實際指令數：防禦
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Tower
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Tower
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Tower
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Tower
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wall
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wall
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wall
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Wall
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Castle
+2026-10-01T05:15:42.261Z,88.261513,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Castle
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Castle
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Monastery
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：University
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.262Z,88.262512,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 正確切到經濟頁
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.378Z,88.378990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 分類規則項目數：經濟
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_House
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Mill
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_LumberCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_MiningCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Farm
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Market
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_TownCenter
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 實際指令數：經濟
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：House
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：House
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：House
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：House
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Mill
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Mill
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Mill
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Mill
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：LumberCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：LumberCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：LumberCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：LumberCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：MiningCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：MiningCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：MiningCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：MiningCamp
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Farm
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Farm
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Farm
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Farm
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Market
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Market
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Market
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Market
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：TownCenter
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：TownCenter
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：TownCenter
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：TownCenter
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.379Z,88.379990,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.380Z,88.380981,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.380Z,88.380981,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.380Z,88.380981,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 桌面第七項位於同頁第二列
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 正確切到軍事頁
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 分類規則項目數：軍事
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Barracks
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_ArcheryRange
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Stable
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Blacksmith
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_SiegeWorkshop
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 實際指令數：軍事
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Barracks
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Barracks
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Barracks
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Barracks
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：ArcheryRange
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：ArcheryRange
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：ArcheryRange
+2026-10-01T05:15:42.415Z,88.415520,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：ArcheryRange
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Stable
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Stable
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Stable
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Stable
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Blacksmith
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Blacksmith
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Blacksmith
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Blacksmith
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：SiegeWorkshop
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：SiegeWorkshop
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：SiegeWorkshop
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：SiegeWorkshop
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.416Z,88.416519,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 正確切到防禦頁
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 分類規則項目數：防禦
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Tower
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wall
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Castle
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Monastery
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_University
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 3 實際指令數：防禦
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Tower
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Tower
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Tower
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Tower
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wall
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wall
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wall
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Wall
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Castle
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Castle
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Castle
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Castle
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Monastery
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Monastery
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Monastery
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Monastery
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：University
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：University
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：University
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：University
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代建築不可使用：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代背景、名稱與需求文字呈灰色：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 灰色建築顯示下一時代需求：Wonder
+2026-10-01T05:15:42.475Z,88.475716,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代圖示呈灰色：Wonder
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一時代的立體建築預覽已轉為灰階：Wonder
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.476Z,88.476723,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.594Z,88.594070,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 正確切到經濟頁
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 分類規則項目數：經濟
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_House
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Mill
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_LumberCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_MiningCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Farm
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Market
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_TownCenter
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 實際指令數：經濟
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：House
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：House
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：House
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：House
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Mill
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Mill
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Mill
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Mill
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：LumberCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：LumberCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：LumberCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：LumberCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：MiningCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：MiningCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：MiningCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：MiningCamp
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Farm
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Farm
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Farm
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Farm
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Market
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Market
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Market
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Market
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：TownCenter
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：TownCenter
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：TownCenter
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：TownCenter
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.595Z,88.595062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.596Z,88.596062,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 桌面第七項位於同頁第二列
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 正確切到軍事頁
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 分類規則項目數：軍事
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Barracks
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_ArcheryRange
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Stable
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Blacksmith
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_SiegeWorkshop
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 實際指令數：軍事
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Barracks
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Barracks
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Barracks
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Barracks
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：ArcheryRange
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：ArcheryRange
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：ArcheryRange
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：ArcheryRange
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Stable
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Stable
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Stable
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Stable
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Blacksmith
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Blacksmith
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Blacksmith
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Blacksmith
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：SiegeWorkshop
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：SiegeWorkshop
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：SiegeWorkshop
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：SiegeWorkshop
+2026-10-01T05:15:42.630Z,88.630562,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Tower
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wall
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Castle
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Monastery
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：University
+2026-10-01T05:15:42.631Z,88.631561,dcb8,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Wonder
+2026-10-01T05:15:42.692Z,88.692719,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 正確切到防禦頁
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：經濟
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：軍事
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民顯示分類按鈕：防禦
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_build
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_train
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 村民隱藏通用分頁：Tab_research
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 分類規則項目數：防禦
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 指令容器裁切捲動內容
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Tower
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wall
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Castle
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Monastery
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_University
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際指令沒有混入其他分類或過遠時代：Command_Wonder
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代 4 實際指令數：防禦
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Tower
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Tower
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Tower
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Tower
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wall
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wall
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wall
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Wall
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Castle
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Castle
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Castle
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Castle
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Monastery
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Monastery
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Monastery
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Monastery
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：University
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：University
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：University
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：University
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 實際 PlayerGui 顯示：Wonder
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 規則保留分類順序與時代狀態：Wonder
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 時代鎖定標記：Wonder
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源充足時本時代建築可以使用：Wonder
+2026-10-01T05:15:42.693Z,88.693718,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：TownCenter
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：House
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Mill
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：LumberCamp
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：MiningCamp
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Barracks
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Farm
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：ArcheryRange
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Stable
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Blacksmith
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：Market
+2026-10-01T05:15:42.694Z,88.694717,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 此頁先不顯示：SiegeWorkshop
+2026-10-01T05:15:42.838Z,88.838715,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源不足仍保留本時代的房屋
+2026-10-01T05:15:42.839Z,88.839714,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源不足的本時代建築不可使用
+2026-10-01T05:15:42.839Z,88.839714,dc4c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 資源不足以紅色價格標示
+2026-10-01T05:15:42.876Z,88.876472,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一頁操作可切換建造分類
+2026-10-01T05:15:42.908Z,88.908272,df00,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 下一頁切至防禦分類
+2026-10-01T05:15:42.910Z,88.910263,df00,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 上一頁操作可切換建造分類
+2026-10-01T05:15:42.944Z,88.944725,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 上一頁切至軍事分類
+2026-10-01T05:15:42.980Z,88.980965,df60,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 選市鎮中心恢復生產頁
+2026-10-01T05:15:42.980Z,88.980965,df60,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 生產建築隱藏村民分類：經濟
+2026-10-01T05:15:42.980Z,88.980965,df60,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 生產建築隱藏村民分類：軍事
+2026-10-01T05:15:42.980Z,88.980965,df60,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 生產建築隱藏村民分類：防禦
+2026-10-01T05:15:43.016Z,89.016655,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 從建築切回村民重設為經濟頁
+2026-10-01T05:15:43.054Z,89.054695,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 清除選取後隱藏建造指令
+2026-10-01T05:15:43.054Z,89.054695,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 空選取隱藏村民分類：經濟
+2026-10-01T05:15:43.054Z,89.054695,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 空選取隱藏村民分類：軍事
+2026-10-01T05:15:43.054Z,89.054695,dd34,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST PASS] 空選取隱藏村民分類：防禦
+2026-10-01T05:15:43.088Z,89.088737,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_TEST COMPLETE] 707 rendering checks; local attributes/selection restored
+2026-10-01T05:15:43.096Z,89.096748,df9c,6,Info [FLog::CreatorOutput] [BUILD_MENU_HARNESS COMPLETE] 45 707 touch false
+2026-10-01T05:17:43.102Z,209.102768,df00,6,Error [FLog::CreatorError] Error: Players.eric126616077.PlayerScripts.BuildMenuHarness:10: [BUILD_MENU_HARNESS FAIL] 等待實際點灰色射箭場

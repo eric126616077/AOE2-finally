@@ -1,0 +1,66 @@
+{
+  "status": "FROZEN ISOLATED-ONLY; engine not executed",
+  "freezeTime": "2026-09-30 21:47:03 +08:00",
+  "paths": [
+    {
+      "name": "CombatStageContext.lua",
+      "path": "C:\\Users\\user\\AppData\\Local\\Temp\\AOE2-team-work-20260930-182724\\src\\ReplicatedStorage\\Shared\\CombatStageContext.lua",
+      "sha256": "CABC3903D4F10A503C8FF8B156952AC72BC7FD765BB8A0807BE735E78CFCCCC9",
+      "bytes": 14958,
+      "baseline": "NEW; absent from baseline"
+    },
+    {
+      "name": "CombatTechnologyTests.lua",
+      "path": "C:\\Users\\user\\AppData\\Local\\Temp\\AOE2-team-work-20260930-182724\\src\\ReplicatedStorage\\Shared\\CombatTechnologyTests.lua",
+      "sha256": "0CB545D75D78E11AA3723D13835C511391458B8C43B43C2B19CDF3BA24613E46",
+      "bytes": 7700,
+      "baseline": "NEW; absent from baseline"
+    },
+    {
+      "name": "ResearchCombatTests.lua",
+      "path": "C:\\Users\\user\\AppData\\Local\\Temp\\AOE2-team-work-20260930-182724\\src\\ReplicatedStorage\\Shared\\ResearchCombatTests.lua",
+      "sha256": "354311A7D5AEC4754F6D788DEE6D88702118E3F0132DE3BF65DF064FCF30D147",
+      "bytes": 8515,
+      "baseline": "NEW; absent from baseline"
+    },
+    {
+      "name": "NaturalVictoryTests.lua",
+      "path": "C:\\Users\\user\\AppData\\Local\\Temp\\AOE2-team-work-20260930-182724\\src\\ReplicatedStorage\\Shared\\NaturalVictoryTests.lua",
+      "sha256": "6A3D4A34259899EFD01E82AE877342CBEE34BCC784FBAD662C38A77FC820862C",
+      "bytes": 10915,
+      "baseline": "NEW; absent from baseline"
+    },
+    {
+      "name": "CombatFlowTests.lua",
+      "path": "C:\\Users\\user\\AppData\\Local\\Temp\\AOE2-team-work-20260930-182724\\src\\ReplicatedStorage\\Shared\\CombatFlowTests.lua",
+      "sha256": "CA45728EAEF73445348F2BB33B3162E1DB9E326D8F2D4951E9057B23F9DCA079",
+      "bytes": 40850,
+      "baseline": "D23B74F0DE13318D0133F351B5442971C4FD164E11075836F8E4FDB928A6C45B"
+    }
+  ],
+  "backups": [
+    "test-output/CombatFlowTests-before-stages.lua",
+    "test-output/g07-before-copy-races-20260930-212221"
+  ],
+  "compile": "5 test-only modules PASS via MAIN absolute luau-compile.exe; no Rojo/build",
+  "actualHelperMocks": "7 formation move + 4 delivery preservation + 14 conquest ledger = 25 PASS; mocks not engine",
+  "mainWrites": "NONE for G07 stages; no build, UI or Studio operation",
+  "reviewFixes": [
+    "Both human post-Start typed Team/Home/state facts wait",
+    "Latest normal Ready revision retries and individual ACK",
+    "Winner fields and final object lifecycle bounded replication convergence",
+    "Regicide positive-HP plus both folder lifecycle samples; death-instant evidence explicitly limited",
+    "Conquest exact all unit births vs both reports; completed building plus initial snapshot lower bound"
+  ],
+  "limitations": [
+    "Two actual Studio clients required",
+    "No pre-technology claim when already researched",
+    "Exact HP and cooldown can strictly FAIL if replication coalesces samples or stalls",
+    "Actual range / cooldown / combat research cancellation / natural victories not yet run",
+    "Each natural victory needs its correct normal Lobby mode",
+    "Conquest buildings lower bound covers completed births and observed initial roster, not a complete historical unfinished-site birth ledger",
+    "Regicide final positive HP sample is not proof of exact death-instant other object health",
+    "Wonder stage does not cover Wonder destruction or competing Wonders",
+    "No cloud verification"
+  ]
+}

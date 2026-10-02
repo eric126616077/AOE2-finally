@@ -1,0 +1,19 @@
+DATE 2026-10-01
+SourceWorldSHA256 7A004B5102D6A3551C27BC313C18C5BC5B625EE3286407202EAA3CDD9B7505E7
+SourceConfigSHA256 E311F207F037B3D963F2667ED83754D00EC84427B49323EB620319953A0A990E
+Seeds: Park-Miller state initialized1234567, advanced by state*48271 mod2147483647 once per map, valid positive31-bit seeds
+RNG shim: same Park-Miller recurrence inside each generation; NextInteger uses modulo, NextNumber uses state/2147483647
+Checks: generation success and exact default Small budget420; no repeated pairwise geometry checks
+SCOPE pure generator logic only; does not claim Roblox engine Random parity or Studio Play success
+PROGRESS seeds=100 failures=0 seconds=8.701
+PROGRESS seeds=200 failures=0 seconds=17.806
+PROGRESS seeds=300 failures=0 seconds=27.088
+PROGRESS seeds=400 failures=0 seconds=35.902
+PROGRESS seeds=500 failures=0 seconds=44.875
+PROGRESS seeds=600 failures=0 seconds=54.093
+PROGRESS seeds=700 failures=0 seconds=62.960
+PROGRESS seeds=800 failures=0 seconds=71.983
+PROGRESS seeds=900 failures=0 seconds=81.257
+PROGRESS seeds=1000 failures=0 seconds=90.236
+RESULT seeds=1000 size=Small target=420 failures=0 budgetMismatches=0 minSeed=3639549 maxSeed=2146304516 seconds=90.236
+SCOPE actual WorldGenerator module and GameConfig with Park-Miller RNG shim; no Roblox Random parity, engine navigation, visual replication, or Studio claim

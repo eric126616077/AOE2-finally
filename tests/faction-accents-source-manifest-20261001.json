@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/ReplicatedStorage/Shared/Art.lua",
+    "sha256": "8DDA408440785B1FC0CE0541FFE01988BCC05FF819DE781434CE4F201E08BB2A"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/ModelFactory.lua",
+    "sha256": "D4E917DE6FB11F4AEFC78B035A5C28D36DF2305D86E329E5DA1846B300C9BDB3"
+  },
+  {
+    "path": "src/StarterPlayer/StarterPlayerScripts/RTSClient.client.lua",
+    "sha256": "96AF27E2B5A6D4F8DA8D64A3CE955087996BD312C42F5C1AAA6EDC5891C6A76C"
+  },
+  {
+    "path": "src/StarterPlayer/StarterPlayerScripts/UnitMotion.client.lua",
+    "sha256": "857677780B377D0448C5F1801B1E3A31BDEEA7DBAFDBB05ABAAEED4ADE61A3BD"
+  },
+  {
+    "path": "src/ServerScriptService/ServerModules/PlayerColorTests.lua",
+    "sha256": "755C6EC34B7EC8542343B3AF37DDAB9FAD3AEA489A6E5D62761AF2B36FE39106"
+  }
+]

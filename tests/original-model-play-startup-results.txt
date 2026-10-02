@@ -1,0 +1,56 @@
+本機 Original-validation-20260930-1954.rbxl 21:57 fresh Play，GameServer HP56EF版。Source probe 是 Edit，正常Release是新的Play。22:04:53–55正常開局、文明、實際PlayerGui與觸控規則通過19+26；不含建造/戰鬥/模板fixture/正式手機實機；首次無角色官方ControlModule警告仍保留。原 protected Model 7612 descendants+root=7613。
+2026-09-30T13:56:43.921Z,5891.921875,959c,6,Info [FLog::CreatorOutput] > local s=game.ServerScriptService.GameServer.Source; print("[ORIGINAL_HEALTH_SOURCE]",string.find(s,"ConstructionRules.initialHP",1,true)~=nil,string.find(s,"ConstructionRules.addWorkHP",1,true)~=nil,game.ServerScriptService.ServerModules:FindFirstChild("ModelFactoryTests")~=nil,game.ReplicatedStorage.Shared:FindFirstChild("PerformanceObserver")~=nil,workspace.StreamingEnabled,workspace:FindFirstChild("Model") and #workspace.Model:GetDescendants())
+2026-09-30T13:56:43.935Z,5891.935547,4ae4,6,Info [FLog::CreatorOutput] [ORIGINAL_HEALTH_SOURCE] true true true true false 7612
+2026-09-30T13:57:25.433Z,5933.433594,959c,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-09-30T13:57:25.435Z,5933.435547,959c,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-09-30T14:04:53.190Z,6381.190918,959c,6,Info [FLog::CreatorOutput] > task.spawn(function() print("[ORIGINAL_RELEASE_BEGIN]",#game.Players:GetPlayers(),workspace:GetAttribute("MatchPhase"),game.Players.LocalPlayer.UserId); require(game.ReplicatedStorage.Shared.ReleaseTests).Run() end)
+2026-09-30T14:04:53.198Z,6381.198730,2494,6,Info [FLog::CreatorOutput] [ORIGINAL_RELEASE_BEGIN] 1 Lobby 1261977619
+2026-09-30T14:04:53.200Z,6381.200684,2494,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 在新的大廳開始
+2026-09-30T14:04:53.200Z,6381.200684,2494,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 完整地圖複製
+2026-09-30T14:04:53.200Z,6381.200684,2494,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 未配置商店關閉
+2026-09-30T14:04:53.200Z,6381.200684,2494,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Studio 不讀寫正式雲端資料或分析
+2026-09-30T14:04:53.617Z,6381.617188,9a4c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 不合法文明無法覆寫
+2026-09-30T14:04:53.834Z,6381.834473,9a4c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 切換文明清除準備
+2026-09-30T14:04:53.834Z,6381.834473,9a4c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 文明名稱由伺服器同步
+2026-09-30T14:04:53.834Z,6381.834473,9a4c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 實際 PlayerGui 有練習設定
+2026-09-30T14:04:54.116Z,6382.116211,2494,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-09-30T14:04:54.718Z,6382.718262,959c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 無角色 RTS 相機
+2026-09-30T14:04:54.718Z,6382.718262,959c,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新局教學事實歸零
+2026-09-30T14:04:55.018Z,6383.018555,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 遊戲中不能改文明
+2026-09-30T14:04:55.018Z,6383.018555,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 文明身份複製
+2026-09-30T14:04:55.018Z,6383.018555,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 存在己方實例
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 存在己方實例
+2026-09-30T14:04:55.019Z,6383.019531,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新手指引或橫向提示可見
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 ControlModule.controlsEnabled=false，全部預設角色移動控制停用
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際作用中的預設控制器未啟用
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 此版面未顯示折疊新手提示
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T14:04:55.020Z,6383.020508,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-09-30T14:04:55.021Z,6383.021484,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-09-30T14:04:55.021Z,6383.021484,52ac,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 26 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T14:04:55.021Z,6383.021484,52ac,6,Info [FLog::CreatorOutput] [RELEASE_TEST COMPLETE] 19 checks; gameplay construction follows separately

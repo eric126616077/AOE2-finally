@@ -1,0 +1,109 @@
+施工音效與動作：實際 Roblox Studio fresh Play 證據
+來源日誌：C:\Users\user\AppData\Local\Roblox\logs\0.741.19.7411056_20260930T123324Z_Studio_081AB_last.log
+時間：原始行為 UTC；Asia/Taipei 為 UTC+8。
+Invocation: task.spawn(function() require(game.ReplicatedStorage.Shared.FeedbackConstructionTests).Run() end)
+
+範圍：無外部 Buildings／Resource 模板的單人 Rich Small 沙盒，正常 LobbyTests 開局、Build／Order／Stop，實際 fallback 村民、正式 LocalScript 音效與動作。
+沒有新增測試資源、修改伺服器時間戳記、加速施工或更換選址程式；到場工作脈衝期限維持 35 秒。
+通過範圍僅是下列38項施工回饋檢查，不推定雙人同步、戰鬥／攻城、正式客戶端或真人聽感通過。
+
+原始失敗與修正：
+20:40:54 Asia/Taipei：Playing 先複製而角色清理尚未到達，原立即 Character==nil 斷言失敗。測試改為等待實際 Sandbox=true AND Character==nil，最多10秒，仍須實際通過清理。
+20:43:36 Asia/Taipei：房屋實際可以完工但村民 LastWork 未發布，真實回饋檢查失敗。20:46唯讀診斷記錄 House Complete=true、ConstructionProgress=1，村民無 LastWork。
+根因：UnitRules.takeAction 的 action allowlist 沒有 workFeedback，productionStep 的施工脈衝被永久拒絕。最小修正只新增該 action；actual UnitRules 回歸先重現FAIL、後76checks PASS，見 latest-construction-feedback-clock-results.txt。
+20:50:44–20:50:56 Asia/Taipei：fresh Play 全部38PASS與COMPLETE。原來的測試選址規則不變，未移遠工地或延長到場期限。
+
+本次通過後來源雜湊（SHA256）：
+9DFB2CC943DD5A79D4734D30F921220C3B4DEC3DA35CC20A382AC29AA1F2A0E2  C:\Users\user\Desktop\AOE2-finally\src\ReplicatedStorage\Shared\FeedbackConstructionTests.lua
+4FED84235B49D2D2A15FE225AFA9C657A2AC4B69B58A2A8327387FF89726A0B3  C:\Users\user\Desktop\AOE2-finally\src\ServerScriptService\ServerModules\UnitRules.lua
+A0C02717563CBF52E678021335EFF2001722F2B3DA4369E2C5B2896F9D58D26E  C:\Users\user\Desktop\AOE2-finally\tests\construction.spec.lua
+F8EAF320B6FBC47E3C01B619D36B339255C98A7682B637C62CEB8721B239CF08  C:\Users\user\Desktop\AOE2-finally\src\StarterPlayer\StarterPlayerScripts\SoundFeedback.client.lua
+E10111BA29E130DACD2BDCE152A6A5CECB515EE9BA477F18216134463AF5C649  C:\Users\user\Desktop\AOE2-finally\src\StarterPlayer\StarterPlayerScripts\UnitMotion.client.lua
+130BDAF1D7CE7463B08040D40B9D802CF71EB70C0DB64C87A94899781664C08F  C:\Users\user\Desktop\AOE2-finally\src\ReplicatedStorage\Shared\AudioFeedback.lua
+8B3612F14D711377221137D0985F5DCEDA98315B6F4D06E132B3669355E20657  C:\Users\user\Desktop\AOE2-finally\src\ReplicatedStorage\Shared\FeedbackRules.lua
+FDD24474C9CB455C3AB88DC85AC106282E732BC7A31B8C99BC505BB6E4CF37AF  C:\Users\user\Desktop\AOE2-finally\src\ServerScriptService\GameServer.server.lua
+
+RAW Studio 檢查及失敗堆疊：
+2026-09-30T12:40:54.093Z,450.093903,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常單人沙盒已開局
+2026-09-30T12:40:54.093Z,450.093903,9d50,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.FeedbackConstructionTests:23: [FEEDBACK_CONSTRUCTION FAIL] 無角色 RTS 沙盒可直接驗證施工回饋
+ReplicatedStorage.Shared.FeedbackConstructionTests:23
+ReplicatedStorage.Shared.FeedbackConstructionTests:110 function run
+ReplicatedStorage.Shared.FeedbackConstructionTests:264 function Run
+CommandBar:1
+
+ReplicatedStorage.Shared.FeedbackConstructionTests:257 function run
+ReplicatedStorage.Shared.FeedbackConstructionTests:264 function Run
+CommandBar:1
+
+2026-09-30T12:43:00.477Z,576.477905,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常單人沙盒已開局
+2026-09-30T12:43:00.724Z,576.724976,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 無角色 RTS 沙盒可直接驗證施工回饋
+2026-09-30T12:43:00.726Z,576.726013,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式三位村民及根零件已複製
+2026-09-30T12:43:00.726Z,576.726013,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式音效 LocalScript 唯讀探針存在
+2026-09-30T12:43:00.726Z,576.726013,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 施工回饋使用的正式音檔已全部預載
+2026-09-30T12:43:00.726Z,576.726013,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式動作 LocalScript 與回饋容器就緒
+2026-09-30T12:43:00.726Z,576.726013,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常停止全部村民，基準姿勢沒有採集或施工
+2026-09-30T12:43:01.066Z,577.066528,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 音效已開啟且前一次短音效已結束
+2026-09-30T12:43:01.066Z,577.066528,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 無模型替代村民具有可驗證工具與手臂
+2026-09-30T12:43:01.066Z,577.066528,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常開局資源足以支付房屋
+2026-09-30T12:43:01.142Z,577.142944,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常建造請求產生伺服器房屋工地
+2026-09-30T12:43:01.142Z,577.142944,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 建立工地只扣一次成本，沒有立即完工
+2026-09-30T12:43:01.142Z,577.142944,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 成功建立工地僅發布一次 Build 並由正式腳本播放已載入音效
+2026-09-30T12:43:01.142Z,577.142944,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 未完工沒有增加人口或提前發布完工音效
+2026-09-30T12:43:36.144Z,612.144409,9d50,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.FeedbackConstructionTests:31: [FEEDBACK_CONSTRUCTION FAIL] 村民實際到場且增加施工進度才發布 build 工作時間戳記；等待逾時
+ReplicatedStorage.Shared.FeedbackConstructionTests:31 function waitFor
+ReplicatedStorage.Shared.FeedbackConstructionTests:183
+ReplicatedStorage.Shared.FeedbackConstructionTests:110 function run
+ReplicatedStorage.Shared.FeedbackConstructionTests:266 function Run
+CommandBar:1
+
+ReplicatedStorage.Shared.FeedbackConstructionTests:259 function run
+ReplicatedStorage.Shared.FeedbackConstructionTests:266 function Run
+CommandBar:1
+
+2026-09-30T12:50:44.109Z,1040.109619,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常單人沙盒已開局
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 無角色 RTS 沙盒可直接驗證施工回饋
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式三位村民及根零件已複製
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式音效 LocalScript 唯讀探針存在
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 施工回饋使用的正式音檔已全部預載
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式動作 LocalScript 與回饋容器就緒
+2026-09-30T12:50:44.356Z,1040.356689,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常停止全部村民，基準姿勢沒有採集或施工
+2026-09-30T12:50:44.696Z,1040.696411,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 音效已開啟且前一次短音效已結束
+2026-09-30T12:50:44.696Z,1040.696411,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 無模型替代村民具有可驗證工具與手臂
+2026-09-30T12:50:44.696Z,1040.696411,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常開局資源足以支付房屋
+2026-09-30T12:50:44.765Z,1040.765991,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常建造請求產生伺服器房屋工地
+2026-09-30T12:50:44.765Z,1040.765991,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 建立工地只扣一次成本，沒有立即完工
+2026-09-30T12:50:44.765Z,1040.765991,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 成功建立工地僅發布一次 Build 並由正式腳本播放已載入音效
+2026-09-30T12:50:44.765Z,1040.765991,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 未完工沒有增加人口或提前發布完工音效
+2026-09-30T12:50:46.646Z,1042.646606,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 村民實際到場且增加施工進度才發布 build 工作時間戳記
+2026-09-30T12:50:46.647Z,1042.647705,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式相機同時看見施工村民與房屋並符合空間音效範圍
+2026-09-30T12:50:46.647Z,1042.647705,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式腳本依 LastWork 播放已載入的村民施工空間音效
+2026-09-30T12:50:46.647Z,1042.647705,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常施工會改變替代村民的工具或手臂姿勢
+2026-09-30T12:50:46.679Z,1042.679688,5f74,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 減少動態將正在施工的工具和手臂還原
+2026-09-30T12:50:46.757Z,1042.757812,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常停止施工使正式工人與建築停止工作
+2026-09-30T12:50:46.757Z,1042.757812,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 停止前只完成部分施工，保留可繼續工地
+2026-09-30T12:50:46.791Z,1042.791870,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 停止施工後活動音效自然清理
+2026-09-30T12:50:47.894Z,1043.894897,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 跨過正常工作脈衝週期仍保持停工，沒有假施工音效
+2026-09-30T12:50:47.894Z,1043.894897,9d50,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正式靜音立即清空播放池
+2026-09-30T12:50:48.031Z,1044.031616,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 靜音期間正常續建仍由伺服器增加進度與工作脈衝
+2026-09-30T12:50:48.031Z,1044.031616,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 靜音續建没有新增施工音效，且沒有影響施工邏輯
+2026-09-30T12:50:49.034Z,1045.034790,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 解除靜音後下一個真正施工脈衝可再次播放
+2026-09-30T12:50:55.803Z,1051.803589,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 正常續建使房屋真正完工
+2026-09-30T12:50:55.835Z,1051.835571,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 真正完工才發布一次完成 cue 並由正式腳本播放已載入音效
+2026-09-30T12:50:55.835Z,1051.835571,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 減少動態仍保留房屋真正完工的短暫輪廓回饋
+2026-09-30T12:50:55.835Z,1051.835571,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 完工回饋與權威進度、施工狀態及人口啟用一致
+2026-09-30T12:50:55.835Z,1051.835571,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 完工村民回到待命並清除施工工作種類
+2026-09-30T12:50:56.096Z,1052.096924,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 完成短音效結束後準備失敗建造檢查
+2026-09-30T12:50:56.168Z,1052.168457,9950,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 重疊建造由伺服器拒絕，正式腳本播放已載入的 Error 音效
+2026-09-30T12:50:56.634Z,1052.634033,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 失敗音效到期清理，播放池沒有遺留聲音
+2026-09-30T12:50:56.636Z,1052.636108,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 失敗建造沒有建立新工地或扣款
+2026-09-30T12:50:56.636Z,1052.636108,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 失敗建造沒有假成功或完工音效
+2026-09-30T12:50:56.636Z,1052.636108,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION PASS] 施工、完工及錯誤音效維持正式播放額度
+2026-09-30T12:50:56.636Z,1052.636108,89e0,6,Info [FLog::CreatorOutput] [FEEDBACK_CONSTRUCTION COMPLETE] 38 項檢查；正常施工、停工、續建、靜音、減少動態、完工與拒絕建造回饋
+
+RAW 第2輪失敗後唯讀診斷（未修改單位／建築）：
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] 村民 -195.9317626953125, 2.5, -188.25071716308594 {"Carrying":0,"Order":"待命","Civilization":"RiverHaven","Armor":0,"UnitType":"villager","TeamId":1,"UnitClass":"villager","Radius":2,"CarryType":"","Animation":"Idle","TeamName":"第 1 隊","CivilizationEmblem":"川","Speed":14,"DisplayName":"村民","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","RTSManaged":true,"OwnerName":"Eric","MaxHP":40,"HP":40,"Attack":3}
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] 村民 -216, 2.5, -188 {"Carrying":0,"Order":"待命","Civilization":"RiverHaven","Armor":0,"UnitType":"villager","TeamId":1,"UnitClass":"villager","Radius":2,"CarryType":"","Animation":"Idle","TeamName":"第 1 隊","CivilizationEmblem":"川","Speed":14,"DisplayName":"村民","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","RTSManaged":true,"OwnerName":"Eric","MaxHP":40,"HP":40,"Attack":3}
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] 村民 -210, 2.5, -188 {"Carrying":0,"Order":"待命","Civilization":"RiverHaven","Armor":0,"UnitType":"villager","TeamId":1,"UnitClass":"villager","Radius":2,"CarryType":"","Animation":"Idle","TeamName":"第 1 隊","CivilizationEmblem":"川","Speed":14,"DisplayName":"村民","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","RTSManaged":true,"OwnerName":"Eric","MaxHP":40,"HP":40,"Attack":3}
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] 斥候騎兵 -184, 2.5, -216 {"Carrying":0,"Order":"待命","Civilization":"RiverHaven","Armor":0,"UnitType":"scout","TeamId":1,"UnitClass":"cavalry","Radius":3,"CarryType":"","Animation":"Idle","TeamName":"第 1 隊","CivilizationEmblem":"川","Speed":27,"DisplayName":"斥候騎兵","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","RTSManaged":true,"OwnerName":"Eric","MaxHP":55,"HP":55,"Attack":5}
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] TownCenter -216, 13, -216 {"MaxHP":2400,"BuildingType":"TownCenter","ConstructionProgress":1,"Complete":true,"Civilization":"RiverHaven","RTSManaged":true,"ConstructionRemaining":0,"Radius":16,"OwnerName":"Eric","UnderConstruction":false,"CivilizationEmblem":"川","BuilderCount":0,"DisplayName":"市鎮中心","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","TeamName":"第 1 隊","TeamId":1,"MainBase":true,"HP":2400,"ConstructionStatus":"已完工"}
+2026-09-30T12:46:22.397Z,778.397278,5470,6,Info [FLog::CreatorOutput] [FEEDBACK_DIAG] House -184, 7, -184 {"MaxHP":550,"BuildingType":"House","ConstructionProgress":1,"Complete":true,"Civilization":"RiverHaven","RTSManaged":true,"ConstructionRemaining":0,"Radius":8,"OwnerName":"Eric","CivilizationEmblem":"川","BuilderCount":0,"DisplayName":"房屋","OwnerId":1261977619,"CivilizationAccent":null,"CivilizationName":"河灣盟邦","UnderConstruction":false,"TeamName":"第 1 隊","TeamId":1,"HP":549.5,"ConstructionStatus":"已完工"}

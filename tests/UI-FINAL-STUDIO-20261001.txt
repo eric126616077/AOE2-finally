@@ -1,0 +1,117 @@
+2026-09-30T20:56:22.847Z,175.847534,0e44,6,Info [FLog::CreatorOutput] [UI_FINAL RESULT] HUDTests false ReplicatedStorage.Shared.HUDTests:29: 需要主城與村民
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 ControlModule.controlsEnabled=false，全部預設角色移動控制停用
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際作用中的預設控制器未啟用
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T20:56:22.848Z,175.848526,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際觸控操作列中心攔截世界指令
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際操作列上鄰可見地面不被 UI 攔截
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 新手提示中心被其他介面覆蓋：Players.eric126616077.PlayerGui.AOE2_MainGUI.Canvas.Notice
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Select
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Move
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Gather
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Attack
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Build
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Home
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Idle
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Villagers
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Cancel
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 手機 HUD 不縮小觸控目標
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 原始手指座標扣 GuiInset 後命中操作列
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 緊鄰操作列上緣的地面不被操作列攔截
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 對局中顯示觸控操作列
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T20:56:22.849Z,175.849533,0e44,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T20:56:22.850Z,175.850540,0e44,6,Info [FLog::CreatorOutput] [UI_FINAL RESULT] TouchTests false ReplicatedStorage.Shared.TouchTests:49: [TOUCH_TEST FAIL] RTS 觸控不需要角色或預設角色相機
+2026-09-30T20:56:22.850Z,175.850540,0e44,6,Info [FLog::CreatorOutput] [UI_FINAL FINISHED]
+2026-09-30T20:57:39.863Z,252.863678,57b0,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 短暫通知關閉後驗收可見地面
+2026-09-30T20:57:39.900Z,252.900848,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 未選取村民時不顯示建築圖示
+2026-09-30T20:57:39.937Z,252.937988,adb4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 選取村民顯示建築指令
+2026-09-30T20:57:39.971Z,252.971863,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城顯示訓練，隱藏村民建築
+2026-09-30T20:57:39.971Z,252.971863,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產建築顯示佇列與集合點
+2026-09-30T20:57:39.971Z,252.971863,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 手機生產佇列位於可見指令區
+2026-09-30T20:57:39.971Z,252.971863,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 手機集合點保持可點擊尺寸
+2026-09-30T20:57:40.007Z,253.007736,0ad8,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城科技頁顯示織布機
+2026-09-30T20:57:40.044Z,253.044983,98d4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 中立資源只顯示資訊
+2026-09-30T20:57:40.081Z,253.081223,98d4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 己方村民可開啟刪除確認
+2026-09-30T20:57:40.113Z,253.113129,57b0,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除確認阻擋世界輸入
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 變更選取立即取消刪除快照
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板不穿透
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 緊鄰底部面板的地面可點擊
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 保留安全區域與UIScale
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 顯示於實際PlayerGui
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 顯示於實際PlayerGui
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 顯示於實際PlayerGui
+2026-09-30T20:57:40.147Z,253.147919,0e44,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 顯示於實際PlayerGui
+2026-09-30T20:57:40.182Z,253.182693,98d4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 手機多選顯示實際數量
+2026-09-30T20:57:40.182Z,253.182693,98d4,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 手機多選顯示村民數與總生命值
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 21 checks
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [UI_FINAL_READY RESULT] HUDTests true 21
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 ControlModule.controlsEnabled=false，全部預設角色移動控制停用
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際作用中的預設控制器未啟用
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際觸控操作列中心攔截世界指令
+2026-09-30T20:57:40.184Z,253.184677,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際操作列上鄰可見地面不被 UI 攔截
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際新手提示按鈕中心攔截世界指令
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Select
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Move
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Gather
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Attack
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Build
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Home
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Idle
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Villagers
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Cancel
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 手機 HUD 不縮小觸控目標
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 原始手指座標扣 GuiInset 後命中操作列
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 緊鄰操作列上緣的地面不被操作列攔截
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 對局中顯示觸控操作列
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 42 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [UI_FINAL_READY RESULT] TouchTests true 42
+2026-09-30T20:57:40.186Z,253.186676,98d4,6,Info [FLog::CreatorOutput] [UI_FINAL_READY FINISHED]
+2026-09-30T20:57:40.188Z,253.188660,98d4,6,Info [FLog::CreatorOutput] [UI_CLICK OBSERVE] 點村民訓練，再點佇列頭像取消；之後點科技與織布機。
+2026-09-30T20:57:50.671Z,263.671204,4a60,6,Info [FLog::CreatorOutput] [UI_CLICK PASS] 實際手機指令區顯示訓練名稱、秒數與百分比
+2026-09-30T20:57:50.671Z,263.671204,4a60,6,Info [FLog::CreatorOutput] [UI_CLICK PASS] 訓練頭像維持44px並顯示進度條
+2026-09-30T20:58:00.320Z,273.320679,57b0,6,Info [FLog::CreatorOutput] [UI_CLICK PASS] 實際點佇列取消退還50食物、未產生單位
+2026-09-30T20:58:20.871Z,293.871155,57b0,6,Info [FLog::CreatorOutput] [UI_CLICK PASS] 實際手機指令區顯示研究名稱、秒數與百分比
+2026-09-30T20:58:20.871Z,293.871155,57b0,6,Info [FLog::CreatorOutput] [UI_CLICK COMPLETE] 4 checks; 以滑鼠操作Studio觸控模擬UI，未驗真實手指

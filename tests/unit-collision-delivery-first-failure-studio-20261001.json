@@ -1,0 +1,586 @@
+{
+  "complete": false,
+  "evidence": {
+    "logPath": "C:\\Users\\user\\AppData\\Local\\Roblox\\logs\\0.741.19.7411056_20261001T051733Z_Studio_B063C_last.log",
+    "snapshotBytes": 1048400,
+    "selection": "Last structurally valid sequence; reject any later unfinished run",
+    "selectedRun": 2,
+    "observedRuns": 2,
+    "validSequences": 1,
+    "runs": [
+      {
+        "ordinal": 1,
+        "firstJsonLine": 2592,
+        "statusLine": 2592,
+        "status": "INCOMPLETE",
+        "segmentsExpected": 0,
+        "segmentsObserved": 0,
+        "validSequence": false,
+        "issues": [
+          "Status marker has no segmented JSON; legacy or truncated output is not acceptance evidence.",
+          "Incomplete segment sequence."
+        ]
+      },
+      {
+        "ordinal": 2,
+        "firstJsonLine": 7663,
+        "statusLine": 7678,
+        "status": "INCOMPLETE",
+        "segmentsExpected": 15,
+        "segmentsObserved": 15,
+        "validSequence": true,
+        "issues": []
+      }
+    ],
+    "rawScopeStartLine": 7545,
+    "rawScopeEndLine": 7678,
+    "startupLine": null,
+    "fixtureLine": null,
+    "supportingScope": "Unit collision run only; no UC95 scope marker found",
+    "errors": [
+      "The selected test ended INCOMPLETE or has no terminal marker."
+    ]
+  },
+  "report": {
+    "finalUnits": [
+      {
+        "goalZ": -216,
+        "index": 1,
+        "animation": "Idle",
+        "order": "交貨",
+        "X": -216.2196502685547,
+        "goalX": -216,
+        "Z": -153.95062255859375,
+        "kind": "villager",
+        "goalDistance": 62.049766540527344,
+        "formation": "Box"
+      },
+      {
+        "slotZ": -160.30868530273438,
+        "index": 2,
+        "animation": "Idle",
+        "order": "待命",
+        "slotX": -214.3999481201172,
+        "X": -214.3999481201172,
+        "Z": -160.30868530273438,
+        "kind": "villager",
+        "formation": "Box"
+      },
+      {
+        "slotZ": -154.3999481201172,
+        "index": 3,
+        "animation": "Idle",
+        "order": "待命",
+        "slotX": -211.69131469726562,
+        "X": -211.69131469726562,
+        "Z": -154.3999481201172,
+        "kind": "villager",
+        "formation": "Box"
+      },
+      {
+        "slotZ": -157.6000518798828,
+        "index": 4,
+        "animation": "Idle",
+        "order": "待命",
+        "slotX": -220.30868530273438,
+        "X": -220.30868530273438,
+        "Z": -157.6000518798828,
+        "kind": "scout",
+        "formation": "Box"
+      }
+    ],
+    "minClearance": 0.062311649322509766,
+    "complete": false,
+    "cleanupStopped": true,
+    "maxStableColliderAngleError": 0.00048828125,
+    "stages": [
+      {
+        "rootChanges": 133,
+        "started": 0.0008630999946035445,
+        "elapsed": 4.640569600000163,
+        "samples": 272,
+        "maxLateral": 0,
+        "name": "分散就位",
+        "finalUnits": [
+          {
+            "slotZ": -144,
+            "goalZ": -144,
+            "index": 1,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -240,
+            "X": -240,
+            "goalX": -240,
+            "Z": -144,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -144,
+            "goalZ": -144,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -216,
+            "X": -216,
+            "goalX": -216,
+            "Z": -144.09683227539062,
+            "kind": "villager",
+            "goalDistance": 0.096832275390625,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -126,
+            "goalZ": -126,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -198,
+            "X": -198,
+            "goalX": -198,
+            "Z": -126,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -162,
+            "goalZ": -162,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -236,
+            "X": -236,
+            "goalX": -236,
+            "Z": -162,
+            "kind": "scout",
+            "goalDistance": 0,
+            "formation": "Box"
+          }
+        ],
+        "complete": true,
+        "rootChangesByUnit": [
+          33,
+          29,
+          42,
+          29
+        ],
+        "minClearance": 2
+      },
+      {
+        "rootChanges": 35,
+        "started": 4.641474599993671,
+        "elapsed": 3.867319299999508,
+        "samples": 231,
+        "maxLateral": 4.436126708984375,
+        "name": "繞過閒置村民",
+        "finalUnits": [
+          {
+            "slotZ": -144,
+            "goalZ": -144,
+            "index": 1,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -192,
+            "X": -192.0064697265625,
+            "goalX": -192,
+            "Z": -143.92552185058594,
+            "kind": "villager",
+            "goalDistance": 0.0747586265206337,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -144,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -216,
+            "X": -216,
+            "Z": -144.09683227539062,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -126,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -198,
+            "X": -198,
+            "Z": -126,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -162,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -236,
+            "X": -236,
+            "Z": -162,
+            "kind": "scout",
+            "formation": "Box"
+          }
+        ],
+        "complete": true,
+        "lineZ": -144,
+        "rootChangesByUnit": [
+          35,
+          0,
+          0,
+          0
+        ],
+        "minClearance": 0.062311649322509766
+      },
+      {
+        "rootChanges": 34,
+        "started": 8.508829699989292,
+        "elapsed": 2.0816884000087157,
+        "samples": 124,
+        "maxLateral": 3.3519744873046875,
+        "finalUnits": [
+          {
+            "slotZ": -144.09683227539062,
+            "goalZ": -144.09683227539062,
+            "index": 1,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -216,
+            "X": -216,
+            "goalX": -216,
+            "Z": -144.09683227539062,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -143.92552185058594,
+            "goalZ": -143.92552185058594,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -192.0064697265625,
+            "X": -192.0064697265625,
+            "goalX": -192.0064697265625,
+            "Z": -143.92552185058594,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -126,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -198,
+            "X": -198,
+            "Z": -126,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -162,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -236,
+            "X": -236,
+            "Z": -162,
+            "kind": "scout",
+            "formation": "Box"
+          }
+        ],
+        "complete": true,
+        "name": "迎面交換位置",
+        "minClearance": 0.6428999900817871,
+        "crossingTargets": [
+          {
+            "Z": -144.09683227539062,
+            "X": -222
+          },
+          {
+            "Z": -143.92552185058594,
+            "X": -186.0064697265625
+          }
+        ],
+        "bothWorkers": true,
+        "rootChangesByUnit": [
+          16,
+          18,
+          0,
+          0
+        ],
+        "lineZ": -144
+      },
+      {
+        "rootChanges": 52,
+        "started": 10.590591399988625,
+        "elapsed": 2.3625306000030832,
+        "samples": 140,
+        "maxLateral": 0,
+        "name": "混合群體移動",
+        "formation": {
+          "forwardX": -0.41671383238969,
+          "assignment": [
+            4,
+            1,
+            3,
+            2
+          ],
+          "key": "Box",
+          "spacing": 6.5,
+          "forwardZ": -0.9090377230319417
+        },
+        "finalUnits": [
+          {
+            "slotZ": -151.69131469726562,
+            "goalZ": -151.69131469726562,
+            "index": 1,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -217.6000518798828,
+            "X": -217.6000518798828,
+            "goalX": -217.6000518798828,
+            "Z": -151.69131469726562,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -160.30868530273438,
+            "goalZ": -160.30868530273438,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -214.3999481201172,
+            "X": -214.3999481201172,
+            "goalX": -214.3999481201172,
+            "Z": -160.30868530273438,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -154.3999481201172,
+            "goalZ": -154.3999481201172,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -211.69131469726562,
+            "X": -211.69131469726562,
+            "goalX": -211.69131469726562,
+            "Z": -154.3999481201172,
+            "kind": "villager",
+            "goalDistance": 0,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -157.6000518798828,
+            "goalZ": -157.6000518798828,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -220.30868530273438,
+            "X": -220.30868530273438,
+            "goalX": -220.30868530273438,
+            "Z": -157.6000518798828,
+            "kind": "scout",
+            "goalDistance": 0,
+            "formation": "Box"
+          }
+        ],
+        "complete": true,
+        "rootChangesByUnit": [
+          6,
+          19,
+          21,
+          6
+        ],
+        "minClearance": 1.4999899864196777
+      },
+      {
+        "rootChanges": 45,
+        "started": 12.955256299988832,
+        "elapsed": 4.929622000010568,
+        "samples": 290,
+        "maxLateral": 0,
+        "name": "正常採集",
+        "finalUnits": [
+          {
+            "goalZ": -76.52517700195312,
+            "index": 1,
+            "animation": "Work",
+            "order": "採集",
+            "X": -218.4129180908203,
+            "goalX": -221.12059020996094,
+            "Z": -84.29230499267578,
+            "kind": "villager",
+            "goalDistance": 8.225555419921875,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -160.30868530273438,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -214.3999481201172,
+            "X": -214.3999481201172,
+            "Z": -160.30868530273438,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -154.3999481201172,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -211.69131469726562,
+            "X": -211.69131469726562,
+            "Z": -154.3999481201172,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -157.6000518798828,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -220.30868530273438,
+            "X": -220.30868530273438,
+            "Z": -157.6000518798828,
+            "kind": "scout",
+            "formation": "Box"
+          }
+        ],
+        "complete": true,
+        "rootChangesByUnit": [
+          45,
+          0,
+          0,
+          0
+        ],
+        "minClearance": 1.4999899864196777
+      },
+      {
+        "rootChanges": 46,
+        "started": 17.88491839999915,
+        "elapsed": 20.002544399991166,
+        "samples": 1198,
+        "maxLateral": 0,
+        "name": "正常交貨",
+        "finalUnits": [
+          {
+            "goalZ": -216,
+            "index": 1,
+            "animation": "Idle",
+            "order": "交貨",
+            "X": -216.2196502685547,
+            "goalX": -216,
+            "Z": -153.95062255859375,
+            "kind": "villager",
+            "goalDistance": 62.049766540527344,
+            "formation": "Box"
+          },
+          {
+            "slotZ": -160.30868530273438,
+            "index": 2,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -214.3999481201172,
+            "X": -214.3999481201172,
+            "Z": -160.30868530273438,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -154.3999481201172,
+            "index": 3,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -211.69131469726562,
+            "X": -211.69131469726562,
+            "Z": -154.3999481201172,
+            "kind": "villager",
+            "formation": "Box"
+          },
+          {
+            "slotZ": -157.6000518798828,
+            "index": 4,
+            "animation": "Idle",
+            "order": "待命",
+            "slotX": -220.30868530273438,
+            "X": -220.30868530273438,
+            "Z": -157.6000518798828,
+            "kind": "scout",
+            "formation": "Box"
+          }
+        ],
+        "complete": false,
+        "rootChangesByUnit": [
+          46,
+          0,
+          0,
+          0
+        ],
+        "minClearance": 0.4807429313659668
+      }
+    ],
+    "stableColliderSamples": [
+      2073,
+      2188,
+      2191,
+      2219
+    ],
+    "movementOnly": false,
+    "checks": 71,
+    "scope": "新的單人沙盒起始 3 村民與 1 斥候；客戶端收到的伺服器 Root 複製樣本",
+    "replicationTolerance": 0.25,
+    "units": [
+      {
+        "height": 5,
+        "kind": "villager",
+        "radius": 2
+      },
+      {
+        "height": 5,
+        "kind": "villager",
+        "radius": 2
+      },
+      {
+        "height": 5,
+        "kind": "villager",
+        "radius": 2
+      },
+      {
+        "height": 7,
+        "kind": "scout",
+        "radius": 3
+      }
+    ],
+    "maxStableColliderOffsetError": 0,
+    "elapsedSeconds": 37.9374497999961,
+    "cleanupStopRequested": true,
+    "samples": 2255,
+    "work": {
+      "carried": 3,
+      "kind": "wood",
+      "gathered": true,
+      "delivered": false
+    },
+    "arena": {
+      "depth": 64,
+      "X": -216,
+      "width": 76,
+      "Z": -144
+    },
+    "error": "ReplicatedStorage.Shared.UnitCollisionTests:78: [UNIT_COLLISION FAIL] 採集後正常交貨完成；等待逾時\nReplicatedStorage.Shared.UnitCollisionTests:78 function waitFor\nReplicatedStorage.Shared.UnitCollisionTests:385\nReplicatedStorage.Shared.UnitCollisionTests:194 function Run\nCommandBar:1\n",
+    "movingStableColliderSamples": [
+      978,
+      355,
+      340,
+      218
+    ]
+  }
+}

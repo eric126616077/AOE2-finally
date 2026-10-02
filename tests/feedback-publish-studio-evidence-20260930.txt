@@ -1,0 +1,6 @@
+使用者明確要求發布試玩；default來源，未執行r2特殊測試。
+Studio第一次被舊live editing session擋住，關閉自身舊雲端視窗2493062後重試。
+2026-09-30T14:42:59.113Z,798.113953,6dbc,6,Info [FLog::StudioPublishService] publishAs: currentUniverse=0 currentPlace=0 -> targetUniverse=9550687645 targetPlace=106565275080490 isPublish=1 (crossUniverse=0)
+2026-09-30T14:44:56.251Z,915.251831,10c0,6,Info [FLog::StudioPublishService] publishAs: currentUniverse=0 currentPlace=0 -> targetUniverse=9550687645 targetPlace=106565275080490 isPublish=1 (crossUniverse=0)
+2026-09-30T14:45:01.576Z,920.576538,6ae4,6,Debug [FLog::PublishSessionStateController] Go to PublishSuccessful
+2026-09-30T14:45:02.031Z,921.031982,10c0,6 [FLog::Output] PublishToDifferentGame srcPlaceId=0, dstPlaceId=106565275080490, srcUniverse=0, dstUniverse=9550687645

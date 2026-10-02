@@ -1,0 +1,43 @@
+{
+  "Date": "2026-10-01",
+  "Scope": "地圖與Resource靜態場景；CLI完成；Small Studio初版helper完成；新版helper Play待驗",
+  "Files": [
+    {
+      "Path": "src/ReplicatedStorage/GameData/GameConfig.lua",
+      "SHA256": "F2D7223CAB1C24D025E8DB9882DDA931F5419BC47FD55D780009F6424C208A3E"
+    },
+    {
+      "Path": "src/ServerScriptService/MapGenerator.server.lua",
+      "SHA256": "0308F4061CCF50595B615A96F54A3D5729750FA5EB859AEE32E9246301CD38B4"
+    },
+    {
+      "Path": "src/ServerScriptService/ServerModules/WorldGenerator.lua",
+      "SHA256": "964456627092279F637B02131071FAE98D5428200CB7DD0D4AE8EA1A6662F2F7"
+    },
+    {
+      "Path": "src/ServerScriptService/ServerModules/ModelFactory.lua",
+      "SHA256": "E1FEB83A03635B712947E979B8376502F32C15C3F62E7BFFEC82A55FFFBB7E7D"
+    },
+    {
+      "Path": "src/ReplicatedStorage/Shared/MapTests.lua",
+      "SHA256": "3C01C8E11968AF74E58BC19A326F25AE5A948DE9ED6E402D7E51B0ADF6710B96"
+    },
+    {
+      "Path": "tests/world.spec.lua",
+      "SHA256": "34F0C9D098E2C8F938E24A60C1A4A1A2F838FAB76ABB7055924F86E615F7CF45"
+    },
+    {
+      "Path": "tests/model_factory.spec.lua",
+      "SHA256": "7F66557E16ACF80C555C4BE467D7142E827ED381389871B657E3D199D706F422"
+    },
+    {
+      "Path": "tests/model_factory.mocks.lua",
+      "SHA256": "611316840B369183179EA1DD9E89C638CA00A425AF49747B117FFF4A2BB38D67"
+    },
+    {
+      "Path": "build/AOE2-map-performance-20261001.rbxlx",
+      "SHA256": "F398DFE71980A6FF871B2A9CB2CFDB2D7BD02DEA957000A6099C68DEEE9CBFE4"
+    }
+  ],
+  "MapTestHelperRevision": "複製等待修正版；Small Studio Play 使用修正前 helper，遊戲地圖來源未變"
+}

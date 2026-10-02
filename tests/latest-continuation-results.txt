@@ -1,0 +1,312 @@
+2026-09-30T09:20:54.999Z,9117.999023,0884,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 在新的大廳開始
+2026-09-30T09:20:54.999Z,9117.999023,0884,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 完整地圖複製
+2026-09-30T09:20:54.999Z,9117.999023,0884,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 未配置商店關閉
+2026-09-30T09:20:55.000Z,9118.000000,0884,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Studio 不讀寫正式雲端資料或分析
+2026-09-30T09:20:55.416Z,9118.416016,0da4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 不合法文明無法覆寫
+2026-09-30T09:20:56.251Z,9119.251953,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 切換文明清除準備
+2026-09-30T09:20:56.251Z,9119.251953,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 文明名稱由伺服器同步
+2026-09-30T09:20:56.251Z,9119.251953,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 實際 PlayerGui 有練習設定
+2026-09-30T09:20:57.111Z,9120.111328,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 無角色 RTS 相機
+2026-09-30T09:20:57.111Z,9120.111328,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新局教學事實歸零
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 遊戲中不能改文明
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 文明身份複製
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 存在己方實例
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 存在己方實例
+2026-09-30T09:20:57.428Z,9120.428711,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新手指引或橫向提示可見
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Select
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Move
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Gather
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Attack
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Build
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Home
+2026-09-30T09:20:57.429Z,9120.429688,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Idle
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Villagers
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Cancel
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 手機 HUD 不縮小觸控目標
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 原始手指座標扣 GuiInset 後命中操作列
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 緊鄰操作列上緣的地面不被操作列攔截
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 對局中顯示觸控操作列
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 33 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T09:20:57.430Z,9120.430664,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST COMPLETE] 19 checks; gameplay construction follows separately
+2026-09-30T09:20:57.542Z,9120.542969,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民收到村民限制回覆
+2026-09-30T09:20:57.543Z,9120.543945,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民不建立工地、不扣資源
+2026-09-30T09:20:57.645Z,9120.645508,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊收到村民限制回覆
+2026-09-30T09:20:57.645Z,9120.645508,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊不建立工地、不扣資源
+2026-09-30T09:20:57.748Z,9120.748047,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選收到村民限制回覆
+2026-09-30T09:20:57.748Z,9120.748047,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選不建立工地、不扣資源
+2026-09-30T09:20:57.865Z,9120.865234,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋由伺服器建立工地
+2026-09-30T09:20:57.865Z,9120.865234,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 重複村民只扣一次建造成本
+2026-09-30T09:20:57.865Z,9120.865234,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 指定遠於舊 80 studs 限制的工地仍可建立
+2026-09-30T09:20:57.865Z,9120.865234,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工房屋不增加人口
+2026-09-30T09:20:57.966Z,9120.966797,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前施工村民停止
+2026-09-30T09:20:58.802Z,9121.802734,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前觀察停工期間
+2026-09-30T09:20:58.802Z,9121.802734,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前停止後保留進度且不自行完工
+2026-09-30T09:20:58.802Z,9121.802734,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 遠距村民尚未到場時沒有施工進度
+2026-09-30T09:21:06.375Z,9129.375977,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民實際走到遠方工地後才開始施工
+2026-09-30T09:21:06.376Z,9129.376953,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 軍隊不能協助施工、重複村民不重算
+2026-09-30T09:21:06.478Z,9129.478516,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後施工村民停止
+2026-09-30T09:21:07.378Z,9130.378906,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後觀察停工期間
+2026-09-30T09:21:07.378Z,9130.378906,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後停止後保留進度且不自行完工
+2026-09-30T09:21:15.064Z,9138.064453,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民可繼續完成停工房屋
+2026-09-30T09:21:15.064Z,9138.064453,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋完工才啟用人口
+2026-09-30T09:21:15.166Z,9138.166992,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營由伺服器建立工地
+2026-09-30T09:21:15.269Z,9138.269531,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前施工村民停止
+2026-09-30T09:21:16.152Z,9139.152344,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前觀察停工期間
+2026-09-30T09:21:16.152Z,9139.152344,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前停止後保留進度且不自行完工
+2026-09-30T09:21:16.254Z,9139.254883,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工兵營拒絕訓練
+2026-09-30T09:21:16.254Z,9139.254883,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工訓練請求不扣款、不排入佇列
+2026-09-30T09:21:27.398Z,9150.398438,8ea4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 多名村民前往並完成兵營
+2026-09-30T09:21:27.516Z,9150.516602,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營完工後才可訓練
+2026-09-30T09:21:27.617Z,9150.617188,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田由伺服器建立工地
+2026-09-30T09:21:27.734Z,9150.734375,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前施工村民停止
+2026-09-30T09:21:28.584Z,9151.584961,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前觀察停工期間
+2026-09-30T09:21:28.584Z,9151.584961,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前停止後保留進度且不自行完工
+2026-09-30T09:21:28.584Z,9151.584961,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工農田不提供可採集資源
+2026-09-30T09:21:37.677Z,9160.677734,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民完成農田
+2026-09-30T09:21:37.677Z,9160.677734,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田完工才啟用食物
+2026-09-30T09:21:37.677Z,9160.677734,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION COMPLETE] 36 項施工引擎檢查通過
+2026-09-30T09:23:14.853Z,9257.853516,0da4,6,Info [FLog::CreatorOutput] > local p=game.Players.LocalPlayer; local g=p.PlayerGui:FindFirstChild("TouchGui"); print("[TOUCH_GUI]",workspace:GetAttribute("MatchPhase"),game:GetService("GuiService").TouchControlsEnabled,g and g.Enabled); if g then for _,v in ipairs(g:GetDescendants()) do if v:IsA("GuiObject") and (v.Name:find("Thumbstick") or v.Name:find("Jump")) then local visible=v.Visible; local a=v.Parent; while a and a~=p.PlayerGui do if a:IsA("GuiObject") and not a.Visible then visible=false end; if a:IsA("ScreenGui") and not a.Enabled then visible=false end; a=a.Parent end; print("[TOUCH_GUI_ITEM]",v.Name,visible,v.AbsolutePosition,v.AbsoluteSize) end end end
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI] Playing true false
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] JumpButton false 706, 244 70, 70
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] DynamicThumbstickFrame false -100, 111.333344 420.399994, 322.666687
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickStart false 29, 241.000031 74, 74
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickEnd false 48, 260.000031 36, 36
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:23:14.856Z,9257.856445,8358,6,Info [FLog::CreatorOutput] [TOUCH_GUI_ITEM] ThumbstickMiddle false -100, 111.333344 0, 0
+2026-09-30T09:39:07.507Z,10210.507812,8ea4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 在新的大廳開始
+2026-09-30T09:39:07.507Z,10210.507812,8ea4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 完整地圖複製
+2026-09-30T09:39:07.507Z,10210.507812,8ea4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 未配置商店關閉
+2026-09-30T09:39:07.507Z,10210.507812,8ea4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Studio 不讀寫正式雲端資料或分析
+2026-09-30T09:39:07.912Z,10210.912109,0da4,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 不合法文明無法覆寫
+2026-09-30T09:39:08.731Z,10211.731445,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 切換文明清除準備
+2026-09-30T09:39:08.731Z,10211.731445,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 文明名稱由伺服器同步
+2026-09-30T09:39:08.731Z,10211.731445,8cb0,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 實際 PlayerGui 有練習設定
+2026-09-30T09:39:09.682Z,10212.682617,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 無角色 RTS 相機
+2026-09-30T09:39:09.682Z,10212.682617,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新局教學事實歸零
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 遊戲中不能改文明
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 文明身份複製
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Buildings 存在己方實例
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 文明身份複製
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] Units 存在己方實例
+2026-09-30T09:39:10.000Z,10213.000000,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST PASS] 新手指引或橫向提示可見
+2026-09-30T09:39:10.000Z,10213.000977,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T09:39:10.001Z,10213.001953,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際觸控操作列中心攔截世界指令
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際操作列上鄰可見地面不被 UI 攔截
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 新手提示中心被其他介面覆蓋：Players.eric126616077.PlayerGui.AOE2_MainGUI.Canvas.Notice
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Select
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Move
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Gather
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Attack
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T09:39:10.002Z,10213.002930,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Build
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Home
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Idle
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Villagers
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕可點擊尺寸：Cancel
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 手機 HUD 不縮小觸控目標
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 原始手指座標扣 GuiInset 後命中操作列
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 緊鄰操作列上緣的地面不被操作列攔截
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 對局中顯示觸控操作列
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 38 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T09:39:10.003Z,10213.003906,8358,6,Info [FLog::CreatorOutput] [RELEASE_TEST COMPLETE] 19 checks; gameplay construction follows separately
+2026-09-30T09:39:10.109Z,10213.109375,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民收到村民限制回覆
+2026-09-30T09:39:10.109Z,10213.109375,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 沒有選中村民不建立工地、不扣資源
+2026-09-30T09:39:10.208Z,10213.208984,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊收到村民限制回覆
+2026-09-30T09:39:10.209Z,10213.209961,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 只選軍隊不建立工地、不扣資源
+2026-09-30T09:39:10.310Z,10213.310547,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選收到村民限制回覆
+2026-09-30T09:39:10.310Z,10213.310547,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民與軍隊混選不建立工地、不扣資源
+2026-09-30T09:39:10.409Z,10213.409180,8ea4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋由伺服器建立工地
+2026-09-30T09:39:10.410Z,10213.410156,8ea4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 重複村民只扣一次建造成本
+2026-09-30T09:39:10.410Z,10213.410156,8ea4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 指定遠於舊 80 studs 限制的工地仍可建立
+2026-09-30T09:39:10.410Z,10213.410156,8ea4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工房屋不增加人口
+2026-09-30T09:39:10.512Z,10213.512695,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前施工村民停止
+2026-09-30T09:39:11.381Z,10214.381836,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前觀察停工期間
+2026-09-30T09:39:11.381Z,10214.381836,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場前停止後保留進度且不自行完工
+2026-09-30T09:39:11.381Z,10214.381836,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 遠距村民尚未到場時沒有施工進度
+2026-09-30T09:39:18.824Z,10221.824219,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民實際走到遠方工地後才開始施工
+2026-09-30T09:39:18.824Z,10221.824219,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 軍隊不能協助施工、重複村民不重算
+2026-09-30T09:39:18.923Z,10221.923828,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後施工村民停止
+2026-09-30T09:39:19.791Z,10222.791016,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後觀察停工期間
+2026-09-30T09:39:19.791Z,10222.791016,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 到場後停止後保留進度且不自行完工
+2026-09-30T09:39:27.482Z,10230.482422,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民可繼續完成停工房屋
+2026-09-30T09:39:27.482Z,10230.482422,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 房屋完工才啟用人口
+2026-09-30T09:39:27.584Z,10230.584961,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營由伺服器建立工地
+2026-09-30T09:39:27.688Z,10230.688477,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前施工村民停止
+2026-09-30T09:39:28.523Z,10231.523438,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前觀察停工期間
+2026-09-30T09:39:28.524Z,10231.524414,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營到場前停止後保留進度且不自行完工
+2026-09-30T09:39:28.624Z,10231.624023,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工兵營拒絕訓練
+2026-09-30T09:39:28.624Z,10231.624023,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工訓練請求不扣款、不排入佇列
+2026-09-30T09:39:39.757Z,10242.757812,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 多名村民前往並完成兵營
+2026-09-30T09:39:39.858Z,10242.858398,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 兵營完工後才可訓練
+2026-09-30T09:39:39.960Z,10242.960938,0884,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田由伺服器建立工地
+2026-09-30T09:39:40.076Z,10243.076172,8358,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前施工村民停止
+2026-09-30T09:39:40.929Z,10243.929688,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前觀察停工期間
+2026-09-30T09:39:40.929Z,10243.929688,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田到場前停止後保留進度且不自行完工
+2026-09-30T09:39:40.929Z,10243.929688,0da4,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 未完工農田不提供可採集資源
+2026-09-30T09:39:50.456Z,10253.456055,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 村民完成農田
+2026-09-30T09:39:50.456Z,10253.456055,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION PASS] 農田完工才啟用食物
+2026-09-30T09:39:50.456Z,10253.456055,8cb0,6,Info [FLog::CreatorOutput] [RTS_CONSTRUCTION COMPLETE] 36 項施工引擎檢查通過
+2026-09-30T09:40:55.285Z,10318.285156,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS OBSERVE] 請點主城或按 H；看到首次置中 PASS 後，以 WASD／方向鍵或雙指平移至少 15 studs，再點同一主城或按 H。
+2026-09-30T09:41:07.239Z,10330.239258,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 收到真人操作的首個聚焦目的地與序號
+2026-09-30T09:41:07.242Z,10330.242188,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 首次真人重聚焦使實際相機置中
+2026-09-30T09:42:55.300Z,10438.300781,8358,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.TouchTests:164: [TOUCH_FOCUS FAIL] 未觀察到相同聚焦屬性下的真人相機平移
+2026-09-30T09:44:19.044Z,10522.044922,0da4,6,Info [FLog::CreatorOutput] > local u=game:GetService("UserInputService"); local c;c=u.InputBegan:Connect(function(i,p) if i.KeyCode==Enum.KeyCode.W or i.KeyCode==Enum.KeyCode.Up then local t=u:GetFocusedTextBox();print("[KEY_OBSERVE]",i.KeyCode,p,t and t.Name,game.Players.LocalPlayer:GetAttribute("RTSModalOpen"),workspace.CurrentCamera.CFrame.Position) end end); task.delay(45,function() c:Disconnect();print("[KEY_OBSERVE END]") end)
+2026-09-30T09:44:44.814Z,10547.814453,7184,6,Info [FLog::CreatorOutput] [KEY_OBSERVE] Enum.KeyCode.W false nil false -216, 160, -96
+2026-09-30T09:45:04.050Z,10567.050781,8cb0,6,Info [FLog::CreatorOutput] [KEY_OBSERVE END]
+2026-09-30T09:47:49.922Z,10732.922852,0884,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS OBSERVE] 請點主城或按 H；看到首次置中 PASS 後，以 WASD／方向鍵或雙指平移至少 15 studs，再點同一主城或按 H。
+2026-09-30T09:48:01.005Z,10744.005859,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 收到真人操作的首個聚焦目的地與序號
+2026-09-30T09:48:01.005Z,10744.005859,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 首次真人重聚焦使實際相機置中
+2026-09-30T09:48:15.268Z,10758.268555,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 相同目的地與序號保持不變，實際相機已平移至少 15 studs
+2026-09-30T09:48:15.268Z,10758.268555,8358,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS OBSERVE] 已觀察到平移，請再次點同一主城或按 H。
+2026-09-30T09:48:28.093Z,10771.093750,0da4,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 相同目的地的第二次真人請求提交新序號
+2026-09-30T09:48:28.093Z,10771.093750,0da4,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS PASS] 相同目的地第二次重聚焦使實際相機再次置中
+2026-09-30T09:48:28.093Z,10771.093750,0da4,6,Info [FLog::CreatorOutput] [TOUCH_FOCUS COMPLETE] 5 checks; 只觀察實際操作與相機，不產生測試輸入
+2026-09-30T09:53:35.664Z,11078.664062,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T09:53:35.664Z,11078.664062,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 大廳恢復接管前的預設控制初值
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 此版面未顯示折疊新手提示
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T09:53:35.665Z,11078.665039,8ea4,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 21 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T09:53:35.668Z,11078.668945,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 只在新單人 Studio 大廳開始，不挪用既有對局
+2026-09-30T09:53:35.668Z,11078.668945,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED START] 4 時代／18 種建築／11 科技／真實四資源；期限 1200 秒
+2026-09-30T09:53:36.537Z,11079.537109,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 沒有 AI 干擾，使用正常無角色 RTS
+2026-09-30T09:53:36.537Z,11079.537109,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 使用正式 Rich 開局，沒有增加任何測試資源
+2026-09-30T09:53:38.220Z,11081.220703,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 初始主城不能代替兩種黑暗時代前置被拒絕、不扣任何資源
+2026-09-30T09:53:39.876Z,11082.876953,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 市鎮中心時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:41.579Z,11084.579102,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 射箭場時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:43.266Z,11086.266602,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 馬廄時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:44.933Z,11087.933594,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵工廠時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:46.619Z,11089.619141,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 市集時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:48.273Z,11091.273438,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 瞭望塔時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:49.957Z,11092.957031,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 石牆時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:51.644Z,11094.644531,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 城堡時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:53.379Z,11096.379883,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 攻城器械廠時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:55.046Z,11098.046875,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 修道院時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:56.736Z,11099.736328,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 大學時代不足被拒絕、不扣任何資源
+2026-09-30T09:53:58.420Z,11101.420898,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 世界奇觀時代不足被拒絕、不扣任何資源
+2026-09-30T09:54:00.092Z,11103.092773,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 手推車時代不足被拒絕、不扣任何資源
+2026-09-30T09:54:00.867Z,11103.867188,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊建立工地且正確扣款，不能立即完工
+2026-09-30T09:54:05.678Z,11108.678711,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 磨坊正常行走施工；時代 1；資源 1200.0/1100.0/800.0/600.0；已用 30.0 秒
+2026-09-30T09:54:11.676Z,11114.676758,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊由真實村民按正常施工計時完成
+2026-09-30T09:54:12.880Z,11115.880859,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊建立工地且正確扣款，不能立即完工
+2026-09-30T09:54:21.166Z,11124.166016,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 磨坊由真實村民按正常施工計時完成
+2026-09-30T09:54:23.284Z,11126.284180,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兩座同類磨坊不是兩種前置被拒絕、不扣任何資源
+2026-09-30T09:54:24.069Z,11127.069336,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 伐木場建立工地且正確扣款，不能立即完工
+2026-09-30T09:54:35.840Z,11138.840820,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 伐木場正常行走施工；時代 1；資源 1220.0/900.0/800.0/600.0；已用 60.2 秒
+2026-09-30T09:54:41.654Z,11144.654297,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 伐木場由真實村民按正常施工計時完成
+2026-09-30T09:54:42.840Z,11145.840820,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地建立工地且正確扣款，不能立即完工
+2026-09-30T09:55:05.477Z,11168.477539,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地由真實村民按正常施工計時完成
+2026-09-30T09:55:05.895Z,11168.895508,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 資源複製穩定；時代 1；資源 1250.0/800.0/800.0/600.0；已用 90.2 秒
+2026-09-30T09:55:06.681Z,11169.681641,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地建立工地且正確扣款，不能立即完工
+2026-09-30T09:55:15.885Z,11178.885742,8cb0,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 採礦營地由真實村民按正常施工計時完成
+2026-09-30T09:55:17.087Z,11180.087891,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵營建立工地且正確扣款，不能立即完工
+2026-09-30T09:55:36.055Z,11199.055664,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 兵營正常行走施工；時代 1；資源 1250.0/535.0/800.0/600.0；已用 120.4 秒
+2026-09-30T09:55:39.630Z,11202.630859,0da4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 兵營由真實村民按正常施工計時完成
+2026-09-30T09:55:40.800Z,11203.800781,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PASS] 農田建立工地且正確扣款，不能立即完工
+2026-09-30T09:56:06.143Z,11229.143555,8358,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 農田正常行走施工；時代 1；資源 1250.0/475.0/800.0/600.0；已用 150.5 秒
+2026-09-30T09:56:36.198Z,11259.198242,8ea4,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 農田正常行走施工；時代 1；資源 1250.0/475.0/800.0/600.0；已用 180.5 秒
+2026-09-30T09:57:06.223Z,11289.223633,0884,6,Info [FLog::CreatorOutput] [RTS_ADVANCED PROGRESS] 農田正常行走施工；時代 1；資源 1250.0/475.0/800.0/600.0；已用 210.6 秒
+2026-09-30T09:57:27.809Z,11310.809570,0da4,6,Error [FLog::CreatorError] Error: [RTS_ADVANCED FAIL] 農田正常行走施工等待逾時；時代 1；資源 1250.0/475.0/800.0/600.0；已用 232.1 秒
+2026-09-30T09:58:12.752Z,11355.752930,0da4,6,Info [FLog::CreatorOutput] > task.spawn(function() require(game.ReplicatedStorage.Shared.TouchTests).Run() end); for _,b in ipairs(workspace.Buildings:GetChildren()) do if b:GetAttribute("BuildingType")=="Farm" then print("[LIVE_FARM]",b:GetPivot().Position,b:GetAttribute("Complete"),b:GetAttribute("ConstructionProgress"),b:GetAttribute("BuilderCount"),b:GetAttribute("ConstructionStatus")) end end; for _,u in ipairs(workspace.Units:GetChildren()) do if u:GetAttribute("UnitType")=="villager" then print("[LIVE_WORKER]",u:GetPivot().Position,u:GetAttribute("Order"),u:GetAttribute("Carrying")) end end
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控輸入與相機初始化，不依賴 CharacterAdded
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerInput 提供 Studio 唯讀控制探針
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 ControlModule.controlsEnabled=false，全部預設角色移動控制停用
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際作用中的預設控制器未啟用
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 階段明確關閉 GuiService.TouchControlsEnabled
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 沒有可見的原生搖桿／跳躍控制
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式客戶端使用有效命令模式
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] HUD 使用安全區域
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 實際 PlayerGui 存在觸控操作列
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 正式 UI 實例提供 Studio 唯讀命中探針
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST SKIP] 此版面未顯示折疊新手提示
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Select
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Move
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Gather
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Attack
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Build
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Home
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Idle
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Villagers
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 觸控按鈕已掛載：Cancel
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指可產生相機手勢
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指放開不選取、不下令、不建造
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] UI 上起始的手指移到地面也不能建造
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 模態／失焦清理後，舊手指放開不下令
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 雙指張開放大、收攏縮小
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] RTS 觸控不需要角色或預設角色相機
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST PASS] 相機地面射線與扣除 GuiInset 的輸入座標一致
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [TOUCH_TEST COMPLETE] 26 checks; 裝置實際手勢仍需手動驗收
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [LIVE_FARM] -228, 0.6000000238418579, -156 false 0 0 等待村民
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [LIVE_WORKER] -206.07513427734375, 2.5, -169.9073486328125 待命 0
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [LIVE_WORKER] -203.37014770507812, 2.5, -169.97714233398438 待命 0
+2026-09-30T09:58:12.754Z,11355.754883,0884,6,Info [FLog::CreatorOutput] [LIVE_WORKER] -212.67327880859375, 2.5, -169.80459594726562 待命 0

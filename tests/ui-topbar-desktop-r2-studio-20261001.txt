@@ -1,0 +1,46 @@
+2026-10-01T04:46:54.275Z,31.275291,9f68,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-10-01T04:46:55.660Z,32.660717,7048,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T04:46:55.660Z,32.660717,7048,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T04:46:55.805Z,32.805862,5494,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-01T04:47:52.842Z,89.842781,8bac,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 短暫通知關閉後驗收可見地面
+2026-10-01T04:47:52.878Z,89.878860,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 移除整塊選取資訊面板
+2026-10-01T04:47:52.878Z,89.878860,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 空選取不再顯示建立你的帝國面板文字
+2026-10-01T04:47:52.878Z,89.878860,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 未選取村民時不顯示建築圖示
+2026-10-01T04:47:52.914Z,89.914108,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 選取村民顯示建築指令
+2026-10-01T04:47:52.915Z,89.915100,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面第一頁顯示十二個建築，減少換頁
+2026-10-01T04:47:52.915Z,89.915100,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面指令格使用兩列
+2026-10-01T04:47:52.949Z,89.949890,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城顯示訓練，隱藏村民建築
+2026-10-01T04:47:52.950Z,89.950882,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產建築顯示佇列與集合點
+2026-10-01T04:47:52.950Z,89.950882,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 生產佇列搬入指令面板
+2026-10-01T04:47:52.950Z,89.950882,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除控制搬入指令面板
+2026-10-01T04:47:52.950Z,89.950882,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面己方建築顯示刪除控制
+2026-10-01T04:47:52.950Z,89.950882,9f68,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 完工狀態明確顯示
+2026-10-01T04:47:52.988Z,89.988655,8bac,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 主城科技頁顯示織布機
+2026-10-01T04:47:52.988Z,89.988655,8bac,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 科技指令限於第一列，保留佇列與選取摘要空間
+2026-10-01T04:47:53.025Z,90.025864,980c,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 中立資源只顯示資訊
+2026-10-01T04:47:53.059Z,90.059792,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 己方村民可開啟刪除確認
+2026-10-01T04:47:53.094Z,90.094719,b498,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 刪除確認阻擋世界輸入
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 變更選取立即取消刪除快照
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板不穿透
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 緊鄰底部面板的地面可點擊
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 保留安全區域與UIScale
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 顯示於實際PlayerGui
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 wood 點擊不穿透
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 顯示於實際PlayerGui
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 food 點擊不穿透
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 顯示於實際PlayerGui
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 gold 點擊不穿透
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 顯示於實際PlayerGui
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源 stone 點擊不穿透
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面資源列使用 Roblox 頂列安全區域
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 整條資源列位於 CoreGui 可用頂列範圍
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 桌面資源列與 Roblox 按鈕同一行
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 頂列下鄰可見地面不被資源列攔截
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 資源列與指令面板間保留戰場
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 閒置村民數由真實單位更新
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 指令面板與小地圖之間保留地面
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 移除選取面板後原區域地面可點擊
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 停用頂列後原資源卡位置不攔截世界輸入
+2026-10-01T04:47:53.129Z,90.129082,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST PASS] 恢復頂列後資源卡重新攔截世界輸入
+2026-10-01T04:47:53.130Z,90.130081,8c90,6,Info [FLog::CreatorOutput] [HUD_TEST COMPLETE] 40 checks
+2026-10-01T04:47:53.132Z,90.132088,8c90,6,Info [FLog::CreatorOutput] [UI_TOPBAR_DESKTOP] 40 header 168, -54 1438, 50 top 164, -58, 1610, 0 scale 1 noInfo true

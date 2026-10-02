@@ -1,0 +1,20 @@
+Root-operated diagnostic in the V1 INCOMPLETE session. This is evidence for choosing normal Humanoid walking in R2, not a multiplayer lifecycle PASS.
+V1 helper/build/manifest and all normal src/default remain preserved.
+SERVER snapshot: peer stayed near spawn while actual CLIENT root was already at portal; server network owner was the peer, JoinOrder remained nil.
+A later true CLIENT Input+1 Humanoid:Move diagnostic, with ordinary QueueJoin, reached queued=true. No server teleport or ownership override was used.
+
+SERVER log: 
+C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20260930T230537Z_Studio_48C72_last.log
+2026-09-30T23:09:48.686Z,251.686386,1900,6,Info [FLog::CreatorOutput] [MULTI_JOIN_DIAGNOSTIC] {"phase":"Lobby","players":[{"name":"Player1","health":100,"id":-1,"pos":[0,4,2053],"queued":true,"ready":false},{"name":"Player2","health":100,"id":-2,"pos":[0.078125,3.0703125,2102.171875],"queued":false,"ready":false}],"portal":[0,0,2048],"lobbyPlayers":1}
+2026-09-30T23:13:16.051Z,459.051117,70e0,6,Info [FLog::CreatorOutput] [MULTI_OWNER_DIAGNOSTIC] Player1 anchored true ownerOK false owner Network Ownership API cannot be called on Anchored parts or parts welded to Anchored parts. joinOrder 3
+2026-09-30T23:13:16.051Z,459.051117,70e0,6,Info [FLog::CreatorOutput] [MULTI_OWNER_DIAGNOSTIC] Player2 anchored false ownerOK true owner Player2 joinOrder nil
+2026-09-30T23:19:04.294Z,807.294128,ca4c,6,Info [FLog::CreatorOutput] [MULTI_WALK_SERVER_START] 0.078125, 3.0703125, 2102.171875
+
+CLIENT log: 
+C:/Users/user/AppData/Local/Roblox/logs/0.741.19.7411056_20260930T230544Z_Studio_9ACEA_last.log
+2026-09-30T23:13:15.476Z,451.476166,b598,6,Info [FLog::CreatorOutput] [MULTI_PEER_POSITION] Player2 9.038558346219361e-09, 3.648203134536743, 2048 0, 0, 0 false 16 Enum.CameraType.Custom false nil
+2026-09-30T23:19:03.743Z,799.743896,b598,6,Info [FLog::CreatorOutput] [MULTI_PEER_CONTROL] {"initial":true,"lobbyCharacterReady":true,"activeEnabled":true,"hasActive":true,"controlsEnabled":true,"characterReadinessReason":"ready","ready":true}
+2026-09-30T23:19:07.511Z,803.511963,8668,6,Info [FLog::CreatorOutput] [MULTI_PEER_WALK_DONE] true 6.123233998228043e-16, 4, 2043
+
+First INCOMPLETE evidence remains tests/optimization-multiplayer-lifecycle-first-failure-20261001.txt
+R2 still needs its own fresh Server & Clients 2-player Studio run.

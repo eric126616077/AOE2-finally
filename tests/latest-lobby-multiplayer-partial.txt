@@ -1,0 +1,23 @@
+2026-09-30 16:08 起 Asia/Taipei：真正 Server & Clients 兩名玩家，新城堡大廳。
+部分結果；沒有取得新版 HOST READY 或 OWNERSHIP COMPLETE，不能宣稱雙人流程通過。
+第一次因未能及時操作第二視窗而等候入隊逾時；第二次測試同設定重送卻未等待 revision 複製，準備封包被拒絕。MultiplayerTests 已改為等 revision 與準備 ACK，尚未重跑。
+第二端透過伺服器 Command Bar 明確放入暫時 LocalScript，在真正客戶端執行正常 QueueJoin / LobbyReady 遠端；沒有伺服器直接改成 ready。
+期間另有文明、觸控、教學並行變更；這些紀錄不證明最新整合版本完整通過。
+0.741.19.7411056_20260930T080805Z_Studio_685E0_last.log
+2026-09-30T08:14:20.106Z,375.106689,975c,6,Info [FLog::CreatorOutput] [RTS_MULTI QUEUED] 已集合與準備，等待房主開始。
+2026-09-30T08:14:20.106Z,375.106689,975c,6,Info [FLog::CreatorOutput] [LOBBY_MULTI PASS] 第二客戶端透過正常遠端集合及準備
+2026-09-30T08:17:20.117Z,555.117615,975c,6,Error [FLog::CreatorError] Error: Players.Player1.PlayerGui.ExplicitLobbyVerification:1: 等待房主開局逾時
+0.741.19.7411056_20260930T080806Z_Studio_14D04_last.log
+2026-09-30T08:11:18.378Z,192.378098,9440,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 兩名真實 Studio 玩家已加入
+2026-09-30T08:11:18.378Z,192.378098,9440,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 雙人測試從新大廳開始
+2026-09-30T08:11:18.984Z,192.984009,9440,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 此客戶端是房主
+2026-09-30T08:11:19.085Z,193.085480,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主設定雙人集合
+2026-09-30T08:11:19.085Z,193.085480,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI WAIT] 請在第二客戶端呼叫 JoinLobby，兩人準備後自動繼續測試。
+2026-09-30T08:13:19.159Z,313.159149,9440,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.MultiplayerTests:12: [RTS_MULTI FAIL] 兩人進入傳送門集合
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 兩名真實 Studio 玩家已加入
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 雙人測試從新大廳開始
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 此客戶端是房主
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 房主設定雙人集合
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI WAIT] 請在第二客戶端呼叫 JoinLobby，兩人準備後自動繼續測試。
+2026-09-30T08:15:54.835Z,468.835144,943c,6,Info [FLog::CreatorOutput] [RTS_MULTI PASS] 兩人進入傳送門集合
+2026-09-30T08:17:54.847Z,588.847534,9440,6,Error [FLog::CreatorError] Error: ReplicatedStorage.Shared.MultiplayerTests:12: [RTS_MULTI FAIL] 兩名玩家都已準備

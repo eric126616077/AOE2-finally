@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-09-30T21:15:21.4980889+08:00",
+  "runtime": "Main Play retains advanced-escape-source.json existing gameplay source; no server patch",
+  "testSHA256": "9062550919F66721C4C5C1F7B2A2D2A2E28EFDAB5CE884FCA560814537FD34E5",
+  "wrapperSHA256": "9FCE34395C2BC7D3EDECDD339F39723B1E50A20B1A40D0EC913E3D76F6ADC71A",
+  "payloadUTF8Bytes": 24698,
+  "outcome": "Two setup FAILs preserved; sealed nearest dropoff not reached",
+  "evidence": "tests/delivery-fallback-setup-results.txt"
+}

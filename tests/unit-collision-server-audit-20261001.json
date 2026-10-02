@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "seconds": 95.004,
+  "minGap": 0.168,
+  "checks": 397129,
+  "samples": 5673,
+  "reason": "complete",
+  "moving": [
+    35,
+    207,
+    65,
+    63
+  ],
+  "factory": 285,
+  "kinds": [
+    "scout",
+    "villager",
+    "villager",
+    "villager"
+  ],
+  "probe": "UC95",
+  "stage": "FINAL",
+  "violations": 0
+}

@@ -1,0 +1,21 @@
+2026-10-01T05:20:11.370Z,158.370438,6760,6,Info [FLog::CreatorOutput] [UNIT_COLLISION INCOMPLETE] {"minClearance":0.11376142501831055,"complete":false,"cleanupStopped":true,"maxStableColliderAngleError":0.00048828125,"stages":[{"complete":true,"rootChanges":131,"name":"分散就位","started":0.05648420000215992,"elapsed":4.6491568999917949,"samples":277,"minClearance":2,"maxLateral":0},{"rootChanges":34,"started":4.70567260000098,"elapsed":3.759830900002271,"minClearance":0.3349308967590332,"maxLateral":4.0539093017578129,"name":"繞過閒置村民","complete":true,"lineZ":-144,"samples":225},{"rootChanges":33,"started":8.465537299998687,"elapsed":1.9542811999999686,"minClearance":0.11376142501831055,"maxLateral":2.160186767578125,"name":"迎面交換位置","complete":true,"bothWorkers":true,"lineZ":-144,"samples":117},{"name":"混合群體移動","started":10.419845199998236,"rootChanges":51,"samples":1198,"minClearance":0.34863901138305666,"maxLateral":0}],"movementOnly":true,"checks":35,"scope":"新的
+2026-10-01T05:20:13.223Z,160.223328,d328,12 [DFLog::HttpTraceError] CURLINFO_OS_ERRNO: 10061 Unknown error
+2026-10-01T05:20:13.223Z,160.223328,d328,12 [DFLog::HttpTraceError] CURLOPT_ERRORBUFFER: Failed to connect to localhost port 34872 after 2236 ms: Error
+2026-10-01T05:20:13.223Z,160.223328,d328,12,Warning [DFLog::HttpTraceError] Curl connect failed. Current file descriptor count is -1, limit -1
+2026-10-01T05:20:13.223Z,160.223328,dc24,12 [DFLog::HttpTraceError] HttpResponse(#320 0x18595c51768) time:2237.4ms (net:2237.3ms timeInRetryQueue:0.0ms) error:3 message:HttpError: ConnectFail url:{ "http://localhost:34872/api/rojo" } ip: external:1 numberOfTimesRetried:0
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Info [FLog::StudioApplicationState] State: Qt::ApplicationActive 
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Info [FLog::RenderSchedulerState] Popping throttle render state (count 0)
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Debug [FLog::DataModelSoundManager] onApplicationStateChanged: m_isApplicationActive = true
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Debug [FLog::DataModelSoundManager] onApplicationStateChanged: m_isApplicationActive = true
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Debug [FLog::DataModelSoundManager] onApplicationStateChanged: m_isApplicationActive = true
+2026-10-01T05:20:14.040Z,161.040558,de24,6,Debug [FLog::DataModelSoundManager] onApplicationStateChanged: with shouldMute = false
+2026-10-01T05:20:14.040Z,161.040558,d83c,6,Debug [FLog::DataModelSoundManager] DataModelSoundManager::updateSoundState(false)
+2026-10-01T05:20:14.040Z,161.040558,d83c,6,Debug [FLog::DataModelSoundManager] soundService->muteAllChannels(false)
+2026-10-01T05:20:14.040Z,161.040558,d83c,6,Debug [FLog::DataModelSoundManager] Restoring voice chat mute state (true)
+2026-10-01T05:20:15.463Z,162.463196,d328,12 [DFLog::HttpTraceError] CURLINFO_OS_ERRNO: 10061 Unknown error
+2026-10-01T05:20:15.463Z,162.463196,d328,12 [DFLog::HttpTraceError] CURLOPT_ERRORBUFFER: Failed to connect to localhost port 34872 after 4458 ms: Error
+2026-10-01T05:20:15.463Z,162.463196,d328,12,Warning [DFLog::HttpTraceError] Curl connect failed. Current file descriptor count is -1, limit -1
+2026-10-01T05:20:15.463Z,162.463196,9644,12 [DFLog::HttpTraceError] HttpResponse(#321 0x185545e3788) time:4459.0ms (net:4459.0ms timeInRetryQueue:0.0ms) error:3 message:HttpError: ConnectFail url:{ "http://localhost:34872/api/rojo" } ip: external:1 numberOfTimesRetried:0
+2026-10-01T05:20:16.315Z,163.315796,d83c,6 [DFLog::NamedMutex] NamedMutex(00000185175CF4A0, name:InstallerInfo.log)
+2026-10-01T05:20:16.315Z,163.315796,d83c,6 [DFLog::NamedMutex] ~NamedMutex(00000185175CF4A0, name:InstallerInfo.log)
+2026-10-01T05:20:16.315Z,163.315796,d83c,6 [DFLog::NamedMutex] NamedMutex(00000185175CF460, name:InstallerInfo.log)

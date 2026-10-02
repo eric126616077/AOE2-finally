@@ -1,0 +1,41 @@
+Compiled 18 KLOC into 1158 KB bytecode (read 0.01s, parse 0.01s, compile 0.03s)
+PASS: 205531 grid / finite-coordinate / atomic-cost checks
+PASS: 198 villager build classification / age visibility / lock checks
+PASS: 167 match settings / economy / data-integrity checks
+PASS: 43 lobby settings / readiness checks
+PASS: 2132 server team assignment / alliance / victory / readiness checks
+PASS: 33 actual team / frozen report / profile merge lifecycle checks
+PASS: 35 client team proposals, no eviction, relation, label checks
+PASS: 67 civilization fairness / lobby lock / commerce policy checks
+PASS: 80 profile concurrency / load-safety / PvP eligibility / analytics checks
+PASS: 92 match report fact, dedup, refund, finish, snapshot, restart checks
+PASS: 12 AI resource fallback / abandoned-site recovery checks
+PASS: 25084 server footprint-search / production-cancellation checks
+PASS: 51 combat acquisition / ownership / retaliation checks
+PASS: 5156 melee approach geometry checks
+PASS: 411 blocked Farm / shared work approach / failed-face selection checks
+PASS: 4906 bounded path radii / recorded House collision / full live-segment / exact-waypoint checks (pure, not engine)
+PASS: 41 actual Camp/Tree recorded-prefix / collision exclusion / forward progress / visited-endpoint / bounded continuation checks (pure, not new engine)
+PASS: 1436 unit swept-disk / large-radius / overlap escape / local index / live update / steering / finite validation checks (pure geometry; not Studio Play)
+Command deletion rules:	21	checks passed
+PASS: 92 training refund / stale queue / rally authorization checks
+Formation geometry / authoritative commands:	507684	checks passed
+Actual server movement step:	259	checks passed; mocked collision, not Studio path verification
+PASS: 29 actual server/preview obstacle-filter collision and cache checks
+PASS: 43 actual resource lifecycle cleanup / registry / metadata / preservation checks
+PASS: 5840 gathering conservation / delivery checks
+PASS: 76 construction selection / worker authority / pause-resume / feedback-clock checks
+PASS: 482 actual castle dust / bounded tolerance / work accumulation / preserved combat damage checks
+PASS: 151 construction reveal / cosmetic budget / camera mix checks (not Studio)
+ModelFactory actual-body engine-mock tests: 514 PASS (not Studio)
+PASS: 135 render timing / missing Stats / p95 bounds / restart boundary / actual-unit stress / event-only focus coverage checks
+PASS: 560 bounded motion timeline / 10 Hz to 60 Hz / no extrapolation / idle / teleport checks
+PASS: 66 touch / camera focus sequence / safe-area input checks
+PASS: tutorial sequence, no skipped steps, false facts, completion, new match
+PASS: 96 feedback throttle / polyphony / mute / camera gating checks
+WORLD Small seed=1 nodes=760/760 Tree=572 Gold=92 Stone=28 Berries=68 fallbackParts=4440
+WORLD Medium seed=1 nodes=1280/1280 Tree=944 Gold=120 Stone=76 Berries=140 fallbackParts=7440
+WORLD Large seed=1 nodes=2200/2200 Tree=1784 Gold=168 Stone=76 Berries=172 fallbackParts=12360
+PASS: 171550441 randomized-world / opening-fairness / patch / budget / preservation checks
+Building project 'AOE2 Project'
+Built project to AOE2.rbxlx

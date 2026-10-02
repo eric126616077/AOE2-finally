@@ -1,0 +1,20 @@
+Compiled 8 KLOC into 534 KB bytecode (read 0.00s, parse 0.01s, compile 0.01s)
+PASS: 205531 grid / finite-coordinate / atomic-cost checks
+PASS: 148 match settings / economy / data-integrity checks
+PASS: 27 lobby settings / readiness checks
+PASS: 67 civilization fairness / lobby lock / commerce policy checks
+PASS: 80 profile concurrency / load-safety / PvP eligibility / analytics checks
+PASS: 80 match report fact, dedup, refund, finish, snapshot, restart checks
+PASS: 12 AI resource fallback / abandoned-site recovery checks
+PASS: 25084 server footprint-search / production-cancellation checks
+PASS: 51 combat acquisition / ownership / retaliation checks
+PASS: 5156 melee approach geometry checks
+PASS: 411 blocked Farm / shared work approach / failed-face selection checks
+PASS: 5840 gathering conservation / delivery checks
+PASS: 36 construction selection / worker authority / pause-resume checks
+PASS: 66 touch / camera focus sequence / safe-area input checks
+PASS: tutorial sequence, no skipped steps, false facts, completion, new match
+PASS: 70 feedback throttle / polyphony / mute / camera gating checks
+PASS: 13667 seeded-world / fairness / preservation checks
+Building project 'AOE2 Project'
+Built project to AOE2.rbxlx

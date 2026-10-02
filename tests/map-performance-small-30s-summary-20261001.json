@@ -1,0 +1,19 @@
+{
+  "elapsed": 30.12971480000124,
+  "focus": "Unknown",
+  "actualUnits": 4,
+  "frames": {
+    "meanDeltaMs": 16.694052371004403,
+    "worstDeltaMs": 26.868799701333046,
+    "below30Fraction": 0,
+    "below15Fraction": 0,
+    "worstInstantaneousFPS": 37.217888819588275,
+    "effectiveFPS": 59.90157319362924,
+    "p95ResolutionMs": 0.5,
+    "validFrames": 1804,
+    "invalidFrames": 0,
+    "p95UpperBoundMs": 17.5
+  },
+  "configuredFourBy200": false,
+  "observedFourBy200": false
+}
