@@ -9,10 +9,12 @@ CursorRules.Kinds={
 local gatherKinds={food="gather_food",wood="gather_wood",gold="gather_gold",stone="gather_stone"}
 -- ctx = {
 --  active, touch, overUI, placing, placementValid, rally,
+--  garrison                       -- 駐紮模式：等待點選自己可駐紮的建築
 --  villagers, military            -- counts of selected own units
 --  monks                          -- selected own monks (also counted in military)
 --  target = nil | {relation="own"|"ally"|"enemy"|"neutral"|"unresolved",
---                  unit, building, resource, complete, damaged}
+--                  unit, building, resource, complete, damaged,
+--                  garrison}      -- 自己已完工、可駐紮的建築
 -- }
 function CursorRules.Resolve(ctx)
  if type(ctx)~="table" or not ctx.active or ctx.touch then return "none" end
@@ -23,6 +25,7 @@ function CursorRules.Resolve(ctx)
   if target and (target.relation=="enemy" or target.relation=="ally" or (not target.resource and target.relation~="neutral")) then return "invalid" end
   return "rally"
  end
+ if ctx.garrison then return target and target.garrison==true and "select" or "invalid" end
  local villagers=type(ctx.villagers)=="number" and ctx.villagers or 0
  local military=type(ctx.military)=="number" and ctx.military or 0
  if villagers+military<=0 then

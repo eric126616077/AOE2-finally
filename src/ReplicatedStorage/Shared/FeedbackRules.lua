@@ -125,7 +125,7 @@ local buildingSelect={
  TownCenter="SelectBell",House="SelectDoor",Barracks="SelectSword",ArcheryRange="SelectBow",Stable="SelectHooves",
  SiegeWorkshop="SelectHammer",Blacksmith="SelectAnvil",Market="SelectCoins",LumberCamp="SelectChop",
  MiningCamp="SelectChisel",Mill="SelectFoliage",Farm="SelectFoliage",Monastery="SelectBell",University="SelectPages",
- Tower="SelectStone",Wall="SelectStone",Castle="SelectHorn",Wonder="SelectHorn",
+ Tower="SelectStone",Wall="SelectStone",Gate="SelectStone",Castle="SelectHorn",Wonder="SelectHorn",
 }
 local resourceSelect={Tree="SelectChop",Gold="SelectChisel",Stone="SelectChisel",Berries="SelectFoliage"}
 -- AOE-style identity sounds: every selectable kind answers with its own sound.

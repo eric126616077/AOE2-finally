@@ -18,6 +18,7 @@ local BuildMenuRules = require(RS.Shared.BuildMenuRules)
 local UnitIcons = require(RS.Shared.UnitIcons)
 local SelectionIcons = require(RS.Shared.SelectionIcons)
 local UnitSelectionPanel = require(RS.Shared.UnitSelectionPanel)
+local HotkeyRules = require(RS.Shared.HotkeyRules)
 local player = Players.LocalPlayer
 local GUI = {hitAreas = {}, reducedMotion = false, tab = "build", page = 1}
 -- Parchment-and-timber theme, matching the storybook models: warm paper panels in a wood frame,
@@ -192,6 +193,7 @@ local function button(parent, size, position, callback, name)
   if GuiService.MenuIsOpen then return end
   if GUI.result and GUI.result.Visible and not b:IsDescendantOf(GUI.result) then return end
   if GUI.deleteConfirm and GUI.deleteConfirm.Visible and not b:IsDescendantOf(GUI.deleteConfirm) then return end
+  if GUI.hotkeyPanel and GUI.hotkeyPanel.Visible and not b:IsDescendantOf(GUI.hotkeyPanel) then return end
   if GUI.menuPanel and GUI.menuPanel.Visible and not b:IsDescendantOf(GUI.menuPanel) and b.Name~="MenuButton" then return end
   if b.Name~="SoundButton" then Audio:Play("Click") end
   callback(...)
@@ -338,6 +340,13 @@ end
 local techIcons={Loom="armor",Forging="attack",Armor="armor",Wheelbarrow="cart",HandCart="cart",DoubleBitAxe="axe",BowSaw="axe",
  HorseCollar="food",HeavyPlow="food",Fletching="range",BodkinArrow="range",ThumbRing="interval",Chemistry="flask",GoldMining="gold",
  StoneMining="stone",Bloodlines="heart",ScaleBarding="armor",Squires="speed",Fervor="speed",Sanctity="heart",Conscription="population"}
+-- 可駐紮的己方完工建築：駐軍人數與每次射擊多出的箭數。
+local function garrisonText(model)
+ local capacity=model:GetAttribute("GarrisonCapacity") or 0
+ if capacity<=0 or model:GetAttribute("OwnerId")~=player.UserId or model:GetAttribute("Complete")==false then return nil end
+ local arrows=model:GetAttribute("GarrisonArrows") or 0
+ return "駐軍 "..(model:GetAttribute("Garrison") or 0).." / "..capacity..(arrows>0 and (" · 多射 "..arrows.." 箭") or "")
+end
 local function commandSymbol(parent,action,width)
  local holder=make("Frame",parent,{Size=UDim2.fromOffset(width,37),BackgroundTransparency=1,Active=false})
  local center=width/2
@@ -376,6 +385,14 @@ local function deleteSelection(selected)
  end
  return result
 end
+-- 單位是「死亡」、建築是「拆除」；兩種都選到時並列。
+local function deleteLabel(selected)
+ local units,structures=false,false
+ for _,model in ipairs(type(selected)=="table" and selected or {}) do
+  if model:GetAttribute("BuildingType") then structures=true else units=true end
+ end
+ return units and structures and "死亡／拆除" or structures and "拆除" or "死亡"
+end
 local function lobbyCommand(action, ...)
  local remotes = RS:FindFirstChild("RTSRemotes")
  local command = remotes and remotes:FindFirstChild("Command")
@@ -399,6 +416,18 @@ function GUI:Init(callbacks)
  for name,value in pairs({SoundEnabled=true,SoundVolume=1,MusicEnabled=true,MusicVolume=0.7}) do
   if player:GetAttribute(name)==nil then player:SetAttribute(name,value) end
  end
+ -- 熱鍵與其他設定一樣存在本機玩家屬性；內容無效時回到預設。
+ self.hotkeys=HotkeyRules.parse(player:GetAttribute("Hotkeys"))
+ -- 個人檔案載入後套用已保存的熱鍵；本場已經改過鍵就以玩家剛才的選擇為準。
+ local function applySavedHotkeys()
+  local saved=player:GetAttribute("SavedHotkeys")
+  if self.hotkeysChanged or type(saved)~="string" then return end
+  self.hotkeys=HotkeyRules.parse(saved); self.hotkeyCapture=nil
+  player:SetAttribute("Hotkeys",HotkeyRules.serialize(self.hotkeys))
+  if self.hotkeyRows then self:RefreshHotkeyLabels(); self:Update(self.selected or {},self.buildingKind) end
+ end
+ player:GetAttributeChangedSignal("SavedHotkeys"):Connect(applySavedHotkeys)
+ applySavedHotkeys()
  local pg = player:WaitForChild("PlayerGui")
  local old = pg:FindFirstChild("AOE2_MainGUI"); if old then old:Destroy() end
  local oldTopbar=pg:FindFirstChild("AOE2_TopbarGUI"); if oldTopbar then oldTopbar:Destroy() end
@@ -420,6 +449,7 @@ function GUI:Init(callbacks)
   if self.menuDock then self:LayoutTopbar() end
   if self.resultBody then self:LayoutResult() end
   if self.deleteBody then self:LayoutDeleteConfirm() end
+  if self.hotkeyBody then self:LayoutHotkeyPanel() end
   if self.unitSelection then self:LayoutUnitSelection() end
   if self.lobby then self:LayoutLobby() end
  end
@@ -507,6 +537,7 @@ function GUI:Init(callbacks)
  local function autoWorkLabel() self.autoWorkLabel.Text="自動工作："..(player:GetAttribute("AutoWork")==false and "關閉" or "開啟") end
  player:GetAttributeChangedSignal("AutoWork"):Connect(autoWorkLabel)
  autoWorkLabel()
+ namedButton(self.menuPanel,"熱鍵設定",UDim2.fromOffset(192,31),UDim2.fromOffset(13,119),function() self:OpenHotkeys() end,"HotkeyButton",C.gold)
  self.noticePanel = panel(self.canvas,UDim2.fromOffset(554,42),UDim2.new(0.5,-277,0,95),"Notice"); self.noticePanel.Visible = false
  self.noticePanel.ZIndex = 40; self.noticePanel.BackgroundColor3 = C.ribbon
  for _,side in ipairs({0,1}) do
@@ -522,7 +553,7 @@ function GUI:Init(callbacks)
  round(self.dockHeader,5)
  rule(self.bottom,UDim2.fromOffset(14,32),UDim2.new(1,-28,0,1),C.gold,0.5,"CommandHeaderRule")
  rule(self.bottom,UDim2.fromOffset(14,183),UDim2.new(1,-28,0,1),C.edge,0.5,"CommandFooterRule")
- self.deleteButton=namedButton(self.bottom,"刪除 [Del]",UDim2.fromOffset(96,25),UDim2.fromOffset(198,5),function() if callbacks.requestDelete then callbacks.requestDelete() end end,"DeleteButton",C.red)
+ self.deleteButton,self.deleteButtonLabel=namedButton(self.bottom,"死亡 [Del]",UDim2.fromOffset(96,25),UDim2.fromOffset(198,5),function() if callbacks.requestDelete then callbacks.requestDelete() end end,"DeleteButton",C.red)
  self.deleteButton.Visible=false
  self.details = text(self.bottom,"",UDim2.fromOffset(272,63),UDim2.fromOffset(320,112),13,C.muted); self.details.TextYAlignment = Enum.TextYAlignment.Top
  self.details.Name="TargetDetails"
@@ -576,8 +607,10 @@ function GUI:Init(callbacks)
  self.previousPage = namedButton(self.bottom,"‹",UDim2.fromOffset(27,26),UDim2.fromOffset(390,187),function() self:ChangePage(-1) end,"PreviousPage",C.gold)
  self.pageLabel = text(self.bottom,"1 / 1",UDim2.fromOffset(48,25),UDim2.fromOffset(420,187),12,C.muted); self.pageLabel.TextXAlignment = Enum.TextXAlignment.Center; self.pageLabel.Name="CommandPageLabel"
  self.nextPage = namedButton(self.bottom,"›",UDim2.fromOffset(27,26),UDim2.fromOffset(471,187),function() self:ChangePage(1) end,"NextPage",C.gold)
- self.stopButton = namedButton(self.bottom,"停止 [X]",UDim2.fromOffset(82,26),UDim2.fromOffset(512,187),callbacks.stop,"StopButton",C.muted)
- self.formationButton=namedButton(self.bottom,"陣形 [F]",UDim2.fromOffset(82,26),UDim2.fromOffset(300,187),function() self:SetTab("formation") end,"FormationButton",C.gold)
+ self.stopButton,self.stopLabel = namedButton(self.bottom,"停止 [X]",UDim2.fromOffset(82,26),UDim2.fromOffset(512,187),callbacks.stop,"StopButton",C.muted)
+ self.formationButton,self.formationLabel=namedButton(self.bottom,"陣形 [F]",UDim2.fromOffset(82,26),UDim2.fromOffset(300,187),function() self:SetTab("formation") end,"FormationButton",C.gold)
+ self.garrisonButton,self.garrisonLabel,self.garrisonEdge=namedButton(self.bottom,"駐紮 [G]",UDim2.fromOffset(82,26),UDim2.fromOffset(214,187),function() if callbacks.garrison then callbacks.garrison() end end,"GarrisonButton",C.gold)
+ self.garrisonButton.Visible=false
  self.formationButton.Visible=false
  self.tooltip = make("Frame",self.bottom,{Name = "CommandTooltip",Size = UDim2.fromOffset(476,100),Position = UDim2.fromOffset(72,-108),Visible = false,BackgroundColor3 = C.panel,BackgroundTransparency = 0.04,BorderSizePixel = 0,ZIndex = 6})
  round(self.tooltip,6); gild(stroke(self.tooltip,C.gold,0)).Thickness=1.5
@@ -617,15 +650,16 @@ function GUI:Init(callbacks)
   local position = self:MinimapPosition(UIS:GetMouseLocation())
   if position and self.callbacks.minimapMove then self.callbacks.minimapMove(position) end
  end)
- self.keyHelp = text(self.canvas,"WASD 移動 · 滾輪縮放 · Home 回基地 · 拖曳框選 · 右鍵下令／小地圖移動 · F 陣形 · Ctrl + 1–9 編隊 · . 閒置村民 · Del 刪除",UDim2.fromOffset(760,18),UDim2.new(0.5,-380,1,-20),11,L.white); self.keyHelp.TextXAlignment = Enum.TextXAlignment.Center
+ self.keyHelp = text(self.canvas,"WASD 移動 · 滾輪縮放 · Home 回基地 · 拖曳框選 · 右鍵下令／小地圖移動 · F 陣形 · Ctrl + 1–9 編隊 · . 閒置村民 · G 駐紮 · Del 死亡／拆除",UDim2.fromOffset(760,18),UDim2.new(0.5,-380,1,-20),11,L.white); self.keyHelp.TextXAlignment = Enum.TextXAlignment.Center
  self.keyHelp.Name="KeyHelp"; self.keyHelp.BackgroundColor3=C.ribbon; self.keyHelp.BackgroundTransparency=0.25; self.keyHelp.TextWrapped=false; round(self.keyHelp,9)
  self.dots = {}
- self.selectionBox = make("Frame",self.screen,{Name = "SelectionBox",Visible = false,BackgroundColor3 = C.green,BackgroundTransparency = 0.86,BorderSizePixel = 1,BorderColor3 = C.green,ZIndex = 8})
+ self.selectionBox = make("Frame",self.screen,{Name = "SelectionBox",Visible = false,BackgroundColor3 = C.green,BackgroundTransparency = 0.84,BorderSizePixel = 0,ZIndex = 8})
+ make("UIStroke",self.selectionBox,{Color = Color3.fromRGB(190,236,170),Thickness = 1.5,Transparency = 0.05})
  self.hudLayer = make("Frame",self.canvas,{Name = "HUD",Size = UDim2.fromScale(1,1),BackgroundTransparency = 1})
  for _,child in ipairs(self.canvas:GetChildren()) do
   if child:IsA("GuiObject") and child ~= self.hudLayer and child ~= self.noticePanel then child.Parent = self.hudLayer end
  end
- self:CreateLobby(); self:CreateResult(); self:CreateGuidance(); self:CreateTouchDock(); self:CreateDeleteConfirm(); resize(); self:Update({},nil)
+ self:CreateLobby(); self:CreateResult(); self:CreateGuidance(); self:CreateTouchDock(); self:CreateTouchRotate(); self:CreateDeleteConfirm(); self:CreateHotkeyPanel(); resize(); self:RefreshHotkeyLabels(); self:Update({},nil)
  if game:GetService("RunService"):IsStudio() then
   local probe=make("BindableFunction",self.screen,{Name="RTSInputProbe"})
   probe.OnInvoke=function(point)
@@ -1068,16 +1102,57 @@ function GUI:LayoutLobby()
 end
 function GUI:CreateGuidance()
  self.tutorialState=Tutorial.New()
- self.guidance=panel(self.hudLayer,UDim2.fromOffset(278,112),UDim2.fromOffset(16,8),"TutorialGuidance")
- self.guidanceTitle=text(self.guidance,"新手指引",UDim2.new(1,-74,0,26),UDim2.fromOffset(12,6),17,C.gold,Enum.Font.SourceSansSemibold)
- self.guidanceText=text(self.guidance,"",UDim2.new(1,-24,0,70),UDim2.fromOffset(12,34),14,C.white)
+ -- 桌面顯示完整說明（章節、進度、做法、原因）；觸控版面只保留標題與做法。
+ self.guidance=panel(self.hudLayer,UDim2.fromOffset(278,234),UDim2.fromOffset(16,8),"TutorialGuidance")
+ self.guidanceChapter=text(self.guidance,"",UDim2.new(1,-78,0,16),UDim2.fromOffset(12,6),12,C.muted)
+ self.guidanceChapter.Name="GuidanceChapter"; self.guidanceChapter.TextWrapped=false; self.guidanceChapter.TextTruncate=Enum.TextTruncate.AtEnd
+ self.guidanceTitle=text(self.guidance,"新手指引",UDim2.new(1,-78,0,24),UDim2.fromOffset(12,22),17,C.gold,Enum.Font.SourceSansSemibold)
+ self.guidanceTitle.Name="GuidanceTitle"
+ self.guidanceTrack=make("Frame",self.guidance,{Name="GuidanceProgress",Size=UDim2.new(1,-24,0,4),Position=UDim2.fromOffset(12,52),
+  BackgroundColor3=C.inset,BorderSizePixel=0,Active=false})
+ round(self.guidanceTrack,2)
+ self.guidanceFill=make("Frame",self.guidanceTrack,{Name="Fill",Size=UDim2.fromScale(0,1),BackgroundColor3=C.green,BorderSizePixel=0,Active=false})
+ round(self.guidanceFill,2)
+ self.guidanceText=text(self.guidance,"",UDim2.new(1,-24,0,82),UDim2.fromOffset(12,62),14,C.white)
+ self.guidanceText.Name="GuidanceText"; self.guidanceText.TextYAlignment=Enum.TextYAlignment.Top
+ self.guidanceWhy=text(self.guidance,"",UDim2.new(1,-24,0,54),UDim2.fromOffset(12,146),13,C.muted)
+ self.guidanceWhy.Name="GuidanceWhy"; self.guidanceWhy.TextYAlignment=Enum.TextYAlignment.Top
  namedButton(self.guidance,"隱藏",UDim2.fromOffset(52,44),UDim2.new(1,-58,0,4),function() self.tutorialHidden=true; self.guidanceExpanded=false; self.guidance.Visible=false end,"HideGuidanceButton",C.muted)
+ self.guidanceSkip,self.guidanceSkipLabel=namedButton(self.guidance,"略過這一步  ›",UDim2.fromOffset(124,24),UDim2.new(1,-136,1,-30),function()
+  if self.tutorialState.complete then self.tutorialHidden=true; self.guidanceExpanded=false; self.guidance.Visible=false
+  else Tutorial.Skip(self.tutorialState); self.guidanceCameraStart=nil end
+ end,"SkipGuidanceStep",C.muted)
  self.guidanceHint,self.guidanceHintText=namedButton(self.hudLayer,"新手提示",UDim2.fromOffset(270,44),UDim2.fromOffset(16,88),function() self.tutorialHidden=false; self.guidanceExpanded=true end,"GuidanceHint",C.gold)
  table.insert(self.hitAreas,self.guidanceHint)
  self.guidanceHint.Visible=false
+ -- 第一次進大廳的歡迎卡：伺服器確認檔案後才顯示；開始鍵只送出請求，由伺服器開一場單人練習局。
+ self.tutorialInvite=panel(self.lobby,UDim2.fromOffset(520,190),UDim2.new(0.5,-260,0,12),"TutorialInvite")
+ self.tutorialInvite.Visible=false; self.tutorialInvite.ZIndex=22
+ self.inviteTitle=text(self.tutorialInvite,"歡迎，新領主！",UDim2.new(1,-32,0,30),UDim2.fromOffset(16,10),24,C.white,Enum.Font.SourceSansBold)
+ self.inviteBody=text(self.tutorialInvite,"",UDim2.new(1,-32,0,84),UDim2.fromOffset(16,44),14,C.muted)
+ self.inviteBody.TextYAlignment=Enum.TextYAlignment.Top
+ self.inviteStart,self.inviteStartLabel=namedButton(self.tutorialInvite,"開始新手教程  ›",UDim2.fromOffset(220,44),UDim2.new(0,16,1,-54),function()
+  if not waitingInLobby() or player:GetAttribute("LobbyQueued")==true then return end
+  self.invitePending=os.clock()+3; self.inviteForced=nil
+  lobbyCommand("StartTutorial")
+ end,"StartTutorialButton",C.green)
+ self.inviteStart:SetAttribute("Primary",true)
+ self.inviteSkip,self.inviteSkipLabel=namedButton(self.tutorialInvite,"跳過教程",UDim2.fromOffset(150,44),UDim2.new(0,244,1,-54),function()
+  self.inviteDismissed=true; self.inviteForced=nil
+  lobbyCommand("TutorialDone")
+  self:Notify("已跳過新手教程；之後可以從大廳左上角的「新手教程」再開始。")
+ end,"SkipTutorialButton",C.muted)
+ self.inviteLater,self.inviteLaterLabel=namedButton(self.tutorialInvite,"稍後再說",UDim2.fromOffset(100,44),UDim2.new(0,402,1,-54),function()
+  self.inviteDismissed=true; self.inviteForced=nil
+ end,"LaterTutorialButton",C.muted)
+ self.inviteReopen=namedButton(self.lobby,"新手教程",UDim2.fromOffset(112,44),UDim2.fromOffset(12,12),function()
+  self.inviteDismissed=nil; self.inviteForced=true
+ end,"ReopenTutorialButton",C.gold)
+ table.insert(self.hitAreas,self.inviteReopen)
+ self.inviteReopen.Visible=false; self.inviteReopen.ZIndex=21
  self.helpButton=namedButton(self.menuPanel,"重新查看新手指引",UDim2.fromOffset(192,44),UDim2.fromOffset(13,158),function()
   self.tutorialHidden=false; self.guidanceExpanded=true; self.menuPanel.Visible=false
-  if self.tutorialState.complete then self.tutorialState=Tutorial.New() end
+  if self.tutorialState.complete then self.tutorialState=Tutorial.New(); self.guidanceCameraStart=nil end
  end,"GuidanceButton",C.green)
  self.soundButton,self.soundLabel=namedButton(self.menuPanel,"音效：開啟",UDim2.fromOffset(192,44),UDim2.fromOffset(13,239),function()
   local enabled=player:GetAttribute("SoundEnabled")==false
@@ -1121,41 +1196,119 @@ function GUI:CreateGuidance()
  for _,name in ipairs({"MusicEnabled","MusicVolume","SoundVolume"}) do player:GetAttributeChangedSignal(name):Connect(audioLabels) end
  audioLabels()
  self.menuPanel.Size=UDim2.fromOffset(218,354)
- self.menuPanel.CanvasSize=UDim2.fromOffset(0,554)
- for i,name in ipairs({"ContinueButton","SurrenderButton","AutoWorkButton","EdgeScrollButton","GuidanceButton","SoundButton","MusicButton","MusicVolumeButton","SoundVolumeButton","ReducedMotionButton"}) do local b=self.menuPanel:FindFirstChild(name); b.Position=UDim2.fromOffset(13,39+(i-1)*50); b.Size=UDim2.fromOffset(192,44) end
+ self.menuPanel.CanvasSize=UDim2.fromOffset(0,604)
+ for i,name in ipairs({"ContinueButton","SurrenderButton","AutoWorkButton","EdgeScrollButton","GuidanceButton","SoundButton","MusicButton","MusicVolumeButton","SoundVolumeButton","ReducedMotionButton","HotkeyButton"}) do local b=self.menuPanel:FindFirstChild(name); b.Position=UDim2.fromOffset(13,39+(i-1)*50); b.Size=UDim2.fromOffset(192,44) end
+end
+function GUI:UpdateTutorialInvite(phase)
+ local firstTime=Tutorial.FirstTime(player:GetAttribute("ProfileStatus"),player:GetAttribute("TutorialDone"))
+ local idle=self.lobby.Visible and phase=="Lobby" and waitingInLobby() and player:GetAttribute("LobbyQueued")~=true
+ local pending=self.invitePending~=nil and os.clock()<self.invitePending
+ local open=idle and not pending and (self.inviteForced==true or (firstTime and not self.inviteDismissed))
+ self.tutorialInvite.Visible=open
+ self.inviteReopen.Visible=idle and not open and not pending
+ local width,height=self.layoutWidth or 1280,self.layoutHeight or 720
+ local cardWidth=math.min(520,width-16)
+ local narrow=cardWidth<480
+ local cardHeight=narrow and 214 or 190
+ self.tutorialInvite.Size=UDim2.fromOffset(cardWidth,cardHeight)
+ self.tutorialInvite.Position=UDim2.new(0.5,-cardWidth/2,0,12)
+ self.inviteTitle.Text=firstTime and "歡迎，新領主！" or "新手教程"
+ self.inviteTitle.TextSize=narrow and 20 or 24
+ self.inviteBody.Size=UDim2.new(1,-32,0,cardHeight-108)
+ self.inviteBody.TextSize=narrow and 13 or 14
+ self.inviteBody.Text=(firstTime and "第一次來嗎？" or "想再複習一次？").."新手教程會開一場沒有對手、資源充足的練習局，分 "..#Tutorial.Chapters.." 章 "..#Tutorial.Steps
+  .." 步帶你學會鏡頭、採集、人口、建造、生產、指揮軍隊與升級時代，大約 10 分鐘。每一步都會說明要做什麼、為什麼這樣做，卡住時可以略過。"
+ -- 三個按鈕依卡片寬度分配；「跳過」只給還沒完成教程的玩家。
+ local inner=cardWidth-32
+ self.inviteSkip.Visible=firstTime
+ local startWidth=firstTime and math.floor(inner*0.46) or math.floor(inner*0.68)
+ local skipWidth=firstTime and math.floor(inner*0.28) or 0
+ local laterX=16+startWidth+8+(firstTime and skipWidth+8 or 0)
+ self.inviteStart.Size=UDim2.fromOffset(startWidth,44)
+ self.inviteSkip.Size=UDim2.fromOffset(skipWidth,44); self.inviteSkip.Position=UDim2.new(0,16+startWidth+8,1,-54)
+ self.inviteLater.Size=UDim2.fromOffset(cardWidth-16-laterX,44); self.inviteLater.Position=UDim2.new(0,laterX,1,-54)
+ for _,label in ipairs({self.inviteStartLabel,self.inviteSkipLabel,self.inviteLaterLabel}) do label.TextSize=narrow and 13 or 14 end
+ -- 矮畫面放不下兩張卡時，歡迎卡開著就先收起匹配點清單。
+ self.tutorialInviteCovers=open and height<self.lobbyWelcome.Size.Y.Offset+cardHeight+32
 end
 function GUI:UpdateGuidance(selected,phase)
  if phase ~= self.guidancePhase then
-  if phase=="Playing" then self.tutorialState=Tutorial.New() end
+  if phase=="Playing" then
+   self.tutorialState=Tutorial.New()
+   -- nil：尚未決定。新手與教程局自動顯示；完成過教程的玩家要從選單開啟。
+   self.tutorialHidden=nil
+   self.guidanceCameraStart=nil; self.guidanceCameraSettle=os.clock()+1.5
+  end
   self.guidancePhase=phase
  end
- local facts={selectedVillager=false,delivered=(player:GetAttribute("DeliveredResources") or 0)>0,house=false,trained=(player:GetAttribute("TrainedVillagers") or 0)>0,army=false}
+ self:UpdateTutorialInvite(phase)
+ local available=phase=="Playing" and not player:GetAttribute("Defeated") and not player:GetAttribute("Spectator")
+ local state=self.tutorialState
+ local facts={selectedVillager=false,selectedArmy=false,delivered=(player:GetAttribute("DeliveredResources") or 0)>0,
+  trained=(player:GetAttribute("TrainedVillagers") or 0)>0,
+  feudal=(player:GetAttribute("Age") or 1)>=2 or (player:GetAttribute("AgeRemaining") or 0)>0}
  for _,model in ipairs(selected) do
-  if model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("UnitType")=="villager" then facts.selectedVillager=true end
- end
- local buildings=workspace:FindFirstChild("Buildings")
- if buildings then for _,model in ipairs(buildings:GetChildren()) do
-  if model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("BuildingType")=="House" and model:GetAttribute("Complete")==true then facts.house=true; break end
- end end
- local units=workspace:FindFirstChild("Units")
- if units then for _,model in ipairs(units:GetChildren()) do
   if model:GetAttribute("OwnerId")==player.UserId then
    local kind=model:GetAttribute("UnitType")
-   if kind=="infantry" then facts.army=true end
+   if kind=="villager" then facts.selectedVillager=true elseif kind=="infantry" then facts.selectedArmy=true end
+  end
+ end
+ local buildings=workspace:FindFirstChild("Buildings")
+ if buildings and available and not state.complete then for _,model in ipairs(buildings:GetChildren()) do
+  if model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("Complete")==true then
+   local kind=model:GetAttribute("BuildingType")
+   if kind=="House" then facts.house=true
+   elseif kind=="LumberCamp" or kind=="Mill" or kind=="MiningCamp" then facts.dropoff=true
+   elseif kind=="Farm" then facts.farm=true
+   elseif kind=="Barracks" then facts.barracks=true end
   end
  end end
- Tutorial.Advance(self.tutorialState,facts)
- local available=phase=="Playing" and not player:GetAttribute("Defeated") and not player:GetAttribute("Spectator")
+ local units=workspace:FindFirstChild("Units")
+ if units and available and not state.complete then for _,model in ipairs(units:GetChildren()) do
+  if model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("UnitType")=="infantry" then facts.army=true; break end
+ end end
+ -- 鏡頭步驟只看本機鏡頭位置；開局鏡頭跳回主城的那段時間不算。
+ local camera=workspace.CurrentCamera
+ if camera and available and not state.complete and Tutorial.Steps[state.step].key=="cameraMoved" then
+  local position=camera.CFrame.Position
+  if not self.guidanceCameraStart or os.clock()<(self.guidanceCameraSettle or 0) then self.guidanceCameraStart=position
+  elseif (position-self.guidanceCameraStart).Magnitude>24 then facts.cameraMoved=true end
+ end
+ -- 每一步至少停留幾秒：自動工作會立刻完成交貨之類的步驟，玩家仍要有時間讀完說明。
+ if self.guidanceShownStep~=state.step then self.guidanceShownStep=state.step; self.guidanceStepSince=os.clock() end
+ if available and os.clock()-self.guidanceStepSince>=5 then Tutorial.Advance(state,facts) end
+ if state.complete and available and not self.tutorialReported and player:GetAttribute("TutorialDone")~=true then
+  self.tutorialReported=true
+  lobbyCommand("TutorialDone")
+ end
+ if self.tutorialHidden==nil and available and (player:GetAttribute("TutorialMatch")==true
+  or Tutorial.FirstTime(player:GetAttribute("ProfileStatus"),player:GetAttribute("TutorialDone"))) then self.tutorialHidden=false end
+ local wanted=available and self.tutorialHidden==false
  local compact=self.touchLayout and self.shortLandscape==true
- self.guidance.Visible=available and not self.tutorialHidden and (not compact or self.guidanceExpanded==true)
- self.guidanceHint.Visible=available and compact and not self.guidance.Visible
- if self.tutorialState.complete then
-  self.guidanceTitle.Text="基本操作已完成 ✓"
-  self.guidanceText.Text="接著建磨坊與伐木場、升級時代；觀察敵軍，使用長槍兵反制騎兵、矛兵反制弓箭手。"
+ self.guidance.Visible=wanted and (not compact or self.guidanceExpanded==true)
+ self.guidanceHint.Visible=wanted and compact and not self.guidance.Visible
+ local touch=self.touchLayout==true
+ local function keys(value) return Tutorial.Format(value,function(id) return self.hotkeys and self.hotkeys[id] and self:HotkeyLabel(id) or nil end) end
+ self.guidanceChapter.Visible=not touch
+ self.guidanceWhy.Visible=not touch and not state.complete
+ self.guidanceSkip.Visible=not touch
+ self.guidanceTitle.Position=UDim2.fromOffset(12,touch and 6 or 22)
+ self.guidanceTrack.Position=UDim2.fromOffset(12,touch and 32 or 52); self.guidanceTrack.Size=UDim2.new(1,touch and -84 or -24,0,4)
+ self.guidanceText.Position=UDim2.fromOffset(12,touch and 38 or 62)
+ self.guidanceText.Size=UDim2.new(1,-24,0,touch and 62 or state.complete and 136 or 82)
+ self.guidanceFill.Size=UDim2.fromScale(Tutorial.Progress(state),1)
+ if state.complete then
+  self.guidanceChapter.Text="全部 "..#Tutorial.Steps.." 步完成"
+  self.guidanceTitle.Text=Tutorial.Completion.title.." ✓"
+  self.guidanceText.Text=touch and Tutorial.Completion.touch or Tutorial.Completion.text
+  self.guidanceSkipLabel.Text="關閉"
  else
-  local step=Tutorial.Steps[self.tutorialState.step]
-  self.guidanceTitle.Text=self.tutorialState.step.." / "..#Tutorial.Steps.."  "..step.title
-  self.guidanceText.Text=self.touchLayout and step.touch or step.desktop
+  local step=Tutorial.Steps[state.step]
+  self.guidanceChapter.Text="第 "..step.chapter.." 章 · "..Tutorial.Chapters[step.chapter]
+  self.guidanceTitle.Text=state.step.." / "..#Tutorial.Steps.."  "..step.title
+  self.guidanceText.Text=touch and step.touch or keys(step.desktop)
+  self.guidanceWhy.Text="為什麼："..keys(step.why)
+  self.guidanceSkipLabel.Text="略過這一步  ›"
  end
  self.guidanceHintText.Text=self.guidanceTitle.Text.."  ›"
 end
@@ -1164,7 +1317,7 @@ function GUI:CreateTouchDock()
  self.touchButtons={}
  local actions={{"Select","選取","select"},{"Move","移動","move"},{"Gather","採集","gather"},{"Attack","攻擊","attack"},{"Build","建造","build"},
   {"Home","主城",nil,"selectHome"},{"Idle","閒置",nil,"selectIdle"},{"Villagers","村民",nil,"selectVillagers"},{"Cancel","取消",nil,"cancel"},
-  {"Delete","刪除",nil,"requestDelete"}}
+  {"Delete","死亡",nil,"requestDelete"}}
  for _,action in ipairs(actions) do
   local b,label,edge=namedButton(self.touchDock,action[2],UDim2.fromOffset(76,44),UDim2.fromOffset(4,2),function()
    local callback=action[3] and self.callbacks.touchMode or self.callbacks[action[4]]
@@ -1172,6 +1325,22 @@ function GUI:CreateTouchDock()
   end,"Touch"..action[1].."Button",C.white)
   table.insert(self.touchButtons,{button=b,label=label,edge=edge,mode=action[3],key=action[1]})
  end
+end
+-- 觸控沒有 R 鍵：放置可旋轉建築（城門）時在畫面右側顯示旋轉按鈕；先點按鈕選方向，再拖曳放置。
+function GUI:CreateTouchRotate()
+ self.touchRotate=panel(self.hudLayer,UDim2.fromOffset(132,56),UDim2.new(1,-140,0.5,-28),"TouchRotatePanel")
+ self.touchRotate.Visible=false
+ local _,label=namedButton(self.touchRotate,"旋轉",UDim2.new(1,-8,1,-8),UDim2.fromOffset(4,4),function()
+  if Building:Rotate() then self:UpdateTouchRotate(self.buildingKind) end
+ end,"TouchRotateButton",C.white)
+ label.TextSize=16
+ self.touchRotateLabel=label
+end
+function GUI:UpdateTouchRotate(buildingKind)
+ local data=buildingKind and Config.Buildings[buildingKind]
+ local visible=self.touchLayout==true and data~=nil and data.rotatable==true and workspace:GetAttribute("MatchPhase")=="Playing"
+ self.touchRotate.Visible=visible
+ if visible then self.touchRotateLabel.Text="旋轉 ⟳ · "..(Building.rotated and "直向" or "橫向") end
 end
 function GUI:UpdateTouchDock(phase)
  self.touchDock.Visible=self.touchLayout and phase=="Playing" and not player:GetAttribute("Defeated") and not player:GetAttribute("Spectator")
@@ -1181,6 +1350,7 @@ function GUI:UpdateTouchDock(phase)
   entry.button:SetAttribute("Unavailable",unavailable==true)
   entry.button:SetAttribute("Selected",entry.mode==mode)
   entry.edge.Color=entry.mode==mode and C.gold or C.edge
+  if entry.key=="Delete" then entry.label.Text=deleteLabel(self.selected) end
   entry.label.TextColor3=unavailable and C.muted or (entry.key=="Delete" and C.red or (entry.mode==mode and C.gold or C.white))
  end
 end
@@ -1276,6 +1446,8 @@ function GUI:LayoutTouch()
  self.pageLabel.Position=UDim2.fromOffset(54,182); self.nextPage.Position=UDim2.fromOffset(104,172); self.nextPage.Size=UDim2.fromOffset(44,44)
  self.stopButton.Position=UDim2.new(1,-90,0,172); self.stopButton.Size=UDim2.fromOffset(82,44)
  self.formationButton.Position=UDim2.new(1,-72,0,128); self.formationButton.Size=UDim2.fromOffset(62,44)
+ self.garrisonButton.Position=UDim2.new(1,-160,0,172); self.garrisonButton.Size=UDim2.fromOffset(66,44)
+ self.garrisonLabel.Text="駐紮"
  self.formationButton:FindFirstChildWhichIsA("TextLabel").Text="陣形"
  self.mobileState.Size=UDim2.new(1,-90,0,44)
  local columns=narrow and 5 or 10; local rows=math.ceil(#self.touchButtons/columns); local modeWidth=math.min(width-16,800)
@@ -1319,12 +1491,12 @@ function GUI:CreateDeleteConfirm()
  self.deleteConfirm.ZIndex=50; self.deleteConfirm.Visible=false
  self.deleteBody=panel(self.deleteConfirm,UDim2.fromOffset(420,208),UDim2.new(0.5,-210,0.5,-104),"DeleteConfirmBody")
  self.deleteBody.ZIndex=51
- self.deleteTitle=text(self.deleteBody,"確認刪除",UDim2.new(1,-32,0,34),UDim2.fromOffset(16,12),22,C.white,Enum.Font.SourceSansSemibold)
+ self.deleteTitle=text(self.deleteBody,"確認死亡",UDim2.new(1,-32,0,34),UDim2.fromOffset(16,12),22,C.white,Enum.Font.SourceSansSemibold)
  self.deleteTitle.Name="DeleteTitle"
  self.deleteWarning=text(self.deleteBody,"",UDim2.new(1,-32,0,92),UDim2.fromOffset(16,50),16,C.muted)
  self.deleteWarning.Name="DeleteWarning"; self.deleteWarning.TextYAlignment=Enum.TextYAlignment.Top
  self.deleteCancel=namedButton(self.deleteBody,"保留 · 取消",UDim2.new(0.5,-22,0,44),UDim2.new(0,16,1,-56),function() self:CancelDelete() end,"DeleteCancel",C.white)
- self.deleteAccept=namedButton(self.deleteBody,"確認刪除",UDim2.new(0.5,-22,0,44),UDim2.new(0.5,6,1,-56),function()
+ self.deleteAccept,self.deleteAcceptLabel=namedButton(self.deleteBody,"確認死亡",UDim2.new(0.5,-22,0,44),UDim2.new(0.5,6,1,-56),function()
   local models=self.pendingDelete and deleteSelection(self.pendingDelete)
   local generation=self.deleteGeneration
   if not models or workspace:GetAttribute("MatchPhase")~="Playing" or workspace:GetAttribute("MatchGeneration")~=generation
@@ -1352,8 +1524,10 @@ function GUI:RequestDelete()
  local buildingType=model:GetAttribute("BuildingType")
  local incomplete=buildingType and model:GetAttribute("Complete")==false
  local name=model:GetAttribute("DisplayName") or model.Name
- self.deleteTitle.Text=#models>1 and ("刪除選取的 "..#models.." 個目標？") or ((incomplete and "取消工地：" or (buildingType and "拆除：" or "刪除："))..name)
- local warning="刪除單位、拆除建築或取消工地，都不退還資源。\n建築內的訓練與研究也會取消。"
+ local label=deleteLabel(models)
+ self.deleteTitle.Text=#models>1 and ("讓選取的 "..#models.." 個目標"..label.."？") or ((incomplete and "取消工地：" or (label.."："))..name)
+ self.deleteAcceptLabel.Text=incomplete and #models==1 and "確認取消工地" or ("確認"..label)
+ local warning="單位死亡、拆除建築或取消工地，都不退還資源。\n建築內的訓練與研究也會取消。"
  if workspace:GetAttribute("VictoryMode")=="Regicide" then
   for _,target in ipairs(models) do if target:GetAttribute("MainBase")==true then warning="包含主城決戰的起始主城，拆除將立即戰敗。\n拆除不退還資源；訓練與研究也會取消。"; break end end
  end
@@ -1361,6 +1535,113 @@ function GUI:RequestDelete()
  self.pendingDelete=models; self.deleteGeneration=workspace:GetAttribute("MatchGeneration")
  self.tooltip.Visible=false; self.deleteConfirm.Visible=true
  player:SetAttribute("RTSModalOpen",true)
+ return true
+end
+function GUI:CreateHotkeyPanel()
+ self.hotkeyPanel=scrim(panel(self.canvas,UDim2.fromScale(1,1),UDim2.fromScale(0,0),"HotkeyOverlay"))
+ self.hotkeyPanel.BackgroundColor3=Color3.new(0,0,0); self.hotkeyPanel.BackgroundTransparency=0.42
+ self.hotkeyPanel.ZIndex=50; self.hotkeyPanel.Visible=false
+ self.hotkeyBody=panel(self.hotkeyPanel,UDim2.fromOffset(440,520),UDim2.new(0.5,-220,0.5,-260),"HotkeyBody")
+ self.hotkeyBody.ZIndex=51
+ text(self.hotkeyBody,"熱鍵設定",UDim2.new(1,-32,0,30),UDim2.fromOffset(16,10),22,C.white,Enum.Font.SourceSansSemibold).Name="HotkeyTitle"
+ self.hotkeyHint=text(self.hotkeyBody,"",UDim2.new(1,-32,0,40),UDim2.fromOffset(16,42),13,C.muted)
+ self.hotkeyHint.Name="HotkeyHint"; self.hotkeyHint.TextYAlignment=Enum.TextYAlignment.Top
+ -- 通知橫幅會被這個面板的暗幕蓋住，改鍵結果與拒絕原因直接顯示在面板內。
+ self.hotkeyStatus=text(self.hotkeyBody,"",UDim2.new(1,-32,0,20),UDim2.fromOffset(16,84),14,C.red,Enum.Font.SourceSansSemibold)
+ self.hotkeyStatus.Name="HotkeyStatus"; self.hotkeyStatus.TextWrapped=false; self.hotkeyStatus.TextTruncate=Enum.TextTruncate.AtEnd
+ self.hotkeyList=make("ScrollingFrame",self.hotkeyBody,{Name="HotkeyList",Size=UDim2.new(1,-24,1,-176),Position=UDim2.fromOffset(12,110),
+  BackgroundTransparency=1,BorderSizePixel=0,CanvasSize=UDim2.fromOffset(0,#HotkeyRules.Actions*48),ScrollBarThickness=4,ScrollBarImageColor3=C.gold,
+  ScrollingDirection=Enum.ScrollingDirection.Y,Active=true,ClipsDescendants=true})
+ self.hotkeyRows={}
+ for i,action in ipairs(HotkeyRules.Actions) do
+  local row=make("Frame",self.hotkeyList,{Name="Hotkey_"..action.id,Size=UDim2.new(1,-8,0,44),Position=UDim2.fromOffset(0,(i-1)*48),
+   BackgroundColor3=C.card,BackgroundTransparency=0.45,BorderSizePixel=0})
+  round(row,5)
+  local name=text(row,action.name,UDim2.new(1,-150,1,0),UDim2.fromOffset(12,0),16,C.white)
+  name.TextWrapped=false; name.TextTruncate=Enum.TextTruncate.AtEnd
+  local b,label=namedButton(row,"",UDim2.fromOffset(124,36),UDim2.new(1,-130,0,4),function()
+   self.hotkeyCapture=self.hotkeyCapture~=action.id and action.id or nil
+   self:SetHotkeyStatus(nil)
+  end,"KeyButton",C.gold)
+  self.hotkeyRows[action.id]={button=b,label=label}
+ end
+ namedButton(self.hotkeyBody,"恢復預設",UDim2.new(0.5,-22,0,44),UDim2.new(0,16,1,-56),function()
+  self:SetHotkeys(HotkeyRules.defaults()); self:SetHotkeyStatus("熱鍵已恢復預設。"); self:Notify("熱鍵已恢復預設。")
+ end,"HotkeyReset",C.muted)
+ local done=namedButton(self.hotkeyBody,"完成",UDim2.new(0.5,-22,0,44),UDim2.new(0.5,6,1,-56),function() self:CloseHotkeys() end,"HotkeyDone",C.gold)
+ done:SetAttribute("Primary",true)
+end
+function GUI:LayoutHotkeyPanel()
+ local width=math.max(220,math.min(440,self.layoutWidth-24))
+ local height=math.max(200,math.min(176+#HotkeyRules.Actions*48,self.layoutHeight-16))
+ self.hotkeyBody.Size=UDim2.fromOffset(width,height); self.hotkeyBody.Position=UDim2.new(0.5,-width/2,0.5,-height/2)
+end
+function GUI:HotkeyLabel(id) return HotkeyRules.label(self.hotkeys[id]) end
+-- HUD 上所有按鍵提示都由目前的綁定產生，改鍵後不會留下舊字樣。
+function GUI:RefreshHotkeyLabels()
+ local function key(id) return self:HotkeyLabel(id) end
+ for tab,name in pairs({build="建築",train="生產",research="科技"}) do self.tabButtons[tab].label.Text=name.." ["..key(tab).."]" end
+ self.stopLabel.Text="停止 ["..key("stop").."]"
+ if not self.touchLayout then
+  self.formationLabel.Text="陣形 ["..key("formation").."]"
+  self.garrisonLabel.Text="駐紮 ["..key("garrison").."]"
+ end
+ self.idleHotkey.Text="按 ["..key("selectIdle").."] 選取"
+ -- 四個相機鍵都是單一字元時並排顯示（例如 WASD），否則用分隔號分開。
+ local cameraKeys={key("cameraUp"),key("cameraLeft"),key("cameraDown"),key("cameraRight")}
+ local compact=true
+ for _,label in ipairs(cameraKeys) do if #label~=1 then compact=false end end
+ self.keyHelp.Text=table.concat(cameraKeys,compact and "" or "／").." 移動 · 滾輪縮放 · Home 回基地 · 拖曳框選 · 右鍵下令／小地圖移動 · "..key("formation").." 陣形 · Ctrl + 1–9 編隊 · "
+  ..key("selectIdle").." 閒置村民 · "..key("garrison").." 駐紮 · "..key("delete").." 死亡／拆除"
+ for id,row in pairs(self.hotkeyRows) do
+  local capturing=self.hotkeyCapture==id
+  row.label.Text=capturing and "請按新按鍵…" or key(id)
+  row.button:SetAttribute("Selected",capturing)
+ end
+ self.hotkeyHint.Text=self.hotkeyCapture and "按下要使用的按鍵；Esc 取消這次變更。"
+  or "點選右側按鍵後按下新按鍵；已被使用的按鍵會互換。\n方向鍵、Home、數字編隊與 Esc 為固定按鍵。"
+end
+function GUI:SetHotkeyStatus(message,isError)
+ self.hotkeyStatus.Text=message or ""
+ self.hotkeyStatus.TextColor3=isError and C.red or C.green
+ self:RefreshHotkeyLabels()
+end
+function GUI:SetHotkeys(map)
+ self.hotkeys=map; self.hotkeyCapture=nil; self.hotkeysChanged=true
+ local stored=HotkeyRules.serialize(map)
+ player:SetAttribute("Hotkeys",stored)
+ lobbyCommand("Hotkeys",stored) -- 伺服器驗證後寫入個人檔案，下次進入遊戲沿用。
+ self:RefreshHotkeyLabels()
+ self:Update(self.selected or {},self.buildingKind)
+end
+function GUI:OpenHotkeys()
+ self.menuPanel.Visible=false; self.tooltip.Visible=false
+ self.hotkeyCapture=nil; self:SetHotkeyStatus(nil)
+ self.hotkeyPanel.Visible=true
+ player:SetAttribute("RTSModalOpen",true)
+end
+function GUI:CloseHotkeys()
+ self.hotkeyCapture=nil
+ if self.hotkeyPanel then self.hotkeyPanel.Visible=false end
+ player:SetAttribute("RTSModalOpen",self:IsModalOpen()==true)
+end
+-- 熱鍵面板開啟時由它接收鍵盤輸入；回傳 true 表示這次按鍵已處理，不再當作遊戲指令。
+function GUI:HotkeyInput(input)
+ if not self.hotkeyPanel or not self.hotkeyPanel.Visible or input.UserInputType~=Enum.UserInputType.Keyboard then return false end
+ local id=self.hotkeyCapture
+ if input.KeyCode==Enum.KeyCode.Escape then
+  if id then self.hotkeyCapture=nil; self:SetHotkeyStatus(nil) else self:CloseHotkeys() end
+  return true
+ end
+ if not id then return true end
+ local map,swapped,reason=HotkeyRules.bind(self.hotkeys,id,input.KeyCode.Name)
+ -- 被拒絕時維持擷取狀態，玩家可以直接再按別的鍵。
+ if not map then self:SetHotkeyStatus(reason,true); self:Notify(reason,"Error"); return true end
+ self:SetHotkeys(map)
+ local name=HotkeyRules.action(id).name
+ local message=name.." 改為 ["..self:HotkeyLabel(id).."]"
+  ..(swapped and ("；"..HotkeyRules.action(swapped).name.." 換成 ["..self:HotkeyLabel(swapped).."]。") or "。")
+ self:SetHotkeyStatus(message); self:Notify(message)
  return true
 end
 function GUI:CreateResult()
@@ -1543,7 +1824,7 @@ function GUI:UpdateLobby()
  local teamMode=self.settings.teamMode
  local previewReady=lobbyRoomAttribute(roomId,"TeamPreviewReady")==true
  self.canStart = self.lobbyConfigured and phase=="Lobby" and humanCount == expectedPlayers and readyCount == humanCount and previewReady
- self.lobbyWelcome.Visible=not queued and not starting
+ self.lobbyWelcome.Visible=not queued and not starting and not self.tutorialInviteCovers
  self.lobbyFrame.Visible=queued and not starting
  self.startingTravel.Visible=starting
  self.lobbyBody.Visible=queued and not starting
@@ -1643,7 +1924,7 @@ function GUI:BlocksPointer(screenPoint)
  return false
 end
 function GUI:IsModalOpen()
- return GuiService.MenuIsOpen or (self.deleteConfirm and self.deleteConfirm.Visible) or (self.result and self.result.Visible) or (self.menuPanel and self.menuPanel.Visible) or (self.lobby and self.lobby.Visible and (player:GetAttribute("LobbyQueued") == true or (self.startingTravel and self.startingTravel.Visible)))
+ return GuiService.MenuIsOpen or (self.deleteConfirm and self.deleteConfirm.Visible) or (self.result and self.result.Visible) or (self.menuPanel and self.menuPanel.Visible) or (self.hotkeyPanel and self.hotkeyPanel.Visible) or (self.lobby and self.lobby.Visible and (player:GetAttribute("LobbyQueued") == true or (self.startingTravel and self.startingTravel.Visible)))
 end
 function GUI:ToggleMenu()
  if self.menuPanel.Visible then self.menuPanel.Visible=false
@@ -1714,8 +1995,12 @@ function GUI:UpdateCommands(selected,buildingKind)
  local formationPage=currentFormation~=nil and (self.tab=="formation" or not canBuild)
  self.hasFormationCommands=formationPage
  self.formationButton.Visible=currentFormation~=nil
- self.buildHelp.Size=UDim2.fromOffset(currentFormation and not self.touchLayout and 280 or 378,25)
  local ownedBuilding=owned and Config.Buildings[kind]~=nil
+ -- 駐紮按鈕：選取自己的單位時顯示，按下後點建築進駐（快捷鍵 G）。
+ local garrisonMode=player:GetAttribute("RTSGarrisonPlacement")==true
+ self.garrisonButton.Visible=owned==true and not ownedBuilding
+ self.garrisonEdge.Color=garrisonMode and C.gold or C.edge
+ self.buildHelp.Size=UDim2.fromOffset(not self.touchLayout and (self.garrisonButton.Visible and 196 or currentFormation and 280) or 378,25)
  if self.tab=="build" and not canBuild then self.tab=ownedBuilding and "train" or "orders"; self.page=1; self.buildCategory=nil end
  if canBuild and self.tab~="build" and self.tab~="formation" then self.tab="build"; self.page=1; self.buildCategory=nil end
  if self.tab=="formation" and not currentFormation then self.tab=canBuild and "build" or ownedBuilding and "train" or "orders"; self.page=1; self.buildCategory=nil end
@@ -1760,10 +2045,11 @@ function GUI:UpdateCommands(selected,buildingKind)
  end
  local age = player:GetAttribute("Age") or 1
  local incomplete=ownedBuilding and model:GetAttribute("Complete")==false
+ local garrisoned=ownedBuilding==true and (model:GetAttribute("Garrison") or 0)>0
  self.stopButton.Visible=owned==true and not ownedBuilding
  -- The lobby can assign a different slot color before a new match. Rebuild the
  -- cached art when it changes, retaining the existing locked-age presentation.
- local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",age,tostring(previewColor())},":")
+ local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",garrisoned and "garrisoned" or "empty",age,tostring(previewColor())},":")
  if key ~= self.commandKey then
   self.commandKey = key; self.commandHolder:ClearAllChildren(); self.emptyCommandHint=nil; self.commandEntries,self.buildButtons = {},{}; self.tooltip.Visible = false
   local actions = {}
@@ -1819,8 +2105,14 @@ function GUI:UpdateCommands(selected,buildingKind)
      cost = {},minAge = 1,symbol = "−",costLabel = function() return (player:GetAttribute("FarmQueue") or 0) > 0 and "退回一塊" or "尚無預置" end,callback = function() self.callbacks.farmQueue(false) end})
    end
   end
+  if garrisoned and (self.tab=="train" or self.tab=="research") then
+   -- 有駐軍時排在最前面，任何分頁都看得到。
+   table.insert(actions,1,{key="Ungarrison",name="全部離開",description="讓駐紮在這座建築裡的單位全部離開，出現在建築周圍；有集合點時會前往集合點。快捷鍵 "..self:HotkeyLabel("garrison").."。",cost={},minAge=1,symbol="→",
+    costLabel=function() local target=self.selected and self.selected[1]; return target and ("駐軍 "..(target:GetAttribute("Garrison") or 0).." 位") or "" end,
+    callback=function() if self.callbacks.ungarrison then self.callbacks.ungarrison() end end})
+  end
   if currentFormation and (formationPage or not canBuild) then
-   table.insert(actions,{key="Stop",name="停止",description="停止所選單位的目前指令。快捷鍵 X。",cost={},minAge=1,symbol="■",callback=self.callbacks.stop})
+   table.insert(actions,{key="Stop",name="停止",description="停止所選單位的目前指令。快捷鍵 "..self:HotkeyLabel("stop").."。",cost={},minAge=1,symbol="■",callback=self.callbacks.stop})
   end
   local buildPage=buildMenu and self.buildCategory~=nil
   local singleRow=buildPage or formationPage
@@ -1880,7 +2172,7 @@ function GUI:UpdateCommands(selected,buildingKind)
    end
   end
   if #actions == 0 and not choosingBuildCategory then
-   local help = buildPage and "此頁尚無目前或下一時代的建築。\n升級時代後會自動顯示。" or not model and "選取村民，開啟建築與採集指令。\n按 H 選主城 · 按 . 找閒置村民" or not owned and "可查看此目標的資訊。\n選取自己的單位或建築下達指令。" or self.tab == "train" and "此建築沒有訓練單位。\n開啟科技頁查看可研究項目。" or "此建築沒有可研究項目。"
+   local help = buildPage and "此頁尚無目前或下一時代的建築。\n升級時代後會自動顯示。" or not model and ("選取村民，開啟建築與採集指令。\n按 "..self:HotkeyLabel("selectHome").." 選主城 · 按 "..self:HotkeyLabel("selectIdle").." 找閒置村民") or not owned and "可查看此目標的資訊。\n選取自己的單位或建築下達指令。" or self.tab == "train" and "此建築沒有訓練單位。\n開啟科技頁查看可研究項目。" or "此建築沒有可研究項目。"
    self.emptyCommandHint=text(self.commandHolder,help,UDim2.new(1,-42,1,0),UDim2.fromOffset(21,0),16,C.muted)
    self.emptyCommandHint.TextXAlignment = Enum.TextXAlignment.Center
   end
@@ -1996,6 +2288,7 @@ function GUI:Update(selected,buildingKind)
  local phase = workspace:GetAttribute("MatchPhase") or "Lobby"; local lobbyVisible = player:GetAttribute("InLobby")==true or phase == "Lobby" or phase == "Starting"
  if self.pendingDelete and (phase~="Playing" or workspace:GetAttribute("MatchGeneration")~=self.deleteGeneration or not deleteSelection(self.pendingDelete)) then self:CancelDelete() end
  self.deleteButton.Visible=phase=="Playing" and not player:GetAttribute("Spectator") and not player:GetAttribute("Defeated") and deleteSelection(selected)~=nil
+ self.deleteButtonLabel.Text=deleteLabel(selected)=="死亡／拆除" and "死亡／拆除" or (deleteLabel(selected).." ["..self:HotkeyLabel("delete").."]")
  if self.lobby.Visible ~= lobbyVisible then self.lobby.Visible = lobbyVisible; if not lobbyVisible then self.dismissedResult = nil end end
  self.hudLayer.Visible = not lobbyVisible
  self.topScreen.Enabled=not lobbyVisible and not self.touchLayout
@@ -2005,8 +2298,9 @@ function GUI:Update(selected,buildingKind)
  end
  self:UpdateGuidance(selected,phase)
  self:UpdateTouchDock(phase)
+ self:UpdateTouchRotate(buildingKind)
  self.noticePanel.Position = self.touchLayout and UDim2.new(0,8,0,62) or UDim2.new(0.5,-277,0,8)
- if lobbyVisible then self.selectionBox.Visible = false; self.menuPanel.Visible = false end
+ if lobbyVisible then self.selectionBox.Visible = false; self.menuPanel.Visible = false; self.hotkeyPanel.Visible = false; self.hotkeyCapture = nil end
  if lobbyVisible then self:UpdateLobby() end
  local ended,defeated = phase == "Ended" or workspace:GetAttribute("MatchEnded"),player:GetAttribute("Defeated")
  self.menuEndLabel.Text = (ended or defeated) and "查看戰後覆盤" or "投降"
@@ -2018,7 +2312,7 @@ function GUI:Update(selected,buildingKind)
   if not self.reducedMotion then tween(self.result,0.25,{BackgroundTransparency = 0.22}) end
  end
  self.result.Visible = resultVisible
- if resultVisible then self.menuPanel.Visible=false end
+ if resultVisible then self.menuPanel.Visible=false; self.hotkeyPanel.Visible=false; self.hotkeyCapture=nil end
  self:UpdateMatchReport(ended)
  local modalOpen = self:IsModalOpen()
  if player:GetAttribute("RTSModalOpen") ~= modalOpen then player:SetAttribute("RTSModalOpen",modalOpen) end
@@ -2088,7 +2382,7 @@ function GUI:Update(selected,buildingKind)
  local targetRelation
  if buildingKind then
   local data = Config.Buildings[buildingKind]
-  self.details.Text = "選擇建造位置\n村民到達後開始施工\n右鍵 / Esc 取消"; self.context.Text = "放 置  /  "..data.name; self.buildHelp.Text = "綠色可以建造 · 放置後村民會走到工地"
+  self.details.Text = "選擇建造位置\n村民到達後開始施工\n右鍵 / Esc 取消"; self.context.Text = "放 置  /  "..data.name; self.buildHelp.Text = data.line and "按住拖曳放置整排 · 綠色可建造 · 黃色資源不足 · 紅色跳過" or data.rotatable and ("綠色可以建造 · "..self:HotkeyLabel("research").." 旋轉方向 · 可蓋在自己的石牆上") or "綠色可以建造 · 放置後村民會走到工地"
  elseif #selected > 0 then
   local model = selected[1]
   targetRelation=TeamClient.Relation(teamMode,player.UserId,player:GetAttribute("TeamId"),model:GetAttribute("OwnerId"),model:GetAttribute("TeamId"))
@@ -2111,6 +2405,7 @@ function GUI:Update(selected,buildingKind)
   if model:GetAttribute("Training") then table.insert(lines,"訓練 "..math.ceil(model:GetAttribute("TrainingRemaining") or 0).."秒 · 佇列 "..(model:GetAttribute("QueueCount") or 1)) end
   if model:GetAttribute("Research") then table.insert(lines,model:GetAttribute("Research").." · "..math.ceil(model:GetAttribute("ResearchRemaining") or 0).."秒") end
   if model:GetAttribute("RallyType") then table.insert(lines,"集合點："..tostring(model:GetAttribute("RallyTargetName") or "地面")) end
+  if garrisonText(model) then table.insert(lines,garrisonText(model)) end
   if kind == "Wonder" and model:GetAttribute("OwnerId") == player.UserId and (player:GetAttribute("WonderRemaining") or 0) > 0 then table.insert(lines,"奇觀勝利倒數 "..math.ceil(player:GetAttribute("WonderRemaining")).."秒") end
   local progress = model:GetAttribute("Complete") == false and model:GetAttribute("ConstructionProgress") or model:GetAttribute("ResearchProgress") or model:GetAttribute("TrainingProgress")
   if progress then self.productionBack.Visible = true; self.productionFill.Size = UDim2.fromScale(math.clamp(progress,0,1),1) end
@@ -2148,12 +2443,13 @@ function GUI:Update(selected,buildingKind)
   end
   if hp and maximum then self.healthBack.Visible = true; self.healthFill.Size = UDim2.fromScale(math.clamp(hp/math.max(1,maximum),0,1),1); self.healthFill.BackgroundColor3=hp/maximum<0.25 and C.red or C.green; self.healthText.Text = string.format("生命值  %d / %d",math.ceil(hp),maximum) end
   self.context.Text = model:GetAttribute("BuildingType") and "生 產 與 科 技" or "建 造 與 指 令"
-  self.buildHelp.Text = kind == "villager" and "右鍵採集、施工或移動 · B 開啟建築" or "T 訓練 · R 科技 · U 升級時代 · X 停止"
+  self.buildHelp.Text = kind == "villager" and "右鍵採集、施工或移動 · B 開啟建築" or model:GetAttribute("UnitType") and model:GetAttribute("OwnerId")==player.UserId and "右鍵移動或攻擊 · G 駐紮" or "T 訓練 · R 科技 · U 升級時代 · G 駐軍離開"
  else
   self.context.Text = "建 造 與 指 令"; self.buildHelp.Text = "選取村民，再右鍵點擊資源開始採集"
  end
  self:UpdateCommands(selected,buildingKind)
  if player:GetAttribute("RTSRallyPlacement") then self.context.Text="設 定 集 合 點"; self.buildHelp.Text="點選地面或資源 · 右鍵 / Esc 取消" end
+ if player:GetAttribute("RTSGarrisonPlacement") then self.context.Text="選 擇 駐 紮 建 築"; self.buildHelp.Text="點自己的主城、塔或城堡" end
  if targetRelation=="ally" then
   self.context.Text="友 方 勢 力"; self.buildHelp.Text="友方不可攻擊 · 各自管理自己的資源與單位"
  elseif targetRelation=="unresolved" then
@@ -2178,7 +2474,7 @@ function GUI:LayoutSelection(selected,buildingKind,relation)
  self.productionBack.Visible=compact and self.productionBack.Visible
  if self.emptyCommandHint then self.emptyCommandHint.Visible=true; self.emptyCommandHint.Size=UDim2.new(1,-42,1,0) end
  if self.touchLayout then self.deleteButton.Visible=false; return end
- if model and not buildingKind and relation~="ally" and relation~="unresolved" and not player:GetAttribute("RTSRallyPlacement") then
+ if model and not buildingKind and relation~="ally" and relation~="unresolved" and not player:GetAttribute("RTSRallyPlacement") and not player:GetAttribute("RTSGarrisonPlacement") then
   self.context.Text=#selected>1 and (#selected.." 個單位") or (model:GetAttribute("DisplayName") or model.Name)
  end
  if builders and not self.hasFormationCommands and not buildingKind and self.healthText.Text~="" then
@@ -2196,7 +2492,7 @@ function GUI:LayoutSelection(selected,buildingKind,relation)
   self.details.Position=UDim2.fromOffset(320,112); self.details.Size=UDim2.fromOffset(272,42)
   self.healthText.Position=UDim2.fromOffset(320,159); self.healthBack.Position=UDim2.fromOffset(320,179)
   self.healthBack.Size=UDim2.fromOffset(272,3)
-  local summary={model:GetAttribute("OwnerName") or "建築"}
+  local summary={(model:GetAttribute("OwnerName") or "建築")..(garrisonText(model) and (" · "..garrisonText(model)) or "")}
   if relation=="ally" then table.insert(summary,"盟友 · 友方不可攻擊")
   elseif relation=="unresolved" then table.insert(summary,"隊伍資料載入中") end
   if model:GetAttribute("Research") then table.insert(summary,model:GetAttribute("Research").." · "..math.ceil(model:GetAttribute("ResearchRemaining") or 0).."秒")

@@ -6,19 +6,19 @@ local Tests={}
 local categories={
  {key="economy",name="經濟",buildings={"House","Mill","LumberCamp","MiningCamp","Farm","Market","TownCenter"}},
  {key="military",name="軍事",buildings={"Barracks","ArcheryRange","Stable","Blacksmith","SiegeWorkshop"}},
- {key="defense",name="防禦",buildings={"Tower","Wall","Castle","Monastery","University","Wonder"}},
+ {key="defense",name="防禦",buildings={"Tower","Wall","Gate","Castle","Monastery","University","Wonder"}},
 }
 -- Independent expected menus catch regressions in both the rules and the rendered categories.
 local expectedByAge={
  [1]={
   {"House","Mill","LumberCamp","MiningCamp","Farm","Market"},
   {"Barracks","ArcheryRange","Stable","Blacksmith"},
-  {"Tower","Wall"},
+  {"Tower","Wall","Gate"},
  },
  [2]={
   {"House","Mill","LumberCamp","MiningCamp","Farm","Market","TownCenter"},
   {"Barracks","ArcheryRange","Stable","Blacksmith","SiegeWorkshop"},
-  {"Tower","Wall","Castle","Monastery","University"},
+  {"Tower","Wall","Gate","Castle","Monastery","University"},
  },
  [3]={categories[1].buildings,categories[2].buildings,categories[3].buildings},
  [4]={categories[1].buildings,categories[2].buildings,categories[3].buildings},

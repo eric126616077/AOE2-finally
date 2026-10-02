@@ -468,7 +468,7 @@ function Tests.ObservePeer(options)
    task.defer(function()
     for source,record in pairs(observers) do
      local target=source:GetAttribute("AttackPosition")
-     if os.clock()-record.activeAt<1 and typeof(target)=="Vector3" and model.PrimaryPart
+     if os.clock()-record.activeAt<1+Config.Combat.projectile.maxFlight and typeof(target)=="Vector3" and model.PrimaryPart
       and (Vector3.new(target.X,0,target.Z)-flat(model)).Magnitude<4 then record.hits+=1 end
     end
    end)

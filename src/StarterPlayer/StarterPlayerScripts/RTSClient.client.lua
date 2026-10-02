@@ -18,9 +18,29 @@ local Art = require(RS.Shared.Art)
 local CursorRules = require(RS.Shared.CursorRules)
 local CursorView = require(RS.Shared.CursorView)
 local OrderMarkers = require(RS.Shared.OrderMarkers)
+local SelectionRules = require(RS.Shared.SelectionRules)
+local HotkeyRules = require(RS.Shared.HotkeyRules)
 local remotes = RS:WaitForChild("RTSRemotes")
 local command, feedback = remotes:WaitForChild("Command"), remotes:WaitForChild("Feedback")
 local selected, highlights, groups = {}, {}, {}
+-- Roblox draws only a limited number of Highlights at once. Larger armies rely
+-- on the ground rings, so every selected unit stays visibly marked.
+local HIGHLIGHT_LIMIT = 24
+local rings, ringFolder = {}, nil
+local ringTilt = CFrame.Angles(0,0,math.pi/2)
+local function addRing(model,color)
+ if not ringFolder or not ringFolder.Parent then
+  ringFolder = Instance.new("Folder"); ringFolder.Name = "RTSSelectionRings"; ringFolder.Parent = workspace
+ end
+ local root = model.PrimaryPart
+ local diameter = root and math.max(root.Size.X,root.Size.Z)+1.6 or 4.6
+ local part = Instance.new("Part")
+ part.Name, part.Shape, part.Size = "SelectionRing", Enum.PartType.Cylinder, Vector3.new(0.1,diameter,diameter)
+ part.Anchored, part.CanCollide, part.CanQuery, part.CanTouch, part.CastShadow = true, false, false, false, false
+ part.Material, part.Color, part.Transparency = Enum.Material.SmoothPlastic, color, 0.55
+ part.Parent = ringFolder
+ table.insert(rings,{model=model,part=part})
+end
 local dragStart, lastClick, lastClickTime, lastGroup, lastGroupTime
 local idleIndex = 0
 local selectIdle, selectHome, allOwned
@@ -29,8 +49,11 @@ local lastTouchTime = -math.huge
 player:SetAttribute("RTSInputMode", UIS.TouchEnabled and not UIS.MouseEnabled and "Touch" or "Mouse")
 player:SetAttribute("RTSTouchMode", "select")
 player:SetAttribute("RTSRallyPlacement", false)
+player:SetAttribute("RTSGarrisonPlacement", false)
+-- 集合點與駐紮都是「下一次點擊選目標」的模式，任何取消路徑一起清除。
 local function clearRallyPlacement()
  player:SetAttribute("RTSRallyPlacement", false)
+ player:SetAttribute("RTSGarrisonPlacement", false)
 end
 local function playable()
  return workspace:GetAttribute("MatchPhase") == "Playing" and player:GetAttribute("InLobby")~=true and not player:GetAttribute("Defeated") and not player:GetAttribute("Spectator")
@@ -52,10 +75,15 @@ local function rejectFriendlyTarget(target)
  end
  return false
 end
+-- 自己已完工、可駐紮的建築；是否收容仍由伺服器決定。
+local function garrisonBuilding(target)
+ return typeof(target)=="Instance" and target:GetAttribute("BuildingType")~=nil and target:GetAttribute("OwnerId")==player.UserId
+  and target:GetAttribute("Complete")==true and (target:GetAttribute("GarrisonCapacity") or 0)>0
+end
 -- Immediate, local acknowledgement of an order: a ground ring or a target flash,
 -- plus the intent that picks the confirmation sound. The server still decides;
 -- its accepted-order cue is what actually plays the sound.
-local function orderFeedback(units,target)
+local function orderFeedback(units,target,garrison)
  local villagers,military=0,0
  for _,unit in ipairs(units) do
   if unit:GetAttribute("UnitType")=="villager" then villagers+=1 else military+=1 end
@@ -75,7 +103,7 @@ local function orderFeedback(units,target)
   Audio:SetOrderIntent("move"); OrderMarkers:Target(target,"build")
  elseif villagers>0 and target:GetAttribute("ResourceType") and (ownerId==nil or ownerId==player.UserId) then
   Audio:SetOrderIntent("gather"); OrderMarkers:Target(target,"gather")
- elseif villagers>0 and target:GetAttribute("BuildingType") and kind=="own" then
+ elseif (villagers>0 and target:GetAttribute("BuildingType") and kind=="own") or (garrison==true and garrisonBuilding(target)) then
   Audio:SetOrderIntent("move"); OrderMarkers:Target(target,"build")
  else
   Audio:SetOrderIntent(walk); OrderMarkers:Ground(target:GetPivot().Position,"move")
@@ -88,9 +116,29 @@ local function ownedUnits()
  end
  return result
 end
+-- Pooled screen brackets marking the units a drag box would select on release.
+local previewMarks = {}
+local function showPreview(rects)
+ for index, rect in ipairs(rects) do
+  local mark = previewMarks[index]
+  if not mark then
+   mark = Instance.new("Frame")
+   mark.Name, mark.BackgroundTransparency, mark.BorderSizePixel, mark.ZIndex = "SelectionPreview", 1, 0, 7
+   local corner = Instance.new("UICorner"); corner.CornerRadius = UDim.new(0,5); corner.Parent = mark
+   local stroke = Instance.new("UIStroke"); stroke.Color, stroke.Thickness, stroke.Transparency = Color3.fromRGB(190,236,170), 1.5, 0.15; stroke.Parent = mark
+   mark.Parent = UI.screen
+   previewMarks[index] = mark
+  end
+  mark.Position = UDim2.fromOffset(rect.left,rect.top)
+  mark.Size = UDim2.fromOffset(rect.right-rect.left,rect.bottom-rect.top)
+  mark.Visible = true
+ end
+ for index = #rects+1, #previewMarks do previewMarks[index].Visible = false end
+end
 local function clearDrag()
  dragStart = nil
  if UI.selectionBox then UI.selectionBox.Visible = false end
+ for _, mark in ipairs(previewMarks) do mark.Visible = false end
 end
 local function selectModels(models)
  Building:Cancel()
@@ -98,22 +146,27 @@ local function selectModels(models)
  if UI.CancelDelete then UI:CancelDelete() end
  player:SetAttribute("RTSTouchMode", "select")
  for _, highlight in ipairs(highlights) do highlight:Destroy() end
- highlights, selected = {}, {}
+ for _, ring in ipairs(rings) do ring.part:Destroy() end
+ highlights, selected, rings = {}, {}, {}
  local seen = {}
  for _, model in ipairs(models) do
   if model.Parent and not seen[model] then seen[model] = true; table.insert(selected, model) end
  end
  if #selected>0 then Audio:Play("Select",selected[1]) end
- for _, model in ipairs(selected) do
-  local highlight = Instance.new("Highlight")
-  highlight.Adornee = model
-  highlight.FillTransparency = 0.94
-  highlight.OutlineTransparency = 0.1
+ for index, model in ipairs(selected) do
   local kind=relation(model)
-  highlight.OutlineColor = kind=="own" and Color3.fromRGB(155,216,146) or kind=="ally" and Color3.fromRGB(118,210,211) or Color3.fromRGB(239,202,117)
-  highlight.DepthMode = Enum.HighlightDepthMode.Occluded
-  highlight.Parent = model
-  table.insert(highlights, highlight)
+  local color = kind=="own" and Color3.fromRGB(155,216,146) or kind=="ally" and Color3.fromRGB(118,210,211) or Color3.fromRGB(239,202,117)
+  if index <= HIGHLIGHT_LIMIT then
+   local highlight = Instance.new("Highlight")
+   highlight.Adornee = model
+   highlight.FillTransparency = 0.94
+   highlight.OutlineTransparency = 0.1
+   highlight.OutlineColor = color
+   highlight.DepthMode = Enum.HighlightDepthMode.Occluded
+   highlight.Parent = model
+   table.insert(highlights, highlight)
+  end
+  if model:GetAttribute("UnitType") then addRing(model,color) end
  end
  local model = selected[1]
  if model and relation(model)=="ally" then UI:Notify("盟友 · 友方不可攻擊；各自管理自己的資源與單位。") end
@@ -173,6 +226,24 @@ local function formation(key)
  cancel()
  command:FireServer("Formation",units,key)
 end
+local function ungarrison()
+ local model=#selected==1 and selected[1]
+ if playable() and model and model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("BuildingType") then command:FireServer("Ungarrison",model) end
+end
+-- 駐紮按鈕與 G 鍵：選取單位時進入「點建築駐紮」模式；選取有駐軍的建築時讓駐軍全部離開。
+local function garrison()
+ if not playable() then return end
+ local model=#selected==1 and selected[1]
+ if model and model:GetAttribute("BuildingType") and model:GetAttribute("OwnerId")==player.UserId then
+  if (model:GetAttribute("Garrison") or 0)>0 then ungarrison() else UI:Notify("這座建築裡沒有駐軍。") end
+  return
+ end
+ if #ownedUnits()==0 then UI:Notify("先選取自己的單位，再選擇要駐紮的建築。") return end
+ if player:GetAttribute("RTSGarrisonPlacement")==true then cancel(); return end
+ cancel()
+ player:SetAttribute("RTSGarrisonPlacement",true)
+ UI:Notify("點自己的市鎮中心、瞭望塔或城堡進駐；右鍵或 Esc 取消。")
+end
 UI:Init({
  build = function(kind)
   if not playable() then return end
@@ -192,6 +263,7 @@ UI:Init({
   local model=rallyBuilding()
   if playable() and model then cancel(); command:FireServer("Rally",model) end
  end,
+ garrison = garrison, ungarrison = ungarrison,
  cancelTraining = function(index,revision)
   local model=selected[1]
   if playable() and model and model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("BuildingType") then
@@ -219,7 +291,7 @@ UI:Init({
   if os.clock()-lastTouchTime<0.4 or UIS:GetFocusedTextBox() or UI:IsModalOpen() then return end
   player:SetAttribute("RTSInputMode","Mouse")
   clearDrag()
-  if Building.kind or player:GetAttribute("RTSRallyPlacement")==true then cancel(); return end
+  if Building.kind or player:GetAttribute("RTSRallyPlacement")==true or player:GetAttribute("RTSGarrisonPlacement")==true then cancel(); return end
   if not playable() then return end
   local units = ownedUnits()
   if #units==0 then UI:Notify("先選取自己的村民或軍隊，再右鍵小地圖移動。") return end
@@ -334,6 +406,20 @@ local function placeRally(screenPoint)
  clearRallyPlacement()
  return true
 end
+-- 駐紮模式的點擊：點到自己可駐紮的建築才送出，點錯時保留模式讓玩家重點。
+local function placeGarrison(screenPoint)
+ local units=ownedUnits()
+ if not playable() or #units==0 then cancel(); return false end
+ local target=targetModel(screenPoint)
+ if not garrisonBuilding(target) then
+  UI:Notify("駐紮：請點自己已完工的市鎮中心、瞭望塔或城堡。")
+  return false
+ end
+ orderFeedback(units,target,true)
+ command:FireServer("Garrison",units,target)
+ clearRallyPlacement()
+ return true
+end
 -- A local flag is shown only for the selected owner's building. Its parts cannot
 -- interfere with placement, ground picking or server collision/path calculations.
 local rallyMarker=Instance.new("Model")
@@ -376,6 +462,43 @@ allOwned = function(kind, visibleOnly)
  end
  return models
 end
+-- Screen silhouette of a unit: the drag box selects on any overlap with it,
+-- not only when it happens to contain the unit's centre point.
+local unitExtents = setmetatable({}, {__mode="k"})
+local function unitScreenRect(camera,unit)
+ -- The visible model is taller and wider than its Root; measure it once.
+ local extent = unitExtents[unit]
+ if not extent then
+  local size = unit:GetExtentsSize()
+  extent = {height=math.max(size.Y,5),radius=math.max(size.X,size.Z,3)/2}
+  unitExtents[unit] = extent
+ end
+ local center = ClientUnitView.GetFrame(unit).Position
+ local ground = center.Y-2.5 -- the unit root is centred 2.5 studs above its feet
+ -- Under a tilted camera the near edge of the body draws below the feet centre
+ -- and the far edge above the head centre; include that depth.
+ local look = camera.CFrame.LookVector
+ local flat = Vector3.new(look.X,0,look.Z)
+ flat = flat.Magnitude > 1e-3 and flat.Unit*extent.radius or Vector3.zero
+ local feet = camera:WorldToScreenPoint(Vector3.new(center.X,ground,center.Z)-flat)
+ if feet.Z <= 0 then return nil end
+ local head = camera:WorldToScreenPoint(Vector3.new(center.X,ground+extent.height,center.Z)+flat)
+ local middle = camera:WorldToScreenPoint(center)
+ local side = camera:WorldToScreenPoint(center+camera.CFrame.RightVector*extent.radius)
+ return SelectionRules.unitRect(feet.X,feet.Y,head.X,head.Y,side.X-middle.X)
+end
+local function boxedUnits(start,finish)
+ local camera = workspace.CurrentCamera
+ local box = SelectionRules.box(start.X,start.Y,finish.X,finish.Y)
+ local models, rects = {}, {}
+ if camera and box then
+  for _, unit in ipairs(allOwned()) do
+   local rect = unitScreenRect(camera,unit)
+   if SelectionRules.overlaps(box,rect) then table.insert(models,unit); table.insert(rects,rect) end
+  end
+ end
+ return models, rects, box
+end
 selectIdle = function()
  local idle = {}
  for _, unit in ipairs(allOwned("villager")) do
@@ -411,12 +534,24 @@ end
 local function placeBuilding(screenPoint)
  Building:Update(groundPoint(screenPoint))
  if Building.valid and playable() then
-  command:FireServer("Build",Building.kind,Building.position,Building:GetBuilders())
+  command:FireServer("Build",Building.kind,Building.position,Building:GetBuilders(),Building.rotated)
   cancel()
  else UI:Notify(Building.reason or "無法建造：請確認資源、已選村民及占地。","Error") end
 end
+-- 整排城牆：放開時送出起訖點，牆段由伺服器計算與驗證。keep 為 true 時保留建造模式繼續放下一排。
+local function placeLine(position,keep)
+ Building:Update(position)
+ if Building.valid and playable() and Building.lineStart and Building.lineEnd then
+  command:FireServer("BuildLine",Building.kind,Building.lineStart,Building.lineEnd,Building:GetBuilders())
+  if keep then Building:CancelLine() else cancel() end
+ else
+  UI:Notify(Building.reason or "無法建造：請確認資源、已選村民及占地。","Error")
+  Building:CancelLine()
+ end
+end
 local function touchCommand(screenPoint)
  if player:GetAttribute("RTSRallyPlacement")==true then placeRally(screenPoint); return end
+ if player:GetAttribute("RTSGarrisonPlacement")==true then placeGarrison(screenPoint); return end
  local mode = player:GetAttribute("RTSTouchMode") or "select"
  local target = targetModel(screenPoint)
  if mode == "select" then
@@ -457,7 +592,14 @@ UIS.InputBegan:Connect(function(input, processed)
   lastTouchTime = os.clock(); player:SetAttribute("RTSInputMode","Touch"); clearDrag()
   local point = touchPoint(input)
   TouchRules.begin(touches,input,point.X,point.Y,lastTouchTime,touchBlocked(point,processed))
-  if Building.kind then Building:Update(TouchRules.single(touches) and groundPoint(point) or nil) end
+  if Building.kind then
+   local position=TouchRules.single(touches) and groundPoint(point) or nil
+   -- 觸控：手指按下為城牆起點，拖曳後放開為終點；第二指加入時取消這一排。
+   if Building:IsLine() then
+    if position then Building:StartLine(position) else Building:CancelLine() end
+   end
+   Building:Update(position)
+  end
   return
  end
  -- Some devices synthesize mouse events for a touch. Never turn those into
@@ -466,6 +608,7 @@ UIS.InputBegan:Connect(function(input, processed)
  if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
   player:SetAttribute("RTSInputMode","Mouse")
  end
+ if UI:HotkeyInput(input) then return end
  if input.KeyCode == Enum.KeyCode.Escape then
   cancel()
   if UI.CancelDelete then UI:CancelDelete() end
@@ -474,6 +617,8 @@ UIS.InputBegan:Connect(function(input, processed)
  end
  if player:GetAttribute("InLobby")==true or processed or UIS:GetFocusedTextBox() or UI:IsModalOpen() then return end
  local group = numberKeys[input.KeyCode]
+ -- 可改綁的指令由設定中的熱鍵決定；滑鼠輸入沒有對應的指令。
+ local hotkey = input.UserInputType == Enum.UserInputType.Keyboard and HotkeyRules.actionFor(UI.hotkeys,input.KeyCode.Name) or nil
  if group then
   if UIS:IsKeyDown(Enum.KeyCode.LeftControl) or UIS:IsKeyDown(Enum.KeyCode.RightControl) then
    groups[group] = table.clone(ownedUnits()); UI:Notify("編隊 " .. group .. "：" .. #groups[group] .. " 個單位")
@@ -484,37 +629,49 @@ UIS.InputBegan:Connect(function(input, processed)
    if lastGroup == group and os.clock() - (lastGroupTime or 0) < 0.4 and alive[1] then CameraFocus.Request(player,alive[1]:GetPivot().Position) end
    lastGroup, lastGroupTime = group, os.clock()
   end
- elseif input.KeyCode == Enum.KeyCode.B then cancel(); UI:SetTab("build")
- elseif input.KeyCode == Enum.KeyCode.F then cancel(); UI:SetTab("formation")
- elseif input.KeyCode == Enum.KeyCode.T then UI:SetTab("train"); UI:DefaultTrain()
- elseif input.KeyCode == Enum.KeyCode.R then UI:SetTab("research")
- elseif input.KeyCode == Enum.KeyCode.U then advanceAge()
- elseif input.KeyCode == Enum.KeyCode.X then stop()
- elseif input.KeyCode == Enum.KeyCode.Delete and playable() then cancel(); UI:RequestDelete()
- elseif input.KeyCode == Enum.KeyCode.V then selectModels(allOwned("villager"))
- elseif input.KeyCode == Enum.KeyCode.H then selectHome()
- elseif input.KeyCode == Enum.KeyCode.Period then selectIdle()
- elseif input.KeyCode == Enum.KeyCode.Space then
+ elseif hotkey == "build" then cancel(); UI:SetTab("build")
+ elseif hotkey == "formation" then cancel(); UI:SetTab("formation")
+ elseif hotkey == "train" then UI:SetTab("train"); UI:DefaultTrain()
+ elseif hotkey == "research" then
+  if Building:CanRotate() then Building:Rotate() else UI:SetTab("research") end
+ elseif hotkey == "advanceAge" then advanceAge()
+ elseif hotkey == "stop" then stop()
+ elseif hotkey == "garrison" then garrison()
+ elseif hotkey == "delete" and playable() then cancel(); UI:RequestDelete()
+ elseif hotkey == "selectVillagers" then selectModels(allOwned("villager"))
+ elseif hotkey == "selectHome" then selectHome()
+ elseif hotkey == "selectIdle" then selectIdle()
+ elseif hotkey == "gotoAlert" then
   -- AOE-style "go to last alert": the sound script records where you were attacked.
   local alert=player:GetAttribute("RTSAlertPosition")
   if typeof(alert)=="Vector3" then CameraFocus.Request(player,alert) end
  elseif input.UserInputType == Enum.UserInputType.MouseButton1 and not UI:BlocksPointer() then
   if player:GetAttribute("RTSRallyPlacement")==true then placeRally(); return
+  elseif player:GetAttribute("RTSGarrisonPlacement")==true then placeGarrison(); return
+  elseif Building:IsLine() then
+   -- 按住拖曳放置整排；放開滑鼠時送出。
+   if not Building:StartLine(groundPoint()) then UI:Notify("請在地面選擇城牆的起點。","Error") end
   elseif Building.kind then
    Building:Update(groundPoint())
    if Building.valid and playable() then
-    command:FireServer("Build", Building.kind, Building.position, Building:GetBuilders())
+    command:FireServer("Build", Building.kind, Building.position, Building:GetBuilders(), Building.rotated)
     if not UIS:IsKeyDown(Enum.KeyCode.LeftShift) and not UIS:IsKeyDown(Enum.KeyCode.RightShift) then Building:Cancel() end
    else UI:Notify(Building.reason or "無法建造：請確認資源、已選村民及占地。","Error") end
   else dragStart = pointer() end
  elseif input.UserInputType == Enum.UserInputType.MouseButton2 and not UI:BlocksPointer() then
-  if Building.kind or player:GetAttribute("RTSRallyPlacement")==true then cancel(); return end
+  if Building.kind or player:GetAttribute("RTSRallyPlacement")==true or player:GetAttribute("RTSGarrisonPlacement")==true then cancel(); return end
   if not playable() then return end
   local units = ownedUnits()
   if #units==0 and rallyBuilding() then placeRally(); return end
   if #units == 0 then UI:Notify("先選取自己的村民或軍隊，再按右鍵下令。") return end
   local target = targetModel() or groundPoint()
-  if target and not rejectFriendlyTarget(target) then orderFeedback(units,target); command:FireServer("Order", units, target) end
+  if target and not rejectFriendlyTarget(target) then
+   -- Alt+右鍵是駐紮的專用指令；一般右鍵不會駐紮。
+   local garrisonOrder=garrisonBuilding(target) and (UIS:IsKeyDown(Enum.KeyCode.LeftAlt) or UIS:IsKeyDown(Enum.KeyCode.RightAlt))
+   orderFeedback(units,target,garrisonOrder)
+   if garrisonOrder then command:FireServer("Garrison",units,target)
+   else command:FireServer("Order", units, target) end
+  end
  end
 end)
 UIS.InputChanged:Connect(function(input,processed)
@@ -529,24 +686,35 @@ UIS.InputEnded:Connect(function(input,processed)
   local point = touchPoint(input)
   local released = TouchRules.finish(touches,input,point.X,point.Y,lastTouchTime,touchBlocked(point,processed))
   if not released then return end
-  if Building.kind then
+  if Building.lineStart then
+   if released.place then placeLine(groundPoint(point),false) else Building:CancelLine(); Building:Update(nil) end
+  elseif Building.kind then
    if released.place then placeBuilding(point) else Building:Update(nil) end
   elseif released.tap then touchCommand(point) end
+  return
+ end
+ if input.UserInputType == Enum.UserInputType.MouseButton1 and Building.lineStart then
+  if os.clock()-lastTouchTime<0.4 then return end
+  placeLine(not UI:BlocksPointer() and groundPoint() or nil,UIS:IsKeyDown(Enum.KeyCode.LeftShift) or UIS:IsKeyDown(Enum.KeyCode.RightShift))
   return
  end
  if input.UserInputType ~= Enum.UserInputType.MouseButton1 or not dragStart then return end
  local start = dragStart; clearDrag()
  if os.clock()-lastTouchTime<0.4 then return end
- if player:GetAttribute("InLobby")==true or UI:BlocksPointer() or UI:IsModalOpen() then return end
+ if player:GetAttribute("InLobby")==true or UI:IsModalOpen() then return end
  local finish = pointer()
- if (finish - start).Magnitude > 8 then
+ local boxed, box
+ if SelectionRules.isDrag(start.X,start.Y,finish.X,finish.Y) then
+  local models, _, area = boxedUnits(start,finish)
+  boxed, box = models, area
+ end
+ -- A drag that began on the map stays valid when released over the HUD. A tiny
+ -- box that caught nothing is a slipped click, not a request to deselect.
+ if boxed and (#boxed > 0 or not SelectionRules.isSmall(box)) then
   local models = (UIS:IsKeyDown(Enum.KeyCode.LeftShift) or UIS:IsKeyDown(Enum.KeyCode.RightShift)) and ownedUnits() or {}
-  for _, unit in ipairs(allOwned(nil, true)) do
-   local point = workspace.CurrentCamera:WorldToScreenPoint(ClientUnitView.GetFrame(unit).Position)
-   if point.X >= math.min(start.X, finish.X) and point.X <= math.max(start.X, finish.X)
-    and point.Y >= math.min(start.Y, finish.Y) and point.Y <= math.max(start.Y, finish.Y) then table.insert(models, unit) end
-  end
+  for _, unit in ipairs(boxed) do table.insert(models, unit) end
   selectModels(models)
+ elseif UI:BlocksPointer() then return
  else
   local target = targetModel()
   if (UIS:IsKeyDown(Enum.KeyCode.LeftShift) or UIS:IsKeyDown(Enum.KeyCode.RightShift)) and target and target:GetAttribute("UnitType") and target:GetAttribute("OwnerId") == player.UserId then
@@ -559,9 +727,9 @@ UIS.InputEnded:Connect(function(input,processed)
   lastClick, lastClickTime = target, os.clock()
  end
 end)
-UIS.WindowFocusReleased:Connect(function() clearDrag(); TouchRules.reset(touches); Building:Update(nil) end)
+UIS.WindowFocusReleased:Connect(function() clearDrag(); TouchRules.reset(touches); Building:CancelLine(); Building:Update(nil) end)
 player:GetAttributeChangedSignal("RTSModalOpen"):Connect(function()
- if player:GetAttribute("RTSModalOpen") then clearDrag(); clearRallyPlacement(); TouchRules.reset(touches); Building:Update(nil) end
+ if player:GetAttribute("RTSModalOpen") then clearDrag(); clearRallyPlacement(); TouchRules.reset(touches); Building:CancelLine(); Building:Update(nil) end
 end)
 workspace:GetAttributeChangedSignal("MatchPhase"):Connect(function()
  if UI.CancelDelete then UI:CancelDelete() end
@@ -602,7 +770,7 @@ local function resolvePointer()
  local target=not overUI and targetModel() or nil
  hover(target)
  local context={active=true,overUI=overUI,placing=Building.kind~=nil,placementValid=Building.valid==true,
-  rally=player:GetAttribute("RTSRallyPlacement")==true,villagers=0,military=0}
+  rally=player:GetAttribute("RTSRallyPlacement")==true,garrison=player:GetAttribute("RTSGarrisonPlacement")==true,villagers=0,military=0}
  if playable() then
   for _,unit in ipairs(ownedUnits()) do
    if unit:GetAttribute("UnitType")=="villager" then context.villagers+=1 else context.military+=1 end
@@ -613,11 +781,15 @@ local function resolvePointer()
   local hp,maxHP=target:GetAttribute("HP"),target:GetAttribute("MaxHP")
   context.target={relation=relation(target),unit=target:GetAttribute("UnitType")~=nil,building=target:GetAttribute("BuildingType")~=nil,
    resource=target:GetAttribute("ResourceType"),complete=target:GetAttribute("Complete"),
-   damaged=type(hp)=="number" and type(maxHP)=="number" and hp<maxHP}
+   damaged=type(hp)=="number" and type(maxHP)=="number" and hp<maxHP,garrison=garrisonBuilding(target)}
  end
  return CursorRules.Resolve(context)
 end
-script.Destroying:Connect(function() CursorView:Destroy(); hoverHighlight:Destroy(); OrderMarkers:Clear() end)
+script.Destroying:Connect(function()
+ CursorView:Destroy(); hoverHighlight:Destroy(); OrderMarkers:Clear()
+ if ringFolder then ringFolder:Destroy() end
+ for _, mark in ipairs(previewMarks) do mark:Destroy() end
+end)
 local updateTime, mapTime = 0, 0
 RunService.RenderStepped:Connect(function(dt)
  cursorTime += dt
@@ -635,9 +807,20 @@ RunService.RenderStepped:Connect(function(dt)
  end
  if dragStart then
   local finish = pointer()
-  UI.selectionBox.Visible = (finish - dragStart).Magnitude > 8
+  local dragging = SelectionRules.isDrag(dragStart.X,dragStart.Y,finish.X,finish.Y)
+  UI.selectionBox.Visible = dragging
   UI.selectionBox.Position = UDim2.fromOffset(math.min(finish.X, dragStart.X), math.min(finish.Y, dragStart.Y))
   UI.selectionBox.Size = UDim2.fromOffset(math.abs(finish.X - dragStart.X), math.abs(finish.Y - dragStart.Y))
+  if dragging then local _, rects = boxedUnits(dragStart,finish); showPreview(rects) else showPreview({}) end
+ end
+ for _, ring in ipairs(rings) do
+  local model = ring.model
+  local shown = model.Parent ~= nil and model.PrimaryPart ~= nil
+  if shown then
+   local position = ClientUnitView.GetFrame(model).Position
+   ring.part.CFrame = CFrame.new(position.X,position.Y-2.38,position.Z)*ringTilt
+  end
+  ring.part.Transparency = shown and 0.55 or 1
  end
  updateTime += dt; mapTime += dt
  if updateTime >= 0.15 then

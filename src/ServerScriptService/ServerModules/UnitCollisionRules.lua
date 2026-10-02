@@ -41,7 +41,7 @@ function Rules.newIndex(cellSize, maxRadius)
  local reach = math.ceil((maxRadius * 2 + Rules.MIN_GAP) / cellSize)
  if not finite(reach) or (reach * 2 + 1) ^ 2 > MAX_QUERY_WORK then return nil end
  return setmetatable({
-  cellSize = cellSize, maxRadius = maxRadius, _cells = {}, _records = {},
+  cellSize = cellSize, maxRadius = maxRadius, _cells = {}, _records = {}, version = 0,
   lastQueryCellCount = 0, lastQueryRecordCount = 0,
  }, Index)
 end
@@ -62,6 +62,8 @@ function Index:Update(key, x, z, radius)
  if not validKey(key) or not positive(radius) or radius > self.maxRadius then return false end
  local cellX, cellZ = cellAt(x, self.cellSize), cellAt(z, self.cellSize)
  if not cellX or not cellZ then return false end
+ -- 任何位置變動都讓 Around 的快取結果失效。
+ self.version += 1
  local old = self._records[key]
  if old and old.cellX == cellX and old.cellZ == cellZ then
   old.X, old.Z, old.radius = x, z, radius
@@ -83,7 +85,37 @@ function Index:Remove(key)
  if not record then return false end
  unlink(self, record)
  self._records[key] = nil
+ self.version += 1
  return true
+end
+
+-- 以 (x,z) 為中心、邊長 distance*2 的方框所碰到的所有格子內的紀錄（不含 excludeKey）。
+-- 回傳的是索引內部的紀錄本身，只供同一步內唯讀使用；一次查詢可供多個避讓候選共用。
+function Index:Around(x, z, distance, excludeKey)
+ if not finite(distance) or distance < 0 or (excludeKey ~= nil and not validKey(excludeKey)) then return nil end
+ local minX, maxX = cellAt(x - distance, self.cellSize), cellAt(x + distance, self.cellSize)
+ local minZ, maxZ = cellAt(z - distance, self.cellSize), cellAt(z + distance, self.cellSize)
+ if not minX or not maxX or not minZ or not maxZ or (maxX - minX + 1) * (maxZ - minZ + 1) > MAX_QUERY_WORK then return nil end
+ local result = {}
+ for cellX = minX, maxX do
+  local column = self._cells[cellX]
+  if column then
+   for cellZ = minZ, maxZ do
+    local bucket = column[cellZ]
+    if bucket then
+     for key, record in pairs(bucket) do
+      if key ~= excludeKey then table.insert(result, record) end
+     end
+    end
+   end
+  end
+ end
+ return result
+end
+
+-- Read-only view of every indexed record (key -> {X,Z,radius}); callers must not modify it.
+function Index:Records()
+ return self._records
 end
 
 -- 沿線段走訪格子，再讀取半徑範圍內的桶；不掃描所有單位。

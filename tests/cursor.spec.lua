@@ -58,4 +58,9 @@ expect(resolve(ctx({military=1,monks=1,target=ownWounded}))=="repair","monk heal
 expect(resolve(ctx({military=1,monks=1,target=ownFresh}))=="select","healthy own unit showed heal cursor")
 expect(resolve(ctx({military=2,target=ownWounded}))=="select","non-monk army showed heal cursor")
 expect(resolve(ctx({military=1,monks=9,target=enemyUnit}))=="attack","monk count above military was not clamped")
+-- Garrison targeting: only an own finished building that accepts a garrison is valid.
+local ownKeep={relation="own",building=true,complete=true,damaged=false,garrison=true}
+expect(resolve(ctx({garrison=true,military=2,target=ownKeep}))=="select","garrison target cursor")
+expect(resolve(ctx({garrison=true,military=2}))=="invalid" and resolve(ctx({garrison=true,villagers=1,target=ownHealthy}))=="invalid"
+ and resolve(ctx({garrison=true,military=2,target=enemyBuilding}))=="invalid","garrison refused targets")
 print(string.format("PASS: %d context cursor checks",checks))

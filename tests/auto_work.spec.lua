@@ -30,6 +30,14 @@ expect(not Rules.idleReady(10,20,2,25),"retry cooldown ignored")
 expect(Rules.idleReady(10,25,2,25),"retry cooldown never expired")
 expect(not Rules.idleReady(nil,20,2),"unknown idle start accepted")
 
+expect(not Rules.siteNeedsBuilders(1,0,100,4),"site with a builder asked for more")
+expect(not Rules.siteNeedsBuilders(0,10,13,4),"abandoned site re-tasked villagers before the grace delay")
+expect(Rules.siteNeedsBuilders(0,10,14,4),"abandoned site never asked for builders")
+expect(not Rules.siteNeedsBuilders(0,10,20,4,25),"failed dispatch retried before its cooldown")
+expect(Rules.siteNeedsBuilders(0,10,25,4,25),"dispatch cooldown never expired")
+for _,bad in ipairs({0/0,math.huge}) do expect(not Rules.siteNeedsBuilders(0,bad,20,4) and not Rules.siteNeedsBuilders(bad,10,20,4),"nonfinite site state accepted") end
+expect(not Rules.siteNeedsBuilders(0,nil,20,4),"site without a waiting start asked for builders")
+
 local pref=Rules.dropoffPreference({"gold","stone"})
 expect(pref and pref[1]=="gold" and pref[2]=="stone","mining camp preference lost")
 expect(Rules.dropoffPreference({"food","wood","gold","stone"})==nil,"all-resource drop-off should not bias villagers")

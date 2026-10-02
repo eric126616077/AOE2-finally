@@ -7,12 +7,14 @@ for _, mapSize in ipairs({768,1024,1536}) do
  Config.Map.MapSize=mapSize
  local half=mapSize/2
  local cells=mapSize/Config.Map.GridSize
- for _,size in ipairs({Vector2.new(1,1),Vector2.new(2,2),Vector2.new(3,3),Vector2.new(4,4),Vector2.new(8,8)}) do
+ for _,size in ipairs({Vector2.new(1,1),Vector2.new(2,2),Vector2.new(3,3),Vector2.new(4,4),Vector2.new(8,8),Vector2.new(3,1),Vector2.new(1,3)}) do
  for x=-half,half,17 do
   for z=-half,half,23 do
    local pos,gx,gz=Grid.snap(Vector3.new(x,0,z),size)
    local again,ax,az=Grid.snap(pos,size)
    check(again.X==pos.X and again.Z==pos.Z and ax==gx and az==gz,"snap must be idempotent")
+   local fromCell=Grid.cellPosition(gx,gz,size)
+   check(fromCell.X==pos.X and fromCell.Z==pos.Z,"cell position must invert snap")
    check(math.abs((pos.X-size.X*4+half)/8-gx)<0.0001,"X footprint grid mismatch")
    check(math.abs((pos.Z-size.Y*4+half)/8-gz)<0.0001,"Z footprint grid mismatch")
    if Grid.inBounds(pos,size) then

@@ -1,0 +1,38 @@
+== 0.741.19.7411056_20261002T131244Z_Studio_D745A_last.log
+2026-10-02T13:12:54.511Z [Output] [GARRISON_TEST] PASS 市鎮中心容量 15、初始駐軍 0 | capacity=15 garrison=0
+2026-10-02T13:12:55.938Z [Output] [GARRISON_TEST] INFO 開局單位 4 個（村民 3），攜帶 0，下令後狀態：駐紮,駐紮,駐紮,駐紮
+2026-10-02T13:12:56.055Z [Output] [GARRISON_TEST] PASS 右鍵市鎮中心：開局單位走進建築 | garrison=4 expected=4
+2026-10-02T13:12:56.055Z [Output] [GARRISON_TEST] PASS 駐紮後單位模型消失 | remaining=0
+2026-10-02T13:12:56.056Z [Output] [GARRISON_TEST] PASS 駐軍仍計入人口 | before=4 after=4
+2026-10-02T13:12:56.056Z [Output] [GARRISON_TEST] PASS 每位村民多射一支箭（斥候騎兵不加箭） | arrows=3
+2026-10-02T13:12:56.061Z [Output] [GARRISON_TEST] PASS 面板顯示「駐軍 4 / 15」
+2026-10-02T13:12:56.061Z [Output] [GARRISON_TEST] PASS 面板出現「全部離開」指令
+2026-10-02T13:12:57.373Z [Output] [GARRISON_TEST] PASS 弓箭手、步兵、騎士進入市鎮中心 | garrison=9 expected=9
+2026-10-02T13:12:57.373Z [Output] [GARRISON_TEST] PASS 攻城衝車不能駐紮 | order=nil
+2026-10-02T13:12:57.373Z [Output] [GARRISON_TEST] PASS 箭數＝村民＋弓箭手＋步兵每兩位一支 | arrows=6 expected=6
+2026-10-02T13:12:57.373Z [Output] [GARRISON_TEST] PASS 混合駐軍仍計入人口 | before=10 after=10
+2026-10-02T13:13:01.323Z [Output] [GARRISON_TEST] INFO 每箭傷害 4；volley=7 hp 97->69；畫面箭矢最多 7 支
+2026-10-02T13:13:01.323Z [Output] [GARRISON_TEST] PASS 齊射箭數 7 且傷害逐箭結算
+2026-10-02T13:13:01.323Z [Output] [GARRISON_TEST] PASS 客戶端畫出多支箭 | arrowParts=7
+2026-10-02T13:13:02.139Z [Output] [GARRISON_TEST] PASS 受傷步兵駐紮 | garrison=10
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 全部離開後駐軍歸零 | garrison=0
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 離開的單位數量正確 | units=10 expected=10
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 離開後人口不變 | before=10 after=10
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 離開的單位都在建築占地外 | insideFootprint=0
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 離開的單位彼此不重疊 | minimumGap=9.36
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 兵種保留（村民／斥候／弓箭手／步兵／騎士） | villager=3 scout=1 archer=2 infantry=3 cavalry=1
+2026-10-02T13:13:08.209Z [Output] [GARRISON_TEST] PASS 受傷步兵在建築內回復生命（20 → 約 25） | hp=25
+2026-10-02T13:13:09.623Z [Output] [GARRISON_TEST] PASS 駐軍達到容量 15 | garrison=15
+2026-10-02T13:13:13.637Z [Output] [GARRISON_TEST] PASS 第 16 個單位留在外面並停止 | garrison=15 outside=1 order=nil
+2026-10-02T13:13:13.637Z [Output] [GARRISON_TEST] PASS 滿員時箭數在 1 到上限 10 之間 | arrows=9
+2026-10-02T13:13:13.637Z [Output] [GARRISON_TEST] PASS 滿員時人口不變 | before=16 after=16
+2026-10-02T13:13:13.674Z [Output] [GARRISON_TEST] PASS 市鎮中心已拆除
+2026-10-02T13:13:13.690Z [Output] [GARRISON_TEST] PASS 駐軍全數出現 | units=16
+2026-10-02T13:13:13.690Z [Output] [GARRISON_TEST] PASS 放出的駐軍在原建築位置附近 | near=16
+2026-10-02T13:13:13.691Z [Output] [GARRISON_TEST] PASS 放出的駐軍彼此不重疊 | minimumGap=5.00
+2026-10-02T13:13:13.691Z [Output] [GARRISON_TEST] PASS 拆除後單位數與人口一致 | population=16
+2026-10-02T13:13:13.691Z [Output] [GARRISON_TEST] PASS 拆除主城後仍未被淘汰（征服模式） | defeated=false phase=Playing
+2026-10-02T13:13:14.705Z [Output] [GARRISON_TEST] PASS 放出的單位可接受移動指令 | moving=16
+2026-10-02T13:13:14.705Z [Output] [GARRISON_TEST] DONE pass=32 fail=0
+== 0.741.19.7411056_20261002T131237Z_Studio_5F526_last.log
+2026-10-02T13:12:53.512Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。

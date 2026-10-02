@@ -73,6 +73,8 @@ local AutoWork={units={[unit]={hold=true}}}
 local reportSequence,reportSubjectSequence=99,23
 local reportSubjects={[unit]=true}
 local startingSides=2
+local Factory={cleared=0}
+function Factory.clearCorpses() Factory.cleared+=1 end
 local function stop(model)
  expect(workspace.attributes.MatchGeneration==8,"pending unit orders stopped before generation invalidation")
  table.insert(events,"stop:"..model.Name)

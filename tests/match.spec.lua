@@ -98,6 +98,20 @@ expect(UnitRules.takeAction(clocks,unitB,"attack",10.1,1.5),"one unit's cooldown
 expect(not UnitRules.takeAction(clocks,unitA,"attack",9,1.5),"clock rollback reset cooldown")
 expect(UnitRules.takeAction(clocks,unitA,"attack",11.5,1.5),"attack did not resume at exact interval")
 expect(UnitRules.takeAction(clocks,unitA,"gather",11.1,1),"gather did not resume at exact interval")
+-- 連續攻擊以間隔累進：伺服器步長 0.1167 秒時，1.4 秒間隔的十次攻擊不得被量化拖慢。
+do
+ local carried,unitC,attacks,first,last={}, {},0,nil,nil
+ for step=0,200 do
+  local now=100+step*0.1167
+  if UnitRules.takeAction(carried,unitC,"attack",now,1.4,0.3) then attacks+=1; first=first or now; last=now end
+  if attacks==11 then break end
+ end
+ expect(attacks==11 and (last-first)/10<1.4+0.1167/10+1e-6,"carried attack interval drifts with the server step")
+ expect(carried[unitC].attack<=last and last-carried[unitC].attack<0.1167+1e-6,"carried clock ran ahead of real time")
+ -- 中斷超過容許值後重新對齊，不能補打累積的攻擊。
+ expect(UnitRules.takeAction(carried,unitC,"attack",last+10,1.4,0.3) and carried[unitC].attack==last+10,"long pause did not realign the attack clock")
+ expect(not UnitRules.takeAction(carried,unitC,"attack",last+10.1,1.4,0.3),"realigned clock allowed a burst attack")
+end
 expect(UnitRules.takeAction(clocks,unitA,"repair",11.1,1),"gather clock incorrectly delayed repair")
 expect(not UnitRules.takeAction(clocks,unitA,"attack",math.huge,1.5),"non-finite attack time accepted")
 expect(not UnitRules.takeAction(clocks,unitA,"attack",12,0/0),"non-finite interval accepted")

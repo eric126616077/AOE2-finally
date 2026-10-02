@@ -1,7 +1,7 @@
--- Persistent data contains preferences and completed human-vs-human results only.
+-- Persistent data contains preferences (civilization, hotkeys), the one-way tutorial flag and completed human-vs-human results only.
 local Rules = {}
 Rules.JournalLimit=512
-local profileFields={version=true,civilization=true,preferenceStamp=true,preferenceToken=true,pvpWins=true,pvpLosses=true,resultJournal=true,resultFloor=true}
+local profileFields={version=true,civilization=true,preferenceStamp=true,preferenceToken=true,pvpWins=true,pvpLosses=true,resultJournal=true,resultFloor=true,tutorialDone=true,hotkeys=true}
 local function integer(value)
  return type(value)=="number" and value==value and value>=0 and value<=9007199254740991 and value%1==0
 end
@@ -9,6 +9,10 @@ local function token(value)
  return type(value)=="string" and #value>0 and #value<=100 and value:match("^[%w_:%-]+$")~=nil
 end
 Rules.validMatchId=token
+-- 熱鍵是介面偏好字串（例如 "build=B;stop=X"）；這裡只管格式與長度，按鍵是否可用由 HotkeyRules 決定。
+function Rules.hotkeys(value)
+ return type(value)=="string" and #value>0 and #value<=512 and value:match("^[%a=;]+$")~=nil
+end
 local function civilization(config,id)
  local data=type(id)=="string" and config.Civilizations[id]
  return data and data.public and id or config.DefaultCivilization
@@ -24,7 +28,8 @@ function Rules.read(raw,config)
  if type(raw)~="table" or raw.version~=1 then return nil end
  for field in pairs(raw) do if not profileFields[field] then return nil end end
  if type(raw.civilization)~="string" or not integer(raw.preferenceStamp) or not token(raw.preferenceToken)
-  or not integer(raw.pvpWins) or not integer(raw.pvpLosses) or not integer(raw.resultFloor) or type(raw.resultJournal)~="table" then return nil end
+  or not integer(raw.pvpWins) or not integer(raw.pvpLosses) or not integer(raw.resultFloor) or type(raw.resultJournal)~="table"
+  or (raw.tutorialDone~=nil and raw.tutorialDone~=true) or (raw.hotkeys~=nil and not Rules.hotkeys(raw.hotkeys)) then return nil end
  local result=table.clone(raw)
  result.civilization=civilization(config,raw.civilization)
  result.resultJournal={}
@@ -48,6 +53,10 @@ function Rules.merge(raw,delta,config)
    merged.civilization,merged.preferenceStamp,merged.preferenceToken=preference.civilization,preference.stamp,preference.token
   end
  end
+ -- 教程旗標只會由未完成變為完成；其他伺服器的舊增量不能把它改回去。
+ if delta.tutorialDone==true then merged.tutorialDone=true end
+ -- 熱鍵以最後寫入為準；格式不對的增量直接忽略，不影響其他欄位。
+ if Rules.hotkeys(delta.hotkeys) then merged.hotkeys=delta.hotkeys end
  for id,entry in pairs(delta.results or {}) do
   if token(id) and Rules.result(entry) and entry.endedAt>merged.resultFloor and not merged.resultJournal[id] then
    merged.resultJournal[id]={outcome=entry.outcome,endedAt=entry.endedAt}

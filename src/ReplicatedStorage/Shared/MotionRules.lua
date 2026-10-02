@@ -1,8 +1,28 @@
 -- Pure, bounded presentation timeline. Samples always come from the authoritative Root.
 -- Rendering waits one server step; it never predicts a position beyond the latest sample.
-local Rules={Delay=.12,ServerStep=.1,MaxSamples=6,VisibilityInterval=.125,PoseInterval=1/30,MaxDetailedUnits=96}
+local Rules={Delay=.12,ServerStep=.1,MaxSamples=6,VisibilityInterval=.125,PoseInterval=1/75,MaxDetailedUnits=96,
+ -- Ground covered by one full gait cycle (two steps) and the wheel radius, in studs.
+ FootCycle=5,MountedCycle=9,WheelRadius=1.6,MaxGaitStep=6,GaitBlendTime=.12,
+ -- Standing units shift their weight slowly, so their pose is refreshed far less often than a gait.
+ IdleInterval=1/12}
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
+end
+local wheeled={ram=true,mangonel=true,trebuchet=true}
+local mounted={scout=true,cavalry=true}
+-- Gait phase follows the distance the figure visibly travelled, never the clock:
+-- feet plant on the ground at any speed and stop the instant the figure stops.
+function Rules.GaitAdvance(kind,distance)
+ if not finite(distance) or distance<=0 or distance>Rules.MaxGaitStep then return 0 end
+ if wheeled[kind] then return distance/Rules.WheelRadius end
+ return distance/(mounted[kind] and Rules.MountedCycle or Rules.FootCycle)*math.pi*2
+end
+-- Stride weight 0..1: eases in and out so a unit never snaps between standing and mid-stride.
+function Rules.GaitBlend(weight,walking,dt)
+ if not finite(weight) then weight=0 end
+ if not finite(dt) or dt<=0 then return math.clamp(weight,0,1) end
+ local change=dt/Rules.GaitBlendTime
+ return math.clamp(weight+(walking and change or -change),0,1)
 end
 function Rules.New(now,frame)
  assert(finite(now) and frame~=nil,"invalid initial motion sample")

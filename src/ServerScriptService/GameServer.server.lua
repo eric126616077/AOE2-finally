@@ -85,6 +85,8 @@ local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.M
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
 -- 自動工作的每單位狀態（閒置起點、玩家保留待命、暫時略過的目標）與延後定義的函式。
 local AutoWork={units=setmetatable({},{__mode="k"}),farmClaims=setmetatable({},{__mode="k"}),farmRules=require(script.Parent.ServerModules.FarmRules)}
+-- 城牆與城門：已完工的城門（gates[model]={state,X,Z,halfX,halfZ,open}）不擋己方與同盟，敵方由伺服器逐段擋下。
+local Walls={gates=setmetatable({},{__mode="k"}),rules=require(RS.Shared.WallRules),config=Config.Walls}
 -- 農田一次只給一位村民：正在耕作、或交貨後會回來的村民保有該田；其餘村民改派其他食物來源。
 AutoWork.isFarm=function(target)
  return typeof(target)=="Instance" and target.Parent==buildings and target:GetAttribute("BuildingType")=="Farm"
@@ -103,6 +105,32 @@ AutoWork.claimFarm=function(farm,unit)
  if not AutoWork.isFarm(farm) or not AutoWork.farmFree(farm,unit) then return false end
  AutoWork.farmClaims[farm]=unit
  return true
+end
+-- 駐紮：進入建築的單位移除模型，只留下紀錄（兵種、生命、攜帶資源、信仰），離開時依紀錄重新生成。
+-- inside[建築] = 紀錄陣列，另帶 arrows 欄位（每次射擊多出的箭數）。規則與函式集中在一個表。
+local Garrison={rules=require(script.Parent.ServerModules.GarrisonRules),config=Config.Garrison,inside=setmetatable({},{__mode="k"})}
+Garrison.count=function(state)
+ local total=0
+ for building in pairs(state.buildings) do
+  local held=building.Parent==buildings and Garrison.inside[building]
+  if held then total+=#held end
+ end
+ return total
+end
+Garrison.publish=function(model)
+ local held=Garrison.inside[model]
+ local data=Config.Buildings[model:GetAttribute("BuildingType")]
+ if held then
+  local classes={}
+  for _,record in ipairs(held) do
+   local class=Config.Units[record.kind].class
+   classes[class]=(classes[class] or 0)+1
+  end
+  held.arrows=Garrison.rules.arrows(Garrison.config.arrows,classes,data and data.damage and data.garrison and data.garrison.maxArrows)
+ end
+ model:SetAttribute("GarrisonCapacity",Garrison.rules.capacity(data))
+ model:SetAttribute("Garrison",held and #held or 0)
+ model:SetAttribute("GarrisonArrows",held and held.arrows or 0)
 end
 local lobbyWorld = LobbyWorld.Create()
 local rooms, activeRoomId = {}, nil
@@ -264,7 +292,7 @@ local function refund(actor,cost)
  for key,value in pairs(cost or {}) do actor:SetAttribute(key,(actor:GetAttribute(key) or 0)+value) end
 end
 local function population(state)
- local count,cap=0,0
+ local count,cap=Garrison.count(state),0
  for unit in pairs(state.units) do if unit.Parent==units then count+=1 end end
  for building in pairs(state.buildings) do
   if building.Parent==buildings then
@@ -278,13 +306,20 @@ local function population(state)
  state.actor:SetAttribute("PopulationCap",cap)
  return count,cap
 end
+-- 每個陣營依兵種／採集資源快取；科技完成或重置陣營時清空（state.statsCache=nil）。回傳的表為共用，呼叫端不得修改。
 local function unitStats(state,kind,resourceKind)
+ local cache=state.statsCache
+ if not cache then cache={}; state.statsCache=cache end
+ local byKind=cache[kind]
+ if not byKind then byKind={}; cache[kind]=byKind end
+ local cached=byKind[resourceKind or ""]
+ if cached then return cached end
  local data,m=Config.Units[kind],state.modifiers
  local c=state.classModifiers[data.class] or {}
  local function value(key) return (m[key] or 0)+(c[key] or 0) end
  local specific=({food="gatherFood",wood="gatherWood",gold="gatherGold",stone="gatherStone"})[resourceKind]
  local military=data.class~="villager" and data.class~="monk"
- return {
+ cached={
   speed=data.speed*(1+value("speed")), damage=data.damage+(military and m.attack or 0)+(c.attack or 0),
   armor=(data.armor or 0)+(military and m.armor or 0)+(c.armor or 0),
   hp=data.hp+value("hp"),
@@ -292,6 +327,8 @@ local function unitStats(state,kind,resourceKind)
   carry=(data.carryCapacity or 15)+value("carry"),
   gather=(data.gatherRate or 4)*(1+value("gather")+(specific and value(specific) or 0)),
  }
+ byKind[resourceKind or ""]=cached
+ return cached
 end
 local function refreshUnit(state,unit)
  local stats=unitStats(state,unit:GetAttribute("UnitType"))
@@ -324,11 +361,16 @@ local function refreshBuildingStats(state,model)
  model:SetAttribute("AttackInterval",armed and (data.attackInterval or 1.5) or 0)
  -- Imported models can already carry authoritative armor; keep every finite value.
  model:SetAttribute("Armor",Rules.finite(armor) and armor or 0)
+ Garrison.publish(model)
 end
-local function makeBuilding(state,kind,pos,complete)
+local function makeBuilding(state,kind,pos,complete,rotated)
  local data=Config.Buildings[kind]
- local model=Factory.model(kind,pos,Vector3.new(data.size.X*GRID_SIZE,data.height,data.size.Y*GRID_SIZE),data.color,"Buildings",state.actor:GetAttribute("TeamColor"))
+ rotated=data.rotatable==true and rotated==true
+ local sizeX,sizeY=Walls.rules.footprint(data.size.X,data.size.Y,rotated)
+ local model=Factory.model(kind,pos,Vector3.new(sizeX*GRID_SIZE,data.height,sizeY*GRID_SIZE),data.color,"Buildings",state.actor:GetAttribute("TeamColor"),rotated)
  model:SetAttribute("RTSManaged",true)
+ if data.rotatable then model:SetAttribute("Rotated",rotated) end
+ if data.gate then model:SetAttribute("GateOpen",false) end
  model:SetAttribute("BuildingType",kind)
  model:SetAttribute("DisplayName",data.name)
  model:SetAttribute("HP",complete and data.hp or ConstructionRules.initialHP(data.hp))
@@ -355,6 +397,7 @@ local function makeBuilding(state,kind,pos,complete)
  refreshBuildingStats(state,model)
  model.Parent=buildings
  state.buildings[model]=true
+ if data.gate and complete then Walls.activate(state,model) end
  population(state)
  return model
 end
@@ -426,13 +469,46 @@ local function obstacleParts(pos,size)
  end
  return obstacles
 end
-local function placementClear(pos,data)
+local function placementClear(pos,data,size)
+ size=size or data.size
  return #obstacleParts(pos+Vector3.new(0,data.height/2,0),
-  Vector3.new(data.size.X*GRID_SIZE-0.2,math.max(4,data.height),data.size.Y*GRID_SIZE-0.2))==0
+  Vector3.new(size.X*GRID_SIZE-0.2,math.max(4,data.height),size.Y*GRID_SIZE-0.2))==0
+end
+-- 城門可以直接蓋在自己的石牆上：占地內只有己方石牆時回傳要拆除的牆段，其餘障礙一律拒絕。
+Walls.replaceable=function(state,pos,data,size)
+ local walls,seen={},{}
+ for _,part in ipairs(obstacleParts(pos+Vector3.new(0,data.height/2,0),
+  Vector3.new(size.X*GRID_SIZE-0.2,math.max(4,data.height),size.Y*GRID_SIZE-0.2))) do
+  local model=part
+  while model and model.Parent~=buildings do model=model.Parent end
+  if not model or not model:IsA("Model") or model:GetAttribute("BuildingType")~="Wall"
+   or model:GetAttribute("RTSManaged")~=true or state.buildings[model]~=true then return nil end
+  if not seen[model] then seen[model]=true; table.insert(walls,model) end
+ end
+ return walls
+end
+-- 完工後占地不再碰撞；導航以標籤區域表示，敵方尋路時把該標籤設為不可通行。
+Walls.label=function(state) return "RTSGate"..tostring(state.id) end
+Walls.activate=function(state,model)
+ local root=model.PrimaryPart
+ if not root then return end
+ local center=root.Position
+ root.CanCollide=false
+ local modifier=Instance.new("PathfindingModifier")
+ modifier.Label=Walls.label(state)
+ modifier.Parent=root
+ Walls.gates[model]={state=state,X=center.X,Z=center.Z,halfX=root.Size.X/2,halfZ=root.Size.Z/2,open=false}
 end
 -- Static scenery stays in engine queries; moving units use a live spatial index.
 -- PivotTo bypasses physics, so every server movement segment checks both.
 units.ChildRemoved:Connect(function(unit) unitCollisionIndex:Remove(unit) end)
+-- 靜態淨空快取：單位周圍一個方框內沒有任何可碰撞的靜態物件時，框內的移動段不必逐段做引擎查詢。
+-- 大型戰鬥多在空地，原本每個單位每步 2–16 次 Blockcast／範圍查詢是主要耗時。
+-- 建築或資源新增時整批失效；其餘（例如使用者模型變動）靠短壽命重新探測。
+-- 掛在碰撞索引表上，不占主程式區塊的 local 暫存器（Studio 上限 200）。
+unitCollisionIndex.staticClear={zones=setmetatable({},{__mode="k"}),epoch=0,half=16,life=0.5}
+buildings.ChildAdded:Connect(function() unitCollisionIndex.staticClear.epoch+=1 end)
+resources.ChildAdded:Connect(function() unitCollisionIndex.staticClear.epoch+=1 end)
 local function unitInBounds(pos,radius)
  local half=(workspace:GetAttribute("MapSize") or Config.Map.MapSize)/2
  return validPosition(pos) and math.abs(pos.X)+radius<=half and math.abs(pos.Z)+radius<=half
@@ -445,14 +521,99 @@ end
 local function staticUnitSegmentClear(unit,from,to)
  local radius,height,size=unitBody(unit)
  if not unitInBounds(to,radius) then return false end
+ if next(Walls.gates)~=nil and Walls.blocks(unit,from,to,radius) then return false end
  updateObstacleFilters()
  local offset=Vector3.new(0,height/2,0)
+ local staticClear=unitCollisionIndex.staticClear
+ local zone=staticClear.zones[unit]
+ local clock=os.clock()
+ if not zone or zone.epoch~=staticClear.epoch or clock>=zone.expires then
+  -- 以單位實際位置為中心探測；from／to 可能是尋路時的假設點。
+  local center=unit:GetPivot().Position
+  local parts=workspace:GetPartBoundsInBox(CFrame.new(center.X,height/2,center.Z),Vector3.new(staticClear.half*2,height+1,staticClear.half*2),attackOverlap)
+  zone={X=center.X,Z=center.Z,clear=#parts==0,epoch=staticClear.epoch,expires=clock+staticClear.life}
+  staticClear.zones[unit]=zone
+ end
+ if zone.clear then
+  local reach=staticClear.half-radius
+  if math.abs(from.X-zone.X)<=reach and math.abs(from.Z-zone.Z)<=reach and math.abs(to.X-zone.X)<=reach and math.abs(to.Z-zone.Z)<=reach then return true end
+ end
  local delta=to-from
  return (delta.Magnitude==0 or workspace:Blockcast(CFrame.new(from+offset),size,delta,rayParams)==nil)
   and #workspace:GetPartBoundsInBox(CFrame.new(to+offset),size,attackOverlap)==0
 end
+Walls.blocks=function(unit,from,to,radius)
+ local mine
+ for gate,entry in pairs(Walls.gates) do
+  if gate.Parent~=buildings then Walls.gates[gate]=nil
+  elseif Walls.rules.gateBlocks(from.X,from.Z,to.X,to.Z,radius,entry.X,entry.Z,entry.halfX,entry.halfZ) then
+   mine=mine or owner(unit)
+   if mine and enemies(mine,entry.state) then return true end
+  end
+ end
+ return false
+end
+-- 敵方城門的導航標籤成本為無限大；沒有城門或沒有敵方城門時不帶成本表。
+Walls.costs=function(unit)
+ local mine,costs=nil,nil
+ for gate,entry in pairs(Walls.gates) do
+  if gate.Parent==buildings then
+   mine=mine or owner(unit)
+   if mine and enemies(mine,entry.state) then costs=costs or {}; costs[Walls.label(entry.state)]=math.huge end
+  end
+ end
+ return costs
+end
+-- 閘門外觀：己方或同盟單位靠近時升起。只發布 GateOpen 屬性，通行與否不依賴它。
+Walls.step=function()
+ if next(Walls.gates)==nil then return end
+ local reach=Walls.config.gateOpenRadius*Walls.config.gateOpenRadius
+ for gate,entry in pairs(Walls.gates) do
+  if gate.Parent~=buildings then Walls.gates[gate]=nil else entry.near=false end
+ end
+ for unit,record in pairs(unitCollisionIndex:Records()) do
+  for _,entry in pairs(Walls.gates) do
+   if not entry.near and Walls.rules.boxDistanceSquared(record.X,record.Z,entry.X,entry.Z,entry.halfX,entry.halfZ)<=reach then
+    local other=owner(unit)
+    if other and (other==entry.state or (alive(other) and not enemies(other,entry.state))) then entry.near=true end
+   end
+  end
+ end
+ for gate,entry in pairs(Walls.gates) do
+  if entry.near~=entry.open then entry.open=entry.near; gate:SetAttribute("GateOpen",entry.open) end
+ end
+end
+-- 同一個單位在同一步內會對多個避讓候選各查一次鄰居；先取一次涵蓋所有候選的鄰居清單共用，
+-- 任何單位移動（索引 version 改變）或查詢點超出涵蓋範圍就重取。多出來的遠處鄰居不影響碰撞判定。
 local function unitNeighbors(unit,from,to,radius)
- return unitCollisionIndex:Nearby(from.X,from.Z,to.X,to.Z,radius,unit)
+ local index=unitCollisionIndex
+ local profile=index.profile
+ local started=profile and os.clock()
+ local reach=radius+MAX_UNIT_RADIUS+UnitCollisionRules.MIN_GAP
+ local scan=index.scan
+ local fx,fz=scan and from.X-scan.X or 0,scan and from.Z-scan.Z or 0
+ if not (scan and scan.unit==unit and scan.version==index.version and math.sqrt(fx*fx+fz*fz)+reach<=scan.limit) then
+  -- 掃描半徑依這一步的位移決定（避讓候選與直行同距離）；只留圓內的紀錄，擁擠時每個候選要比對的鄰居少很多。
+  local sx,sz=to.X-from.X,to.Z-from.Z
+  local limit=math.sqrt(sx*sx+sz*sz)+reach+0.5
+  local cells=index:Around(from.X,from.Z,limit,unit)
+  scan=nil
+  if cells then
+   local records={}
+   for _,record in ipairs(cells) do
+    local dx,dz=record.X-from.X,record.Z-from.Z
+    if dx*dx+dz*dz<=limit*limit then table.insert(records,record) end
+   end
+   scan={unit=unit,version=index.version,X=from.X,Z=from.Z,limit=limit,records=records}
+  end
+  index.scan=scan
+ end
+ local result
+ local tx,tz=scan and to.X-scan.X or 0,scan and to.Z-scan.Z or 0
+ if scan and math.sqrt(tx*tx+tz*tz)+reach<=scan.limit then result=scan.records
+ else result=index:Nearby(from.X,from.Z,to.X,to.Z,radius,unit) end
+ if profile then profile.neighbor+=os.clock()-started; profile.neighbors+=1 end
+ return result
 end
 local function unitPositionClear(unit,pos,radius)
  return not UnitCollisionRules.overlaps(pos.X,pos.Z,radius,unitNeighbors(unit,pos,pos,radius))
@@ -556,7 +717,7 @@ issue=function(unit,kind,target,automatic)
  unit:SetAttribute("FormationSlot",kind=="move" and target or nil)
  unit:SetAttribute("Animation","Idle")
  unit:SetAttribute("WorkKind",nil)
- unit:SetAttribute("Order",({move="移動",gather="採集",deliver="交貨",attack="攻擊",build="施工",repair="修復",convert="招降",heal="治療"})[kind] or "移動")
+ unit:SetAttribute("Order",({move="移動",gather="採集",deliver="交貨",attack="攻擊",build="施工",repair="修復",convert="招降",heal="治療",garrison="駐紮"})[kind] or "移動")
  local targetModel=typeof(target)=="Instance" and target:IsA("Model") and target or nil
  unit:SetAttribute("OrderKind",kind)
  unit:SetAttribute("OrderTargetName",targetModel and (targetModel:GetAttribute("DisplayName") or targetModel.Name) or nil)
@@ -570,7 +731,15 @@ local function unreachable(unit,order,message)
   retries[unit]=os.clock()+8
   state.buildRetryAfter[order.target]=retries
  end
- if order.kind=="attack" and state then finishAttack(state,unit,order) else stop(unit) end
+ if order.kind=="attack" and state then
+  -- 這個目標暫時不再自動選取，讓索敵改挑其他走得到的敵人。
+  local clock=actionClocks[unit] or {}
+  clock.skipTarget,clock.skipUntil=order.target,os.clock()+8
+  actionClocks[unit]=clock
+  finishAttack(state,unit,order)
+ else stop(unit) end
+ -- 自動接戰（索敵、反擊、電腦進攻波）找不到路不是玩家下的指令，不跳提示。
+ if order.kind=="attack" and order.automatic then return end
  if order.autoWork then
   -- 自動指派失敗時不打擾玩家，暫時略過該目標改找其他工作。
   local entry=AutoWork.units[unit] or {}
@@ -637,7 +806,7 @@ local function route(unit,order,goal,now)
     if not currentOrder() or not nextCall then return nil end
     engineCalls=nextCall
     local ok,waypoints=pcall(function()
-     local path=PathfindingService:CreatePath({AgentRadius=agentRadius,AgentHeight=unit:GetAttribute("CollisionHeight") or 5,AgentCanJump=false,WaypointSpacing=8})
+     local path=PathfindingService:CreatePath({AgentRadius=agentRadius,AgentHeight=unit:GetAttribute("CollisionHeight") or 5,AgentCanJump=false,WaypointSpacing=8,Costs=Walls.costs(unit)})
      path:ComputeAsync(origin+Vector3.new(0,2,0),goal+Vector3.new(0,2,0))
      return path.Status==Enum.PathStatus.Success and path:GetWaypoints() or nil
     end)
@@ -713,6 +882,10 @@ local function route(unit,order,goal,now)
  end)
 end
 local function moveToward(unit,order,destination,speed,dt,now)
+ if order.crowdedRetry then
+  if now<order.crowdedRetry then return end
+  order.crowdedRetry=nil
+ end
  refreshRouteGoal(order,destination)
  if order.escapeGoal and (not order.escapeOriginalGoal or (destination-order.escapeOriginalGoal).Magnitude>.05) then
   order.escapeGoal,order.escapeOriginalGoal,order.escapeExpires=nil,nil,nil
@@ -787,8 +960,9 @@ local function moveToward(unit,order,destination,speed,dt,now)
   local accepted
   for _,candidate in ipairs(UnitCollisionRules.steeringCandidates(current.X,current.Z,goal.X,goal.Z,step,order.avoidSide) or {}) do
    local point=Vector3.new(candidate.X,Config.Map.GroundY,candidate.Z)
-   if staticUnitSegmentClear(unit,current,point)
-    and UnitCollisionRules.segmentClear(current.X,current.Z,point.X,point.Z,radius,unitNeighbors(unit,current,point,radius)) then
+   -- 先做純 Lua 的單位碰撞檢查；擁擠時多數候選在這裡就被排除，不必進引擎查詢。
+   if UnitCollisionRules.segmentClear(current.X,current.Z,point.X,point.Z,radius,unitNeighbors(unit,current,point,radius))
+    and staticUnitSegmentClear(unit,current,point) then
     accepted=point
     if candidate.side then order.avoidSide=candidate.side end
     break
@@ -808,10 +982,11 @@ local function moveToward(unit,order,destination,speed,dt,now)
      if (point-Vector3.new(previous.X,Config.Map.GroundY,previous.Z)).Magnitude<radius then visited=true; break end
     end
     local advance=current+(point-current).Unit*math.min((point-current).Magnitude,speed*dt)
-    if not visited and staticUnitSegmentClear(unit,current,point)
+    if not visited
      and UnitCollisionRules.segmentClear(current.X,current.Z,point.X,point.Z,radius,unitNeighbors(unit,current,point,radius))
-     and staticUnitSegmentClear(unit,current,advance)
-     and UnitCollisionRules.segmentClear(current.X,current.Z,advance.X,advance.Z,radius,unitNeighbors(unit,current,advance,radius)) then
+     and UnitCollisionRules.segmentClear(current.X,current.Z,advance.X,advance.Z,radius,unitNeighbors(unit,current,advance,radius))
+     and staticUnitSegmentClear(unit,current,point)
+     and staticUnitSegmentClear(unit,current,advance) then
      order.escapeGoal,order.escapeOriginalGoal,order.escapeExpires=point,destination,now+duration
      order.escapeHistory=order.escapeHistory or {}
      table.insert(order.escapeHistory,{X=point.X,Z=point.Z})
@@ -823,6 +998,8 @@ local function moveToward(unit,order,destination,speed,dt,now)
   end
   if not accepted then
    order.crowdedSince=order.crowdedSince or now
+   -- 四周都被擋住：隔 0.2–0.4 秒再試，不必每一步重算全部避讓候選（錯開時間避免同一步集中重試）。
+   order.crowdedRetry=now+0.2+math.random()*0.2
    unit:SetAttribute("Animation","Idle")
    -- A filled move destination is reached beside the occupying unit.
    if order.kind=="move" and now-order.crowdedSince>=1
@@ -835,7 +1012,10 @@ local function moveToward(unit,order,destination,speed,dt,now)
  order.crowdedSince=nil
  local facing=nextPos-current
  unit:SetAttribute("Animation","Walk")
+ local profile=unitCollisionIndex.profile
+ local pivotStarted=profile and os.clock()
  unit:PivotTo(CFrame.lookAt(nextPos+Vector3.new(0,2.5,0),nextPos+facing.Unit+Vector3.new(0,2.5,0)))
+ if profile then profile.pivot+=os.clock()-pivotStarted; profile.pivots+=1 end
  unitCollisionIndex:Update(unit,nextPos.X,nextPos.Z,radius)
 end
 local function nearestResource(state,pos,kind,unit)
@@ -898,9 +1078,8 @@ finishAttack=function(state,unit,order)
  elseif target then issue(unit,"gather",target)
  else stop(unit) end
 end
-local function buildRequest(state,kind,rawPosition,selection,quiet)
- local data=type(kind)=="string" and Config.Buildings[kind]
- if not data or not validPosition(rawPosition) or not alive(state) then return false end
+-- 建造請求共用：驗證選取的村民；AI 取最近的村民；玩家空選取時由伺服器派最近的村民。
+Walls.builders=function(state,rawPosition,selection,count,quiet)
  local builders=ConstructionRules.validateSelection(selection,function(unit) return canBuildWorker(state,unit) end,CONSTRUCTION.maxSelectedWorkers)
  if not builders and state.ai then
   local nearest,distance=nil,math.huge
@@ -923,26 +1102,95 @@ local function buildRequest(state,kind,rawPosition,selection,quiet)
     table.insert(candidates,{unit=unit,distance=(position(unit)-rawPosition).Magnitude,idle=order==nil,building=order~=nil and order.kind=="build"})
    end
   end
-  local picked=AutoWorkRules.pickBuilders(candidates,AutoWorkRules.builderCount(data.size.X,data.size.Y,CONSTRUCTION.maxSelectedWorkers),Config.AutoWork.busyPenalty)
+  local picked=AutoWorkRules.pickBuilders(candidates,count,Config.AutoWork.busyPenalty)
   if #picked>0 then builders,autoAssigned=picked,true end
  end
- if not builders then if not quiet then notify(state.actor,"先選取自己的村民才能建造；軍隊不能施工。") end; return false end
- if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then if not quiet then notify(state.actor,"需先升級時代才能建造"..data.name.."。") end; return false end
- local pos=Grid.snap(rawPosition,data.size)
- if not Grid.inBounds(pos,data.size) or not placementClear(pos,data) then if not quiet then notify(state.actor,"此處有障礙物或超出地圖。","Error") end; return false end
- if not Economy.spend(state.actor,data.cost) then if not quiet then notify(state.actor,"資源不足："..Grid.costText(data.cost),"Error") end; return false end
- local ok,model=pcall(makeBuilding,state,kind,pos,false)
+ if not builders and not quiet then notify(state.actor,"先選取自己的村民才能建造；軍隊不能施工。") end
+ return builders,autoAssigned
+end
+-- 扣款並建立一個工地；失敗不扣款。回傳模型，或 nil 與原因（"blocked"／"cost"／"model"）。
+Walls.site=function(state,kind,data,pos,size,rotated)
+ if not Grid.inBounds(pos,size) then return nil,"blocked" end
+ local replaced
+ if data.gate then
+  replaced=Walls.replaceable(state,pos,data,size)
+  if not replaced then return nil,"blocked" end
+ elseif not placementClear(pos,data,size) then return nil,"blocked" end
+ if not Economy.spend(state.actor,data.cost) then return nil,"cost" end
+ -- 先拆除被城門取代的牆段，城門才不會與它們重疊；不退還牆段的資源。
+ for _,wall in ipairs(replaced or {}) do destroyModel(wall) end
+ local ok,model=pcall(makeBuilding,state,kind,pos,false,rotated)
  if not ok then
   refund(state.actor,data.cost)
   warn("[RTS] 建築生成失敗："..tostring(model))
-  if not quiet then notify(state.actor,"建築模型載入失敗，已退還資源。") end
-  return false
+  return nil,"model"
  end
  construction[model]={state=state,duration=data.buildTime or 12,work=0}
  recordReport(state,"spend",{cost=data.cost})
+ return model
+end
+local function buildRequest(state,kind,rawPosition,selection,quiet,rotated)
+ local data=type(kind)=="string" and Config.Buildings[kind]
+ if not data or not validPosition(rawPosition) or not alive(state) then return false end
+ rotated=data.rotatable==true and rotated==true
+ local size=Vector2.new(Walls.rules.footprint(data.size.X,data.size.Y,rotated))
+ local builders,autoAssigned=Walls.builders(state,rawPosition,selection,AutoWorkRules.builderCount(size.X,size.Y,CONSTRUCTION.maxSelectedWorkers),quiet)
+ if not builders then return false end
+ if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then if not quiet then notify(state.actor,"需先升級時代才能建造"..data.name.."。") end; return false end
+ local model,reason=Walls.site(state,kind,data,Grid.snap(rawPosition,size),size,rotated)
+ if not model then
+  if not quiet then
+   if reason=="cost" then notify(state.actor,"資源不足："..Grid.costText(data.cost),"Error")
+   elseif reason=="model" then notify(state.actor,"建築模型載入失敗，已退還資源。")
+   else notify(state.actor,"此處有障礙物或超出地圖。","Error") end
+  end
+  return false
+ end
  for _,builder in ipairs(builders) do issue(builder,"build",model) end
  if not quiet then notify(state.actor,data.name..(autoAssigned and (" 工地已建立；已派最近的 "..#builders.." 位村民前往施工。") or " 工地已建立；選中的村民正前往施工。"),"Build") end
  return true,model
+end
+-- 整排城牆：伺服器自行由起訖格算出牆段，逐段驗證占地與扣款；被擋住的格子跳過，資源用完即停。
+Walls.lineRequest=function(state,kind,rawFrom,rawTo,selection)
+ local data=type(kind)=="string" and Config.Buildings[kind]
+ if not data or data.line~=true or not validPosition(rawFrom) or not validPosition(rawTo) or not alive(state) then return false end
+ local _,fromX,fromZ=Grid.snap(rawFrom,data.size)
+ local _,toX,toZ=Grid.snap(rawTo,data.size)
+ local cells=Walls.rules.line(fromX,fromZ,toX,toZ,Walls.config.maxLine)
+ if not cells then return false end
+ local builders,autoAssigned=Walls.builders(state,rawFrom,selection,math.clamp(math.ceil(#cells/6),1,3),false)
+ if not builders then return false end
+ if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then notify(state.actor,"需先升級時代才能建造"..data.name.."。"); return false end
+ local sites,short={},false
+ for _,cell in ipairs(cells) do
+  local model,reason=Walls.site(state,kind,data,Grid.cellPosition(cell.x,cell.z,data.size),data.size,false)
+  if model then table.insert(sites,model)
+  elseif reason~="blocked" then short=reason=="cost"; break end
+ end
+ if #sites==0 then
+  notify(state.actor,short and ("資源不足："..Grid.costText(data.cost)) or "此處有障礙物或超出地圖。","Error")
+  return false
+ end
+ -- 村民從不同牆段開始，完工後依 buildQueue 接續同一排中最近的未完工牆段。
+ for index,builder in ipairs(builders) do
+  issue(builder,"build",sites[math.floor((index-1)*#sites/#builders)+1])
+  orders[builder].buildQueue=sites
+ end
+ notify(state.actor,data.name.." × "..#sites.." 工地已建立"..(short and "（資源不足，其餘未放置）" or "")
+  ..(autoAssigned and ("；已派最近的 "..#builders.." 位村民前往施工。") or "；選中的村民正前往施工。"),"Build")
+ return true,sites
+end
+-- 同一排中離村民最近、仍在施工的牆段。
+Walls.nextSite=function(unit,queue)
+ local nearest,distance=nil,math.huge
+ local current=position(unit)
+ for _,site in ipairs(queue or {}) do
+  if site.Parent==buildings and construction[site] and not site:GetAttribute("Complete") then
+   local d=(position(site)-current).Magnitude
+   if d<distance then nearest,distance=site,d end
+  end
+ end
+ return nearest
 end
 local function canTrain(buildingKind,unitKind)
  local data=Config.Buildings[buildingKind]
@@ -1039,7 +1287,7 @@ local function ageRequirements(state,data)
   for b in pairs(state.buildings) do
    local kind=b:GetAttribute("BuildingType")
    local info=Config.Buildings[kind]
-   if b.Parent==buildings and b:GetAttribute("Complete") and info and kind~="TownCenter" and kind~="House" and kind~="Farm" and kind~="Wall" and kind~="Tower" and kind~="Castle" and (info.minAge or 1)==age and not kinds[kind] then kinds[kind],count=true,count+1 end
+   if b.Parent==buildings and b:GetAttribute("Complete") and info and kind~="TownCenter" and kind~="House" and kind~="Farm" and kind~="Wall" and kind~="Gate" and kind~="Tower" and kind~="Castle" and (info.minAge or 1)==age and not kinds[kind] then kinds[kind],count=true,count+1 end
   end
   if count<requirements.buildings then return false end
  end
@@ -1099,7 +1347,7 @@ destroyModel=function(model)
   for _,retries in pairs(state.buildRetryAfter) do retries[model]=nil end
  end
  if model.Parent==units then orders[model]=nil; if state then state.units[model]=nil end
- elseif model.Parent==buildings then training[model],construction[model]=nil,nil; if state then state.buildings[model]=nil; cancelResearch(model,state); state.defenseLast[model]=nil end end
+ elseif model.Parent==buildings then training[model],construction[model],Garrison.inside[model]=nil,nil,nil; if state then state.buildings[model]=nil; cancelResearch(model,state); state.defenseLast[model]=nil end end
  if state and state.rallies then state.rallies[model]=nil end
  model:Destroy()
  if state then population(state) end
@@ -1208,7 +1456,10 @@ local function damage(target,raw,attacker,now)
    recordReport(source,"kill",{subjectId=subjectId,category=category})
    recordReport(victim,"loss",{subjectId=subjectId,category=category})
   end
-  destroyModel(target)
+  -- 戰死的單位留下屍體；投降、刪除與清場不留。
+  if target.Parent==units then Factory.corpse(target,COMBAT.corpseSeconds,COMBAT.maxCorpses) end
+  -- 被摧毀的建築先放出駐軍，再判定淘汰。
+  Garrison.release(target)
   eliminationCheck(victim)
  elseif target.Parent==units and target:GetAttribute("UnitType")~="monk" and CombatRules.canRetaliate(orders[target] and orders[target].kind,enemies(victim,owner(attacker)),
   attacker.Parent==buildings,target:GetAttribute("UnitType")=="villager") then
@@ -1222,11 +1473,25 @@ local function damage(target,raw,attacker,now)
   end
  end
 end
-local function attackDamage(state,unit,target)
+-- 命中結算集中在一個表，避免超過 Studio 的 200 個區域變數上限。
+local Strike={}
+Strike.amount=function(state,unit,target)
  local data=Config.Units[unit:GetAttribute("UnitType")]
  local targetKind=target:GetAttribute("UnitType")
  local class=target.Parent==buildings and "building" or (Config.Units[targetKind] and Config.Units[targetKind].class or targetKind)
  return unitStats(state,unit:GetAttribute("UnitType")).damage+((data.bonus or {})[class] or 0)
+end
+-- 傷害在武器揮到或投射物飛抵時才結算；期間攻擊者消失、換局或對局結束就不再命中。
+Strike.land=function(attacker,delay,resolve)
+ local generation=matchGeneration
+ task.delay(delay,function()
+  if phase~="Playing" or generation~=matchGeneration or not attacker.Parent then return end
+  resolve(os.clock())
+ end)
+end
+Strike.flight=function(kind,distance)
+ local settings=COMBAT.projectile
+ return CombatRules.flightTime(distance,settings[COMBAT.projectileKinds[kind] or "arrow"],settings.minFlight,settings.maxFlight) or settings.minFlight
 end
 local function freeSpawn(building,kind)
  local origin=position(building)
@@ -1261,6 +1526,120 @@ local function applyRally(state,building,unit,kind)
   issue(unit,"move",rally.position)
  end
 end
+-- 同一批單位被拒絕時只通知一次。
+Garrison.notice=function(state,message)
+ -- 依訊息分開節流：不同原因不會互相蓋掉。
+ local now=os.clock()
+ local sent=state.garrisonNotice or {}
+ state.garrisonNotice=sent
+ if now-(sent[message] or -math.huge)<1 then return end
+ sent[message]=now
+ notify(state.actor,message,"Error")
+end
+Garrison.check=function(building,unit)
+ local held=Garrison.inside[building]
+ local data=Config.Units[unit:GetAttribute("UnitType")]
+ return Garrison.rules.canEnter(Garrison.config,Config.Buildings[building:GetAttribute("BuildingType")],building:GetAttribute("Complete"),
+  held and #held or 0,data and data.class,unit:GetAttribute("HP"))
+end
+-- 駐紮指令：只收自己已完工、仍有空位的建築。quiet 供一般右鍵使用，不能駐紮時不打擾玩家。
+Garrison.order=function(state,unit,building,quiet)
+ if not isOwned(state,building,buildings) then return false end
+ local ok,reason=Garrison.check(building,unit)
+ if not ok then
+  if not quiet then Garrison.notice(state,reason) end
+  return false
+ end
+ issue(unit,"garrison",building)
+ return true
+end
+-- 單位走到建築旁時呼叫：途中建築可能已滿，再檢查一次。
+Garrison.enter=function(state,unit,building)
+ local ok,reason=Garrison.check(building,unit)
+ if not ok then stop(unit); Garrison.notice(state,reason); return end
+ local held=Garrison.inside[building] or {arrows=0}
+ table.insert(held,{kind=unit:GetAttribute("UnitType"),hp=unit:GetAttribute("HP"),carrying=unit:GetAttribute("Carrying") or 0,
+  carryType=unit:GetAttribute("CarryType") or "",faith=unit:GetAttribute("Faith"),formation=unit:GetAttribute("Formation")})
+ Garrison.inside[building]=held
+ AutoWork.units[unit]=nil
+ destroyModel(unit)
+ Garrison.publish(building)
+end
+Garrison.spawn=function(state,record,pos)
+ local ok,model=pcall(makeUnit,state,record.kind,pos)
+ if not ok then warn("[RTS] 駐軍離開時單位生成失敗："..tostring(model)); return nil end
+ model:SetAttribute("HP",Garrison.rules.restoreHP(record.hp,model:GetAttribute("MaxHP")))
+ if record.carrying>0 then model:SetAttribute("CarryType",record.carryType); model:SetAttribute("Carrying",record.carrying) end
+ if record.faith then model:SetAttribute("Faith",record.faith) end
+ if record.formation then model:SetAttribute("Formation",record.formation) end
+ return model
+end
+-- 玩家下令全部離開：逐一找建築周圍的空位，沒有空位的留在裡面。回傳離開的人數。
+Garrison.eject=function(state,building)
+ local held=Garrison.inside[building]
+ if not held then return 0 end
+ local left=0
+ while #held>0 do
+  local record=held[#held]
+  local spot=freeSpawn(building,record.kind)
+  if not spot then break end
+  -- 先移出紀錄再生成，人口不會短暫重複計算。
+  held[#held]=nil
+  local model=Garrison.spawn(state,record,spot)
+  if not model then table.insert(held,record); break end
+  left+=1
+  applyRally(state,building,model,record.kind)
+ end
+ if #held==0 then Garrison.inside[building]=nil end
+ Garrison.publish(building)
+ population(state)
+ return left
+end
+-- 建築被摧毀或拆除：先移除建築，駐軍出現在原本的占地內；沒有駐軍時等同 destroyModel。
+Garrison.release=function(building)
+ local held=building.Parent==buildings and Garrison.inside[building]
+ local state=owner(building)
+ if not held or #held==0 or not alive(state) then destroyModel(building); return end
+ local origin=position(building)
+ local half=building.PrimaryPart and building.PrimaryPart.Size/2 or Vector3.new(8,8,8)
+ destroyModel(building)
+ -- 候選位置：先排滿原占地，小建築（瞭望塔）放不下時再往外三圈；每個位置只用一次。
+ local spots,used={},{}
+ local margin=Config.UnitCollision.default.radius
+ for x=-half.X+margin,half.X-margin,5 do
+  for z=-half.Z+margin,half.Z-margin,5 do table.insert(spots,origin+Vector3.new(x,0,z)) end
+ end
+ for ring=1,3 do
+  local radius=math.max(half.X,half.Z)+margin+ring*6
+  local count=math.max(8,math.floor(radius*2*math.pi/6))
+  for index=0,count-1 do
+   local angle=index*2*math.pi/count
+   table.insert(spots,origin+Vector3.new(math.cos(angle)*radius,0,math.sin(angle)*radius))
+  end
+ end
+ for _,record in ipairs(held) do
+  local profile=Config.UnitCollision.profiles[Config.Units[record.kind].class] or Config.UnitCollision.default
+  local radius,height=profile.radius,profile.height
+  local spot=origin
+  for index,candidate in ipairs(spots) do
+   if not used[index] and unitInBounds(candidate,radius) and unitPositionClear(nil,candidate,radius)
+    and #obstacleParts(candidate+Vector3.new(0,height/2,0),Vector3.new(radius*2,height,radius*2))==0 then
+    used[index]=true
+    spot=candidate
+    break
+   end
+  end
+  Garrison.spawn(state,record,spot)
+ end
+end
+Garrison.heal=function(state,dt)
+ for building in pairs(state.buildings) do
+  local held=Garrison.inside[building]
+  if held then
+   for _,record in ipairs(held) do record.hp=Garrison.rules.heal(record.hp,unitStats(state,record.kind).hp,Garrison.config.healRate,dt) end
+  end
+ end
+end
 local function resetActor(state)
  clearReport(state)
  state.civilization=CivilizationRules.resolve(Config,state.civilization)
@@ -1268,6 +1647,7 @@ local function resetActor(state)
  state.units,state.buildings,state.technologies,state.pendingTech,state.defenseLast={},{},{},{},{}
  state.modifiers={attack=0,armor=0,hp=0,gather=0,carry=0,speed=0,gatherFood=0,gatherWood=0,gatherGold=0,gatherStone=0,farmCapacity=0,range=0,interval=0,trainSpeed=0}
  state.classModifiers={}
+ state.statsCache=nil
  state.buildRetryAfter={}
  state.rallies={}
  state.playing,state.defeated,state.advancing,state.forfeited=false,false,nil,false
@@ -1462,6 +1842,7 @@ queueLeave=function(state)
  state.actor:SetAttribute("LobbyReady",false)
  state.actor:SetAttribute("LobbyRoomId",nil)
  state.actor:SetAttribute("LobbyTeamId",nil)
+ state.actor:SetAttribute("TutorialMatch",nil)
  positionLobby(state)
  if state.actor.Character then state.actor.Character:PivotTo(lobbyWorld:SpawnCFrame()) end
  invalidateReady(room)
@@ -1518,6 +1899,7 @@ local function clearBattlefieldResources()
  workspace:SetAttribute("ResourceNodeCount",0)
 end
 local function clearMatch()
+ Factory.clearCorpses()
  currentMatch=nil
  matchTeams=nil
  matchGeneration+=1
@@ -1568,6 +1950,7 @@ local function lobbyReset()
   state.inLobby=true
   state.actor:SetAttribute("InLobby",true)
   state.actor:SetAttribute("Spectator",false)
+  if not state.queued then state.actor:SetAttribute("TutorialMatch",nil) end
   if not state.actor.Character then spawnLobby(state) else positionLobby(state) end
  end
  if departingRoom then invalidateReady(departingRoom) end
@@ -1695,7 +2078,9 @@ startMatch=function(player)
   or settings.teamMode=="CoopAI" and "合作對局開始！所有玩家同隊，發展經濟並擊敗電腦聯軍。"
   or settings.teamMode=="Teams" and "分隊對局開始！與盟友共同發展，擊敗敵方隊伍。"
   or "對局開始！採集資源、發展時代並擊敗對手。"
- for _,state in ipairs(humans) do notify(state.actor,startMessage,"MatchStart") end
+ for _,state in ipairs(humans) do
+  notify(state.actor,state.actor:GetAttribute("TutorialMatch")==true and "新手教程開始：跟著左上角的指引一步一步來；這一局沒有對手，可以慢慢練習。" or startMessage,"MatchStart")
+ end
 end
 autoStartLobby=function()
  if phase~="Lobby" then return end
@@ -1895,6 +2280,7 @@ local function acceptOrder(state,selection,target,key)
  for _,unit in ipairs(validated) do
   local previous=orders[unit]
   local victim,kind=owner(target),unit:GetAttribute("UnitType")
+  -- 右鍵不會駐紮：駐紮一律走專用的 Garrison 指令（駐紮按鈕／G、Alt+右鍵、觸控模式），村民與軍隊相同。
   if kind=="monk" then Monk.order(state,unit,target,victim)
   elseif enemies(state,victim) then issue(unit,"attack",target)
   elseif canBuildWorker(state,unit) and isOwned(state,target,buildings) and construction[target] and not target:GetAttribute("Complete") then issue(unit,"build",target)
@@ -1912,7 +2298,7 @@ local function acceptOrder(state,selection,target,key)
  end
  if accepted then notify(state.actor,nil,"Order") end
 end
-command.OnServerEvent:Connect(function(player,action,a,b,c)
+command.OnServerEvent:Connect(function(player,action,a,b,c,d)
  local state=states[player]
  if not state or type(action)~="string" then return end
  local now=os.clock()
@@ -1928,6 +2314,37 @@ command.OnServerEvent:Connect(function(player,action,a,b,c)
  if action=="QueueLeave" then queueLeave(state); return end
  if action=="LobbySettings" then configureLobby(player,a); return end
  if action=="LobbyConfigureComplete" then configureLobbyComplete(player,a); return end
+ -- 教程旗標只是偏好：不給資源或戰力，完成或跳過都只記一次。
+ if action=="TutorialDone" then profiles:CompleteTutorial(player); return end
+ -- 熱鍵只是介面偏好：伺服器重新解析成合法綁定後才存檔，不影響戰局。
+ if action=="Hotkeys" then
+  if type(a)=="string" and #a<=512 then
+   local HotkeyRules=require(RS.Shared.HotkeyRules)
+   profiles:SetHotkeys(player,HotkeyRules.serialize(HotkeyRules.parse(a)))
+  end
+  return
+ end
+ if action=="StartTutorial" then
+  -- 新手教程：伺服器代玩家把一間空房設成單人、無對手、豐富資源並準備，之後走正常的開局流程。
+  if phase~="Lobby" or not state.inLobby or state.playing then notify(player,"戰場目前使用中，請稍候再開始新手教程。"); return end
+  if state.queued then notify(player,"請先離開目前的房間，再開始新手教程。"); return end
+  local validated,count=LobbyRules.settings({expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"})
+  local room
+  for _,portal in ipairs(Config.Lobby.portals) do
+   local candidate=rooms[portal.id]
+   if activeRoomId~=candidate.id and #queuedStates(candidate.id)==0 then room=candidate; break end
+  end
+  if not validated or not room then notify(player,"目前沒有空的匹配點，請稍候再試。"); return end
+  queueJoin(state,room.id,true,true)
+  if not state.queued or state.roomId~=room.id then notify(player,"大廳角色尚未準備好，請稍候再開始新手教程。"); return end
+  room.settings,room.expected,room.configured=validated,count,true
+  invalidateReady(room)
+  state.ready=true
+  player:SetAttribute("LobbyReady",true)
+  player:SetAttribute("TutorialMatch",true)
+  updateHost()
+  return
+ end
  if action=="SelectCivilization" then
   local allowed,entry=CivilizationRules.canSelect(Config,state.inLobby and "Lobby" or phase,a)
   if not allowed then notify(player,entry); return end
@@ -1957,7 +2374,8 @@ command.OnServerEvent:Connect(function(player,action,a,b,c)
  if action=="RestartMatch" then if phase=="Ended" and workspace:GetAttribute("HostUserId")==player.UserId then lobbyReset() end; return end
  if phase~="Playing" or not alive(state) then return end
  if action=="Surrender" then defeat(state,"你已投降，本局判負；可以繼續觀戰。",true); if startingSides==1 then endMatch(nil) end
- elseif action=="Build" then buildRequest(state,a,b,c,false)
+ elseif action=="Build" then buildRequest(state,a,b,c,false,d)
+ elseif action=="BuildLine" then Walls.lineRequest(state,a,b,c,d)
  elseif action=="Train" then trainRequest(state,a,b,false)
  elseif action=="CancelTraining" then cancelTrainingRequest(state,a,b,c)
  elseif action=="Rally" then rallyRequest(state,a,b)
@@ -1975,6 +2393,17 @@ command.OnServerEvent:Connect(function(player,action,a,b,c)
   recordReport(state,"spend",{cost=cost})
  elseif action=="Order" then acceptOrder(state,a,b,c)
  elseif action=="Formation" then acceptFormation(state,a,b)
+ elseif action=="Garrison" then
+  local validated=selectedFormationUnits(state,a)
+  if not validated or not isOwned(state,b,buildings) then return end
+  local accepted=false
+  for _,unit in ipairs(validated) do if Garrison.order(state,unit,b) then accepted=true end end
+  if accepted then notify(player,nil,"Order") end
+ elseif action=="Ungarrison" then
+  if not isOwned(state,a,buildings) or not Garrison.inside[a] then return end
+  local left=Garrison.eject(state,a)
+  if Garrison.inside[a] then notify(player,left>0 and "建築周圍空位不足，部分駐軍仍留在裡面。" or "建築周圍沒有空位，駐軍無法離開。","Error")
+  else notify(player,nil,"Order") end
  elseif action=="Delete" then
   local selection=CommandRules.deletion(a,b,matchGeneration,function(model)
    if not (isOwned(state,model,units) or isOwned(state,model,buildings)) then return false end
@@ -1984,7 +2413,9 @@ command.OnServerEvent:Connect(function(player,action,a,b,c)
   if not selection then notify(player,"無法拆除：選取已失效，或包含非己方的單位與建築。","Error"); return end
   -- No refund, damage, kill credit or queued production can run between
   -- validation and this synchronous cleanup. Reuse the normal lifecycle.
-  for _,model in ipairs(selection) do destroyModel(model) end
+  for _,model in ipairs(selection) do
+   if model.Parent==buildings then Garrison.release(model) else destroyModel(model) end
+  end
   eliminationCheck(state)
   if phase=="Playing" then checkVictory() end
   notify(player,"已移除所選單位與建築；不退還資源。","Order")
@@ -2152,23 +2583,36 @@ local function aiStep(state,now)
  end
 end
 -- 戰鬥索敵輔助函式留在區塊內，避免主程式區塊超過 Studio 的 200 個 local 暫存器。
-local combatStep
+-- 索敵步掛在 Strike 表上（Strike.step），不另占主程式區塊的 local。
 do
 local spatial={}
 local CELL=64
 -- 數字格鍵避免每次查詢建立字串；地圖最大 1536 studs，格座標遠小於 4096。
 local function spatialKey(x,z) return x*8192+z end
+local function targetCategory(model)
+ if model.Parent==units then return model:GetAttribute("UnitType")=="villager" and "villager" or "military" end
+ local data=Config.Buildings[model:GetAttribute("BuildingType")]
+ return data and data.damage and model:GetAttribute("Complete") and "defense" or "building"
+end
+-- 每個索敵步重建一次：位置、擁有者、類別與占地都先讀進純 Lua 表，
+-- 之後每個單位掃描候選目標時不再逐一呼叫引擎（原本 N×N 次屬性／位置讀取是大型戰鬥的尖峰）。
 local function rebuildSpatial()
  spatial={}
  for _,state in pairs(states) do
   if alive(state) then
-   for _,models in ipairs({state.units,state.buildings}) do
+   for index,models in ipairs({state.units,state.buildings}) do
     for model in pairs(models) do
      if model.Parent then
       local p=position(model)
+      local entry={model=model,state=state,isUnit=index==1,X=p.X,Z=p.Z,category=targetCategory(model)}
+      if index==1 then entry.radius=model:GetAttribute("Radius") or Config.UnitCollision.default.radius
+      else
+       local half=model.PrimaryPart and model.PrimaryPart.Size/2 or Vector3.new(2,2,2)
+       entry.halfX,entry.halfZ=half.X,half.Z
+      end
       local key=spatialKey(math.floor(p.X/CELL),math.floor(p.Z/CELL))
       local bucket=spatial[key] or {}
-      table.insert(bucket,model)
+      table.insert(bucket,entry)
       spatial[key]=bucket
      end
     end
@@ -2176,30 +2620,41 @@ local function rebuildSpatial()
   end
  end
 end
-local function targetCategory(model)
- if model.Parent==units then return model:GetAttribute("UnitType")=="villager" and "villager" or "military" end
- local data=Config.Buildings[model:GetAttribute("BuildingType")]
- return data and data.damage and model:GetAttribute("Complete") and "defense" or "building"
-end
 local function targetScore(target,current,preferred)
  return CombatRules.targetScore(distanceTo(target,current),targetCategory(target),COMBAT.tierDistance,preferred)
 end
 -- 依優先層級與邊緣距離挑選目標；unitsOnly 供防禦建築只射擊單位。
-local function bestEnemy(state,current,radius,preferred,unitsOnly)
+-- 距離算法與 edgePosition 相同：單位取碰撞圓邊緣，建築取占地矩形邊緣。
+local function bestEnemy(state,current,radius,preferred,unitsOnly,skip)
  local found,best=nil,math.huge
  local cells=SpatialRules.searchCells(radius,TARGET_HALF_EXTENT,CELL)
  if not cells then return nil end
- local x,z=math.floor(current.X/CELL),math.floor(current.Z/CELL)
+ local cx,cz=current.X,current.Z
+ local x,z=math.floor(cx/CELL),math.floor(cz/CELL)
+ local hostile={}
  for dx=-cells,cells do
   for dz=-cells,cells do
    local bucket=spatial[spatialKey(x+dx,z+dz)]
    if bucket then
-    for _,target in ipairs(bucket) do
-     if target.Parent and (not unitsOnly or target.Parent==units) and enemies(state,owner(target)) then
-      local distance=distanceTo(target,current)
-      if distance<=radius then
-       local score=CombatRules.targetScore(distance,targetCategory(target),COMBAT.tierDistance,preferred)
-       if score and score<best then found,best=target,score end
+    for _,entry in ipairs(bucket) do
+     if not unitsOnly or entry.isUnit then
+      local other=entry.state
+      local enemy=hostile[other]
+      if enemy==nil then enemy=enemies(state,other); hostile[other]=enemy end
+      if enemy then
+       local distance
+       if entry.isUnit then
+        local ox,oz=cx-entry.X,cz-entry.Z
+        distance=math.max(0,math.sqrt(ox*ox+oz*oz)-entry.radius)
+       else
+        local ox=math.max(0,math.abs(cx-entry.X)-entry.halfX)
+        local oz=math.max(0,math.abs(cz-entry.Z)-entry.halfZ)
+        distance=math.sqrt(ox*ox+oz*oz)
+       end
+       if distance<=radius and entry.model~=skip and entry.model.Parent then
+        local score=CombatRules.targetScore(distance,entry.category,COMBAT.tierDistance,preferred)
+        if score and score<best then found,best=entry.model,score end
+       end
       end
      end
     end
@@ -2207,6 +2662,68 @@ local function bestEnemy(state,current,radius,preferred,unitsOnly)
   end
  end
  return found,best
+end
+-- 被友軍擋在後排的攻擊者：近戰找「周圍還有空位」的敵人（先看目前目標，再由近到遠），繞到那個空位去打；
+-- 遠程改打已在射程內的敵人。玩家手動指定的目標不換人，只繞位。回傳是否找到新的打法。
+Strike.flank=function(state,unit,order,current,range,now)
+ local body=unit:GetAttribute("Radius") or Config.UnitCollision.default.radius
+ local reach=CombatRules.acquisitionRadius(COMBAT.acquisitionRadius,range)
+ local cells=reach and SpatialRules.searchCells(reach,TARGET_HALF_EXTENT,CELL)
+ if not cells then return false end
+ local cx,cz=current.X,current.Z
+ local x,z=math.floor(cx/CELL),math.floor(cz/CELL)
+ local hostile,found={}, {}
+ for dx=-cells,cells do
+  for dz=-cells,cells do
+   local bucket=spatial[spatialKey(x+dx,z+dz)]
+   if bucket then
+    for _,entry in ipairs(bucket) do
+     if order.automatic or entry.model==order.target then
+      local other=entry.state
+      local enemy=hostile[other]
+      if enemy==nil then enemy=enemies(state,other); hostile[other]=enemy end
+      if enemy then
+       local ox,oz=cx-entry.X,cz-entry.Z
+       local distance=math.sqrt(ox*ox+oz*oz)
+       -- 目前目標優先；其餘由近到遠。
+       if distance<=reach+TARGET_HALF_EXTENT then table.insert(found,{entry=entry,distance=entry.model==order.target and -1 or distance}) end
+      end
+     end
+    end
+   end
+  end
+ end
+ table.sort(found,function(a,b) return a.distance<b.distance end)
+ for index=1,math.min(#found,5) do
+  local entry=found[index].entry
+  local model=entry.model
+  if model.Parent then
+   local goal=nil
+   local usable=false
+   if range>20 then
+    usable=model~=order.target and distanceTo(model,current)<=range
+   else
+    local center=position(model)
+    local point=ApproachRules.nearest(MeleeRules.candidates(center.X,center.Z,entry.isUnit and entry.radius or entry.halfX,entry.isUnit and entry.radius or entry.halfZ,body,range) or {},cx,cz,nil,function(candidate)
+     local spot=Vector3.new(candidate.X,Config.Map.GroundY,candidate.Z)
+     return unitPositionClear(unit,spot,body) and staticUnitSegmentClear(unit,spot,spot)
+    end)
+    if point then goal,usable=Vector3.new(point.X,Config.Map.GroundY,point.Z),true end
+   end
+   if usable then
+    if model~=order.target then
+     local previous=order
+     issue(unit,"attack",model,true)
+     order=orders[unit]
+     order.objective,order.anchor=previous.objective,previous.anchor
+     order.resumeGather,order.resumeKind=previous.resumeGather,previous.resumeKind
+    end
+    order.flankGoal,order.flankUntil,order.flankHold=goal,now+4,now+4
+    return true
+   end
+  end
+ end
+ return false
 end
 -- 待命或自動攻擊中的軍隊重新評估目標。afterKill 讓剛完成擊殺（含玩家手動指定）的部隊立即接戰，不留空檔。
 acquireTarget=function(state,unit,now,afterKill)
@@ -2218,7 +2735,11 @@ acquireTarget=function(state,unit,now,afterKill)
  local current=position(unit)
  local radius=CombatRules.acquisitionRadius(COMBAT.acquisitionRadius,unit:GetAttribute("Range") or data.range)
  if not radius then return false end
- local target,score=bestEnemy(state,current,radius,data.preferredTarget)
+ -- 剛繞路改打的目標先保留幾秒，不被「最近的敵人」拉回擠不進去的位置。
+ if order and order.flankHold and now<order.flankHold and order.target.Parent then return true end
+ local clock=actionClocks[unit]
+ local skip=clock and clock.skipUntil and now<clock.skipUntil and clock.skipTarget or nil
+ local target,score=bestEnemy(state,current,radius,data.preferredTarget,nil,skip)
  if not target then return false end
  local previous=order and order.kind=="attack" and order.target or nil
  if previous==target then return true end
@@ -2232,15 +2753,22 @@ acquireTarget=function(state,unit,now,afterKill)
  orders[unit].objective,orders[unit].anchor=objective,anchor
  return true
 end
-combatStep=function(now)
+-- 每 0.2 秒呼叫一次；單位分成三組輪流索敵，每個單位仍是 0.6 秒評估一次，但不會全部擠在同一步。
+local turns={of=setmetatable({},{__mode="k"}),next=0,current=0}
+Strike.step=function(now)
  rebuildSpatial()
+ turns.current=(turns.current+1)%3
  for _,state in pairs(states) do
   if phase~="Playing" then return end
   if alive(state) then
    for unit in pairs(state.units) do
-    local retryAfter=actionClocks[unit] and actionClocks[unit].acquireAfter or 0
-    if now>=retryAfter then acquireTarget(state,unit,now) end
-    if orders[unit]==nil and unit.Parent==units and unit:GetAttribute("UnitType")=="monk" then Monk.autoHeal(state,unit) end
+    local mine=turns.of[unit]
+    if not mine then mine=turns.next; turns.of[unit]=mine; turns.next=(mine+1)%3 end
+    if mine==turns.current then
+     local retryAfter=actionClocks[unit] and actionClocks[unit].acquireAfter or 0
+     if now>=retryAfter then acquireTarget(state,unit,now) end
+     if orders[unit]==nil and unit.Parent==units and unit:GetAttribute("UnitType")=="monk" then Monk.autoHeal(state,unit) end
+    end
    end
    for b in pairs(state.buildings) do
     if phase~="Playing" then return end
@@ -2249,12 +2777,27 @@ combatStep=function(now)
     local last=state.defenseLast[b]
     if b.Parent==buildings and data and data.damage and b:GetAttribute("Complete") and now-(last or -math.huge)>=interval then
      local target=bestEnemy(state,position(b),data.range or 64,nil,true)
+     -- 城堡（attacksBuildings）：射程內沒有敵方單位時改射擊敵方建築；單位永遠優先。
+     if not target and data.attacksBuildings==true then target=bestEnemy(state,position(b),data.range or 64,"buildings",false) end
      if target then
       -- 以射擊間隔累進，不受 0.6 秒索敵週期量化而變慢；中斷過久才重新對齊。
       state.defenseLast[b]=last and now-last<interval+0.75 and last+interval or now
-      b:SetAttribute("AttackPosition",position(target))
+      local impact=position(target)
+      local flight=Strike.flight(nil,(impact-position(b)).Magnitude)
+      local raw=buildingAttack(state,data)
+      -- 駐軍每多一支箭就多結算一次傷害（各自扣護甲），全部射向同一目標。
+      local held=Garrison.inside[b]
+      local volley=1+(held and held.arrows or 0)
+      b:SetAttribute("AttackPosition",impact)
+      b:SetAttribute("AttackFlight",flight)
+      b:SetAttribute("AttackVolley",volley)
       b:SetAttribute("LastAttack",now)
-      damage(target,buildingAttack(state,data),b,now)
+      Strike.land(b,flight,function(at)
+       for _=1,volley do
+        if not target.Parent then break end
+        damage(target,raw,b,at)
+       end
+      end)
      end
     end
    end
@@ -2425,6 +2968,38 @@ AutoWork.step=function(now)
      if not assign(state,unit,context,now) then entryFor(unit).nextCheck=now+AUTO.retryInterval end
     end
    end
+   -- 無人施工的工地：施工村民被調走或陣亡後，附近沒有閒置村民就會永遠停在「等待村民」。
+   -- 等待 siteDelay 秒後重新派工；只找閒置、採集或交貨中的村民，不動玩家指定待命、移動或修復的村民。
+   for b,item in pairs(construction) do
+    if budget<=0 then break end
+    if item.state==state and b.Parent==buildings and not b:GetAttribute("Complete") then
+     local assigned,candidates=0,{}
+     local sitePosition=position(b)
+     for unit in pairs(state.units) do
+      if unit.Parent==units and canBuildWorker(state,unit) then
+       local order=orders[unit]
+       if order and order.kind=="build" and order.target==b then assigned+=1
+       elseif (order==nil or order.kind=="gather" or order.kind=="deliver") and not entryFor(unit).hold and not skipped(entryFor(unit),b,now) then
+        table.insert(candidates,{unit=unit,distance=(position(unit)-sitePosition).Magnitude,idle=order==nil,building=false})
+       end
+      end
+     end
+     if assigned>0 then item.waitingSince=nil
+     else
+      item.waitingSince=item.waitingSince or now
+      if AutoWorkRules.siteNeedsBuilders(assigned,item.waitingSince,now,AUTO.siteDelay or 4,item.nextDispatch) then
+       local data=Config.Buildings[b:GetAttribute("BuildingType")]
+       local count=data and AutoWorkRules.builderCount(data.size.X,data.size.Y,CONSTRUCTION.maxSelectedWorkers) or 1
+       for _,unit in ipairs(AutoWorkRules.pickBuilders(candidates,math.max(1,count),AUTO.busyPenalty)) do
+        budget-=1
+        issue(unit,"build",b)
+        if orders[unit] then orders[unit].autoWork=true end
+       end
+       item.nextDispatch=now+AUTO.retryInterval
+      end
+     end
+    end
+   end
   end
  end
 end
@@ -2465,15 +3040,20 @@ local function productionStep(dt)
      b:SetAttribute("ConstructionStatus","已完工")
      b:SetAttribute("ConstructionProgress",1)
      b:SetAttribute("ConstructionRemaining",0)
-     notify(item.state.actor,nil,"ConstructionComplete")
+     -- 整排放置的牆段不逐段提示完工。
+     if not Config.Buildings[b:GetAttribute("BuildingType")].line then notify(item.state.actor,nil,"ConstructionComplete") end
      if b:GetAttribute("BuildingType")=="Farm" then b:SetAttribute("Amount",b:GetAttribute("MaxAmount") or 0); AutoWork.farmLook(b) end
      recordReport(item.state,"building",{subjectId=reportSubject(b)})
      population(item.state)
      if b:GetAttribute("BuildingType")=="House" then telemetry:Fact(item.state.actor,"firsthouse") end
+     if Config.Buildings[b:GetAttribute("BuildingType")].gate then Walls.activate(item.state,b) end
      for unit in pairs(item.state.units) do
       local order=orders[unit]
       if order and order.kind=="build" and order.target==b then
-       if b:GetAttribute("BuildingType")=="Farm" then issue(unit,"gather",b) else stop(unit); AutoWork.afterBuild(item.state,unit,b) end
+       local following=Walls.nextSite(unit,order.buildQueue)
+       if b:GetAttribute("BuildingType")=="Farm" then issue(unit,"gather",b)
+       elseif following then issue(unit,"build",following); orders[unit].buildQueue=order.buildQueue
+       else stop(unit); AutoWork.afterBuild(item.state,unit,b) end
       end
      end
     end
@@ -2487,7 +3067,7 @@ local function productionStep(dt)
    item.remaining=math.max(0,item.remaining-dt)
    if item.remaining<=0 then
     local _,cap=population(item.state)
-    local liveUnits=0
+    local liveUnits=Garrison.count(item.state)
     for unit in pairs(item.state.units) do if unit.Parent==units then liveUnits+=1 end end
     local spawn=UnitRules.canCompletePopulation(liveUnits,cap) and freeSpawn(b,item.kind)
     if spawn then
@@ -2531,6 +3111,7 @@ local function productionStep(dt)
     for key,value in pairs(data.effect or {}) do
      if state.modifiers[key]~=nil then modifiers[key]=(modifiers[key] or 0)+value end
     end
+    state.statsCache=nil
     if data.effect and data.effect.farmCapacity then
      for farm in pairs(state.buildings) do
       if farm:GetAttribute("BuildingType")=="Farm" then
@@ -2577,9 +3158,21 @@ local function productionStep(dt)
   end
  end
 end
-local function orderStep(dt,now)
- for unit,order in pairs(orders) do
+local orderStep
+do
+-- 先複製本步要處理的單位：步驟中反擊、改派會對 orders 新增鍵，邊走訪邊新增會讓部分單位被跳過或重複處理。
+local pending={}
+-- 每步最多幾個單位重新找繞路位置；其餘留到下一步，避免整支軍隊同一步一起搜尋造成尖峰。
+local FLANK_PER_STEP=6
+orderStep=function(dt,now)
+ local flankBudget=FLANK_PER_STEP
+ local profile=unitCollisionIndex.profile
+ table.clear(pending)
+ for unit in pairs(orders) do table.insert(pending,unit) end
+ for _,unit in ipairs(pending) do
   if phase~="Playing" then return end
+  local order=orders[unit]
+  if not order then continue end
   local state=owner(unit)
   if unit.Parent~=units or not alive(state) then orders[unit]=nil; continue end
   local target=order.target
@@ -2619,12 +3212,13 @@ local function orderStep(dt,now)
    beginDelivery(state,unit,order.returnTarget,nil,order.returnKind); continue
   end
   if order.kind=="build" and (not canBuildWorker(state,unit) or not isOwned(state,target,buildings) or not construction[target] or target:GetAttribute("Complete")) then stop(unit); continue end
+  if order.kind=="garrison" and not isOwned(state,target,buildings) then stop(unit); continue end
   local current=position(unit)
   local stats=unitStats(state,unit:GetAttribute("UnitType"),order.kind=="gather" and target:GetAttribute("ResourceType") or nil)
   -- 農田可以踩踏：村民走進田中央耕作，其餘目標停在外緣。
   local destination=order.kind=="move" and target or farming and position(target) or edgePosition(target,current)
   -- 到位誤差小於陣形間隙，避免先停止的前排占住後排目的地。
-  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and CONSTRUCTION.workRange or farming and Config.Farms.workRange or 5
+  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and CONSTRUCTION.workRange or farming and Config.Farms.workRange or order.kind=="garrison" and Garrison.config.enterRange or 5
   local inRange=(destination-current).Magnitude<=range
   if order.kind=="attack" and order.anchor and not order.objective and not inRange
    and CombatRules.beyondLeash(order.anchor.X,order.anchor.Z,current.X,current.Z,COMBAT.leashDistance) then
@@ -2647,7 +3241,9 @@ local function orderStep(dt,now)
     end
    end
   elseif order.kind=="attack" and range<=20 and (inRange or order.approachGoal or order.approachBlacklist) then
-   if interactionLineClear(target,current) then
+   -- 攻擊通道剛確認暢通時短暫沿用結果，貼身纏鬥不必每 0.1 秒各打一次射線。
+   if now<(order.lineClearUntil or 0) or interactionLineClear(target,current) then
+    if now>=(order.lineClearUntil or 0) then order.lineClearUntil=now+0.4 end
     if order.approachGoal then order.path=nil end
     order.approachGoal=nil
    else
@@ -2661,6 +3257,7 @@ local function orderStep(dt,now)
     end
    end
   end
+  if inRange and order.kind=="garrison" then Garrison.enter(state,unit,target); continue end
   if inRange then
    order.path=nil
    unit:SetAttribute("Animation",order.kind=="attack" and "Attack" or (order.kind=="gather" or order.kind=="build" or order.kind=="repair" or order.kind=="convert" or order.kind=="heal") and "Work" or "Idle")
@@ -2697,19 +3294,39 @@ local function orderStep(dt,now)
     if amount>0 then unit:SetAttribute("LastWork",now) end
     if carrying+amount>=stats.carry or (target:GetAttribute("Amount") or 0)<=0 then beginDelivery(state,unit,target) end
     if (target:GetAttribute("Amount") or 0)<=0 and target.Parent==resources then managedResources[target]=nil; target:Destroy() end
-   elseif order.kind=="attack" and UnitRules.takeAction(actionClocks,unit,"attack",now,stats.interval) then
-    unit:SetAttribute("AttackPosition",position(target))
-    unit:SetAttribute("LastAttack",now)
-    local data=Config.Units[unit:GetAttribute("UnitType")]
+   elseif order.kind=="attack" and UnitRules.takeAction(actionClocks,unit,"attack",now,stats.interval,0.3) then
+    local kind=unit:GetAttribute("UnitType")
+    local data=Config.Units[kind]
     local impact=position(target)
-    damage(target,attackDamage(state,unit,target),unit,now)
-    if data.splash and data.splash>0 then
-     for _,enemy in pairs(states) do
-      if enemies(state,enemy) then
-       for other in pairs(enemy.units) do if other~=target and other.Parent and (position(other)-impact).Magnitude<=data.splash then damage(other,stats.damage*0.5,unit,now) end end
+    local raw=Strike.amount(state,unit,target)
+    local melee=range<=20
+    local stone=not melee and COMBAT.projectileKinds[kind]=="stone"
+    local flight=melee and (COMBAT.windup[kind] or COMBAT.windup.default) or Strike.flight(kind,(impact-current).Magnitude)
+    local contact=nil
+    if melee then
+     -- 武器要碰到的點：建築取最近的牆面，單位取碰撞圓內側的身體。
+     contact=edgePosition(target,current)
+     if target.Parent==units then contact=contact:Lerp(impact,0.5) end
+    end
+    unit:SetAttribute("AttackPosition",impact)
+    unit:SetAttribute("AttackContact",contact)
+    unit:SetAttribute("AttackFlight",flight)
+    unit:SetAttribute("LastAttack",now)
+    Strike.land(unit,flight,function(at)
+     if target.Parent then
+      local hit=true
+      if melee then hit=CombatRules.connects(distanceTo(target,position(unit)),range,COMBAT.meleeTolerance)
+      elseif stone then hit=CombatRules.landsOn(target.Parent==buildings,(position(target)-impact).Magnitude,math.max(data.splash or 0,COMBAT.projectile.stoneRadius)) end
+      if hit then damage(target,raw,unit,at) end
+     end
+     if data.splash and data.splash>0 then
+      for _,enemy in pairs(states) do
+       if enemies(state,enemy) then
+        for other in pairs(enemy.units) do if other~=target and other.Parent and (position(other)-impact).Magnitude<=data.splash then damage(other,stats.damage*0.5,unit,at) end end
+       end
       end
      end
-    end
+    end)
    elseif order.kind=="convert" then Monk.step(state,unit,order,target,now)
    elseif order.kind=="heal" and UnitRules.takeAction(actionClocks,unit,"heal",now,1) then
     local maxHP=target:GetAttribute("MaxHP") or 0
@@ -2725,8 +3342,22 @@ local function orderStep(dt,now)
     end
    end
   else
+   -- 攻擊者被友軍擋住超過半秒：改打有空位的敵人或繞到空位；找不到就拉長重試間隔。
+   if flankBudget>0 and order.kind=="attack" and order.crowdedSince and now-order.crowdedSince>=0.5 and now>=(order.nextFlank or 0) then
+    flankBudget-=1
+    local flankStarted=profile and os.clock()
+    local found=Strike.flank(state,unit,order,current,range,now)
+    if profile then profile.flank+=os.clock()-flankStarted; profile.flanks+=1 end
+    order.flankTries=found and 0 or (order.flankTries or 0)+1
+    order.nextFlank=now+math.min(4,1.5+order.flankTries)
+    if orders[unit]~=order then continue end
+   end
    local goal=order.approachGoal or destination
-   if order.kind~="move" and not order.approachGoal then
+   if order.flankGoal then
+    if now>=order.flankUntil or (order.flankGoal-current).Magnitude<0.5 then order.flankGoal=nil
+    elseif not order.approachGoal then goal=order.flankGoal end
+   end
+   if order.kind~="move" and not order.approachGoal and not order.flankGoal then
     local outward=current-destination
     if outward.Magnitude>0.01 then
      local standoff=destination+outward.Unit*math.max(1,range-1)
@@ -2741,9 +3372,12 @@ local function orderStep(dt,now)
      if order.standoffClear then goal=standoff end
     end
    end
+   local moveStarted=profile and os.clock()
    moveToward(unit,order,goal,stats.speed,dt,now)
+   if profile then profile.move+=os.clock()-moveStarted; profile.moves+=1 end
   end
  end
+end
 end
 
 workspace:SetAttribute("Winner","")
@@ -2773,6 +3407,46 @@ end
 for _,player in ipairs(Players:GetPlayers()) do join(player) end
 do
 local stepTimers={accumulated=0,combat=0,ai=0,attributes=0,lobby=0,auto=0}
+-- Studio 專用戰鬥壓力探針：tests/battle-stress.server.lua 用來直接生成對戰部隊並讀取每步耗時。
+-- 正式伺服器不建立；BindableFunction 留在 ServerScriptService，不複製給客戶端。
+if RunService:IsStudio() then
+ local probe=Instance.new("BindableFunction")
+ probe.Name="RTSBattleProbe"
+ probe.OnInvoke=function(action,a,b,c)
+  if phase~="Playing" then return nil end
+  if action=="spawn" then
+   local state=byId[a]
+   if not alive(state) or type(b)~="string" or not Config.Units[b] or not validPosition(c) then return nil end
+   return makeUnit(state,b,c)
+  elseif action=="build" then
+   -- 直接放一座已完工的建築（不扣資源、不看時代）；占地仍須在界內且沒有障礙。
+   local state,data=byId[a],type(b)=="string" and Config.Buildings[b] or nil
+   if not alive(state) or not data or not validPosition(c) then return nil end
+   local pos=Grid.snap(c,data.size)
+   if not validPosition(pos) or not Grid.inBounds(pos,data.size) or not placementClear(pos,data) then return nil end
+   return makeBuilding(state,b,pos,true)
+  elseif action=="attack" then
+   if typeof(a)~="Instance" or a.Parent~=units or not isTarget(b) or not enemies(owner(a),owner(b)) then return false end
+   issue(a,"attack",b,true)
+   orders[a].objective=b
+   return true
+  elseif action=="remove" then
+   if typeof(a)=="Instance" and a.Parent==units then destroyModel(a) end
+   return true
+  elseif action=="timings" then
+   local result=stepTimers.probe or {}
+   local orderCount=0
+   for _ in pairs(orders) do orderCount+=1 end
+   result.orders,result.pathTasks=orderCount,pathTasks
+   result.profile=unitCollisionIndex.profile
+   unitCollisionIndex.profile={move=0,moves=0,flank=0,flanks=0,pivot=0,pivots=0,neighbor=0,neighbors=0}
+   stepTimers.probe={order={count=0,sum=0,worst=0},combat={count=0,sum=0,worst=0},step={count=0,sum=0,worst=0}}
+   return result
+  end
+  return nil
+ end
+ probe.Parent=script.Parent
+end
 RunService.Heartbeat:Connect(function(dt)
  do
   stepTimers.lobby+=dt
@@ -2826,15 +3500,30 @@ RunService.Heartbeat:Connect(function(dt)
       removed=true
      end
     end
+    Garrison.heal(state,1)
     if removed then population(state); eliminationCheck(state) end
    end
   end
  end
  if phase~="Playing" then return end
+ local probe=stepTimers.probe
+ local function mark(entry,started)
+  local seconds=os.clock()-started
+  entry.count+=1; entry.sum+=seconds; entry.worst=math.max(entry.worst,seconds)
+ end
  productionStep(step)
+ local orderStarted=os.clock()
  orderStep(step,now)
+ if probe then mark(probe.order,orderStarted) end
  if phase~="Playing" then return end
- if stepTimers.combat>=0.6 then stepTimers.combat=0; combatStep(now) end
+ if stepTimers.combat>=0.2 then
+  stepTimers.combat=0
+  local combatStarted=os.clock()
+  Strike.step(now)
+  if probe then mark(probe.combat,combatStarted) end
+  Walls.step()
+ end
+ if probe then mark(probe.step,now) end
  if phase~="Playing" then return end
  if stepTimers.ai>=2 then stepTimers.ai=0; for _,state in pairs(states) do if state.ai then aiStep(state,now) end end end
  if phase~="Playing" then return end

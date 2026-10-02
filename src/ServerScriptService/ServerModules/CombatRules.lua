@@ -49,4 +49,23 @@ function CombatRules.beyondLeash(anchorX,anchorZ,x,z,leash)
  return dx*dx+dz*dz>leash*leash
 end
 
+-- 投射物飛行秒數：距離除以速度，夾在最短與最長之間。
+function CombatRules.flightTime(distance,speed,minTime,maxTime)
+ if not finite(distance) or not finite(speed) or not finite(minTime) or not finite(maxTime)
+  or distance<0 or speed<=0 or minTime<0 or maxTime<minTime then return nil end
+ return math.clamp(distance/speed,minTime,maxTime)
+end
+
+-- 近戰揮到的瞬間目標仍在武器長度加容許值內才算命中。
+function CombatRules.connects(distance,reach,tolerance)
+ return finite(distance) and finite(reach) and finite(tolerance) and distance>=0 and reach>=0 and tolerance>=0
+  and distance<=reach+tolerance
+end
+
+-- 落地型投射物：建築不會移動必定命中；單位離開落點半徑就躲開。
+function CombatRules.landsOn(isBuilding,distanceFromImpact,radius)
+ if isBuilding==true then return true end
+ return finite(distanceFromImpact) and finite(radius) and distanceFromImpact>=0 and radius>=0 and distanceFromImpact<=radius
+end
+
 return CombatRules

@@ -1,0 +1,22 @@
+== 0.741.19.7411056_20261002T163930Z_Studio_32965_last.log
+2026-10-02T16:39:46.137Z [Output] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+== 0.741.19.7411056_20261002T163937Z_Studio_46578_last.log
+2026-10-02T16:39:45.884Z [Output] [SITE_TEST] PASS 開局有 3 位村民 | 3
+2026-10-02T16:39:49.891Z [Output] [SITE_TEST] INFO 開局指令：採集,採集,採集
+2026-10-02T16:39:49.923Z [Output] [SITE_TEST] INFO 伺服器通知：農田 工地已建立；已派最近的 2 位村民前往施工。
+2026-10-02T16:39:49.924Z [Output] [SITE_TEST] PASS A 農田工地建立
+2026-10-02T16:39:49.924Z [Output] [SITE_TEST] PASS A 伺服器派村民到農田 | 採集,施工,施工
+2026-10-02T16:39:49.973Z [Output] [SITE_TEST] INFO 伺服器通知：房屋 工地已建立；選中的村民正前往施工。
+2026-10-02T16:39:49.974Z [Output] [SITE_TEST] PASS A 農田的施工村民改去蓋 192 studs 外的房屋 | 2
+2026-10-02T16:40:15.357Z [Output] [SITE_TEST] PASS A 農田在施工村民被調走後仍完工 | 25.4 秒 | complete=true builders=0 status=已完工 orders=採集,交貨,採集
+2026-10-02T16:40:15.357Z [Output] [SITE_TEST] PASS A 房屋也完工 | complete=true builders=0 status=已完工 orders=採集,交貨,採集
+2026-10-02T16:40:15.405Z [Output] [SITE_TEST] INFO 伺服器通知：自動工作已關閉：村民只執行你下的指令。
+2026-10-02T16:40:15.439Z [Output] [SITE_TEST] INFO 伺服器通知：房屋 工地已建立；已派最近的 1 位村民前往施工。
+2026-10-02T16:40:15.440Z [Output] [SITE_TEST] PASS B 房屋工地建立
+2026-10-02T16:40:27.455Z [Output] [SITE_TEST] PASS B 自動工作關閉時，無人工地 12 秒內沒有被派工 | complete=false builders=0 status=等待村民 orders=採集,交貨,移動
+2026-10-02T16:40:27.471Z [Output] [SITE_TEST] INFO 伺服器通知：自動工作已開啟：閒置村民會就近施工、交貨或採集。
+2026-10-02T16:40:44.903Z [Output] [SITE_TEST] PASS B 重新開啟自動工作後工地完工 | complete=true builders=0 status=已完工 orders=採集,交貨,待命
+2026-10-02T16:40:45.938Z [Output] [SITE_TEST] INFO 伺服器通知：房屋 工地已建立；已派最近的 1 位村民前往施工。
+2026-10-02T16:40:45.939Z [Output] [SITE_TEST] PASS C 房屋工地建立
+2026-10-02T16:40:58.955Z [Output] [SITE_TEST] PASS C 玩家指定待命的村民 12 秒內沒有被抽去施工 | complete=false builders=0 status=等待村民 orders=待命,待命,待命
+2026-10-02T16:40:58.955Z [Output] [SITE_TEST] COMPLETE passed=11 failed=0

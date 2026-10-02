@@ -222,6 +222,29 @@ B.Wall=function(model,kind,team,stage)
   block(model,"Battlement",V(2,2,2),V(x,12,z),paleStone,M.Brick)
  end end
 end
+-- Gatehouse over three wall cells along X: two piers, a parapet bridge and a portcullis.
+-- The client raises every "GateDoor" part into the bridge while friendly units are near.
+B.Gate=function(model,kind,team,stage)
+ block(model,"Foundation",V(24,.5,8),V(0,.25,0),stone,M.Cobblestone)
+ for _,s in ipairs({-1,1}) do
+  block(model,"GatePier",V(4,14,8),V(s*10,7,0),stone,M.Brick)
+  for _,x in ipairs({8.8,11.2}) do for _,z in ipairs({-3,3}) do
+   block(model,"Battlement",V(1.6,2,2),V(s*x,15,z),paleStone,M.Brick)
+  end end
+ end
+ block(model,"StoneWall",V(16,2.5,8),V(0,9.75,0),stone,M.Brick)
+ block(model,"TeamTrim",V(16,.5,8),V(0,11.25,0),team,M.Fabric)
+ block(model,"Parapet",V(16,2,8),V(0,12.5,0),paleStone,M.Brick)
+ -- Seen from the top-down camera the passage is hidden, so the deck carries the team colour.
+ block(model,"TeamTrim",V(16,.16,4),V(0,13.58,0),team,M.Fabric)
+ for _,s in ipairs({-1,1}) do block(model,"TeamTrim",V(2.4,.16,4),V(s*10,14.08,0),team,M.Fabric) end
+ for _,x in ipairs({-6,-2,2,6}) do for _,z in ipairs({-3,3}) do
+  block(model,"Battlement",V(2,2,2),V(x,14.5,z),paleStone,M.Brick)
+ end end
+ block(model,"GateDoor",V(16,8,1),V(0,4.5,0),cutWood,M.WoodPlanks)
+ for _,y in ipairs({2.5,6.5}) do block(model,"GateDoor",V(16,.5,1.3),V(0,y,0),iron,M.Metal) end
+ for _,x in ipairs({-5.5,0,5.5}) do block(model,"GateDoor",V(.5,8,1.3),V(x,4.5,0),iron,M.Metal) end
+end
 -- Curtain walls, four capped corner towers, a gatehouse on +Z and a tall keep with bartizans.
 B.Castle=function(model,kind,team,stage)
  local w=26

@@ -89,6 +89,8 @@ local function resetActor(state)
  state.units,state.buildings={},{}
  state.actor:SetAttribute("HomePosition",nil)
 end
+local Factory={cleared=0}
+function Factory.clearCorpses() Factory.cleared+=1 end
 local function stop(model) orders[model]=nil end
 local function destroyModel(model)
  for _,state in pairs(states) do state.units[model]=nil; state.buildings[model]=nil end

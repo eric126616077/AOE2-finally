@@ -5,7 +5,7 @@
 local Tests={}
 local kinds={"villager","infantry","spearman","archer","skirmisher","scout","cavalry","ram","mangonel","trebuchet"}
 local buildingKinds={"TownCenter","House","Mill","LumberCamp","MiningCamp","Barracks","Farm","ArcheryRange","Stable",
- "Blacksmith","Market","Tower","Wall","Castle","SiegeWorkshop","Monastery","University","Wonder"}
+ "Blacksmith","Market","Tower","Wall","Gate","Castle","SiegeWorkshop","Monastery","University","Wonder"}
 local landmarks={villager="PickShaft",infantry="SwordBlade",spearman="LongSpear",archer="Bowstring",skirmisher="Javelin",
  scout="HorseHead",cavalry="HorseFaceplate",ram="RamLog",mangonel="ThrowingArm",trebuchet="Counterweight"}
 local coreFields={

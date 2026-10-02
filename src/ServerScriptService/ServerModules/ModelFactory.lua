@@ -31,7 +31,9 @@ local function resourceFlags(model)
  end
  if shadow then shadow.CastShadow=true end
 end
-function Factory.model(kind, position, size, color, category, team)
+-- size is the world footprint. quarterTurn fits the art (authored along X) to the swapped
+-- footprint and turns only the art, so the Footprint part stays axis-aligned for every rule.
+function Factory.model(kind, position, size, color, category, team, quarterTurn)
  local folder=ReplicatedStorage:FindFirstChild(category)
  local template=folder and folder:FindFirstChild(kind)
  if not template and category=="Buildings" then
@@ -58,11 +60,15 @@ function Factory.model(kind, position, size, color, category, team)
  else model=Art.Create(kind,team) end
  local _,bounds=model:GetBoundingBox()
  local visualX,visualZ=visualFootprint(kind,size,category)
+ if quarterTurn==true then visualX,visualZ=visualZ,visualX end
  -- Fit only the cloned / generated geometry; keep its original proportions.
  model:ScaleTo(model:GetScale()*math.min(visualX/bounds.X,size.Y/bounds.Y,visualZ/bounds.Z))
  local box,fitted=model:GetBoundingBox()
  local desired=CFrame.new(position+Vector3.new(0,fitted.Y/2,0))
  model:PivotTo(desired*box:Inverse()*model:GetPivot())
+ if quarterTurn==true then
+  model:PivotTo(CFrame.new(position)*CFrame.Angles(0,math.pi/2,0)*CFrame.new(-position)*model:GetPivot())
+ end
  if category=="Buildings" and Art.ApplyPlayerColor(model,team)==0 then
   Art.AddPlayerMarker(model,team)
  end
@@ -172,6 +178,63 @@ function Factory.watchCarry(unit)
  unit:GetAttributeChangedSignal("Carrying"):Connect(function()
   Art.SetCarry(unit,(unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType") or nil)
  end)
+end
+-- Fallen units stay on the field as remains: people lie on their back, mounts on their side,
+-- siege engines slump as wrecks. Remains are anchored copies of the appearance parts only, so
+-- they never block movement, placement, selection or line-of-attack queries.
+local corpseFolder
+local corpseQueue={}
+local corpseLay={
+ siege=CFrame.new(0,-.35,0)*CFrame.Angles(0,0,.22),
+ cavalry=CFrame.new(0,1.4,0)*CFrame.Angles(0,0,math.pi/2),
+ default=CFrame.new(0,.75,-2.2)*CFrame.Angles(math.pi/2,0,0),
+}
+local ashen=Color3.fromRGB(96,88,80)
+function Factory.corpse(unit,seconds,limit)
+ local root=unit.PrimaryPart
+ if not root or type(seconds)~="number" or seconds<=0 or type(limit)~="number" or limit<1 then return nil end
+ local ground=root.Position-Vector3.new(0,2.5,0)
+ local look=root.CFrame.LookVector
+ local flat=Vector3.new(look.X,0,look.Z)
+ local base=flat.Magnitude>.01 and CFrame.lookAt(ground,ground+flat) or CFrame.new(ground)
+ local frame=base*(corpseLay[unit:GetAttribute("UnitClass")] or corpseLay.default)
+ local corpse=Instance.new("Model")
+ corpse.Name="Corpse"
+ for _,part in ipairs(unit:GetDescendants()) do
+  if part:IsA("BasePart") and part~=root and part.Name~="CollisionVolume" and part.Transparency<1 then
+   local ok,copy=pcall(function() return part:Clone() end)
+   if ok and copy then
+    for _,child in ipairs(copy:GetDescendants()) do
+     if child:IsA("BasePart") or child:IsA("BaseScript") or child:IsA("BillboardGui") then child:Destroy() end
+    end
+    copy.Anchored,copy.CanCollide,copy.CanQuery,copy.CanTouch,copy.CastShadow=true,false,false,false,false
+    copy.Color=copy.Color:Lerp(ashen,.35)
+    copy.CFrame=frame*base:ToObjectSpace(part.CFrame)
+    copy.Parent=corpse
+   end
+  end
+ end
+ if not corpse:FindFirstChildWhichIsA("BasePart") then corpse:Destroy(); return nil end
+ corpse:SetAttribute("UnitType",unit:GetAttribute("UnitType"))
+ if not corpseFolder or not corpseFolder.Parent then
+  corpseFolder=workspace:FindFirstChild("Corpses")
+  if not corpseFolder then
+   corpseFolder=Instance.new("Folder")
+   corpseFolder.Name="Corpses"
+   corpseFolder.Parent=workspace
+  end
+ end
+ corpse.Parent=corpseFolder
+ game:GetService("Debris"):AddItem(corpse,seconds)
+ -- Drop entries that already expired, then the oldest ones beyond the cap.
+ for index=#corpseQueue,1,-1 do if not corpseQueue[index].Parent then table.remove(corpseQueue,index) end end
+ table.insert(corpseQueue,corpse)
+ while #corpseQueue>limit do table.remove(corpseQueue,1):Destroy() end
+ return corpse
+end
+function Factory.clearCorpses()
+ for _,corpse in ipairs(corpseQueue) do corpse:Destroy() end
+ table.clear(corpseQueue)
 end
 function Factory.unit(kind,position,data,owner)
  local team=owner:GetAttribute("TeamColor")

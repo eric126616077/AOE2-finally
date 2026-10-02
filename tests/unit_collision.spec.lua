@@ -147,4 +147,24 @@ expect(Rules.retreatCandidates(0, 0, 1e300, 0, 8) == nil and Rules.retreatDurati
 expect(Rules.retreatCandidates(0, 0, 10, 0, 0) == nil and Rules.retreatCandidates(0, 0, 10, 0, 8, 0) == nil, "invalid retreat distance or side accepted")
 expect(Rules.steeringCandidates(0, 0, 1, 0, -1) == nil and Rules.steeringCandidates(0, 0, 1, 0, 1, 0) == nil, "invalid step or side accepted")
 expect(not Rules.segmentClear(0, 0, 1, 0, 1.8, nil) and Rules.overlaps(0, 0, 1.8, nil), "missing neighbor list failed open")
+
+-- Around: one shared neighbour list covering a square; any Update/Remove bumps the version.
+do
+ local around = Rules.newIndex(16, 4)
+ around:Update("self", 0, 0, 2); around:Update("near", 10, -9, 2); around:Update("edge", 16.9, 0, 3); around:Update("far", 40, 40, 2)
+ local version = around.version
+ local records = around:Around(0, 0, 17, "self")
+ expect(includes(records, "near") and includes(records, "edge") and not includes(records, "self"), "Around missed a record inside its square or returned the excluded key")
+ expect(not includes(records, "far"), "Around returned a record from an untouched cell")
+ for _, record in ipairs(around:Nearby(0, 0, 8, 0, 3, "self")) do
+  expect(includes(records, record.key), "Around(17) does not cover a short Nearby segment query")
+ end
+ around:Update("near", 11, -9, 2)
+ expect(around.version > version, "position update did not invalidate cached neighbour scans")
+ version = around.version
+ around:Remove("edge")
+ expect(around.version > version and not includes(around:Around(0, 0, 17, "self"), "edge"), "removal did not invalidate / clear Around results")
+ expect(around:Around(0, 0, 0/0) == nil and around:Around(0/0, 0, 17) == nil, "Around accepted non-finite input")
+end
+
 print("PASS: " .. checks .. " unit swept-disk / large-radius / overlap escape / local index / live update / steering / finite validation checks (pure geometry; not Studio Play)")

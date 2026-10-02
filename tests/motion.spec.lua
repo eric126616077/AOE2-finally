@@ -38,4 +38,27 @@ expect(Rules.IsDiscontinuity(100,20) and not Rules.IsDiscontinuity(2,20),"telepo
 expect(Rules.IsDiscontinuity(math.huge,20) and Rules.IsDiscontinuity(-1,20),"invalid displacement was interpolated")
 expect(Rules.Push(path,12,100,true),"teleport reset rejected")
 expect(#path.samples==1 and value(path,12)==100,"teleport swept the unit across unrelated map space")
+-- Gait is paid for in ground covered: the same road gives the same steps at any speed or frame rate.
+local function steps(kind,speed,fps,seconds)
+ local phase=0
+ for _=1,fps*seconds do phase+=Rules.GaitAdvance(kind,speed/fps) end
+ return phase/(math.pi*2)
+end
+expect(math.abs(steps("villager",14,60,1)-14/Rules.FootCycle)<1e-6,"walker cycles did not match ground covered")
+expect(math.abs(steps("villager",14,60,2)-steps("villager",28,144,1))<1e-6,"gait depended on speed or frame rate, feet slide")
+expect(math.abs(steps("cavalry",24,60,1)-24/Rules.MountedCycle)<1e-6,"horse cycles did not match ground covered")
+expect(math.abs(Rules.GaitAdvance("ram",Rules.WheelRadius)-1)<1e-9,"wheel did not roll one radian per radius travelled")
+expect(Rules.GaitAdvance("villager",0)==0,"standing unit kept stepping")
+for _,invalid in ipairs({-1,0/0,math.huge,Rules.MaxGaitStep+1,"far"}) do
+ expect(Rules.GaitAdvance("villager",invalid)==0,"teleport or invalid travel spun the legs")
+end
+local weight=0
+for _=1,60 do
+ local nextWeight=Rules.GaitBlend(weight,true,1/60)
+ expect(nextWeight>=weight and nextWeight<=1,"stride weight left 0..1 while easing in")
+ weight=nextWeight
+end
+expect(weight==1 and Rules.GaitBlend(0,true,1/60)<1,"stride snapped instead of easing in")
+for _=1,60 do weight=Rules.GaitBlend(weight,false,1/60) end
+expect(weight==0 and Rules.GaitBlend(0/0,false,0)==0,"stride weight did not settle at rest")
 print("PASS: "..checks.." bounded motion timeline / 10 Hz to 60 Hz / no extrapolation / idle / teleport checks")

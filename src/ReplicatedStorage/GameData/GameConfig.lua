@@ -3,10 +3,21 @@ local Config = {}
 Config.Construction = {workRange=5, extraWorkerRate=0.5, maxSelectedWorkers=200}
 -- 自動工作（玩家可在選單關閉）：閒置村民就近施工、交貨或採集；未選村民時建造會派最近村民。
 -- 玩家手動移動或停止的村民保持待命，直到再收到工作指令。
+-- 工地沒有任何村民施工超過 siteDelay 秒時，重新派最近的村民（閒置優先，採集中的次之），不受 buildRadius 限制。
 -- 採集半徑涵蓋開局資源圈（ResourceLayout.OpeningRadius）；資源至少離基地 BaseClearance，80 會讓主城旁的村民找不到資源。
-Config.AutoWork = {idleDelay=2, buildRadius=64, gatherRadius=260, checkInterval=0.5, retryInterval=4, maxPerStep=12, blockedTime=20, busyPenalty=40, reseedFarms=true}
+Config.AutoWork = {idleDelay=2, siteDelay=4, buildRadius=64, gatherRadius=260, checkInterval=0.5, retryInterval=4, maxPerStep=12, blockedTime=20, busyPenalty=40, reseedFarms=true}
 -- 自動索敵：基礎半徑、換目標需領先的距離、每一優先層級的等效距離，以及自動追擊離開原位的上限。
-Config.Combat = {acquisitionRadius=72, retargetMargin=12, tierDistance=40, leashDistance=120, leashCooldown=2}
+Config.Combat = {acquisitionRadius=72, retargetMargin=12, tierDistance=40, leashDistance=120, leashCooldown=2,
+ -- 陣亡單位留在戰場的秒數與同時存在的上限；超過上限先移除最舊的。
+ corpseSeconds=20, maxCorpses=60,
+ -- 被打時頭上血條在最後一次受擊後保留的秒數。
+ healthBarSeconds=5,
+ -- 近戰在揮到的瞬間結算（windup 秒後）；目標此時超出射程加容許值就落空。
+ windup={default=0.15, ram=0.25}, meleeTolerance=1.5,
+ -- 投射物每秒 studs；傷害在飛抵時結算。石彈落在發射當下的位置，離開 stoneRadius 的單位可以躲開。
+ projectile={arrow=110, javelin=80, stone=70, minFlight=0.15, maxFlight=1.8, stoneRadius=6},
+ projectileKinds={skirmisher="javelin", mangonel="stone", trebuchet="stone"},
+}
 Config.Lobby = {
  origin = Vector3.new(0,0,2048), spawnOffset = Vector3.new(0,4,90),
  portalOffset = Vector3.new(54,0,62), portalRadius = 14, portalUseRange = 24,
@@ -44,21 +55,27 @@ Config.Map = {
 }
 -- 農田：磨坊可預先付款預置，耗盡時優先使用預置；workRange 是村民站在田中央耕作的距離。
 Config.Farms = {queueLimit=40, workRange=4}
+-- 駐紮（AOE2 式）：只能用專用指令（駐紮按鈕／G、Alt+右鍵、觸控模式），一般右鍵不會駐紮。單位走到建築旁進入，在裡面不會被攻擊並緩慢回復生命，仍計入人口。
+-- 每次射擊多出的箭數 = 各類別駐軍人數 × arrows 權重（無條件捨去），上限為建築的 garrison.maxArrows。
+-- 攻城器械不能進入；個別建築可用 garrison.blocked 再排除類別。建築被摧毀或拆除時駐軍全數離開。
+Config.Garrison = {enterRange=5, healRate=1, arrows={villager=1,archer=1,infantry=0.5}, blocked={siege=true}}
+-- 城牆一次拖曳的最大段數；城門在己方或同盟單位進入 gateOpenRadius 時升起閘門（僅外觀，通行權由伺服器判定）。
+Config.Walls = {maxLine=40, gateOpenRadius=18}
 Config.Settings = {
  maxPlayers = 4, gameMode = "Conquest", defaultMapSize = "Medium",
  startingResources = { food = 300, wood = 300, gold = 150, stone = 150 },
  startingVillagers = 3, populationLimit = 100, wonderVictoryTime = 180,
 }
 Config.Spawns = { Vector3.new(-344,0,-344), Vector3.new(344,0,344), Vector3.new(344,0,-344), Vector3.new(-344,0,344) }
-Config.BuildOrder = { "TownCenter", "House", "Mill", "LumberCamp", "MiningCamp", "Barracks", "Farm", "ArcheryRange", "Stable", "Blacksmith", "Market", "Tower", "Wall", "Castle", "SiegeWorkshop", "Monastery", "University", "Wonder" }
+Config.BuildOrder = { "TownCenter", "House", "Mill", "LumberCamp", "MiningCamp", "Barracks", "Farm", "ArcheryRange", "Stable", "Blacksmith", "Market", "Tower", "Wall", "Gate", "Castle", "SiegeWorkshop", "Monastery", "University", "Wonder" }
 -- Fixed villager command pages; building availability still comes from BuildOrder and minAge.
 Config.BuildPages = {
  {key="economy",name="經濟",buildings={"House","Mill","LumberCamp","MiningCamp","Farm","Market","TownCenter"}},
  {key="military",name="軍事",buildings={"Barracks","ArcheryRange","Stable","Blacksmith","SiegeWorkshop"}},
- {key="defense",name="防禦",buildings={"Tower","Wall","Castle","Monastery","University","Wonder"}},
+ {key="defense",name="防禦",buildings={"Tower","Wall","Gate","Castle","Monastery","University","Wonder"}},
 }
 Config.Buildings = {
- TownCenter = { name="市鎮中心", description="訓練村民、交回資源並升級時代，會射擊附近敵軍；城堡時代可增建。", cost={wood=275,stone=100}, hp=2400, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(174,130,79), population=5, minAge=3, buildTime=25, damage=6, range=56, attackInterval=2.0, dropoff={"food","wood","gold","stone"}, trains={"villager"} },
+ TownCenter = { name="市鎮中心", description="訓練村民、交回資源並升級時代，會射擊附近敵軍；可駐紮 15 個單位，駐軍越多射出的箭越多。城堡時代可增建。", cost={wood=275,stone=100}, hp=2400, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(174,130,79), population=5, minAge=3, buildTime=25, damage=6, range=56, attackInterval=2.0, garrison={capacity=15,maxArrows=10}, dropoff={"food","wood","gold","stone"}, trains={"villager"} },
  House = { name="房屋", description="增加 5 人口上限。", cost={wood=25}, hp=550, size=Vector2.new(2,2), height=14, color=Color3.fromRGB(200,173,125), population=5, minAge=1, buildTime=8, trains={} },
  Barracks = { name="兵營", description="訓練步兵與對抗騎兵的長槍兵。", cost={wood=175}, hp=1200, size=Vector2.new(3,3), height=20, color=Color3.fromRGB(149,117,103), population=0, minAge=1, buildTime=18, trains={"infantry","spearman"} },
  Farm = { name="農田", description="提供可採集的食物；一塊農田一位村民，單位可以踩過，耗盡後可重新播種。", cost={wood=60}, hp=300, size=Vector2.new(3,3), height=1.2, walkable=true, color=Color3.fromRGB(165,141,60), population=0, minAge=1, buildTime=7, amount=700, trains={} },
@@ -72,20 +89,22 @@ Config.Buildings = {
  University = { name="大學", description="研究帝國的高階軍事科技。", cost={wood=200}, hp=1500, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(188,167,134), population=0, minAge=3, buildTime=24, trains={} },
  Blacksmith = { name="兵工廠", description="研究武器與護甲升級。", cost={wood=150}, hp=1100, size=Vector2.new(3,3), height=19, color=Color3.fromRGB(133,126,113), population=0, minAge=2, buildTime=18, trains={} },
  Market = { name="市集", description="交換木材、食物、石材與黃金。", cost={wood=175}, hp=1300, size=Vector2.new(4,3), height=19, color=Color3.fromRGB(177,147,97), population=0, minAge=2, buildTime=20, dropoff={"food","wood","gold","stone"}, trains={} },
- Tower = { name="瞭望塔", description="自動射擊進入射程的敵軍。", cost={wood=50,stone=125}, hp=1500, size=Vector2.new(2,2), height=30, color=Color3.fromRGB(161,158,144), population=0, minAge=2, buildTime=22, damage=8, range=60, attackInterval=1.8, trains={} },
- Wall = { name="石牆", description="封鎖狹道並保護基地。", cost={stone=15}, hp=1700, size=Vector2.new(1,1), height=13, color=Color3.fromRGB(169,166,150), population=0, minAge=2, buildTime=4, trains={} },
- Castle = { name="城堡", description="強大的基地防禦，可製造巨型投石機。", cost={stone=650}, hp=4800, size=Vector2.new(8,8), height=48, color=Color3.fromRGB(118,128,146), population=10, minAge=3, buildTime=45, damage=14, range=75, attackInterval=1.6, dropoff={"food","wood","gold","stone"}, trains={"trebuchet"} },
+ Tower = { name="瞭望塔", description="自動射擊進入射程的敵軍；可駐紮 5 個步行單位增加箭數。", cost={wood=50,stone=125}, hp=1500, size=Vector2.new(2,2), height=30, color=Color3.fromRGB(161,158,144), population=0, minAge=2, buildTime=22, damage=8, range=60, attackInterval=1.8, garrison={capacity=5,maxArrows=5,blocked={cavalry=true}}, trains={} },
+ Wall = { name="石牆", description="封鎖狹道並保護基地；按住拖曳可一次放置整排。", cost={stone=15}, hp=1700, size=Vector2.new(1,1), height=13, color=Color3.fromRGB(169,166,150), population=0, minAge=2, buildTime=4, line=true, trains={} },
+ Gate = { name="城門", description="己方與同盟部隊可自由通行，敵軍必須攻破才能進入；可直接蓋在自己的石牆上。放置時可旋轉方向。", cost={stone=30}, hp=2000, size=Vector2.new(3,1), height=16, color=Color3.fromRGB(160,156,140), population=0, minAge=2, buildTime=14, gate=true, rotatable=true, trains={} },
+ Castle = { name="城堡", description="強大的基地防禦，可製造巨型投石機；射程內沒有敵軍時會射擊敵方建築。可駐紮 20 個單位增加箭數。", cost={stone=650}, hp=4800, size=Vector2.new(8,8), height=48, color=Color3.fromRGB(118,128,146), population=10, minAge=3, buildTime=45, damage=14, range=75, attackInterval=1.6, attacksBuildings=true, garrison={capacity=20,maxArrows=15}, dropoff={"food","wood","gold","stone"}, trains={"trebuchet"} },
  Wonder = { name="世界奇觀", description="奇觀模式中守住完工奇觀即可勝利。", cost={wood=1000,gold=1000,stone=1000}, hp=4500, size=Vector2.new(7,7), height=57, color=Color3.fromRGB(213,197,155), population=0, minAge=4, buildTime=80, trains={} },
 }
 Config.Units = {
- villager = { name="村民", description="採集資源、建造與修復。", cost={food=50}, hp=40, speed=14, damage=3, range=5, trainTime=10, color=Color3.fromRGB(227,196,137), minAge=1, trainsAt={"TownCenter"}, class="villager", armor=0, attackInterval=1.6, population=1, carryCapacity=10, gatherRate=3, bonus={} },
- infantry = { name="步兵", description="便宜且可靠的近戰部隊。", cost={food=60,gold=20}, hp=75, speed=16, damage=10, range=6, trainTime=14, color=Color3.fromRGB(160,182,208), minAge=1, trainsAt={"Barracks"}, class="infantry", armor=1, attackInterval=1.4, population=1, bonus={building=3} },
- spearman = { name="長槍兵", description="長槍對騎兵造成額外傷害。", cost={food=35,wood=25}, hp=55, speed=16, damage=5, range=8, trainTime=12, color=Color3.fromRGB(173,186,167), minAge=2, trainsAt={"Barracks"}, class="infantry", armor=0, attackInterval=1.5, population=1, bonus={cavalry=22} },
+ -- 近戰射程是武器實際長度（自己中心到目標邊緣）；必須不小於碰撞半徑 + 1.5，否則站不到攻擊位置。
+ villager = { name="村民", description="採集資源、建造與修復。", cost={food=50}, hp=40, speed=14, damage=3, range=3.5, trainTime=10, color=Color3.fromRGB(227,196,137), minAge=1, trainsAt={"TownCenter"}, class="villager", armor=0, attackInterval=1.6, population=1, carryCapacity=10, gatherRate=3, bonus={} },
+ infantry = { name="步兵", description="便宜且可靠的近戰部隊。", cost={food=60,gold=20}, hp=75, speed=16, damage=10, range=3.5, trainTime=14, color=Color3.fromRGB(160,182,208), minAge=1, trainsAt={"Barracks"}, class="infantry", armor=1, attackInterval=1.4, population=1, bonus={building=3} },
+ spearman = { name="長槍兵", description="長槍對騎兵造成額外傷害。", cost={food=35,wood=25}, hp=55, speed=16, damage=5, range=5.5, trainTime=12, color=Color3.fromRGB(173,186,167), minAge=2, trainsAt={"Barracks"}, class="infantry", armor=0, attackInterval=1.5, population=1, bonus={cavalry=22} },
  archer = { name="弓箭手", description="遠距離射擊，畏懼快速騎兵。", cost={wood=25,gold=45}, hp=40, speed=15, damage=6, range=48, trainTime=14, color=Color3.fromRGB(159,181,116), minAge=2, trainsAt={"ArcheryRange"}, class="archer", armor=0, attackInterval=1.8, population=1, bonus={infantry=1} },
- scout = { name="斥候騎兵", description="快速探索地圖與突襲村民。", cost={food=80}, hp=55, speed=27, damage=5, range=7, trainTime=16, color=Color3.fromRGB(167,126,78), minAge=1, trainsAt={"Stable"}, class="cavalry", armor=0, attackInterval=1.3, population=1, bonus={villager=2} },
+ scout = { name="斥候騎兵", description="快速探索地圖與突襲村民。", cost={food=80}, hp=55, speed=27, damage=5, range=4.5, trainTime=16, color=Color3.fromRGB(167,126,78), minAge=1, trainsAt={"Stable"}, class="cavalry", armor=0, attackInterval=1.3, population=1, bonus={villager=2} },
  skirmisher = { name="矛兵", description="低成本遠程部隊，克制弓箭手。", cost={food=25,wood=35}, hp=40, speed=15, damage=3, range=40, trainTime=14, color=Color3.fromRGB(171,185,126), minAge=2, trainsAt={"ArcheryRange"}, class="archer", armor=2, attackInterval=1.9, population=1, bonus={archer=7} },
- cavalry = { name="騎士", description="迅速突襲經濟與遠程部隊。", cost={food=60,gold=75}, hp=125, speed=24, damage=12, range=7, trainTime=20, color=Color3.fromRGB(182,151,105), minAge=3, trainsAt={"Stable"}, class="cavalry", armor=2, attackInterval=1.5, population=1, bonus={archer=5} },
- ram = { name="攻城衝車", description="高護甲、低速度，專精摧毀建築。", cost={wood=160,gold=75}, hp=280, speed=9, damage=4, range=8, trainTime=25, color=Color3.fromRGB(151,127,84), minAge=3, trainsAt={"SiegeWorkshop"}, class="siege", armor=8, attackInterval=2.2, population=1, preferredTarget="buildings", bonus={building=40} },
+ cavalry = { name="騎士", description="迅速突襲經濟與遠程部隊。", cost={food=60,gold=75}, hp=125, speed=24, damage=12, range=4.5, trainTime=20, color=Color3.fromRGB(182,151,105), minAge=3, trainsAt={"Stable"}, class="cavalry", armor=2, attackInterval=1.5, population=1, bonus={archer=5} },
+ ram = { name="攻城衝車", description="高護甲、低速度，專精摧毀建築。", cost={wood=160,gold=75}, hp=280, speed=9, damage=4, range=6.5, trainTime=25, color=Color3.fromRGB(151,127,84), minAge=3, trainsAt={"SiegeWorkshop"}, class="siege", armor=8, attackInterval=2.2, population=1, preferredTarget="buildings", bonus={building=40} },
  mangonel = { name="投石車", description="遠距投石造成範圍傷害，適合對付密集部隊。", cost={wood=160,gold=135}, hp=90, speed=10, damage=24, range=62, trainTime=28, color=Color3.fromRGB(157,134,94), minAge=3, trainsAt={"SiegeWorkshop"}, class="siege", armor=2, attackInterval=3.5, population=1, splash=12, bonus={building=18} },
  monk = { name="僧侶", description="招降敵方單位、治療受傷友軍；不會攻擊。", cost={gold=100}, hp=30, speed=11, damage=0, range=36, trainTime=30, color=Color3.fromRGB(150,104,64), minAge=3, trainsAt={"Monastery"}, class="monk", armor=0, attackInterval=1, population=1, bonus={} },
  trebuchet = { name="巨型投石機", description="極遠程攻城武器，需要軍隊保護。", cost={wood=200,gold=200}, hp=170, speed=8, damage=12, range=115, trainTime=35, color=Color3.fromRGB(165,145,97), minAge=4, trainsAt={"Castle"}, class="siege", armor=3, attackInterval=4.5, population=1, preferredTarget="buildings", bonus={building=85} },

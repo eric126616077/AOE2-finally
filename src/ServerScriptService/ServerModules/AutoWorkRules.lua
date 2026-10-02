@@ -37,6 +37,14 @@ function Rules.idleReady(idleSince, now, delay, nextCheck, hold)
  return now-idleSince>=delay
 end
 
+-- A site nobody is assigned to waits a short while (the player may be re-tasking),
+-- then asks for builders again; failed dispatches retry on a cooldown.
+function Rules.siteNeedsBuilders(assigned, waitingSince, now, delay, nextDispatch)
+ if not finite(assigned) or assigned>0 or not finite(waitingSince) or not finite(now) or not finite(delay) then return false end
+ if finite(nextDispatch) and now<nextDispatch then return false end
+ return now-waitingSince>=delay
+end
+
 -- Economic buildings steer their builders to the resources they collect.
 -- Buildings accepting every resource (town center, market, castle) have no preference.
 function Rules.dropoffPreference(dropoff)

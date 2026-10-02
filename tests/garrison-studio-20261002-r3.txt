@@ -1,0 +1,159 @@
+== 0.741.19.7411056_20261002T134829Z_Studio_BEF5D_last.log
+2026-10-02T13:48:43.284Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
+== 0.741.19.7411056_20261002T134835Z_Studio_71218_last.log
+2026-10-02T13:48:40.863Z [Error] Error: Players.Player1.PlayerScripts.ChatScript:116: Error calling SetCore CoreGuiChatConnections: SetCore: CoreGuiChatConnections has not been registered by the CoreScripts
+2026-10-02T13:48:40.863Z [Output] Info: Stack Begin
+2026-10-02T13:48:40.863Z [Output] Info: Script 'Players.Player1.PlayerScripts.ChatScript', Line 116 - function SetCoreGuiChatConnections
+2026-10-02T13:48:40.863Z [Output] Info: Script 'Players.Player1.PlayerScripts.ChatScript', Line 104 - function DoEverything
+2026-10-02T13:48:40.863Z [Output] Info: Script 'Players.Player1.PlayerScripts.ChatScript', Line 133
+2026-10-02T13:48:40.863Z [Output] Info: Stack End
+2026-10-02T13:48:43.454Z [Output] [GARRISON_TEST] PASS 市鎮中心容量 15、初始駐軍 0 | capacity=15 garrison=0
+2026-10-02T13:48:43.491Z [Output] [GARRISON_TEST] INFO 伺服器通知：自動工作已關閉：村民只執行你下的指令。
+2026-10-02T13:48:44.867Z [Output] [GARRISON_TEST] INFO 開局單位 4 個（村民 3），攜帶 0，下令後狀態：駐紮,駐紮,駐紮,駐紮
+2026-10-02T13:48:45.056Z [Output] [GARRISON_TEST] PASS 右鍵市鎮中心：開局單位走進建築 | garrison=4 expected=4
+2026-10-02T13:48:45.056Z [Output] [GARRISON_TEST] PASS 駐紮後單位模型消失 | remaining=0
+2026-10-02T13:48:45.056Z [Output] [GARRISON_TEST] PASS 駐軍仍計入人口 | before=4 after=4
+2026-10-02T13:48:45.056Z [Output] [GARRISON_TEST] PASS 每位村民多射一支箭（斥候騎兵不加箭） | arrows=3
+2026-10-02T13:48:45.061Z [Output] [GARRISON_TEST] PASS 面板顯示「駐軍 4 / 15」
+2026-10-02T13:48:45.061Z [Output] [GARRISON_TEST] PASS 面板出現「全部離開」指令
+2026-10-02T13:48:45.329Z [Output] [GARRISON_TEST] INFO 伺服器通知：這種單位不能進入這座建築。
+2026-10-02T13:48:46.264Z [Output] [GARRISON_TEST] PASS 弓箭手、步兵、騎士進入市鎮中心 | garrison=9 expected=9
+2026-10-02T13:48:46.264Z [Output] [GARRISON_TEST] PASS 攻城衝車不能駐紮 | order=nil
+2026-10-02T13:48:46.264Z [Output] [GARRISON_TEST] PASS 箭數＝村民＋弓箭手＋步兵每兩位一支 | arrows=6 expected=6
+2026-10-02T13:48:46.264Z [Output] [GARRISON_TEST] PASS 混合駐軍仍計入人口 | before=10 after=10
+2026-10-02T13:48:48.316Z [Output] [GARRISON_TEST] INFO 每箭傷害 4；volley=7 hp 125->97；畫面箭矢最多 7 支
+2026-10-02T13:48:48.316Z [Output] [GARRISON_TEST] PASS 齊射箭數 7 且傷害逐箭結算
+2026-10-02T13:48:48.316Z [Output] [GARRISON_TEST] PASS 客戶端畫出多支箭 | arrowParts=7
+2026-10-02T13:48:48.942Z [Output] [GARRISON_TEST] PASS 受傷步兵駐紮 | garrison=10
+2026-10-02T13:48:54.995Z [Output] [GARRISON_TEST] PASS 全部離開後駐軍歸零 | garrison=0
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 離開的單位數量正確 | units=10 expected=10
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 離開後人口不變 | before=10 after=10
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 離開的單位都在建築占地外 | insideFootprint=0
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 離開的單位彼此不重疊 | minimumGap=9.36
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 兵種保留（村民／斥候／弓箭手／步兵／騎士） | villager=3 scout=1 archer=2 infantry=3 cavalry=1
+2026-10-02T13:48:54.996Z [Output] [GARRISON_TEST] PASS 受傷步兵在建築內回復生命（20 → 約 25） | hp=26
+2026-10-02T13:48:56.362Z [Output] [GARRISON_TEST] PASS 駐軍達到容量 15 | garrison=15
+2026-10-02T13:48:57.028Z [Output] [GARRISON_TEST] INFO 伺服器通知：建築已滿，無法再駐紮。
+2026-10-02T13:49:00.378Z [Output] [GARRISON_TEST] PASS 第 16 個單位留在外面並停止 | garrison=15 outside=1 order=nil
+2026-10-02T13:49:00.378Z [Output] [GARRISON_TEST] PASS 滿員時箭數在 1 到上限 10 之間 | arrows=9
+2026-10-02T13:49:00.378Z [Output] [GARRISON_TEST] PASS 滿員時人口不變 | before=16 after=16
+2026-10-02T13:49:00.432Z [Output] [GARRISON_TEST] PASS 市鎮中心已拆除
+2026-10-02T13:49:00.447Z [Output] [GARRISON_TEST] INFO 伺服器通知：已移除所選單位與建築；不退還資源。
+2026-10-02T13:49:00.448Z [Output] [GARRISON_TEST] PASS 駐軍全數出現 | units=16
+2026-10-02T13:49:00.448Z [Output] [GARRISON_TEST] PASS 放出的駐軍在原建築位置附近 | near=16
+2026-10-02T13:49:00.448Z [Output] [GARRISON_TEST] PASS 放出的駐軍彼此不重疊 | minimumGap=5.00
+2026-10-02T13:49:00.448Z [Output] [GARRISON_TEST] PASS 拆除後單位數與人口一致 | population=16
+2026-10-02T13:49:00.448Z [Output] [GARRISON_TEST] PASS 拆除主城後仍未被淘汰（征服模式） | defeated=false phase=Playing
+2026-10-02T13:49:01.461Z [Output] [GARRISON_TEST] PASS 放出的單位可接受移動指令 | moving=16
+2026-10-02T13:49:02.028Z [Output] [GARRISON_TEST] PASS 瞭望塔容量 5、初始駐軍 0 | capacity=5
+2026-10-02T13:49:05.779Z [Output] [GARRISON_TEST] INFO Tower 每箭傷害 6；volley=1 hp 119->113；畫面箭矢最多 1 支
+2026-10-02T13:49:05.779Z [Output] [GARRISON_TEST] PASS 空的瞭望塔會攻擊（一次 1 支箭）
+2026-10-02T13:49:06.045Z [Output] [GARRISON_TEST] INFO 伺服器通知：這種單位不能進入這座建築。
+2026-10-02T13:49:06.663Z [Output] [GARRISON_TEST] PASS 瞭望塔駐軍達到容量 5 | garrison=5
+2026-10-02T13:49:09.677Z [Output] [GARRISON_TEST] PASS 騎士不能進瞭望塔、第 6 位弓箭手留在外面 | archer:nil,cavalry:nil
+2026-10-02T13:49:09.677Z [Output] [GARRISON_TEST] PASS 瞭望塔箭數 5（上限 5） | arrows=5
+2026-10-02T13:49:11.929Z [Output] [GARRISON_TEST] INFO Tower 每箭傷害 6；volley=6 hp 125->89；畫面箭矢最多 6 支
+2026-10-02T13:49:11.929Z [Output] [GARRISON_TEST] PASS 駐軍的瞭望塔齊射 6 支且傷害逐箭結算
+2026-10-02T13:49:11.929Z [Output] [GARRISON_TEST] PASS 客戶端畫出瞭望塔的 6 支箭 | arrowParts=6
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 敵方衝車摧毀瞭望塔 | lastHP=12
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 瞭望塔被摧毀後 5 位駐軍出現 | units=5
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 放出的駐軍在瞭望塔原位置 | close=5
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 放出的駐軍彼此不重疊 | minimumGap=5.00
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 放出的都是弓箭手 | archer=5
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 駐軍一直計入人口（摧毀前後皆為 5） | before=5 after=5
+2026-10-02T13:49:20.548Z [Output] [GARRISON_TEST] PASS 失去瞭望塔後未被淘汰
+2026-10-02T13:49:23.061Z [Output] [GARRISON_TEST] PASS 放出的弓箭手自動迎戰衝車 | attacking=5 alive=5
+2026-10-02T13:49:23.580Z [Output] [GARRISON_TEST] PASS 城堡容量 20、初始駐軍 0 | capacity=20
+2026-10-02T13:49:23.580Z [Output] [GARRISON_TEST] PASS 城堡有攻擊力與射程 | attack=14 range=75
+2026-10-02T13:49:26.045Z [Output] [GARRISON_TEST] INFO Castle 每箭傷害 12；volley=1 hp 125->113；畫面箭矢最多 1 支
+2026-10-02T13:49:26.045Z [Output] [GARRISON_TEST] PASS 空的城堡會攻擊進入射程的敵軍（一次 1 支箭）
+2026-10-02T13:49:26.676Z [Output] [GARRISON_TEST] INFO 伺服器通知：這種單位不能進入這座建築。
+2026-10-02T13:49:51.238Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:49:51.238Z [Output] Info: Stack Begin
+2026-10-02T13:49:51.238Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:49:51.238Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:49:51.238Z [Output] Info: Stack End
+2026-10-02T13:49:55.230Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:49:55.230Z [Output] Info: Stack Begin
+2026-10-02T13:49:55.230Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:49:55.230Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:49:55.230Z [Output] Info: Stack End
+2026-10-02T13:49:55.916Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:49:55.917Z [Output] Info: Stack Begin
+2026-10-02T13:49:55.917Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:49:55.917Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:49:55.917Z [Output] Info: Stack End
+2026-10-02T13:49:57.003Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:49:57.003Z [Output] Info: Stack Begin
+2026-10-02T13:49:57.003Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:49:57.003Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:49:57.003Z [Output] Info: Stack End
+2026-10-02T13:49:58.699Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:49:58.699Z [Output] Info: Stack Begin
+2026-10-02T13:49:58.699Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:49:58.699Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:49:58.699Z [Output] Info: Stack End
+2026-10-02T13:50:09.953Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:09.953Z [Output] Info: Stack Begin
+2026-10-02T13:50:09.953Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:09.953Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:09.953Z [Output] Info: Stack End
+2026-10-02T13:50:11.655Z [Output] [GARRISON_TEST] FAIL 16 位弓箭手與騎士進入城堡 | garrison=0
+2026-10-02T13:50:11.655Z [Output] [GARRISON_TEST] INFO 城堡外的單位 ram order=move (移動) 相對位置 -2,39
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=garrison (駐紮) 相對位置 -2,-52
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 36,46
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 42,27
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 24,44
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 22,55
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 5,46
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 17,48
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 5,38
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=move (移動) 相對位置 4,42
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 cavalry order=nil (待命) 相對位置 36,27
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=move (移動) 相對位置 35,22
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 40,39
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 43,41
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 39,34
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 29,51
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 10,53
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] INFO 城堡外的單位 archer order=nil (待命) 相對位置 15,60
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] PASS 攻城衝車不能進城堡 | order=move
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] FAIL 城堡箭數 15（上限 15） | arrows=0
+2026-10-02T13:50:11.656Z [Output] [GARRISON_TEST] PASS 城堡駐軍計入人口 | before=18 after=18
+2026-10-02T13:50:15.939Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:15.939Z [Output] Info: Stack Begin
+2026-10-02T13:50:15.939Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:15.939Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:15.939Z [Output] Info: Stack End
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] INFO Castle 每箭傷害 12；volley=1 hp 125->77; volley=1 hp 61->17；畫面箭矢最多 1 支
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] FAIL 駐軍的城堡齊射 16 支且傷害逐箭結算
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] FAIL 客戶端畫出城堡的 16 支箭 | arrowParts=1
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] PASS 城堡全部離開 | garrison=0 units=17
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] PASS 離開城堡的單位都在占地外 | insideFootprint=0
+2026-10-02T13:50:15.975Z [Output] [GARRISON_TEST] DONE pass=54 fail=4
+2026-10-02T13:50:16.340Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:16.340Z [Output] Info: Stack Begin
+2026-10-02T13:50:16.340Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:16.340Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:16.340Z [Output] Info: Stack End
+2026-10-02T13:50:16.905Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:16.906Z [Output] Info: Stack Begin
+2026-10-02T13:50:16.906Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:16.906Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:16.906Z [Output] Info: Stack End
+2026-10-02T13:50:17.240Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:17.240Z [Output] Info: Stack Begin
+2026-10-02T13:50:17.240Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:17.240Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:17.240Z [Output] Info: Stack End
+2026-10-02T13:50:17.621Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:17.621Z [Output] Info: Stack Begin
+2026-10-02T13:50:17.621Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:17.621Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:17.621Z [Output] Info: Stack End
+2026-10-02T13:50:17.900Z [Error] Error: Players.Player1.PlayerScripts.RTSClient:97: attempt to call a nil value
+2026-10-02T13:50:17.901Z [Output] Info: Stack Begin
+2026-10-02T13:50:17.901Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 97 - function orderFeedback
+2026-10-02T13:50:17.901Z [Output] Info: Script 'Players.Player1.PlayerScripts.RTSClient', Line 633
+2026-10-02T13:50:17.901Z [Output] Info: Stack End
+2026-10-02T13:50:51.323Z [Output] [GARRISON_TEST] INFO 伺服器通知：電腦 1 已進入封建時代。

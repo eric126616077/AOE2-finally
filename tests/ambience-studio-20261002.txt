@@ -1,0 +1,9 @@
+2026-10-02T13:38:27.198Z,71.198723,a714,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-10-02T13:39:13.987Z,117.987953,4b08,6,Info [FLog::CreatorOutput] [AMB3] bladesLeft 554 bladesRight 438 idleHead scout=0.368 fps 59.666666666666664 {"tufts":493,"still":false,"smoke":0,"maxTufts":640,"fastActors":3,"writes":433,"buildings":1,"flocks":1,"writeBudget":420,"maxTrees":320,"ring":630,"trees":137}
+2026-10-02T13:39:38.570Z,142.570908,cb14,6,Info [FLog::CreatorOutput] [AMB4] sailTravel2s 4.738400459289551 smokeParts 4 villagerIdleHead  {"tufts":493,"still":false,"smoke":1,"maxTufts":640,"fastActors":4,"writes":465,"buildings":3,"flocks":2,"writeBudget":420,"maxTrees":320,"ring":630,"trees":137}
+
+== R4 2026-10-02 22:29-22:30 (Asia/Taipei) build/AOE2-ambience-r4-20261002.rbxlx, single-player Small / 0 AI / Rich, desktop Play ==
+[AMB5] cloth Banner 2.2x3.2=16.0deg; Banner 2.2x3.2=7.6deg; Flag 2.6x1.6=34.0deg | villagerHead 待命=0.378 待命=0.226 待命=0.220 | fps 59.75 bladesLR 556 456 {"tufts":506,"still":false,"smoke":0,"maxTufts":640,"fastActors":3,"writes":444,"buildings":1,"flocks":2,"writeBudget":420,"maxTrees":320,"ring":661,"trees":155}
+cloth = max rotation away from the first sampled frame within 4 s (not the amplitude). villagerHead = max Head travel in 4 s after AutoWork off + Stop.
+Studio log 0.741.19.7411056_20261002T142805Z_Studio_C0584_last.log: no game script errors (only Studio cloud-auth / asset fetch messages).
+Screenshots: tests/ambience-studio-r4-default-20261002.jpg (camera height 160), tests/ambience-studio-r4-zoomed-20261002.jpg (wheel in 6 ticks).

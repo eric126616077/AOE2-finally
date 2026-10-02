@@ -29,7 +29,7 @@ local skin=Color3.fromRGB(230,190,146)
 local leather=Color3.fromRGB(98,68,44)
 local buildingKinds={Castle=true,TownCenter=true,House=true,Barracks=true,ArcheryRange=true,Stable=true,
  SiegeWorkshop=true,Blacksmith=true,Market=true,University=true,Monastery=true,Mill=true,LumberCamp=true,
- MiningCamp=true,Tower=true,Wall=true,Wonder=true,Farm=true}
+ MiningCamp=true,Tower=true,Wall=true,Gate=true,Wonder=true,Farm=true}
 local unitKinds={villager=true,infantry=true,spearman=true,archer=true,skirmisher=true,scout=true,
  cavalry=true,monk=true,ram=true,mangonel=true,trebuchet=true}
 local teamColorNames={Roof=true,Banner=true,Flag=true,Tabard=true,Shield=true,Saddle=true,Ridge=true,

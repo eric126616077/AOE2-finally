@@ -1,0 +1,33 @@
+2026-10-02T15:56:27.241Z,3.241746,6498,6,Info [FLog::CreatorOutput] AssetQualityValidation Loaded!
+2026-10-02T15:56:29.450Z,5.450012,95ec,6,Info [FLog::CreatorOutput] Loading Lua Ribbon, was enabled? true
+2026-10-02T15:56:29.484Z,5.484792,bdcc,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-02T15:56:29.484Z,5.484792,bdcc,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-02T15:56:29.484Z,5.484792,bdcc,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-02T15:56:29.484Z,5.484792,bdcc,6,Warning [FLog::CreatorWarning] Warning: Failed to apply StyleRule property 'CornerRadius' from '>> .RoundedCorner8 ::UICorner': Unable to cast string to UDim
+2026-10-02T15:56:29.579Z,5.579961,5588,6,Error [FLog::CreatorError] Error: 從雲端載入 Beta 測試功能失敗：{"errors":[{"code":9002,"subcode":1,"message":"User is not authenticated"}]}
+2026-10-02T15:56:29.940Z,5.940573,bdcc,6,Error [FLog::CreatorError] Error: 無法從雲端載入外掛程式權限：{"errors":[{"code":9002,"subcode":1,"message":"User is not authenticated"}]}
+2026-10-02T15:56:29.940Z,5.940573,bdcc,6,Error [FLog::CreatorError] Error: 無法從雲端載入外掛程式權限：{"errors":[{"code":9002,"subcode":1,"message":"User is not authenticated"}]}
+2026-10-02T15:56:29.940Z,5.940573,bdcc,6,Error [FLog::CreatorError] Error: 從雲端載入已安裝外掛程式失敗：{"errors":[{"code":9002,"subcode":1,"message":"User is not authenticated"}]}
+2026-10-02T15:56:32.428Z,8.428105,6cd0,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverRecents] DiscoverRecentsBackfill request failed
+2026-10-02T15:56:33.031Z,9.031097,6498,6,Warning [FLog::CreatorWarning] Warning: [Roblox][ReimportPlugin.ReimportPlugin.Lib.Networking] Reimport failed to get groups: HttpResponse = {
+2026-10-02T15:56:33.115Z,9.115310,a8a8,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverTeamCreatePresence] DiscoverTeamCreatePresence experienced an error: HttpResponse = {
+2026-10-02T15:56:33.134Z,9.134326,982c,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverBuildSealStatus] DiscoverBuildSealStatus failed for universe 9550687645: HttpResponse = {
+2026-10-02T15:56:33.134Z,9.134326,982c,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverTeamCreateStatus] DiscoverTeamCreateStatus experienced an error: HttpResponse = {
+2026-10-02T15:56:33.135Z,9.135326,982c,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverSequestration] DiscoverSequestration experienced an error for universe 9550687645: HttpResponse = {
+2026-10-02T15:56:33.154Z,9.154343,6498,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverSequestration] DiscoverSequestration experienced an error for universe 9695213779: HttpResponse = {
+2026-10-02T15:56:33.154Z,9.154343,6498,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverBuildSealStatus] DiscoverBuildSealStatus failed for universe 9695213779: HttpResponse = {
+2026-10-02T15:56:33.522Z,9.522069,a8a8,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverCoreContent] DiscoverCoreContent experienced an error: HttpResponse = {
+2026-10-02T15:56:34.020Z,10.020313,5588,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverGameIcons] DiscoverGameIcons experienced an error: sabuiltin_StartPage.rbxm.StartPage.Src.Network.GameCache:26: Item has no Id or FilePath or ContentId
+2026-10-02T15:56:34.020Z,10.020313,5588,6,Warning [FLog::CreatorWarning] Warning: [Roblox][sabuiltin_StartPage.rbxm.StartPage.Src.Network.DiscoverGameIcons] DiscoverGameIcons experienced an error: sabuiltin_StartPage.rbxm.StartPage.Src.Network.GameCache:26: Item has no Id or FilePath or ContentId
+2026-10-02T15:57:03.963Z,39.963982,5588,6,Warning [FLog::CreatorWarning] Warning: Player:Move called, but player currently has no character.
+2026-10-02T15:57:05.927Z,41.927494,10d8,6,Error [FLog::CreatorError] Error: MeshContentProvider failed to process https://assetdelivery.roblox.com/v1/asset?id=78496787064587 because 'could not fetch'
+2026-10-02T15:57:06.447Z,42.447472,5274,6,Error [FLog::CreatorError] Error: HSRDataContentProvider failed to process https://assetdelivery.roblox.com/v1/asset?id=78969174228961 because 'could not fetch'
+2026-10-02T15:57:06.447Z,42.447472,10d8,6,Error [FLog::CreatorError] Error: MeshContentProvider failed to process https://assetdelivery.roblox.com/v1/asset?id=128436547668329 because 'could not fetch'
+2026-10-02T15:57:09.903Z,45.903324,431c,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-02T15:57:09.909Z,45.909325,9c24,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-02T15:57:43.392Z,79.392853,a8a8,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Small。
+2026-10-02T16:03:32.098Z,428.098602,4a64,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-02T16:03:32.098Z,428.098602,4a64,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-02T16:03:32.232Z,428.232391,3af0,6,Error [FLog::CreatorError] Error: Failed to load animation with sanitized ID rbxassetid://96806611330323: Animation failed to load, assetId: https://assetdelivery.roblox.com/v1/asset?id=96806611330323&serverplaceid=0
+2026-10-02T16:04:20.107Z,476.107086,982c,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|55883
+2026-10-02T16:04:20.107Z,476.107086,982c,6,Info [FLog::CreatorOutput] Disconnect from 127.0.0.1|55883

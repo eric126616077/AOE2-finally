@@ -5,6 +5,13 @@ local RunService=game:GetService("RunService")
 local TweenService=game:GetService("TweenService")
 local RS=game:GetService("ReplicatedStorage")
 local Rules=require(RS:WaitForChild("Shared"):WaitForChild("ConstructionVisualRules"))
+local Damage=require(RS:WaitForChild("Shared"):WaitForChild("DamageVisualRules"))
+local Config=require(RS:WaitForChild("GameData"):WaitForChild("GameConfig"))
+-- 整排放置的牆段數量多：不顯示鷹架、進度條與完工標示，只保留由下而上的顯現。
+local function quiet(model)
+ local data=Config.Buildings[model:GetAttribute("BuildingType")]
+ return data~=nil and data.line==true
+end
 local player=Players.LocalPlayer
 if script:GetAttribute("Initialized")==true or player:GetAttribute("RTSBuildingVisualsReady")==true then return end
 script:SetAttribute("Initialized",true)
@@ -12,6 +19,10 @@ local tracked,sites,folders,connections={},{},{},{}
 local effects=Instance.new("Folder")
 effects.Name="RTSConstructionEffects"
 effects.Parent=workspace
+local damageEffects=Instance.new("Folder")
+damageEffects.Name="RTSDamageEffects"
+damageEffects.Parent=workspace
+local damageOverlays,damageFires=0,0
 local completionCount=0
 local completionEffects={}
 local visibleSites=0
@@ -57,17 +68,21 @@ local function restore(observer)
  end
  table.clear(observer.parts)
 end
-local function cachePart(model,observer,part)
- if not part:IsA("BasePart") or part==model.PrimaryPart or part.Name=="Footprint" or part.Transparency>=1 or observer.parts[part] then return end
- local root=model.PrimaryPart
- if not root then return end
+-- Imported models need no metadata: ground detail, walls, then roof/top follow
+-- height; all original appearances return unchanged when complete or repaired.
+local function partStage(root,part)
  local height=math.max(root.Size.Y,1)
  local relative=root.CFrame:PointToObjectSpace(part.Position)
  local ratio=math.clamp((relative.Y+height/2)/height,0,1)
  local stage=part:GetAttribute("ConstructionStage")
- -- Imported models need no metadata: ground detail, walls, then roof/top follow
- -- height; all original appearances return unchanged when complete.
  if type(stage)~="number" then stage=ratio<=.08 and 0 or ratio<.58 and 1 or 3 end
+ return stage,ratio,relative
+end
+local function cachePart(model,observer,part)
+ if not part:IsA("BasePart") or part==model.PrimaryPart or part.Name=="Footprint" or part.Transparency>=1 or observer.parts[part] then return end
+ local root=model.PrimaryPart
+ if not root then return end
+ local stage,ratio=partStage(root,part)
  local entry={part=part,original=part.LocalTransparencyModifier,threshold=Rules.RevealAt(stage,ratio)}
  observer.parts[part]=entry
  setRevealed(entry,Rules.Progress(model:GetAttribute("ConstructionProgress"))>=entry.threshold,false)
@@ -192,10 +207,186 @@ local function completion(model)
  end
  task.delay(1.8,function() if sign.Parent then sign:Destroy() end end)
 end
+-- Portcullis: every "GateDoor" part rises into the gatehouse while the server reports GateOpen.
+-- Purely cosmetic; who may pass is decided on the server.
+local function gateDoors(model,observer,animate)
+ local root=model.PrimaryPart
+ if tracked[model]~=observer or not root then return end
+ local open=model:GetAttribute("GateOpen")==true
+ local raise=Vector3.new(0,root.Size.Y*5/16,0)
+ observer.gateBase=observer.gateBase or {}
+ for _,part in ipairs(model:GetDescendants()) do
+  if part:IsA("BasePart") and part.Name=="GateDoor" then
+   local base=observer.gateBase[part] or part.CFrame
+   observer.gateBase[part]=base
+   local goal=open and base+raise or base
+   if animate and player:GetAttribute("ReducedMotion")~=true and inView(root) then
+    TweenService:Create(part,TweenInfo.new(.45,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{CFrame=goal}):Play()
+   else part.CFrame=goal end
+  end
+ end
+end
+-- Damage states of a completed building: at half health part of the roof and trim breaks away,
+-- the rest is sooted, rubble lies around it and a fire starts; at a third the holes, soot,
+-- rubble and fires grow. Everything is local and returns to the original look when repaired.
+local charcoal=Color3.fromRGB(38,34,31)
+local function restoreDamagedPart(part,entry)
+ if entry.hidden then part.LocalTransparencyModifier=entry.original
+ elseif entry.soot and part.Color==entry.soot then part.Color=entry.color end
+end
+local function clearDamage(observer)
+ local parts=observer.damageParts
+ if parts then
+  observer.damageParts=nil
+  for part,entry in pairs(parts) do restoreDamagedPart(part,entry) end
+ end
+ if observer.damageOverlay then
+  observer.damageOverlay:Destroy()
+  observer.damageOverlay=nil
+  damageOverlays-=1
+  damageFires-=observer.damageFires
+  observer.damageFires=0
+ end
+end
+local function blaze(site,position,scale,heavy)
+ local holder=cosmetic("Blaze",Vector3.new(scale,.2,scale),CFrame.new(position),charcoal,nil,site)
+ holder.Transparency=1
+ local flame=Instance.new("ParticleEmitter")
+ flame.Name="Flame"
+ flame.Texture="rbxasset://textures/particles/fire_main.dds"
+ flame.Color=ColorSequence.new(Color3.fromRGB(255,196,92),Color3.fromRGB(214,72,30))
+ flame.Size=NumberSequence.new(scale*1.3,scale*.4)
+ flame.Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(.6,.3),NumberSequenceKeypoint.new(1,1)})
+ flame.Lifetime=NumberRange.new(.8,1.4)
+ flame.Rate=heavy and 22 or 12
+ flame.Speed=NumberRange.new(scale*1.4,scale*2.2)
+ flame.SpreadAngle=Vector2.new(14,14)
+ flame.EmissionDirection=Enum.NormalId.Top
+ flame.Rotation=NumberRange.new(0,360)
+ flame.LightEmission,flame.LightInfluence=.6,0
+ flame.Parent=holder
+ local smoke=Instance.new("ParticleEmitter")
+ smoke.Name="Smoke"
+ smoke.Texture="rbxasset://textures/particles/smoke_main.dds"
+ smoke.Color=ColorSequence.new(Color3.fromRGB(48,45,42),Color3.fromRGB(110,106,100))
+ smoke.Size=NumberSequence.new(scale*1.2,scale*3.2)
+ smoke.Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,.3),NumberSequenceKeypoint.new(.6,.6),NumberSequenceKeypoint.new(1,1)})
+ smoke.Lifetime=NumberRange.new(3,4.5)
+ smoke.Rate=heavy and 7 or 4
+ smoke.Speed=NumberRange.new(3,4.5)
+ smoke.SpreadAngle=Vector2.new(12,12)
+ smoke.EmissionDirection=Enum.NormalId.Top
+ smoke.Rotation=NumberRange.new(0,360)
+ smoke.RotSpeed=NumberRange.new(-20,20)
+ smoke.LightEmission,smoke.LightInfluence=0,1
+ smoke.Parent=holder
+ return holder,smoke
+end
+local function damageOverlay(model,observer,stage,spots,worsened)
+ if damageOverlays>=Damage.MaxOverlays then return end
+ local root=model.PrimaryPart
+ local line=quiet(model)
+ local site=Instance.new("Model")
+ site.Name="Damage_"..model.Name
+ observer.damageOverlay,observer.damageFires=site,0
+ damageOverlays+=1
+ local frame=root.CFrame*CFrame.new(0,-root.Size.Y/2,0)
+ local w,d,h=root.Size.X,root.Size.Z,root.Size.Y
+ local seed=math.floor(Damage.Rank(root.Position.X,0,root.Position.Z)*997)
+ local grain=math.clamp(math.min(w,d)/10,.6,1.6)
+ -- The stage 1 pieces keep their place at stage 2; later indices only add to them.
+ for index=1,Damage.Rubble(stage,line) do
+  local along,size,spin=Damage.Rank(index,seed,1),Damage.Rank(index,seed,2),Damage.Rank(index,seed,3)
+  local side=index%2==0 and 1 or -1
+  local edge=(.8+1.3*size)*grain
+  local x,z
+  if index%4<2 then x,z=(along-.5)*w,side*(d/2+.5*grain) else x,z=side*(w/2+.5*grain),(along-.5)*d end
+  local charred=index%3==0
+  cosmetic("Rubble",Vector3.new(edge,edge*.55,edge*(.6+.5*spin)),frame*CFrame.new(x,edge*.22,z)*CFrame.Angles(0,spin*math.pi*2,(size-.5)*.5),
+   charred and charcoal or Color3.fromRGB(150,144,132),charred and Enum.Material.Wood or Enum.Material.Slate,site)
+ end
+ if stage>=2 and not line then
+  for _,side in ipairs({-1,1}) do
+   local foot=frame*Vector3.new(side*w*.28,0,side*(d/2+1.2*grain))
+   local top=frame*Vector3.new(side*w*.18,h*.42,side*d*.42)
+   cosmetic("CharredBeam",Vector3.new(.5*grain,.5*grain,(top-foot).Magnitude),CFrame.lookAt((foot+top)/2,top),charcoal,nil,site)
+  end
+ end
+ local puff
+ if player:GetAttribute("ReducedMotion")~=true then
+  local scale=math.clamp(math.min(w,d)*.22,2,5)
+  for index=1,Damage.Fires(stage,line) do
+   if damageFires>=Damage.MaxFires then break end
+   -- Burn where a roof piece fell; a model with nothing to lose burns on its upper part.
+   local position=spots[index] and spots[index]+Vector3.new(0,1,0) or frame*Vector3.new((Damage.Rank(index,seed,4)-.5)*w*.6,h*.7,(Damage.Rank(index,seed,5)-.5)*d*.6)
+   local holder,smoke=blaze(site,position,scale,stage>=2)
+   if index==1 then
+    puff=smoke
+    if stage>=2 then
+     local glow=Instance.new("PointLight")
+     glow.Color,glow.Range,glow.Brightness,glow.Shadows=Color3.fromRGB(255,150,70),16,1,false
+     glow.Parent=holder
+    end
+   end
+   observer.damageFires+=1
+   damageFires+=1
+  end
+ end
+ site.Parent=damageEffects
+ if puff and worsened and inView(root) then puff:Emit(8) end
+end
+local function applyDamage(model,observer,stage,worsened)
+ local root=model.PrimaryPart
+ local parts,roof,trim={}, {}, {}
+ observer.damageParts=parts
+ for _,part in ipairs(model:GetDescendants()) do
+  if part:IsA("BasePart") and part~=root and part.Name~="Footprint" and part.Transparency<1 then
+   local constructionStage,_,relative=partStage(root,part)
+   local entry={rank=Damage.Rank(relative.X,relative.Y,relative.Z)}
+   parts[part]=entry
+   -- Owner colors (with the pole that carries them) and the gate leaf stay readable in every state.
+   if part:GetAttribute("TeamColorPart")==true or part.Name=="GateDoor" or part.Name=="Flagpole" then entry.keep=true
+   elseif constructionStage==3 then table.insert(roof,part)
+   elseif constructionStage==2 then table.insert(trim,part) end
+  end
+ end
+ local spots={}
+ for _,group in ipairs({roof,trim}) do
+  table.sort(group,function(a,b) return parts[a].rank<parts[b].rank end)
+  for index=1,Damage.HideCount(stage,group==roof and 3 or 2,#group) do
+   local part=group[index]
+   local entry=parts[part]
+   entry.hidden,entry.original=true,part.LocalTransparencyModifier
+   part.LocalTransparencyModifier=1
+   table.insert(spots,part.Position)
+  end
+ end
+ for part,entry in pairs(parts) do
+  if not entry.hidden and not entry.keep then
+   entry.color=part.Color
+   part.Color=entry.color:Lerp(charcoal,Damage.Soot(stage,entry.rank))
+   -- Read back the stored value, so a later server recolor is recognised and left alone.
+   entry.soot=part.Color
+  end
+ end
+ damageOverlay(model,observer,stage,spots,worsened)
+end
+local function refreshDamage(model,observer,constructing)
+ local stage=0
+ if not constructing and model.PrimaryPart then
+  stage=Damage.Stage(model:GetAttribute("HP"),model:GetAttribute("MaxHP"),observer.damageStage)
+ end
+ if stage==observer.damageStage and not observer.damageDirty then return end
+ local worsened=observer.hadUpdate and stage>observer.damageStage
+ clearDamage(observer)
+ observer.damageStage,observer.damageDirty=stage,false
+ if stage>0 then applyDamage(model,observer,stage,worsened) end
+end
 local function update(model,observer)
  if tracked[model]~=observer then return end
  local constructing=model:GetAttribute("UnderConstruction")==true or model:GetAttribute("Complete")==false
  if constructing then
+  refreshDamage(model,observer,true)
   if not observer.constructing then
    observer.constructing=true
    for _,part in ipairs(model:GetDescendants()) do cachePart(model,observer,part) end
@@ -208,9 +399,13 @@ local function update(model,observer)
   end
   if observer.overlay then updateOverlay(model,observer) end
  else
-  if observer.constructing then restore(observer); destroyOverlay(observer); completion(model) end
+  if observer.constructing then
+   restore(observer); destroyOverlay(observer)
+   if not quiet(model) then completion(model) end
+  end
   observer.constructing=false
   sites[model]=nil
+  refreshDamage(model,observer,false)
  end
  observer.hadUpdate=true
 end
@@ -229,12 +424,13 @@ local function untrack(model)
  for _,connection in ipairs(observer.connections) do connection:Disconnect() end
  restore(observer)
  destroyOverlay(observer)
+ clearDamage(observer)
 end
 local function track(model)
  if not model:IsA("Model") or tracked[model] then return end
- local observer={parts={},connections={},hadUpdate=false}
+ local observer={parts={},connections={},hadUpdate=false,damageStage=0,damageFires=0}
  tracked[model]=observer
- for _,attribute in ipairs({"Complete","UnderConstruction","ConstructionProgress","BuilderCount"}) do
+ for _,attribute in ipairs({"Complete","UnderConstruction","ConstructionProgress","BuilderCount","HP","MaxHP"}) do
   table.insert(observer.connections,model:GetAttributeChangedSignal(attribute):Connect(function() schedule(model,observer) end))
  end
  table.insert(observer.connections,model:GetPropertyChangedSignal("PrimaryPart"):Connect(function()
@@ -243,14 +439,29 @@ local function track(model)
    restore(observer)
    for _,part in ipairs(model:GetDescendants()) do cachePart(model,observer,part) end
   end
+  observer.damageDirty=true
   schedule(model,observer)
  end))
  table.insert(observer.connections,model.DescendantAdded:Connect(function(part)
   if observer.constructing then cachePart(model,observer,part) end
+  -- Late replicated parts and a re-staged farm take the current damage state in one deferred pass.
+  if observer.damageStage>0 and part:IsA("BasePart") then observer.damageDirty=true; schedule(model,observer) end
+  if part.Name=="GateDoor" and model:GetAttribute("GateOpen")==true then task.defer(gateDoors,model,observer,false) end
  end))
+ if model:GetAttribute("BuildingType")=="Gate" then
+  table.insert(observer.connections,model:GetAttributeChangedSignal("GateOpen"):Connect(function() gateDoors(model,observer,true) end))
+  gateDoors(model,observer,false)
+ end
  table.insert(observer.connections,model.DescendantRemoving:Connect(function(part)
   local entry=observer.parts[part]
   if entry then cancelTween(entry); part.LocalTransparencyModifier=entry.original; observer.parts[part]=nil end
+  local damaged=observer.damageParts and observer.damageParts[part]
+  if damaged then
+   restoreDamagedPart(part,damaged)
+   observer.damageParts[part]=nil
+   observer.damageDirty=true
+   schedule(model,observer)
+  end
  end))
  update(model,observer)
 end
@@ -279,11 +490,15 @@ table.insert(connections,RunService.Heartbeat:Connect(function(dt)
  -- buildings and resources never take part in this camera visibility pass.
  for model,observer in pairs(sites) do
   if workspace:GetAttribute("MatchPhase")=="Playing" and inView(model.PrimaryPart) then
-   if not observer.overlay then overlay(model,observer); updateOverlay(model,observer) end
+   if not observer.overlay and not quiet(model) then overlay(model,observer); updateOverlay(model,observer) end
   else destroyOverlay(observer) end
  end
 end))
 table.insert(connections,player:GetAttributeChangedSignal("ReducedMotion"):Connect(function()
+ -- Fire and smoke are motion: rebuild damaged buildings with or without them.
+ for model,observer in pairs(tracked) do
+  if observer.damageStage>0 then observer.damageDirty=true; schedule(model,observer) end
+ end
  if player:GetAttribute("ReducedMotion")~=true then return end
  for _,observer in pairs(sites) do
   for _,entry in pairs(observer.parts) do
@@ -317,7 +532,16 @@ if RunService:IsStudio() then
     stage=Rules.Stage(model:GetAttribute("ConstructionProgress")),parts=partCount,hiddenParts=hiddenCount,
     overlay=observer.overlay~=nil,scaffoldVisible=observer.scaffoldVisible==true,
     label=observer.label and observer.label.Text or nil}
+   local damagedParts,brokenParts,sootedParts=0,0,0
+   for _,entry in pairs(observer.damageParts or {}) do
+    damagedParts+=1
+    if entry.hidden then brokenParts+=1 elseif entry.soot then sootedParts+=1 end
+   end
+   result.damage={stage=observer.damageStage,parts=damagedParts,brokenParts=brokenParts,sootedParts=sootedParts,
+    overlay=observer.damageOverlay~=nil,fires=observer.damageFires,
+    effectParts=observer.damageOverlay and #observer.damageOverlay:GetChildren() or 0}
   end
+  result.damageOverlays,result.damageFires=damageOverlays,damageFires
   return result
  end
  probe.Parent=script.Parent
@@ -328,6 +552,7 @@ script.Destroying:Connect(function()
  for current in pairs(folders) do detach(current) end
  for model in pairs(tracked) do untrack(model) end
  effects:Destroy()
+ damageEffects:Destroy()
  if probe then probe:Destroy() end
  player:SetAttribute("RTSBuildingVisualsReady",false)
 end)

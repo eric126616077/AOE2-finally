@@ -115,6 +115,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Combat acquisition / ownership tests failed.' }
     & $runtime tests/monk.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Monk conversion / heal / faith tests failed.' }
+    & $runtime tests/garrison.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Garrison capacity / entry / extra-arrow tests failed.' }
     & $runtime tests/melee.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Melee attack approach geometry tests failed.' }
     & $runtime tests/approach.spec.lua
@@ -192,10 +194,14 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Gathering conservation / delivery tests failed.' }
     & $runtime tests/construction.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Construction rules tests failed.' }
+    & $runtime tests/walls.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Wall line / gate passage geometry tests failed.' }
     & $runtime tests/construction_hp.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Construction health conservation tests failed.' }
     & $runtime tests/construction_visuals.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Construction reveal stages / visible effect budget tests failed.' }
+    & $runtime tests/damage_visuals.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Building damage state / break share / effect budget tests failed.' }
     $factory = Get-Content src/ServerScriptService/ServerModules/ModelFactory.lua -Raw
     $factory = $factory.Replace('local Art=require(ReplicatedStorage.Shared.Art)', '')
     $factory = $factory.Replace('local Config=require(ReplicatedStorage.GameData.GameConfig)', '')
@@ -209,6 +215,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Performance observer accounting tests failed.' }
     & $runtime tests/motion.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Buffered unit motion / visible pose budget tests failed.' }
+    & $runtime tests/ambience.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Ambience wind / grass layout tests failed.' }
     & $runtime tests/touch.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Touch rules tests failed.' }
     & $runtime tests/tutorial.spec.lua
@@ -217,6 +225,10 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Cosmetic audio playback rules tests failed.' }
     & $runtime tests/cursor.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Context cursor rules tests failed.' }
+    & $runtime tests/selection.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Drag-box selection rules tests failed.' }
+    & $runtime tests/hotkey.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Hotkey binding rules tests failed.' }
     $world = Get-Content src/ServerScriptService/ServerModules/WorldGenerator.lua -Raw
     $world = $world.Replace('local Config = require(game.ReplicatedStorage.GameData.GameConfig)', '')
     $worldTests = Get-Content tests/world.spec.lua -Raw

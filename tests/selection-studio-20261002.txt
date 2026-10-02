@@ -1,0 +1,16 @@
+2026-10-02T14:33:32.423Z,124.423309,ae28,6,Info [FLog::CreatorOutput] [RTS] 對局開始：1 名玩家、0 個電腦陣營，地圖 Medium。
+2026-10-02T14:34:18.198Z,170.198654,a26c,6,Info [FLog::CreatorOutput] > local p=game.Players:GetPlayers()[1]; local probe=game.ServerScriptService.RTSBattleProbe; local h=p:GetAttribute("HomePosition"); local n=0; for i=0,39 do local u=probe:Invoke("spawn",p.UserId,(i%4==3) and "archer" or "infantry",h+Vector3.new(-21+(i%8)*6,0,28+math.floor(i/8)*6)); if u then n+=1 end end print("[SELECTION_TEST] spawned",n,"home",h)
+2026-10-02T14:34:18.212Z,170.212830,8374,6,Info [FLog::CreatorOutput] [SELECTION_TEST] spawned 40 home -344, 0, -344
+2026-10-02T14:34:43.955Z,195.955963,a26c,6,Info [FLog::CreatorOutput] > task.spawn(function() local R=game:GetService("RunService"); local function seg(sec) local t={}; local c=R.RenderStepped:Connect(function(dt) t[#t+1]=dt end); task.wait(sec); c:Disconnect(); table.sort(t); local s=0; for _,v in ipairs(t) do s+=v end; return string.format("frames=%d mean=%.1fms p95=%.1fms worst=%.1fms",#t,s/#t*1000,t[math.ceil(#t*0.95)]*1000,t[#t]*1000) end; local a=seg(6); task.wait(2); local b=seg(11); task.wait(3); local hl=0; for _,d in ipairs(workspace.Units:GetDescendants()) do if d:IsA("Highlight") t
+2026-10-02T14:35:06.007Z,218.007751,886c,6,Info [FLog::CreatorOutput] [SELECTION_TEST] idle frames=291 mean=20.7ms p95=23.4ms worst=29.9ms | dragging frames=528 mean=20.8ms p95=23.7ms worst=63.4ms | highlights=24 rings=42
+2026-10-02T14:37:10.424Z,342.424713,a26c,6,Info [FLog::CreatorOutput] > local U=game:GetService("UserInputService"); U.InputEnded:Connect(function(i) if i.UserInputType==Enum.UserInputType.MouseButton1 then print("[SELECTION_TEST] release shiftL",U:IsKeyDown(Enum.KeyCode.LeftShift),"shiftR",U:IsKeyDown(Enum.KeyCode.RightShift)) end end); U.InputBegan:Connect(function(i) if i.UserInputType==Enum.UserInputType.Keyboard then print("[SELECTION_TEST] key",i.KeyCode.Name) end end)
+2026-10-02T14:37:12.707Z,344.707947,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:13.878Z,345.878387,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] key LeftShift
+2026-10-02T14:37:13.898Z,345.898376,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:15.430Z,347.430573,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:16.466Z,348.466217,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] key LeftShift
+2026-10-02T14:37:30.440Z,362.440033,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:33.492Z,365.492584,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:37.409Z,369.409607,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:40.416Z,372.416138,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false
+2026-10-02T14:37:49.365Z,381.365265,b230,6,Info [FLog::CreatorOutput] [SELECTION_TEST] release shiftL false shiftR false

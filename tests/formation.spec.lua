@@ -98,6 +98,8 @@ local AutoWork={units={},hold=function(unit) holds[unit]=true end,
  isFarm=function() return false end,farmFree=function() return true end,claimFarm=function() return false end,reseed=function() return false end}
 -- Monk handlers are defined inside the extracted order body; formation checks never select monks.
 local Monk={}
+-- Garrison rules live outside the extracted body; these checks never target a garrisonable building.
+local Garrison={order=function() return false end}
 local mode,externalNeighbors="clear",{}
 local function model(x,z,ownerId,radius)
  local value={X=x,Z=z,Parent=units,attributes={OwnerId=ownerId,HP=40,Radius=radius or 2,UnitType="villager",Formation="Box",FormationForwardX=0,FormationForwardZ=-1}}

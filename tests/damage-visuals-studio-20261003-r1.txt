@@ -1,0 +1,130 @@
+== 0.741.19.7411056_20261002T160845Z_Studio_58ACD_last.log
+2026-10-02T16:08:57.736Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
+== 0.741.19.7411056_20261002T160851Z_Studio_9DA36_last.log
+2026-10-02T16:08:58.061Z [Output] [DAMAGE_TEST] PASS 開局時沒有受損疊加物件 | children=0
+2026-10-02T16:08:58.061Z [Output] [DAMAGE_TEST] PASS 滿血市鎮中心為完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:08:58.089Z [Output] [DAMAGE_TEST] INFO 伺服器通知：自動工作已關閉：村民只執行你下的指令。
+2026-10-02T16:09:01.324Z [Output] [DAMAGE_TEST] PASS 房屋：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:01.390Z [Output] [DAMAGE_TEST] PASS 房屋：50% 進入受損 | stage=1 broken=6 sooted=34 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:01.391Z [Output] [DAMAGE_TEST] PASS 房屋：受損的火數 | fires=1
+2026-10-02T16:09:01.391Z [Output] [DAMAGE_TEST] PASS 房屋：受損時玩家色部件仍可見 | 3 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:01.457Z [Output] [DAMAGE_TEST] PASS 房屋：33% 進入殘破 | stage=2 broken=14 sooted=26 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:01.457Z [Output] [DAMAGE_TEST] PASS 房屋：殘破的火數 | fires=3
+2026-10-02T16:09:01.457Z [Output] [DAMAGE_TEST] INFO 房屋 脫落部件：受損 6、殘破 14（共 43 個可見部件）
+2026-10-02T16:09:01.458Z [Output] [DAMAGE_TEST] PASS 房屋：殘破時玩家色部件仍可見 | 3 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:01.524Z [Output] [DAMAGE_TEST] PASS 房屋：修到 36% 仍殘破（緩衝） | stage=2 broken=14 sooted=26 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:01.590Z [Output] [DAMAGE_TEST] PASS 房屋：修到 45% 退回受損 | stage=1 broken=6 sooted=34 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:01.640Z [Output] [DAMAGE_TEST] PASS 房屋：修到 52% 仍受損（緩衝） | stage=1 broken=6 sooted=34 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:01.706Z [Output] [DAMAGE_TEST] PASS 房屋：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:01.755Z [Output] [DAMAGE_TEST] PASS 房屋：滿血後顏色與透明度完全還原 | 44 個部件，0 個不同
+2026-10-02T16:09:01.823Z [Output] [DAMAGE_TEST] PASS 市鎮中心：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:01.874Z [Output] [DAMAGE_TEST] PASS 市鎮中心：50% 進入受損 | stage=1 broken=11 sooted=60 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:01.874Z [Output] [DAMAGE_TEST] PASS 市鎮中心：受損的火數 | fires=1
+2026-10-02T16:09:01.874Z [Output] [DAMAGE_TEST] PASS 市鎮中心：受損時玩家色部件仍可見 | 8 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:01.941Z [Output] [DAMAGE_TEST] PASS 市鎮中心：33% 進入殘破 | stage=2 broken=24 sooted=47 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:01.941Z [Output] [DAMAGE_TEST] PASS 市鎮中心：殘破的火數 | fires=3
+2026-10-02T16:09:01.941Z [Output] [DAMAGE_TEST] INFO 市鎮中心 脫落部件：受損 11、殘破 24（共 79 個可見部件）
+2026-10-02T16:09:01.941Z [Output] [DAMAGE_TEST] PASS 市鎮中心：殘破時玩家色部件仍可見 | 8 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:02.004Z [Output] [DAMAGE_TEST] PASS 市鎮中心：修到 36% 仍殘破（緩衝） | stage=2 broken=24 sooted=47 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:02.073Z [Output] [DAMAGE_TEST] PASS 市鎮中心：修到 45% 退回受損 | stage=1 broken=11 sooted=60 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:02.139Z [Output] [DAMAGE_TEST] PASS 市鎮中心：修到 52% 仍受損（緩衝） | stage=1 broken=11 sooted=60 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:02.190Z [Output] [DAMAGE_TEST] PASS 市鎮中心：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:02.257Z [Output] [DAMAGE_TEST] PASS 市鎮中心：滿血後顏色與透明度完全還原 | 80 個部件，0 個不同
+2026-10-02T16:09:02.307Z [Output] [DAMAGE_TEST] PASS 城堡：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:02.373Z [Output] [DAMAGE_TEST] PASS 城堡：50% 進入受損 | stage=1 broken=19 sooted=96 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:02.373Z [Output] [DAMAGE_TEST] PASS 城堡：受損的火數 | fires=1
+2026-10-02T16:09:02.373Z [Output] [DAMAGE_TEST] PASS 城堡：受損時玩家色部件仍可見 | 13 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:02.423Z [Output] [DAMAGE_TEST] PASS 城堡：33% 進入殘破 | stage=2 broken=44 sooted=71 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:02.423Z [Output] [DAMAGE_TEST] PASS 城堡：殘破的火數 | fires=3
+2026-10-02T16:09:02.424Z [Output] [DAMAGE_TEST] INFO 城堡 脫落部件：受損 19、殘破 44（共 128 個可見部件）
+2026-10-02T16:09:02.424Z [Output] [DAMAGE_TEST] PASS 城堡：殘破時玩家色部件仍可見 | 13 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:02.489Z [Output] [DAMAGE_TEST] PASS 城堡：修到 36% 仍殘破（緩衝） | stage=2 broken=44 sooted=71 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:02.539Z [Output] [DAMAGE_TEST] PASS 城堡：修到 45% 退回受損 | stage=1 broken=19 sooted=96 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:02.606Z [Output] [DAMAGE_TEST] PASS 城堡：修到 52% 仍受損（緩衝） | stage=1 broken=19 sooted=96 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:02.655Z [Output] [DAMAGE_TEST] PASS 城堡：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:02.723Z [Output] [DAMAGE_TEST] PASS 城堡：滿血後顏色與透明度完全還原 | 129 個部件，0 個不同
+2026-10-02T16:09:02.773Z [Output] [DAMAGE_TEST] PASS 石牆：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:02.840Z [Output] [DAMAGE_TEST] PASS 石牆：50% 進入受損 | stage=1 broken=1 sooted=8 fires=0 effectParts=1 overlay=true
+2026-10-02T16:09:02.840Z [Output] [DAMAGE_TEST] PASS 石牆：受損的火數 | fires=0
+2026-10-02T16:09:02.840Z [Output] [DAMAGE_TEST] PASS 石牆：受損時玩家色部件仍可見 | 1 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:02.906Z [Output] [DAMAGE_TEST] PASS 石牆：33% 進入殘破 | stage=2 broken=3 sooted=6 fires=0 effectParts=2 overlay=true
+2026-10-02T16:09:02.906Z [Output] [DAMAGE_TEST] PASS 石牆：殘破的火數 | fires=0
+2026-10-02T16:09:02.906Z [Output] [DAMAGE_TEST] INFO 石牆 脫落部件：受損 1、殘破 3（共 10 個可見部件）
+2026-10-02T16:09:02.906Z [Output] [DAMAGE_TEST] PASS 石牆：殘破時玩家色部件仍可見 | 1 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:02.971Z [Output] [DAMAGE_TEST] PASS 石牆：修到 36% 仍殘破（緩衝） | stage=2 broken=3 sooted=6 fires=0 effectParts=2 overlay=true
+2026-10-02T16:09:03.040Z [Output] [DAMAGE_TEST] PASS 石牆：修到 45% 退回受損 | stage=1 broken=1 sooted=8 fires=0 effectParts=1 overlay=true
+2026-10-02T16:09:03.107Z [Output] [DAMAGE_TEST] PASS 石牆：修到 52% 仍受損（緩衝） | stage=1 broken=1 sooted=8 fires=0 effectParts=1 overlay=true
+2026-10-02T16:09:03.173Z [Output] [DAMAGE_TEST] PASS 石牆：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:03.240Z [Output] [DAMAGE_TEST] PASS 石牆：滿血後顏色與透明度完全還原 | 11 個部件，0 個不同
+2026-10-02T16:09:03.306Z [Output] [DAMAGE_TEST] PASS 城門：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:03.372Z [Output] [DAMAGE_TEST] PASS 城門：50% 進入受損 | stage=1 broken=3 sooted=18 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:03.372Z [Output] [DAMAGE_TEST] PASS 城門：受損的火數 | fires=1
+2026-10-02T16:09:03.372Z [Output] [DAMAGE_TEST] PASS 城門：受損時玩家色部件仍可見 | 10 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:03.422Z [Output] [DAMAGE_TEST] PASS 城門：33% 進入殘破 | stage=2 broken=6 sooted=15 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:03.422Z [Output] [DAMAGE_TEST] PASS 城門：殘破的火數 | fires=3
+2026-10-02T16:09:03.422Z [Output] [DAMAGE_TEST] INFO 城門 脫落部件：受損 3、殘破 6（共 31 個可見部件）
+2026-10-02T16:09:03.422Z [Output] [DAMAGE_TEST] PASS 城門：殘破時玩家色部件仍可見 | 10 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:03.489Z [Output] [DAMAGE_TEST] PASS 城門：修到 36% 仍殘破（緩衝） | stage=2 broken=6 sooted=15 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:03.539Z [Output] [DAMAGE_TEST] PASS 城門：修到 45% 退回受損 | stage=1 broken=3 sooted=18 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:03.605Z [Output] [DAMAGE_TEST] PASS 城門：修到 52% 仍受損（緩衝） | stage=1 broken=3 sooted=18 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:03.673Z [Output] [DAMAGE_TEST] PASS 城門：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:03.739Z [Output] [DAMAGE_TEST] PASS 城門：滿血後顏色與透明度完全還原 | 32 個部件，0 個不同
+2026-10-02T16:09:03.806Z [Output] [DAMAGE_TEST] PASS 農田：60% 仍完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:03.872Z [Output] [DAMAGE_TEST] PASS 農田：50% 進入受損 | stage=1 broken=3 sooted=16 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:03.872Z [Output] [DAMAGE_TEST] PASS 農田：受損的火數 | fires=1
+2026-10-02T16:09:03.872Z [Output] [DAMAGE_TEST] PASS 農田：受損時玩家色部件仍可見 | 2 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:03.938Z [Output] [DAMAGE_TEST] PASS 農田：33% 進入殘破 | stage=2 broken=7 sooted=12 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:03.939Z [Output] [DAMAGE_TEST] PASS 農田：殘破的火數 | fires=3
+2026-10-02T16:09:03.939Z [Output] [DAMAGE_TEST] INFO 農田 脫落部件：受損 3、殘破 7（共 21 個可見部件）
+2026-10-02T16:09:03.939Z [Output] [DAMAGE_TEST] PASS 農田：殘破時玩家色部件仍可見 | 2 個玩家色／旗桿／門扇，0 個被隱藏
+2026-10-02T16:09:04.006Z [Output] [DAMAGE_TEST] PASS 農田：修到 36% 仍殘破（緩衝） | stage=2 broken=7 sooted=12 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:04.073Z [Output] [DAMAGE_TEST] PASS 農田：修到 45% 退回受損 | stage=1 broken=3 sooted=16 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:04.139Z [Output] [DAMAGE_TEST] PASS 農田：修到 52% 仍受損（緩衝） | stage=1 broken=3 sooted=16 fires=1 effectParts=4 overlay=true
+2026-10-02T16:09:04.189Z [Output] [DAMAGE_TEST] PASS 農田：修到 55% 恢復完好 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:09:04.256Z [Output] [DAMAGE_TEST] PASS 農田：滿血後顏色與透明度完全還原 | 22 個部件，0 個不同
+2026-10-02T16:09:04.256Z [Output] [DAMAGE_TEST] PASS 全部修復後沒有殘留疊加物件 | children=0
+2026-10-02T16:09:04.306Z [Output] [DAMAGE_TEST] PASS 受損房屋有火與煙的發射器 | rbxasset://textures/particles/fire_main.dds / rbxasset://textures/particles/smoke_main.dds
+2026-10-02T16:09:04.306Z [Output] [DAMAGE_TEST] INFO 房屋火焰位置 -161.6999969482422, 9.100000381469727, -206，占地 16, 14, 16
+2026-10-02T16:09:04.306Z [Output] [DAMAGE_TEST] PASS 受損階段沒有火光
+2026-10-02T16:09:04.306Z [Output] [DAMAGE_TEST] HOLD house-stage1 14
+2026-10-02T16:09:18.322Z [Output] [DAMAGE_TEST] RELEASE house-stage1
+2026-10-02T16:09:18.387Z [Output] [DAMAGE_TEST] PASS 殘破房屋：1 個火光、2 根焦梁、6 塊瓦礫 | lights=1 beams=2 rubble=6
+2026-10-02T16:09:18.387Z [Output] [DAMAGE_TEST] HOLD house-stage2 14
+2026-10-02T16:09:32.389Z [Output] [DAMAGE_TEST] RELEASE house-stage2
+2026-10-02T16:09:32.703Z [Output] [DAMAGE_TEST] PASS 減少動態效果：火與煙消失、破損與瓦礫保留 | stage=2 broken=14 sooted=26 fires=0 effectParts=8 overlay=true
+2026-10-02T16:09:33.022Z [Output] [DAMAGE_TEST] PASS 關閉減少動態效果後火恢復 | stage=2 broken=14 sooted=26 fires=3 effectParts=11 overlay=true
+2026-10-02T16:09:33.405Z [Output] [DAMAGE_TEST] HOLD towncenter-stage1 12
+2026-10-02T16:09:45.421Z [Output] [DAMAGE_TEST] RELEASE towncenter-stage1
+2026-10-02T16:09:45.488Z [Output] [DAMAGE_TEST] HOLD towncenter-stage2 12
+2026-10-02T16:09:57.504Z [Output] [DAMAGE_TEST] RELEASE towncenter-stage2
+2026-10-02T16:09:57.573Z [Output] [DAMAGE_TEST] HOLD castle-stage2 12
+2026-10-02T16:10:09.587Z [Output] [DAMAGE_TEST] RELEASE castle-stage2
+2026-10-02T16:10:09.702Z [Output] [DAMAGE_TEST] HOLD wall-gate-stage2 12
+2026-10-02T16:10:21.720Z [Output] [DAMAGE_TEST] RELEASE wall-gate-stage2
+2026-10-02T16:10:22.020Z [Output] [DAMAGE_TEST] INFO 農田存量 700 / 700，ResourceStage=nil
+2026-10-02T16:10:22.569Z [Output] [DAMAGE_TEST] PASS 農田換階段後部件已重建 | ResourceStage=2
+2026-10-02T16:10:22.569Z [Output] [DAMAGE_TEST] PASS 換階段後仍是殘破且重新套用 | 之前 stage=2 broken=7 sooted=12 fires=3 effectParts=11 overlay=true；之後 stage=2 broken=7 sooted=13 fires=3 effectParts=11 overlay=true
+2026-10-02T16:10:22.569Z [Output] [DAMAGE_TEST] HOLD farm-stage2 8
+2026-10-02T16:10:30.585Z [Output] [DAMAGE_TEST] RELEASE farm-stage2
+2026-10-02T16:10:30.655Z [Output] [DAMAGE_TEST] PASS 農田滿血後沒有隱藏部件與疊加物件 | stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:10:30.686Z [Output] [DAMAGE_TEST] INFO 伺服器通知：此處有障礙物或超出地圖。
+2026-10-02T16:10:33.703Z [Output] [DAMAGE_TEST] INFO 伺服器通知：此處有障礙物或超出地圖。
+2026-10-02T16:10:36.702Z [Output] [DAMAGE_TEST] INFO 伺服器通知：房屋 工地已建立；選中的村民正前往施工。
+2026-10-02T16:10:37.219Z [Output] [DAMAGE_TEST] FAIL 工地生命低於 1/3 但不顯示受損外觀 | ratio=0.150 stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:10:48.186Z [Output] [DAMAGE_TEST] PASS 完工後依實際生命決定階段 | ratio=1.000 stage=0 broken=0 sooted=0 fires=0 effectParts=0 overlay=false
+2026-10-02T16:10:49.085Z [Output] [DAMAGE_TEST] INFO 生成敵方攻城衝車 4 台
+2026-10-02T16:10:53.436Z [Output] [DAMAGE_TEST] INFO 伺服器通知：電腦 1 已進入封建時代。
+2026-10-02T16:10:56.420Z [Output] [DAMAGE_TEST] PASS 戰鬥中階段只升不降並到達殘破 | 順序：0,1,2
+2026-10-02T16:10:56.420Z [Output] [DAMAGE_TEST] PASS 殘破時戰鬥房屋有疊加物件
+2026-10-02T16:10:56.420Z [Output] [DAMAGE_TEST] PASS 房屋被摧毀 | HP=nil
+2026-10-02T16:10:56.920Z [Output] [DAMAGE_TEST] PASS 被摧毀的房屋位置沒有殘留瓦礫或火 | leftovers=0 total=1
+2026-10-02T16:10:56.920Z [Output] [DAMAGE_TEST] INFO 結束前：受損疊加 1、火 3、Workspace 內 1 個
+2026-10-02T16:10:56.920Z [Output] [DAMAGE_TEST] PASS 結束前仍有受損建築可供清理檢查
+2026-10-02T16:10:56.968Z [Output] [DAMAGE_TEST] INFO 伺服器通知：你已投降，本局判負；可以繼續觀戰。
+2026-10-02T16:10:56.969Z [Output] [DAMAGE_TEST] INFO 伺服器通知：Player1 已投降。
+2026-10-02T16:10:56.970Z [Output] [DAMAGE_TEST] INFO 伺服器通知：電腦 1 獲得勝利！房主可返回大廳開始新局。
+2026-10-02T16:10:56.971Z [Output] [DAMAGE_TEST] INFO 投降後 MatchPhase=Ended
+2026-10-02T16:10:57.173Z [Output] [DAMAGE_TEST] INFO 伺服器通知：已返回匹配大廳，選擇匹配點後可準備新局。
+2026-10-02T16:10:58.069Z [Output] [DAMAGE_TEST] PASS 回到大廳 | MatchPhase=Lobby
+2026-10-02T16:10:58.069Z [Output] [DAMAGE_TEST] PASS 回大廳後 RTSDamageEffects 為空且計數歸零 | children=0 overlays=0 fires=0
+2026-10-02T16:10:58.069Z [Output] [DAMAGE_TEST] DONE pass=91 fail=1

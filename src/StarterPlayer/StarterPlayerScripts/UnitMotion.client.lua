@@ -17,7 +17,7 @@ local diagnostics={rootSamples=0,partWrites=0,totalPartWrites=0}
 local motionProbe
 local reducedMotion=player:GetAttribute("ReducedMotion")==true
 local activeEffects=0
-local MAX_EFFECTS=40
+local MAX_EFFECTS=80
 local effects=Instance.new("Folder")
 effects.Name="RTSClientEffects"
 effects.Parent=workspace
@@ -80,34 +80,153 @@ local function impact(point,color,siege)
  TweenService:Create(part,TweenInfo.new(.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
   {Transparency=1}):Play()
 end
+-- Overhead health bar: appears when a unit or building is hit, follows later HP changes and
+-- hides a few seconds after the last hit. Local display only; HP stays server authoritative.
+local healthBars={}
+-- Unit bars hang on a local anchor that is placed on the smoothed visible frame every render
+-- step. Adorning the replicated Root would show its 10 Hz server steps as stutter.
+local anchors=Instance.new("Folder")
+anchors.Name="RTSClientAnchors"
+anchors.Parent=workspace
+local function hideHealth(model)
+ local bar=healthBars[model]
+ if not bar then return end
+ healthBars[model]=nil
+ bar.gui:Destroy()
+ if bar.anchor then bar.anchor:Destroy() end
+end
+local function fillHealth(model,bar)
+ local hp,maxHP=model:GetAttribute("HP"),model:GetAttribute("MaxHP")
+ if not finite(hp) or not finite(maxHP) or maxHP<=0 or hp<=0 then hideHealth(model); return end
+ local ratio=math.clamp(hp/maxHP,0,1)
+ bar.fill.Size=UDim2.fromScale(ratio,1)
+ bar.fill.BackgroundColor3=ratio>.5 and Color3.fromRGB(96,196,92) or ratio>.25 and Color3.fromRGB(232,190,70) or Color3.fromRGB(214,72,60)
+end
+local function showHealth(model)
+ local root=model.PrimaryPart
+ if not root then return end
+ local bar=healthBars[model]
+ if not bar then
+  local unit=model.Parent==units
+  local gui=Instance.new("BillboardGui")
+  gui.Name="RTSHealthBar"
+  local anchor
+  if unit then
+   anchor=effectPart("HealthAnchor",Vector3.new(.2,.2,.2),Color3.new())
+   anchor.Transparency=1
+   anchor.Position=UnitView.GetFrame(model).Position
+   anchor.Parent=anchors
+  end
+  gui.Adornee=anchor or root
+  gui.AlwaysOnTop=true
+  gui.LightInfluence=0
+  gui.MaxDistance=900
+  gui.ResetOnSpawn=false
+  gui.Size=unit and UDim2.fromScale(root.Size.Y>6 and 5 or 4,.55) or UDim2.fromScale(math.clamp(root.Size.X*.6,6,18),.9)
+  local offset=Vector3.new(0,unit and (root.Size.Y>6 and 7.5 or 4.5) or root.Size.Y/2+3,0)
+  gui.StudsOffsetWorldSpace=offset
+  local back=Instance.new("Frame")
+  back.Size=UDim2.fromScale(1,1)
+  back.BackgroundColor3=Color3.fromRGB(28,24,20)
+  back.BorderSizePixel=0
+  back.Parent=gui
+  local stroke=Instance.new("UIStroke")
+  stroke.Color=Color3.fromRGB(12,10,8)
+  stroke.Thickness=1
+  stroke.Parent=back
+  local fill=Instance.new("Frame")
+  fill.Name="Fill"
+  fill.BorderSizePixel=0
+  fill.Parent=back
+  bar={gui=gui,fill=fill,token=0,anchor=anchor}
+  healthBars[model]=bar
+  gui.Parent=player:WaitForChild("PlayerGui")
+ end
+ fillHealth(model,bar)
+ if healthBars[model]~=bar then return end
+ bar.token+=1
+ local token=bar.token
+ task.delay(Config.Combat.healthBarSeconds,function()
+  if healthBars[model]==bar and bar.token==token then hideHealth(model) end
+ end)
+end
+-- How far in front of its own center each melee weapon ends at the peak of the swing.
+-- The figure steps in by the remaining gap, so the blade, spear point or ram head touches the target.
+local meleeReach={villager=1.6,infantry=2.4,spearman=5.3,scout=4.1,cavalry=4.1,ram=7.1}
+local MAX_LUNGE=3.5
+local function meleeLunge(model,kind)
+ local reach,contact=meleeReach[kind],model:GetAttribute("AttackContact")
+ if not reach or not finitePosition(contact) then return 0 end
+ local from=UnitView.GetFrame(model).Position
+ local dx,dz=contact.X-from.X,contact.Z-from.Z
+ return math.clamp(math.sqrt(dx*dx+dz*dz)-reach,0,MAX_LUNGE)
+end
+-- Extra pieces ride the main projectile part: -Z is the direction of travel.
+local function projectilePiece(parent,extras,size,offset,color,material)
+ local piece=effectPart("Piece",size,color,material)
+ piece.Parent=parent
+ table.insert(extras,{part=piece,offset=offset})
+end
 local function attackEffect(model)
  if player:GetAttribute("ReducedMotion")==true or activeEffects>=MAX_EFFECTS then return end
  local root,target=model.PrimaryPart,model:GetAttribute("AttackPosition")
  local unitKind,buildingKind=model:GetAttribute("UnitType"),model:GetAttribute("BuildingType")
  local data=Config.Units[unitKind] or Config.Buildings[buildingKind]
  if not data or not root or not finitePosition(target) or not onScreen(root.Position) then return end
- local siege=unitKind=="mangonel" or unitKind=="trebuchet"
+ local kind=Config.Combat.projectileKinds[unitKind] or "arrow"
+ local stone,javelin=kind=="stone",kind=="javelin"
  local sourceFrame=unitKind and UnitView.GetFrame(model) or root.CFrame
- local start=sourceFrame.Position+Vector3.new(0,unitKind and (siege and 3 or 1.5) or root.Size.Y*.35,0)
+ local start=sourceFrame.Position+Vector3.new(0,unitKind and (stone and 3 or 1.5) or root.Size.Y*.35,0)
  local finish=target+Vector3.new(0,2,0)
  local direction=finish-start
  if direction.Magnitude<.1 then return end
+ -- The server resolves the hit after this many seconds: the swing lands / the projectile arrives then.
+ local flight=model:GetAttribute("AttackFlight")
  if (data.range or 0)<=20 then
-  impact(finish,Color3.fromRGB(236,196,135),false)
+  local contact=model:GetAttribute("AttackContact")
+  local point=finitePosition(contact) and contact+Vector3.new(0,2.5,0) or finish
+  task.delay(finite(flight) and math.clamp(flight,0,1) or Config.Combat.windup.default,function()
+   impact(point,Color3.fromRGB(236,196,135),false)
+  end)
   return
  end
- local javelin=unitKind=="skirmisher"
- local name=siege and "StoneEffect" or javelin and "JavelinEffect" or "ArrowEffect"
- local size=siege and Vector3.new(1.3,1.3,1.3) or Vector3.new(.14,.14,javelin and 3.2 or 1.8)
- local color=siege and Color3.fromRGB(165,162,145) or Color3.fromRGB(231,199,134)
- local part=effectPart(name,size,color,siege and Enum.Material.Slate or Enum.Material.SmoothPlastic)
- if siege then part.Shape=Enum.PartType.Ball end
+ local name=stone and "StoneEffect" or javelin and "JavelinEffect" or "ArrowEffect"
+ local wood,steel=Color3.fromRGB(150,112,70),Color3.fromRGB(196,202,204)
+ local color=stone and Color3.fromRGB(165,162,145) or Color3.fromRGB(231,199,134)
+ -- 駐軍讓防禦建築一次射出多支箭：每支箭從稍微錯開的位置出發，落點相同。
+ local volley=buildingKind and math.clamp(tonumber(model:GetAttribute("AttackVolley")) or 1,1,16) or 1
+ local side=direction:Cross(Vector3.yAxis)
+ side=side.Magnitude>.01 and side.Unit or Vector3.xAxis
+ local origin=start
+ for shot=1,volley do
+ if shot>1 and activeEffects>=MAX_EFFECTS then return end
+ start=origin+side*((shot-(volley+1)/2)*1.4)+Vector3.new(0,((shot*7)%5-2)*.35,0)
+ local extras={}
+ local part
+ if stone then
+  local diameter=unitKind=="trebuchet" and 2.3 or 1.7
+  part=effectPart(name,Vector3.new(diameter,diameter,diameter),color,Enum.Material.Slate)
+  part.Shape=Enum.PartType.Ball
+ else
+  -- A real shaft with an iron head and fletching, not a flash.
+  local length=javelin and 3.8 or 2.6
+  local thickness=javelin and .2 or .14
+  part=effectPart(name,Vector3.new(thickness,thickness,length),wood,Enum.Material.Wood)
+  projectilePiece(part,extras,Vector3.new(.3,.3,javelin and .8 or .5),CFrame.new(0,0,-length/2-.2),steel,Enum.Material.Metal)
+  if not javelin then
+   local feather=Color3.fromRGB(236,232,220)
+   projectilePiece(part,extras,Vector3.new(.5,.06,.55),CFrame.new(0,0,length/2-.3),feather)
+   projectilePiece(part,extras,Vector3.new(.06,.5,.55),CFrame.new(0,0,length/2-.3),feather)
+  end
+ end
  part.CFrame=CFrame.lookAt(start,finish)
- -- Cosmetic travel begins after the authoritative hit; it never delays or applies damage.
- local duration=siege and .5 or .2
- if not keepEffect(part,true,duration+.1) then return end
- projectiles[part]={start=start,finish=finish,created=os.clock(),duration=duration,
-  arc=siege and math.min(18,direction.Magnitude*.16) or javelin and 3 or 0,color=color,siege=siege}
+ for _,extra in ipairs(extras) do extra.part.CFrame=part.CFrame*extra.offset end
+ local duration=finite(flight) and math.clamp(flight,.05,3) or (stone and .5 or .2)
+ if not keepEffect(part,true,duration+.25) then return end
+ projectiles[part]={start=start,finish=finish,created=os.clock(),duration=duration,extras=extras,
+  arc=stone and math.min(22,direction.Magnitude*.2) or math.min(javelin and 5 or 6,direction.Magnitude*.08),
+  color=color,siege=stone}
+ end
 end
 local workColors={
  food=Color3.fromRGB(164,190,109),wood=Color3.fromRGB(171,127,77),
@@ -189,7 +308,8 @@ local function refresh(model)
   else
    local frame=root.CFrame
    local item={root=root,parts=parts,billboards=billboards,timeline=Motion.New(os.clock(),frame),
-    rootFrame=frame,viewFrame=frame,phase=0,lastMove=-math.huge,wasActive=false,dirty=true,poseDirty=true}
+    rootFrame=frame,viewFrame=frame,phase=0,gait=0,lastMove=-math.huge,wasActive=false,dirty=true,poseDirty=true,
+    idleNext=0,idleSeed=math.random()*math.pi*2,idleClock=0}
    tracked[model]=item
    diagnostics.rootSamples+=1
    item.rootConnection=root:GetPropertyChangedSignal("CFrame"):Connect(function()
@@ -227,6 +347,7 @@ local function untrack(model)
  tracked[model]=nil
  visibleUnits[model]=nil
  UnitView.Clear(model)
+ hideHealth(model)
  local observer=observers[model]
  if not observer then return end
  observers[model]=nil
@@ -234,7 +355,7 @@ local function untrack(model)
 end
 local function track(model)
  if not model:IsA("Model") or observers[model] then return end
- local observer={pending=false,connections={},lastAttack=-math.huge,lastWork=-math.huge,lastWorkEffect=-math.huge,
+ local observer={pending=false,connections={},lunge=0,lastAttack=-math.huge,lastWork=-math.huge,lastWorkEffect=-math.huge,
   lastDamage=-math.huge,hp=model:GetAttribute("HP"),complete=model:GetAttribute("Complete")}
  observers[model]=observer
  local function connect(signal,callback)
@@ -242,8 +363,13 @@ local function track(model)
  end
  connect(model:GetAttributeChangedSignal("LastAttack"),function()
   observer.lastAttack=os.clock()
+  observer.lunge=0
   -- Attribute replication can arrive in one batch; read the matching position after that batch.
-  task.defer(function() if observers[model]==observer then attackEffect(model) end end)
+  task.defer(function()
+   if observers[model]~=observer then return end
+   observer.lunge=meleeLunge(model,observer.kind)
+   attackEffect(model)
+  end)
  end)
  connect(model:GetAttributeChangedSignal("LastWork"),function()
   observer.lastWork=os.clock()
@@ -255,6 +381,9 @@ local function track(model)
  connect(model:GetAttributeChangedSignal("HP"),function()
   local hp=model:GetAttribute("HP")
   local now=os.clock()
+  -- A hit shows the bar and restarts its timer; healing or repair only updates a visible bar.
+  if finite(hp) and finite(observer.hp) and hp<observer.hp then showHealth(model)
+  elseif healthBars[model] then fillHealth(model,healthBars[model]) end
   if finite(hp) and finite(observer.hp) and hp<observer.hp and now-observer.lastDamage>=.25 then
    observer.lastDamage=now
    flash(model,"DamageFeedback",Color3.fromRGB(224,140,114))
@@ -296,21 +425,29 @@ end
 local function pose(entry,item,kind,walk,work,attack,workKind)
  local group,phase=entry.group,item.phase
  if not group then return entry.offset end
- local sine=math.sin(phase)
+ local sine,cosine=math.sin(phase),math.cos(phase)
  local mounted=kind=="cavalry" or kind=="scout"
- local lift=walk and (mounted and .1 or .06)*math.abs(sine) or 0
+ -- A standing figure slowly shifts its weight; feet, hooves and wheels stay planted.
+ local idle=walk<=0 and not work and attack<=0
+ local breath=item.idleClock*1.6+item.idleSeed
+ -- walk is the stride weight 0..1. A walker sinks as its legs spread, so the planted sole
+ -- stays on the ground; a horse rises with each bound.
+ local lift=mounted and walk*.18*sine*sine or -walk*.3*sine*sine
  local frame=CFrame.new(0,lift,0)
  if group=="wheel" then
-  return walk and CFrame.new(entry.offset.Position)*CFrame.Angles(phase,0,0)*entry.offset.Rotation or entry.offset
+  return walk>0 and CFrame.new(entry.offset.Position)*CFrame.Angles(phase,0,0)*entry.offset.Rotation or entry.offset
  elseif group=="horseLeg" then
-  local gait=math.sin(phase+(entry.side*entry.front<0 and math.pi or 0))
-  return frame*turnAt(entry.pivot,walk and gait*.45 or 0)*entry.offset
+  local shift=entry.side*entry.front<0 and math.pi or 0
+  -- The leg swinging forward lifts clear; the one pushing back stays planted.
+  local swing=walk*.3*math.max(0,math.cos(phase+shift))
+  return CFrame.new(0,swing,0)*turnAt(entry.pivot,walk*math.sin(phase+shift)*.55)*entry.offset
  elseif group=="horse" then
-  local nod=walk and sine*.035 or 0
-  return frame*turnAt(Vector3.new(0,1,-2),nod)*entry.offset
+  return frame*turnAt(Vector3.new(0,1,-2),walk*sine*.035+(idle and .045*math.sin(breath*.8) or 0))*entry.offset
  elseif group=="foot" then
-  local stride=walk and sine*entry.side*(mounted and .1 or .35) or 0
-  return frame*turnAt(entry.pivot,stride)*entry.offset
+  if mounted then return frame*turnAt(entry.pivot,walk*sine*entry.side*.1)*entry.offset end
+  -- Legs swing from the hip under the skirt, not from the boot top.
+  local swing=walk*.3*math.max(0,cosine*entry.side)
+  return CFrame.new(0,lift+swing,0)*turnAt(entry.pivot+Vector3.new(0,.6,0),walk*sine*entry.side*.65)*entry.offset
  elseif group=="siege" then
   return entry.offset
  elseif group=="ram" then
@@ -321,9 +458,16 @@ local function pose(entry,item,kind,walk,work,attack,workKind)
   return turnAt(Vector3.new(0,6.5,0),attack*1.2)*entry.offset
  end
  local lean=work and (workKind=="food" and .13 or .055)*(1-sine)*.5 or 0
+ -- A walker tips slightly into its stride.
+ if not mounted then lean-=walk*.09 end
  local body=frame*turnAt(Vector3.new(0,-.7,0),lean)
+ if idle then
+  local hip=Vector3.new(0,mounted and 2.4 or -.7,0)
+  body=CFrame.new(hip)*CFrame.Angles(.03*math.sin(breath*1.3),0,.07*math.sin(breath))*CFrame.new(-hip)
+ end
  if group=="torso" then return body*entry.offset end
- local angle=walk and sine*entry.side*-.2 or 0
+ local angle=walk*sine*entry.side*(mounted and -.2 or -.45)
+ if idle then angle=.12*math.sin(breath*1.3+entry.side) end
  local reach=0
  if work then
   if workKind=="food" then angle=-.3-(1-sine)*.14; reach=.16*(1-sine)
@@ -332,8 +476,10 @@ local function pose(entry,item,kind,walk,work,attack,workKind)
   else angle=group=="right" and -.42+sine*.3 or -.18 end
  elseif attack>0 then
   if kind=="archer" then angle=group=="right" and -.6-attack*.25 or -.75; reach=group=="right" and -attack*.35 or 0
-  elseif kind=="spearman" or kind=="skirmisher" then angle=group=="right" and -attack*.6 or -.18; reach=group=="right" and attack*.5 or 0
-  else angle=group=="right" and -attack*1.15 or -attack*.12 end
+  elseif kind=="skirmisher" then angle=group=="right" and -attack*.6 or -.18; reach=group=="right" and attack*.5 or 0
+  -- The spear levels at the target; a rider leans the sword arm out past the horse's head.
+  elseif kind=="spearman" then angle=group=="right" and -attack*1.3 or -.18; reach=group=="right" and attack*.5 or 0
+  else angle=group=="right" and -attack*1.15 or -attack*.12; reach=group=="right" and attack*(mounted and 2.2 or .5) or 0 end
  end
  local shoulder=Vector3.new(entry.side*1.4,mounted and 4.3 or 1.2,0)
  return body*CFrame.new(0,0,-reach)*turnAt(shoulder,angle)*entry.offset
@@ -400,6 +546,7 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
   local tangent=item.finish-item.start+Vector3.new(0,4*item.arc*(1-2*t),0)
   if tangent.Magnitude<.001 then tangent=item.finish-item.start end
   part.CFrame=CFrame.lookAt(point,point+tangent)
+  for _,extra in ipairs(item.extras) do extra.part.CFrame=part.CFrame*extra.offset end
   if t>=1 then
    part:Destroy()
    impact(item.finish,item.color,item.siege)
@@ -410,32 +557,51 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
   local before,after,alpha=Motion.Sample(item.timeline,now)
   local frame=before==after and before or before:Lerp(after,alpha)
   local changed=frame~=item.viewFrame
+  local observer=observers[model]
+  local kind=observer and observer.kind
+  -- Work must have produced a server pulse; failed / paused work returns to rest.
+  local working=observer~=nil and observer.animation=="Work" and now-observer.lastWork<1.3
+  if changed and not working then
+   -- Steps are paid for in ground actually covered on screen, so feet do not slide.
+   local travelled=frame.Position-item.viewFrame.Position
+   item.phase=(item.phase+Motion.GaitAdvance(kind,math.sqrt(travelled.X*travelled.X+travelled.Z*travelled.Z)))%(math.pi*2)
+  end
   item.viewFrame=frame
   UnitView.SetFrame(model,frame)
-  local observer=observers[model]
   local animation=observer and observer.animation
   -- Hold between replicated movement samples; blocked / idle units stop their gait.
   local walking=animation=="Walk" and now-item.lastMove<.2
-  -- Work must have produced a server pulse; failed / paused work returns to rest.
-  local working=animation=="Work" and observer~=nil and now-observer.lastWork<1.3
-  local kind=observer and observer.kind
-  local attackTime=(kind=="mangonel" or kind=="trebuchet" or kind=="ram") and .5 or .3
+  -- A melee swing peaks exactly when the server resolves the hit (Config.Combat.windup).
+  local attackTime=(kind=="mangonel" or kind=="trebuchet") and .5 or 2*(Config.Combat.windup[kind] or Config.Combat.windup.default)
   local elapsed=observer and now-observer.lastAttack or math.huge
-  local attack=animation=="Attack" and elapsed<attackTime and math.sin(math.pi*elapsed/attackTime) or 0
-  local active=not reduced and item.detailed and (walking or working or attack>0)
-  if active and poseTick then
-   local speed=observer and observer.speed
-   local rate=walking and (finite(speed) and math.clamp(speed/2.4,3,12) or 6) or 7
-   if kind=="ram" or kind=="mangonel" or kind=="trebuchet" then rate=walking and (finite(speed) and speed/1.6 or 6) or 7 end
-   item.phase=(item.phase+step*rate)%(math.pi*2)
+  -- LastAttack is the server fact: finish the swing even if the unit resumes walking the same step.
+  local attack=elapsed<attackTime and math.sin(math.pi*elapsed/attackTime) or 0
+  local detailed=not reduced and item.detailed
+  if poseTick then
+   item.gait=Motion.GaitBlend(item.gait,detailed and walking and not working,step)
+   -- Work gestures have no ground travel to follow; they keep a steady clock.
+   if detailed and working then item.phase=(item.phase+step*7)%(math.pi*2) end
   end
-  local poseChanged=item.poseDirty or item.wasActive~=active or (active and poseTick)
+  local busy=detailed and (item.gait>0 or working or attack>0)
+  -- Detailed units at rest keep a slow weight shift, refreshed at Motion.IdleInterval.
+  local idleTick=false
+  if busy then item.idleNext=0
+  elseif detailed and now>=item.idleNext then
+   item.idleNext=now+Motion.IdleInterval
+   item.idleClock=now
+   idleTick=true
+  end
+  local active=detailed
+  local poseChanged=item.poseDirty or item.wasActive~=active or (busy and poseTick) or idleTick
   -- ReducedMotion removes gait and work gestures while preserving readable unit travel.
   -- Server replication can overwrite an appearance part: dirty rewrites it before drawing.
   if changed or item.dirty or poseChanged then
+   -- Step in so the weapon reaches the target, then back; the Root never moves.
+   local lunge=active and observer and observer.lunge*attack or 0
+   if lunge>0 then frame*=CFrame.new(0,0,-lunge) end
    for _,entry in ipairs(item.parts) do
     if entry.part.Parent then
-     if poseChanged then entry.localFrame=active and pose(entry,item,kind,walking,working,attack,observer and observer.workKind) or entry.offset end
+     if poseChanged then entry.localFrame=active and pose(entry,item,kind,item.gait,working,attack,observer and observer.workKind) or entry.offset end
      table.insert(moveParts,entry.part)
      table.insert(moveFrames,frame*(entry.localFrame or entry.offset))
     end
@@ -445,6 +611,10 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
   end
   item.wasActive=active
   item.dirty,item.poseDirty=false,false
+ end
+ -- Every frame, including units outside the detailed set.
+ for model,bar in pairs(healthBars) do
+  if bar.anchor and model.Parent==units then bar.anchor.Position=UnitView.GetFrame(model).Position end
  end
  -- One engine batch, only appearance parts. Never PivotTo / BulkMoveTo an authoritative Root.
  diagnostics.partWrites=#moveParts
@@ -492,6 +662,8 @@ script.Destroying:Once(function()
  reducedConnection:Disconnect()
  for _,connection in ipairs(folderConnections) do connection:Disconnect() end
  for model in pairs(observers) do untrack(model) end
+ for model in pairs(healthBars) do hideHealth(model) end
+ anchors:Destroy()
  if motionProbe then motionProbe:Destroy() end
  effects:Destroy()
 end)

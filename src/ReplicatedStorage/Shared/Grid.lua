@@ -10,6 +10,11 @@ function Grid.snap(position, size)
  local z = math.floor((position.Z+half)/g-size.Y/2+0.5)
  return Vector3.new(-half+(x+size.X/2)*g, Config.Map.GroundY, -half+(z+size.Y/2)*g), x, z
 end
+-- Inverse of snap: the center of a footprint whose lower corner is cell (x,z).
+function Grid.cellPosition(x, z, size)
+ local g, half = Config.Map.GridSize, Config.Map.MapSize/2
+ return Vector3.new(-half+(x+size.X/2)*g, Config.Map.GroundY, -half+(z+size.Y/2)*g)
+end
 function Grid.inBounds(position, size)
  local half, g = Config.Map.MapSize/2, Config.Map.GridSize
  return math.abs(position.X)+size.X*g/2<=half and math.abs(position.Z)+size.Y*g/2<=half

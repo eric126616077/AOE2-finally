@@ -86,4 +86,33 @@ for _,invalid in ipairs({math.huge,0/0,"1",false}) do
  expect(not CombatRules.beyondLeash(invalid,0,500,0,120),"invalid anchor recalled the unit")
  expect(not CombatRules.beyondLeash(0,0,500,0,invalid),"invalid leash recalled the unit")
 end
+
+-- 投射物飛抵才結算：飛行時間隨距離增加並夾在上下限內。
+expect(CombatRules.flightTime(55,110,0.15,1.8)==0.5,"arrow flight time ignores distance")
+expect(CombatRules.flightTime(1,110,0.15,1.8)==0.15,"point-blank shot landed before the minimum flight")
+expect(CombatRules.flightTime(500,70,0.15,1.8)==1.8,"long shot exceeded the maximum flight")
+expect(CombatRules.flightTime(0,110,0.15,1.8)==0.15,"zero distance rejected")
+for _,invalid in ipairs({-1,math.huge,0/0,"1",false}) do
+ expect(CombatRules.flightTime(invalid,110,0.15,1.8)==nil,"invalid flight distance accepted")
+ expect(CombatRules.flightTime(10,invalid,0.15,1.8)==nil,"invalid projectile speed accepted")
+end
+expect(CombatRules.flightTime(10,0,0.15,1.8)==nil,"zero projectile speed accepted")
+expect(CombatRules.flightTime(10,110,2,1)==nil,"inverted flight limits accepted")
+
+-- 近戰揮到的瞬間目標必須仍在武器長度內。
+expect(CombatRules.connects(3.5,3.5,1.5),"target at weapon length was missed")
+expect(CombatRules.connects(5,3.5,1.5),"target inside tolerance was missed")
+expect(not CombatRules.connects(5.1,3.5,1.5),"target that stepped out of reach was hit")
+for _,invalid in ipairs({-1,math.huge,0/0,"1",false}) do
+ expect(not CombatRules.connects(invalid,3.5,1.5),"invalid melee distance connected")
+ expect(not CombatRules.connects(1,invalid,1.5),"invalid melee reach connected")
+ expect(not CombatRules.connects(1,3.5,invalid),"invalid melee tolerance connected")
+end
+
+-- 石彈落在發射當下的位置：建築必中，走開的單位躲開。
+expect(CombatRules.landsOn(true,400,6),"building dodged a stone")
+expect(CombatRules.landsOn(false,6,6),"unit at the edge of the impact was missed")
+expect(not CombatRules.landsOn(false,6.1,6),"unit that walked away was hit")
+expect(not CombatRules.landsOn(false,0/0,6) and not CombatRules.landsOn(false,1,-1),"invalid impact geometry hit a unit")
+
 print(string.format("PASS: %d combat acquisition / ownership / retaliation / priority / leash checks",checks))

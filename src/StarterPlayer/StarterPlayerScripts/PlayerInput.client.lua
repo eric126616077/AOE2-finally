@@ -329,10 +329,15 @@ RunService:BindToRenderStep("RTSCamera",Enum.RenderPriority.Camera.Value+1,funct
   end
   lastGesture=pair
   if player:GetAttribute("RTSTouchGesture")~=(pair~=nil) then player:SetAttribute("RTSTouchGesture",pair~=nil) end
-  if keys[Enum.KeyCode.W] or keys[Enum.KeyCode.Up] then z-=1 end
-  if keys[Enum.KeyCode.S] or keys[Enum.KeyCode.Down] then z+=1 end
-  if keys[Enum.KeyCode.A] or keys[Enum.KeyCode.Left] then x-=1 end
-  if keys[Enum.KeyCode.D] or keys[Enum.KeyCode.Right] then x+=1 end
+  -- 相機鍵可在熱鍵設定改綁；方向鍵固定可用。介面尚未初始化時只用方向鍵。
+  local bound=UI.hotkeys
+  local function held(id,arrow)
+   return keys[arrow] or (bound~=nil and keys[Enum.KeyCode[bound[id]]]==true)
+  end
+  if held("cameraUp",Enum.KeyCode.Up) then z-=1 end
+  if held("cameraDown",Enum.KeyCode.Down) then z+=1 end
+  if held("cameraLeft",Enum.KeyCode.Left) then x-=1 end
+  if held("cameraRight",Enum.KeyCode.Right) then x+=1 end
   -- Edge scrolling is opt-in: Studio docks and command bar can sit beside the viewport.
   if player:GetAttribute("EdgeScroll")==true and player:GetAttribute("RTSInputMode")~="Touch" and workspace:GetAttribute("MatchPhase")=="Playing" then
    -- This Rect and GuiObject coordinates share the CoreUISafeInsets origin.
