@@ -301,7 +301,8 @@ Config.Trade = { minDistance=160, goldPerStud=0.08, goldPerStudSquared=1/12000, 
 -- 攜帶者陣亡或修道院被摧毀時聖物掉落在原地。axisRadii 是相對於地圖半寬的距離。
 Config.Relics = { name="聖物", description="僧侶右鍵拾取，帶回自己的修道院存放後每秒產生黃金。攜帶者陣亡時會掉落。",
  -- 聖物勝利：同一隊存放全圖所有聖物並守住 victoryTime 秒即獲勝。
- goldPerSecond=0.5, victoryTime=180, counts={Small=4,Medium=5,Large=9}, axisRadii={Small={0.55},Medium={0.55},Large={0.38,0.72}}, clearance=10, size=4 }
+ -- reserve：地圖生成時，聖物點周圍這個半徑內不放樹林與礦，聖物一定落在對稱點上、四周開闊可抵達。
+ goldPerSecond=0.5, victoryTime=180, reserve=36, counts={Small=4,Medium=5,Large=9}, axisRadii={Small={0.55},Medium={0.55},Large={0.38,0.72}}, clearance=10, size=4 }
 -- Original identities share the complete gameplay rules above. Purchases never alter them.
 Config.CivilizationOrder = { "RiverHaven", "Sunspire", "JadeGrove" }
 Config.DefaultCivilization = "RiverHaven"

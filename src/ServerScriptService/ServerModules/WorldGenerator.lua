@@ -30,6 +30,17 @@ function WorldGenerator.Generate(sizeName, makeResource, seed)
  local clusterId=0
  local bucketSize=layout.ClusterSeparation
  local roadClearance=Config.Map.RoadWidth/2+Config.Map.ResourceFootprint/math.sqrt(2)+1
+ -- 聖物點（與 RelicTradeRules.relicPoints 相同：每個半徑四條軸線各一件，數量除以 4 餘 1 時加地圖中心）
+ -- 周圍保留空地，避免聖物被放進樹林或被擠到不對稱的位置；world.spec 會比對兩邊算出的點。
+ local relicReserve,relicSpots=0,{}
+ local relicConfig=Config.Relics
+ if relicConfig and relicConfig.counts and relicConfig.counts[sizeName] then
+  relicReserve=relicConfig.reserve or 0
+  if relicConfig.counts[sizeName]%4==1 then table.insert(relicSpots,Vector3.new(0,0,0)) end
+  for _,ratio in ipairs(relicConfig.axisRadii[sizeName] or {}) do
+   for _,axis in ipairs({{1,0},{0,1},{-1,0},{0,-1}}) do table.insert(relicSpots,Vector3.new(axis[1]*half*ratio,0,axis[2]*half*ratio)) end
+  end
+ end
  local function key(x,z) return tostring(x)..":"..tostring(z) end
  local function clear(position,slot,opening)
   if math.abs(position.X)>half-layout.BorderMargin or math.abs(position.Z)>half-layout.BorderMargin then return false end
@@ -40,6 +51,9 @@ function WorldGenerator.Generate(sizeName, makeResource, seed)
   end
   if opening and distanceSquared(position,home)>layout.OpeningRadius^2 then return false end
   if position.X^2+position.Z^2<layout.CenterClearance^2 then return false end
+  for _,spot in ipairs(relicSpots) do
+   if distanceSquared(position,spot)<relicReserve^2 then return false end
+  end
   if math.abs(math.abs(position.X)-math.abs(position.Z))/math.sqrt(2)<roadClearance then return false end
   local bx,bz=math.floor(position.X/bucketSize),math.floor(position.Z/bucketSize)
   for dx=-1,1 do for dz=-1,1 do

@@ -34,9 +34,9 @@ local function place(ownerId,kind,center,minRadius,maxRadius,awayFrom,minAway)
  end
  return nil
 end
--- 開局時聖物的對稱位置；電腦觀察結束後，把被電腦僧侶帶走又掉落的聖物放回原位（電腦僧侶被移除時聖物掉在牠腳下，
--- 常在電腦主城射程內，玩家的僧侶過去會被射死，讓「集齊全部聖物」的前提不成立）。
-local relicHome={}
+-- 聖物階段前把地上所有聖物（包含電腦僧侶被移除時掉落的）放回正式的對稱點，並回報總數與是否都在原位。
+local Config=require(RS.GameData.GameConfig)
+local RelicRules=require(script.Parent:WaitForChild("ServerModules"):WaitForChild("RelicTradeRules"))
 local function groundRelics()
  local result={}
  for _,model in ipairs(workspace.Resources:GetChildren()) do if model:GetAttribute("Relic")==true then table.insert(result,model) end end
@@ -93,8 +93,6 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local ai=aiActor()
   if not ai then return nil end
   local id=ai:GetAttribute("OwnerId")
-  table.clear(relicHome)
-  for _,relic in ipairs(groundRelics()) do table.insert(relicHome,relic:GetPivot().Position) end
   -- 帝王時代：電腦不會再為升級時代存資源（存資源時不訓練）；只給足夠訓練僧侶與貿易車的少量資源。
   ai:SetAttribute("Age",4)
   -- 測試期間電腦的軍隊會被持續移除、電腦會一直補兵，所以給足以同時補兵與訓練僧侶／貿易車的資源。
@@ -130,22 +128,23 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local ai=aiActor()
   if not ai then return false end
   aiHold(ai)
-  task.wait(0.5)
-  -- 把不在原位的聖物移回空著的原位。
-  local moved=0
-  for _,relic in ipairs(groundRelics()) do
-   local here=relic:GetPivot().Position
-   local atHome=false
-   for _,spot in ipairs(relicHome) do if (spot-here).Magnitude<3 then atHome=true; break end end
-   if not atHome then
-    for _,spot in ipairs(relicHome) do
-     local taken=false
-     for _,other in ipairs(groundRelics()) do if (other:GetPivot().Position-spot).Magnitude<3 then taken=true; break end end
-     if not taken then relic:PivotTo(CFrame.new(spot)); moved+=1; break end
-    end
-   end
+  return true
+ elseif action=="relicReset" then
+  local size=workspace:GetAttribute("MapSize") or Config.Map.MapSize
+  local sizeName=workspace:GetAttribute("MatchSizeName") or "Medium"
+  local points=RelicRules.relicPoints(size,Config.Relics.counts[sizeName],Config.Relics.axisRadii[sizeName]) or {}
+  local relics=groundRelics()
+  local half=Config.Relics.size/2
+  for index,relic in ipairs(relics) do
+   local point=points[index]
+   if point then relic:PivotTo(CFrame.new(point.X,Config.Map.GroundY+half,point.Z)) end
   end
-  return {moved=moved,home=#relicHome}
+  local atHome=0
+  for _,relic in ipairs(groundRelics()) do
+   local p=relic:GetPivot().Position
+   for _,point in ipairs(points) do if (Vector3.new(point.X,p.Y,point.Z)-p).Magnitude<1 then atHome+=1; break end end
+  end
+  return {count=#relics,points=#points,atHome=atHome}
  elseif action=="aiDisarm" then
   -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。a=true 時（聖物階段）另外維持電腦不撿聖物。
   local ai=aiActor()

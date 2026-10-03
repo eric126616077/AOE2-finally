@@ -32,7 +32,12 @@ local ok,problem=pcall(function()
  assert(waitFor(function() return workspace:GetAttribute("RTSReady")==true and player.PlayerGui:FindFirstChild("AOE2_MainGUI") end,30),"初始化逾時")
  require(RS.Shared.LobbyTests).Start({size="Small",aiCount=1,difficulty="Easy",population=200,startingResources="Rich",victory="Relic",teamMode="FFA"})
  assert(waitFor(function() return workspace:GetAttribute("MatchPhase")=="Playing" and #workspace.Units:GetChildren()>0 end,40),"開始測試局逾時")
- task.wait(3)
+ -- 等到自己的主城、出生點與聖物都已建立，而不是固定等待秒數。
+ assert(waitFor(function()
+  if typeof(player:GetAttribute("HomePosition"))~="Vector3" or (workspace:GetAttribute("RelicTotal") or 0)<=0 then return false end
+  for _,b in ipairs(workspace.Buildings:GetChildren()) do if b:GetAttribute("OwnerId")==player.UserId and b:GetAttribute("BuildingType")=="TownCenter" then return true end end
+  return false
+ end,30),"等待主城、出生點與聖物逾時")
  local Config=require(RS.GameData.GameConfig)
  local command=RS:WaitForChild("RTSRemotes"):WaitForChild("Command")
  local server=assert(RS:WaitForChild("ContentStudioTest",20),"伺服器測試輔助不存在")
@@ -91,10 +96,12 @@ local ok,problem=pcall(function()
  local hunter=mine("villager")[1]
  local prey=nearest(deer,home)
  local preyBefore=prey and prey:GetAttribute("Amount")
+ -- 村民可能已帶著其他食物（自動工作、羊群），所以以鹿本身的食物減少為準，不看攜帶量。
  command:FireServer("Order",{hunter},prey)
- check(waitFor(function() return (hunter:GetAttribute("Carrying") or 0)>0 and hunter:GetAttribute("CarryType")=="food" end,60),"村民走到鹿旁採集食物",hunter:GetAttribute("Carrying"))
+ check(waitFor(function() return hunter:GetAttribute("OrderKind")=="gather" and hunter:GetAttribute("OrderTargetName")==prey:GetAttribute("DisplayName") end,5),"村民接受狩獵指令",hunter:GetAttribute("OrderKind"))
+ check(waitFor(function() return prey.Parent==nil or (prey:GetAttribute("Amount") or 0)<preyBefore end,90),"鹿的食物減少",prey:GetAttribute("Amount"))
+ check(hunter:GetAttribute("CarryType")=="food" and (hunter:GetAttribute("Carrying") or 0)>0,"村民帶著獵物的食物",hunter:GetAttribute("Carrying"))
  check(server:InvokeServer("tool",hunter)=="spear","打獵時換上狩獵矛",server:InvokeServer("tool",hunter))
- check(prey.Parent==nil or (prey:GetAttribute("Amount") or 0)<preyBefore,"鹿的食物減少",prey:GetAttribute("Amount"))
  command:FireServer("Stop",{hunter})
 
  guard("新兵種與兵種升級")
@@ -157,9 +164,8 @@ local ok,problem=pcall(function()
   if s and s.trading>0 then trading=trading or s end
   return seen and trading
  end,180)
- local restored=server:InvokeServer("aiStop")
+ server:InvokeServer("aiStop")
  holdAI=true
- print(TAG.."INFO 電腦觀察結束：移回原位的聖物 "..tostring(restored and restored.moved).." / 原位 "..tostring(restored and restored.home))
  check(seen~=nil,"電腦訓練僧侶並派去撿聖物",seen and ("monks="..seen.monks))
  check(trading~=nil,"電腦訓練貿易車並跑貿易",trading and ("carts="..trading.carts))
 
@@ -168,6 +174,11 @@ local ok,problem=pcall(function()
  local total=workspace:GetAttribute("RelicTotal") or 0
  check(total==Config.Relics.counts.Small,"小地圖放置設定數量的聖物",total)
  check(waitFor(function() return #groundRelics()==total end,30),"電腦停止後聖物都在地上",#groundRelics())
+ -- 聖物階段的已知起點：全部放回正式的對稱點，總數必須等於設定。
+ local reset=server:InvokeServer("relicReset")
+ assert(reset and reset.count==total and reset.points==total and reset.atHome==total,
+  "聖物重設失敗："..tostring(reset and reset.count).."/"..tostring(reset and reset.points).."/"..tostring(reset and reset.atHome))
+ check(true,"聖物重設到對稱點",reset.atHome.." / "..total)
  local monastery=server:InvokeServer("build","Monastery",home,{min=48,max=180})
  check(monastery~=nil,"測試前置：修道院")
  local monks={}
@@ -179,9 +190,11 @@ local ok,problem=pcall(function()
  command:FireServer("Order",{monks[total+1]},first)
  check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",tostring(monks[total+1]:GetAttribute("OrderKind")).." 位置 "..tostring(monks[total+1]:GetPivot().Position))
  check(#groundRelics()==total-1,"拾取後地上少一件",#groundRelics())
+ local rejected=false
+ local notice=RS.RTSRemotes.Feedback.OnClientEvent:Connect(function(message) if type(message)=="string" and message:find("攜帶聖物") then rejected=true end end)
  command:FireServer("Order",{monks[total+1]},infantry)
- task.wait(0.5)
- check(monks[total+1]:GetAttribute("CarryingRelic")==true,"攜帶聖物時其他指令不會讓聖物消失")
+ check(waitFor(function() return rejected end,5) and monks[total+1]:GetAttribute("CarryingRelic")==true,"攜帶聖物時其他指令被拒絕、聖物仍在")
+ notice:Disconnect()
  server:InvokeServer("remove",monks[total+1])
  check(waitFor(function() return #groundRelics()==total end,5),"攜帶者被移除時聖物掉回地上",#groundRelics())
  -- 收集全部聖物：每位僧侶各拿一件，拿到後自動送回修道院。
@@ -191,10 +204,20 @@ local ok,problem=pcall(function()
  check(firstStored,"聖物存放到修道院",monastery:GetAttribute("Relics"))
  if firstStored then
   local goldBefore=player:GetAttribute("RelicGold") or 0
-  task.wait(4.5)
-  check((player:GetAttribute("RelicGold") or 0)>goldBefore,"存放的聖物持續產生黃金",player:GetAttribute("RelicGold"))
+  check(waitFor(function() return (player:GetAttribute("RelicGold") or 0)>goldBefore end,10),"存放的聖物持續產生黃金",player:GetAttribute("RelicGold"))
  end
- check(waitFor(function() return (player:GetAttribute("Relics") or 0)==total end,200),"集齊全部聖物",player:GetAttribute("Relics"))
+ -- 收集期間每 20 秒輸出每位僧侶的狀態，失敗時能看出卡在哪裡。
+ local lastReport=os.clock()
+ check(waitFor(function()
+  if os.clock()-lastReport>20 then
+   lastReport=os.clock()
+   for i=1,total do
+    local monk=monks[i]
+    if monk and monk.Parent then print(TAG.."INFO 僧侶 "..i.."："..tostring(monk:GetAttribute("OrderKind")).." 攜帶="..tostring(monk:GetAttribute("CarryingRelic")).." 位置 "..tostring(monk:GetPivot().Position)) end
+   end
+  end
+  return (player:GetAttribute("Relics") or 0)==total
+ end,240),"集齊全部聖物",player:GetAttribute("Relics"))
  guard("聖物勝利倒數")
  local countdown=waitFor(function() return player:GetAttribute("RelicRemaining") end,5)
  check(countdown and countdown<=Config.Relics.victoryTime,"聖物勝利開始倒數",countdown)

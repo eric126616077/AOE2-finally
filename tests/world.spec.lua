@@ -79,8 +79,11 @@ for _,patch in ipairs(layout.OpeningClusters) do
  openingCount+=patch.count
 end
 for _,sizes in pairs(openingSizes) do table.sort(sizes) end
+local RelicTradeRules=require("../src/ServerScriptService/ServerModules/RelicTradeRules")
 local function inspect(name,seed,nodes,spawns,target)
  local size=Config.Map.Sizes[name]
+ -- 與伺服器放聖物用的同一個規則：生成器保留的點必須就是聖物會放的點。
+ local relicSpots=assert(RelicTradeRules.relicPoints(size,Config.Relics.counts[name],Config.Relics.axisRadii[name]),"relic layout unavailable")
  expect(Config.Map.MapSize==size,"map config size mismatch")
  expect(#spawns==4,"match needs four reserved spawns")
  expect(#nodes==target,"resource target not reached: "..name.." seed "..seed)
@@ -107,6 +110,9 @@ local function inspect(name,seed,nodes,spawns,target)
   expect(pos.X*spawns[slot].X>0 and pos.Z*spawns[slot].Z>0,"resource must remain strictly in its reserved slot quadrant")
   expect(math.abs(pos.X)<=size/2-layout.BorderMargin and math.abs(pos.Z)<=size/2-layout.BorderMargin,"resource outside map")
   expect(pos.X*pos.X+pos.Z*pos.Z>=layout.CenterClearance^2,"resource blocks central reservation")
+  for _,spot in ipairs(relicSpots) do
+   expect((pos.X-spot.X)^2+(pos.Z-spot.Z)^2>=Config.Relics.reserve^2-1e-6,"resource blocks a relic reservation")
+  end
   local roadDistance=math.abs(math.abs(pos.X)-math.abs(pos.Z))/math.sqrt(2)
   local resourceReach=Config.Map.ResourceFootprint/math.sqrt(2)
   expect(roadDistance-resourceReach>=Config.Map.RoadWidth/2+1-1e-6,"resource footprint blocks diagonal road margin")
