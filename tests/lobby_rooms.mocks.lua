@@ -109,7 +109,7 @@ local function plannedAIIds(count)
 end
 local function makeResource() end
 -- 聖物放置與收入不屬於大廳流程；只保留開局呼叫與重置用的介面。
-local Relic={spawnAll=function() end,accumulated={}}
+local Relic={spawnAll=function() end,accumulated={},ground={},trade={home={}}}
 local function makeBuilding(state)
  local model=actor(state.id,"Model")
  state.buildings[model]=true

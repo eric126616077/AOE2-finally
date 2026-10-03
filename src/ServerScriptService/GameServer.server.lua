@@ -81,8 +81,10 @@ local unitCollisionIndex=assert(UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS))
 -- 僧侶規則、設定與函式集中在一個表，避免超過 Studio 的 200 個區域變數上限。
 local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.Monk,random=Random.new()}
 -- 聖物與貿易車的規則、設定與函式（同樣集中在表內；主程式區塊已接近 200 個區域變數上限）。Relic.trade.home[貿易車]=出發市集。
-local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),ground=setmetatable({},{__mode="k"}),
- trade={home=setmetatable({},{__mode="k"}),config=Config.Trade}}
+-- ground／home 以 Instance 為鍵，必須是強參照表：Roblox 的 Instance 包裝物件沒有 Lua 強參照時可能被回收，
+-- 弱鍵表會在模型仍存在時遺失項目（Studio 實測：電腦因此看不到任何聖物）。改為在拾取、移除與清場時明確刪除。
+local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),ground={},
+ trade={home={},config=Config.Trade}}
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
 -- AOE2 式擴充系統（主程式已接近 Studio 的 200 個區域變數上限，全部集中在這個表）：
 -- 市集浮動價格與進貢、單位姿態、城鎮警鐘、羊群與野豬、弩砲貫穿與防禦科技。函式大多在指令處理前的區塊內定義。
@@ -1422,6 +1424,7 @@ destroyModel=function(model)
  if state and state.rallies then state.rallies[model]=nil end
  -- 聖物不會消失：攜帶的僧侶或存放的修道院被移除時掉落在原地。
  if phase=="Playing" then Relic.release(model) end
+ Relic.trade.home[model]=nil
  model:Destroy()
  if state then population(state) end
 end
@@ -2008,6 +2011,8 @@ local function clearBattlefieldResources()
   if resource:GetAttribute("RTSManagedResource")==true then resource:Destroy() end
  end
  table.clear(managedResources)
+ table.clear(Relic.ground)
+ table.clear(Relic.trade.home)
  workspace:SetAttribute("ResourceNodeCount",0)
  workspace:SetAttribute("RelicTotal",0)
 end

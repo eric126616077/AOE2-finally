@@ -51,6 +51,8 @@ local template=object("OriginalTreeTemplate","Model",templateFolder,{RTSManagedR
 local staleRegistryObject=object("OutsideResources","Model",workspace,{RTSManagedResource=true})
 local managedResources={[taggedModel]=true,[taggedFolder]=true,[unknownModel]=true,[staleRegistryObject]=true}
 local originalRegistry=managedResources
+-- 地上聖物與貿易車出發市集的索引（強參照表）也在清場時清空。
+local Relic={ground={[taggedModel]=true},trade={home={[unknownModel]=true}}}
 local currentMatch={id="old-match"}
 local matchTeams={old=true}
 local matchGeneration=7

@@ -44,6 +44,7 @@ clearBattlefieldResources()
 expect(#resources:GetChildren()==remaining and taggedModel.destroyCalls==1 and taggedFolder.destroyCalls==1,
  "repeated cleanup double-destroyed geometry or removed remaining unknown nodes")
 expect(next(managedResources)==nil and workspace.attributes.ResourceNodeCount==0,"repeated cleanup left a stale registry/count")
+expect(next(Relic.ground)==nil and next(Relic.trade.home)==nil,"match cleanup kept relic or trade-cart references")
 
 -- An empty generated-node registry cannot replace inspecting resource ownership.
 local laterNode=object("LaterGeneratedStone","Model",resources,{RTSManagedResource=true})
