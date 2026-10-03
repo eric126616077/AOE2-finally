@@ -157,6 +157,8 @@ local function ribbon(parent,title,name)
  label.Name="RibbonTitle"; label.TextWrapped=false; label.TextTruncate=Enum.TextTruncate.AtEnd
  return band,label
 end
+-- 大廳按鈕可登記自己的配色；沒有登記的按鈕（戰場 HUD）維持羊皮紙主題。
+local buttonPalettes = setmetatable({}, {__mode = "k"})
 local function button(parent, size, position, callback, name)
  local b = make("TextButton", parent, {Name = name or "Action", Text = "", Size = size, Position = position,
   BackgroundColor3 = C.card, BorderSizePixel = 0, AutoButtonColor = false})
@@ -169,7 +171,10 @@ local function button(parent, size, position, callback, name)
   local unavailable=b:GetAttribute("Unavailable")==true
   local selected=b:GetAttribute("Selected")==true
   local primary=b:GetAttribute("Primary")==true
-  local color=b:GetAttribute("AgeLocked") and Color3.fromRGB(176,176,176)
+  local palette=buttonPalettes[b]
+  local color=palette and (unavailable and (selected and palette.on:Lerp(palette.off,0.45) or palette.off)
+   or pressed and palette.press or (hovered or focused) and palette.hover or (selected or primary) and palette.on or palette.base)
+   or b:GetAttribute("AgeLocked") and Color3.fromRGB(176,176,176)
    or unavailable and Color3.fromRGB(226,216,196)
    or pressed and Color3.fromRGB(224,186,110)
    or (hovered or focused) and Color3.fromRGB(255,236,180)
@@ -194,7 +199,7 @@ local function button(parent, size, position, callback, name)
  end)
  b.SelectionGained:Connect(function() focused=true; refresh(true) end)
  b.SelectionLost:Connect(function() focused=false; pressed=false; refresh(true) end)
- for _,attribute in ipairs({"Unavailable","AgeLocked","Selected","Primary"}) do b:GetAttributeChangedSignal(attribute):Connect(function() refresh(true) end) end
+ for _,attribute in ipairs({"Unavailable","AgeLocked","Selected","Primary","LobbySkin"}) do b:GetAttributeChangedSignal(attribute):Connect(function() refresh(true) end) end
  b.Activated:Connect(function(...)
   if GuiService.MenuIsOpen then return end
   if GUI.result and GUI.result.Visible and not b:IsDescendantOf(GUI.result) then return end
@@ -212,6 +217,55 @@ local function namedButton(parent, label, size, position, callback, name, color)
  title.TextXAlignment = Enum.TextXAlignment.Center
  return b,title,edge
 end
+-- Roblox 風格大廳：白色面板、深藍粗外框、FredokaOne 字體與帶底部厚度的糖果色按鈕。只套用在大廳，戰場 HUD 不變。
+local LB = {text = Color3.fromRGB(33,38,58), muted = Color3.fromRGB(100,110,138), blue = Color3.fromRGB(0,132,230),
+ green = Color3.fromRGB(24,160,72), gold = Color3.fromRGB(214,136,0), outline = Color3.fromRGB(27,31,48),
+ line = Color3.fromRGB(196,206,224), panel = Color3.fromRGB(248,250,255), header = Color3.fromRGB(0,162,255), white = Color3.new(1,1,1)}
+local LOBBY_TITLE_FONT, LOBBY_BODY_FONT = Enum.Font.FredokaOne, Enum.Font.GothamMedium
+local function lobbyPalette(base, ink)
+ return {base = base, hover = base:Lerp(Color3.new(1,1,1),0.18), press = base:Lerp(Color3.new(0,0,0),0.16), on = base,
+  off = Color3.fromRGB(178,186,202), ink = ink or LB.white}
+end
+local LOBBY_PALETTES = {
+ neutral = {base = Color3.new(1,1,1), hover = Color3.fromRGB(236,245,255), press = Color3.fromRGB(212,228,248),
+  on = Color3.fromRGB(220,239,255), off = Color3.fromRGB(234,237,243), ink = LB.text},
+ blue = lobbyPalette(Color3.fromRGB(0,162,255)), green = lobbyPalette(Color3.fromRGB(40,196,90)),
+ red = lobbyPalette(Color3.fromRGB(240,78,78)), yellow = lobbyPalette(Color3.fromRGB(255,196,40),LB.text)}
+local LOBBY_MODE_COLORS = {Story = Color3.fromRGB(255,170,30), PvP = Color3.fromRGB(240,78,78), PvE = Color3.fromRGB(40,190,96)}
+-- 白字配深色描邊；深色字不加描邊。
+local function lobbyText(label, color, font, outlined)
+ if not label then return end
+ label.TextColor3 = color; label.Font = font or LOBBY_BODY_FONT
+ local outline = label:FindFirstChild("LobbyTextStroke")
+ if outlined and not outline then outline = make("UIStroke",label,{Name = "LobbyTextStroke",Color = LB.outline,Thickness = 1.5,Transparency = 0.1}) end
+ if outline then outline.Enabled = outlined == true end
+end
+local function lobbyPanel(frame, radius)
+ for _,child in ipairs(frame:GetChildren()) do
+  if child:IsA("UIStroke") or child:IsA("UIGradient") or child.Name == "PanelLightEdge" or child.Name == "PanelLowerSeam" then child:Destroy() end
+ end
+ local corner = frame:FindFirstChildOfClass("UICorner") or make("UICorner",frame)
+ corner.CornerRadius = UDim.new(0,radius or 16)
+ frame.BackgroundColor3 = LB.panel
+ make("UIStroke",frame,{Name = "LobbyOutline",Color = LB.outline,Thickness = 3,ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
+ make("UIGradient",frame,{Name = "LobbyShade",Rotation = 90,Color = ColorSequence.new(Color3.new(1,1,1),Color3.fromRGB(228,236,250))})
+ return frame
+end
+-- 漸層底部較暗，形成按鈕厚度；按下時漸層下移，像被壓下去。lip 是厚度開始的位置（0–1）。
+local function lobbyButton(b, palette, label, lip)
+ local edge = b:FindFirstChildOfClass("UIStroke")
+ if edge then edge.Color = LB.outline; edge.Thickness = 2.5 end
+ local corner = b:FindFirstChildOfClass("UICorner"); if corner then corner.CornerRadius = UDim.new(0,10) end
+ local sheen = b:FindFirstChild("ButtonLightEdge"); if sheen then sheen.Visible = false end
+ local gradient = b:FindFirstChildOfClass("UIGradient")
+ lip = lip or 0.86
+ gradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,1)),ColorSequenceKeypoint.new(lip-0.02,Color3.fromRGB(238,238,238)),
+  ColorSequenceKeypoint.new(lip,Color3.fromRGB(186,186,186)),ColorSequenceKeypoint.new(1,Color3.fromRGB(186,186,186))})
+ buttonPalettes[b] = {base = palette.base, hover = palette.hover, press = palette.press, on = palette.on, off = palette.off, gradient = gradient}
+ b:SetAttribute("LobbySkin",true)
+ if label then lobbyText(label,palette.ink,LOBBY_TITLE_FONT,palette.ink == LB.white) end
+end
+local function buttonLabel(b) return b:FindFirstChildOfClass("TextLabel") end
 -- Shared, asset-free art stays recognizable when the resource cards shrink.
 local function resourceIcon(parent,key)
  local holder=SelectionIcons.Create(parent,key,UDim2.fromOffset(28,28),UDim2.fromOffset(6,7))
@@ -996,7 +1050,87 @@ function GUI:CreateLobby()
  self.travelDetail=text(self.startingTravel,"隊伍已確認。戰場準備完成後會自動進入遊戲。",UDim2.new(1,-40,0,43),UDim2.fromOffset(20,173),14,C.muted)
  self.travelDetail.TextXAlignment=Enum.TextXAlignment.Center
  self.lobbyPage=1
+ self:SkinLobby()
  self:LayoutLobby()
+end
+function GUI:SkinLobby()
+ local P=LOBBY_PALETTES
+ lobbyPanel(self.lobbyWelcome)
+ lobbyText(self.welcomeHeading,LB.text,LOBBY_TITLE_FONT)
+ lobbyText(self.welcomeDescription,LB.muted)
+ lobbyText(self.queueSummary,LB.muted)
+ lobbyText(self.roomsHeading,LB.blue,LOBBY_TITLE_FONT)
+ for _,quick in ipairs(self.quickButtons) do
+  lobbyButton(quick.button,lobbyPalette(LOBBY_MODE_COLORS[quick.entry.mode] or LB.header),quick.title,0.84)
+  lobbyText(quick.detail,LB.white,LOBBY_BODY_FONT,true)
+  local accent=quick.button:FindFirstChild("QuickAccent"); if accent then accent.Visible=false end
+ end
+ for _,entry in pairs(self.portalCards) do
+  lobbyButton(entry.button,lobbyPalette(entry.portal.color or LB.header),entry.title,0.92)
+  lobbyText(entry.detail,LB.white,LOBBY_BODY_FONT,true)
+  for _,child in ipairs(entry.button:GetChildren()) do
+   if child:IsA("TextLabel") and child.Text=="›" then lobbyText(child,LB.white,LOBBY_TITLE_FONT,true) end
+  end
+  local accent=entry.button:FindFirstChild("PortalAccent"); if accent then accent.Visible=false end
+  -- 狀態做成深色膠囊，任何房間顏色上都看得清楚。
+  local status=entry.status
+  lobbyText(status,LB.white,Enum.Font.GothamBold)
+  status.Size=UDim2.fromOffset(0,20); status.AutomaticSize=Enum.AutomaticSize.X; status.TextWrapped=false
+  status.BackgroundColor3=LB.outline; status.BackgroundTransparency=0.45
+  round(status,10)
+  make("UIPadding",status,{PaddingLeft=UDim.new(0,8),PaddingRight=UDim.new(0,8)})
+ end
+ for id,card in pairs(self.modeCards) do
+  local palette=table.clone(P.neutral); palette.on=LOBBY_MODE_COLORS[id] or LB.header
+  lobbyButton(card.button,palette,nil,0.88)
+  lobbyText(card.title,LB.text,LOBBY_TITLE_FONT); lobbyText(card.detail,LB.muted)
+  local accent=card.button:FindFirstChild("ModeAccent"); if accent then accent.BackgroundColor3=palette.on end
+ end
+ lobbyPanel(self.lobbyFrame)
+ -- 房間面板頂部的藍色標題列；下半部用填色蓋掉圓角，與內容區平接。
+ self.lobbyHeaderBand=make("Frame",self.lobbyFrame,{Name="LobbyHeaderBand",Size=UDim2.new(1,0,0,76),BackgroundColor3=LB.header,BorderSizePixel=0,ZIndex=0,Active=false})
+ round(self.lobbyHeaderBand,16)
+ make("Frame",self.lobbyHeaderBand,{Name="BandFill",Size=UDim2.new(1,0,0,16),Position=UDim2.new(0,0,1,-16),BackgroundColor3=LB.header,BorderSizePixel=0,ZIndex=0,Active=false})
+ lobbyText(self.lobbyHeading,LB.white,LOBBY_TITLE_FONT,true)
+ lobbyText(self.lobbyDescription,Color3.fromRGB(226,242,255))
+ self.lobbyBody.ScrollBarImageColor3=LB.blue
+ for _,label in ipairs({self.basicHeading,self.advancedHeading,self.reviewStatus}) do lobbyText(label,LB.text,LOBBY_TITLE_FONT) end
+ for _,label in ipairs({self.basicHint,self.advancedHint,self.readySummary,self.rules,self.hostLabel}) do lobbyText(label,LB.muted) end
+ lobbyText(self.storyBriefing,LB.text)
+ lobbyText(self.reviewSummary,LB.text,Enum.Font.GothamBold)
+ lobbyText(self.rosterHeading,LB.blue,LOBBY_TITLE_FONT)
+ for _,entry in pairs(self.settingLabels) do
+  lobbyButton(entry.button,P.neutral,entry.label)
+  lobbyText(entry.caption,LB.muted,Enum.Font.GothamBold)
+  entry.button.SettingIndicator.BackgroundColor3=LB.blue
+ end
+ for _,entry in ipairs(self.lobbyStepButtons) do lobbyButton(entry.button,P.neutral,entry.label) end
+ for b,palette in pairs({[self.leaveButton]=P.red,[self.previousLobbyPage]=P.neutral,[self.skipLobbyRules]=P.neutral,[self.editLobbyButton]=P.neutral,
+  [self.nextLobbyPage]=P.blue,[self.completeLobbySetup]=P.blue,[self.readyButton]=P.green,[self.civilizationButton]=P.yellow}) do
+  lobbyButton(b,palette,buttonLabel(b))
+ end
+ for _,label in ipairs(self.lobbyRows) do
+  local row=lobbyPanel(label.Parent,10)
+  row.LobbyOutline.Thickness=2; row.LobbyOutline.Color=LB.line
+  lobbyText(label,LB.text,Enum.Font.GothamBold)
+ end
+ local footerRule=self.lobbyFooter:FindFirstChild("LobbyFooterRule"); if footerRule then footerRule.BackgroundColor3=LB.line end
+ lobbyPanel(self.startingTravel)
+ for _,child in ipairs(self.startingTravel:GetChildren()) do
+  if child:IsA("TextLabel") then lobbyText(child,LB.text,LOBBY_TITLE_FONT) end
+ end
+ lobbyText(self.travelStatus,LB.blue,Enum.Font.GothamBold)
+ lobbyText(self.travelDetail,LB.muted)
+end
+function GUI:SkinTutorialInvite()
+ local P=LOBBY_PALETTES
+ lobbyPanel(self.tutorialInvite)
+ lobbyText(self.inviteTitle,LB.text,LOBBY_TITLE_FONT)
+ lobbyText(self.inviteBody,LB.muted)
+ lobbyButton(self.inviteStart,P.green,self.inviteStartLabel)
+ lobbyButton(self.inviteSkip,P.neutral,self.inviteSkipLabel)
+ lobbyButton(self.inviteLater,P.neutral,self.inviteLaterLabel)
+ lobbyButton(self.inviteReopen,P.yellow,buttonLabel(self.inviteReopen))
 end
 function GUI:StoryUnlocked()
  return GameModes.unlocked(player:GetAttribute("StoryCleared"))
@@ -1047,7 +1181,7 @@ function GUI:SetLobbyPage(page)
  for i,entry in ipairs(self.lobbyStepButtons) do
   entry.button:SetAttribute("Selected",i==self.lobbyPage)
   entry.button:SetAttribute("Unavailable",i==3 or self.lobbyConfigurePending~=nil)
-  entry.label.TextColor3=i==self.lobbyPage and C.gold or C.muted
+  entry.label.TextColor3=i==self.lobbyPage and LB.blue or LB.muted
  end
  local editing=self.lobbyWizard==true
  self.previousLobbyPage.Visible=editing and self.lobbyPage>1
@@ -1114,6 +1248,7 @@ function GUI:LayoutLobby()
  local panelWidth=math.min(760,width-24)
  local panelHeight=math.min(600,height-24)
  local short=panelHeight<420
+ if self.lobbyHeaderBand then self.lobbyHeaderBand.Size=UDim2.new(1,0,0,short and 52 or 76) end
  self.lobbyFrame.Size=UDim2.fromOffset(panelWidth,panelHeight)
  self.lobbyFrame.Position=UDim2.new(0.5,-panelWidth/2,0.5,-panelHeight/2)
  self.lobbySeal.Visible=panelWidth>=480
@@ -1257,6 +1392,7 @@ function GUI:CreateGuidance()
  end,"ReopenTutorialButton",C.gold)
  table.insert(self.hitAreas,self.inviteReopen)
  self.inviteReopen.Visible=false; self.inviteReopen.ZIndex=21
+ self:SkinTutorialInvite()
  self.helpButton=namedButton(self.menuPanel,"重新查看新手指引",UDim2.fromOffset(192,44),UDim2.fromOffset(13,158),function()
   self.tutorialHidden=false; self.guidanceExpanded=true; self.menuPanel.Visible=false
   if self.tutorialState.complete then self.tutorialState=Tutorial.New(); self.guidanceCameraStart=nil end
@@ -1961,19 +2097,20 @@ function GUI:UpdateLobby()
   entry.status.Text=status=="Configuring" and (count==0 and "空房間 · 進入設定  ›" or "設定中 · "..count.." / "..required.." 人")
    or status=="Waiting" and ((count>=required and "已滿員 · " or "等候中 · ")..count.." / "..required.." 人")
    or status=="Starting" and "隊伍正在出發…" or "對局進行中 · 稍後開放"
-  entry.status.TextColor3=available and (entry.portal.color or C.gold):Lerp(C.white,0.45) or C.muted
+  entry.status.TextColor3=LB.white
  end
  self.lobbyHeading.Text=portal and portal.name or "匹配房間"
  self.lobbyDescription.Text=self.lobbyWizard and "選擇玩法與人數，再確認遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定模式與規則，先等候玩家加入。")
  self.reviewStatus.Text=self.lobbyConfigured and "等候玩家" or "房主正在設定"
  self.rosterHeading.Text = "集 合 名 單  ·  "..humanCount.." / "..expectedPlayers.." 人"
  self.readySummary.Text="準備 "..readyCount.." / "..humanCount
- self.readySummary.TextColor3=humanCount>0 and readyCount==humanCount and C.green or C.muted
+ self.readySummary.TextColor3=humanCount>0 and readyCount==humanCount and LB.green or LB.muted
  for _,id in ipairs(GameModes.Order) do
   local card=self.modeCards[id]
   card.button:SetAttribute("Selected",gameMode==id)
   card.button:SetAttribute("Unavailable",not self.lobbyWizard or self.lobbyConfigurePending~=nil)
-  card.title.TextColor3=gameMode==id and C.gold or C.white
+  lobbyText(card.title,gameMode==id and LB.white or LB.text,LOBBY_TITLE_FONT,gameMode==id)
+  lobbyText(card.detail,gameMode==id and LB.white or LB.muted,LOBBY_BODY_FONT,gameMode==id)
  end
  self.basicHint.Text=gameMode=="Story" and ("真人玩家同隊闖關；已解鎖到第 "..unlocked.." 章。") or Config.GameModes[gameMode] and Config.GameModes[gameMode].description or "選擇玩法，再決定人數與對手。"
  self.advancedHint.Text=gameMode=="Story" and "這一章的戰場規則；換章節就會換規則。" or "已有預設規則；可直接完成設定，或再調整這場遊戲。"
@@ -1987,7 +2124,7 @@ function GUI:UpdateLobby()
    or key=="expectedPlayers" and gameMode=="Story" and (value==1 and "單人" or value.." 人合作")
    or entry.field.names and entry.field.names[value] or tostring(value)
   entry.label.Text = shown..(key=="storyChapter" and value==unlocked and (player:GetAttribute("StoryCleared") or 0)<GameModes.ChapterCount and "（最新）" or "")..(entry.locked and "（章節）" or "")..(editable and "  ›" or "")
-  entry.label.TextColor3 = editable and C.white or C.muted
+  entry.label.TextColor3 = editable and LB.text or LB.muted
   entry.button:SetAttribute("Unavailable",not editable)
   entry.button.SettingIndicator.BackgroundTransparency=editable and 0.45 or 0.86
  end
@@ -1997,14 +2134,14 @@ function GUI:UpdateLobby()
    local ready = human:GetAttribute("LobbyReady") == true
    local teamLabel=previewReady and TeamClient.TeamLabel(teamMode,human:GetAttribute("LobbyTeamId")) or "分隊待確認"
    label.Text = (ready and "✓  " or "●  ")..human.DisplayName.." · "..teamLabel..(human.UserId == hostId and " · 房主" or "")..(ready and " · 已準備" or " · 未準備")
-   label.TextColor3 = ready and C.green or C.white
-  elseif i <= expectedPlayers then label.Text = "○  等候玩家加入傳送門"; label.TextColor3 = C.muted
+   label.TextColor3 = ready and LB.green or LB.text
+  elseif i <= expectedPlayers then label.Text = "○  等候玩家加入傳送門"; label.TextColor3 = LB.muted
   elseif i <= expectedPlayers+aiCount then
    local aiIndex=i-expectedPlayers
    local teamLabel=previewReady and TeamClient.TeamLabel(teamMode,lobbyRoomAttribute(roomId,"AITeam_"..aiIndex)) or "分隊待確認"
    local enemy=chapter and (chapter.enemy..(aiCount>1 and " "..aiIndex or "")) or "電腦 "..aiIndex
-   label.Text = "◆  "..enemy.." · "..teamLabel.." · 已準備"; label.TextColor3 = C.gold
-  else label.Text = "○  空位"; label.TextColor3 = C.muted end
+   label.Text = "◆  "..enemy.." · "..teamLabel.." · 已準備"; label.TextColor3 = LB.gold
+  else label.Text = "○  空位"; label.TextColor3 = LB.muted end
   label.Parent.RosterStateAccent.BackgroundColor3=label.TextColor3
   label.Parent.Visible=i<=self.lobbyFactionCount
  end
@@ -2019,7 +2156,7 @@ function GUI:UpdateLobby()
  local readyAvailable=not starting and self.lobbyConfigured and not self.lobbyWizard
  self.readyButton:SetAttribute("Unavailable",not readyAvailable)
  self.readyLabel.Text=starting and "正在出發…" or not self.lobbyConfigured and "等待房主完成設定" or (player:GetAttribute("LobbyReady") and "取消準備" or "準備完成  ✓")
- self.readyLabel.TextColor3 = readyAvailable and C.green or C.muted
+ self.readyLabel.TextColor3 = LB.white
  self.completeLobbySetup:SetAttribute("Unavailable",self.lobbyConfigurePending~=nil)
  self.completeLobbyLabel.Text=self.lobbyConfigurePending and "正在確認設定…" or "完成設定，等候玩家  ✓"
  self.previousLobbyPage:SetAttribute("Unavailable",self.lobbyConfigurePending~=nil)

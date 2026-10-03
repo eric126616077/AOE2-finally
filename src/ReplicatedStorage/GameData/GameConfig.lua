@@ -24,13 +24,13 @@ Config.Lobby = {
  expectedPlayers = 2, scanInterval = 0.25,
  -- Equivalent room stations: the first entrant configures a room before everyone confirms readiness.
  portals = {
-  {id="Room1",name="匹配點 1",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(223,184,102),
+  {id="Room1",name="匹配點 1",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(255,176,32),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room2",name="匹配點 2",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,4),color=Color3.fromRGB(101,190,143),
+  {id="Room2",name="匹配點 2",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,4),color=Color3.fromRGB(46,196,104),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room3",name="匹配點 3",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,4),color=Color3.fromRGB(92,168,226),
+  {id="Room3",name="匹配點 3",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,4),color=Color3.fromRGB(32,148,255),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room4",name="匹配點 4",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(180,137,221),
+  {id="Room4",name="匹配點 4",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(160,92,250),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
  },
 }
