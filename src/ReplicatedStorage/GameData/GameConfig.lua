@@ -257,7 +257,7 @@ Config.Resources = {
  Deer = { resource="food", name="鹿", amount=150, color=Color3.fromRGB(168,118,72), height=6, gatherMultiplier=1.6, hunt=true },
  -- 野豬：食物多，但村民要先合力打倒牠（boar.hp），期間牠會反擊靠近的單位。
  Boar = { resource="food", name="野豬", amount=340, color=Color3.fromRGB(92,70,58), height=5, gatherMultiplier=1.6, hunt=true,
-  boar={hp=75, armor=1, damage=7, attackInterval=2, reach=7} },
+  boar={hp=60, armor=0, damage=3, attackInterval=2, reach=7} },
  -- 宰殺後的綿羊；尚未有主人時是可接收的中立羊群（Herdable），不能直接採集。
  Sheep = { resource="food", name="綿羊", amount=100, color=Color3.fromRGB(236,232,220), height=4, gatherMultiplier=1.6, hunt=true },
 }

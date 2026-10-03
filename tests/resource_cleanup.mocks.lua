@@ -70,6 +70,7 @@ local construction={[building]={work=true}}
 local researching={[building]={research=true}}
 local actionClocks={[unit]={work=true}}
 local AutoWork={units={[unit]={hold=true}}}
+local AOE={boars={},neutralSheep={},prices={},publishPrices=function() end}
 local reportSequence,reportSubjectSequence=99,23
 local reportSubjects={[unit]=true}
 local startingSides=2

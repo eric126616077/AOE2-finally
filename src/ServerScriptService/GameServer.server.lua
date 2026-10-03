@@ -20,7 +20,6 @@ local GatheringRules = require(script.Parent.ServerModules.GatheringRules)
 local ConstructionRules = require(script.Parent.ServerModules.ConstructionRules)
 local World = require(script.Parent.ServerModules.WorldGenerator)
 local LobbyRules = require(script.Parent.ServerModules.LobbyRules)
-local LobbyWorld = require(script.Parent.ServerModules.LobbyWorld)
 local CivilizationRules = require(script.Parent.ServerModules.CivilizationRules)
 local CivilizationPreferenceRules = require(script.Parent.ServerModules.CivilizationPreferenceRules)
 local ProfileRules = require(script.Parent.ServerModules.ProfileRules)
@@ -85,6 +84,22 @@ local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.M
 local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),ground=setmetatable({},{__mode="k"}),
  trade={home=setmetatable({},{__mode="k"}),config=Config.Trade}}
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
+-- AOE2 式擴充系統（主程式已接近 Studio 的 200 個區域變數上限，全部集中在這個表）：
+-- 市集浮動價格與進貢、單位姿態、城鎮警鐘、羊群與野豬、弩砲貫穿與防禦科技。函式大多在指令處理前的區塊內定義。
+local AOE={market=require(RS.Shared.MarketRules),stance=require(RS.Shared.StanceRules),herd=require(script.Parent.ServerModules.HerdRules),
+ prices={},boars=setmetatable({},{__mode="k"}),neutralSheep=setmetatable({},{__mode="k"}),
+ -- 升級時代的「兩種建築」不計入的種類。
+ noAgeCredit={TownCenter=true,House=true,Farm=true,Wall=true,Gate=true,Tower=true,Castle=true,Palisade=true,Outpost=true}}
+AOE.isHerd=function(unit) return unit:GetAttribute("UnitClass")=="herd" end
+-- 瞭望塔吃箭樓科技；其餘防禦建築只用設定值。
+AOE.towerBonus=function(state,data,key) return data==Config.Buildings.Tower and (state.modifiers[key] or 0) or 0 end
+AOE.buildingRange=function(state,data) return (data.range or 64)+AOE.towerBonus(state,data,"towerRange") end
+AOE.buildingMaxHP=function(state,data) return math.floor(data.hp*(1+(state.modifiers.buildingHp or 0))+0.5) end
+-- 只剩羊群也算淘汰：綿羊不是作戰單位。
+AOE.onlyHerd=function(state)
+ for unit in pairs(state.units) do if unit.Parent==units and not AOE.isHerd(unit) then return false end end
+ return true
+end
 -- 自動工作的每單位狀態（閒置起點、玩家保留待命、暫時略過的目標）與延後定義的函式。
 local AutoWork={units=setmetatable({},{__mode="k"}),farmClaims=setmetatable({},{__mode="k"}),farmRules=require(script.Parent.ServerModules.FarmRules)}
 -- 城牆與城門：已完工的城門（gates[model]={state,X,Z,halfX,halfZ,open}）不擋己方與同盟，敵方由伺服器逐段擋下。
@@ -139,7 +154,8 @@ end
 local Travel={rules=require(script.Parent.ServerModules.PlaceRules),places=Config.Places}
 Travel.role=Travel.rules.role(Config.Places,game.PlaceId,RunService:IsStudio(),script.Parent:GetAttribute("RTSPlaceRole"))
 Travel.service=require(script.Parent.ServerModules.MatchTravel).new(Config.Places,Travel.role)
-local lobbyWorld = Travel.role=="Match" and LobbyWorld.Stub() or LobbyWorld.Create()
+-- 大廳世界模組只在這裡使用，直接 require，不另占主程式的 local（Studio 上限 200）。
+local lobbyWorld = Travel.role=="Match" and require(script.Parent.ServerModules.LobbyWorld).Stub() or require(script.Parent.ServerModules.LobbyWorld).Create()
 local rooms, activeRoomId = {}, nil
 for _,portal in ipairs(Config.Lobby.portals) do
  local roomSettings,count=LobbyRules.settings(portal.settings)
@@ -303,7 +319,7 @@ local function refund(actor,cost)
 end
 local function population(state)
  local count,cap=Garrison.count(state),0
- for unit in pairs(state.units) do if unit.Parent==units then count+=1 end end
+ for unit in pairs(state.units) do if unit.Parent==units and not AOE.isHerd(unit) then count+=1 end end
  for building in pairs(state.buildings) do
   if building.Parent==buildings then
    local data=Config.Buildings[building:GetAttribute("BuildingType")]
@@ -367,17 +383,27 @@ end
 -- Publish the same defensive weapon values used by the authoritative attack step.
 local function buildingAttack(state,data)
  if not data or not data.damage then return 0 end
- return data.damage+state.modifiers.attack
+ return data.damage+state.modifiers.attack+AOE.towerBonus(state,data,"towerAttack")
 end
 local function refreshBuildingStats(state,model)
  local data=Config.Buildings[model:GetAttribute("BuildingType")]
  local armed=data and data.damage~=nil
  local armor=model:GetAttribute("Armor")
  model:SetAttribute("Attack",buildingAttack(state,data))
- model:SetAttribute("Range",armed and (data.range or 64) or 0)
+ model:SetAttribute("Range",armed and AOE.buildingRange(state,data) or 0)
  model:SetAttribute("AttackInterval",armed and (data.attackInterval or 1.5) or 0)
- -- Imported models can already carry authoritative armor; keep every finite value.
- model:SetAttribute("Armor",Rules.finite(armor) and armor or 0)
+ -- Imported models can already carry authoritative armor; keep every finite value. 石工術／建築學另加護甲。
+ local base=model:GetAttribute("BaseArmor")
+ if not Rules.finite(base) then base=Rules.finite(armor) and armor or 0; model:SetAttribute("BaseArmor",base) end
+ model:SetAttribute("Armor",base+(state.modifiers.buildingArmor or 0))
+ -- 建築生命科技：上限提高時，目前生命加上同樣的差額。
+ if data then
+  local oldMax,newMax=model:GetAttribute("MaxHP"),AOE.buildingMaxHP(state,data)
+  if Rules.finite(oldMax) and oldMax~=newMax then
+   model:SetAttribute("MaxHP",newMax)
+   model:SetAttribute("HP",math.clamp((model:GetAttribute("HP") or 0)+(newMax-oldMax),1,newMax))
+  end
+ end
  Garrison.publish(model)
 end
 local function makeBuilding(state,kind,pos,complete,rotated)
@@ -390,8 +416,9 @@ local function makeBuilding(state,kind,pos,complete,rotated)
  if data.gate then model:SetAttribute("GateOpen",false) end
  model:SetAttribute("BuildingType",kind)
  model:SetAttribute("DisplayName",data.name)
- model:SetAttribute("HP",complete and data.hp or ConstructionRules.initialHP(data.hp))
- model:SetAttribute("MaxHP",data.hp)
+ local maxHP=AOE.buildingMaxHP(state,data)
+ model:SetAttribute("HP",complete and maxHP or ConstructionRules.initialHP(maxHP))
+ model:SetAttribute("MaxHP",maxHP)
  model:SetAttribute("OwnerId",state.id)
  model:SetAttribute("OwnerName",actorName(state.actor))
  publishCivilization(state,model)
@@ -429,6 +456,15 @@ local function makeUnit(state,kind,pos)
  model:SetAttribute("FormationForwardZ",-1)
  if kind=="monk" then model:SetAttribute("Faith",Monk.config.maxFaith); model:SetAttribute("MaxFaith",Monk.config.maxFaith) end
  if kind=="villager" then Factory.watchCarry(model) end
+ local unitData=Config.Units[kind]
+ if unitData.damage>0 and unitData.class~="villager" then model:SetAttribute("Stance",Config.Stances.default) end
+ -- 綿羊本身就是可宰殺的食物：村民右鍵時當成採集目標。
+ if unitData.class=="herd" then
+  model:SetAttribute("ResourceType","food")
+  model:SetAttribute("Amount",Config.Resources.Sheep.amount)
+  model:SetAttribute("MaxAmount",Config.Resources.Sheep.amount)
+  model:SetAttribute("Hunt",true)
+ end
  publishCivilization(state,model)
  publishTeam(state,model)
  model.Parent=units
@@ -1053,6 +1089,13 @@ local function nearestResource(state,pos,kind,unit)
     if d<distance then nearest,distance=b,d end
    end
   end
+  -- 自己的綿羊也是食物來源（村民走過去宰殺）。
+  for sheep in pairs(state.units) do
+   if sheep.Parent==units and AOE.isHerd(sheep) then
+    local d=(position(sheep)-pos).Magnitude
+    if d<distance then nearest,distance=sheep,d end
+   end
+  end
  end
  return nearest
 end
@@ -1235,6 +1278,10 @@ local function trainRequest(state,building,kind,quiet)
  if not data or not canTrain(building:GetAttribute("BuildingType"),kind) then return false end
  if not building:GetAttribute("Complete") then if not quiet then notify(state.actor,"建築尚未完工。") end; return false end
  if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then if not quiet then notify(state.actor,"此單位尚未解鎖，請先升級時代。") end; return false end
+ if data.requiresTech and not state.technologies[data.requiresTech] then
+  if not quiet then notify(state.actor,"需先研究"..Config.Technologies[data.requiresTech].name.."才能訓練"..data.name.."。") end
+  return false
+ end
  if researching[building] or (state.advancing and state.advancing.building==building) then if not quiet then notify(state.actor,"此建築正在研究。") end; return false end
  local queue=training[building] or {}
  if #queue>=5 then if not quiet then notify(state.actor,"訓練佇列最多五個單位。") end; return false end
@@ -1307,7 +1354,7 @@ local function ageRequirements(state,data)
   for b in pairs(state.buildings) do
    local kind=b:GetAttribute("BuildingType")
    local info=Config.Buildings[kind]
-   if b.Parent==buildings and b:GetAttribute("Complete") and info and kind~="TownCenter" and kind~="House" and kind~="Farm" and kind~="Wall" and kind~="Gate" and kind~="Tower" and kind~="Castle" and (info.minAge or 1)==age and not kinds[kind] then kinds[kind],count=true,count+1 end
+   if b.Parent==buildings and b:GetAttribute("Complete") and info and not AOE.noAgeCredit[kind] and (info.minAge or 1)==age and not kinds[kind] then kinds[kind],count=true,count+1 end
   end
   if count<requirements.buildings then return false end
  end
@@ -1472,7 +1519,7 @@ local function eliminationCheck(state)
   local main=false
   for b in pairs(state.buildings) do if b.Parent==buildings and b:GetAttribute("MainBase") then main=true; break end end
   if not main then defeat(state,"主城被摧毀，你的勢力已淘汰，可觀戰並等待對局結果。") end
- elseif next(state.units)==nil and next(state.buildings)==nil then defeat(state,"全部單位與建築已被摧毀，你的勢力已淘汰，可觀戰並等待對局結果。") end
+ elseif AOE.onlyHerd(state) and next(state.buildings)==nil then defeat(state,"全部單位與建築已被摧毀，你的勢力已淘汰，可觀戰並等待對局結果。") end
 end
 local function damage(target,raw,attacker,now)
  if phase~="Playing" then return end
@@ -1498,7 +1545,8 @@ local function damage(target,raw,attacker,now)
   Garrison.release(target)
   eliminationCheck(victim)
  elseif target.Parent==units and ((Config.Units[target:GetAttribute("UnitType")] or {}).damage or 0)>0 and CombatRules.canRetaliate(orders[target] and orders[target].kind,enemies(victim,owner(attacker)),
-  attacker.Parent==buildings,target:GetAttribute("UnitType")=="villager") then
+  attacker.Parent==buildings,target:GetAttribute("UnitType")=="villager")
+  and AOE.stance.retaliates(AOE.stance.resolve(Config.Stances,target:GetAttribute("Stance"))) then
   local previous=orders[target]
   issue(target,"attack",attacker,true)
   -- 反擊從受擊位置起算追擊距離，避免被風箏到地圖另一端。
@@ -1599,7 +1647,8 @@ Garrison.enter=function(state,unit,building)
  if not ok then stop(unit); Garrison.notice(state,reason); return end
  local held=Garrison.inside[building] or {arrows=0}
  table.insert(held,{kind=unit:GetAttribute("UnitType"),hp=unit:GetAttribute("HP"),carrying=unit:GetAttribute("Carrying") or 0,
-  carryType=unit:GetAttribute("CarryType") or "",faith=unit:GetAttribute("Faith"),formation=unit:GetAttribute("Formation")})
+  carryType=unit:GetAttribute("CarryType") or "",faith=unit:GetAttribute("Faith"),formation=unit:GetAttribute("Formation"),
+  stance=unit:GetAttribute("Stance"),resume=orders[unit] and orders[unit].bellResume})
  Garrison.inside[building]=held
  AutoWork.units[unit]=nil
  destroyModel(unit)
@@ -1612,6 +1661,7 @@ Garrison.spawn=function(state,record,pos)
  if record.carrying>0 then model:SetAttribute("CarryType",record.carryType); model:SetAttribute("Carrying",record.carrying) end
  if record.faith then model:SetAttribute("Faith",record.faith) end
  if record.formation then model:SetAttribute("Formation",record.formation) end
+ if record.stance and model:GetAttribute("Stance") then model:SetAttribute("Stance",AOE.stance.resolve(Config.Stances,record.stance)) end
  return model
 end
 -- 玩家下令全部離開：逐一找建築周圍的空位，沒有空位的留在裡面。回傳離開的人數。
@@ -1676,7 +1726,7 @@ Garrison.heal=function(state,dt)
  for building in pairs(state.buildings) do
   local held=Garrison.inside[building]
   if held then
-   for _,record in ipairs(held) do record.hp=Garrison.rules.heal(record.hp,unitStats(state,record.kind).hp,Garrison.config.healRate,dt) end
+   for _,record in ipairs(held) do record.hp=Garrison.rules.heal(record.hp,unitStats(state,record.kind).hp,Garrison.config.healRate*(1+state.modifiers.garrisonHeal),dt) end
   end
  end
 end
@@ -1685,7 +1735,11 @@ local function resetActor(state)
  state.civilization=CivilizationRules.resolve(Config,state.civilization)
  publishCivilization(state,state.actor)
  state.units,state.buildings,state.technologies,state.pendingTech,state.defenseLast={},{},{},{},{}
- state.modifiers={attack=0,armor=0,hp=0,gather=0,carry=0,speed=0,gatherFood=0,gatherWood=0,gatherGold=0,gatherStone=0,farmCapacity=0,range=0,interval=0,trainSpeed=0}
+ state.modifiers={attack=0,armor=0,hp=0,gather=0,carry=0,speed=0,gatherFood=0,gatherWood=0,gatherGold=0,gatherStone=0,farmCapacity=0,range=0,interval=0,trainSpeed=0,
+  buildingHp=0,buildingArmor=0,buildSpeed=0,towerAttack=0,towerRange=0,buildingVision=0,garrisonHeal=0,tributeFeeCut=0}
+ state.townBell=false
+ state.actor:SetAttribute("TownBell",false)
+ state.actor:SetAttribute("BuildingVision",0)
  state.classModifiers={}
  state.unitModifiers,state.unitNames={},{}
  Relic.accumulated[state]=nil
@@ -1971,6 +2025,9 @@ local function clearMatch()
  end
  training,construction,researching,orders={},{},{},{}
  table.clear(AutoWork.units)
+ table.clear(AOE.boars); table.clear(AOE.neutralSheep)
+ AOE.prices={}
+ if AOE.publishPrices then AOE.publishPrices() end
  clearBattlefieldResources()
  actionClocks={}
  reportSequence,reportSubjectSequence=0,0
@@ -2113,6 +2170,11 @@ Travel.launch=function(room,humans,validated,player)
    population(state)
   end
  end)
+ -- 羊群與野豬放在陣營之後，避開出生的村民；失敗不影響開局。
+ if made then
+  local herdsOk,herdError=pcall(AOE.spawnHerds,participants)
+  if not herdsOk then warn("[RTS] 羊群／野豬放置失敗："..tostring(herdError)) end
+ end
  if not made then warn("[RTS] 初始陣營生成失敗："..tostring(spawnError)); lobbyReset(); notify(player,"陣營生成失敗，已返回大廳。"); return end
  for _,state in ipairs(humans) do
   clearLobbyCharacter(state)
@@ -2813,6 +2875,7 @@ local function acceptOrder(state,selection,target,key)
   elseif kind=="monk" then Monk.order(state,unit,target,victim)
   elseif Relic.isRelic(target) then notify(state.actor,"只有僧侶能拾取聖物。")
   elseif kind=="tradeCart" then Relic.trade.order(state,unit,target)
+  elseif AOE.boarAlive(target) and kind~="villager" and (Config.Units[kind].damage or 0)>0 then issue(unit,"attack",target)
   elseif enemies(state,victim) then issue(unit,"attack",target)
   elseif canBuildWorker(state,unit) and isOwned(state,target,buildings) and construction[target] and not target:GetAttribute("Complete") then issue(unit,"build",target)
   elseif kind=="villager" and target:GetAttribute("ResourceType") and (not victim or victim==state) and (target.Parent~=buildings or target:GetAttribute("Complete"))
@@ -2961,12 +3024,19 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
  elseif action=="Trade" then
   if not isOwned(state,a,buildings) or a:GetAttribute("BuildingType")~="Market" or not a:GetAttribute("Complete") then return end
   if type(b)~="string" or not ({food=true,wood=true,stone=true})[b] or (c~="Buy" and c~="Sell") then return end
-  local market=Config.MarketTrade or {batch=100,buyGold=130,sellGold=70}
-  local cost=c=="Buy" and {gold=market.buyGold} or {[b]=market.batch}
+  -- 浮動價格：所有玩家共用，買入漲價、賣出跌價。
+  local market=Config.MarketTrade
+  local buyPrice,sellPrice=AOE.market.quote(AOE.prices[b],market)
+  local cost=c=="Buy" and {gold=buyPrice} or {[b]=market.batch}
   if not Economy.spend(player,cost) then notify(player,"交易所需資源不足。","Error"); return end
-  local key,amount=c=="Buy" and b or "gold",c=="Buy" and market.batch or market.sellGold
+  local key,amount=c=="Buy" and b or "gold",c=="Buy" and market.batch or sellPrice
   player:SetAttribute(key,(player:GetAttribute(key) or 0)+amount)
   recordReport(state,"spend",{cost=cost})
+  AOE.prices[b]=AOE.market.after(AOE.prices[b],c,market)
+  AOE.publishPrices()
+ elseif action=="Tribute" then AOE.tribute(state,a,b,c)
+ elseif action=="Stance" then AOE.setStance(state,a,b)
+ elseif action=="TownBell" then AOE.bell(state,a)
  elseif action=="Order" then acceptOrder(state,a,b,c)
  elseif action=="Formation" then acceptFormation(state,a,b)
  elseif action=="Garrison" then
@@ -3000,6 +3070,347 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
   for _,unit in ipairs(a) do if isOwned(state,unit,units) then stop(unit); AutoWork.hold(unit) end end
  end
 end)
+-- AOE2 式擴充系統的函式（掛在 AOE 表上，區塊內的 local 不占主程式的暫存器）。
+do
+local HERDS=Config.Herds
+local BOAR=Config.Resources.Boar.boar
+local resourceNames={food="食物",wood="木材",gold="黃金",stone="石材"}
+-- 市集 ----------------------------------------------------------------------
+AOE.publishPrices=function()
+ for _,key in ipairs({"food","wood","stone"}) do
+  local buy,sell=AOE.market.quote(AOE.prices[key],Config.MarketTrade)
+  workspace:SetAttribute("MarketBuy_"..key,buy)
+  workspace:SetAttribute("MarketSell_"..key,sell)
+ end
+end
+AOE.publishPrices()
+-- 進貢給盟友：需要己方已完工的市集；手續費依鑄幣／銀行業減免。失敗不扣款。
+AOE.tribute=function(state,recipientId,key,amount)
+ if type(recipientId)~="number" or type(key)~="string" or not table.find(Config.Tribute.resources,key)
+  or not AOE.market.tributeAmount(amount,Config.Tribute.amounts) then return end
+ local other=byId[recipientId]
+ if not other or other==state or not alive(other) or not currentMatch or not TeamRules.isParticipant(matchTeams,currentMatch.factions,other)
+  or enemies(state,other) then notify(state.actor,"只能進貢給仍在場上的盟友。","Error"); return end
+ local market=false
+ for building in pairs(state.buildings) do
+  if building.Parent==buildings and building:GetAttribute("BuildingType")=="Market" and building:GetAttribute("Complete") then market=true; break end
+ end
+ if not market then notify(state.actor,"進貢需要一座已完工的市集。","Error"); return end
+ local total,fee=AOE.market.tribute(amount,Config.Tribute.fee,state.modifiers.tributeFeeCut)
+ if not total or not Economy.spend(state.actor,{[key]=total}) then
+  notify(state.actor,string.format("資源不足：進貢 %d %s 需要共 %d（含手續費 %d）。",amount,resourceNames[key],total or amount,fee or 0),"Error")
+  return
+ end
+ recordReport(state,"spend",{cost={[key]=total}})
+ other.actor:SetAttribute(key,(other.actor:GetAttribute(key) or 0)+amount)
+ notify(state.actor,string.format("已進貢 %d %s 給 %s%s。",amount,resourceNames[key],actorName(other.actor),fee>0 and ("（手續費 "..fee.."）") or ""),"Order")
+ notify(other.actor,string.format("%s 進貢了 %d %s。",actorName(state.actor),amount,resourceNames[key]),"Research")
+end
+-- 姿態 ----------------------------------------------------------------------
+AOE.setStance=function(state,selection,key)
+ if not AOE.stance.valid(Config.Stances,key) then return end
+ local validated=selectedFormationUnits(state,selection)
+ if not validated then return end
+ local changed=0
+ for _,unit in ipairs(validated) do
+  if unit:GetAttribute("Stance")~=nil then
+   unit:SetAttribute("Stance",key)
+   changed+=1
+   local order=orders[unit]
+   -- 改成不攻擊時立刻放下自動接戰；玩家指定的攻擊照常執行。
+   if key=="NoAttack" and order and order.kind=="attack" and order.automatic then
+    if order.resumeGather then finishAttack(state,unit,order) else stop(unit) end
+   end
+  end
+ end
+ if changed>0 then notify(state.actor,"已切換為"..Config.Stances.types[key].name.."（"..changed.." 個單位）。","Order")
+ else notify(state.actor,"所選單位沒有姿態：只有能作戰的軍隊可以切換。") end
+end
+-- 城鎮警鐘 ------------------------------------------------------------------
+-- 鳴鐘：每位村民躲進最近、仍有空位的己方駐紮建築，並記住原本的工作。再按一次解除警報，村民回到原本的工作。
+AOE.resume=function(state,unit,resume)
+ if type(resume)~="table" then return end
+ local target=resume.target
+ if typeof(target)~="Instance" or not target.Parent then return end
+ if resume.kind=="build" and construction[target] and isOwned(state,target,buildings) then issue(unit,"build",target)
+ elseif resume.kind=="gather" and ((target:GetAttribute("Amount") or 0)>0 or AutoWork.isFarm(target)) then issue(unit,"gather",target) end
+end
+AOE.releaseVillagers=function(state,building)
+ local held=Garrison.inside[building]
+ if not held then return 0 end
+ local villagers,others={}, {arrows=held.arrows}
+ for _,record in ipairs(held) do table.insert(record.kind=="villager" and villagers or others,record) end
+ Garrison.inside[building]=others
+ local left=0
+ for _,record in ipairs(villagers) do
+  local spot=freeSpawn(building,record.kind)
+  local model=spot and Garrison.spawn(state,record,spot)
+  if model then left+=1; AOE.resume(state,model,record.resume) else table.insert(others,record) end
+ end
+ if #others==0 then Garrison.inside[building]=nil end
+ Garrison.publish(building)
+ population(state)
+ return left
+end
+AOE.bell=function(state,building)
+ if not isOwned(state,building,buildings) or building:GetAttribute("BuildingType")~="TownCenter" or not building:GetAttribute("Complete") then return end
+ if state.townBell then
+  state.townBell=false
+  state.actor:SetAttribute("TownBell",false)
+  local released=0
+  for other in pairs(state.buildings) do
+   if other.Parent==buildings and Garrison.inside[other] then released+=AOE.releaseVillagers(state,other) end
+  end
+  notify(state.actor,"警報解除："..released.." 位村民離開建築，回到原本的工作。","Order")
+  return
+ end
+ local shelters={}
+ for other in pairs(state.buildings) do
+  local data=Config.Buildings[other:GetAttribute("BuildingType")]
+  local capacity=Garrison.rules.capacity(data)
+  if other.Parent==buildings and capacity>0 and other:GetAttribute("Complete") then
+   local held=Garrison.inside[other]
+   table.insert(shelters,{model=other,free=capacity-(held and #held or 0),position=position(other)})
+  end
+ end
+ local sent,left=0,0
+ for unit in pairs(state.units) do
+  if unit.Parent==units and unit:GetAttribute("UnitType")=="villager" and (unit:GetAttribute("HP") or 0)>0 then
+   local here,best,bestDistance=position(unit),nil,math.huge
+   for _,shelter in ipairs(shelters) do
+    local distance=(shelter.position-here).Magnitude
+    if shelter.free>0 and distance<bestDistance then best,bestDistance=shelter,distance end
+   end
+   if best then
+    local previous=orders[unit]
+    local resume=previous and (previous.kind=="gather" or previous.kind=="build") and {kind=previous.kind,target=previous.target}
+     or previous and previous.kind=="deliver" and previous.returnTarget and {kind="gather",target=previous.returnTarget} or nil
+    issue(unit,"garrison",best.model)
+    orders[unit].bellResume=resume
+    best.free-=1
+    sent+=1
+   else left+=1 end
+  end
+ end
+ state.townBell=true
+ state.actor:SetAttribute("TownBell",true)
+ notify(state.actor,"城鎮警鐘響起！"..sent.." 位村民前往駐紮"..(left>0 and ("，"..left.." 位找不到空位") or "").."。再按一次解除警報。","Error")
+end
+-- 羊群 ----------------------------------------------------------------------
+-- 地面上找一個沒有障礙、也沒有單位的位置；找不到時回傳 nil。
+local function openSpot(point,radius)
+ local pos=Vector3.new(point.X,Config.Map.GroundY,point.Z)
+ return unitInBounds(pos,radius) and unitPositionClear(nil,pos,radius)
+  and #obstacleParts(pos+Vector3.new(0,2,0),Vector3.new(radius*2,4,radius*2))==0
+end
+local function nudged(point,radius)
+ return Relic.rules.nudge(point,function(x,z) return openSpot({X=x,Z=z},radius) end,4,16)
+end
+AOE.makeNeutralSheep=function(x,z)
+ local model=makeResource("Sheep",Vector3.new(x,Config.Map.GroundY,z))
+ model.PrimaryPart.CanCollide=false
+ -- 中立羊還不能採集：沒有資源類別、數量為 0；被接收時換成該陣營的綿羊單位。
+ model:SetAttribute("ResourceType",nil)
+ model:SetAttribute("Amount",0)
+ model:SetAttribute("Herdable",true)
+ AOE.neutralSheep[model]=true
+ return model
+end
+AOE.makeBoar=function(x,z)
+ local model=makeResource("Boar",Vector3.new(x,Config.Map.GroundY,z))
+ model:SetAttribute("BoarHP",BOAR.hp)
+ model:SetAttribute("BoarMaxHP",BOAR.hp)
+ AOE.boars[model]={hp=BOAR.hp,attackers=setmetatable({},{__mode="k"}),last=0}
+ return model
+end
+AOE.spawnHerds=function(participants)
+ local center={X=0,Z=0}
+ for _,state in ipairs(participants) do
+  local home=state.home
+  -- 已歸屬的綿羊：主城朝地圖中心那一側。
+  for _,point in ipairs(AOE.herd.ringPoints(home.X,home.Z,center.X,center.Z,HERDS.startSheep,30,38,math.rad(26),0) or {}) do
+   local spot=nudged(point,2)
+   if spot then makeUnit(state,"sheep",Vector3.new(spot.X,Config.Map.GroundY,spot.Z)) end
+  end
+  -- 中立羊群（成對）與野豬：每個出生點相同的相對位置。
+  for _,point in ipairs(AOE.herd.ringPoints(home.X,home.Z,center.X,center.Z,HERDS.neutralPairs,HERDS.sheepRing.min,HERDS.sheepRing.max,math.rad(100),0) or {}) do
+   for _,offset in ipairs({{-4,0},{4,2}}) do
+    local spot=Relic.rules.nudge({X=point.X+offset[1],Z=point.Z+offset[2]},Relic.clear,5,14)
+    if spot then AOE.makeNeutralSheep(spot.X,spot.Z) end
+   end
+  end
+  for _,point in ipairs(AOE.herd.ringPoints(home.X,home.Z,center.X,center.Z,HERDS.boars,HERDS.boarRing.min,HERDS.boarRing.max,math.rad(160),0) or {}) do
+   local spot=Relic.rules.nudge(point,Relic.clear,5,14)
+   if spot then AOE.makeBoar(spot.X,spot.Z) end
+  end
+ end
+end
+-- claimRadius 內其他陣營（存活、參戰）的非綿羊單位。
+local function nearbyOwners(origin)
+ local result={}
+ for _,record in ipairs(unitCollisionIndex:Around(origin.X,origin.Z,HERDS.claimRadius) or {}) do
+  local unit=record.key
+  if unit.Parent==units and not AOE.isHerd(unit) then
+   local other=owner(unit)
+   local dx,dz=record.X-origin.X,record.Z-origin.Z
+   local distance=math.sqrt(dx*dx+dz*dz)
+   if other and alive(other) and distance<=HERDS.claimRadius then table.insert(result,{ownerId=other.id,distance=distance}) end
+  end
+ end
+ return result
+end
+local function relation(a,b)
+ local first,second=byId[a],byId[b]
+ return (first and second and enemies(first,second)) and "enemy" or "ally"
+end
+AOE.claimSheep=function(model,state,pos,hp,maxHP)
+ local ok,sheep=pcall(makeUnit,state,"sheep",pos)
+ if not ok then warn("[RTS] 綿羊生成失敗："..tostring(sheep)); return nil end
+ if hp and maxHP and maxHP>0 then sheep:SetAttribute("HP",math.clamp(sheep:GetAttribute("MaxHP")*hp/maxHP,1,sheep:GetAttribute("MaxHP"))) end
+ return sheep
+end
+AOE.herdStep=function(now)
+ if phase~="Playing" or now<(AOE.nextHerd or 0) then return end
+ AOE.nextHerd=now+HERDS.checkInterval
+ for model in pairs(AOE.neutralSheep) do
+  if model.Parent~=resources then AOE.neutralSheep[model]=nil
+  else
+   local pos=position(model)
+   local winner=AOE.herd.claim(nil,nearbyOwners(pos),relation)
+   local state=winner and byId[winner]
+   if state then
+    AOE.neutralSheep[model]=nil
+    managedResources[model]=nil
+    model:Destroy()
+    if AOE.claimSheep(model,state,pos) then notify(state.actor,"發現羊群！綿羊已歸你所有，村民右鍵即可宰殺採集。","Order") end
+   end
+  end
+ end
+ for _,state in pairs(states) do
+  if alive(state) then
+   for unit in pairs(state.units) do
+    if unit.Parent==units and AOE.isHerd(unit) then
+     local pos=position(unit)
+     local winner=AOE.herd.claim(state.id,nearbyOwners(pos),relation)
+     local other=winner and byId[winner]
+     if other and other~=state then
+      local hp,maxHP=unit:GetAttribute("HP"),unit:GetAttribute("MaxHP")
+      destroyModel(unit)
+      if AOE.claimSheep(unit,other,pos,hp,maxHP) then
+       notify(other.actor,"你帶走了敵方的一隻綿羊。","Order")
+       notify(state.actor,"你的綿羊被敵軍帶走了！","Error")
+      end
+     end
+    end
+   end
+  end
+ end
+end
+-- 宰殺自己的綿羊：原地留下可採集的食物（不擋路），回傳該資源。
+AOE.slaughter=function(state,sheep)
+ if not isOwned(state,sheep,units) or not AOE.isHerd(sheep) then return nil end
+ local pos=position(sheep)
+ local amount=sheep:GetAttribute("Amount") or Config.Resources.Sheep.amount
+ destroyModel(sheep)
+ local ok,carcass=pcall(makeResource,"Sheep",pos)
+ if not ok then warn("[RTS] 綿羊食物生成失敗："..tostring(carcass)); return nil end
+ carcass.PrimaryPart.CanCollide=false
+ carcass:SetAttribute("Amount",amount)
+ carcass:SetAttribute("Slain",true)
+ Factory.restage(carcass,"Sheep","Resource",1)
+ return carcass
+end
+-- 野豬 ----------------------------------------------------------------------
+AOE.boarAlive=function(target)
+ local entry=typeof(target)=="Instance" and AOE.boars[target]
+ return entry~=nil and entry~=false and entry.hp>0 and target.Parent==resources
+end
+-- 單位受到非玩家（野豬）的傷害；陣亡時與一般戰死相同：留下屍體、記錄損失並檢查淘汰。
+AOE.hurt=function(unit,amount)
+ local victim=owner(unit)
+ if not victim or unit.Parent~=units then return end
+ local before=unit:GetAttribute("HP") or 0
+ local after=math.max(0,before-math.max(1,amount-(unit:GetAttribute("Armor") or 0)))
+ unit:SetAttribute("HP",after)
+ unit:SetAttribute("LastHurt",os.clock())
+ if after<=0 and before>0 then
+  recordReport(victim,"loss",{subjectId=reportSubject(unit),category="unit"})
+  Factory.corpse(unit,COMBAT.corpseSeconds,COMBAT.maxCorpses)
+  destroyModel(unit)
+  local clock=os.clock()
+  if clock-(victim.boarNotice or -math.huge)>5 then victim.boarNotice=clock; notify(victim.actor,"野豬咬死了你的單位！多派幾位村民或先用軍隊打倒牠。","Error") end
+  eliminationCheck(victim)
+ end
+end
+AOE.strikeBoar=function(state,unit,boar,stats,now)
+ local entry=AOE.boars[boar]
+ if not entry or not UnitRules.takeAction(actionClocks,unit,"attack",now,stats.interval,0.3) then return end
+ unit:SetAttribute("Animation","Attack")
+ unit:SetAttribute("AttackPosition",position(boar))
+ unit:SetAttribute("AttackContact",nil)
+ unit:SetAttribute("AttackFlight",0.15)
+ unit:SetAttribute("LastAttack",now)
+ entry.attackers[unit]=now
+ entry.hp=AOE.herd.boarDamage(entry.hp,stats.damage,BOAR.armor)
+ boar:SetAttribute("BoarHP",entry.hp)
+ if entry.hp<=0 then
+  -- 打倒後變成可採集的獵物；在旁邊的村民下一步就開始採集。
+  AOE.boars[boar]=nil
+  boar:SetAttribute("Slain",true)
+  Factory.restage(boar,"Boar","Resource",1)
+  notify(state.actor,"野豬已被打倒，村民可以開始採集。","Order")
+ end
+end
+AOE.boarStep=function(now)
+ if phase~="Playing" then return end
+ for boar,entry in pairs(AOE.boars) do
+  if boar.Parent~=resources then AOE.boars[boar]=nil
+  elseif entry.hp>0 and next(entry.attackers)~=nil and now-entry.last>=BOAR.attackInterval then
+   local center,list=position(boar),{}
+   local half=boar.PrimaryPart and boar.PrimaryPart.Size.X/2 or 4
+   for unit,hitAt in pairs(entry.attackers) do
+    if unit.Parent==units then
+     local distance=math.max(0,(position(unit)-center).Magnitude-half)
+     table.insert(list,{key=unit,distance=distance,lastHit=hitAt})
+    else entry.attackers[unit]=nil end
+   end
+   local victim=AOE.herd.boarTarget(list,BOAR.reach)
+   if victim then
+    entry.last=now
+    boar:SetAttribute("LastAttack",now)
+    AOE.hurt(victim,BOAR.damage)
+   end
+  end
+ end
+end
+-- 弩砲 ----------------------------------------------------------------------
+-- 弩矢沿射擊方向繼續飛到射程盡頭，貫穿線上 width 內的其他敵方單位；越後面傷害越低。
+AOE.pierce=function(state,unit,from,impact,target,amount,data,at)
+ local pierce=data.pierce
+ local direction=Vector3.new(impact.X-from.X,0,impact.Z-from.Z)
+ if direction.Magnitude<0.1 then return end
+ direction=direction.Unit
+ local reach=(unit:GetAttribute("Range") or data.range)+4
+ local hits={}
+ for _,enemy in pairs(states) do
+  if enemies(state,enemy) then
+   for other in pairs(enemy.units) do
+    if other~=target and other.Parent==units and not AOE.isHerd(other) then
+     local offset=position(other)-from
+     local along=offset.X*direction.X+offset.Z*direction.Z
+     local side=math.abs(offset.X*direction.Z-offset.Z*direction.X)
+     if along>0 and along<=reach and side<=pierce.width+(other:GetAttribute("Radius") or 2) then table.insert(hits,{unit=other,along=along}) end
+    end
+   end
+  end
+ end
+ table.sort(hits,function(a,b) return a.along<b.along end)
+ for index=1,math.min(#hits,pierce.max) do
+  local other=hits[index].unit
+  if other.Parent then damage(other,amount*pierce.falloff^index,unit,at) end
+ end
+end
+end
 Players.PlayerAdded:Connect(join)
 Players.PlayerRemoving:Connect(function(player)
  local state=states[player]
@@ -3182,7 +3593,7 @@ local function rebuildSpatial()
   if alive(state) then
    for index,models in ipairs({state.units,state.buildings}) do
     for model in pairs(models) do
-     if model.Parent then
+     if model.Parent and not (index==1 and AOE.isHerd(model)) then
       local p=position(model)
       local entry={model=model,state=state,isUnit=index==1,X=p.X,Z=p.Z,category=targetCategory(model)}
       if index==1 then entry.radius=model:GetAttribute("Radius") or Config.UnitCollision.default.radius
@@ -3312,8 +3723,11 @@ acquireTarget=function(state,unit,now,afterKill)
  if kind=="villager" or kind=="monk" or not data or data.damage<=0 or unit.Parent~=units then return false end
  local order=orders[unit]
  if order and not afterKill and not (order.kind=="attack" and order.automatic) then return false end
+ local stance=AOE.stance.resolve(Config.Stances,unit:GetAttribute("Stance"))
+ if not AOE.stance.acquires(stance) then return false end
  local current=position(unit)
  local radius=CombatRules.acquisitionRadius(COMBAT.acquisitionRadius,unit:GetAttribute("Range") or data.range)
+ radius=radius and AOE.stance.acquisitionRadius(stance,radius,unit:GetAttribute("Range") or data.range)
  if not radius then return false end
  -- 剛繞路改打的目標先保留幾秒，不被「最近的敵人」拉回擠不進去的位置。
  if order and order.flankHold and now<order.flankHold and order.target.Parent then return true end
@@ -3356,9 +3770,10 @@ Strike.step=function(now)
     local interval=data and data.attackInterval or 1.5
     local last=state.defenseLast[b]
     if b.Parent==buildings and data and data.damage and b:GetAttribute("Complete") and now-(last or -math.huge)>=interval then
-     local target=bestEnemy(state,position(b),data.range or 64,nil,true)
+     local reach=AOE.buildingRange(state,data)
+     local target=bestEnemy(state,position(b),reach,nil,true)
      -- 城堡（attacksBuildings）：射程內沒有敵方單位時改射擊敵方建築；單位永遠優先。
-     if not target and data.attacksBuildings==true then target=bestEnemy(state,position(b),data.range or 64,"buildings",false) end
+     if not target and data.attacksBuildings==true then target=bestEnemy(state,position(b),reach,"buildings",false) end
      if target then
       -- 以射擊間隔累進，不受 0.6 秒索敵週期量化而變慢；中斷過久才重新對齊。
       state.defenseLast[b]=last and now-last<interval+0.75 and last+interval or now
@@ -3429,6 +3844,13 @@ local function nearbyResources(state,unit,pos,entry,now,farmUsed)
   if not farmUsed[b] and AutoWork.farmUsable(state,b,unit) and not skipped(entry,b,now) then
    local d=distanceTo(b,pos)
    if d<=radius and d<(distance.food or math.huge) then nearest.food,distance.food=b,d end
+  end
+ end
+ -- 自己的綿羊：村民走過去宰殺後採集。
+ for sheep in pairs(state.units) do
+  if sheep.Parent==units and AOE.isHerd(sheep) and not skipped(entry,sheep,now) then
+   local d=(position(sheep)-pos).Magnitude
+   if d<=radius and d<(distance.food or math.huge) then nearest.food,distance.food=sheep,d end
   end
  end
  return nearest
@@ -3599,7 +4021,7 @@ local function productionStep(dt)
    b:SetAttribute("BuilderCount",builders)
    b:SetAttribute("ConstructionStatus",builders>0 and "施工中" or "等待村民")
    if builders>0 then
-    local nextWork,work,complete=ConstructionRules.stepWork(item.work,item.duration,builders,dt,Config.Construction.extraWorkerRate)
+    local nextWork,work,complete=ConstructionRules.stepWork(item.work,item.duration,builders,dt*(1+item.state.modifiers.buildSpeed),Config.Construction.extraWorkerRate)
     if work>0 then
      for _,unit in ipairs(working) do
       unit:SetAttribute("WorkKind","build")
@@ -3648,7 +4070,7 @@ local function productionStep(dt)
    if item.remaining<=0 then
     local _,cap=population(item.state)
     local liveUnits=Garrison.count(item.state)
-    for unit in pairs(item.state.units) do if unit.Parent==units then liveUnits+=1 end end
+    for unit in pairs(item.state.units) do if unit.Parent==units and not AOE.isHerd(unit) then liveUnits+=1 end end
     local spawn=UnitRules.canCompletePopulation(liveUnits,cap) and freeSpawn(b,item.kind)
     if spawn then
      local ok,model=pcall(makeUnit,item.state,item.kind,spawn)
@@ -3696,6 +4118,7 @@ local function productionStep(dt)
      state.actor:SetAttribute("UnitName_"..data.upgrade.unit,state.unitNames[data.upgrade.unit])
     end
     state.statsCache=nil
+    state.actor:SetAttribute("BuildingVision",state.modifiers.buildingVision)
     if data.effect and data.effect.farmCapacity then
      for farm in pairs(state.buildings) do
       if farm:GetAttribute("BuildingType")=="Farm" then
@@ -3786,7 +4209,7 @@ orderStep=function(dt,now)
    else stop(unit) end
    continue
   end
-  if order.kind=="attack" and not enemies(state,owner(target)) then
+  if order.kind=="attack" and not enemies(state,owner(target)) and not AOE.boarAlive(target) then
    if order.resumeGather or not acquireTarget(state,unit,now,true) then finishAttack(state,unit,order) end
    continue
   end
@@ -3808,8 +4231,16 @@ orderStep=function(dt,now)
   -- 到位誤差小於陣形間隙，避免先停止的前排占住後排目的地。
   local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and Config.Construction.workRange or farming and Config.Farms.workRange or order.kind=="garrison" and Garrison.config.enterRange or 5
   local inRange=(destination-current).Magnitude<=range
+  local stance=order.kind=="attack" and order.automatic and AOE.stance.resolve(Config.Stances,unit:GetAttribute("Stance")) or nil
+  if stance and not inRange and not order.objective and not AOE.stance.mayChase(stance) then
+   -- 堅守姿態：自動接戰的目標離開射程就放棄，不離開原位。
+   actionClocks[unit]=actionClocks[unit] or {}
+   actionClocks[unit].acquireAfter=now+0.6
+   if order.resumeGather then finishAttack(state,unit,order) else stop(unit) end
+   continue
+  end
   if order.kind=="attack" and order.anchor and not order.objective and not inRange
-   and CombatRules.beyondLeash(order.anchor.X,order.anchor.Z,current.X,current.Z,COMBAT.leashDistance) then
+   and CombatRules.beyondLeash(order.anchor.X,order.anchor.Z,current.X,current.Z,AOE.stance.leash(stance,COMBAT.leashDistance,Config.Stances.defensiveLeash)) then
    -- 自動追擊超出上限：村民回去採集，軍隊回到原點，短暫不再索敵以免來回拉扯。
    actionClocks[unit]=actionClocks[unit] or {}
    actionClocks[unit].acquireAfter=now+COMBAT.leashCooldown
@@ -3849,6 +4280,12 @@ orderStep=function(dt,now)
   if inRange and order.kind=="relic" then Relic.pickup(state,unit,target); continue end
   if inRange and order.kind=="relicStore" then Relic.store(state,unit,target); continue end
   if inRange and order.kind=="trade" then Relic.trade.arrive(state,unit,order); continue end
+  -- 村民走到自己的綿羊旁：宰殺成可採集的食物，下一步開始採集。
+  if inRange and order.kind=="gather" and target.Parent==units and AOE.isHerd(target) then
+   local carcass=AOE.slaughter(state,target)
+   if carcass then order.target=carcass; unit:SetAttribute("OrderTargetName",carcass:GetAttribute("DisplayName")) else stop(unit) end
+   continue
+  end
   if inRange then
    order.path=nil
    unit:SetAttribute("Animation",order.kind=="attack" and "Attack" or (order.kind=="gather" or order.kind=="build" or order.kind=="repair" or order.kind=="convert" or order.kind=="heal") and "Work" or "Idle")
@@ -3873,13 +4310,20 @@ orderStep=function(dt,now)
     local returnTarget=order.returnTarget
     if not returnTarget or not returnTarget.Parent or ((returnTarget:GetAttribute("Amount") or 0)<=0 and not (AutoWork.isFarm(returnTarget) and AutoWork.farmUsable(state,returnTarget,unit))) then returnTarget=nearestResource(state,current,order.returnKind or key,unit) end
     if returnTarget then issue(unit,"gather",returnTarget) else stop(unit) end
+   elseif (order.kind=="gather" or order.kind=="attack") and AOE.boarAlive(target) then AOE.strikeBoar(state,unit,target,stats,now)
    elseif order.kind=="gather" and UnitRules.takeAction(actionClocks,unit,"gather",now,1) then
     local key=target:GetAttribute("ResourceType")
     local carrying=unit:GetAttribute("Carrying") or 0
     local rate=GatheringRules.gatherRate(stats.gather,target:GetAttribute("GatherMultiplier"))
     local amount=GatheringRules.takeAmount(target:GetAttribute("Amount") or 0,carrying,stats.carry,rate)
     target:SetAttribute("Amount",math.max(0,(target:GetAttribute("Amount") or 0)-amount))
-    if target.Parent==resources then Factory.refreshStage(target) end
+    if target.Parent==resources then
+     -- 已宰殺／打倒的獵物維持倒下的外觀（至少第 1 階段）。
+     if target:GetAttribute("Slain") then
+      local ratio=(target:GetAttribute("Amount") or 0)/math.max(1,target:GetAttribute("MaxAmount") or 1)
+      Factory.restage(target,target.Name,"Resource",ratio<=1/3 and 2 or 1)
+     else Factory.refreshStage(target) end
+    end
     if target.Parent==buildings and (target:GetAttribute("Amount") or 0)<=0 and not AutoWork.reseed(state,target) then AutoWork.farmLook(target) end
     unit:SetAttribute("CarryType",key)
     unit:SetAttribute("Carrying",carrying+amount)
@@ -3911,6 +4355,7 @@ orderStep=function(dt,now)
       elseif stone then hit=CombatRules.landsOn(target.Parent==buildings,(position(target)-impact).Magnitude,math.max(data.splash or 0,COMBAT.projectile.stoneRadius)) end
       if hit then damage(target,raw,unit,at) end
      end
+     if data.pierce then AOE.pierce(state,unit,current,impact,target,stats.damage,data,at) end
      if data.splash and data.splash>0 then
       for _,enemy in pairs(states) do
        if enemies(state,enemy) then
@@ -4126,6 +4571,8 @@ RunService.Heartbeat:Connect(function(dt)
   Strike.step(now)
   if probe then mark(probe.combat,combatStarted) end
   Walls.step()
+  AOE.boarStep(now)
+  AOE.herdStep(now)
  end
  if probe then mark(probe.step,now) end
  if phase~="Playing" then return end

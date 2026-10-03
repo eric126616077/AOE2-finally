@@ -102,6 +102,8 @@ local Monk={}
 local Relic={isRelic=function() return false end,trade={}}
 -- Garrison rules live outside the extracted body; these checks never target a garrisonable building.
 local Garrison={order=function() return false end}
+-- AOE2 式擴充：陣形測試的目標都不是野豬。
+local AOE={boarAlive=function() return false end}
 local mode,externalNeighbors="clear",{}
 local function model(x,z,ownerId,radius)
  local value={X=x,Z=z,Parent=units,attributes={OwnerId=ownerId,HP=40,Radius=radius or 2,UnitType="villager",Formation="Box",FormationForwardX=0,FormationForwardZ=-1}}

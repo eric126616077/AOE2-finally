@@ -44,6 +44,8 @@ local factions={}
 local orders,training,construction,researching={},{},{},{}
 local actionClocks={}
 local AutoWork={units={}}
+-- AOE2 式擴充系統的替身：開局放羊群／野豬與市集價格發布不在此測試範圍。
+local AOE={boars={},neutralSheep={},prices={},spawnHerds=function() end,publishPrices=function() end}
 local reportSequence,reportSubjectSequence=0,0
 local reportSubjects={}
 local generatedMaps=0
