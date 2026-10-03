@@ -460,19 +460,24 @@ local function development(options)
    train(building, kind)
    trainedKinds[kind] = true
   end
-  afford({ wood = Config.MarketTrade.batch, gold = Config.MarketTrade.buyGold }, "市集交易")
+  -- 市集價格浮動且所有玩家共用：每次交易前讀伺服器發布的報價。
+  local function quote(key,direction) return workspace:GetAttribute((direction=="Buy" and "MarketBuy_" or "MarketSell_")..key) or (direction=="Buy" and Config.MarketTrade.buyGold or Config.MarketTrade.sellGold) end
+  afford({ wood = Config.MarketTrade.batch, gold = quote("food","Buy") }, "市集交易")
   local beforeTrade = balances()
+  local sellQuote = quote("wood","Sell")
   send("Trade", market, "wood", "Sell")
-  waitFor(function() local b = balances(); return approximately(b.wood, beforeTrade.wood - Config.MarketTrade.batch) and approximately(b.gold, beforeTrade.gold + Config.MarketTrade.sellGold) end, 8, "市集真實賣出")
+  waitFor(function() local b = balances(); return approximately(b.wood, beforeTrade.wood - Config.MarketTrade.batch) and approximately(b.gold, beforeTrade.gold + sellQuote) end, 8, "市集真實賣出")
   check(approximately(player:GetAttribute("wood"), beforeTrade.wood - Config.MarketTrade.batch), "市集按正常比例賣出資源")
   local afterSell = balances()
+  local buyQuote = quote("food","Buy")
   send("Trade", market, "food", "Buy")
-  waitFor(function() local b = balances(); return approximately(b.food, afterSell.food + Config.MarketTrade.batch) and approximately(b.gold, afterSell.gold - Config.MarketTrade.buyGold) end, 8, "市集真實買入")
+  waitFor(function() local b = balances(); return approximately(b.food, afterSell.food + Config.MarketTrade.batch) and approximately(b.gold, afterSell.gold - buyQuote) end, 8, "市集真實買入")
   check(approximately(player:GetAttribute("food"), afterSell.food + Config.MarketTrade.batch), "市集按正常比例買入資源")
-  while (player:GetAttribute("gold") or 0) >= Config.MarketTrade.buyGold do
+  while (player:GetAttribute("gold") or 0) >= quote("food","Buy") do
    local beforeBuy = balances()
+   local price = quote("food","Buy")
    send("Trade", market, "food", "Buy")
-   waitFor(function() local b = balances(); return approximately(b.food, beforeBuy.food + Config.MarketTrade.batch) and approximately(b.gold, beforeBuy.gold - Config.MarketTrade.buyGold) end, 8, "正常買入以驗證資源不足")
+   waitFor(function() local b = balances(); return approximately(b.food, beforeBuy.food + Config.MarketTrade.batch) and approximately(b.gold, beforeBuy.gold - price) end, 8, "正常買入以驗證資源不足")
   end
   reject("Trade", { market, "food", "Buy" }, "黃金不足的市集交易")
   for _, kind in ipairs(Config.BuildOrder) do

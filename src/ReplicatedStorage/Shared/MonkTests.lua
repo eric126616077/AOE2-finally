@@ -165,8 +165,10 @@ local function run(options)
   build("Blacksmith")
   local market = build("Market")
   local before = balances()
+  -- 市集價格浮動：以伺服器目前發布的報價計算。
+  local price = workspace:GetAttribute("MarketBuy_food") or Config.MarketTrade.buyGold
   send("Trade", market, "food", "Buy")
-  waitFor(function() return paid(before, { gold = Config.MarketTrade.buyGold, food = -Config.MarketTrade.batch }) end, 8, "市集買入食物")
+  waitFor(function() return paid(before, { gold = price, food = -Config.MarketTrade.batch }) end, 8, "市集買入食物")
   check(true, "市集以正常價格買入食物")
   advance(3)
   build("House")

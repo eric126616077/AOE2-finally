@@ -20,6 +20,7 @@ local CursorView = require(RS.Shared.CursorView)
 local OrderMarkers = require(RS.Shared.OrderMarkers)
 local SelectionRules = require(RS.Shared.SelectionRules)
 local HotkeyRules = require(RS.Shared.HotkeyRules)
+local FogView = require(RS.Shared.FogView)
 local remotes = RS:WaitForChild("RTSRemotes")
 local command, feedback = remotes:WaitForChild("Command"), remotes:WaitForChild("Feedback")
 local selected, highlights, groups = {}, {}, {}
@@ -292,6 +293,25 @@ UI:Init({
   local model = selected[1]
   if playable() and model and model:GetAttribute("OwnerId") == player.UserId then command:FireServer("Trade",model,key,direction) end
  end,
+ -- 進貢：按住 Shift 送出較大的數量；盟友、市集與資源由伺服器驗證。
+ tribute = function(recipientId,key)
+  if not playable() or type(recipientId)~="number" then return end
+  local amounts=Config.Tribute.amounts
+  local amount=(UIS:IsKeyDown(Enum.KeyCode.LeftShift) or UIS:IsKeyDown(Enum.KeyCode.RightShift)) and amounts[#amounts] or amounts[1]
+  command:FireServer("Tribute",recipientId,key,amount)
+ end,
+ stance = function(key)
+  if not playable() or not Config.Stances.types[key] then return end
+  local units=ownedUnits()
+  if #units==0 then UI:Notify("先選取自己的軍隊，再切換姿態。") return end
+  command:FireServer("Stance",units,key)
+ end,
+ townBell = function()
+  local model=#selected==1 and selected[1]
+  if playable() and model and model:GetAttribute("OwnerId")==player.UserId and model:GetAttribute("BuildingType")=="TownCenter" then
+   command:FireServer("TownBell",model)
+  end
+ end,
  start = function() command:FireServer("StartMatch") end,
  autoWork = function(enabled) if type(enabled)=="boolean" then command:FireServer("AutoWork",enabled) end end,
  surrender = function() if playable() then command:FireServer("Surrender") end end,
@@ -394,7 +414,11 @@ local function targetModel(screenPoint)
   target=result and result.Instance
  end
  while target and target ~= workspace do
-  if target:IsA("Model") and (target:GetAttribute("BuildingType") or target:GetAttribute("UnitType") or target:GetAttribute("ResourceType") or target:GetAttribute("Relic")) then return target end
+  if target:IsA("Model") and (target:GetAttribute("BuildingType") or target:GetAttribute("UnitType") or target:GetAttribute("ResourceType") or target:GetAttribute("Relic")) then
+   -- 戰爭迷霧中看不到的目標不能點選或下令（點到的就當成地面）。
+   if not FogView.CanSee(target) then return nil end
+   return target
+  end
   target = target.Parent
  end
  return nil

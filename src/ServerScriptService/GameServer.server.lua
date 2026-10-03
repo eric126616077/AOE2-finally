@@ -1077,7 +1077,8 @@ local function nearestResource(state,pos,kind,unit)
  local nearest,distance=nil,math.huge
  for resource in pairs(managedResources) do
   if resource.Parent~=resources then managedResources[resource]=nil
-  elseif (resource:GetAttribute("Amount") or 0)>0 and (not kind or resource:GetAttribute("ResourceType")==kind) then
+  -- 活著的野豬要玩家手動圍獵；自動指派與電腦不會單獨派村民過去。
+  elseif (resource:GetAttribute("Amount") or 0)>0 and (not kind or resource:GetAttribute("ResourceType")==kind) and not AOE.boarAlive(resource) then
    local d=(position(resource)-pos).Magnitude
    if d<distance then nearest,distance=resource,d end
   end
@@ -3832,7 +3833,7 @@ local function nearbyResources(state,unit,pos,entry,now,farmUsed)
  local nearest,distance={},{}
  local radius=AUTO.gatherRadius
  for resource in pairs(managedResources) do
-  if resource.Parent==resources and (resource:GetAttribute("Amount") or 0)>0 then
+  if resource.Parent==resources and (resource:GetAttribute("Amount") or 0)>0 and not AOE.boarAlive(resource) then
    local key=resource:GetAttribute("ResourceType")
    if key then
     local d=(position(resource)-pos).Magnitude

@@ -26,7 +26,7 @@ end
 
 local function key(grid,column,row) return (row-1)*grid.count+column end
 
--- 重新計算目前視野。sources：{X,Z,radius}。回傳本次狀態有改變的列（row → true）。
+-- 重新計算目前視野。sources：{X,Z,radius}。回傳本次狀態有改變的列（row → true）與這次才第一次探索到的格子索引。
 -- 以世代編號標記可見，不必每次清空整張表。
 function FogRules.update(grid,sources)
  local previous=grid.generation
@@ -34,7 +34,7 @@ function FogRules.update(grid,sources)
  grid.generation=generation
  local seen,explored,count,cell=grid.seen,grid.explored,grid.count,grid.cell
  local half=grid.size/2
- local changed={}
+ local changed,discovered={},{}
  for _,source in ipairs(sources or {}) do
   local x,z,radius=source.X,source.Z,source.radius
   if finite(x) and finite(z) and finite(radius) and radius>0 then
@@ -53,6 +53,7 @@ function FogRules.update(grid,sources)
       local index=(row-1)*count+column
       if seen[index]~=generation then
        if seen[index]~=previous or not explored[index] then changed[row]=true end
+       if not explored[index] then table.insert(discovered,index) end
        seen[index]=generation
        explored[index]=true
       end
@@ -68,8 +69,12 @@ function FogRules.update(grid,sources)
    seen[index]=nil
   end
  end
- return changed
+ return changed,discovered
 end
+
+-- 格子索引 ↔ 欄列。
+function FogRules.index(grid,column,row) return key(grid,column,row) end
+function FogRules.cellAt(grid,index) return (index-1)%grid.count+1,math.floor((index-1)/grid.count)+1 end
 
 function FogRules.stateAt(grid,column,row)
  local index=key(grid,column,row)

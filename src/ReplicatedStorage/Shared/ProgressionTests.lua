@@ -191,10 +191,13 @@ local function run()
   local function trade(key,direction)
    local rules=Config.MarketTrade
    local oldResource,oldGold=player:GetAttribute(key),player:GetAttribute("gold")
+   -- 市集價格浮動：以交易前伺服器發布的報價計算。
+   local buyPrice=workspace:GetAttribute("MarketBuy_"..key) or rules.buyGold
+   local sellPrice=workspace:GetAttribute("MarketSell_"..key) or rules.sellGold
    command:FireServer("Trade",market,key,direction)
    waitFor(function()
-    if direction=="Buy" then return player:GetAttribute(key)==oldResource+rules.batch and player:GetAttribute("gold")==oldGold-rules.buyGold end
-    return player:GetAttribute(key)==oldResource-rules.batch and player:GetAttribute("gold")==oldGold+rules.sellGold
+    if direction=="Buy" then return player:GetAttribute(key)==oldResource+rules.batch and player:GetAttribute("gold")==oldGold-buyPrice end
+    return player:GetAttribute(key)==oldResource-rules.batch and player:GetAttribute("gold")==oldGold+sellPrice
    end,5,"市集"..(direction=="Buy" and "買入" or "賣出")..key.."正確交換資源")
   end
   trade("food","Buy")

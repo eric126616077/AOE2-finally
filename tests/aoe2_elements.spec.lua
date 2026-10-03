@@ -101,11 +101,16 @@ for row=1,16 do
  local runs=Fog.runs(grid,row)
  expect(#runs==1 and runs[1].first==1 and runs[1].last==16 and runs[1].state==0,"unexplored row not one black run")
 end
-local changed=Fog.update(grid,{{X=0,Z=0,radius=40}})
+local changed,discovered=Fog.update(grid,{{X=0,Z=0,radius=40}})
+expect(#discovered>0,"first sight discovered nothing")
+for _,index in ipairs(discovered) do
+ local column,row=Fog.cellAt(grid,index)
+ expect(Fog.index(grid,column,row)==index and Fog.stateAt(grid,column,row)==2,"discovered cell index round trip wrong")
+end
 expect(Fog.visibleAt(grid,0,0) and Fog.visibleAt(grid,30,0) and not Fog.visibleAt(grid,60,0),"vision circle wrong")
 expect(changed[9] and not changed[1],"changed rows wrong")
-local again=Fog.update(grid,{{X=0,Z=0,radius=40}})
-expect(next(again)==nil,"unchanged vision reported changes")
+local again,againDiscovered=Fog.update(grid,{{X=0,Z=0,radius=40}})
+expect(next(again)==nil and #againDiscovered==0,"unchanged vision reported changes")
 Fog.update(grid,{{X=-100,Z=-100,radius=20}})
 expect(not Fog.visibleAt(grid,0,0) and Fog.exploredAt(grid,0,0),"left area did not become fog")
 expect(Fog.visibleAt(grid,-100,-100),"new source not visible")

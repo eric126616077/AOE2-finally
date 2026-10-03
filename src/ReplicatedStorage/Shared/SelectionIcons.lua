@@ -267,6 +267,17 @@ function painters.flag(canvas)
  oval(canvas, "FlagFinial", 0.22, 0.04, 0.12, 0.12, P.gold)
 end
 
+function painters.bell(canvas)
+ -- Town bell: a bronze bell hanging from a wooden yoke, clapper showing below the rim.
+ edgedLine(canvas, "BellYoke", 0.2, 0.14, 0.8, 0.14, 0.07, P.woodLight)
+ rect(canvas, "BellEdge", 0.28, 0.2, 0.44, 0.52, P.edge, nil, 0.4)
+ rect(canvas, "BellBody", 0.31, 0.23, 0.38, 0.47, P.gold, nil, 0.38)
+ rect(canvas, "BellRimEdge", 0.18, 0.64, 0.64, 0.14, P.edge, nil, 0.5)
+ rect(canvas, "BellRim", 0.21, 0.66, 0.58, 0.1, P.goldLight, nil, 0.5)
+ oval(canvas, "BellShine", 0.38, 0.3, 0.08, 0.22, P.goldLight)
+ oval(canvas, "BellClapper", 0.44, 0.76, 0.12, 0.12, P.edge)
+end
+
 function painters.empty(canvas)
  -- An empty carrying basket: nothing is currently held.
  line(canvas, "BasketHandleEdge", 0.22, 0.4, 0.5, 0.12, 0.1, P.edge)

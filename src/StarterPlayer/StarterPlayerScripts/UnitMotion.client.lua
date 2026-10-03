@@ -6,6 +6,8 @@ local Debris=game:GetService("Debris")
 local Config=require(game.ReplicatedStorage.GameData.GameConfig)
 local Motion=require(game.ReplicatedStorage.Shared.MotionRules)
 local UnitView=require(game.ReplicatedStorage.Shared.ClientUnitView)
+-- 戰爭迷霧中看不到的敵方單位不顯示血條與攻擊特效。
+local FogView=require(game.ReplicatedStorage.Shared.FogView)
 local player=Players.LocalPlayer
 if script:GetAttribute("MotionInitialized") then return end
 script:SetAttribute("MotionInitialized",true)
@@ -103,6 +105,7 @@ local function fillHealth(model,bar)
  bar.fill.BackgroundColor3=ratio>.5 and Color3.fromRGB(96,196,92) or ratio>.25 and Color3.fromRGB(232,190,70) or Color3.fromRGB(214,72,60)
 end
 local function showHealth(model)
+ if not FogView.CanSee(model) then return end
  local root=model.PrimaryPart
  if not root then return end
  local bar=healthBars[model]
@@ -173,6 +176,7 @@ local function attackEffect(model)
  local unitKind,buildingKind=model:GetAttribute("UnitType"),model:GetAttribute("BuildingType")
  local data=Config.Units[unitKind] or Config.Buildings[buildingKind]
  if not data or not root or not finitePosition(target) or not onScreen(root.Position) then return end
+ if not FogView.CanSee(model) and not FogView.VisibleAt(target) then return end
  local kind=Config.Combat.projectileKinds[unitKind] or "arrow"
  local stone,javelin,bullet=kind=="stone",kind=="javelin",kind=="bullet"
  local sourceFrame=unitKind and UnitView.GetFrame(model) or root.CFrame

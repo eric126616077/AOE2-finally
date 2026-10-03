@@ -2,6 +2,8 @@
 -- authoritative; user model templates are neither replaced nor transformed.
 local Players=game:GetService("Players")
 local RunService=game:GetService("RunService")
+-- 戰爭迷霧：沒看過的敵方工地不顯示鷹架與進度。
+local FogView=require(game:GetService("ReplicatedStorage").Shared.FogView)
 local TweenService=game:GetService("TweenService")
 local RS=game:GetService("ReplicatedStorage")
 local Rules=require(RS:WaitForChild("Shared"):WaitForChild("ConstructionVisualRules"))
@@ -489,7 +491,7 @@ table.insert(connections,RunService.Heartbeat:Connect(function(dt)
  -- Only active construction sites are visited, four times a second. Completed
  -- buildings and resources never take part in this camera visibility pass.
  for model,observer in pairs(sites) do
-  if workspace:GetAttribute("MatchPhase")=="Playing" and inView(model.PrimaryPart) then
+  if workspace:GetAttribute("MatchPhase")=="Playing" and inView(model.PrimaryPart) and FogView.CanSee(model) then
    if not observer.overlay and not quiet(model) then overlay(model,observer); updateOverlay(model,observer) end
   else destroyOverlay(observer) end
  end

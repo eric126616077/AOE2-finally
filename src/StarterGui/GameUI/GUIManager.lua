@@ -20,6 +20,7 @@ local UnitIcons = require(RS.Shared.UnitIcons)
 local SelectionIcons = require(RS.Shared.SelectionIcons)
 local UnitSelectionPanel = require(RS.Shared.UnitSelectionPanel)
 local HotkeyRules = require(RS.Shared.HotkeyRules)
+local FogView = require(RS.Shared.FogView)
 local player = Players.LocalPlayer
 local GUI = {hitAreas = {}, reducedMotion = false, tab = "build", page = 1}
 -- Parchment-and-timber theme, matching the storybook models: warm paper panels in a wood frame,
@@ -399,7 +400,34 @@ end
 -- Pictogram per technology: what it improves, not a generic scroll.
 local techIcons={Loom="armor",Forging="attack",Armor="armor",Wheelbarrow="cart",HandCart="cart",DoubleBitAxe="axe",BowSaw="axe",
  HorseCollar="food",HeavyPlow="food",Fletching="range",BodkinArrow="range",ThumbRing="interval",Chemistry="flask",GoldMining="gold",
- StoneMining="stone",Bloodlines="heart",ScaleBarding="armor",Squires="speed",Fervor="speed",Sanctity="heart",Conscription="population"}
+ StoneMining="stone",Bloodlines="heart",ScaleBarding="armor",Squires="speed",Fervor="speed",Sanctity="heart",Conscription="population",
+ Masonry="armor",Architecture="armor",TreadmillCrane="hammer",GuardTower="range",TownWatch="flag",HerbalMedicine="heart",Coinage="gold",Banking="gold",Caravan="cart"}
+-- 姿態按鈕的圖示。
+local stanceIcons={Aggressive="attack",Defensive="armor",StandGround="flag",NoAttack="stop"}
+-- 可進貢的盟友：分隊或合作模式中同隊、仍在場上的其他陣營。
+local function tributeAllies()
+ local result={}
+ local team=player:GetAttribute("TeamId")
+ if team==nil or (workspace:GetAttribute("TeamMode") or "FFA")=="FFA" then return result end
+ for _,faction in ipairs(factions()) do
+  local actor=faction.actor
+  if faction.id~=player.UserId and actor:GetAttribute("TeamId")==team and actor:GetAttribute("Defeated")~=true
+   and actor:GetAttribute("Spectator")~=true and actor:GetAttribute("InLobby")~=true then table.insert(result,faction) end
+ end
+ return result
+end
+-- 所選單位目前的姿態；沒有可切換姿態的單位時為 nil，姿態不同時為 "Mixed"。
+local function stanceSelection(selected)
+ local current
+ for _,unit in ipairs(selected) do
+  local key=unit:GetAttribute("OwnerId")==player.UserId and unit:GetAttribute("Stance")
+  if key then
+   if current and current~=key then return "Mixed" end
+   current=key
+  end
+ end
+ return current
+end
 -- 可駐紮的己方完工建築：駐軍人數與每次射擊多出的箭數。
 local function garrisonText(model)
  local capacity=model:GetAttribute("GarrisonCapacity") or 0
@@ -421,6 +449,12 @@ local function commandSymbol(parent,action,width)
   local key=action.key:match("_(.+)$")
   local icon=resourceIcon(holder,key); icon.Position=UDim2.fromOffset(center-16,3)
   badge(action.key:match("^Buy_") and "+" or "−")
+ elseif action.resource then
+  local icon=resourceIcon(holder,action.resource); icon.Position=UDim2.fromOffset(center-16,3)
+  if action.symbol then badge(action.symbol) end
+ elseif action.icon then
+  SelectionIcons.Create(holder,action.icon,UDim2.fromOffset(30,30),UDim2.fromOffset(center-15,4)).Name="OrderIcon"
+  if action.symbol then badge(action.symbol) end
  elseif action.key=="Stop" then
   SelectionIcons.Create(holder,"stop",UDim2.fromOffset(28,28),UDim2.fromOffset(center-14,5)).Name="StopMark"
  else
@@ -2333,7 +2367,8 @@ function GUI:UpdateCommands(selected,buildingKind)
  -- 兵種升級會改變訓練卡片上的名稱，名稱變了就重建卡片。
  local upgradedNames = {}
  for _,unitKind in ipairs(ownedBuilding and Config.Buildings[kind].trains or {}) do table.insert(upgradedNames,player:GetAttribute("UnitName_"..unitKind) or "") end
- local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",table.concat(upgradedNames,","),model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",garrisoned and "garrisoned" or "empty",age,tostring(previewColor())},":")
+ local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",table.concat(upgradedNames,","),model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",garrisoned and "garrisoned" or "empty",age,tostring(previewColor()),player:GetAttribute("TownBell") and "bell" or "calm",
+  #tributeAllies(),stanceSelection(selected) and "stances" or "nostance"},":")
  if key ~= self.commandKey then
   self.commandKey = key; self.commandHolder:ClearAllChildren(); self.emptyCommandHint=nil; self.commandEntries,self.buildButtons = {},{}; self.tooltip.Visible = false
   local actions = {}
@@ -2341,6 +2376,15 @@ function GUI:UpdateCommands(selected,buildingKind)
    for _,formationKey in ipairs(Config.Formations.order) do
     local data=Config.Formations.types[formationKey]
     table.insert(actions,{key="Formation_"..formationKey,formation=formationKey,name=data.name,description=data.description.."\n改為列隊移動，取代目前工作；之後地面移動會沿用此陣形。",cost={},minAge=1,callback=function() self.callbacks.formation(formationKey) end})
+   end
+   -- 姿態（AOE2 式）：只對能作戰的軍隊有效。
+   if stanceSelection(selected) then
+    for _,stanceKey in ipairs(Config.Stances.order) do
+     local data=Config.Stances.types[stanceKey]
+     table.insert(actions,{key="Stance_"..stanceKey,name=data.short,description=data.name.."：\n"..data.description,cost={},minAge=1,icon=stanceIcons[stanceKey],
+      costLabel=function() return stanceSelection(self.selected or {})==stanceKey and "使用中" or "切換姿態" end,
+      callback=function() if self.callbacks.stance then self.callbacks.stance(stanceKey) end end})
+    end
    end
   elseif self.tab == "build" and canBuild and self.buildCategory then
    for _,item in ipairs(BuildMenuRules.items(Config,self.page,age)) do
@@ -2352,16 +2396,57 @@ function GUI:UpdateCommands(selected,buildingKind)
    for _,unitKind in ipairs(Config.Buildings[kind].trains or {}) do
     local data = Config.Units[unitKind]
     local upgradedName = player:GetAttribute("UnitName_"..unitKind)
-    table.insert(actions,{key = unitKind,name = upgradedName or data.name,description = (upgradedName and ("已升級為"..upgradedName.."。\n") or "")..data.description,cost = data.cost,minAge = data.minAge or 1,art = unitKind,callback = function() self.callbacks.train(unitKind) end})
+    table.insert(actions,{key = unitKind,name = upgradedName or data.name,description = (upgradedName and ("已升級為"..upgradedName.."。\n") or "")..data.description,cost = data.cost,minAge = data.minAge or 1,requires = data.requiresTech,art = unitKind,callback = function() self.callbacks.train(unitKind) end})
+   end
+   if kind == "TownCenter" then
+    -- 城鎮警鐘：村民躲進最近的駐紮建築；再按一次解除警報。
+    local ringing = player:GetAttribute("TownBell") == true
+    table.insert(actions,1,{key = "TownBell",name = ringing and "解除警報" or "城鎮警鐘",icon = "bell",symbol = ringing and "✓" or "!",
+     description = ringing and "解除警報：駐紮中的村民離開建築，回到原本的工作。" or "敲響城鎮警鐘：所有村民立刻躲進最近、仍有空位的市鎮中心、瞭望塔或城堡；駐軍會讓建築多射箭。\n再按一次解除警報。",
+     cost = {},minAge = 1,costLabel = ringing and "警報中" or "全員駐紮",callback = function() if self.callbacks.townBell then self.callbacks.townBell() end end})
    end
    if kind == "Market" then
-    local trade = Config.MarketTrade or {batch = 100,buyGold = 130,sellGold = 70}
+    -- 浮動價格：伺服器發布目前報價；所有玩家的買賣都會改變價格。
+    local trade = Config.MarketTrade
     for _,resourceKey in ipairs({"food","wood","stone"}) do
      local resourceName = ({food = "食物",wood = "木材",stone = "石材"})[resourceKey]
-     table.insert(actions,{key = "Buy_"..resourceKey,name = "購買"..resourceName,description = "花費 "..trade.buyGold.." 黃金，獲得 "..trade.batch.." "..resourceName.."。",
-      cost = {gold = trade.buyGold},costLabel = "金"..trade.buyGold.." → "..trade.batch,minAge = 2,callback = function() self.callbacks.trade(resourceKey,"Buy") end})
-     table.insert(actions,{key = "Sell_"..resourceKey,name = "出售"..resourceName,description = "出售 "..trade.batch.." "..resourceName.."，獲得 "..trade.sellGold.." 黃金。",
-      cost = {[resourceKey] = trade.batch},costLabel = trade.batch.." → 金"..trade.sellGold,minAge = 2,callback = function() self.callbacks.trade(resourceKey,"Sell") end})
+     local buyCost,sellCost = {gold = trade.buyGold},{[resourceKey] = trade.batch}
+     table.insert(actions,{key = "Buy_"..resourceKey,name = "購買"..resourceName,description = "用黃金買入 "..trade.batch.." "..resourceName.."。\n價格由所有玩家的買賣決定：每次買入都會漲價。",
+      cost = buyCost,costLabel = function() buyCost.gold = workspace:GetAttribute("MarketBuy_"..resourceKey) or trade.buyGold; return "金"..buyCost.gold.." → "..trade.batch end,
+      minAge = 2,callback = function() self.callbacks.trade(resourceKey,"Buy") end})
+     table.insert(actions,{key = "Sell_"..resourceKey,name = "出售"..resourceName,description = "賣出 "..trade.batch.." "..resourceName.."換黃金。\n價格由所有玩家的買賣決定：每次賣出都會跌價。",
+      cost = sellCost,costLabel = function() return trade.batch.." → 金"..(workspace:GetAttribute("MarketSell_"..resourceKey) or trade.sellGold) end,
+      minAge = 2,callback = function() self.callbacks.trade(resourceKey,"Sell") end})
+    end
+    -- 進貢：選擇盟友後送出 100（按住 Shift 為 500）；另付手續費，鑄幣／銀行業可減免。
+    local allies = tributeAllies()
+    if #allies > 0 then
+     local function recipient()
+      local list = tributeAllies()
+      for _,faction in ipairs(list) do if faction.id == self.tributeTarget then return faction end end
+      self.tributeTarget = list[1] and list[1].id or nil
+      return list[1]
+     end
+     table.insert(actions,{key = "TributeTarget",name = "進貢對象",icon = "flag",description = "點一下切換要進貢的盟友。",cost = {},minAge = 1,
+      costLabel = function() local target = recipient(); return target and target.name or "沒有盟友" end,
+      callback = function()
+       local list,index = tributeAllies(),0
+       for i,faction in ipairs(list) do if faction.id == self.tributeTarget then index = i end end
+       local nextTarget = list[index % math.max(1,#list) + 1]
+       self.tributeTarget = nextTarget and nextTarget.id or nil
+       if nextTarget then self:Notify("進貢對象："..nextTarget.name) end
+      end})
+     for _,resourceKey in ipairs(Config.Tribute.resources) do
+      local resourceName = ({food = "食物",wood = "木材",gold = "黃金",stone = "石材"})[resourceKey]
+      table.insert(actions,{key = "Tribute_"..resourceKey,name = "進貢"..resourceName,resource = resourceKey,symbol = "→",
+       description = "把 100 "..resourceName.."送給進貢對象（按住 Shift 送 500）。\n需另付 "..math.floor(Config.Tribute.fee*100).."% 手續費；鑄幣減半、銀行業免除。",
+       cost = {},minAge = 1,costLabel = function() local target = recipient(); return target and ("給 "..target.name) or "沒有盟友" end,
+       callback = function()
+        local target = recipient()
+        if not target then self:Notify("目前沒有可以進貢的盟友。") return end
+        if self.callbacks.tribute then self.callbacks.tribute(target.id,resourceKey) end
+       end})
+     end
     end
    end
   elseif self.tab == "research" and owned and Config.Buildings[kind] then
@@ -2844,10 +2929,13 @@ function GUI:UpdateMap()
     dot.BackgroundColor3 = colors[model:GetAttribute("OwnerId")] or ({wood=Color3.fromRGB(46,84,37),food=Color3.fromRGB(170,77,58),gold=Color3.fromRGB(224,184,82),stone=Color3.fromRGB(154,165,170)})[model:GetAttribute("ResourceType")] or C.muted
     -- 聖物在小地圖上以較大的白點標示，方便爭奪。
     if model:GetAttribute("Relic") then dot.BackgroundColor3=Color3.fromRGB(255,250,236); dot.Size=UDim2.fromOffset(6,6); dot.Visible=self.mapMode~="military" end
+    -- 戰爭迷霧：未探索的資源／建築與視野外的敵方單位不顯示。
+    if dot.Visible and not FogView.CanSee(model) then dot.Visible=false end
    end
   end end
  end
  for model,dot in pairs(self.dots) do if not alive[model] then dot:Destroy(); self.dots[model] = nil end end
+ self:UpdateMapFog()
  local camera = workspace.CurrentCamera
  if camera and camera.CFrame.LookVector.Y < 0 then
   local hit = camera.CFrame.Position+camera.CFrame.LookVector*(-camera.CFrame.Position.Y/camera.CFrame.LookVector.Y)
@@ -2864,6 +2952,34 @@ function GUI:UpdateMap()
   if minimum.X<maximum.X then
    self.mapFocus.Position=UDim2.fromScale((minimum.X+maximum.X)/2/mapSize()+0.5,(minimum.Y+maximum.Y)/2/mapSize()+0.5)
    self.mapFocus.Size=UDim2.fromScale(math.min(1,(maximum.X-minimum.X)/mapSize()),math.min(1,(maximum.Y-minimum.Y)/mapSize()))
+  end
+ end
+end
+-- 小地圖上的黑色地圖與暗霧：只重畫迷霧有變化的列（FogView.mapRows）。
+function GUI:UpdateMapFog()
+ local rows=FogView.mapRows
+ if next(rows)==nil then return end
+ FogView.mapRows={}
+ self.mapFog=self.mapFog or {}
+ local grid=FogView.Active() and FogView.grid or nil
+ if rows.all or not grid then
+  for _,frames in pairs(self.mapFog) do for _,frame in ipairs(frames) do frame:Destroy() end end
+  self.mapFog={}
+  if not grid then return end
+  rows={}
+  for row=1,grid.count do rows[row]=true end
+ end
+ local FogRules=require(RS.Shared.FogRules)
+ for row in pairs(rows) do
+  if type(row)=="number" then
+   for _,frame in ipairs(self.mapFog[row] or {}) do frame:Destroy() end
+   local frames={}
+   for _,run in ipairs(FogRules.runs(grid,row)) do
+    table.insert(frames,make("Frame",self.map,{Name="MinimapFog",BorderSizePixel=0,Active=false,ZIndex=2,BackgroundColor3=Color3.new(0,0,0),
+     BackgroundTransparency=run.state==0 and 0 or .5,Position=UDim2.fromScale((run.first-1)/grid.count,(row-1)/grid.count),
+     Size=UDim2.fromScale((run.last-run.first+1)/grid.count,1/grid.count)}))
+   end
+   self.mapFog[row]=frames
   end
  end
 end

@@ -8,7 +8,7 @@ local Panel = {}
 Panel.__index = Panel
 local C = {ink=Color3.fromRGB(61,44,28),muted=Color3.fromRGB(112,88,57),paper=Color3.fromRGB(225,207,166),
  card=Color3.fromRGB(72,57,38),edge=Color3.fromRGB(142,110,62),green=Color3.fromRGB(64,131,66),red=Color3.fromRGB(164,53,39),gold=Color3.fromRGB(179,126,40),white=Color3.fromRGB(248,234,204)}
-local classes = {villager="村民",infantry="步兵",archer="遠程部隊",cavalry="騎兵",siege="攻城器械",monk="僧侶",trade="貿易",building="建築"}
+local classes = {villager="村民",infantry="步兵",archer="遠程部隊",cavalry="騎兵",siege="攻城器械",monk="僧侶",trade="貿易",herd="家畜",building="建築"}
 local resources = {food="食物",wood="木材",gold="黃金",stone="石材"}
 local resourceNotes = {wood="右鍵指派村民伐木，木材交回市鎮中心或伐木場。",food="右鍵指派村民採集，食物交回市鎮中心或磨坊。",
  gold="右鍵指派村民採礦，黃金交回市鎮中心或採礦營地。",stone="右鍵指派村民採石，石材交回市鎮中心或採礦營地。"}
@@ -63,6 +63,8 @@ local function status(model)
  if verb and target then order=verb..target end
  local formation=Config.Formations.types[model:GetAttribute("Formation")]
  if formation then order..="\n"..formation.name end
+ local stance=Config.Stances.types[model:GetAttribute("Stance")]
+ if stance then order..=(formation and " · " or "\n")..stance.name end
  return order
 end
 local function details(model)
@@ -269,6 +271,11 @@ function Panel:ShowResource(model,data,touch)
  self.carryText.Text=string.format("%s %d",resources[data.resource] or "資源",math.floor(amount))
  self.stats.Position=UDim2.fromOffset(0,40)
  self.stats.Text=resourceNotes[data.resource] or ""
+ -- 野豬：還沒打倒前顯示生命，提醒要多派村民。
+ local boarHP=model:GetAttribute("BoarHP")
+ if Grid.isFinite(boarHP) and boarHP>0 then
+  self.stats.Text="野豬生命 "..math.ceil(boarHP).." / "..number(model,"BoarMaxHP",boarHP).."：先合力打倒牠，牠會反擊靠近的單位。"
+ end
 end
 function Panel:Update(selected,buildingKind,touch,relation)
  local units={}
