@@ -46,16 +46,27 @@ local function flush()
  reset()
 end
 local effects=workspace:WaitForChild("RTSClientEffects")
+-- UnitMotion 的特效物件會重複使用：同一個物件每次飛行都重新加入 RTSClientEffects。
+-- 每個物件只連一次 Parent 監聽，每次加入時重設起點；離開資料夾即視為飛行結束
+-- （歸還物件池時 Parent=nil，插在地上／建築上時移到 RTSStuckArrows）。
+local flights=setmetatable({}, {__mode="k"})
+local watched=setmetatable({}, {__mode="k"})
 effects.ChildAdded:Connect(function(object)
  stats.effects[object.Name]=(stats.effects[object.Name] or 0)+1
  if object.Name=="ArrowEffect" or object.Name=="JavelinEffect" or object.Name=="StoneEffect" then
-  local born,name,bucket=os.clock(),object.Name,stats
+  local name,bucket=object.Name,stats
   local pieces=#object:GetChildren()
   bucket.effects[name.."Pieces"]=math.max(bucket.effects[name.."Pieces"] or 0,pieces)
-  object.AncestryChanged:Connect(function()
-   if object.Parent then return end
-   bucket.projectileSeconds[name]=bucket.projectileSeconds[name] or {}
-   if type(bucket.projectileSeconds[name])=="table" and #bucket.projectileSeconds[name]<200 then table.insert(bucket.projectileSeconds[name],round(os.clock()-born,3)) end
+  flights[object]={born=os.clock(),name=name,bucket=bucket}
+  if watched[object] then return end
+  watched[object]=true
+  object:GetPropertyChangedSignal("Parent"):Connect(function()
+   local flight=flights[object]
+   if not flight or object.Parent==effects then return end
+   flights[object]=nil
+   local list=flight.bucket.projectileSeconds
+   list[flight.name]=list[flight.name] or {}
+   if type(list[flight.name])=="table" and #list[flight.name]<200 then table.insert(list[flight.name],round(os.clock()-flight.born,3)) end
   end)
  end
 end)
