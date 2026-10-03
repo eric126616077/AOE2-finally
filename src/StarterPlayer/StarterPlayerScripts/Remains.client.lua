@@ -28,12 +28,23 @@ local function inView(point)
  local screen,visible=camera:WorldToViewportPoint(point)
  return visible and screen.Z>0 and screen.Z<Rules.MaxDistance and FogView.VisibleAt(point)
 end
-local function partsOf(model)
- local list={}
+-- 客戶端收到 Corpses／Ruins 的新模型時，子零件可能還沒複製過來（ChildAdded 先到）。
+-- 所以先追蹤模型，零件陸續到達時再加入；晚到的零件立即套用目前的淡出，下一次 RenderStepped 套用動作。
+local function addPart(entry,part)
+ local item={part=part,final=part.CFrame}
+ -- 樹幹與樹冠從底部倒下；地面上的樹樁、木頭與切口只淡出。
+ if entry.kind=="tree" then item.topples=item.final.Position.Y-entry.ground.Y>1.5 end
+ table.insert(entry.parts,item)
+ if entry.alpha~=0 then part.LocalTransparencyModifier=entry.alpha end
+end
+local function watchParts(model,entry)
+ entry.parts={}
  for _,part in ipairs(model:GetDescendants()) do
-  if part:IsA("BasePart") then table.insert(list,{part=part,final=part.CFrame}) end
+  if part:IsA("BasePart") then addPart(entry,part) end
  end
- return list
+ entry.connection=model.DescendantAdded:Connect(function(part)
+  if part:IsA("BasePart") then addPart(entry,part) end
+ end)
 end
 local function setFade(entry,alpha)
  if entry.alpha==alpha then return end
@@ -62,8 +73,8 @@ local function trackCorpse(corpse)
  if not corpse:IsA("Model") or corpses[corpse] then return end
  local base,lay,expires=corpse:GetAttribute("CorpseBase"),corpse:GetAttribute("CorpseLay"),corpse:GetAttribute("CorpseExpires")
  if typeof(base)~="CFrame" or typeof(lay)~="CFrame" or type(expires)~="number" then return end
- local entry={parts=partsOf(corpse),base=base,lay=lay,expires=expires,alpha=0}
- if #entry.parts==0 then return end
+ local entry={base=base,lay=lay,expires=expires,alpha=0}
+ watchParts(corpse,entry)
  corpses[corpse]=entry
  -- 只有剛倒下的屍體播倒地；中途加入或畫面外的屍體直接是平躺狀態。
  local age=Config.Combat.corpseSeconds-(expires-workspace:GetServerTimeNow())
@@ -80,6 +91,7 @@ local function untrackCorpse(corpse)
  local entry=corpses[corpse]
  if not entry then return end
  corpses[corpse]=nil
+ if entry.connection then entry.connection:Disconnect() end
  if entry.fallStart then falling-=1 end
 end
 local function stepCorpses(clock,serverNow)
@@ -135,8 +147,8 @@ local function trackRuin(ruin)
  if type(kind)~="string" or type(start)~="number" or type(seconds)~="number" or seconds<=0
   or typeof(ground)~="Vector3" or type(height)~="number" then return end
  local entry={kind=kind,start=start,seconds=seconds,ground=ground,height=math.max(height,1),
-  parts=partsOf(ruin),alpha=0,seed=Rules.Seed(ground.X,ground.Z)}
- if #entry.parts==0 then return end
+  alpha=0,seed=Rules.Seed(ground.X,ground.Z)}
+ watchParts(ruin,entry)
  ruins[ruin]=entry
  local fresh=workspace:GetServerTimeNow()-start<seconds*.5
  -- 看不見、太遠、超過同時上限或已過半：直接隱藏，避免已死的建築靜止地多留一會。
@@ -151,17 +163,9 @@ local function trackRuin(ruin)
   collapsing+=1
   entry.counted=true
   if not reduced() then
-   local radius=0
-   for _,item in ipairs(entry.parts) do
-    local offset=item.final.Position-ground
-    radius=math.max(radius,math.sqrt(offset.X*offset.X+offset.Z*offset.Z))
-   end
-   dust(ground,math.max(radius,3),entry.height)
-  end
- elseif kind=="tree" then
-  -- 樹幹與樹冠從底部倒下；地面上的樹樁、木頭與切口只淡出。
-  for _,item in ipairs(entry.parts) do
-   item.topples=item.final.Position.Y-ground.Y>1.5
+   -- 半徑由伺服器給（零件可能還沒到）；舊伺服器沒有這個屬性時用最小值。
+   local radius=ruin:GetAttribute("RuinRadius")
+   dust(ground,math.max(type(radius)=="number" and radius or 0,3),entry.height)
   end
  end
 end
@@ -169,6 +173,7 @@ local function untrackRuin(ruin)
  local entry=ruins[ruin]
  if not entry then return end
  ruins[ruin]=nil
+ if entry.connection then entry.connection:Disconnect() end
  if entry.counted then collapsing-=1 end
 end
 local function finishRuin(entry)

@@ -341,6 +341,7 @@ local function ruin(model,kind,seconds,limit,maxParts)
  ruin:SetAttribute("RuinSeconds",seconds)
  ruin:SetAttribute("RuinGround",frame.Position-Vector3.new(0,size.Y/2,0))
  ruin:SetAttribute("RuinHeight",size.Y)
+ ruin:SetAttribute("RuinRadius",math.max(size.X,size.Z)/2)
  if not ruinFolder or not ruinFolder.Parent then
   ruinFolder=workspace:FindFirstChild("Ruins")
   if not ruinFolder then

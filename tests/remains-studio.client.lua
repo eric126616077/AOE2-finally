@@ -95,6 +95,11 @@ local function track(model,folderName,preexisting)
  local rec={model=model,corpse=folderName=="Corpses",preexisting=preexisting==true,appearClock=os.clock(),appearServer=serverNow(),parts={},
   maxLTM=0,maxMove=0,maxAngle=0,maxDown=0,maxTopAngle=0,preFadeLTM=0,preFadeMove=0,preFadeAngle=0,fadeLTM=0,fadeDown=0,fadeMove=0,fadeSamples=0}
  for _,part in ipairs(model:GetDescendants()) do if part:IsA("BasePart") then table.insert(rec.parts,part) end end
+ -- 客戶端的 ChildAdded 可能早於子零件複製；晚到的零件陸續加入，第一次看到時記下它的初始姿勢。
+ rec.first,rec.firstSeen,rec.firstVisible={},0,false
+ rec.partConnection=model.DescendantAdded:Connect(function(part)
+  if part:IsA("BasePart") then table.insert(rec.parts,part) end
+ end)
  if rec.corpse then
   rec.base,rec.lay,rec.expires=model:GetAttribute("CorpseBase"),model:GetAttribute("CorpseLay"),model:GetAttribute("CorpseExpires")
   rec.point=typeof(rec.base)=="CFrame" and rec.base.Position or nil
@@ -110,13 +115,12 @@ local function track(model,folderName,preexisting)
  -- 延後到同一輪的 Remains ChildAdded 處理之後、下一次 RenderStepped 之前：
  -- 這時的姿勢與透明度就是 Remains 一開始決定的狀態（直立／立即隱藏／揚塵數）。
  task.defer(function()
-  rec.first={}
-  local hidden=#rec.parts>0
-  for index,part in ipairs(rec.parts) do
-   rec.first[index]=part.CFrame
-   if part.LocalTransparencyModifier<.999 then hidden=false end
+  for _,part in ipairs(rec.parts) do
+   rec.first[part]=part.CFrame
+   rec.firstSeen+=1
+   if part.LocalTransparencyModifier<.999 then rec.firstVisible=true end
   end
-  rec.firstHidden=hidden
+  rec.firstHidden=rec.firstSeen>0 and not rec.firstVisible
   if rec.point then
    rec.view=inView(rec.point)
    rec.screen,rec.depth=onScreen(rec.point)
@@ -133,6 +137,7 @@ local function untrack(model)
  local rec=records[model]
  if not rec or rec.removed then return end
  rec.removed=true
+ if rec.partConnection then rec.partConnection:Disconnect() end
  rec.removedServer=serverNow()
  rec.removedPhase=workspace:GetAttribute("MatchPhase")
  active[model]=nil
@@ -157,6 +162,13 @@ Run.Heartbeat:Connect(function()
   local fading=rec.corpse and type(rec.expires)=="number" and now>=rec.expires-Rules.FadeSeconds-.05
   local alpha=0
   for _,part in ipairs(rec.parts) do
+   if part.Parent and not rec.first[part] then
+    -- 晚到的零件：Remains 已在這一幀的 RenderStepped 套用初始狀態，這裡就是它的第一個畫面。
+    rec.first[part]=part.CFrame
+    rec.firstSeen+=1
+    if part.LocalTransparencyModifier<.999 then rec.firstVisible=true end
+    rec.firstHidden=not rec.firstVisible
+   end
    if part.Parent then
     alpha=math.max(alpha,part.LocalTransparencyModifier)
     local server=part:GetAttribute("RemainsServerCFrame")
@@ -190,9 +202,9 @@ end
 -- 第一個畫面（Remains 處理後）與 expected(server) 的最大差距。
 local function firstDeviation(rec,expected)
  local maxMove,maxAngle,count=0,0,0
- for index,part in ipairs(rec.parts) do
+ for _,part in ipairs(rec.parts) do
   local server=part:GetAttribute("RemainsServerCFrame")
-  local first=rec.first and rec.first[index]
+  local first=rec.first[part]
   if typeof(server)=="CFrame" and first then
    local target=expected and expected(server) or server
    count+=1
