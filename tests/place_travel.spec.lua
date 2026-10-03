@@ -30,6 +30,11 @@ expect(read.settings.aiCount==1 and read.settings.size=="Small" and read.setting
 expect(read.players[1].civilization=="Riverland" and read.players[2].tutorial==true and read.players[1].tutorial==false,"ticket roster changed")
 expect(PlaceRules.member(read,12)==read.players[2] and PlaceRules.member(read,99)==nil,"ticket membership lookup wrong")
 expect(PlaceRules.member(nil,12)==nil,"missing ticket has members")
+-- 聖物勝利模式同樣經過大廳驗證並完整寫入票據；未知的勝利模式在大廳就被拒絕。
+local relicSettings=assert(LobbyRules.settings({expectedPlayers=2,size="Large",aiCount=2,difficulty="Normal",population=200,startingResources="Standard",victory="Relic",teamMode="FFA"}))
+local relicRead=PlaceRules.readTicket(PlaceRules.newTicket("match-relic","Room1",relicSettings,{{id=21},{id=22}},1000),1001,600,Config.Lobby.portals)
+expect(relicRead and relicRead.settings.victory=="Relic","relic victory lost in the ticket")
+expect(LobbyRules.settings({expectedPlayers=2,size="Small",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Relics",teamMode="FFA"})==nil,"unknown victory mode accepted")
 local function rejected(mutate,label,now)
  local copy=table.clone(ticket)
  copy.settings=table.clone(ticket.settings)

@@ -45,6 +45,14 @@ function Rules.relicIncome(accumulated,relics,rate,dt)
  local whole=math.floor(total)
  return whole,total-whole
 end
+-- 聖物勝利：某一隊存放的聖物等於全圖總數（總數 > 0）時回傳該隊，否則 nil。totals={[隊伍]=件數}
+function Rules.relicHolder(totals,total)
+ if type(totals)~="table" or not finite(total) or total<=0 then return nil end
+ for team,count in pairs(totals) do
+  if finite(count) and count>=total then return team end
+ end
+ return nil
+end
 -- 每趟貿易的黃金：距離越遠越多（含平方項）；距離不足或設定無效時為 0。盟友市集另加比例獎勵。
 function Rules.tradeGold(distance,config,ally)
  if type(config)~="table" or not finite(distance) or distance<0 then return 0 end

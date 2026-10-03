@@ -977,7 +977,7 @@ function GUI:CreateLobby()
   {key="difficulty",label="電腦難度",values={"Easy","Normal","Hard"},names={Easy="簡單",Normal="普通",Hard="困難"}},
   {key="population",label="人口上限",values={60,100,150,200}},
   {key="startingResources",label="初始資源",values={"Standard","Rich"},names={Standard="標準經濟",Rich="豐富資源"}},
-  {key="victory",label="勝利規則",values={"Conquest","Regicide","Wonder"},names={Conquest="征服",Regicide="主城決戰",Wonder="世界奇觀"}},
+  {key="victory",label="勝利規則",values={"Conquest","Regicide","Wonder","Relic"},names={Conquest="征服",Regicide="主城決戰",Wonder="世界奇觀",Relic="聖物"}},
  }
  self.settingLabels = {}
  for _,field in ipairs(fields) do
@@ -2174,6 +2174,7 @@ function GUI:UpdateLobby()
  self.reviewCivilizationButton:SetAttribute("Unavailable",starting)
  local victoryText = self.settings.victory == "Regicide" and (teamMode=="FFA" and "保護你的起始市鎮中心。\n起始主城失守即淘汰。" or "保護你的起始市鎮中心。\n起始主城失守即淘汰；盟友仍可繼續作戰。")
   or self.settings.victory == "Wonder" and ("完工後守住世界奇觀 "..(Config.Settings.wonderVictoryTime or 180).." 秒即可勝利。\n消滅其餘勢力也能獲勝。")
+  or self.settings.victory == "Relic" and ("用僧侶把全圖聖物存放到自己"..(teamMode=="FFA" and "" or "隊伍").."的修道院，守住 "..Config.Relics.victoryTime.." 秒即可勝利。\n消滅其餘勢力也能獲勝。")
   or (teamMode=="FFA" and "消滅敵方全部單位與建築。\n最後存活的勢力獲勝；沒有對手可自由建設。" or "消滅敵隊全部陣營；盟友不可互相攻擊。\n各自管理資源與單位，最後存活的隊伍獲勝。")
  self.reviewSummary.Text=GameModes.label(self.settings).." · "..expectedPlayers.." 真人＋"..aiCount.." 電腦\n"
   ..self.settingLabels.size.field.names[self.settings.size].."戰場 · 人口上限 "..self.settings.population.."\n"
@@ -2635,6 +2636,12 @@ function GUI:Update(selected,buildingKind)
  elseif workspace:GetAttribute("VictoryMode") == "Wonder" then
   local remaining = player:GetAttribute("WonderRemaining") or 0
   self.objective.Text = remaining > 0 and ("世界奇觀已完工\n勝利倒數 "..math.ceil(remaining).." 秒") or ("升級帝王時代建造世界奇觀\n完工後守住 "..(Config.Settings.wonderVictoryTime or 180).." 秒")
+ elseif workspace:GetAttribute("VictoryMode") == "Relic" then
+  local remaining = player:GetAttribute("RelicRemaining") or 0
+  local others = workspace:GetAttribute("RelicHoldRemaining")
+  self.objective.Text = remaining > 0 and ("已集齊全部聖物\n勝利倒數 "..math.ceil(remaining).." 秒")
+   or (others and ("敵方已集齊聖物！"..math.ceil(others).." 秒後獲勝\n派兵奪回聖物或摧毀修道院"))
+   or ("聖物 "..(player:GetAttribute("Relics") or 0).." / "..(workspace:GetAttribute("RelicTotal") or 0).."\n用僧侶集齊全部聖物並守住 "..Config.Relics.victoryTime.." 秒")
  else self.objective.Text = "採集、升級、擴張\n消滅敵方全部單位與建築" end
  local factionList = factions()
  for i,row in ipairs(self.scoreRows) do
@@ -2649,7 +2656,10 @@ function GUI:Update(selected,buildingKind)
    local noWinner=teamMode=="FFA" and workspace:GetAttribute("WinnerId")==0 or teamMode~="FFA" and workspace:GetAttribute("WinnerTeamId")==0
    local stateText=won and "勝利" or actor:GetAttribute("Forfeited") and "已投降" or finishedParticipant and (noWinner and "無勝者" or "戰敗")
     or actor:GetAttribute("Defeated") and (not ended and teamMode~="FFA" and "已淘汰 · 待結算" or "戰敗")
-    or (remaining > 0 and ("奇觀 "..math.ceil(remaining).."秒") or ("時代 "..(actor:GetAttribute("Age") or 1)))
+    or (remaining > 0 and ("奇觀 "..math.ceil(remaining).."秒")
+     or (actor:GetAttribute("RelicRemaining") and ("聖物 "..math.ceil(actor:GetAttribute("RelicRemaining")).."秒"))
+     or (workspace:GetAttribute("VictoryMode") == "Relic" and ("聖物 "..(actor:GetAttribute("Relics") or 0).." · 時代 "..(actor:GetAttribute("Age") or 1)))
+     or ("時代 "..(actor:GetAttribute("Age") or 1)))
    local teamLabel=teamMode~="FFA" and (" · "..TeamClient.TeamLabel(teamMode,actorTeam)) or ""
    row.Text = (faction.ai and "◆ " or "")..faction.name..teamLabel.."  ·  "..stateText
    local teamColor = actor:GetAttribute("TeamColor")

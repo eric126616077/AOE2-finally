@@ -186,6 +186,12 @@ expect(RelicTrade.tradeGold(800,trade,true)>RelicTrade.tradeGold(800,trade,false
 expect(RelicTrade.tradeGold(0/0,trade,false)==0 and RelicTrade.tradeGold(800,nil,false)==0 and RelicTrade.tradeGold(-5,trade,false)==0,"invalid trade input paid gold")
 expect(RelicTrade.tradeArrival(true,40)=="deliver" and RelicTrade.tradeArrival(false,0)=="load" and RelicTrade.tradeArrival(true,0)=="load","trade arrival actions")
 expect(RelicTrade.tradeArrival(false,40)==nil,"loaded cart delivered gold to a foreign market")
+-- 聖物勝利：只有存放全部聖物的隊伍成立；總數為 0 或資料無效時沒有持有者。
+expect(RelicTrade.relicHolder({[1]=5,[2]=0},5)==1,"relic holder not found")
+expect(RelicTrade.relicHolder({[1]=3,[2]=2},5)==nil,"split relics produced a holder")
+expect(RelicTrade.relicHolder({},0)==nil and RelicTrade.relicHolder({[1]=0},0)==nil,"zero relics produced a holder")
+expect(RelicTrade.relicHolder({[1]=0/0},5)==nil and RelicTrade.relicHolder(nil,5)==nil and RelicTrade.relicHolder({[1]=5},0/0)==nil,"invalid relic totals produced a holder")
+expect(Config.MatchModes.Relic~=nil and Config.Relics.victoryTime>0,"relic victory mode config")
 -- 貿易車與商隊設定。
 local cart=Config.Units.tradeCart
 expect(cart.class=="trade" and cart.damage==0 and table.find(Config.Buildings.Market.trains,"tradeCart"),"trade cart definition")

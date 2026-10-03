@@ -236,7 +236,7 @@ Config.Resources = {
  -- 獵物：每頭食物較少，但村民採集速度是 gatherMultiplier 倍；靜止不逃跑。
  Deer = { resource="food", name="鹿", amount=150, color=Color3.fromRGB(168,118,72), height=6, gatherMultiplier=1.6, hunt=true },
 }
-Config.MatchModes = { Conquest="征服", Regicide="主城決戰", Wonder="奇觀" }
+Config.MatchModes = { Conquest="征服", Regicide="主城決戰", Wonder="奇觀", Relic="聖物" }
 Config.AIDifficulties = { Easy="簡單", Normal="普通", Hard="困難" }
 Config.MarketTrade = { batch=100, buyGold=130, sellGold=70 }
 -- 貿易車：每趟黃金 = 距離 × goldPerStud + 距離² × goldPerStudSquared（無條件捨去），盟友市集再加 allyBonus。
@@ -246,7 +246,8 @@ Config.Trade = { minDistance=160, goldPerStud=0.08, goldPerStudSquared=1/12000, 
 -- 只有僧侶能拾取；存放在己方已完工的修道院，每件每秒產生 goldPerSecond 黃金。
 -- 攜帶者陣亡或修道院被摧毀時聖物掉落在原地。axisRadii 是相對於地圖半寬的距離。
 Config.Relics = { name="聖物", description="僧侶右鍵拾取，帶回自己的修道院存放後每秒產生黃金。攜帶者陣亡時會掉落。",
- goldPerSecond=0.5, counts={Small=4,Medium=5,Large=9}, axisRadii={Small={0.55},Medium={0.55},Large={0.38,0.72}}, clearance=10, size=4 }
+ -- 聖物勝利：同一隊存放全圖所有聖物並守住 victoryTime 秒即獲勝。
+ goldPerSecond=0.5, victoryTime=180, counts={Small=4,Medium=5,Large=9}, axisRadii={Small={0.55},Medium={0.55},Large={0.38,0.72}}, clearance=10, size=4 }
 -- Original identities share the complete gameplay rules above. Purchases never alter them.
 Config.CivilizationOrder = { "RiverHaven", "Sunspire", "JadeGrove" }
 Config.DefaultCivilization = "RiverHaven"

@@ -5,7 +5,7 @@ local sizes = {Small = true, Medium = true, Large = true}
 local difficulties = {Easy = true, Normal = true, Hard = true}
 local populations = {[60] = true, [100] = true, [150] = true, [200] = true}
 local resources = {Standard = true, Rich = true}
-local victories = {Conquest = true, Regicide = true, Wonder = true}
+local victories = {Conquest = true, Regicide = true, Wonder = true, Relic = true}
 local settingFields={expectedPlayers=true,size=true,aiCount=true,difficulty=true,population=true,startingResources=true,victory=true,teamMode=true,gameMode=true,storyChapter=true}
 -- 玩法本身的人數與章節規則由 LobbyRules／GameModeRules 檢查；這裡只確認欄位型別。
 local gameModes = {Story = true, PvP = true, PvE = true, Sandbox = true}

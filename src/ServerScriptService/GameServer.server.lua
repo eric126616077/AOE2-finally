@@ -1690,6 +1690,7 @@ local function resetActor(state)
  state.unitModifiers,state.unitNames={},{}
  Relic.accumulated[state]=nil
  for _,key in ipairs({"Relics","RelicGold","TradeIncome"}) do state.actor:SetAttribute(key,0) end
+ state.actor:SetAttribute("RelicRemaining",nil)
  for kind in pairs(Config.Units) do state.actor:SetAttribute("UnitName_"..kind,nil) end
  state.statsCache=nil
  state.buildRetryAfter={}
@@ -2399,6 +2400,34 @@ Relic.spawnAll=function(sizeName)
   if spot then Relic.make(spot.X,spot.Z); placed+=1 else warn("[RTS] 找不到聖物的空位：",point.X,point.Z) end
  end
  workspace:SetAttribute("RelicTotal",placed)
+ Relic.holder,Relic.holdSince=nil,nil
+ workspace:SetAttribute("RelicHoldRemaining",nil)
+end
+-- 聖物勝利：同一隊（FFA 時就是單一陣營）存放全圖所有聖物後開始倒數，期間失去任何一件就重新計算。
+Relic.victoryStep=function(now)
+ local totals={}
+ for _,state in pairs(states) do
+  if alive(state) then
+   local team=TeamRules.team(matchTeams,state.id)
+   if team~=nil then totals[team]=(totals[team] or 0)+(state.actor:GetAttribute("Relics") or 0) end
+  end
+ end
+ local holder=Relic.rules.relicHolder(totals,workspace:GetAttribute("RelicTotal") or 0)
+ if holder~=Relic.holder then
+  if holder~=nil then announce(string.format("有勢力已集齊全部聖物！守住 %d 秒就會獲勝。",Relic.config.victoryTime),"Error")
+  elseif Relic.holder~=nil then announce("聖物已被奪走，聖物勝利倒數中斷。") end
+  Relic.holder,Relic.holdSince=holder,holder~=nil and now or nil
+ end
+ local remaining=Relic.holdSince and math.max(0,Relic.config.victoryTime-(now-Relic.holdSince)) or nil
+ for _,state in pairs(states) do
+  local holding=remaining~=nil and alive(state) and TeamRules.team(matchTeams,state.id)==holder
+  state.actor:SetAttribute("RelicRemaining",holding and math.ceil(remaining) or nil)
+ end
+ workspace:SetAttribute("RelicHoldRemaining",remaining and math.ceil(remaining) or nil)
+ if remaining and remaining<=0 then
+  Relic.holder,Relic.holdSince=nil,nil
+  endMatch(holder)
+ end
 end
 -- 掉落時找附近空位；真的找不到也照放，聖物不能消失。
 Relic.drop=function(origin,count,spread)
@@ -4040,6 +4069,7 @@ RunService.Heartbeat:Connect(function(dt)
    end
   end
  end
+ if settings.victory=="Relic" and phase=="Playing" then Relic.victoryStep(now) end
 end)
 end
 workspace:SetAttribute("RTSReady",true)
