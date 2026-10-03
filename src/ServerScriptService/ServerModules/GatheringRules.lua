@@ -23,4 +23,11 @@ function Rules.returnKind(carryType, requestedType)
  return resources[carryType] and carryType or nil
 end
 
+-- 獵物等資源以倍率加快採集；只接受 (0,4] 的有限倍率，其餘一律視為 1。
+function Rules.gatherRate(rate,multiplier)
+ if not finite(rate) or rate<0 then return 0 end
+ if finite(multiplier) and multiplier>0 and multiplier<=4 then return rate*multiplier end
+ return rate
+end
+
 return Rules

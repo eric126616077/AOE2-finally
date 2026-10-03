@@ -252,6 +252,62 @@ function painters.cavalry(canvas, team)
  kiteShield(canvas, 0.25, 0.455, 0.165, 0.22, team)
 end
 
+function painters.cavalryArcher(canvas, team)
+ -- Light horse with a hooded rider drawing a short bow; the quiver rides at the hip.
+ horse(canvas, team, false)
+ edgedLine(canvas, "HipQuiver", 0.27, 0.6, 0.2, 0.38, 0.07, P.leather)
+ line(canvas, "QuiverArrow", 0.22, 0.4, 0.19, 0.3, 0.024, team)
+ shoulders(canvas, 0.29, 0.4, 0.265, 0.25, P.green, team)
+ ellipse(canvas, "HoodEdge", 0.31, 0.135, 0.23, 0.25, P.outline)
+ ellipse(canvas, "Hood", 0.325, 0.15, 0.2, 0.22, P.green)
+ face(canvas, 0.355, 0.21, 0.15, 0.17)
+ line(canvas, "CapTrim", 0.33, 0.215, 0.53, 0.215, 0.04, P.leather)
+ edgedLine(canvas, "BowUpper", 0.53, 0.2, 0.63, 0.3, 0.045, P.woodLight)
+ edgedLine(canvas, "BowLower", 0.63, 0.3, 0.55, 0.5, 0.045, P.woodLight)
+ line(canvas, "Bowstring", 0.53, 0.2, 0.55, 0.5, 0.018, P.light)
+ ellipse(canvas, "BowHand", 0.585, 0.31, 0.07, 0.07, P.skinLight)
+end
+
+function painters.camel(canvas, team)
+ -- Sandy camel with a hump and a long neck; turbaned rider with a curved sword.
+ local coat, dark = Color3.fromRGB(214, 172, 112), Color3.fromRGB(158, 116, 70)
+ ellipse(canvas, "CamelBodyEdge", 0.15, 0.56, 0.56, 0.22, P.outline)
+ ellipse(canvas, "CamelBody", 0.17, 0.58, 0.52, 0.18, coat)
+ ellipse(canvas, "HumpEdge", 0.25, 0.45, 0.24, 0.2, P.outline)
+ ellipse(canvas, "Hump", 0.265, 0.465, 0.21, 0.17, coat)
+ edgedLine(canvas, "Foreleg", 0.62, 0.7, 0.65, 0.92, 0.05, dark)
+ edgedLine(canvas, "Hindleg", 0.24, 0.7, 0.21, 0.92, 0.05, dark)
+ edgedLine(canvas, "CamelNeck", 0.66, 0.62, 0.78, 0.36, 0.08, coat)
+ ellipse(canvas, "CamelHeadEdge", 0.73, 0.28, 0.2, 0.12, P.outline, 12)
+ ellipse(canvas, "CamelHead", 0.743, 0.293, 0.175, 0.095, coat, 12)
+ rect(canvas, "CamelEye", 0.8, 0.31, 0.025, 0.025, P.outline, nil, 0.5)
+ rect(canvas, "SaddleCloth", 0.42, 0.56, 0.2, 0.17, team, nil, 0.12)
+ shoulders(canvas, 0.42, 0.33, 0.22, 0.24, P.light, team)
+ face(canvas, 0.45, 0.16, 0.15, 0.18)
+ ellipse(canvas, "TurbanEdge", 0.43, 0.1, 0.2, 0.13, P.outline)
+ ellipse(canvas, "Turban", 0.443, 0.113, 0.174, 0.1, P.light)
+ line(canvas, "TurbanBand", 0.44, 0.18, 0.62, 0.18, 0.032, team)
+ edgedLine(canvas, "Scimitar", 0.38, 0.42, 0.24, 0.2, 0.04, P.steelLight)
+ line(canvas, "ScimitarGuard", 0.35, 0.44, 0.42, 0.39, 0.03, P.gold)
+end
+
+function painters.handCannoneer(canvas, team)
+ -- Broad black hat, red doublet and a levelled iron hand gun with a puff of smoke.
+ ellipse(canvas, "SmokeEdge", 0.78, 0.33, 0.17, 0.15, P.outline)
+ ellipse(canvas, "Smoke", 0.79, 0.34, 0.15, 0.13, P.light)
+ edgedLine(canvas, "GunStock", 0.42, 0.6, 0.6, 0.5, 0.06, P.woodLight)
+ edgedLine(canvas, "GunBarrel", 0.58, 0.51, 0.82, 0.4, 0.055, P.steelDark)
+ shoulders(canvas, 0.23, 0.56, 0.45, 0.31, Color3.fromRGB(150, 66, 52), team)
+ face(canvas, 0.35, 0.31, 0.22, 0.25)
+ ellipse(canvas, "HatBrimEdge", 0.22, 0.27, 0.48, 0.085, P.outline)
+ ellipse(canvas, "HatBrim", 0.232, 0.28, 0.456, 0.06, P.mane)
+ rect(canvas, "HatCrownEdge", 0.33, 0.13, 0.25, 0.17, P.outline, nil, 0.2)
+ rect(canvas, "HatCrown", 0.345, 0.145, 0.22, 0.14, P.mane, nil, 0.2)
+ line(canvas, "HatBand", 0.345, 0.27, 0.565, 0.27, 0.035, team)
+ edgedLine(canvas, "PowderHorn", 0.2, 0.68, 0.3, 0.76, 0.05, P.light)
+ ellipse(canvas, "GunHand", 0.53, 0.5, 0.08, 0.08, P.skinLight)
+end
+
 local function wheel(canvas, x, y, diameter)
  ellipse(canvas, "WheelEdge", x, y, diameter, diameter, P.outline)
  ellipse(canvas, "WheelRim", x + 0.014, y + 0.014, diameter - 0.028, diameter - 0.028, P.woodLight)
@@ -259,6 +315,19 @@ local function wheel(canvas, x, y, diameter)
  line(canvas, "WheelSpoke", x + diameter / 2, y + 0.034, x + diameter / 2, y + diameter - 0.034, 0.024, P.woodLight)
  line(canvas, "WheelSpoke", x + 0.034, y + diameter / 2, x + diameter - 0.034, y + diameter / 2, 0.024, P.woodLight)
  ellipse(canvas, "WheelHub", x + diameter * 0.39, y + diameter * 0.39, diameter * 0.22, diameter * 0.22, P.gold)
+end
+
+function painters.tradeCart(canvas, team)
+ -- Covered cart in the player color with a big spoked wheel, and a gold coin for its trade.
+ rect(canvas, "CoverEdge", 0.13, 0.22, 0.6, 0.38, P.outline, nil, 0.45)
+ rect(canvas, "Cover", 0.15, 0.24, 0.56, 0.34, team, nil, 0.45)
+ for i = 0, 2 do line(canvas, "CoverHoop", 0.24 + i * 0.17, 0.26, 0.24 + i * 0.17, 0.56, 0.025, P.light) end
+ edgedLine(canvas, "CartBed", 0.12, 0.62, 0.74, 0.62, 0.07, P.woodLight)
+ edgedLine(canvas, "Shaft", 0.72, 0.62, 0.92, 0.5, 0.04, P.wood)
+ wheel(canvas, 0.32, 0.56, 0.3)
+ ellipse(canvas, "CoinEdge", 0.68, 0.16, 0.2, 0.2, P.outline)
+ ellipse(canvas, "Coin", 0.695, 0.175, 0.17, 0.17, P.gold)
+ ellipse(canvas, "CoinShine", 0.725, 0.2, 0.06, 0.06, P.light)
 end
 
 function painters.ram(canvas, team)

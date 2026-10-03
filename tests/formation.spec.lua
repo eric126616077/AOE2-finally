@@ -98,6 +98,8 @@ local AutoWork={units={},hold=function(unit) holds[unit]=true end,
  isFarm=function() return false end,farmFree=function() return true end,claimFarm=function() return false end,reseed=function() return false end}
 -- Monk handlers are defined inside the extracted order body; formation checks never select monks.
 local Monk={}
+-- 聖物與貿易的實作不在陣形指令範圍；指令分派只需要判斷「不是聖物」。
+local Relic={isRelic=function() return false end,trade={}}
 -- Garrison rules live outside the extracted body; these checks never target a garrisonable building.
 local Garrison={order=function() return false end}
 local mode,externalNeighbors="clear",{}

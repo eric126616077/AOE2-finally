@@ -68,4 +68,17 @@ function CombatRules.landsOn(isBuilding,distanceFromImpact,radius)
  return finite(distanceFromImpact) and finite(radius) and distanceFromImpact>=0 and radius>=0 and distanceFromImpact<=radius
 end
 
+-- 剋制加成：攻擊者設定加成加上兵種升級加成（extra）。雙重類別的目標（例如騎射手同時是騎兵與遠程部隊）
+-- 取兩類中較高的一個，不重複疊加。
+function CombatRules.counterBonus(base,extra,targetClass,alsoClass)
+ base=type(base)=="table" and base or {}
+ extra=type(extra)=="table" and extra or {}
+ local function value(class)
+  if type(class)~="string" then return 0 end
+  local total=(finite(base[class]) and base[class] or 0)+(finite(extra[class]) and extra[class] or 0)
+  return math.max(0,total)
+ end
+ return math.max(value(targetClass),value(alsoClass))
+end
+
 return CombatRules

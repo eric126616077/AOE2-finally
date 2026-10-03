@@ -63,9 +63,19 @@ local function relation(model)
 end
 -- Visual intent only; the server independently validates ownership and teams.
 -- Pending replication is never guessed as hostile, including desktop right click.
-local function rejectFriendlyTarget(target)
+-- 盟友目標只有兩種合法用途：貿易車前往盟友市集、僧侶治療盟友單位；其餘一律擋下。
+local function allyUse(target,units)
+ for _,unit in ipairs(units or {}) do
+  local kind=unit:GetAttribute("UnitType")
+  if kind=="tradeCart" and target:GetAttribute("BuildingType")=="Market" then return true end
+  if kind=="monk" and target:GetAttribute("UnitType")~=nil then return true end
+ end
+ return false
+end
+local function rejectFriendlyTarget(target,units)
  if typeof(target)~="Instance" then return false end
  local kind=relation(target)
+ if kind=="ally" and allyUse(target,units) then return false end
  if kind=="ally" then
   UI:Notify("友方不可攻擊；各自管理自己的資源與單位。")
   return true
@@ -384,7 +394,7 @@ local function targetModel(screenPoint)
   target=result and result.Instance
  end
  while target and target ~= workspace do
-  if target:IsA("Model") and (target:GetAttribute("BuildingType") or target:GetAttribute("UnitType") or target:GetAttribute("ResourceType")) then return target end
+  if target:IsA("Model") and (target:GetAttribute("BuildingType") or target:GetAttribute("UnitType") or target:GetAttribute("ResourceType") or target:GetAttribute("Relic")) then return target end
   target = target.Parent
  end
  return nil
@@ -575,8 +585,10 @@ local function touchCommand(screenPoint)
  elseif mode == "move" then target = groundPoint(screenPoint)
  elseif mode == "gather" then
   local owner = target and target:GetAttribute("OwnerId")
-  if not target or not target:GetAttribute("ResourceType") or (owner ~= nil and owner ~= player.UserId) then
-   UI:Notify("採集模式：請點資源或自己的農田。") return
+  -- 觸控的採集模式也負責聖物（僧侶拾取／存放）與市集貿易；是否合法由伺服器判斷。
+  local special = target and (target:GetAttribute("Relic") or ((target:GetAttribute("BuildingType") == "Market" or target:GetAttribute("BuildingType") == "Monastery") and allyUse(target,units) or (owner == player.UserId and target:GetAttribute("BuildingType") == "Monastery")))
+  if not special and (not target or not target:GetAttribute("ResourceType") or (owner ~= nil and owner ~= player.UserId)) then
+   UI:Notify("採集模式：請點資源、自己的農田、聖物（僧侶）或市集（貿易車）。") return
   end
  elseif mode == "attack" then
   if target and rejectFriendlyTarget(target) then return end
@@ -665,7 +677,7 @@ UIS.InputBegan:Connect(function(input, processed)
   if #units==0 and rallyBuilding() then placeRally(); return end
   if #units == 0 then UI:Notify("先選取自己的村民或軍隊，再按右鍵下令。") return end
   local target = targetModel() or groundPoint()
-  if target and not rejectFriendlyTarget(target) then
+  if target and not rejectFriendlyTarget(target,units) then
    -- Alt+右鍵是駐紮的專用指令；一般右鍵不會駐紮。
    local garrisonOrder=garrisonBuilding(target) and (UIS:IsKeyDown(Enum.KeyCode.LeftAlt) or UIS:IsKeyDown(Enum.KeyCode.RightAlt))
    orderFeedback(units,target,garrisonOrder)
@@ -775,13 +787,18 @@ local function resolvePointer()
   for _,unit in ipairs(ownedUnits()) do
    if unit:GetAttribute("UnitType")=="villager" then context.villagers+=1 else context.military+=1 end
    if unit:GetAttribute("UnitType")=="monk" then context.monks=(context.monks or 0)+1 end
+   if unit:GetAttribute("CarryingRelic")==true then context.relicCarriers=(context.relicCarriers or 0)+1 end
+   if unit:GetAttribute("UnitType")=="tradeCart" then context.traders=(context.traders or 0)+1 end
   end
  end
  if target then
   local hp,maxHP=target:GetAttribute("HP"),target:GetAttribute("MaxHP")
   context.target={relation=relation(target),unit=target:GetAttribute("UnitType")~=nil,building=target:GetAttribute("BuildingType")~=nil,
    resource=target:GetAttribute("ResourceType"),complete=target:GetAttribute("Complete"),
-   damaged=type(hp)=="number" and type(maxHP)=="number" and hp<maxHP,garrison=garrisonBuilding(target)}
+   damaged=type(hp)=="number" and type(maxHP)=="number" and hp<maxHP,garrison=garrisonBuilding(target),
+   relic=target:GetAttribute("Relic")==true,
+   market=target:GetAttribute("BuildingType")=="Market" and target:GetAttribute("Complete")==true,
+   monastery=target:GetAttribute("BuildingType")=="Monastery" and target:GetAttribute("Complete")==true}
  end
  return CursorRules.Resolve(context)
 end

@@ -22,7 +22,7 @@ local function tint(part,on) part:SetAttribute("TeamColorPart",on); return part 
 local function append(list,more) for _,p in ipairs(more) do table.insert(list,p) end; return list end
 -- Villager hand tools follow the job. Every piece keeps the Tool / ToolHead names
 -- of the right-arm animation group and is held in the right hand, head toward -Z.
-local toolKinds={axe=true,pick=true,hoe=true,hammer=true,basket=true}
+local toolKinds={axe=true,pick=true,hoe=true,hammer=true,basket=true,spear=true}
 local function villagerTool(model,tool)
  local parts={}
  local function add(part) table.insert(parts,part); return part end
@@ -41,6 +41,11 @@ local function villagerTool(model,tool)
   add(block(model,"Tool",V(.22,2.7,.22),V(x,2.45,z),cutWood))
   add(block(model,"ToolHead",V(.62,.62,1.3),V(x,3.75,z),iron,Metal))
   add(block(model,"ToolHead",V(.7,.7,.3),V(x,3.75,z-.6),blade,Metal))
+ elseif tool=="spear" then
+  -- Hunting spear: a long shaft with a broad leaf blade and a crossbar lug.
+  add(block(model,"Tool",V(.2,5.2,.2),V(x,3.3,z),cutWood))
+  add(block(model,"ToolHead",V(.5,.14,.14),V(x,5.6,z),iron,Metal))
+  for _,piece in ipairs(point(model,"ToolHead",V(x,5.75,z),.5,1.1,.14,blade,Metal)) do add(piece) end
  elseif tool=="basket" then
   add(round(model,"Tool",1.4,.9,V(x,1.5,-.45),straw,Fabric))
   add(round(model,"Tool",1.54,.18,V(x,1.95,-.45),cutWood,Enum.Material.Wood))
@@ -54,11 +59,22 @@ local function villagerTool(model,tool)
  return parts
 end
 -- Goods on the back show what a villager is hauling to the drop-off.
-local carryKinds={food=true,wood=true,gold=true,stone=true}
+local carryKinds={food=true,wood=true,gold=true,stone=true,relic=true,trade=true}
 local function carryLoad(model,kind)
  local parts={}
  local function add(part) table.insert(parts,part); return part end
- if kind=="wood" then
+ if kind=="relic" then
+  -- A monk shoulders the gilded reliquary; the gem glows so a carrier is easy to spot and chase.
+  add(block(model,"Carry",V(1.7,1.1,1.1),V(0,3.3,1.25),gold,Metal))
+  add(block(model,"Carry",V(1.85,.18,1.25),V(0,3.92,1.25),Color3.fromRGB(176,128,46),Metal))
+  add(block(model,"Carry",V(.4,.4,.1),V(0,3.35,1.85),Color3.fromRGB(120,214,255),Enum.Material.Neon))
+ elseif kind=="trade" then
+  -- Bales and a strongbox stacked on the cart bed show a loaded trade cart.
+  add(block(model,"Carry",V(1.5,1.2,1.4),V(-.85,3.5,2.6),straw,Fabric))
+  add(block(model,"Carry",V(1.4,1.1,1.3),V(.85,3.45,3.9),linen,Fabric))
+  add(block(model,"Carry",V(1.2,.9,1.1),V(.8,3.35,2.4),cutWood,Planks))
+  add(block(model,"Carry",V(1.3,.25,1.2),V(.8,3.9,2.4),gold,Metal))
+ elseif kind=="wood" then
   for i,at in ipairs({V(0,2.45,1.05),V(0,3.1,1.05),V(0,2.8,1.62)}) do
    add(plate(model,"Carry",.64,2.5,at,i==3 and timber or cutWood,Enum.Material.Wood))
   end
@@ -222,6 +238,15 @@ function B.skirmisher(model,kind,team,stage)
  end
  roundShield(model,team,1.7)
 end
+-- Curved bow from connected limb segments; the string closes the arc. scale shortens a horse bow.
+local function bow(model,scale)
+ local hold=V(1.84,2.3,-.45)
+ local arc={}
+ for i=0,4 do local t=i/2-1; table.insert(arc,hold+V(0,t*2*scale,t*t*.85*scale)) end
+ for i=1,4 do beam(model,"Bow",arc[i],arc[i+1],.24,cutWood,Enum.Material.Wood) end
+ block(model,"Bow",V(.34,.6,.34),hold,leather)
+ block(model,"Bowstring",V(.07,4*scale,.07),hold+V(0,0,.85*scale),plaster)
+end
 function B.archer(model,kind,team,stage)
  figure(model,{cloth=forest,skirt=forestDark,glove=leather,boot=leather})
  block(model,"Tabard",V(1.3,1.3,1.5),V(0,2.95,0),team,Fabric)
@@ -230,13 +255,7 @@ function B.archer(model,kind,team,stage)
  ball(model,"Hat",.85,V(0,4.75,1.05),forest,Fabric)
  round(model,"Hat",2.6,.4,V(0,3.72,.05),forestDark,Fabric)
  block(model,"HatBand",V(.14,1.25,.5),V(.72,5.25,.3),team,Fabric).CFrame*=CFrame.Angles(-.45,0,-.4)
- -- Curved bow from connected limb segments; the string closes the arc.
- local hold=V(1.84,2.3,-.45)
- local arc={}
- for i=0,4 do local t=i/2-1; table.insert(arc,hold+V(0,t*2,t*t*.85)) end
- for i=1,4 do beam(model,"Bow",arc[i],arc[i+1],.24,cutWood,Enum.Material.Wood) end
- block(model,"Bow",V(.34,.6,.34),hold,leather)
- block(model,"Bowstring",V(.07,4,.07),hold+V(0,0,.85),plaster)
+ bow(model,1)
  local top=V(-.55,3.9,1)
  beam(model,"Quiver",V(.6,1.9,1),top,.6,leather)
  local out=(top-V(.6,1.9,1)).Unit
@@ -278,6 +297,99 @@ function B.cavalry(model,kind,team,stage)
  sword(model,.3)
  kiteShield(model,team)
  mount(model,team,true)
+end
+-- Horse archer: fur-trimmed cap, short recurve bow and a hip quiver, on an unarmored horse.
+function B.cavalryArcher(model,kind,team,stage)
+ figure(model,{cloth=tan,skirt=forestDark,sleeve=forest,glove=leather,boot=leather})
+ block(model,"Tabard",V(1.3,1.6,1.5),V(0,2.85,0),team,Fabric)
+ ball(model,"Hat",1.95,V(0,4.7,.1),forest,Fabric)
+ round(model,"Hat",2.3,.42,V(0,4.95,0),hide,Fabric)
+ round(model,"HatBand",1.2,.5,V(0,5.45,0),team,Fabric)
+ bow(model,.75)
+ beam(model,"Quiver",V(-1.25,1.6,.5),V(-1.05,3.2,.95),.55,leather)
+ for _,x in ipairs({-.12,.12}) do beam(model,"Quiver",V(-1.05+x,3.2,.95),V(-.98+x,3.85,1.12),.12,plaster) end
+ mount(model,team,false)
+end
+-- Camel: tall legs, a long curved neck and a hump the saddle sits behind; named like
+-- horse parts so the client gait and corpse rules animate it without a new group.
+local function camelBody(model,team)
+ local coat,points=Color3.fromRGB(198,160,104),Color3.fromRGB(150,112,70)
+ disc(model,"HorseBody",2.4,3.8,V(0,4.6,.3),coat)
+ ball(model,"HorseBody",2.5,V(0,4.7,-1.5),coat)
+ ball(model,"HorseBody",2.5,V(0,4.6,2.1),coat)
+ ball(model,"Hump",2.2,V(0,6,-.6),coat)
+ for _,x in ipairs({-.7,.7}) do for _,z in ipairs({-1.6,2.1}) do
+  block(model,"HorseLeg",V(.62,3.9,.7),V(x,1.95,z),points)
+ end end
+ segment(model,"HorseNeck",V(0,5,-2.3),V(0,5.4,-3.9),1,1.1,coat)
+ segment(model,"HorseNeck",V(0,5.3,-3.8),V(0,7.2,-4.1),.85,.95,coat)
+ segment(model,"HorseHead",V(0,7.3,-3.9),V(0,6.9,-5.3),.9,.85,coat)
+ ball(model,"HorseHead",.7,V(0,6.85,-5.3),points)
+ for _,side in ipairs({-1,1}) do block(model,"HorseHead",V(.2,.4,.25),V(side*.3,7.75,-3.85),points) end
+ block(model,"HorseCloth",V(2.6,1.2,2.2),V(0,5.4,1),team,Fabric)
+ block(model,"Saddle",V(1.7,.45,1.6),V(0,6.1,1),team,Fabric)
+ segment(model,"Mane",V(0,4.6,3.3),V(0,3.2,3.6),.4,.45,points)
+end
+function B.camel(model,kind,team,stage)
+ figure(model,{cloth=linen,skirt=tan,sleeve=linen,glove=leather,boot=leather})
+ block(model,"Tabard",V(1.4,2.1,1.74),V(0,2.5,0),team,Fabric)
+ -- Wrapped turban with a trailing tail in the player color.
+ ball(model,"Hat",1.95,V(0,4.75,.08),linen,Fabric)
+ round(model,"HatBand",2.05,.3,V(0,4.92,0),team,Fabric)
+ block(model,"HatBand",V(.3,1,.14),V(0,4.4,1),team,Fabric).CFrame*=CFrame.Angles(.3,0,0)
+ sword(model,.3)
+ roundShield(model,team,1.6)
+ for _,p in ipairs(model:GetChildren()) do
+  if p:IsA("BasePart") then
+   p.CFrame+=V(0,4.3,1)
+   if p.Name=="BootL" or p.Name=="BootR" then
+    p.Size=V(.7,1.7,.95)
+    p.CFrame=CFrame.new((p.Name=="BootL" and -1 or 1)*1.45,5,.8)
+   end
+  end
+ end
+ camelBody(model,team)
+end
+-- Hand cannoneer: broad felt hat, padded doublet, powder horn and a levelled iron hand gun.
+function B.handCannoneer(model,kind,team,stage)
+ local doublet=Color3.fromRGB(132,58,46)
+ figure(model,{cloth=doublet,skirt=Color3.fromRGB(96,44,38),sleeve=linen,glove=leather,boot=leather})
+ block(model,"Tabard",V(1.3,1.9,1.6),V(0,2.6,0),team,Fabric)
+ ball(model,"Hat",1.85,V(0,4.62,.1),hair)
+ round(model,"Hat",3,.16,V(0,5.12,0),dark,Fabric)
+ round(model,"Hat",1.6,.75,V(0,5.5,0),dark,Fabric)
+ round(model,"HatBand",1.68,.24,V(0,5.24,0),team,Fabric)
+ local gun={block(model,"Gun",V(.32,.32,2.2),grip+V(0,.3,.6),cutWood,Enum.Material.Wood),
+  block(model,"Gun",V(.36,.36,3),grip+V(0,.45,-1.6),iron,Metal),
+  block(model,"Gun",V(.48,.48,.3),grip+V(0,.45,-3.05),iron,Metal)}
+ turn(gun,grip,CFrame.Angles(.1,0,0))
+ segment(model,"Quiver",V(-.9,2.6,.6),V(-.6,2.1,1.1),.42,.42,straw)
+ block(model,"Belt",V(.5,1.8,1.5),V(.35,2.9,0),leather,Fabric).CFrame*=CFrame.Angles(0,0,.5)
+end
+-- Trade cart: a horse in harness pulling a two-wheeled cart with a canvas hood in the player color.
+-- Horse parts keep their names so the client gait animates the legs; Chassis / Wheel follow the siege groups.
+function B.tradeCart(model,kind,team,stage)
+ horse(model,team,false)
+ for _,p in ipairs(model:GetChildren()) do
+  if p:IsA("BasePart") then p.CFrame+=V(0,0,-3.2) end
+ end
+ block(model,"Chassis",V(4.4,.5,5),V(0,2.85,3.2),cutWood,Planks)
+ for _,x in ipairs({-2.05,2.05}) do
+  block(model,"Chassis",V(.3,1,5),V(x,3.5,3.2),timber,Planks)
+  beam(model,"Chassis",V(x*.55,2.9,.8),V(x*.42,3.6,-3.6),.25,timber)
+  plate(model,"Wheel",3.4,.45,V(x*1.2,1.7,3.6),timber,Planks)
+  plate(model,"Wheel",1.1,.6,V(x*1.2,1.7,3.6),iron,Metal)
+ end
+ block(model,"Chassis",V(4.4,.3,.3),V(0,1.7,3.6),iron,Metal)
+ -- Arched canvas hood: three bent hoops under a player-colored cover.
+ for _,z in ipairs({1.4,3.2,5}) do
+  for _,side in ipairs({-1,1}) do beam(model,"Chassis",V(side*2.05,4,z),V(side*1.3,5.9,z),.18,timber) end
+  block(model,"Chassis",V(2.7,.18,.18),V(0,6.05,z),timber)
+ end
+ for _,side in ipairs({-1,1}) do
+  block(model,"CanvasSail",V(.14,2,4.1),V(side*1.75,5,3.2),team,Fabric).CFrame*=CFrame.Angles(0,0,side*.35)
+ end
+ block(model,"CanvasSail",V(2.8,.14,4.1),V(0,6.2,3.2),team,Fabric)
 end
 -- Wheels are cylinders on the X axis so the client can spin them about their own center.
 local function wheels(model,x,z,d)

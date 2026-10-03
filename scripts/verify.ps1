@@ -121,6 +121,21 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Server spatial / production lifecycle tests failed.' }
     & $runtime tests/combat.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Combat acquisition / ownership tests failed.' }
+    # Fallback art builders and HUD portraits run against a small engine mock.
+    $artTest = (Get-Content tests/art_smoke.spec.lua -Raw) -split '--@@MODULES@@'
+    $artKit = Get-Content src/ReplicatedStorage/Shared/ArtKit.lua -Raw
+    $artUnits = (Get-Content src/ReplicatedStorage/Shared/ArtUnits.lua -Raw).Replace('require(script.Parent.ArtKit)', '__ArtKit')
+    $artNature = (Get-Content src/ReplicatedStorage/Shared/ArtNature.lua -Raw).Replace('require(script.Parent.ArtKit)', '__ArtKit')
+    $unitIcons = Get-Content src/ReplicatedStorage/Shared/UnitIcons.lua -Raw
+    $artBundle = $artTest[0] + "`nlocal Config=(function()`n" + $config + "`nend)()`nlocal __ArtKit=(function()`n" + $artKit + "`nend)()`nlocal ArtUnits=(function()`n" + $artUnits + "`nend)()`nlocal ArtNature=(function()`n" + $artNature + "`nend)()`nlocal UnitIcons=(function()`n" + $unitIcons + "`nend)()`n" + $artTest[1]
+    Write-Utf8NoBom build/art-smoke-tests.luau $artBundle
+    & $runtime build/art-smoke-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Fallback art / HUD portrait smoke tests failed.' }
+    $contentTests = Get-Content tests/content.spec.lua -Raw
+    $contentBundle = $shim + "`nlocal Config=(function()`n" + $config + "`nend)()`n" + $contentTests
+    Write-Utf8NoBom build/content-tests.luau $contentBundle
+    & $runtime build/content-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Unit upgrade / new unit / hunting content tests failed.' }
     & $runtime tests/monk.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Monk conversion / heal / faith tests failed.' }
     & $runtime tests/garrison.spec.lua

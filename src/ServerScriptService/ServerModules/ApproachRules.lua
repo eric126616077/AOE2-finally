@@ -1,6 +1,6 @@
 -- Pure selection over the actual perimeter candidates; collision/path checks stay on the server.
 local ApproachRules = {}
-local workOrders={build=true,gather=true,deliver=true,repair=true,garrison=true}
+local workOrders={build=true,gather=true,deliver=true,repair=true,garrison=true,relicStore=true,trade=true}
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
 end

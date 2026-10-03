@@ -71,8 +71,8 @@ local function patchGeometry(cluster)
  return {connected=#queue==count,averageNearest=totalNearest/count,width=width,depth=depth,
   fill=count*layout.ClusterSpacing^2/(width*depth),interior=interior,wellConnected=wellConnected}
 end
-local kinds={"Tree","Gold","Stone","Berries"}
-local openingSizes={Tree={},Gold={},Stone={},Berries={}}
+local kinds={"Tree","Gold","Stone","Berries","Deer"}
+local openingSizes={Tree={},Gold={},Stone={},Berries={},Deer={}}
 local openingCount=0
 for _,patch in ipairs(layout.OpeningClusters) do
  table.insert(openingSizes[patch.kind],patch.count)
@@ -92,7 +92,7 @@ local function inspect(name,seed,nodes,spawns,target)
  local openingClusters={{},{},{},{}}
  local positions,clusters={},{}
  for slot=1,4 do
-  kindCounts[slot]={Tree=0,Gold=0,Stone=0,Berries=0}
+  kindCounts[slot]={Tree=0,Gold=0,Stone=0,Berries=0,Deer=0}
   for _,kind in ipairs(kinds) do openingClusters[slot][kind]={} end
  end
  for _,node in ipairs(nodes) do
@@ -198,10 +198,10 @@ for _,name in ipairs({"Small","Medium","Large"}) do
    firstFingerprint=currentFingerprint
    firstOpening={}
    for slot=1,4 do firstOpening[slot]=fingerprint(nodes,slot) end
-   local total={Tree=0,Gold=0,Stone=0,Berries=0}
+   local total={Tree=0,Gold=0,Stone=0,Berries=0,Deer=0}
    for _,byKind in ipairs(counts) do for _,kind in ipairs(kinds) do total[kind]+=byKind[kind] end end
-   local fallbackParts=total.Tree*5+total.Gold*9+total.Stone*5+total.Berries*9
-   print(string.format("WORLD %s seed=%d nodes=%d/%d Tree=%d Gold=%d Stone=%d Berries=%d fallbackParts=%d",name,seed,#nodes,target,total.Tree,total.Gold,total.Stone,total.Berries,fallbackParts))
+   local fallbackParts=total.Tree*5+total.Gold*9+total.Stone*5+total.Berries*9+total.Deer*20
+   print(string.format("WORLD %s seed=%d nodes=%d/%d Tree=%d Gold=%d Stone=%d Berries=%d Deer=%d fallbackParts=%d",name,seed,#nodes,target,total.Tree,total.Gold,total.Stone,total.Berries,total.Deer,fallbackParts))
   else
    expect(currentFingerprint~=firstFingerprint,"different seeds must vary resource layout")
    for slot=1,4 do expect(fingerprint(nodes,slot)~=firstOpening[slot],"different seeds must also vary every opening economy") end

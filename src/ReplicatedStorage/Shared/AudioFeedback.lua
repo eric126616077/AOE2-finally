@@ -81,7 +81,9 @@ end
 local function resolveCue(cue,source)
  if cue=="Select" and typeof(source)=="Instance" then
   local unit=Config.Units[source:GetAttribute("UnitType")]
-  return Rules.SelectCue(unit and unit.class,source:GetAttribute("BuildingType"),source:GetAttribute("ResourceType"))
+  -- 資源以種類（模型名稱 Tree／Deer…）對應音效；ResourceType 只是 food／wood 等資源鍵。
+  local resourceKind=(source:GetAttribute("ResourceType") or source:GetAttribute("Relic")) and source.Name or nil
+  return Rules.SelectCue(unit and unit.class,source:GetAttribute("BuildingType"),resourceKind)
  elseif cue=="Order" and os.clock()-orderIntentTime<=Rules.OrderIntentLifetime then
   return Rules.OrderCue(orderIntent)
  end

@@ -120,14 +120,14 @@ function Rules.Variant(data, index)
  if not finite(index) then index=1 end
  return variants[(math.floor(index)-1)%#variants+1]
 end
-local unitSelect={villager="Select",infantry="SelectSword",archer="SelectBow",cavalry="SelectHooves",siege="SelectSiege",monk="SelectBell"}
+local unitSelect={villager="Select",infantry="SelectSword",archer="SelectBow",cavalry="SelectHooves",siege="SelectSiege",monk="SelectBell",trade="SelectCoins"}
 local buildingSelect={
  TownCenter="SelectBell",House="SelectDoor",Barracks="SelectSword",ArcheryRange="SelectBow",Stable="SelectHooves",
  SiegeWorkshop="SelectHammer",Blacksmith="SelectAnvil",Market="SelectCoins",LumberCamp="SelectChop",
  MiningCamp="SelectChisel",Mill="SelectFoliage",Farm="SelectFoliage",Monastery="SelectBell",University="SelectPages",
  Tower="SelectStone",Wall="SelectStone",Gate="SelectStone",Castle="SelectHorn",Wonder="SelectHorn",
 }
-local resourceSelect={Tree="SelectChop",Gold="SelectChisel",Stone="SelectChisel",Berries="SelectFoliage"}
+local resourceSelect={Tree="SelectChop",Gold="SelectChisel",Stone="SelectChisel",Berries="SelectFoliage",Deer="SelectHooves",Relic="SelectBell"}
 -- AOE-style identity sounds: every selectable kind answers with its own sound.
 function Rules.SelectCue(unitClass, buildingType, resourceType)
  return unitSelect[unitClass] or buildingSelect[buildingType] or resourceSelect[resourceType] or "Select"

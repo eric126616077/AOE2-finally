@@ -2322,7 +2322,10 @@ function GUI:UpdateCommands(selected,buildingKind)
  self.stopButton.Visible=owned==true and not ownedBuilding
  -- The lobby can assign a different slot color before a new match. Rebuild the
  -- cached art when it changes, retaining the existing locked-age presentation.
- local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",garrisoned and "garrisoned" or "empty",age,tostring(previewColor())},":")
+ -- 兵種升級會改變訓練卡片上的名稱，名稱變了就重建卡片。
+ local upgradedNames = {}
+ for _,unitKind in ipairs(ownedBuilding and Config.Buildings[kind].trains or {}) do table.insert(upgradedNames,player:GetAttribute("UnitName_"..unitKind) or "") end
+ local key = table.concat({self.tab,self.page,self.buildCategory or "categories",kind or "",table.concat(upgradedNames,","),model and "target" or "empty",owned and "owned" or "foreign",canBuild and "builders" or "no-builders",formationPage and "formations" or "normal",incomplete and "incomplete" or "complete",garrisoned and "garrisoned" or "empty",age,tostring(previewColor())},":")
  if key ~= self.commandKey then
   self.commandKey = key; self.commandHolder:ClearAllChildren(); self.emptyCommandHint=nil; self.commandEntries,self.buildButtons = {},{}; self.tooltip.Visible = false
   local actions = {}
@@ -2340,7 +2343,8 @@ function GUI:UpdateCommands(selected,buildingKind)
   elseif self.tab == "train" and owned and Config.Buildings[kind] then
    for _,unitKind in ipairs(Config.Buildings[kind].trains or {}) do
     local data = Config.Units[unitKind]
-    table.insert(actions,{key = unitKind,name = data.name,description = data.description,cost = data.cost,minAge = data.minAge or 1,art = unitKind,callback = function() self.callbacks.train(unitKind) end})
+    local upgradedName = player:GetAttribute("UnitName_"..unitKind)
+    table.insert(actions,{key = unitKind,name = upgradedName or data.name,description = (upgradedName and ("已升級為"..upgradedName.."。\n") or "")..data.description,cost = data.cost,minAge = data.minAge or 1,art = unitKind,callback = function() self.callbacks.train(unitKind) end})
    end
    if kind == "Market" then
     local trade = Config.MarketTrade or {batch = 100,buyGold = 130,sellGold = 70}
@@ -2660,7 +2664,7 @@ function GUI:Update(selected,buildingKind)
   local model = selected[1]
   targetRelation=TeamClient.Relation(teamMode,player.UserId,player:GetAttribute("TeamId"),model:GetAttribute("OwnerId"),model:GetAttribute("TeamId"))
   self.details:SetAttribute("TargetOwnerId",model:GetAttribute("OwnerId")); self.details:SetAttribute("TargetTeamId",model:GetAttribute("TeamId"))
-  local kind = model:GetAttribute("UnitType") or model:GetAttribute("BuildingType") or ({wood = "Tree",gold = "Gold",stone = "Stone",food = "Berries"})[model:GetAttribute("ResourceType")] or "TownCenter"
+  local kind = model:GetAttribute("UnitType") or model:GetAttribute("BuildingType") or (model:GetAttribute("Relic") and "Relic") or ({wood = "Tree",gold = "Gold",stone = "Stone",food = "Berries"})[model:GetAttribute("ResourceType")] or "TownCenter"
   local lines = {model:GetAttribute("OwnerName") or "自然資源"}
   if targetRelation=="ally" then table.insert(lines,"盟友 · 友方不可攻擊")
   elseif targetRelation=="unresolved" then table.insert(lines,"隊伍資料載入中") end
@@ -2679,6 +2683,23 @@ function GUI:Update(selected,buildingKind)
   if model:GetAttribute("Research") then table.insert(lines,model:GetAttribute("Research").." · "..math.ceil(model:GetAttribute("ResearchRemaining") or 0).."秒") end
   if model:GetAttribute("RallyType") then table.insert(lines,"集合點："..tostring(model:GetAttribute("RallyTargetName") or "地面")) end
   if garrisonText(model) then table.insert(lines,garrisonText(model)) end
+  if model:GetAttribute("Relic") then
+   table.insert(lines,Config.Relics.description)
+   table.insert(lines,"全圖聖物 "..(workspace:GetAttribute("RelicTotal") or 0).." 件 · 每件每秒 +"..Config.Relics.goldPerSecond.." 黃金")
+  end
+  if kind == "Monastery" and model:GetAttribute("OwnerId") == player.UserId then
+   local relics = model:GetAttribute("Relics") or 0
+   table.insert(lines,relics > 0 and ("存放聖物 "..relics.." 件 · 每秒 +"..(relics*Config.Relics.goldPerSecond).." 黃金") or "尚無聖物：派僧侶拾取地圖上的聖物")
+   if (player:GetAttribute("RelicGold") or 0) > 0 then table.insert(lines,"聖物累計產出 "..math.floor(player:GetAttribute("RelicGold")).." 黃金") end
+  end
+  if model:GetAttribute("CarryingRelic") then table.insert(lines,"攜帶聖物 · 右鍵自己的修道院存放") end
+  if kind == "tradeCart" then
+   local cargo = model:GetAttribute("TradeGold") or 0
+   table.insert(lines,cargo > 0 and ("載運黃金 "..cargo.." · 回到己方市集後入帳") or "空車 · 右鍵另一座己方或盟友市集開始貿易")
+  end
+  if kind == "Market" and model:GetAttribute("OwnerId") == player.UserId and (player:GetAttribute("TradeIncome") or 0) > 0 then
+   table.insert(lines,"貿易累計收入 "..math.floor(player:GetAttribute("TradeIncome")).." 黃金")
+  end
   if kind == "Wonder" and model:GetAttribute("OwnerId") == player.UserId and (player:GetAttribute("WonderRemaining") or 0) > 0 then table.insert(lines,"奇觀勝利倒數 "..math.ceil(player:GetAttribute("WonderRemaining")).."秒") end
   local progress = model:GetAttribute("Complete") == false and model:GetAttribute("ConstructionProgress") or model:GetAttribute("ResearchProgress") or model:GetAttribute("TrainingProgress")
   if progress then self.productionBack.Visible = true; self.productionFill.Size = UDim2.fromScale(math.clamp(progress,0,1),1) end
@@ -2800,6 +2821,8 @@ function GUI:UpdateMap()
     local economic=name=="Resources" or unitType=="villager" or name=="Buildings"
     dot.Visible=self.mapMode=="all" or self.mapMode=="economy" and economic or self.mapMode=="military" and name~="Resources" and unitType~="villager"
     dot.BackgroundColor3 = colors[model:GetAttribute("OwnerId")] or ({wood=Color3.fromRGB(46,84,37),food=Color3.fromRGB(170,77,58),gold=Color3.fromRGB(224,184,82),stone=Color3.fromRGB(154,165,170)})[model:GetAttribute("ResourceType")] or C.muted
+    -- 聖物在小地圖上以較大的白點標示，方便爭奪。
+    if model:GetAttribute("Relic") then dot.BackgroundColor3=Color3.fromRGB(255,250,236); dot.Size=UDim2.fromOffset(6,6); dot.Visible=self.mapMode~="military" end
    end
   end end
  end

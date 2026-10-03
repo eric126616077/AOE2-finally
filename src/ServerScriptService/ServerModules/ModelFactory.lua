@@ -171,9 +171,13 @@ end
 local workTools={wood="axe",gold="pick",stone="pick",build="hammer",repair="hammer"}
 function Factory.workTool(unit,workKind,target)
  if unit:GetAttribute("UnitType")~="villager" then return false end
- local tool=workKind=="food" and (target:GetAttribute("BuildingType") and "hoe" or "basket") or workTools[workKind]
+ -- 打獵用狩獵矛，耕田用鋤頭，採漿果用籃子。
+ local tool=workKind=="food" and (target:GetAttribute("BuildingType") and "hoe" or target:GetAttribute("Hunt") and "spear" or "basket") or workTools[workKind]
  return tool~=nil and Art.SetTool(unit,tool)
 end
+-- 僧侶背著聖物、貿易車載著貨箱；只是外觀，數量由伺服器屬性決定。
+function Factory.relicCarry(unit,on) return Art.SetCarry(unit,on and "relic" or nil) end
+function Factory.tradeCargo(unit,on) return Art.SetCarry(unit,on and "trade" or nil) end
 function Factory.watchCarry(unit)
  unit:GetAttributeChangedSignal("Carrying"):Connect(function()
   Art.SetCarry(unit,(unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType") or nil)
@@ -186,6 +190,7 @@ local corpseFolder
 local corpseQueue={}
 local corpseLay={
  siege=CFrame.new(0,-.35,0)*CFrame.Angles(0,0,.22),
+ trade=CFrame.new(0,-.35,0)*CFrame.Angles(0,0,.22),
  cavalry=CFrame.new(0,1.4,0)*CFrame.Angles(0,0,math.pi/2),
  default=CFrame.new(0,.75,-2.2)*CFrame.Angles(math.pi/2,0,0),
 }

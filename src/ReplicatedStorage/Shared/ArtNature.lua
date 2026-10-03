@@ -4,7 +4,7 @@
 local K=require(script.Parent.ArtKit)
 local timber,cutWood,paleStone,dark=K.timber,K.cutWood,K.paleStone,K.dark
 local leaf,leafDark,leafLight=K.leaf,K.leafDark,K.leafLight
-local block,round,ball=K.block,K.round,K.ball
+local block,round,ball,disc=K.block,K.round,K.ball,K.disc
 local B={}
 B.Tree=function(model,kind,team,stage)
  -- Four parts per tree across thousands of forest nodes: trunk plus three uniform crowns.
@@ -106,5 +106,52 @@ B.Berries=function(model,kind,team,stage)
   local mound=mounds[spot[1]]
   ball(model,"Berry",1.25,mound[2]+spot[2].Unit*(mound[1]/2-.25),i%2==0 and Color3.fromRGB(214,58,76) or Color3.fromRGB(170,40,66))
  end
+end
+B.Deer=function(model,kind,team,stage)
+ -- A standing red deer with a pale rump and antlers. Once hunted (any later stage) it lies on
+ -- its side as a carcass that shrinks as villagers butcher it, always inside the standing bounds.
+ local coat,belly,hoof,antler=Color3.fromRGB(150,98,58),Color3.fromRGB(214,186,146),Color3.fromRGB(58,44,34),Color3.fromRGB(226,212,180)
+ if stage<=0 then
+  disc(model,"Body",2.1,3.6,Vector3.new(0,3.1,0),coat)
+  ball(model,"Body",2.1,Vector3.new(0,3.15,-1.7),coat)
+  ball(model,"Rump",1.9,Vector3.new(0,3.2,1.8),belly)
+  for _,x in ipairs({-.55,.55}) do for _,z in ipairs({-1.6,1.7}) do
+   block(model,"Leg",Vector3.new(.38,2.2,.42),Vector3.new(x,1.1,z),coat)
+   block(model,"Hoof",Vector3.new(.42,.3,.46),Vector3.new(x,.15,z),hoof)
+  end end
+  local neck=block(model,"Neck",Vector3.new(.9,2,.9),Vector3.new(0,4.3,-2.3),coat)
+  neck.CFrame*=CFrame.Angles(-.5,0,0)
+  block(model,"Head",Vector3.new(.85,.85,1.6),Vector3.new(0,5.2,-2.95),coat)
+  block(model,"Muzzle",Vector3.new(.6,.55,.5),Vector3.new(0,5.05,-3.8),hoof)
+  for _,side in ipairs({-1,1}) do
+   block(model,"Ear",Vector3.new(.15,.6,.35),Vector3.new(side*.5,5.7,-2.6),coat).CFrame*=CFrame.Angles(0,0,side*.5)
+   local beamPart=block(model,"Antler",Vector3.new(.16,1.5,.16),Vector3.new(side*.45,6.2,-2.7),antler)
+   beamPart.CFrame*=CFrame.Angles(.15,0,side*-.45)
+   block(model,"Antler",Vector3.new(.14,.7,.14),Vector3.new(side*.6,6.3,-3.05),antler).CFrame*=CFrame.Angles(.7,0,side*-.2)
+  end
+ else
+  local shrink=stage>=2 and .75 or 1
+  disc(model,"Body",2*shrink,3.4*shrink,Vector3.new(0,.95*shrink,0),coat)
+  ball(model,"Rump",1.7*shrink,Vector3.new(0,.9*shrink,1.7*shrink),belly)
+  for _,z in ipairs({-1.4,1.5}) do
+   block(model,"Leg",Vector3.new(2.2,.36,.4)*shrink,Vector3.new(1.6*shrink,.4,z*shrink),coat)
+  end
+  block(model,"Head",Vector3.new(.8,.8,1.5)*shrink,Vector3.new(-.3,.45,-2.7*shrink),coat).CFrame*=CFrame.Angles(0,.4,0)
+  if stage<2 then block(model,"Antler",Vector3.new(1.2,.16,.16),Vector3.new(-.9,.5,-2.4),antler) end
+ end
+end
+B.Relic=function(model,kind,team,stage)
+ -- A gilded reliquary on a weathered stone plinth, with a glowing gem: reads as treasure from the top-down camera.
+ local gilt,giltDark,gem=Color3.fromRGB(232,190,82),Color3.fromRGB(176,128,46),Color3.fromRGB(120,214,255)
+ block(model,"Plinth",Vector3.new(3.4,.6,3.4),Vector3.new(0,.3,0),paleStone,Enum.Material.Slate)
+ block(model,"Plinth",Vector3.new(2.8,.35,2.8),Vector3.new(0,.78,0),paleStone:Lerp(dark,.15),Enum.Material.Slate)
+ block(model,"Reliquary",Vector3.new(2.2,1.3,1.5),Vector3.new(0,1.6,0),gilt,Enum.Material.Metal)
+ block(model,"Reliquary",Vector3.new(2.4,.2,1.7),Vector3.new(0,2.3,0),giltDark,Enum.Material.Metal)
+ local roof=block(model,"Reliquary",Vector3.new(2.2,.7,1.5),Vector3.new(0,2.75,0),gilt,Enum.Material.Metal,"WedgePart")
+ roof.Size=Vector3.new(2.2,.7,.75); roof.CFrame=CFrame.new(0,2.75,-.375)*CFrame.Angles(0,math.pi,0)
+ block(model,"Reliquary",Vector3.new(2.2,.7,.75),Vector3.new(0,2.75,.375),gilt,Enum.Material.Metal,"WedgePart")
+ block(model,"Gem",Vector3.new(.5,.5,.12),Vector3.new(0,1.65,-.8),gem,Enum.Material.Neon)
+ block(model,"Finial",Vector3.new(.2,.9,.2),Vector3.new(0,3.5,0),giltDark,Enum.Material.Metal)
+ block(model,"Finial",Vector3.new(.7,.2,.2),Vector3.new(0,3.65,0),giltDark,Enum.Material.Metal)
 end
 return B

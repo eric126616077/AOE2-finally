@@ -63,4 +63,20 @@ local ownKeep={relation="own",building=true,complete=true,damaged=false,garrison
 expect(resolve(ctx({garrison=true,military=2,target=ownKeep}))=="select","garrison target cursor")
 expect(resolve(ctx({garrison=true,military=2}))=="invalid" and resolve(ctx({garrison=true,villagers=1,target=ownHealthy}))=="invalid"
  and resolve(ctx({garrison=true,military=2,target=enemyBuilding}))=="invalid","garrison refused targets")
+-- 聖物：只有未攜帶聖物的僧侶顯示拾取；攜帶者指向自己的修道院顯示存放。貿易車指向己方／盟友市集顯示貿易。
+local relic={relation="neutral",relic=true}
+local ownMonastery={relation="own",building=true,complete=true,damaged=false,monastery=true}
+local allyMarket={relation="ally",building=true,complete=true,market=true}
+local ownMarket={relation="own",building=true,complete=true,market=true}
+local enemyMarket={relation="enemy",building=true,complete=true,market=true}
+expect(resolve(ctx({military=1,monks=1,target=relic}))=="relic","monk relic pickup cursor")
+expect(resolve(ctx({military=1,monks=1,relicCarriers=1,target=relic}))=="invalid","carrier shown pickup on another relic")
+expect(resolve(ctx({military=2,target=relic}))=="invalid" and resolve(ctx({villagers=2,target=relic}))=="invalid","non-monks shown relic pickup")
+expect(resolve(ctx({military=1,monks=1,relicCarriers=1,target=ownMonastery}))=="relic","relic store cursor")
+expect(resolve(ctx({military=1,monks=1,target=ownMonastery}))=="select","monk without relic shown store cursor")
+expect(resolve(ctx({military=1,traders=1,target=allyMarket}))=="trade" and resolve(ctx({military=1,traders=1,target=ownMarket}))=="trade","trade cursor")
+expect(resolve(ctx({military=2,traders=1,target=enemyMarket}))=="attack","mixed army lost attack cursor on an enemy market")
+expect(resolve(ctx({military=1,traders=1,target=enemyMarket}))=="invalid" and resolve(ctx({military=1,traders=1,target=enemyUnit}))=="invalid","trade-cart-only selection showed attack")
+expect(resolve(ctx({military=2,target=allyMarket}))=="select","non-traders shown trade cursor")
+expect(resolve(ctx({military=1,monks=1,relicCarriers=5,traders=9,target=relic}))=="invalid","counts were not clamped to the selection")
 print(string.format("PASS: %d context cursor checks",checks))

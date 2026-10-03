@@ -75,13 +75,15 @@ local phase, matchStart, matchGeneration, startingSides = "Lobby", 0, 0, 0
 local joinSequence, pathTasks = 0, 0
 local GRID_SIZE = Config.Map.GridSize
 local TARGET_HALF_EXTENT=assert(SpatialRules.maxHalfFootprint(Config.Buildings,GRID_SIZE))
-local CONSTRUCTION = Config.Construction
 local COMBAT = Config.Combat
 local MAX_UNIT_RADIUS=Config.UnitCollision.default.radius
 for _,profile in pairs(Config.UnitCollision.profiles) do MAX_UNIT_RADIUS=math.max(MAX_UNIT_RADIUS,profile.radius) end
 local unitCollisionIndex=assert(UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS))
 -- 僧侶規則、設定與函式集中在一個表，避免超過 Studio 的 200 個區域變數上限。
 local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.Monk,random=Random.new()}
+-- 聖物與貿易車的規則、設定與函式（同樣集中在表內；主程式區塊已接近 200 個區域變數上限）。Relic.trade.home[貿易車]=出發市集。
+local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),
+ trade={home=setmetatable({},{__mode="k"}),config=Config.Trade}}
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
 -- 自動工作的每單位狀態（閒置起點、玩家保留待命、暫時略過的目標）與延後定義的函式。
 local AutoWork={units=setmetatable({},{__mode="k"}),farmClaims=setmetatable({},{__mode="k"}),farmRules=require(script.Parent.ServerModules.FarmRules)}
@@ -279,7 +281,7 @@ local function isTarget(model)
  return typeof(model)=="Instance" and model:IsA("Model")
   and (model.Parent==buildings or model.Parent==units or model.Parent==resources)
   and (model:GetAttribute("RTSManaged")==true or model:GetAttribute("RTSManagedResource")==true)
-  and (model:GetAttribute("HP")~=nil or model:GetAttribute("Amount")~=nil)
+  and (model:GetAttribute("HP")~=nil or model:GetAttribute("Amount")~=nil or model:GetAttribute("Relic")==true)
 end
 local function enemies(a,b)
  return alive(a)==true and alive(b)==true and currentMatch~=nil
@@ -319,12 +321,14 @@ local function unitStats(state,kind,resourceKind)
  if cached then return cached end
  local data,m=Config.Units[kind],state.modifiers
  local c=state.classModifiers[data.class] or {}
- local function value(key) return (m[key] or 0)+(c[key] or 0) end
+ local also=data.alsoClass and state.classModifiers[data.alsoClass] or {}
+ local u=state.unitModifiers[kind] or {}
+ local function value(key) return (m[key] or 0)+(c[key] or 0)+(also[key] or 0)+(u[key] or 0) end
  local specific=({food="gatherFood",wood="gatherWood",gold="gatherGold",stone="gatherStone"})[resourceKind]
- local military=data.class~="villager" and data.class~="monk"
+ local military=data.class~="villager" and data.class~="monk" and data.class~="trade"
  cached={
-  speed=data.speed*(1+value("speed")), damage=data.damage+(military and m.attack or 0)+(c.attack or 0),
-  armor=(data.armor or 0)+(military and m.armor or 0)+(c.armor or 0),
+  speed=data.speed*(1+value("speed")), damage=data.damage+(military and m.attack or 0)+(c.attack or 0)+(also.attack or 0)+(u.attack or 0),
+  armor=(data.armor or 0)+(military and m.armor or 0)+(c.armor or 0)+(also.armor or 0)+(u.armor or 0),
   hp=data.hp+value("hp"),
   range=data.range+((military and data.range>20) and value("range") or 0), interval=(data.attackInterval or 1)*math.max(0.4,1-value("interval")),
   carry=(data.carryCapacity or 15)+value("carry"),
@@ -335,6 +339,11 @@ local function unitStats(state,kind,resourceKind)
 end
 local function refreshUnit(state,unit)
  local stats=unitStats(state,unit:GetAttribute("UnitType"))
+ -- 兵種升級後的名稱與剋制加成；沒有升級時回到設定值。
+ local kind=unit:GetAttribute("UnitType")
+ unit:SetAttribute("DisplayName",state.unitNames[kind] or Config.Units[kind].name)
+ local extra=(state.unitModifiers[kind] or {}).bonus or {}
+ for class,amount in pairs(extra) do unit:SetAttribute("Bonus_"..class,(Config.Units[kind].bonus[class] or 0)+amount) end
  local oldMax=unit:GetAttribute("MaxHP") or stats.hp
  unit:SetAttribute("MaxHP",stats.hp)
  unit:SetAttribute("HP",math.min(stats.hp,(unit:GetAttribute("HP") or 0)+math.max(0,stats.hp-oldMax)))
@@ -433,6 +442,8 @@ local function makeResource(kind,pos)
  model:SetAttribute("DisplayName",data.name)
  model:SetAttribute("Amount",data.amount)
  model:SetAttribute("MaxAmount",data.amount)
+ if data.gatherMultiplier then model:SetAttribute("GatherMultiplier",data.gatherMultiplier) end
+ if data.hunt then model:SetAttribute("Hunt",true) end
  model.Parent=resources
  managedResources[model]=true
  return model
@@ -720,7 +731,7 @@ issue=function(unit,kind,target,automatic)
  unit:SetAttribute("FormationSlot",kind=="move" and target or nil)
  unit:SetAttribute("Animation","Idle")
  unit:SetAttribute("WorkKind",nil)
- unit:SetAttribute("Order",({move="移動",gather="採集",deliver="交貨",attack="攻擊",build="施工",repair="修復",convert="招降",heal="治療",garrison="駐紮"})[kind] or "移動")
+ unit:SetAttribute("Order",({move="移動",gather="採集",deliver="交貨",attack="攻擊",build="施工",repair="修復",convert="招降",heal="治療",garrison="駐紮",relic="拾取聖物",relicStore="存放聖物",trade="貿易"})[kind] or "移動")
  local targetModel=typeof(target)=="Instance" and target:IsA("Model") and target or nil
  unit:SetAttribute("OrderKind",kind)
  unit:SetAttribute("OrderTargetName",targetModel and (targetModel:GetAttribute("DisplayName") or targetModel.Name) or nil)
@@ -1083,7 +1094,7 @@ finishAttack=function(state,unit,order)
 end
 -- 建造請求共用：驗證選取的村民；AI 取最近的村民；玩家空選取時由伺服器派最近的村民。
 Walls.builders=function(state,rawPosition,selection,count,quiet)
- local builders=ConstructionRules.validateSelection(selection,function(unit) return canBuildWorker(state,unit) end,CONSTRUCTION.maxSelectedWorkers)
+ local builders=ConstructionRules.validateSelection(selection,function(unit) return canBuildWorker(state,unit) end,Config.Construction.maxSelectedWorkers)
  if not builders and state.ai then
   local nearest,distance=nil,math.huge
   for unit in pairs(state.units) do
@@ -1137,7 +1148,7 @@ local function buildRequest(state,kind,rawPosition,selection,quiet,rotated)
  if not data or not validPosition(rawPosition) or not alive(state) then return false end
  rotated=data.rotatable==true and rotated==true
  local size=Vector2.new(Walls.rules.footprint(data.size.X,data.size.Y,rotated))
- local builders,autoAssigned=Walls.builders(state,rawPosition,selection,AutoWorkRules.builderCount(size.X,size.Y,CONSTRUCTION.maxSelectedWorkers),quiet)
+ local builders,autoAssigned=Walls.builders(state,rawPosition,selection,AutoWorkRules.builderCount(size.X,size.Y,Config.Construction.maxSelectedWorkers),quiet)
  if not builders then return false end
  if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then if not quiet then notify(state.actor,"需先升級時代才能建造"..data.name.."。") end; return false end
  local model,reason=Walls.site(state,kind,data,Grid.snap(rawPosition,size),size,rotated)
@@ -1203,12 +1214,13 @@ end
 local function queueAttributes(building)
  local queue=training[building]
  local names={}
- for _,item in ipairs(queue or {}) do table.insert(names,Config.Units[item.kind].name) end
+ -- 佇列名稱沿用該陣營的兵種升級名稱。
+ for _,item in ipairs(queue or {}) do table.insert(names,item.state and item.state.unitNames[item.kind] or Config.Units[item.kind].name) end
  for index=1,5 do building:SetAttribute("QueueKind_"..index,queue and queue[index] and queue[index].kind or nil) end
  building:SetAttribute("QueueCount",#names)
  building:SetAttribute("Queue",table.concat(names,"、"))
  local item=queue and queue[1]
- building:SetAttribute("Training",item and Config.Units[item.kind].name or nil)
+ building:SetAttribute("Training",item and names[1] or nil)
  building:SetAttribute("TrainingRemaining",item and math.ceil(math.max(0,item.remaining)) or nil)
  building:SetAttribute("TrainingProgress",item and math.clamp(1-item.remaining/item.duration,0,1) or nil)
 end
@@ -1244,7 +1256,7 @@ local function cancelTrainingRequest(state,building,index,revision)
  if item.reportReceipt then recordReport(state,"refund",{spendId=item.reportReceipt}) end
  queueAttributes(building)
  population(state)
- notify(state.actor,"已取消"..Config.Units[item.kind].name.."訓練，退回全部資源。")
+ notify(state.actor,"已取消"..(state.unitNames[item.kind] or Config.Units[item.kind].name).."訓練，退回全部資源。")
  return true
 end
 local function rallyResource(state,target)
@@ -1352,6 +1364,8 @@ destroyModel=function(model)
  if model.Parent==units then orders[model]=nil; if state then state.units[model]=nil end
  elseif model.Parent==buildings then training[model],construction[model],Garrison.inside[model]=nil,nil,nil; if state then state.buildings[model]=nil; cancelResearch(model,state); state.defenseLast[model]=nil end end
  if state and state.rallies then state.rallies[model]=nil end
+ -- 聖物不會消失：攜帶的僧侶或存放的修道院被移除時掉落在原地。
+ if phase=="Playing" then Relic.release(model) end
  model:Destroy()
  if state then population(state) end
 end
@@ -1470,7 +1484,7 @@ local function damage(target,raw,attacker,now)
   -- 被摧毀的建築先放出駐軍，再判定淘汰。
   Garrison.release(target)
   eliminationCheck(victim)
- elseif target.Parent==units and target:GetAttribute("UnitType")~="monk" and CombatRules.canRetaliate(orders[target] and orders[target].kind,enemies(victim,owner(attacker)),
+ elseif target.Parent==units and ((Config.Units[target:GetAttribute("UnitType")] or {}).damage or 0)>0 and CombatRules.canRetaliate(orders[target] and orders[target].kind,enemies(victim,owner(attacker)),
   attacker.Parent==buildings,target:GetAttribute("UnitType")=="villager") then
   local previous=orders[target]
   issue(target,"attack",attacker,true)
@@ -1487,8 +1501,10 @@ local Strike={}
 Strike.amount=function(state,unit,target)
  local data=Config.Units[unit:GetAttribute("UnitType")]
  local targetKind=target:GetAttribute("UnitType")
- local class=target.Parent==buildings and "building" or (Config.Units[targetKind] and Config.Units[targetKind].class or targetKind)
- return unitStats(state,unit:GetAttribute("UnitType")).damage+((data.bonus or {})[class] or 0)
+ local targetData=target.Parent~=buildings and Config.Units[targetKind]
+ local class=target.Parent==buildings and "building" or (targetData and targetData.class or targetKind)
+ local extra=(state.unitModifiers[unit:GetAttribute("UnitType")] or {}).bonus
+ return unitStats(state,unit:GetAttribute("UnitType")).damage+CombatRules.counterBonus(data.bonus,extra,class,targetData and targetData.alsoClass)
 end
 -- 傷害在武器揮到或投射物飛抵時才結算；期間攻擊者消失、換局或對局結束就不再命中。
 Strike.land=function(attacker,delay,resolve)
@@ -1548,6 +1564,8 @@ end
 Garrison.check=function(building,unit)
  local held=Garrison.inside[building]
  local data=Config.Units[unit:GetAttribute("UnitType")]
+ -- 駐軍紀錄不保存聖物；攜帶者必須先把聖物存放到修道院。
+ if unit:GetAttribute("CarryingRelic")==true then return false,"攜帶聖物的僧侶不能駐紮；先把聖物存放到修道院。" end
  return Garrison.rules.canEnter(Garrison.config,Config.Buildings[building:GetAttribute("BuildingType")],building:GetAttribute("Complete"),
   held and #held or 0,data and data.class,unit:GetAttribute("HP"))
 end
@@ -1656,6 +1674,10 @@ local function resetActor(state)
  state.units,state.buildings,state.technologies,state.pendingTech,state.defenseLast={},{},{},{},{}
  state.modifiers={attack=0,armor=0,hp=0,gather=0,carry=0,speed=0,gatherFood=0,gatherWood=0,gatherGold=0,gatherStone=0,farmCapacity=0,range=0,interval=0,trainSpeed=0}
  state.classModifiers={}
+ state.unitModifiers,state.unitNames={},{}
+ Relic.accumulated[state]=nil
+ for _,key in ipairs({"Relics","RelicGold","TradeIncome"}) do state.actor:SetAttribute(key,0) end
+ for kind in pairs(Config.Units) do state.actor:SetAttribute("UnitName_"..kind,nil) end
  state.statsCache=nil
  state.buildRetryAfter={}
  state.rallies={}
@@ -1907,6 +1929,7 @@ local function clearBattlefieldResources()
  end
  table.clear(managedResources)
  workspace:SetAttribute("ResourceNodeCount",0)
+ workspace:SetAttribute("RelicTotal",0)
 end
 local function clearMatch()
  Factory.clearCorpses()
@@ -2003,6 +2026,8 @@ startMatch=function(player)
  end
  local ok,spawns=pcall(World.Generate,settings.size,makeResource)
  if not ok then lobbyReset(); warn("[RTS] 地圖生成失敗："..tostring(spawns)); notify(player,"地圖生成失敗，請查看 Studio 輸出後重試。"); return end
+ local relicsOk,relicError=pcall(Relic.spawnAll,settings.size)
+ if not relicsOk then warn("[RTS] 聖物放置失敗："..tostring(relicError)) end
  Config.Spawns=spawns or Config.Spawns
  for model in pairs(managedResources) do if model.Parent~=resources then managedResources[model]=nil end end
  workspace:SetAttribute("Difficulty",settings.difficulty)
@@ -2143,6 +2168,189 @@ local function join(player)
  spawnLobby(state)
  if phase~="Lobby" then notify(player,"目前有對局進行中；可在其他匹配點集合等待下一局。") end
 end
+-- Trade 是區塊內的別名，不占主程式的區域變數。
+do
+local Trade=Relic.trade
+-- 聖物 ----------------------------------------------------------------------
+Relic.isRelic=function(model)
+ return typeof(model)=="Instance" and model:IsA("Model") and model.Parent==resources and model:GetAttribute("Relic")==true
+end
+-- 可放聖物：地圖內，且周圍沒有資源、建築、單位或其他聖物。
+Relic.clear=function(x,z)
+ local pos=Vector3.new(x,Config.Map.GroundY,z)
+ local half=(workspace:GetAttribute("MapSize") or Config.Map.MapSize)/2-Config.Map.ResourceLayout.BorderMargin
+ if not validPosition(pos) or math.abs(x)>half or math.abs(z)>half then return false end
+ local box=Relic.config.clearance*2
+ return #obstacleParts(pos+Vector3.new(0,3,0),Vector3.new(box,6,box))==0
+end
+Relic.make=function(x,z)
+ local half=(workspace:GetAttribute("MapSize") or Config.Map.MapSize)/2-Config.Map.ResourceLayout.BorderMargin
+ local pos=Vector3.new(math.clamp(x,-half,half),Config.Map.GroundY,math.clamp(z,-half,half))
+ local size=Relic.config.size
+ local model=Factory.model("Relic",pos,Vector3.new(size,size,size),Color3.fromRGB(226,190,92),"Resource")
+ -- 聖物不擋路；占地只用來點選與避免把建築蓋在上面。
+ model.PrimaryPart.CanCollide=false
+ model:SetAttribute("RTSManagedResource",true)
+ model:SetAttribute("Relic",true)
+ model:SetAttribute("DisplayName",Relic.config.name)
+ model.Parent=resources
+ return model
+end
+Relic.spawnAll=function(sizeName)
+ local count=Relic.config.counts[sizeName] or 0
+ local size=workspace:GetAttribute("MapSize") or Config.Map.MapSize
+ local points=Relic.rules.relicPoints(size,count,Relic.config.axisRadii[sizeName] or {}) or {}
+ local placed=0
+ for _,point in ipairs(points) do
+  local spot=Relic.rules.nudge(point,Relic.clear,6,12)
+  if spot then Relic.make(spot.X,spot.Z); placed+=1 else warn("[RTS] 找不到聖物的空位：",point.X,point.Z) end
+ end
+ workspace:SetAttribute("RelicTotal",placed)
+end
+-- 掉落時找附近空位；真的找不到也照放，聖物不能消失。
+Relic.drop=function(origin,count,spread)
+ for index=1,count do
+  local angle=index*2*math.pi/math.max(1,count)
+  local start={X=origin.X+math.cos(angle)*spread,Z=origin.Z+math.sin(angle)*spread}
+  local spot=Relic.rules.nudge(start,Relic.clear,5,14) or start
+  Relic.make(spot.X,spot.Z)
+ end
+end
+Relic.publish=function(state)
+ local total=0
+ for building in pairs(state.buildings) do
+  if building.Parent==buildings and building:GetAttribute("BuildingType")=="Monastery" then total+=building:GetAttribute("Relics") or 0 end
+ end
+ state.actor:SetAttribute("Relics",total)
+ return total
+end
+Relic.release=function(model)
+ local state=owner(model)
+ if model.Parent==units and model:GetAttribute("CarryingRelic")==true then
+  model:SetAttribute("CarryingRelic",nil)
+  Relic.drop(position(model),1,0)
+  if state then notify(state.actor,"攜帶聖物的僧侶倒下了，聖物掉落在原地。","Error") end
+ elseif model.Parent==buildings and (model:GetAttribute("Relics") or 0)>0 then
+  local count=model:GetAttribute("Relics")
+  model:SetAttribute("Relics",0)
+  local half=model.PrimaryPart and model.PrimaryPart.Size/2 or Vector3.new(8,8,8)
+  Relic.drop(position(model),count,math.max(half.X,half.Z)+6)
+  if state then Relic.publish(state); notify(state.actor,"修道院被摧毀，"..count.." 件聖物掉落在廢墟旁。","Error") end
+ end
+end
+Relic.income=function(state,dt)
+ local relics=state.actor:GetAttribute("Relics") or 0
+ if relics<=0 then return end
+ local gold,rest=Relic.rules.relicIncome(Relic.accumulated[state] or 0,relics,Relic.config.goldPerSecond,dt)
+ Relic.accumulated[state]=rest
+ if gold>0 then
+  state.actor:SetAttribute("gold",(state.actor:GetAttribute("gold") or 0)+gold)
+  state.actor:SetAttribute("RelicGold",(state.actor:GetAttribute("RelicGold") or 0)+gold)
+ end
+end
+Relic.storeTarget=function(state,building)
+ return isOwned(state,building,buildings) and building:GetAttribute("BuildingType")=="Monastery" and building:GetAttribute("Complete")==true
+end
+Relic.order=function(state,unit,relic)
+ if unit:GetAttribute("CarryingRelic")==true then notify(state.actor,"這位僧侶已攜帶聖物；先右鍵自己的修道院存放。"); return end
+ issue(unit,"relic",relic)
+end
+Relic.orderStore=function(state,unit,building)
+ if not Relic.storeTarget(state,building) then notify(state.actor,"聖物只能存放在自己已完工的修道院。"); return end
+ issue(unit,"relicStore",building)
+end
+Relic.pickup=function(state,unit,relic)
+ if not Relic.isRelic(relic) or unit:GetAttribute("CarryingRelic")==true then stop(unit); return end
+ relic:Destroy()
+ unit:SetAttribute("CarryingRelic",true)
+ Factory.relicCarry(unit,true)
+ local best,bestDistance=nil,math.huge
+ for building in pairs(state.buildings) do
+  if Relic.storeTarget(state,building) then
+   local distance=(position(building)-position(unit)).Magnitude
+   if distance<bestDistance then best,bestDistance=building,distance end
+  end
+ end
+ if best then issue(unit,"relicStore",best); notify(state.actor,"僧侶拾起聖物，正送回修道院。","Order")
+ else stop(unit); notify(state.actor,"僧侶拾起聖物；建造修道院後右鍵它存放聖物。","Order") end
+end
+Relic.store=function(state,unit,building)
+ if unit:GetAttribute("CarryingRelic")~=true or not Relic.storeTarget(state,building) then stop(unit); return end
+ unit:SetAttribute("CarryingRelic",nil)
+ Factory.relicCarry(unit,false)
+ building:SetAttribute("Relics",(building:GetAttribute("Relics") or 0)+1)
+ local total=Relic.publish(state)
+ stop(unit)
+ notify(state.actor,string.format("聖物已存放到修道院：共 %d 件，每秒 +%g 黃金。",total,total*Relic.config.goldPerSecond),"Research")
+end
+-- 貿易 ----------------------------------------------------------------------
+-- 可貿易的市集：己方或盟友（存活且非敵對）已完工的市集。
+Trade.market=function(state,building)
+ if typeof(building)~="Instance" or building.Parent~=buildings or building:GetAttribute("BuildingType")~="Market" or building:GetAttribute("Complete")~=true then return false end
+ local other=owner(building)
+ if other==state then return true end
+ return alive(other) and currentMatch~=nil and TeamRules.isParticipant(matchTeams,currentMatch.factions,other) and not enemies(state,other)
+end
+Trade.distance=function(a,b) return (position(a)-position(b)).Magnitude end
+Trade.order=function(state,unit,destination)
+ if not Trade.market(state,destination) then
+  notify(state.actor,"貿易車只能前往己方或盟友已完工的市集；貿易車不能攻擊。")
+  return
+ end
+ local home=Trade.home[unit]
+ if not (home and home~=destination and isOwned(state,home,buildings) and Trade.market(state,home)) then
+  -- 沒有有效的出發市集時，選離目的地最遠的己方市集，每趟收益最高。
+  home=nil
+  local farthest=-1
+  for building in pairs(state.buildings) do
+   if building~=destination and Trade.market(state,building) then
+    local distance=Trade.distance(building,destination)
+    if distance>farthest then home,farthest=building,distance end
+   end
+  end
+ end
+ if not home then notify(state.actor,"需要另一座己方已完工的市集作為貿易起點。","Error"); return end
+ local distance=Trade.distance(home,destination)
+ if distance<Trade.config.minDistance then
+  notify(state.actor,string.format("兩座市集只相距 %d，至少要 %d 才能貿易。",math.floor(distance),Trade.config.minDistance),"Error")
+  return
+ end
+ Trade.home[unit]=home
+ issue(unit,"trade",destination)
+ orders[unit].home=home
+end
+-- 目的地仍有效；回程載著黃金時，出發點失效也繼續把黃金帶回。
+Trade.valid=function(state,unit,order)
+ if not Trade.market(state,order.target) then return false end
+ if (unit:GetAttribute("TradeGold") or 0)>0 and isOwned(state,order.target,buildings) then return true end
+ return order.home~=nil and order.home~=order.target and Trade.market(state,order.home)
+end
+Trade.arrive=function(state,unit,order)
+ local market=order.target
+ local carrying=unit:GetAttribute("TradeGold") or 0
+ local action=Relic.rules.tradeArrival(isOwned(state,market,buildings),carrying)
+ if action=="deliver" then
+  state.actor:SetAttribute("gold",(state.actor:GetAttribute("gold") or 0)+carrying)
+  state.actor:SetAttribute("TradeIncome",(state.actor:GetAttribute("TradeIncome") or 0)+carrying)
+  unit:SetAttribute("TradeGold",0)
+  Factory.tradeCargo(unit,false)
+ elseif action=="load" then
+  local partner=order.home
+  local gold=(partner and partner.Parent==buildings) and Relic.rules.tradeGold(Trade.distance(partner,market),Trade.config,owner(market)~=state) or 0
+  unit:SetAttribute("TradeGold",gold)
+  Factory.tradeCargo(unit,gold>0)
+ end
+ local nextTarget=order.home
+ if not (nextTarget and nextTarget~=market and Trade.market(state,nextTarget)) then
+  stop(unit)
+  if action~="deliver" then notify(state.actor,"貿易路線的另一座市集已失效，貿易車停止。") end
+  return
+ end
+ issue(unit,"trade",nextTarget)
+ orders[unit].home=market
+ Trade.home[unit]=isOwned(state,nextTarget,buildings) and nextTarget or market
+end
+end
 local function selectedFormationUnits(state,selection)
  return FormationRules.selection(selection,Config.Formations.maxSelectedUnits,function(unit)
   if not isOwned(state,unit,units) then return false end
@@ -2215,6 +2423,7 @@ local function acceptFormation(state,selection,key)
 end
 -- 僧侶右鍵：敵方單位招降，自己或同盟的受傷單位治療；建築與敵方僧侶不可招降。
 Monk.order=function(state,unit,target,victim)
+ if unit:GetAttribute("CarryingRelic")==true then notify(state.actor,"攜帶聖物的僧侶不能招降或治療；右鍵自己的修道院存放聖物。","Error"); return end
  local data=target.Parent==units and Config.Units[target:GetAttribute("UnitType")] or nil
  if enemies(state,victim) then
   if not data then notify(state.actor,"僧侶無法招降建築。","Error"); return end
@@ -2232,7 +2441,7 @@ Monk.convert=function(state,monk,target)
  local victim=owner(target)
  local kind,pos=target:GetAttribute("UnitType"),position(target)
  local hp,maxHP=target:GetAttribute("HP") or 0,target:GetAttribute("MaxHP") or 1
- local name=Config.Units[kind] and Config.Units[kind].name or "單位"
+ local name=target:GetAttribute("DisplayName") or (Config.Units[kind] and Config.Units[kind].name) or "單位"
  local subjectId=reportSubject(target)
  recordReport(state,"kill",{subjectId=subjectId,category="unit"})
  if victim then recordReport(victim,"loss",{subjectId=subjectId,category="unit"}) end
@@ -2269,6 +2478,7 @@ Monk.step=function(state,unit,order,target,now)
  end
 end
 Monk.autoHeal=function(state,monk)
+ if monk:GetAttribute("CarryingRelic")==true then return end
  local current,best,bestDistance=position(monk),nil,Monk.config.autoHealRadius
  for other in pairs(state.units) do
   local data=other~=monk and other.Parent==units and Config.Units[other:GetAttribute("UnitType")]
@@ -2295,7 +2505,11 @@ local function acceptOrder(state,selection,target,key)
   local previous=orders[unit]
   local victim,kind=owner(target),unit:GetAttribute("UnitType")
   -- 右鍵不會駐紮：駐紮一律走專用的 Garrison 指令（駐紮按鈕／G、Alt+右鍵、觸控模式），村民與軍隊相同。
-  if kind=="monk" then Monk.order(state,unit,target,victim)
+  if kind=="monk" and Relic.isRelic(target) then Relic.order(state,unit,target)
+  elseif kind=="monk" and unit:GetAttribute("CarryingRelic")==true and isOwned(state,target,buildings) and target:GetAttribute("BuildingType")=="Monastery" then Relic.orderStore(state,unit,target)
+  elseif kind=="monk" then Monk.order(state,unit,target,victim)
+  elseif Relic.isRelic(target) then notify(state.actor,"只有僧侶能拾取聖物。")
+  elseif kind=="tradeCart" then Relic.trade.order(state,unit,target)
   elseif enemies(state,victim) then issue(unit,"attack",target)
   elseif canBuildWorker(state,unit) and isOwned(state,target,buildings) and construction[target] and not target:GetAttribute("Complete") then issue(unit,"build",target)
   elseif kind=="villager" and target:GetAttribute("ResourceType") and (not victim or victim==state) and (target.Parent~=buildings or target:GetAttribute("Complete"))
@@ -2597,7 +2811,7 @@ local function aiStep(state,now)
     local queue=training[b]
     if not queue or #queue<2 then
      local options=Config.Buildings[b:GetAttribute("BuildingType")].trains or {}
-     for offset=1,#options do local kind=options[(state.aiTurn+offset)%#options+1]; if kind~="villager" and trainRequest(state,b,kind,true) then break end end
+     for offset=1,#options do local kind=options[(state.aiTurn+offset)%#options+1]; if kind~="villager" and Config.Units[kind].class~="trade" and trainRequest(state,b,kind,true) then break end end
     end
    end
   end
@@ -2783,7 +2997,7 @@ end
 acquireTarget=function(state,unit,now,afterKill)
  local kind=unit:GetAttribute("UnitType")
  local data=Config.Units[kind]
- if kind=="villager" or kind=="monk" or not data or unit.Parent~=units then return false end
+ if kind=="villager" or kind=="monk" or not data or data.damage<=0 or unit.Parent~=units then return false end
  local order=orders[unit]
  if order and not afterKill and not (order.kind=="attack" and order.automatic) then return false end
  local current=position(unit)
@@ -3043,7 +3257,7 @@ AutoWork.step=function(now)
       item.waitingSince=item.waitingSince or now
       if AutoWorkRules.siteNeedsBuilders(assigned,item.waitingSince,now,AUTO.siteDelay or 4,item.nextDispatch) then
        local data=Config.Buildings[b:GetAttribute("BuildingType")]
-       local count=data and AutoWorkRules.builderCount(data.size.X,data.size.Y,CONSTRUCTION.maxSelectedWorkers) or 1
+       local count=data and AutoWorkRules.builderCount(data.size.X,data.size.Y,Config.Construction.maxSelectedWorkers) or 1
        for _,unit in ipairs(AutoWorkRules.pickBuilders(candidates,math.max(1,count),AUTO.busyPenalty)) do
         budget-=1
         issue(unit,"build",b)
@@ -3067,13 +3281,13 @@ local function productionStep(dt)
    for unit in pairs(item.state.units) do
     local order=orders[unit]
     if canBuildWorker(item.state,unit) and order and ConstructionRules.isWorking(unit:GetAttribute("UnitType"),unit:GetAttribute("HP"),true,
-     order.kind,order.target==b,distanceTo(b,position(unit)),CONSTRUCTION.workRange)
+     order.kind,order.target==b,distanceTo(b,position(unit)),Config.Construction.workRange)
      and interactionLineClear(b,position(unit)) then builders+=1; table.insert(working,unit) end
    end
    b:SetAttribute("BuilderCount",builders)
    b:SetAttribute("ConstructionStatus",builders>0 and "施工中" or "等待村民")
    if builders>0 then
-    local nextWork,work,complete=ConstructionRules.stepWork(item.work,item.duration,builders,dt,CONSTRUCTION.extraWorkerRate)
+    local nextWork,work,complete=ConstructionRules.stepWork(item.work,item.duration,builders,dt,Config.Construction.extraWorkerRate)
     if work>0 then
      for _,unit in ipairs(working) do
       unit:SetAttribute("WorkKind","build")
@@ -3136,6 +3350,7 @@ local function productionStep(dt)
       if item.kind=="villager" then item.state.actor:SetAttribute("TrainedVillagers",(item.state.actor:GetAttribute("TrainedVillagers") or 0)+1) end
       telemetry:Fact(item.state.actor,"firsttrain")
       notify(item.state.actor,nil,"Train")
+      if item.kind=="tradeCart" then Relic.trade.home[model]=b end
       applyRally(item.state,b,model,item.kind)
      end
      table.remove(queue,1)
@@ -3165,6 +3380,9 @@ local function productionStep(dt)
     for key,value in pairs(data.effect or {}) do
      if state.modifiers[key]~=nil then modifiers[key]=(modifiers[key] or 0)+value end
     end
+    if data.upgrade and ProductionRules.applyUpgrade(state.unitModifiers,state.unitNames,data.upgrade,Config.Units) then
+     state.actor:SetAttribute("UnitName_"..data.upgrade.unit,state.unitNames[data.upgrade.unit])
+    end
     state.statsCache=nil
     if data.effect and data.effect.farmCapacity then
      for farm in pairs(state.buildings) do
@@ -3187,6 +3405,7 @@ local function productionStep(dt)
    end
   end
  end
+ for _,state in pairs(states) do if alive(state) then Relic.income(state,dt) end end
  for _,state in pairs(states) do
   local item=state.advancing
   if alive(state) and item then
@@ -3267,12 +3486,15 @@ orderStep=function(dt,now)
   end
   if order.kind=="build" and (not canBuildWorker(state,unit) or not isOwned(state,target,buildings) or not construction[target] or target:GetAttribute("Complete")) then stop(unit); continue end
   if order.kind=="garrison" and not isOwned(state,target,buildings) then stop(unit); continue end
+  if order.kind=="relic" and (not Relic.isRelic(target) or unit:GetAttribute("CarryingRelic")==true) then stop(unit); continue end
+  if order.kind=="relicStore" and (not Relic.storeTarget(state,target) or unit:GetAttribute("CarryingRelic")~=true) then stop(unit); continue end
+  if order.kind=="trade" and not Relic.trade.valid(state,unit,order) then stop(unit); notify(state.actor,"貿易路線上的市集已失效，貿易車停止。"); continue end
   local current=position(unit)
   local stats=unitStats(state,unit:GetAttribute("UnitType"),order.kind=="gather" and target:GetAttribute("ResourceType") or nil)
   -- 農田可以踩踏：村民走進田中央耕作，其餘目標停在外緣。
   local destination=order.kind=="move" and target or farming and position(target) or edgePosition(target,current)
   -- 到位誤差小於陣形間隙，避免先停止的前排占住後排目的地。
-  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and CONSTRUCTION.workRange or farming and Config.Farms.workRange or order.kind=="garrison" and Garrison.config.enterRange or 5
+  local range=order.kind=="move" and Config.Formations.arrivalTolerance or (order.kind=="attack" or order.kind=="convert") and stats.range or order.kind=="heal" and Monk.config.healRange or order.kind=="build" and Config.Construction.workRange or farming and Config.Farms.workRange or order.kind=="garrison" and Garrison.config.enterRange or 5
   local inRange=(destination-current).Magnitude<=range
   if order.kind=="attack" and order.anchor and not order.objective and not inRange
    and CombatRules.beyondLeash(order.anchor.X,order.anchor.Z,current.X,current.Z,COMBAT.leashDistance) then
@@ -3312,6 +3534,9 @@ orderStep=function(dt,now)
    end
   end
   if inRange and order.kind=="garrison" then Garrison.enter(state,unit,target); continue end
+  if inRange and order.kind=="relic" then Relic.pickup(state,unit,target); continue end
+  if inRange and order.kind=="relicStore" then Relic.store(state,unit,target); continue end
+  if inRange and order.kind=="trade" then Relic.trade.arrive(state,unit,order); continue end
   if inRange then
    order.path=nil
    unit:SetAttribute("Animation",order.kind=="attack" and "Attack" or (order.kind=="gather" or order.kind=="build" or order.kind=="repair" or order.kind=="convert" or order.kind=="heal") and "Work" or "Idle")
@@ -3339,7 +3564,8 @@ orderStep=function(dt,now)
    elseif order.kind=="gather" and UnitRules.takeAction(actionClocks,unit,"gather",now,1) then
     local key=target:GetAttribute("ResourceType")
     local carrying=unit:GetAttribute("Carrying") or 0
-    local amount=GatheringRules.takeAmount(target:GetAttribute("Amount") or 0,carrying,stats.carry,stats.gather)
+    local rate=GatheringRules.gatherRate(stats.gather,target:GetAttribute("GatherMultiplier"))
+    local amount=GatheringRules.takeAmount(target:GetAttribute("Amount") or 0,carrying,stats.carry,rate)
     target:SetAttribute("Amount",math.max(0,(target:GetAttribute("Amount") or 0)-amount))
     if target.Parent==resources then Factory.refreshStage(target) end
     if target.Parent==buildings and (target:GetAttribute("Amount") or 0)<=0 and not AutoWork.reseed(state,target) then AutoWork.farmLook(target) end

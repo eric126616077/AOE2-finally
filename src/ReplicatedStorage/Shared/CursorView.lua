@@ -18,6 +18,8 @@ local styles={
  repair={"🛠️",Color3.fromRGB(70,90,120),HAND},
  rally={"🚩",Color3.fromRGB(46,86,140),ARROW},
  invalid={"🚫",Color3.fromRGB(70,30,30),ARROW},
+ relic={"✨",Color3.fromRGB(150,112,30),HAND},
+ trade={"🪙",Color3.fromRGB(120,92,30),HAND},
 }
 local screen,badge,glyph
 local current="none"

@@ -8,7 +8,7 @@ local Panel = {}
 Panel.__index = Panel
 local C = {ink=Color3.fromRGB(61,44,28),muted=Color3.fromRGB(112,88,57),paper=Color3.fromRGB(225,207,166),
  card=Color3.fromRGB(72,57,38),edge=Color3.fromRGB(142,110,62),green=Color3.fromRGB(64,131,66),red=Color3.fromRGB(164,53,39),gold=Color3.fromRGB(179,126,40),white=Color3.fromRGB(248,234,204)}
-local classes = {villager="村民",infantry="步兵",archer="遠程部隊",cavalry="騎兵",siege="攻城器械",monk="僧侶",building="建築"}
+local classes = {villager="村民",infantry="步兵",archer="遠程部隊",cavalry="騎兵",siege="攻城器械",monk="僧侶",trade="貿易",building="建築"}
 local resources = {food="食物",wood="木材",gold="黃金",stone="石材"}
 local resourceNotes = {wood="右鍵指派村民伐木，木材交回市鎮中心或伐木場。",food="右鍵指派村民採集，食物交回市鎮中心或磨坊。",
  gold="右鍵指派村民採礦，黃金交回市鎮中心或採礦營地。",stone="右鍵指派村民採石，石材交回市鎮中心或採礦營地。"}
@@ -58,7 +58,7 @@ local function status(model)
  local building=Config.Buildings[model:GetAttribute("OrderTargetBuildingType")]
  if building then target=building.name end
  if not target then target=resources[model:GetAttribute("OrderTargetResourceType")] end
- local verbs={gather="採集",build="施工",repair="修復",deliver="交貨至",attack="攻擊",convert="招降",heal="治療"}
+ local verbs={gather="採集",build="施工",repair="修復",deliver="交貨至",attack="攻擊",convert="招降",heal="治療",relic="拾取",relicStore="存放聖物至",trade="貿易前往"}
  local verb=verbs[model:GetAttribute("OrderKind")]
  if verb and target then order=verb..target end
  local formation=Config.Formations.types[model:GetAttribute("Formation")]
@@ -88,10 +88,17 @@ local function details(model)
   table.insert(lines,"建造成本："..Grid.costText(data.cost))
   table.insert(lines,"基礎建造時間 "..data.buildTime.." 秒 · "..Config.Ages[data.minAge].name)
  else
-  table.insert(lines,"類型："..(classes[data.class] or data.class))
+  table.insert(lines,"類型："..(classes[data.class] or data.class)..(data.alsoClass and ("、"..(classes[data.alsoClass] or data.alsoClass)) or ""))
   if data.splash then table.insert(lines,string.format("範圍傷害半徑 %g",data.splash)) end
   for _,key in ipairs({"villager","infantry","archer","cavalry","siege","building"}) do
-   if data.bonus[key] then table.insert(lines,"對"..classes[key].."額外傷害 +"..data.bonus[key]) end
+   -- 伺服器發布含兵種升級的加成（Bonus_類別）；沒有時用設定值。
+   local bonus=number(model,"Bonus_"..key,data.bonus[key] or 0)
+   if bonus>0 then table.insert(lines,"對"..classes[key].."額外傷害 +"..bonus) end
+  end
+  if model:GetAttribute("CarryingRelic")==true then table.insert(lines,"攜帶聖物：不能招降、治療或駐紮；右鍵自己的修道院存放。") end
+  if data.class=="trade" then
+   local cargo=number(model,"TradeGold",0)
+   table.insert(lines,cargo>0 and ("載運黃金 "..cargo.."，回到己方市集後入帳。") or "空車：右鍵另一座己方或盟友的市集開始往返貿易。")
   end
   if data.class=="monk" then
    local faith,maxFaith=number(model,"Faith",0),math.max(1,number(model,"MaxFaith",100))

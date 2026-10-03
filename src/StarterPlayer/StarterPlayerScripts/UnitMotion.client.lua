@@ -152,7 +152,7 @@ local function showHealth(model)
 end
 -- How far in front of its own center each melee weapon ends at the peak of the swing.
 -- The figure steps in by the remaining gap, so the blade, spear point or ram head touches the target.
-local meleeReach={villager=1.6,infantry=2.4,spearman=5.3,scout=4.1,cavalry=4.1,ram=7.1}
+local meleeReach={villager=1.6,infantry=2.4,spearman=5.3,scout=4.1,cavalry=4.1,camel=4.1,ram=7.1}
 local MAX_LUNGE=3.5
 local function meleeLunge(model,kind)
  local reach,contact=meleeReach[kind],model:GetAttribute("AttackContact")
@@ -174,7 +174,7 @@ local function attackEffect(model)
  local data=Config.Units[unitKind] or Config.Buildings[buildingKind]
  if not data or not root or not finitePosition(target) or not onScreen(root.Position) then return end
  local kind=Config.Combat.projectileKinds[unitKind] or "arrow"
- local stone,javelin=kind=="stone",kind=="javelin"
+ local stone,javelin,bullet=kind=="stone",kind=="javelin",kind=="bullet"
  local sourceFrame=unitKind and UnitView.GetFrame(model) or root.CFrame
  local start=sourceFrame.Position+Vector3.new(0,unitKind and (stone and 3 or 1.5) or root.Size.Y*.35,0)
  local finish=target+Vector3.new(0,2,0)
@@ -190,7 +190,7 @@ local function attackEffect(model)
   end)
   return
  end
- local name=stone and "StoneEffect" or javelin and "JavelinEffect" or "ArrowEffect"
+ local name=stone and "StoneEffect" or javelin and "JavelinEffect" or bullet and "BulletEffect" or "ArrowEffect"
  local wood,steel=Color3.fromRGB(150,112,70),Color3.fromRGB(196,202,204)
  local color=stone and Color3.fromRGB(165,162,145) or Color3.fromRGB(231,199,134)
  -- 駐軍讓防禦建築一次射出多支箭：每支箭從稍微錯開的位置出發，落點相同。
@@ -207,6 +207,19 @@ local function attackEffect(model)
   local diameter=unitKind=="trebuchet" and 2.3 or 1.7
   part=effectPart(name,Vector3.new(diameter,diameter,diameter),color,Enum.Material.Slate)
   part.Shape=Enum.PartType.Ball
+ elseif bullet then
+  -- Lead ball with a short bright tracer; a puff of powder smoke hangs at the muzzle.
+  part=effectPart(name,Vector3.new(.35,.35,1.6),Color3.fromRGB(255,214,140),Enum.Material.Neon)
+  if shot==1 and activeEffects<MAX_EFFECTS then
+   local smoke=effectPart("MuzzleSmoke",Vector3.new(1.4,1.4,1.4),Color3.fromRGB(214,210,200))
+   smoke.Shape=Enum.PartType.Ball
+   smoke.Transparency=.35
+   smoke.Position=start
+   if keepEffect(smoke,true,.6) then
+    TweenService:Create(smoke,TweenInfo.new(.55,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+     {Size=Vector3.new(3.4,3.4,3.4),Position=start+Vector3.new(0,1.4,0),Transparency=1}):Play()
+   end
+  end
  else
   -- A real shaft with an iron head and fletching, not a flash.
   local length=javelin and 3.8 or 2.6
@@ -224,7 +237,7 @@ local function attackEffect(model)
  local duration=finite(flight) and math.clamp(flight,.05,3) or (stone and .5 or .2)
  if not keepEffect(part,true,duration+.25) then return end
  projectiles[part]={start=start,finish=finish,created=os.clock(),duration=duration,extras=extras,
-  arc=stone and math.min(22,direction.Magnitude*.2) or math.min(javelin and 5 or 6,direction.Magnitude*.08),
+  arc=stone and math.min(22,direction.Magnitude*.2) or bullet and 0 or math.min(javelin and 5 or 6,direction.Magnitude*.08),
   color=color,siege=stone}
  end
 end
@@ -253,10 +266,10 @@ end
 local groups={
  BootL="foot",BootR="foot",HorseLeg="horseLeg",Wheel="wheel",
  Arm="right",ArmR="right",Tool="right",ToolHead="right",Sword="right",
- Spear="right",Spearhead="right",Bow="right",Bowstring="right",Staff="right",StaffHead="right",
+ Spear="right",Spearhead="right",Bow="right",Bowstring="right",Staff="right",StaffHead="right",Gun="right",
  ArmL="left",Shield="left",
  Body="torso",Belt="torso",Tabard="torso",Head="torso",Hat="torso",HatBand="torso",Quiver="torso",Robe="torso",Carry="torso",
- HorseBody="horse",Saddle="horse",HorseCloth="horse",HorseHead="horse",HorseNeck="horse",Mane="horse",
+ HorseBody="horse",Saddle="horse",HorseCloth="horse",HorseHead="horse",HorseNeck="horse",Mane="horse",Hump="horse",
  Chassis="siege",Roof="siege",Ridge="siege",SiegeBanner="siege",CatapultPost="siege",TrebuchetFrame="siege",
  RamLog="ram",RamHead="ram",CatapultArm="catapult",StoneBasket="catapult",
  TrebuchetArm="trebuchet",Counterweight="trebuchet",Sling="trebuchet",
@@ -426,7 +439,7 @@ local function pose(entry,item,kind,walk,work,attack,workKind)
  local group,phase=entry.group,item.phase
  if not group then return entry.offset end
  local sine,cosine=math.sin(phase),math.cos(phase)
- local mounted=kind=="cavalry" or kind=="scout"
+ local mounted=Config.Units[kind]~=nil and Config.Units[kind].mounted==true
  -- A standing figure slowly shifts its weight; feet, hooves and wheels stay planted.
  local idle=walk<=0 and not work and attack<=0
  local breath=item.idleClock*1.6+item.idleSeed
@@ -475,7 +488,9 @@ local function pose(entry,item,kind,walk,work,attack,workKind)
   elseif workKind=="stone" or workKind=="gold" then angle=group=="right" and -.55+sine*.55 or -.15
   else angle=group=="right" and -.42+sine*.3 or -.18 end
  elseif attack>0 then
-  if kind=="archer" then angle=group=="right" and -.6-attack*.25 or -.75; reach=group=="right" and -attack*.35 or 0
+  if kind=="archer" or kind=="cavalryArcher" then angle=group=="right" and -.6-attack*.25 or -.75; reach=group=="right" and -attack*.35 or 0
+  -- The hand gun stays levelled and kicks back with the shot.
+  elseif kind=="handCannoneer" then angle=group=="right" and attack*.22 or -.5; reach=group=="right" and -attack*.6 or 0
   elseif kind=="skirmisher" then angle=group=="right" and -attack*.6 or -.18; reach=group=="right" and attack*.5 or 0
   -- The spear levels at the target; a rider leans the sword arm out past the horse's head.
   elseif kind=="spearman" then angle=group=="right" and -attack*1.3 or -.18; reach=group=="right" and attack*.5 or 0

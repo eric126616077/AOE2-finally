@@ -8,8 +8,8 @@ local Rules={Delay=.12,ServerStep=.1,MaxSamples=6,VisibilityInterval=.125,PoseIn
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
 end
-local wheeled={ram=true,mangonel=true,trebuchet=true}
-local mounted={scout=true,cavalry=true}
+local wheeled={ram=true,mangonel=true,trebuchet=true,tradeCart=true}
+local mounted={scout=true,cavalry=true,cavalryArcher=true,camel=true}
 -- Gait phase follows the distance the figure visibly travelled, never the clock:
 -- feet plant on the ground at any speed and stop the instant the figure stops.
 function Rules.GaitAdvance(kind,distance)
