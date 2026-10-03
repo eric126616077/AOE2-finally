@@ -1276,8 +1276,8 @@ function GUI:LayoutLobby()
   if entry then
    entry.button.Size=UDim2.fromOffset(cardWidth,cardHeight)
    entry.button.Position=UDim2.fromOffset(14+((i-1)%columns)*(cardWidth+6),welcomeTop+math.floor((i-1)/columns)*(cardHeight+6))
-   entry.title.TextSize=compact and 16 or 18
-   entry.title.Position=UDim2.fromOffset(12,compact and 4 or 7)
+   entry.title.TextSize=small and 16 or 18
+   entry.title.Position=UDim2.fromOffset(12,small and 4 or 7)
    entry.title.Size=UDim2.new(1,-43,0,tight and 24 or 27)
    -- 窄卡片的「›」會壓到說明文字；矮畫面只顯示房間名稱與狀態。
    entry.arrow.Visible=not small

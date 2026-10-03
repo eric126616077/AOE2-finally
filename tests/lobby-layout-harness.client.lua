@@ -50,7 +50,8 @@ local function applySize(size)
  UI.canvas.Size=UDim2.fromOffset(size.w,size.h)
  UI.layoutWidth,UI.layoutHeight=size.w,size.h
  UI:LayoutLobby()
- task.wait(); task.wait() -- the client update loop also lays out with these values; let geometry settle
+ -- RTSClient calls UI:Update every 0.15 s; panel visibility (e.g. the tutorial card rule) follows on that cadence.
+ task.wait(0.4)
  UI:LayoutLobby()
  task.wait()
 end
