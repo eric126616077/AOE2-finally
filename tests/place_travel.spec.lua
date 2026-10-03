@@ -65,6 +65,23 @@ rejected(function(t) t.settings.aiCount=3 end,"more than four factions accepted"
 rejected(function(t) t.settings.population=9999 end,"unsupported population accepted")
 rejected(function(t) t.settings=nil end,"missing settings accepted")
 
+-- 劇情與新手教程：大廳已檢查章節解鎖與內部模式，對戰伺服器仍要接受並保留章節規則。
+local storySettings=assert(LobbyRules.settings(GameModeRules.defaults("Story",2,4),{unlocked=4}))
+expect(storySettings.gameMode=="Story" and storySettings.storyChapter==4,"story defaults changed chapter")
+local storyRead,storyMessage=PlaceRules.readTicket(PlaceRules.newTicket("story-1","Room1",storySettings,{{id=31},{id=32}},1000),1010,600,Config.Lobby.portals)
+expect(storyRead,"unlocked story chapter rejected by the match server: "..tostring(storyMessage))
+expect(storyRead.settings.gameMode=="Story" and storyRead.settings.storyChapter==4 and storyRead.settings.teamMode=="CoopAI"
+ and storyRead.settings.aiCount==storySettings.aiCount and storyRead.settings.victory==storySettings.victory,"story chapter rules lost in the ticket")
+local tamperedStory=PlaceRules.newTicket("story-2","Room1",storySettings,{{id=31},{id=32}},1000)
+tamperedStory.settings.victory="Wonder"; tamperedStory.settings.aiCount=0
+local tamperedRead=PlaceRules.readTicket(tamperedStory,1010,600,Config.Lobby.portals)
+expect(tamperedRead==nil or (tamperedRead.settings.victory==storySettings.victory and tamperedRead.settings.aiCount==storySettings.aiCount),"edited story ticket bypassed chapter rules")
+expect(PlaceRules.readTicket(PlaceRules.newTicket("story-3","Room1",storySettings,{{id=31},{id=32},{id=33},{id=34}},1000),1010,600,Config.Lobby.portals)==nil,"story ticket exceeded its player limit")
+local sandbox=assert(LobbyRules.settings({gameMode="Sandbox",expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"},{internal=true}))
+local sandboxRead,sandboxMessage=PlaceRules.readTicket(PlaceRules.newTicket("tutorial-1","Room3",sandbox,{{id=41,tutorial=true}},1000),1010,600,Config.Lobby.portals)
+expect(sandboxRead and sandboxRead.settings.gameMode=="Sandbox" and sandboxRead.players[1].tutorial==true,"tutorial ticket rejected by the match server: "..tostring(sandboxMessage))
+expect(LobbyRules.settings({gameMode="Sandbox",expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"})==nil,"lobby players can create the internal tutorial mode")
+
 -- 抵達：全員到齊立即開局，逾時以已到者開局，沒有人到則放棄。
 expect(PlaceRules.arrival(2,2,0,45)=="start","full roster waited")
 expect(PlaceRules.arrival(2,1,10,45)=="wait","partial roster started early")
