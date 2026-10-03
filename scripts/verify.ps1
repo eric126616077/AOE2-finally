@@ -171,6 +171,15 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     & $runtime tests/production.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Production queue revision / rally / refund validation tests failed.' }
     $serverSource = Get-Content src/ServerScriptService/GameServer.server.lua -Raw
+    # endMatch must publish winner attributes before switching to Ended (clients see changes in set order).
+    $endStart = $serverSource.IndexOf('local function endMatch(winnerTeam)')
+    $endEnd = $serverSource.IndexOf('checkVictory=function()', $endStart)
+    if ($endStart -lt 0 -or $endEnd -le $endStart) { throw 'Actual endMatch source unavailable.' }
+    $endBody = $serverSource.Substring($endStart, $endEnd - $endStart)
+    $winnerAt = $endBody.IndexOf('SetAttribute("WinnerTeamId"')
+    $endedAt = $endBody.IndexOf('setPhase("Ended")')
+    if ($winnerAt -lt 0 -or $endedAt -lt 0 -or $winnerAt -gt $endedAt) { throw 'endMatch switches to Ended before publishing the winner.' }
+    Write-Output 'PASS: endMatch publishes winner attributes before MatchPhase=Ended'
     $formationStart = $serverSource.IndexOf('local function selectedFormationUnits(')
     $formationEnd = $serverSource.IndexOf('command.OnServerEvent:Connect(', $formationStart)
     if ($formationStart -lt 0 -or $formationEnd -le $formationStart) { throw 'Actual formation command source unavailable.' }

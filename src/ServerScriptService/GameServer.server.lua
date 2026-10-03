@@ -1465,12 +1465,10 @@ end
 local function endMatch(winnerTeam)
  if phase~="Playing" then return end
  if not matchTeams or not TeamRules.result(matchTeams,matchTeams.memberIds[1],winnerTeam,true,false) then return end
- setPhase("Ended")
- if activeRoomId then
-  workspace:SetAttribute("LobbyRoom_"..activeRoomId.."_Status","Ended")
-  local room=rooms[activeRoomId]
-  lobbyWorld:SetStatus(0,room.expected,0,"Ended",activeRoomId,room.settings)
- end
+ -- 順序：覆盤、劇情進度與勝負屬性全部寫好之後才切到 Ended。客戶端屬性變更的觸發順序和伺服器設定的順序相同，
+ -- 先切階段的話，結算畫面（與測試）在看到 Ended 的那一刻可能讀到舊的勝者。通知與音效在切換之後才送出。
+ -- 這段沒有 yield，phase 仍是 Playing 的期間不會有其他步驟插進來。
+ local storyNotices={}
  local endedAt=os.clock()
  if currentMatch then
   for _,state in pairs(currentMatch.factions) do
@@ -1481,7 +1479,7 @@ local function endMatch(winnerTeam)
    if outcome=="win" and not state.ai and settings.gameMode=="Story" and state.actor.Parent==Players
     and profiles:CompleteStory(state.actor,settings.storyChapter) then
     local nextChapter=LobbyRules.GameModes.chapter(settings.storyChapter+1)
-    notify(state.actor,nextChapter and ("已解鎖第 "..(settings.storyChapter+1).." 章「"..nextChapter.title.."」。") or "恭喜完成全部劇情章節！")
+    table.insert(storyNotices,{actor=state.actor,message=nextChapter and ("已解鎖第 "..(settings.storyChapter+1).." 章「"..nextChapter.title.."」。") or "恭喜完成全部劇情章節！"})
    end
   end
   for _,state in pairs(currentMatch.participants) do
@@ -1500,6 +1498,13 @@ local function endMatch(winnerTeam)
  workspace:SetAttribute("Winner",winnerName)
  workspace:SetAttribute("WinnerId",winnerId)
  workspace:SetAttribute("WinnerTeamId",winnerTeam or 0)
+ setPhase("Ended")
+ if activeRoomId then
+  workspace:SetAttribute("LobbyRoom_"..activeRoomId.."_Status","Ended")
+  local room=rooms[activeRoomId]
+  lobbyWorld:SetStatus(0,room.expected,0,"Ended",activeRoomId,room.settings)
+ end
+ for _,entry in ipairs(storyNotices) do notify(entry.actor,entry.message) end
  for unit in pairs(orders) do stop(unit) end
  if Travel.role=="Match" then
   -- 每場對局獨佔一台伺服器：結束後送回大廳，空伺服器由 Roblox 自動關閉。
