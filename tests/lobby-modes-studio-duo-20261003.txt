@@ -1,0 +1,18 @@
+== 0.741.19.7411056_20261003T063833Z_Studio_7C846_last.log
+2026-10-03T06:38:50.212Z [Output] [RTS] 對局開始：2 名玩家、1 個電腦陣營，地圖 Small。
+2026-10-03T06:38:53.470Z [Output] [LOBBY_MODES probe] Player1 removed 7 AI models
+2026-10-03T06:38:57.718Z [Output] [RTS] 對局開始：2 名玩家、0 個電腦陣營，地圖 Medium。
+== 0.741.19.7411056_20261003T063839Z_Studio_9954F_last.log
+2026-10-03T06:38:50.226Z [Output] [LOBBY_MODES Player1] PASS both clients in the same Story room
+2026-10-03T06:38:50.776Z [Output] [LOBBY_MODES Player1] PASS co-op chapter 1, humans on team 1
+2026-10-03T06:38:50.776Z [Output] [LOBBY_MODES Player1] PASS co-op enemy count
+2026-10-03T06:38:58.285Z [Output] [LOBBY_MODES Player1] PASS PvP has no AI and no chapter
+2026-10-03T06:39:00.376Z [Output] [LOBBY_MODES Player1] PASS remaining player won PvP
+2026-10-03T06:39:00.376Z [Output] [LOBBY_MODES Player1] ALL PASS 5 checks
+== 0.741.19.7411056_20261003T063840Z_Studio_915B0_last.log
+2026-10-03T06:38:50.224Z [Output] [LOBBY_MODES Player2] PASS both clients in the same Story room
+2026-10-03T06:38:50.774Z [Output] [LOBBY_MODES Player2] PASS co-op chapter 1, humans on team 1
+2026-10-03T06:38:50.774Z [Output] [LOBBY_MODES Player2] PASS co-op enemy count
+2026-10-03T06:38:58.274Z [Output] [LOBBY_MODES Player2] PASS PvP has no AI and no chapter
+2026-10-03T06:39:00.393Z [Output] [LOBBY_MODES Player2] PASS remaining player won PvP
+2026-10-03T06:39:00.393Z [Output] [LOBBY_MODES Player2] ALL PASS 5 checks

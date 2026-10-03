@@ -25,5 +25,14 @@
 ## 驗證
 
 - `scripts/verify.ps1` 全部通過，包含新增的 220 項 `tests/game_modes.spec.lua`（玩法、章節解鎖、提案）、個人檔案的劇情進度檢查、既有 65 項實際伺服器房間流程，以及 Rojo build。
-- **未在 Roblox Studio Play 驗證**：這輪沒有取得 Studio 操作權限。尚未實測：快速開始、設定精靈的版面（桌面與手機）、劇情勝利後解鎖、多人劇情同步、敵方名稱顯示。純邏輯測試不能取代這些實機結果。
+- **Studio 自動測試通過**（main `16407ab`）：測試檔是 `lobby-modes-validation.project.json` 建出來的 `build/lobby-modes-test.rbxlx`，裡面有 Studio 專用的 `tests/lobby-modes-harness.client.lua` 與 `tests/lobby-modes-probe.server.lua`。兩輪都由「Agent 管理」session 用命令列啟動 Studio 伺服器與客戶端執行，沒有人看畫面。
+  - 單人（1 客戶端）：ALL PASS，29 項。內容包括四個快速開始按鈕；三張玩法卡片與各玩法的欄位；套用第 1 章規則；伺服器拒絕未解鎖章節、改寫章節規則、PvP 加電腦、客戶端建立 Sandbox；單人劇情一鍵出發、敵方名稱與隊伍；勝利後 `StoryCleared=1`、回大廳後解鎖並可選第 2 章；快速開始建立 PvE／PvP 房間。紀錄在 `tests/lobby-modes-studio-solo-20261003.txt`。
+  - 雙人（Player1／Player2）：兩個客戶端各 ALL PASS 5 項。兩人用快速開始進同一個劇情房間，都在玩家隊，電腦數量正確；probe 移除 7 個電腦模型後，兩人都記錄通關並回到大廳；接著 PvP 沒有電腦、兩人分屬不同隊，Player2 投降後 Player1 獲勝。紀錄裡沒有腳本錯誤，見 `tests/lobby-modes-studio-duo-20261003.txt`。
+  - probe 直接移除電腦模型，讓正常的淘汰與結算流程判勝負，所以「真的把電腦打敗」的對局過程沒有實測。Studio 停用雲端存檔，劇情進度只存在當次工作階段，發布環境的 DataStore 寫入沒有實測。
+- **尚未目視檢查**（命令列模式看不到畫面）：
+  1. 歡迎面板的版面，包含手機寬度
+  2. 設定精靈第一頁的玩法卡片樣式與劇情簡報排版
+  3. 劇情的「章節規則」頁
+  4. 3D 傳送門看板上的玩法標籤
+  5. 開局與勝利時的通知文字
 - 舊的 Studio 整合測試（例如 `TeamUITests` 的手機欄位順序檢查）是依照原本的欄位排列寫的，執行前可能需要更新。
