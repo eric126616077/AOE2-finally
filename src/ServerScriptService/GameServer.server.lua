@@ -1058,6 +1058,28 @@ local function moveToward(unit,order,destination,speed,dt,now)
   end
   if not accepted then
    order.crowdedSince=order.crowdedSince or now
+   -- 被己方閒置單位卡住超過 1 秒（例如停在狹窄通道裡的部隊）：請前方的閒置單位往兩側讓路，
+   -- 否則移動者會永遠等下去（Studio 實測：僧侶卡在主城旁停著的步兵後面）。只動自己、沒有指令的單位，
+   -- 每 2 秒最多請兩個；讓開的位置須沒有單位、也沒有建築或資源擋住。
+   if now-order.crowdedSince>=1 and now>=(order.yieldAfter or 0) then
+    order.yieldAfter=now+2
+    local mover,asked=owner(unit),0
+    for _,record in ipairs(unitNeighbors(unit,current,current,radius+2) or {}) do
+     local blocker=record.key
+     if asked<2 and typeof(blocker)=="Instance" and blocker.Parent==units and orders[blocker]==nil and owner(blocker)==mover
+      and UnitCollisionRules.blocksAhead(current.X,current.Z,delta.X,delta.Z,record.X,record.Z,radius+record.radius+2) then
+      local from=Vector3.new(record.X,Config.Map.GroundY,record.Z)
+      for _,spot in ipairs(UnitCollisionRules.yieldCandidates(record.X,record.Z,delta.X,delta.Z,radius+record.radius*2+1) or {}) do
+       local point=Vector3.new(spot.X,Config.Map.GroundY,spot.Z)
+       if unitPositionClear(blocker,point,record.radius) and staticUnitSegmentClear(blocker,from,point) then
+        issue(blocker,"move",point,true)
+        asked+=1
+        break
+       end
+      end
+     end
+    end
+   end
    -- 四周都被擋住：隔 0.2–0.4 秒再試，不必每一步重算全部避讓候選（錯開時間避免同一步集中重試）。
    order.crowdedRetry=now+0.2+math.random()*0.2
    unit:SetAttribute("Animation","Idle")

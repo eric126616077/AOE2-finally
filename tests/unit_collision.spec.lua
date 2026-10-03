@@ -167,4 +167,16 @@ do
  expect(around:Around(0, 0, 0/0) == nil and around:Around(0/0, 0, 17) == nil, "Around accepted non-finite input")
 end
 
+-- 讓路：候選點在行進方向的左右兩側、距離正確；只有前方的單位算擋路。
+do
+ local spots = Rules.yieldCandidates(10, 0, 1, 0, 5)
+ expect(spots and #spots == 2, "yield candidates missing")
+ expect(math.abs(spots[1].X - 10) < 1e-9 and math.abs(math.abs(spots[1].Z) - 5) < 1e-9 and math.abs(spots[2].Z + spots[1].Z) < 1e-9, "yield candidates are not beside the blocker")
+ expect(Rules.yieldCandidates(0, 0, 0, 0, 5) == nil and Rules.yieldCandidates(0, 0, 1, 0, 0) == nil and Rules.yieldCandidates(0/0, 0, 1, 0, 5) == nil, "invalid yield input accepted")
+ expect(Rules.blocksAhead(0, 0, 1, 0, 3, 1, 5), "blocker ahead not detected")
+ expect(not Rules.blocksAhead(0, 0, 1, 0, -3, 1, 5), "unit behind treated as blocker")
+ expect(not Rules.blocksAhead(0, 0, 1, 0, 9, 0, 5), "distant unit treated as blocker")
+ expect(not Rules.blocksAhead(0, 0, 1, 0, 0/0, 0, 5), "invalid blocker position accepted")
+end
+
 print("PASS: " .. checks .. " unit swept-disk / large-radius / overlap escape / local index / live update / steering / finite validation checks (pure geometry; not Studio Play)")

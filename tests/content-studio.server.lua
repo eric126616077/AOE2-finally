@@ -201,6 +201,16 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   for _,b in ipairs(workspace.Buildings:GetChildren()) do if b:GetAttribute("OwnerId")==player.UserId then buildingCount+=1 end end
   return {units=units,buildings=buildingCount,defeated=player:GetAttribute("Defeated"),phase=workspace:GetAttribute("MatchPhase"),
    population=player:GetAttribute("Population"),cap=player:GetAttribute("PopulationCap")}
+ elseif action=="near" then
+  -- 診斷：a 周圍 10 studs 內的單位（種類、指令、是否己方）。
+  if typeof(a)~="Instance" or not a.Parent then return "" end
+  local here,list=a:GetPivot().Position,{}
+  for _,unit in ipairs(workspace.Units:GetChildren()) do
+   if unit~=a and (unit:GetPivot().Position-here).Magnitude<=10 then
+    table.insert(list,tostring(unit:GetAttribute("UnitType")).."/"..tostring(unit:GetAttribute("OrderKind")).."/"..(unit:GetAttribute("OwnerId")==a:GetAttribute("OwnerId") and "己方" or "他方"))
+   end
+  end
+  return table.concat(list,"、")
  elseif action=="tool" then
   return typeof(a)=="Instance" and a:GetAttribute("ToolKind") or nil
  end

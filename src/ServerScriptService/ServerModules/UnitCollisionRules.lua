@@ -268,4 +268,23 @@ function Rules.retreatDuration(distance, speed, tick)
  return positive(duration) and duration or nil
 end
 
+-- 讓路：被己方閒置單位擋住時，請擋路者往行進方向的左右兩側讓開。
+-- 回傳兩個候選點（先左後右），距離為 distance；方向無效時回傳 nil。
+function Rules.yieldCandidates(blockerX, blockerZ, dirX, dirZ, distance)
+ if not finite(blockerX) or not finite(blockerZ) or not finite(dirX) or not finite(dirZ) or not positive(distance) then return nil end
+ local length = math.sqrt(dirX * dirX + dirZ * dirZ)
+ if length < 1e-6 then return nil end
+ local sideX, sideZ = -dirZ / length, dirX / length
+ return {
+  { X = blockerX + sideX * distance, Z = blockerZ + sideZ * distance },
+  { X = blockerX - sideX * distance, Z = blockerZ - sideZ * distance },
+ }
+end
+-- 擋路者是否在前方：位於行進方向的半平面內，且離移動者不超過 reach。
+function Rules.blocksAhead(fromX, fromZ, dirX, dirZ, otherX, otherZ, reach)
+ if not finite(fromX) or not finite(fromZ) or not finite(dirX) or not finite(dirZ) or not finite(otherX) or not finite(otherZ) or not positive(reach) then return false end
+ local dx, dz = otherX - fromX, otherZ - fromZ
+ return dx * dirX + dz * dirZ > 0 and dx * dx + dz * dz <= reach * reach
+end
+
 return Rules

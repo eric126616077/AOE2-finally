@@ -194,7 +194,8 @@ local ok,problem=pcall(function()
  -- 先驗掉落：一位僧侶撿起最近的聖物後被移除，聖物應回到地上。
  local first=nearest(groundRelics(),home)
  command:FireServer("Order",{monks[total+1]},first)
- check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",tostring(monks[total+1]:GetAttribute("OrderKind")).." 位置 "..tostring(monks[total+1]:GetPivot().Position))
+ check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",
+  "僧侶指令 "..tostring(monks[total+1]:GetAttribute("OrderKind")).." 僧侶位置 "..tostring(monks[total+1]:GetPivot().Position).." 目標聖物 "..tostring(first and first:GetPivot().Position).." 附近單位 "..tostring(server:InvokeServer("near",monks[total+1])))
  check(#groundRelics()==total-1,"拾取後地上少一件",#groundRelics())
  local rejected=false
  local notice=RS.RTSRemotes.Feedback.OnClientEvent:Connect(function(message) if type(message)=="string" and message:find("攜帶聖物") then rejected=true end end)
@@ -219,7 +220,7 @@ local ok,problem=pcall(function()
    lastReport=os.clock()
    for i=1,total do
     local monk=monks[i]
-    if monk and monk.Parent then print(TAG.."INFO 僧侶 "..i.."："..tostring(monk:GetAttribute("OrderKind")).." 攜帶="..tostring(monk:GetAttribute("CarryingRelic")).." 位置 "..tostring(monk:GetPivot().Position)) end
+    if monk and monk.Parent then print(TAG.."INFO 僧侶 "..i.."："..tostring(monk:GetAttribute("OrderKind")).." 攜帶="..tostring(monk:GetAttribute("CarryingRelic")).." 位置 "..tostring(monk:GetPivot().Position).." 附近單位 "..tostring(server:InvokeServer("near",monk))) end
    end
   end
   return (player:GetAttribute("Relics") or 0)==total

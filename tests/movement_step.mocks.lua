@@ -31,6 +31,10 @@ end -- Mock engine scenery only; optional boundaries exercise actual movement gu
 local function unitNeighbors(unit,from,to,radius) return unitCollisionIndex:Nearby(from.X,from.Z,to.X,to.Z,radius,unit) end
 local function unitPositionClear(unit,pos,radius) return not UnitCollisionRules.overlaps(pos.X,pos.Z,radius,unitNeighbors(unit,pos,pos,radius)) end
 local function stop(unit) unit.stopped=true; orders[unit]=nil end
+-- 讓路分支只對真正的 Instance 生效；mock 單位是表，這裡只提供名稱（讓路的候選點規則在 unit_collision.spec 測）。
+local units={}
+local function owner(model) return model and model.owner end
+local function issue(unit,kind,target) orders[unit]={kind=kind,target=target} end
 local function actor(x,z,radius,keepIndex)
  if not keepIndex then unitCollisionIndex=UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS); orders={} end
  local unit={pos=Vector3.new(x,0,z or 0),radius=radius or 2,moves=0,GetAttribute=function(self,key) return key=="Animation" and (self.Animation or "Idle") or self.radius end,SetAttribute=function(self,key,value) self[key]=value end,
