@@ -16,7 +16,7 @@ Config.Combat = {acquisitionRadius=72, retargetMargin=12, tierDistance=40, leash
  windup={default=0.15, ram=0.25}, meleeTolerance=1.5,
  -- 投射物每秒 studs；傷害在飛抵時結算。石彈落在發射當下的位置，離開 stoneRadius 的單位可以躲開。
  projectile={arrow=110, javelin=80, stone=70, bullet=170, minFlight=0.15, maxFlight=1.8, stoneRadius=6},
- projectileKinds={skirmisher="javelin", mangonel="stone", trebuchet="stone", handCannoneer="bullet"},
+ projectileKinds={skirmisher="javelin", mangonel="stone", trebuchet="stone", handCannoneer="bullet", scorpion="javelin", bombardCannon="stone"},
 }
 Config.Lobby = {
  origin = Vector3.new(0,0,2048), spawnOffset = Vector3.new(0,4,90),
@@ -86,7 +86,7 @@ Config.Map = {
  ResourceNodeTargets = { Small = 760, Medium = 1280, Large = 2200 },
  ResourceFootprint = 8, RoadWidth = 20,
  -- Canopies may overlap while the authoritative trunk / ore collider stays small.
- ResourceVisualFootprints = { Tree = 14, Gold = 11, Stone = 11, Berries = 11, Deer = 10, Relic = 6 },
+ ResourceVisualFootprints = { Tree = 14, Gold = 11, Stone = 11, Berries = 11, Deer = 10, Relic = 6, Boar = 10, Sheep = 6 },
  ResourceLayout = {
   BorderMargin = 20, BaseClearance = 128, CenterClearance = 64,
   MinNodeSpacing = 12.5, ClusterSpacing = 13, ClusterSeparation = 20, OpeningRadius = 260,
@@ -103,7 +103,7 @@ Config.Farms = {queueLimit=40, workRange=4}
 -- 駐紮（AOE2 式）：只能用專用指令（駐紮按鈕／G、Alt+右鍵、觸控模式），一般右鍵不會駐紮。單位走到建築旁進入，在裡面不會被攻擊並緩慢回復生命，仍計入人口。
 -- 每次射擊多出的箭數 = 各類別駐軍人數 × arrows 權重（無條件捨去），上限為建築的 garrison.maxArrows。
 -- 攻城器械不能進入；個別建築可用 garrison.blocked 再排除類別。建築被摧毀或拆除時駐軍全數離開。
-Config.Garrison = {enterRange=5, healRate=1, arrows={villager=1,archer=1,infantry=0.5}, blocked={siege=true,trade=true}}
+Config.Garrison = {enterRange=5, healRate=1, arrows={villager=1,archer=1,infantry=0.5}, blocked={siege=true,trade=true,herd=true}}
 -- 城牆一次拖曳的最大段數；城門在己方或同盟單位進入 gateOpenRadius 時升起閘門（僅外觀，通行權由伺服器判定）。
 Config.Walls = {maxLine=40, gateOpenRadius=18}
 Config.Settings = {
@@ -112,12 +112,12 @@ Config.Settings = {
  startingVillagers = 3, populationLimit = 100, wonderVictoryTime = 180,
 }
 Config.Spawns = { Vector3.new(-344,0,-344), Vector3.new(344,0,344), Vector3.new(344,0,-344), Vector3.new(-344,0,344) }
-Config.BuildOrder = { "TownCenter", "House", "Mill", "LumberCamp", "MiningCamp", "Barracks", "Farm", "ArcheryRange", "Stable", "Blacksmith", "Market", "Tower", "Wall", "Gate", "Castle", "SiegeWorkshop", "Monastery", "University", "Wonder" }
+Config.BuildOrder = { "TownCenter", "House", "Mill", "LumberCamp", "MiningCamp", "Barracks", "Farm", "ArcheryRange", "Stable", "Blacksmith", "Market", "Palisade", "Outpost", "Tower", "Wall", "Gate", "Castle", "SiegeWorkshop", "Monastery", "University", "Wonder" }
 -- Fixed villager command pages; building availability still comes from BuildOrder and minAge.
 Config.BuildPages = {
  {key="economy",name="經濟",buildings={"House","Mill","LumberCamp","MiningCamp","Farm","Market","TownCenter"}},
  {key="military",name="軍事",buildings={"Barracks","ArcheryRange","Stable","Blacksmith","SiegeWorkshop"}},
- {key="defense",name="防禦",buildings={"Tower","Wall","Gate","Castle","Monastery","University","Wonder"}},
+ {key="defense",name="防禦",buildings={"Palisade","Outpost","Tower","Wall","Gate","Castle","Monastery","University","Wonder"}},
 }
 Config.Buildings = {
  TownCenter = { name="市鎮中心", description="訓練村民、交回資源並升級時代，會射擊附近敵軍；可駐紮 15 個單位，駐軍越多射出的箭越多。城堡時代可增建。", cost={wood=275,stone=100}, hp=2400, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(174,130,79), population=5, minAge=3, buildTime=25, damage=6, range=56, attackInterval=2.0, garrison={capacity=15,maxArrows=10}, dropoff={"food","wood","gold","stone"}, trains={"villager"} },
@@ -129,7 +129,7 @@ Config.Buildings = {
  MiningCamp = { name="採礦營地", description="交回黃金與石材。", cost={wood=100}, hp=800, size=Vector2.new(2,2), height=12, color=Color3.fromRGB(145,142,125), population=0, minAge=1, buildTime=12, dropoff={"gold","stone"}, trains={} },
  ArcheryRange = { name="射箭場", description="訓練弓箭手、反制弓兵的矛兵；城堡時代可訓練騎射手，帝王時代可訓練火槍手。", cost={wood=175}, hp=1200, size=Vector2.new(3,3), height=20, color=Color3.fromRGB(161,131,92), population=0, minAge=2, buildTime=20, trains={"archer","skirmisher","cavalryArcher","handCannoneer"} },
  Stable = { name="馬廄", description="訓練偵察騎兵與重裝騎兵；城堡時代可訓練剋制騎兵的駱駝騎兵。", cost={wood=175}, hp=1400, size=Vector2.new(4,3), height=19, color=Color3.fromRGB(172,128,89), population=0, minAge=2, buildTime=20, trains={"scout","cavalry","camel"} },
- SiegeWorkshop = { name="攻城器械廠", description="製造攻城衝車與投石車。", cost={wood=200}, hp=1500, size=Vector2.new(4,3), height=21, color=Color3.fromRGB(144,122,99), population=0, minAge=3, buildTime=24, trains={"ram","mangonel"} },
+ SiegeWorkshop = { name="攻城器械廠", description="製造攻城衝車、投石車與能貫穿敵陣的弩砲；帝王時代研究化學後可製造射石砲。", cost={wood=200}, hp=1500, size=Vector2.new(4,3), height=21, color=Color3.fromRGB(144,122,99), population=0, minAge=3, buildTime=24, trains={"ram","mangonel","scorpion","bombardCannon"} },
  Monastery = { name="修道院", description="訓練僧侶：招降敵方單位並治療友軍。僧侶把聖物存放在這裡，每件聖物持續產生黃金。", cost={wood=175}, hp=1300, size=Vector2.new(3,3), height=28, color=Color3.fromRGB(218,207,165), population=0, minAge=3, buildTime=24, trains={"monk"} },
  University = { name="大學", description="研究帝國的高階軍事科技。", cost={wood=200}, hp=1500, size=Vector2.new(4,4), height=26, color=Color3.fromRGB(188,167,134), population=0, minAge=3, buildTime=24, trains={} },
  Blacksmith = { name="兵工廠", description="研究武器與護甲升級。", cost={wood=150}, hp=1100, size=Vector2.new(3,3), height=19, color=Color3.fromRGB(133,126,113), population=0, minAge=2, buildTime=18, trains={} },
@@ -138,6 +138,9 @@ Config.Buildings = {
  Wall = { name="石牆", description="封鎖狹道並保護基地；按住拖曳可一次放置整排。", cost={stone=15}, hp=1700, size=Vector2.new(1,1), height=13, color=Color3.fromRGB(169,166,150), population=0, minAge=2, buildTime=4, line=true, trains={} },
  Gate = { name="城門", description="己方與同盟部隊可自由通行，敵軍必須攻破才能進入；可直接蓋在自己的石牆上。放置時可旋轉方向。", cost={stone=30}, hp=2000, size=Vector2.new(3,1), height=16, color=Color3.fromRGB(160,156,140), population=0, minAge=2, buildTime=14, gate=true, rotatable=true, trains={} },
  Castle = { name="城堡", description="強大的基地防禦，可製造巨型投石機；射程內沒有敵軍時會射擊敵方建築。可駐紮 20 個單位增加箭數。", cost={stone=650}, hp=4800, size=Vector2.new(8,8), height=48, color=Color3.fromRGB(118,128,146), population=10, minAge=3, buildTime=45, damage=14, range=75, attackInterval=1.6, attacksBuildings=true, garrison={capacity=20,maxArrows=15}, dropoff={"food","wood","gold","stone"}, trains={"trebuchet"} },
+ -- 木柵牆：黑暗時代的廉價木牆，整排放置規則與石牆相同。前哨站只提供視野，不會攻擊。
+ Palisade = { name="木柵牆", description="黑暗時代就能蓋的廉價木牆，能拖延敵軍突襲；生命比石牆低。按住拖曳可一次放置整排。", cost={wood=3}, hp=300, size=Vector2.new(1,1), height=10, color=Color3.fromRGB(150,112,70), population=0, minAge=1, buildTime=2, line=true, trains={} },
+ Outpost = { name="前哨站", description="便宜的木造瞭望台，提供很遠的視野，用來監視敵軍動向；不會攻擊。", cost={wood=25,stone=10}, hp=500, size=Vector2.new(1,1), height=18, color=Color3.fromRGB(158,122,82), population=0, minAge=1, buildTime=10, trains={} },
  Wonder = { name="世界奇觀", description="奇觀模式中守住完工奇觀即可勝利。", cost={wood=1000,gold=1000,stone=1000}, hp=4500, size=Vector2.new(7,7), height=57, color=Color3.fromRGB(213,197,155), population=0, minAge=4, buildTime=80, trains={} },
 }
 Config.Units = {
@@ -159,13 +162,20 @@ Config.Units = {
  -- 貿易車不能攻擊；在兩座相距夠遠的己方／盟友市集之間往返，回到出發市集時交回黃金。
  tradeCart = { name="貿易車", description="右鍵另一座己方或盟友的市集開始往返貿易；距離越遠，每趟黃金越多。不能攻擊。", cost={wood=100,gold=50}, hp=70, speed=15, damage=0, range=4.5, trainTime=25, color=Color3.fromRGB(176,138,82), minAge=2, trainsAt={"Market"}, class="trade", armor=0, attackInterval=1, population=1, bonus={} },
  handCannoneer = { name="火槍手", description="火藥步兵，一槍重創步兵；射速慢、怕騎兵。", cost={food=45,gold=50}, hp=35, speed=14, damage=17, range=38, trainTime=26, color=Color3.fromRGB(120,104,92), minAge=4, trainsAt={"ArcheryRange"}, class="archer", armor=0, attackInterval=3.4, population=1, bonus={infantry=10} },
+ -- 弩砲：弩矢貫穿目標後方直線上的敵方單位（pierce）；後方每多一個目標傷害乘上 falloff。
+ scorpion = { name="弩砲", description="發射穿透弩矢的攻城器械，一箭可貫穿直線上的多名敵軍，適合對付密集的步兵與弓兵；怕騎兵近身。", cost={wood=75,gold=75}, hp=40, speed=10, damage=12, range=56, trainTime=30, color=Color3.fromRGB(150,118,78), minAge=3, trainsAt={"SiegeWorkshop"}, class="siege", armor=0, attackInterval=3.6, population=1, pierce={width=3,falloff=0.6,max=6}, bonus={} },
+ -- 射石砲：需要化學（requiresTech）。對建築造成巨大傷害，射程很遠。
+ bombardCannon = { name="射石砲", description="火藥攻城砲，在很遠的距離重創建築與城牆；需要先在大學研究化學。射速慢、近身脆弱。", cost={wood=225,gold=225}, hp=80, speed=8, damage=40, range=88, trainTime=40, color=Color3.fromRGB(96,92,88), minAge=4, trainsAt={"SiegeWorkshop"}, class="siege", armor=2, attackInterval=6, population=1, preferredTarget="buildings", requiresTech="Chemistry", bonus={building=160} },
+ -- 綿羊（AOE2 式放牧）：不佔人口、不能訓練、不會攻擊。附近只有某一方的單位時歸那一方；
+ -- 村民右鍵宰殺後變成可採集的食物（Config.Resources.Sheep）。
+ sheep = { name="綿羊", description="放牧的羊群：附近沒有原主人的單位時，其他玩家靠近就會接收。可以像部隊一樣移動，村民右鍵宰殺後採集食物。", cost={}, hp=7, speed=8, damage=0, range=3.5, trainTime=1, color=Color3.fromRGB(236,232,220), minAge=1, trainsAt={}, class="herd", armor=0, attackInterval=1, population=0, bonus={} },
 }
 -- Shared gameplay volumes; decorative limbs, weapons and wheels do not collide.
 Config.UnitCollision = {
  default={radius=2,height=5},
  profiles={
   villager={radius=2,height=5}, infantry={radius=2,height=5}, archer={radius=2,height=5},
-  cavalry={radius=3,height=7}, siege={radius=4,height=5}, monk={radius=2,height=5}, trade={radius=3,height=5},
+  cavalry={radius=3,height=7}, siege={radius=4,height=5}, monk={radius=2,height=5}, trade={radius=3,height=5}, herd={radius=2,height=4},
  },
 }
 -- 陣形偏好及幾何同時供客戶端顯示與伺服器驗證；位置由伺服器計算。
@@ -224,9 +234,19 @@ Config.Technologies = {
  HeavyCamel = { name="重裝駱駝騎兵", description="駱駝騎兵升級為重裝駱駝騎兵：生命 +20、攻擊 +2。", cost={food=325,gold=360}, time=35, minAge=4, building="Stable", upgrade={unit="camel",name="重裝駱駝騎兵",hp=20,attack=2} },
  HeavyCavalryArcher = { name="重裝騎射手", description="騎射手升級為重裝騎射手：生命 +10、攻擊 +1、護甲 +1。", cost={food=900,gold=500}, time=35, minAge=4, building="ArcheryRange", upgrade={unit="cavalryArcher",name="重裝騎射手",hp=10,attack=1,armor=1} },
  CappedRam = { name="加蓋衝車", description="攻城衝車升級為加蓋衝車：生命 +70、對建築額外傷害 +15。", cost={food=300,gold=200}, time=35, minAge=4, building="SiegeWorkshop", upgrade={unit="ram",name="加蓋衝車",hp=70,bonus={building=15}} },
+ -- 防禦與經濟科技（AOE2 式）：建築生命／護甲、施工速度、瞭望塔、建築視野、駐軍治療與進貢手續費。
+ Masonry = { name="石工術", description="所有建築生命 +10%、護甲 +1。", cost={food=175,stone=150}, time=30, minAge=3, building="University", effect={buildingHp=0.1,buildingArmor=1} },
+ Architecture = { name="建築學", description="所有建築生命再 +10%、護甲再 +1。", cost={food=300,wood=200}, time=40, minAge=4, building="University", requires="Masonry", effect={buildingHp=0.1,buildingArmor=1} },
+ TreadmillCrane = { name="踏車起重機", description="村民施工速度 +20%。", cost={food=200,wood=300}, time=25, minAge=3, building="University", effect={buildSpeed=0.2} },
+ GuardTower = { name="箭樓", description="瞭望塔攻擊 +3、射程 +8。", cost={food=100,stone=250}, time=30, minAge=3, building="University", effect={towerAttack=3,towerRange=8} },
+ TownWatch = { name="城鎮守望", description="所有建築視野 +30%，更早發現來襲的敵軍。", cost={food=75}, time=15, minAge=2, building="TownCenter", effect={buildingVision=0.3} },
+ HerbalMedicine = { name="草藥學", description="駐紮在建築裡的單位回復生命的速度變為 4 倍。", cost={gold=350}, time=25, minAge=3, building="Monastery", effect={garrisonHeal=3} },
+ Coinage = { name="鑄幣", description="進貢給盟友的手續費減半。", cost={food=200,gold=100}, time=25, minAge=2, building="Market", effect={tributeFeeCut=0.5} },
+ Banking = { name="銀行業", description="進貢不再收取手續費。", cost={food=300,gold=200}, time=30, minAge=3, building="Market", requires="Coinage", effect={tributeFeeCut=0.5} },
  Onager = { name="野戰投石車", description="投石車升級為野戰投石車：攻擊 +8、射程 +8。", cost={food=800,gold=500}, time=40, minAge=4, building="SiegeWorkshop", upgrade={unit="mangonel",name="野戰投石車",attack=8,range=8} },
 }
 Config.TechnologyOrder = { "Loom", "Wheelbarrow", "HandCart", "DoubleBitAxe", "BowSaw", "GoldMining", "StoneMining", "HorseCollar", "HeavyPlow", "Forging", "Armor", "ScaleBarding", "Fletching", "BodkinArrow", "ThumbRing", "Bloodlines", "Squires", "Fervor", "Sanctity", "Chemistry", "Conscription", "Caravan",
+ "TownWatch", "Masonry", "Architecture", "TreadmillCrane", "GuardTower", "HerbalMedicine", "Coinage", "Banking",
  "LongSwordsman", "Champion", "Pikeman", "Crossbowman", "Arbalester", "EliteSkirmisher", "HeavyCavalryArcher", "LightCavalry", "Cavalier", "HeavyCamel", "CappedRam", "Onager" }
 Config.Resources = {
  Tree = { resource="wood", name="樹木", amount=500, color=Color3.fromRGB(64,114,68), height=18 },
@@ -235,10 +255,44 @@ Config.Resources = {
  Berries = { resource="food", name="漿果叢", amount=400, color=Color3.fromRGB(157,67,84), height=5 },
  -- 獵物：每頭食物較少，但村民採集速度是 gatherMultiplier 倍；靜止不逃跑。
  Deer = { resource="food", name="鹿", amount=150, color=Color3.fromRGB(168,118,72), height=6, gatherMultiplier=1.6, hunt=true },
+ -- 野豬：食物多，但村民要先合力打倒牠（boar.hp），期間牠會反擊靠近的單位。
+ Boar = { resource="food", name="野豬", amount=340, color=Color3.fromRGB(92,70,58), height=5, gatherMultiplier=1.6, hunt=true,
+  boar={hp=75, armor=1, damage=7, attackInterval=2, reach=7} },
+ -- 宰殺後的綿羊；尚未有主人時是可接收的中立羊群（Herdable），不能直接採集。
+ Sheep = { resource="food", name="綿羊", amount=100, color=Color3.fromRGB(236,232,220), height=4, gatherMultiplier=1.6, hunt=true },
 }
 Config.MatchModes = { Conquest="征服", Regicide="主城決戰", Wonder="奇觀", Relic="聖物" }
 Config.AIDifficulties = { Easy="簡單", Normal="普通", Hard="困難" }
-Config.MarketTrade = { batch=100, buyGold=130, sellGold=70 }
+-- 市集浮動價格（AOE2 式）：所有玩家共用；每 batch 單位的基準價 basePrice 黃金，買入價 = 基準 × buyMarkup，
+-- 賣出價 = 基準 × sellMarkdown。每次買入基準價 +step、賣出 −step，限制在 minPrice～maxPrice。
+-- buyGold／sellGold 是開局（基準價）時的報價，保留給舊測試與說明。
+Config.MarketTrade = { batch=100, buyGold=130, sellGold=70, basePrice=100, buyMarkup=1.3, sellMarkdown=0.7, step=3, minPrice=20, maxPrice=1000 }
+-- 進貢：需要己方已完工的市集；每次 amounts 其中一個數量，另付 fee 比例的手續費（鑄幣／銀行業可減免）。
+Config.Tribute = { amounts={100,500}, fee=0.3, resources={"food","wood","gold","stone"} }
+-- 單位姿態（AOE2 式）：攻擊＝自動索敵並追擊；防守＝只追擊短距離後回到原位；堅守＝不移動、只打射程內的敵人；不攻擊＝不索敵也不反擊。
+Config.Stances = {
+ default="Aggressive", order={"Aggressive","Defensive","StandGround","NoAttack"},
+ defensiveLeash=36,
+ types={
+  Aggressive={name="攻擊姿態",short="攻擊",description="自動攻擊視野內的敵人並追擊。"},
+  Defensive={name="防守姿態",short="防守",description="攻擊靠近的敵人，追擊一小段距離後回到原位。"},
+  StandGround={name="堅守姿態",short="堅守",description="站在原地不移動，只攻擊射程內的敵人。"},
+  NoAttack={name="不攻擊",short="不攻擊",description="不會主動攻擊，被打也不還手；適合撤退或偵察。"},
+ },
+}
+-- 戰爭迷霧（客戶端顯示）：cell 為格子大小；radius 為各單位／建築的視野半徑（studs）。盟友共享視野。
+-- 未探索區域是黑色；探索過但目前看不到的區域變暗，看不到其中的敵方單位。
+Config.Vision = {
+ enabled=true, cell=16, refresh=0.25,
+ unitDefault=44, buildingDefault=40,
+ units={villager=34, scout=88, cavalry=52, cavalryArcher=56, camel=50, monk=40, tradeCart=36, sheep=16, archer=52, skirmisher=50, handCannoneer=48,
+  mangonel=56, trebuchet=60, scorpion=56, bombardCannon=60, ram=24},
+ buildings={TownCenter=80, Castle=96, Tower=84, Outpost=128, House=28, Farm=20, Wall=16, Palisade=12, Gate=20, Wonder=60},
+}
+-- 羊群與野豬：開局每方 startSheep 隻已歸屬的綿羊；另在出生點附近對稱放置中立羊群與野豬。
+-- 綿羊在 claimRadius 內只有一方的單位時歸那一方；已有主人的羊只有在附近沒有主人或盟友單位時才會被敵人帶走。
+Config.Herds = { startSheep=4, neutralPairs=2, boars=2, claimRadius=14, checkInterval=0.4,
+ sheepRing={min=170,max=230}, boarRing={min=140,max=190} }
 -- 貿易車：每趟黃金 = 距離 × goldPerStud + 距離² × goldPerStudSquared（無條件捨去），盟友市集再加 allyBonus。
 -- 兩座市集中心距離小於 minDistance 時不能貿易。
 Config.Trade = { minDistance=160, goldPerStud=0.08, goldPerStudSquared=1/12000, allyBonus=0.25 }

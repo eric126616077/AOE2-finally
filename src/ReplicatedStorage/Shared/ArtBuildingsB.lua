@@ -389,4 +389,41 @@ B.Farm=function(model,kind,team,stage)
   block(model,"TeamTrim",V(1.4,.8,1.4),V(side*11,.8,11),team,M.Fabric)
  end
 end
+-- Palisade: a row of sharpened logs on an earth bank, lashed by two rails, one trim in the player color.
+B.Palisade=function(model,kind,team,stage)
+ block(model,"Foundation",V(8,.8,8),V(0,.4,0),earth,M.Ground)
+ for i=0,4 do
+  local x=-3.2+i*1.6
+  local h=7.6+(i%2)*.8
+  round(model,"Post",1.5,h,V(x,.8+h/2,0),i%2==0 and timber or cutWood,M.Wood)
+  local tip=block(model,"Post",V(1.1,1.2,1.1),V(x,.8+h+.45,0),cutWood,M.Wood,"WedgePart")
+  tip.CFrame*=CFrame.Angles(0,math.pi/4,0)
+ end
+ for _,y in ipairs({2.6,6}) do
+  block(model,"Beam",V(8,.45,.5),V(0,y,.8),plank,M.Wood)
+  block(model,"Beam",V(8,.45,.5),V(0,y,-.8),plank,M.Wood)
+ end
+ block(model,"TeamTrim",V(8,.4,.55),V(0,4.3,.85),team,M.Fabric)
+end
+-- Outpost: a tall timber watch post on four braced legs with a railed lookout and a signal fire.
+B.Outpost=function(model,kind,team,stage)
+ block(model,"Foundation",V(8,.6,8),V(0,.3,0),stone,M.Cobblestone)
+ for _,x in ipairs({-2.6,2.6}) do for _,z in ipairs({-2.6,2.6}) do
+  beam(model,"Post",V(x*1.15,.6,z*1.15),V(x*.75,13,z*.75),.8,timber,M.Wood)
+ end end
+ for _,y in ipairs({4.5,9}) do
+  for _,side in ipairs({-1,1}) do
+   block(model,"TimberBrace",V(5.6,.4,.4),V(0,y,side*2.3),cutWood,M.Wood)
+   block(model,"TimberBrace",V(.4,.4,5.6),V(side*2.3,y,0),cutWood,M.Wood)
+  end
+ end
+ block(model,"Walls",V(6.6,.6,6.6),V(0,13.2,0),plank,M.WoodPlanks)
+ for _,side in ipairs({-1,1}) do
+  block(model,"Beam",V(6.6,1.2,.35),V(0,14.1,side*3.1),cutWood,M.Wood)
+  block(model,"Beam",V(.35,1.2,6.6),V(side*3.1,14.1,0),cutWood,M.Wood)
+ end
+ round(model,"Brazier",1.8,.8,V(0,13.9,0),iron,M.Metal)
+ ball(model,"Fire",1.2,V(0,14.6,0),Color3.fromRGB(255,170,60),M.Neon)
+ flag(model,V(2.6,13.5,2.6),5,team)
+end
 return B

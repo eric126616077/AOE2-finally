@@ -218,7 +218,7 @@ for kind,data in pairs(Config.Units) do
  expect(value.attributes.OwnerId==player.UserId and value.attributes.OwnerName==player.DisplayName,"player unit ownership changed")
  unitCount+=1
 end
-expect(unitCount==15,"all current playable unit kinds were not checked")
+expect(unitCount==18,"all current playable unit kinds were not checked")
 local aiUnit=unitFlags("villager",Config.Units.villager,ai,Config.UnitCollision.profiles.villager)
 expect(aiUnit.attributes.OwnerId==-1 and aiUnit.attributes.OwnerName=="測試電腦","AI unit collision changed ownership")
 unitFlags("futureUnit",{class="futureClass",name="測試單位",hp=50},player,Config.UnitCollision.default)

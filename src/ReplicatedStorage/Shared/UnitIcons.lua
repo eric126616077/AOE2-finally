@@ -407,6 +407,43 @@ function painters.monk(canvas, team)
  ellipse(canvas, "CrookHand", 0.715, 0.58, 0.085, 0.09, P.skinLight)
 end
 
+function painters.scorpion(canvas, team)
+ -- A giant crossbow on a wheeled bed: bow arms in the player color, the long bolt ready to fly.
+ edgedLine(canvas, "CartBed", 0.14, 0.72, 0.86, 0.72, 0.09, P.woodLight)
+ edgedLine(canvas, "Stock", 0.22, 0.52, 0.8, 0.44, 0.07, P.wood)
+ edgedLine(canvas, "BowArm", 0.72, 0.46, 0.6, 0.18, 0.06, team)
+ edgedLine(canvas, "BowArm", 0.72, 0.46, 0.84, 0.74, 0.06, team)
+ line(canvas, "Bowstring", 0.6, 0.18, 0.36, 0.5, 0.02, P.light)
+ line(canvas, "Bowstring", 0.84, 0.74, 0.36, 0.5, 0.02, P.light)
+ edgedLine(canvas, "Bolt", 0.3, 0.5, 0.94, 0.42, 0.035, P.steelLight)
+ edgedLine(canvas, "Brace", 0.45, 0.7, 0.5, 0.5, 0.05, P.wood)
+ wheel(canvas, 0.17, 0.7, 0.2)
+ wheel(canvas, 0.6, 0.7, 0.2)
+end
+
+function painters.bombardCannon(canvas, team)
+ -- A banded iron barrel raised on a two-wheeled carriage; the carriage cheeks wear the player color.
+ edgedLine(canvas, "Trail", 0.14, 0.78, 0.5, 0.6, 0.08, P.woodLight)
+ edgedLine(canvas, "Barrel", 0.3, 0.52, 0.9, 0.3, 0.17, P.steelDark)
+ for i = 0, 2 do line(canvas, "Band", 0.42 + i * 0.16, 0.5 - i * 0.058, 0.42 + i * 0.16, 0.37 - i * 0.058, 0.035, P.gold) end
+ ellipse(canvas, "MuzzleEdge", 0.84, 0.22, 0.1, 0.16, P.outline)
+ rect(canvas, "Cheek", 0.36, 0.5, 0.2, 0.16, team, nil, 0.1)
+ wheel(canvas, 0.3, 0.56, 0.3)
+end
+
+function painters.sheep(canvas, team)
+ -- A fluffy white sheep with a dark face and a collar in the player color.
+ for _, leg in ipairs({0.3, 0.42, 0.6, 0.7}) do edgedLine(canvas, "Leg", leg, 0.62, leg, 0.8, 0.045, P.mane) end
+ ellipse(canvas, "WoolEdge", 0.2, 0.3, 0.6, 0.4, P.outline)
+ ellipse(canvas, "Wool", 0.22, 0.32, 0.56, 0.36, P.light)
+ ellipse(canvas, "WoolTuft", 0.3, 0.26, 0.24, 0.18, P.light)
+ ellipse(canvas, "WoolTuft", 0.5, 0.25, 0.22, 0.18, P.light)
+ rect(canvas, "Collar", 0.66, 0.42, 0.07, 0.16, team, nil, 0.2)
+ ellipse(canvas, "HeadEdge", 0.68, 0.3, 0.2, 0.26, P.outline)
+ ellipse(canvas, "Head", 0.695, 0.315, 0.17, 0.23, P.mane)
+ ellipse(canvas, "Eye", 0.78, 0.38, 0.035, 0.035, P.light)
+end
+
 local function unknown(canvas, team)
  shoulders(canvas, 0.235, 0.57, 0.53, 0.31, P.steelDark, team)
  ellipse(canvas, "HeadEdge", 0.345, 0.255, 0.31, 0.31, P.outline)

@@ -154,4 +154,47 @@ B.Relic=function(model,kind,team,stage)
  block(model,"Finial",Vector3.new(.2,.9,.2),Vector3.new(0,3.5,0),giltDark,Enum.Material.Metal)
  block(model,"Finial",Vector3.new(.7,.2,.2),Vector3.new(0,3.65,0),giltDark,Enum.Material.Metal)
 end
+B.Boar=function(model,kind,team,stage)
+ -- A dark bristly boar with pale tusks; once killed (any later stage) it lies on its side and shrinks.
+ local hide,bristle,tusk,snout=Color3.fromRGB(86,64,52),Color3.fromRGB(54,40,34),Color3.fromRGB(236,226,200),Color3.fromRGB(150,104,92)
+ if stage<=0 then
+  disc(model,"Body",2.6,4,Vector3.new(0,2.3,0),hide)
+  ball(model,"Body",2.7,Vector3.new(0,2.4,-1.6),hide)
+  ball(model,"Rump",2.3,Vector3.new(0,2.2,1.8),hide)
+  block(model,"Bristle",Vector3.new(.5,.7,3.6),Vector3.new(0,3.75,-.4),bristle)
+  for _,x in ipairs({-.65,.65}) do for _,z in ipairs({-1.4,1.6}) do
+   block(model,"Leg",Vector3.new(.45,1.3,.5),Vector3.new(x,.65,z),bristle)
+  end end
+  block(model,"Head",Vector3.new(1.4,1.3,1.5),Vector3.new(0,2.3,-3),hide)
+  block(model,"Snout",Vector3.new(.9,.7,.5),Vector3.new(0,2,-3.9),snout)
+  for _,side in ipairs({-1,1}) do
+   block(model,"Tusk",Vector3.new(.16,.6,.16),Vector3.new(side*.5,2.3,-3.8),tusk).CFrame*=CFrame.Angles(.4,0,side*.3)
+   block(model,"Ear",Vector3.new(.2,.5,.4),Vector3.new(side*.55,3.1,-2.6),bristle)
+  end
+ else
+  local shrink=stage>=2 and .75 or 1
+  disc(model,"Body",2.4*shrink,3.8*shrink,Vector3.new(0,1.2*shrink,0),hide)
+  ball(model,"Rump",2*shrink,Vector3.new(0,1.1*shrink,1.7*shrink),hide)
+  block(model,"Head",Vector3.new(1.3,1.2,1.4)*shrink,Vector3.new(-.2,.65,-2.7*shrink),hide)
+  for _,z in ipairs({-1.3,1.4}) do block(model,"Leg",Vector3.new(1.3,.4,.45)*shrink,Vector3.new(1.5*shrink,.4,z*shrink),bristle) end
+  if stage<2 then block(model,"Tusk",Vector3.new(.16,.16,.6),Vector3.new(-.4,.7,-3.5),tusk) end
+ end
+end
+B.Sheep=function(model,kind,team,stage)
+ -- A neutral standing sheep (not yet claimed), or a slaughtered fleece lying on the grass.
+ local wool,face=Color3.fromRGB(240,236,224),Color3.fromRGB(52,46,42)
+ if stage<=0 then
+  ball(model,"Body",2.6,Vector3.new(0,2.1,.3),wool,Enum.Material.Fabric)
+  ball(model,"Body",2.2,Vector3.new(0,2.3,-.8),wool,Enum.Material.Fabric)
+  for _,x in ipairs({-.6,.6}) do for _,z in ipairs({-.9,1}) do
+   block(model,"Leg",Vector3.new(.32,1.3,.32),Vector3.new(x,.65,z),face)
+  end end
+  block(model,"Head",Vector3.new(.8,.9,1.1),Vector3.new(0,2.6,-2),face)
+ else
+  local shrink=stage>=2 and .7 or 1
+  disc(model,"Body",2.4*shrink,2.8*shrink,Vector3.new(0,1*shrink,0),wool:Lerp(face,.08),Enum.Material.Fabric)
+  block(model,"Head",Vector3.new(.8,.8,1)*shrink,Vector3.new(.2,.5,-1.9*shrink),face)
+  for _,z in ipairs({-.8,.9}) do block(model,"Leg",Vector3.new(1.2,.3,.3)*shrink,Vector3.new(1.3*shrink,.35,z*shrink),face) end
+ end
+end
 return B

@@ -464,4 +464,49 @@ function B.trebuchet(model,kind,team,stage)
  block(model,"Sling",V(1.4,.5,1.4),tip+V(0,-3.5,-.45),team,Fabric)
  ball(model,"TrebuchetArm",1.1,tip+V(0,-3.1,-.45),stone,Enum.Material.Slate)
 end
+-- Scorpion: a giant crossbow on a low wheeled bed; the bow arms carry the player color.
+function B.scorpion(model,kind,team,stage)
+ wheels(model,2.6,2.4,2.2)
+ block(model,"Chassis",V(4.2,.5,6.6),V(0,1.8,0),cutWood,Planks)
+ for _,z in ipairs({-1.8,1.8}) do beam(model,"CatapultPost",V(0,2,z),V(0,3.6,0),.55,timber) end
+ -- Stock along -Z, the bow across it at the front, the loaded bolt in the groove.
+ block(model,"Chassis",V(.9,.6,6.2),V(0,3.9,-.4),timber)
+ for _,side in ipairs({-1,1}) do
+  local arm=block(model,"SiegeBanner",V(3.2,.45,.45),V(side*1.7,4,-3.1),team,Fabric)
+  arm.CFrame*=CFrame.Angles(0,side*-.35,0)
+  block(model,"Chassis",V(.18,.18,3.2),V(side*1.6,4.05,-1.6),straw).CFrame*=CFrame.Angles(0,side*.5,0)
+ end
+ block(model,"Chassis",V(.25,.25,5.4),V(0,4.35,-1.2),cutWood)
+ block(model,"Chassis",V(.4,.4,.6),V(0,4.35,-4.1),iron,Metal)
+ plate(model,"Chassis",.9,.4,V(0,3.9,2.6),iron,Metal)
+end
+-- Bombard cannon: an iron barrel banded in brass on a two-wheeled carriage with a trail.
+function B.bombardCannon(model,kind,team,stage)
+ for _,side in ipairs({-1,1}) do
+  plate(model,"Wheel",3.2,.6,V(side*2.2,1.6,.4),timber,Planks)
+  plate(model,"Wheel",1.1,.8,V(side*2.2,1.6,.4),iron,Metal)
+ end
+ block(model,"Chassis",V(3.8,.5,.5),V(0,1.6,.4),iron,Metal)
+ block(model,"Chassis",V(1.8,.7,6),V(0,1.5,2.6),cutWood,Planks).CFrame*=CFrame.Angles(-.18,0,0)
+ for _,side in ipairs({-1,1}) do block(model,"SiegeBanner",V(.2,1.3,2.4),V(side*1,2.4,.8),team,Fabric) end
+ local barrel=disc(model,"Chassis",1.9,6.2,V(0,3,-1.4),Color3.fromRGB(70,72,74),Metal)
+ barrel.CFrame*=CFrame.Angles(.12,0,0)
+ for _,z in ipairs({-4.2,-1.4,1.2}) do disc(model,"Chassis",2.2,.35,V(0,3+(-1.4-z)*-.12,z),gold,Metal).CFrame*=CFrame.Angles(.12,0,0) end
+ disc(model,"Chassis",1.1,.3,V(0,3.45,-4.55),dark).CFrame*=CFrame.Angles(.12,0,0)
+end
+-- Sheep: a woolly round body on four short legs, dark face, a collar in the player color.
+-- Legs and body use the horse animation groups so a walking flock trots.
+function B.sheep(model,kind,team,stage)
+ local wool,face=Color3.fromRGB(240,236,224),Color3.fromRGB(52,46,42)
+ ball(model,"HorseBody",2.6,V(0,2.1,.3),wool,Fabric)
+ ball(model,"HorseBody",2.2,V(0,2.3,-.8),wool,Fabric)
+ ball(model,"HorseBody",1.6,V(0,2.9,.6),wool:Lerp(Color3.new(1,1,1),.4),Fabric)
+ for _,x in ipairs({-.6,.6}) do for _,z in ipairs({-.9,1}) do
+  block(model,"HorseLeg",V(.32,1.3,.32),V(x,.65,z),face)
+ end end
+ block(model,"HorseHead",V(.8,.9,1.1),V(0,2.6,-2),face)
+ for _,side in ipairs({-1,1}) do block(model,"HorseHead",V(.5,.18,.3),V(side*.55,2.85,-1.8),face) end
+ tint(block(model,"TeamPatch",V(1.1,.3,.5),V(0,2.3,-1.55),team,Fabric),true)
+ ball(model,"HorseBody",.6,V(0,2.4,1.6),wool,Fabric)
+end
 return {builders=B,tool=villagerTool,carry=carryLoad,toolKinds=toolKinds,carryKinds=carryKinds}

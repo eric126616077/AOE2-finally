@@ -29,9 +29,9 @@ local skin=Color3.fromRGB(230,190,146)
 local leather=Color3.fromRGB(98,68,44)
 local buildingKinds={Castle=true,TownCenter=true,House=true,Barracks=true,ArcheryRange=true,Stable=true,
  SiegeWorkshop=true,Blacksmith=true,Market=true,University=true,Monastery=true,Mill=true,LumberCamp=true,
- MiningCamp=true,Tower=true,Wall=true,Gate=true,Wonder=true,Farm=true}
+ MiningCamp=true,Tower=true,Wall=true,Gate=true,Wonder=true,Farm=true,Palisade=true,Outpost=true}
 local unitKinds={villager=true,infantry=true,spearman=true,archer=true,skirmisher=true,scout=true,
- cavalry=true,monk=true,ram=true,mangonel=true,trebuchet=true,cavalryArcher=true,camel=true,handCannoneer=true,tradeCart=true}
+ cavalry=true,monk=true,ram=true,mangonel=true,trebuchet=true,cavalryArcher=true,camel=true,handCannoneer=true,tradeCart=true,scorpion=true,bombardCannon=true,sheep=true}
 local teamColorNames={Roof=true,Banner=true,Flag=true,Tabard=true,Shield=true,Saddle=true,Ridge=true,
  Awning=true,CanvasSail=true,TeamTrim=true,Cuff=true,TeamPatch=true,Bullseye=true,Shutter=true,
  Sling=true,HatBand=true,HorseCloth=true,SiegeBanner=true}

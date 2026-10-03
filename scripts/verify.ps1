@@ -146,6 +146,10 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     Write-Utf8NoBom build/content-tests.luau $contentBundle
     & $runtime build/content-tests.luau
     if ($LASTEXITCODE -ne 0) { throw 'Unit upgrade / new unit / hunting content tests failed.' }
+    $elementsTests = Get-Content tests/aoe2_elements.spec.lua -Raw
+    Write-Utf8NoBom build/aoe2-elements-tests.luau ($shim + "`nlocal Config=(function()`n" + $config + "`nend)()`n" + $elementsTests)
+    & $runtime build/aoe2-elements-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Market / stance / herd / fog-of-war rule tests failed.' }
     & $runtime tests/monk.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Monk conversion / heal / faith tests failed.' }
     & $runtime tests/garrison.spec.lua

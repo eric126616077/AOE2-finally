@@ -44,10 +44,10 @@ expect(#Config.BuildPages==3,"villager construction requires exactly three class
 local pageKeys={"economy","military","defense"}
 local pageNames={"經濟","軍事","防禦"}
 local expected={
- [1]={"House,Mill,LumberCamp,MiningCamp,Farm,Market*","Barracks,ArcheryRange*,Stable*,Blacksmith*","Tower*,Wall*,Gate*"},
- [2]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter*","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop*","Tower,Wall,Gate,Castle*,Monastery*,University*"},
- [3]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop","Tower,Wall,Gate,Castle,Monastery,University,Wonder*"},
- [4]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop","Tower,Wall,Gate,Castle,Monastery,University,Wonder"},
+ [1]={"House,Mill,LumberCamp,MiningCamp,Farm,Market*","Barracks,ArcheryRange*,Stable*,Blacksmith*","Palisade,Outpost,Tower*,Wall*,Gate*"},
+ [2]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter*","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop*","Palisade,Outpost,Tower,Wall,Gate,Castle*,Monastery*,University*"},
+ [3]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop","Palisade,Outpost,Tower,Wall,Gate,Castle,Monastery,University,Wonder*"},
+ [4]={"House,Mill,LumberCamp,MiningCamp,Farm,Market,TownCenter","Barracks,ArcheryRange,Stable,Blacksmith,SiegeWorkshop","Palisade,Outpost,Tower,Wall,Gate,Castle,Monastery,University,Wonder"},
 }
 for age=1,4 do
  local visible={}
