@@ -2,10 +2,12 @@
 local RunService=game:GetService("RunService")
 local Players=game:GetService("Players")
 local TweenService=game:GetService("TweenService")
-local Debris=game:GetService("Debris")
 local Config=require(game.ReplicatedStorage.GameData.GameConfig)
 local Motion=require(game.ReplicatedStorage.Shared.MotionRules)
 local UnitView=require(game.ReplicatedStorage.Shared.ClientUnitView)
+-- 箭與標槍落地後的停留時間與數量上限。
+local Remains=require(game.ReplicatedStorage.Shared.RemainsRules)
+local EffectPool=require(game.ReplicatedStorage.Shared.EffectPool)
 -- 戰爭迷霧中看不到的敵方單位不顯示血條與攻擊特效。
 local FogView=require(game.ReplicatedStorage.Shared.FogView)
 local player=Players.LocalPlayer
@@ -18,12 +20,15 @@ local visibleUnits={}
 local diagnostics={rootSamples=0,partWrites=0,totalPartWrites=0}
 local motionProbe
 local reducedMotion=player:GetAttribute("ReducedMotion")==true
-local activeEffects=0
 local MAX_EFFECTS=80
 local effects=Instance.new("Folder")
 effects.Name="RTSClientEffects"
 effects.Parent=workspace
-local effectKinds={}
+-- 插在地上／建築上的箭另外放：它們停留數秒，不屬於「暫時特效」，也不再叫 ArrowEffect。
+local stuckFolder=Instance.new("Folder")
+stuckFolder.Name="RTSStuckArrows"
+stuckFolder.Parent=workspace
+local stuckArrows={}
 
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
@@ -37,19 +42,6 @@ local function onScreen(point)
  local screen,visible=camera:WorldToViewportPoint(point)
  return visible and screen.Z>0 and screen.Z<600
 end
-local function keepEffect(effect,moving,lifetime)
- if activeEffects>=MAX_EFFECTS then effect:Destroy(); return false end
- activeEffects+=1
- effectKinds[effect]=moving
- effect.Destroying:Once(function()
-  activeEffects-=1
-  effectKinds[effect]=nil
-  projectiles[effect]=nil
- end)
- effect.Parent=effects
- Debris:AddItem(effect,lifetime)
- return true
-end
 local function effectPart(name,size,color,material)
  local part=Instance.new("Part")
  part.Name,part.Size,part.Color=name,size,color
@@ -59,28 +51,92 @@ local function effectPart(name,size,color,material)
  part.CastShadow=false
  return part
 end
+-- 特效物件池。使用中的物件放在 RTSClientEffects（保持原本名稱，ChildAdded 照常觸發）；
+-- 歸還後離開 workspace（Parent=nil）等待重用，所以閒置時資料夾仍是空的。
+local WOOD,STEEL,FEATHER=Color3.fromRGB(150,112,70),Color3.fromRGB(196,202,204),Color3.fromRGB(236,232,220)
+local function addPiece(record,size,offset,color,material)
+ local piece=effectPart("Piece",size,color,material)
+ piece.Parent=record.root
+ table.insert(record.extras,{part=piece,offset=offset})
+end
+local pool=EffectPool.new({limit=MAX_EFFECTS+Remains.MaxStuck,maxIdle=48,
+ build=function(key)
+  local record={extras={},tweens={}}
+  if key=="highlight" then
+   record.root=Instance.new("Highlight")
+   record.root.DepthMode=Enum.HighlightDepthMode.Occluded
+  elseif key=="arrow" or key=="javelin" then
+   -- A real shaft with an iron head and fletching, not a flash. -Z is the direction of travel.
+   local javelin=key=="javelin"
+   local length,thickness=javelin and 3.8 or 2.6,javelin and .2 or .14
+   record.root=effectPart("ArrowEffect",Vector3.new(thickness,thickness,length),WOOD,Enum.Material.Wood)
+   addPiece(record,Vector3.new(.3,.3,javelin and .8 or .5),CFrame.new(0,0,-length/2-.2),STEEL,Enum.Material.Metal)
+   if not javelin then
+    addPiece(record,Vector3.new(.5,.06,.55),CFrame.new(0,0,length/2-.3),FEATHER)
+    addPiece(record,Vector3.new(.06,.5,.55),CFrame.new(0,0,length/2-.3),FEATHER)
+   end
+  else
+   record.root=effectPart("Effect",Vector3.one,Color3.new(1,1,1))
+   if key=="ball" then record.root.Shape=Enum.PartType.Ball end
+  end
+  return record
+ end,
+ hide=function(record)
+  for _,tween in ipairs(record.tweens) do tween:Cancel() end
+  table.clear(record.tweens)
+  projectiles[record.root]=nil
+  record.moving=nil
+  if record.stuck then
+   record.stuck=nil
+   if record.anchorConnection then record.anchorConnection:Disconnect(); record.anchorConnection=nil end
+   local index=table.find(stuckArrows,record)
+   if index then table.remove(stuckArrows,index) end
+  end
+  if record.root:IsA("Highlight") then record.root.Adornee=nil end
+  for _,extra in ipairs(record.extras) do extra.part.Transparency=0 end
+  record.root.Parent=nil
+ end,
+ destroy=function(record) record.root:Destroy() end})
+local function effectsBusy() return pool.count-#stuckArrows>=MAX_EFFECTS end
+-- 取出一個物件並在 lifetime 秒後歸還；達到上限時回傳 nil，這次特效照舊略過。
+local function useEffect(key,moving,lifetime)
+ if effectsBusy() then return nil end
+ local record,lease=pool:Acquire(key)
+ if not record then return nil end
+ record.moving=moving
+ task.delay(lifetime,function() pool:Release(record,lease) end)
+ return record
+end
+local function playTween(record,object,info,goal)
+ local tween=TweenService:Create(object,info,goal)
+ table.insert(record.tweens,tween)
+ tween:Play()
+end
+local function setPart(part,name,size,color,material,transparency,frame)
+ part.Name,part.Size,part.Color,part.Material,part.Transparency,part.CFrame=name,size,color,material,transparency,frame
+end
+local QUICK=TweenInfo.new(.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out)
 local function flash(model,name,color)
  local root=model.PrimaryPart
- if not root or not onScreen(root.Position) or activeEffects>=MAX_EFFECTS then return end
- local outline=Instance.new("Highlight")
+ if not root or not onScreen(root.Position) then return end
+ local record=useEffect("highlight",false,.25)
+ if not record then return end
+ local outline=record.root
  outline.Name=name
  outline.Adornee=model
- outline.DepthMode=Enum.HighlightDepthMode.Occluded
  outline.FillColor,outline.OutlineColor=color,color
  outline.FillTransparency,outline.OutlineTransparency=.92,.25
- if not keepEffect(outline,false,.25) then return end
- TweenService:Create(outline,TweenInfo.new(.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-  {FillTransparency=1,OutlineTransparency=1}):Play()
+ outline.Parent=effects
+ playTween(record,outline,QUICK,{FillTransparency=1,OutlineTransparency=1})
 end
 local function impact(point,color,siege)
  if player:GetAttribute("ReducedMotion")==true or not onScreen(point) then return end
- local part=effectPart("ImpactEffect",siege and Vector3.new(2,.3,2) or Vector3.new(.45,.45,.45),color)
- part.Shape=Enum.PartType.Ball
- part.Position=point
- part.Transparency=.25
- if not keepEffect(part,true,.25) then return end
- TweenService:Create(part,TweenInfo.new(.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-  {Transparency=1}):Play()
+ local record=useEffect("ball",true,.25)
+ if not record then return end
+ local part=record.root
+ setPart(part,"ImpactEffect",siege and Vector3.new(2,.3,2) or Vector3.new(.45,.45,.45),color,Enum.Material.SmoothPlastic,.25,CFrame.new(point))
+ part.Parent=effects
+ playTween(record,part,QUICK,{Transparency=1})
 end
 -- Overhead health bar: appears when a unit or building is hit, follows later HP changes and
 -- hides a few seconds after the last hit. Local display only; HP stays server authoritative.
@@ -164,14 +220,8 @@ local function meleeLunge(model,kind)
  local dx,dz=contact.X-from.X,contact.Z-from.Z
  return math.clamp(math.sqrt(dx*dx+dz*dz)-reach,0,MAX_LUNGE)
 end
--- Extra pieces ride the main projectile part: -Z is the direction of travel.
-local function projectilePiece(parent,extras,size,offset,color,material)
- local piece=effectPart("Piece",size,color,material)
- piece.Parent=parent
- table.insert(extras,{part=piece,offset=offset})
-end
 local function attackEffect(model)
- if player:GetAttribute("ReducedMotion")==true or activeEffects>=MAX_EFFECTS then return end
+ if player:GetAttribute("ReducedMotion")==true or effectsBusy() then return end
  local root,target=model.PrimaryPart,model:GetAttribute("AttackPosition")
  local unitKind,buildingKind=model:GetAttribute("UnitType"),model:GetAttribute("BuildingType")
  local data=Config.Units[unitKind] or Config.Buildings[buildingKind]
@@ -195,55 +245,125 @@ local function attackEffect(model)
   return
  end
  local name=stone and "StoneEffect" or javelin and "JavelinEffect" or bullet and "BulletEffect" or "ArrowEffect"
- local wood,steel=Color3.fromRGB(150,112,70),Color3.fromRGB(196,202,204)
  local color=stone and Color3.fromRGB(165,162,145) or Color3.fromRGB(231,199,134)
  -- 駐軍讓防禦建築一次射出多支箭：每支箭從稍微錯開的位置出發，落點相同。
  local volley=buildingKind and math.clamp(tonumber(model:GetAttribute("AttackVolley")) or 1,1,16) or 1
  local side=direction:Cross(Vector3.yAxis)
  side=side.Magnitude>.01 and side.Unit or Vector3.xAxis
  local origin=start
+ local duration=finite(flight) and math.clamp(flight,.05,3) or (stone and .5 or .2)
  for shot=1,volley do
- if shot>1 and activeEffects>=MAX_EFFECTS then return end
  start=origin+side*((shot-(volley+1)/2)*1.4)+Vector3.new(0,((shot*7)%5-2)*.35,0)
- local extras={}
- local part
+ local frame=CFrame.lookAt(start,finish)
+ local record=useEffect(stone and "ball" or bullet and "block" or javelin and "javelin" or "arrow",true,duration+.25)
+ if not record then return end
+ local part=record.root
  if stone then
   local diameter=unitKind=="trebuchet" and 2.3 or 1.7
-  part=effectPart(name,Vector3.new(diameter,diameter,diameter),color,Enum.Material.Slate)
-  part.Shape=Enum.PartType.Ball
+  setPart(part,name,Vector3.new(diameter,diameter,diameter),color,Enum.Material.Slate,0,frame)
  elseif bullet then
   -- Lead ball with a short bright tracer; a puff of powder smoke hangs at the muzzle.
-  part=effectPart(name,Vector3.new(.35,.35,1.6),Color3.fromRGB(255,214,140),Enum.Material.Neon)
-  if shot==1 and activeEffects<MAX_EFFECTS then
-   local smoke=effectPart("MuzzleSmoke",Vector3.new(1.4,1.4,1.4),Color3.fromRGB(214,210,200))
-   smoke.Shape=Enum.PartType.Ball
-   smoke.Transparency=.35
-   smoke.Position=start
-   if keepEffect(smoke,true,.6) then
-    TweenService:Create(smoke,TweenInfo.new(.55,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-     {Size=Vector3.new(3.4,3.4,3.4),Position=start+Vector3.new(0,1.4,0),Transparency=1}):Play()
-   end
+  setPart(part,name,Vector3.new(.35,.35,1.6),Color3.fromRGB(255,214,140),Enum.Material.Neon,0,frame)
+  local smoke=shot==1 and useEffect("ball",true,.6)
+  if smoke then
+   setPart(smoke.root,"MuzzleSmoke",Vector3.new(1.4,1.4,1.4),Color3.fromRGB(214,210,200),Enum.Material.SmoothPlastic,.35,CFrame.new(start))
+   smoke.root.Parent=effects
+   playTween(smoke,smoke.root,TweenInfo.new(.55,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+    {Size=Vector3.new(3.4,3.4,3.4),CFrame=CFrame.new(start+Vector3.new(0,1.4,0)),Transparency=1})
   end
  else
-  -- A real shaft with an iron head and fletching, not a flash.
-  local length=javelin and 3.8 or 2.6
-  local thickness=javelin and .2 or .14
-  part=effectPart(name,Vector3.new(thickness,thickness,length),wood,Enum.Material.Wood)
-  projectilePiece(part,extras,Vector3.new(.3,.3,javelin and .8 or .5),CFrame.new(0,0,-length/2-.2),steel,Enum.Material.Metal)
-  if not javelin then
-   local feather=Color3.fromRGB(236,232,220)
-   projectilePiece(part,extras,Vector3.new(.5,.06,.55),CFrame.new(0,0,length/2-.3),feather)
-   projectilePiece(part,extras,Vector3.new(.06,.5,.55),CFrame.new(0,0,length/2-.3),feather)
-  end
+  part.Name,part.Transparency,part.CFrame=name,0,frame
  end
- part.CFrame=CFrame.lookAt(start,finish)
- for _,extra in ipairs(extras) do extra.part.CFrame=part.CFrame*extra.offset end
- local duration=finite(flight) and math.clamp(flight,.05,3) or (stone and .5 or .2)
- if not keepEffect(part,true,duration+.25) then return end
- projectiles[part]={start=start,finish=finish,created=os.clock(),duration=duration,extras=extras,
+ for _,extra in ipairs(record.extras) do extra.part.CFrame=frame*extra.offset end
+ part.Parent=effects
+ projectiles[part]={record=record,start=start,finish=finish,created=os.clock(),duration=duration,extras=record.extras,
   arc=stone and math.min(22,direction.Magnitude*.2) or bullet and 0 or math.min(javelin and 5 or 6,direction.Magnitude*.08),
-  color=color,siege=stone}
+  color=color,siege=stone,kind=kind}
  end
+end
+-- 沒射中單位的箭與標槍插在建築或地面上，停留後淡出；命中單位照舊消失並閃一下。
+local unitOverlap=OverlapParams.new()
+unitOverlap.FilterType=Enum.RaycastFilterType.Include
+unitOverlap.FilterDescendantsInstances={units}
+local buildingRay=RaycastParams.new()
+buildingRay.FilterType=Enum.RaycastFilterType.Include
+buildingRay.FilterDescendantsInstances={buildings}
+local function clearStuck()
+ for index=#stuckArrows,1,-1 do pool:Release(stuckArrows[index]) end
+end
+-- 飛行中的箭直接換手成插著的箭（同一組零件），舊的到期計時器因租約更新而失效。
+local function stick(record,frame,building)
+ local lease=pool:Renew(record)
+ if not lease then return end
+ projectiles[record.root]=nil
+ record.moving,record.stuck=false,true
+ record.root.Name="StuckArrow"
+ record.root.CFrame=frame
+ for _,extra in ipairs(record.extras) do extra.part.CFrame=frame*extra.offset end
+ record.root.Parent=stuckFolder
+ table.insert(stuckArrows,record)
+ while #stuckArrows>Remains.MaxStuck do pool:Release(stuckArrows[1]) end
+ -- 插著的建築被移除時一起消失，不會懸在半空。
+ if building then
+  record.anchorConnection=building.AncestryChanged:Connect(function()
+   if not building:IsDescendantOf(buildings) then pool:Release(record,lease) end
+  end)
+ end
+ task.delay(Remains.StuckSeconds-Remains.StuckFadeSeconds,function()
+  if record.lease~=lease then return end
+  local fade=TweenInfo.new(Remains.StuckFadeSeconds)
+  playTween(record,record.root,fade,{Transparency=1})
+  for _,extra in ipairs(record.extras) do playTween(record,extra.part,fade,{Transparency=1}) end
+ end)
+ task.delay(Remains.StuckSeconds,function() pool:Release(record,lease) end)
+end
+-- 建築的占地是透明、可查詢的整塊方盒：穿過透明零件繼續找，直到碰到看得見的牆面。
+local function buildingSurface(from,direction,distance)
+ for _=1,4 do
+  local result=workspace:Raycast(from,direction*distance,buildingRay)
+  if not result then return nil end
+  if result.Instance.Transparency<1 then return result end
+  distance-=(result.Position-from).Magnitude+.05
+  if distance<=0 then return nil end
+  from=result.Position+direction*.05
+ end
+ return nil
+end
+local function land(item,tangent)
+ local record=item.record
+ local part=record.root
+ local landing="vanish"
+ local direction=tangent.Magnitude>.001 and tangent.Unit or (item.finish-item.start).Unit
+ local wall
+ if not reducedMotion and (item.kind=="arrow" or item.kind=="javelin") then
+  local hitUnit=#workspace:GetPartBoundsInRadius(item.finish,2.5,unitOverlap)>0
+  -- 從飛行方向後方往前找建築的可見表面；占地等透明零件不算。
+  wall=buildingSurface(item.finish-direction*12,direction,16)
+  landing=Remains.ArrowLanding(item.kind,hitUnit,wall~=nil)
+ end
+ if landing=="vanish" then
+  pool:Release(record)
+  impact(item.finish,item.color,item.siege)
+  return
+ end
+ local length=part.Size.Z
+ local tip,pointing
+ if landing=="lodge" then
+  tip,pointing=wall.Position,direction
+ else
+  local flat=Vector3.new(direction.X,0,direction.Z)
+  flat=flat.Magnitude>.01 and flat.Unit or Vector3.zAxis
+  pointing=flat*math.cos(Remains.StuckPitch)-Vector3.yAxis*math.sin(Remains.StuckPitch)
+  tip=Vector3.new(item.finish.X,Config.Map.GroundY,item.finish.Z)+flat*1.5
+ end
+ -- 箭頭在前方（-Z）；埋入 StuckBury 比例的長度。
+ local center=tip-pointing*(length*(.5-Remains.StuckBury))
+ local model
+ if wall then
+  model=wall.Instance
+  while model and model.Parent~=buildings do model=model.Parent end
+ end
+ stick(record,CFrame.lookAt(center,center+pointing),model)
 end
 local workColors={
  food=Color3.fromRGB(164,190,109),wood=Color3.fromRGB(171,127,77),
@@ -258,11 +378,13 @@ local function workEffect(model,observer)
  observer.lastWorkEffect=now
  local color=workColors[model:GetAttribute("WorkKind")]
  if not color then return end
- local part=effectPart("WorkEffect",Vector3.new(.22,.22,.22),color)
- part.Position=(UnitView.GetFrame(model)*CFrame.new(1.6,-1,-2)).Position
- if not keepEffect(part,true,.25) then return end
- TweenService:Create(part,TweenInfo.new(.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-  {Position=part.Position+Vector3.new(.15,.4,0),Transparency=1}):Play()
+ local record=useEffect("block",true,.25)
+ if not record then return end
+ local part=record.root
+ local point=(UnitView.GetFrame(model)*CFrame.new(1.6,-1,-2)).Position
+ setPart(part,"WorkEffect",Vector3.new(.22,.22,.22),color,Enum.Material.SmoothPlastic,0,CFrame.new(point))
+ part.Parent=effects
+ playTween(record,part,QUICK,{CFrame=CFrame.new(point+Vector3.new(.15,.4,0)),Transparency=1})
 end
 
 -- Animate known fallback groups. Other appearance parts follow the same frame at rest.
@@ -330,6 +452,14 @@ local function refresh(model)
     rootFrame=frame,viewFrame=frame,phase=0,gait=0,lastMove=-math.huge,wasActive=false,dirty=true,poseDirty=true,
     idleNext=0,idleSeed=math.random()*math.pi*2,idleClock=0}
    tracked[model]=item
+   -- 剛訓練完成或離開駐軍：畫面上從建築邊緣走到出生點。伺服器位置不變。
+   local spawnFrom,spawnAt=model:GetAttribute("SpawnFrom"),model:GetAttribute("SpawnAt")
+   if not reducedMotion and finitePosition(spawnFrom) and finite(spawnAt) and workspace:GetServerTimeNow()-spawnAt<Motion.SpawnFresh then
+    local offset=Vector3.new(spawnFrom.X-frame.X,0,spawnFrom.Z-frame.Z)
+    local observer=observers[model]
+    local duration=Motion.SpawnDuration(offset.Magnitude,observer and observer.speed)
+    if duration>0 then item.spawn={offset=offset,start=os.clock(),duration=duration} end
+   end
    diagnostics.rootSamples+=1
    item.rootConnection=root:GetPropertyChangedSignal("CFrame"):Connect(function()
     if tracked[model]~=item then return end
@@ -561,22 +691,32 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
  local now=os.clock()
  local reduced=reducedMotion
  for part,item in pairs(projectiles) do
-  if reduced then part:Destroy(); continue end
+  if reduced then pool:Release(item.record); continue end
   local t=math.clamp((now-item.created)/item.duration,0,1)
   local point=item.start:Lerp(item.finish,t)+Vector3.new(0,4*item.arc*t*(1-t),0)
   local tangent=item.finish-item.start+Vector3.new(0,4*item.arc*(1-2*t),0)
   if tangent.Magnitude<.001 then tangent=item.finish-item.start end
   part.CFrame=CFrame.lookAt(point,point+tangent)
   for _,extra in ipairs(item.extras) do extra.part.CFrame=part.CFrame*extra.offset end
-  if t>=1 then
-   part:Destroy()
-   impact(item.finish,item.color,item.siege)
-  end
+  if t>=1 then land(item,tangent) end
  end
  for model,item in pairs(visibleUnits) do
   if model.Parent~=units or not item.root.Parent then untrack(model); continue end
   local before,after,alpha=Motion.Sample(item.timeline,now)
   local frame=before==after and before or before:Lerp(after,alpha)
+  local spawning=false
+  if item.spawn then
+   local remaining=Motion.SpawnRemaining(now-item.spawn.start,item.spawn.duration)
+   if remaining<=0 or reduced then item.spawn=nil
+   else
+    spawning=true
+    local offset=item.spawn.offset
+    local position=frame.Position+offset*remaining
+    local walk=CFrame.lookAt(position,position-offset)
+    -- 走出門時面向外，最後一段轉回伺服器的朝向。
+    frame=remaining>.25 and walk or walk:Lerp(CFrame.new(position)*frame.Rotation,1-remaining/.25)
+   end
+  end
   local changed=frame~=item.viewFrame
   local observer=observers[model]
   local kind=observer and observer.kind
@@ -591,7 +731,7 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
   UnitView.SetFrame(model,frame)
   local animation=observer and observer.animation
   -- Hold between replicated movement samples; blocked / idle units stop their gait.
-  local walking=animation=="Walk" and now-item.lastMove<.2
+  local walking=(animation=="Walk" and now-item.lastMove<.2) or spawning
   -- A melee swing peaks exactly when the server resolves the hit (Config.Combat.windup).
   local attackTime=(kind=="mangonel" or kind=="trebuchet") and .5 or 2*(Config.Combat.windup[kind] or Config.Combat.windup.default)
   local elapsed=observer and now-observer.lastAttack or math.huge
@@ -646,7 +786,8 @@ end)
 local reducedConnection=player:GetAttributeChangedSignal("ReducedMotion"):Connect(function()
  reducedMotion=player:GetAttribute("ReducedMotion")==true
  if not reducedMotion then return end
- for effect,moving in pairs(effectKinds) do if moving then effect:Destroy() end end
+ pool:ReleaseWhere(function(record) return record.moving==true end)
+ clearStuck()
 end)
 if RunService:IsStudio() then
  -- Read the real LocalScript's cache; Command Bar ModuleScript require caches are separate.
@@ -659,6 +800,7 @@ if RunService:IsStudio() then
   local result={ready=script:GetAttribute("RTSMotionReady")==true,
    stats={tracked=count,visible=visible,detailed=details,rootSamples=diagnostics.rootSamples,
     partWrites=diagnostics.partWrites,totalPartWrites=diagnostics.totalPartWrites,
+    effectsActive=pool.count,effectsIdle=pool:IdleCount(),effectsCreated=pool.created,effectsReused=pool.reused,stuckArrows=#stuckArrows,
     delay=Motion.Delay,maxSamples=Motion.MaxSamples,maxDetailed=Motion.MaxDetailedUnits}}
   if typeof(model)=="Instance" and model:IsA("Model") then
    local item=tracked[model]
@@ -686,5 +828,7 @@ script.Destroying:Once(function()
  for model in pairs(healthBars) do hideHealth(model) end
  anchors:Destroy()
  if motionProbe then motionProbe:Destroy() end
+ pool:Clear()
  effects:Destroy()
+ stuckFolder:Destroy()
 end)

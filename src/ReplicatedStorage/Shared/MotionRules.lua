@@ -4,7 +4,9 @@ local Rules={Delay=.12,ServerStep=.1,MaxSamples=6,VisibilityInterval=.125,PoseIn
  -- Ground covered by one full gait cycle (two steps) and the wheel radius, in studs.
  FootCycle=5,MountedCycle=9,WheelRadius=1.6,MaxGaitStep=6,GaitBlendTime=.12,
  -- Standing units shift their weight slowly, so their pose is refreshed far less often than a gait.
- IdleInterval=1/12}
+ IdleInterval=1/12,
+ -- 新單位從建築邊緣走到伺服器出生點的畫面時間；太遠（異常位置）時不播放。
+ SpawnFresh=.6,SpawnMin=.35,SpawnMax=1.2,SpawnMaxDistance=30,SpawnDefaultSpeed=12}
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
 end
@@ -23,6 +25,18 @@ function Rules.GaitBlend(weight,walking,dt)
  if not finite(dt) or dt<=0 then return math.clamp(weight,0,1) end
  local change=dt/Rules.GaitBlendTime
  return math.clamp(weight+(walking and change or -change),0,1)
+end
+-- 走出建築所需時間：依單位速度，限制在 SpawnMin..SpawnMax；距離無效、太短或太遠時為 0（不播放）。
+function Rules.SpawnDuration(distance,speed)
+ if not finite(distance) or distance<=.2 or distance>Rules.SpawnMaxDistance then return 0 end
+ local pace=finite(speed) and speed>0 and speed or Rules.SpawnDefaultSpeed
+ return math.clamp(distance/pace,Rules.SpawnMin,Rules.SpawnMax)
+end
+-- 剩下的出場位移比例：1 在建築邊緣，0 已到出生點；起步加速、到點減速，結束後恆為 0。
+function Rules.SpawnRemaining(elapsed,duration)
+ if not finite(elapsed) or not finite(duration) or duration<=0 then return 0 end
+ local t=math.clamp(elapsed/duration,0,1)
+ return 1-t*t*(3-2*t)
 end
 function Rules.New(now,frame)
  assert(finite(now) and frame~=nil,"invalid initial motion sample")

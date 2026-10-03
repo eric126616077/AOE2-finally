@@ -61,4 +61,17 @@ end
 expect(weight==1 and Rules.GaitBlend(0,true,1/60)<1,"stride snapped instead of easing in")
 for _=1,60 do weight=Rules.GaitBlend(weight,false,1/60) end
 expect(weight==0 and Rules.GaitBlend(0/0,false,0)==0,"stride weight did not settle at rest")
+-- 新單位出場：時間有上下限，異常距離不播放，位移單調收斂到出生點。
+expect(Rules.SpawnDuration(0,10)==0 and Rules.SpawnDuration(0/0,10)==0 and Rules.SpawnDuration(Rules.SpawnMaxDistance+1,10)==0,"invalid spawn walk still animated")
+expect(Rules.SpawnDuration(1,100)==Rules.SpawnMin and Rules.SpawnDuration(29,1)==Rules.SpawnMax,"spawn walk time not bounded")
+expect(Rules.SpawnDuration(8,10)>0 and math.abs(Rules.SpawnDuration(8,10)-.8)<1e-9,"spawn walk ignored unit speed")
+expect(Rules.SpawnDuration(8,0/0)==8/Rules.SpawnDefaultSpeed,"invalid speed did not fall back")
+local remaining=1
+for step=0,60 do
+ local value=Rules.SpawnRemaining(step/60,.8)
+ expect(value<=remaining+1e-12 and value>=0 and value<=1,"spawn walk moved back toward the building")
+ remaining=value
+end
+expect(Rules.SpawnRemaining(0,.8)==1 and Rules.SpawnRemaining(.8,.8)==0 and Rules.SpawnRemaining(5,.8)==0,"spawn walk did not start at the door or end at the spawn point")
+expect(Rules.SpawnRemaining(.1,0)==0 and Rules.SpawnRemaining(0/0,1)==0,"invalid spawn walk displaced the unit")
 print("PASS: "..checks.." bounded motion timeline / 10 Hz to 60 Hz / no extrapolation / idle / teleport checks")

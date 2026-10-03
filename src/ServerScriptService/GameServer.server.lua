@@ -1686,6 +1686,7 @@ Garrison.eject=function(state,building)
   held[#held]=nil
   local model=Garrison.spawn(state,record,spot)
   if not model then table.insert(held,record); break end
+  Factory.markSpawn(model,building)
   left+=1
   applyRally(state,building,model,record.kind)
  end
@@ -3156,7 +3157,7 @@ AOE.releaseVillagers=function(state,building)
  for _,record in ipairs(villagers) do
   local spot=freeSpawn(building,record.kind)
   local model=spot and Garrison.spawn(state,record,spot)
-  if model then left+=1; AOE.resume(state,model,record.resume) else table.insert(others,record) end
+  if model then left+=1; Factory.markSpawn(model,building); AOE.resume(state,model,record.resume) else table.insert(others,record) end
  end
  if #others==0 then Garrison.inside[building]=nil end
  Garrison.publish(building)
@@ -4105,6 +4106,7 @@ local function productionStep(dt)
       if item.kind=="villager" then item.state.actor:SetAttribute("TrainedVillagers",(item.state.actor:GetAttribute("TrainedVillagers") or 0)+1) end
       telemetry:Fact(item.state.actor,"firsttrain")
       notify(item.state.actor,nil,"Train")
+      Factory.markSpawn(model,b)
       if item.kind=="tradeCart" then Relic.trade.home[model]=b end
       applyRally(item.state,b,model,item.kind)
      end

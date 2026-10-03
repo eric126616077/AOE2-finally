@@ -372,6 +372,27 @@ function Factory.clearCorpses()
  for _,ruin in ipairs(ruinQueue) do ruin:Destroy() end
  table.clear(ruinQueue)
 end
+-- 新單位（訓練完成、離開駐軍）記錄從哪個建築邊緣走出來；客戶端 UnitMotion 只用它播放出場，
+-- 伺服器的位置、碰撞與指令從生成那一刻起就在出生點，不受影響。
+function Factory.markSpawn(unit,building)
+ local root=unit and unit.PrimaryPart
+ local footprint=building and building.PrimaryPart
+ if not root or not footprint then return false end
+ local center=footprint.Position
+ local flat=Vector3.new(root.Position.X-center.X,0,root.Position.Z-center.Z)
+ if flat.Magnitude<.5 then return false end
+ local direction=flat.Unit
+ -- 沿方向到占地邊緣的距離（占地可能旋轉），再往內一點，看起來是從門內走出。
+ local along=footprint.CFrame:VectorToObjectSpace(direction)
+ local half=footprint.Size/2
+ local toX=math.abs(along.X)>1e-3 and half.X/math.abs(along.X) or math.huge
+ local toZ=math.abs(along.Z)>1e-3 and half.Z/math.abs(along.Z) or math.huge
+ local edge=math.max(0,math.min(toX,toZ,flat.Magnitude)-1)
+ local from=center+direction*edge
+ unit:SetAttribute("SpawnFrom",Vector3.new(from.X,root.Position.Y,from.Z))
+ unit:SetAttribute("SpawnAt",workspace:GetServerTimeNow())
+ return true
+end
 function Factory.unit(kind,position,data,owner)
  local team=owner:GetAttribute("TeamColor")
  local ownerId=owner:IsA("Player") and owner.UserId or owner:GetAttribute("UserId")

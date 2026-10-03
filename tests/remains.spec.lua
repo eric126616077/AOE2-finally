@@ -70,4 +70,10 @@ end end
 expect(low/total>.3 and low/total<.7,"seed too lopsided to vary fall direction")
 expect(Rules.Seed(0/0,1)==0,"invalid position corrupted seed")
 expect(Rules.Admit(0,1) and not Rules.Admit(1,1) and not Rules.Admit(nil,1),"animation budget check wrong")
+-- 箭落地：命中單位照舊消失；建築上插著；目標離開時插在地上；石彈與鉛彈不留下。
+expect(Rules.ArrowLanding("arrow",true,true)=="vanish","arrow lodged inside a unit it hit")
+expect(Rules.ArrowLanding("arrow",false,true)=="lodge" and Rules.ArrowLanding("javelin",false,true)=="lodge","arrow did not lodge in a building")
+expect(Rules.ArrowLanding("arrow",false,false)=="ground" and Rules.ArrowLanding("javelin",nil,nil)=="ground","missed arrow did not stick in the ground")
+for _,kind in ipairs({"stone","bullet","x"}) do expect(Rules.ArrowLanding(kind,false,false)=="vanish","non-arrow projectile left a remnant") end
+expect(Rules.StuckSeconds>Rules.StuckFadeSeconds and Rules.MaxStuck>0 and Rules.StuckPitch>0 and Rules.StuckPitch<math.pi/2,"stuck arrow budget invalid")
 print(("Remains animation tests passed: %d checks"):format(count))

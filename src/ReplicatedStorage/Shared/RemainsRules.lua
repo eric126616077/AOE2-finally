@@ -12,6 +12,8 @@ local Rules={
  -- 同時播放的上限；超過時直接照舊立即出現 / 消失。
  -- 伺服器同時保留的倒塌／資源複本上限（Ruins），以及單棟建築複製的零件上限。
  MaxFalls=32,MaxCollapses=4,MaxRuins=24,MaxCollapseParts=180,MaxDistance=600,
+ -- 箭與標槍落地：沒射中單位時插在建築或地面上，停留後淡出；同時最多 MaxStuck 支。
+ StuckSeconds=4,StuckFadeSeconds=.6,MaxStuck=40,StuckPitch=math.rad(38),StuckBury=.3,
 }
 local function finite(value)
  return type(value)=="number" and value==value and math.abs(value)<math.huge
@@ -68,6 +70,14 @@ function Rules.Seed(x,z)
  local n=math.floor(x*2+.5)*73856093+math.floor(z*2+.5)*83492791
  n=(n%233280*9301+49297)%233280
  return n/233280
+end
+-- 投射物抵達時的外觀："vanish" 命中單位後消失（原本的行為）；"lodge" 插在建築上；
+-- "ground" 目標已離開，插在地上。只有箭與標槍會留下；石彈與鉛彈一律消失。
+local sticks={arrow=true,javelin=true}
+function Rules.ArrowLanding(kind,hitUnit,hitBuilding)
+ if not sticks[kind] or hitUnit==true then return "vanish" end
+ if hitBuilding==true then return "lodge" end
+ return "ground"
 end
 -- 是否還能開新的動畫；超過上限就讓模型照舊瞬間處理。
 function Rules.Admit(active,limit)
