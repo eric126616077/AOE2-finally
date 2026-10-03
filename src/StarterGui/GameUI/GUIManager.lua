@@ -951,7 +951,7 @@ function GUI:CreateLobby()
   local detail=text(b,portal.description,UDim2.new(1,-24,0,34),UDim2.fromOffset(12,34),13,C.muted)
   detail.TextYAlignment=Enum.TextYAlignment.Top
   local status=text(b,"",UDim2.new(1,-24,0,20),UDim2.fromOffset(12,72),12,color)
-  self.portalCards[portal.id]={button=b,title=title,detail=detail,status=status,edge=edge,portal=portal}
+  self.portalCards[portal.id]={button=b,title=title,arrow=arrow,detail=detail,status=status,edge=edge,portal=portal}
   if i==1 then self.joinButton,self.joinLabel=b,title end
  end
  self.lobbyFrame = panel(self.lobby,UDim2.fromOffset(760,572),UDim2.new(0.5,-380,0.5,-286),"MatchLobby")
@@ -1233,36 +1233,42 @@ function GUI:LayoutLobby()
  if not self.lobby then return end
  local width,height=self.layoutWidth or 1280,self.layoutHeight or 720
  local compact=width<700
+ -- 手機橫向等矮畫面：只留標題、快速開始與房間名稱／狀態，面板不蓋住大半個庭院。
+ local tight=height<520
+ local small=compact or tight
  local welcomeWidth=math.min(width-16,860)
  local columns=compact and 2 or 4
- local cardHeight=compact and 82 or 98
+ local cardHeight=tight and 52 or compact and 82 or 98
  -- 快速開始固定一列四格；窄畫面只留標題，避免歡迎面板蓋住庭院。
- local quickTop=compact and 67 or 77
- local quickHeight=compact and 44 or 64
+ local quickTop=tight and 42 or compact and 67 or 77
+ local quickHeight=small and 44 or 64
  local quickWidth=(welcomeWidth-28-3*6)/4
  for i,quick in ipairs(self.quickButtons) do
   quick.button.Size=UDim2.fromOffset(quickWidth,quickHeight)
   quick.button.Position=UDim2.fromOffset(14+(i-1)*(quickWidth+6),quickTop)
-  quick.title.Text=compact and quick.entry.title or quick.entry.title.."  ›"
-  quick.title.TextSize=compact and 14 or 17
-  quick.title.Position=UDim2.fromOffset(compact and 8 or 12,compact and 9 or 6)
-  quick.title.Size=UDim2.new(1,compact and -12 or -20,0,26)
-  quick.detail.Visible=not compact
+  quick.title.Text=small and quick.entry.title or quick.entry.title.."  ›"
+  quick.title.TextSize=small and 14 or 17
+  quick.title.Position=UDim2.fromOffset(small and 8 or 12,small and 9 or 6)
+  quick.title.Size=UDim2.new(1,small and -12 or -20,0,26)
+  quick.detail.Visible=not small
   quick.detail.Position=UDim2.fromOffset(12,34)
  end
  local roomsTop=quickTop+quickHeight+8
- self.roomsHeading.Visible=not compact
+ self.roomsHeading.Visible=not small
  self.roomsHeading.Position=UDim2.fromOffset(14,roomsTop)
- local welcomeTop=roomsTop+(compact and 0 or 24)
+ local welcomeTop=roomsTop+(small and 0 or 24)
  local rows=math.ceil(#(Config.Lobby.portals or {})/columns)
- local welcomeHeight=welcomeTop+rows*(cardHeight+6)+28
+ local welcomeHeight=welcomeTop+rows*(cardHeight+6)+(tight and 8 or 28)
  self.lobbyWelcome.Size=UDim2.fromOffset(welcomeWidth,welcomeHeight)
  self.lobbyWelcome.Position=UDim2.new(0.5,-welcomeWidth/2,1,-welcomeHeight-8)
- self.welcomeHeading.TextSize=compact and 22 or 26
+ self.welcomeHeading.TextSize=small and 22 or 26
  self.welcomeHeading.Position=UDim2.fromOffset(14,8)
- self.welcomeDescription.Position=UDim2.fromOffset(14,compact and 36 or 43)
+ self.welcomeHeading.Size=UDim2.new(1,-36,0,small and 28 or 32)
+ self.welcomeDescription.Visible=not tight
+ self.welcomeDescription.Position=UDim2.fromOffset(14,compact and 37 or 43)
  self.welcomeDescription.Size=UDim2.new(1,-28,0,compact and 29 or 27)
  self.welcomeDescription.TextSize=compact and 12 or 14
+ self.queueSummary.Visible=not tight
  self.queueSummary.Position=UDim2.fromOffset(14,welcomeHeight-23)
  local cardWidth=(welcomeWidth-28-(columns-1)*6)/columns
  for i,portal in ipairs(Config.Lobby.portals or {}) do
@@ -1272,6 +1278,10 @@ function GUI:LayoutLobby()
    entry.button.Position=UDim2.fromOffset(14+((i-1)%columns)*(cardWidth+6),welcomeTop+math.floor((i-1)/columns)*(cardHeight+6))
    entry.title.TextSize=compact and 16 or 18
    entry.title.Position=UDim2.fromOffset(12,compact and 4 or 7)
+   entry.title.Size=UDim2.new(1,-43,0,tight and 24 or 27)
+   -- 窄卡片的「›」會壓到說明文字；矮畫面只顯示房間名稱與狀態。
+   entry.arrow.Visible=not small
+   entry.detail.Visible=not tight
    entry.detail.Position=UDim2.fromOffset(12,compact and 30 or 34)
    entry.detail.Size=UDim2.new(1,-24,0,compact and 28 or 34)
    entry.detail.TextSize=compact and 12 or 13
@@ -1291,7 +1301,7 @@ function GUI:LayoutLobby()
  self.lobbyHeading.TextSize=panelWidth<480 and 23 or 28
  self.lobbyDescription.Visible=not short
  self.lobbyDescription.Position=UDim2.fromOffset(panelWidth>=480 and 72 or 16,47)
- self.lobbyDescription.Size=UDim2.new(1,panelWidth>=480 and -88 or -32,0,24)
+ self.lobbyDescription.Size=UDim2.new(1,panelWidth>=480 and -208 or -152,0,24)
  self.lobbyDescription.TextSize=panelWidth<480 and 12 or 14
  self.leaveButton.Position=UDim2.new(1,-120,0,short and 6 or 15)
  local stepTop=short and 54 or 83
@@ -1741,6 +1751,7 @@ function GUI:LayoutTouch()
  self.noticePanel.Size=UDim2.fromOffset(width-16,44)
  self.noticePanel.Position=UDim2.new(0,8,0,62)
  self.notice.TextSize=14
+ self:FitNotice()
  self.commandKey=nil
  self:LayoutLobby()
  self.mapPanel.Visible=not self.shortLandscape
@@ -2246,10 +2257,16 @@ function GUI:ToggleMenu()
  elseif not self:IsModalOpen() then self.menuPanel.Visible=true end
  player:SetAttribute("RTSModalOpen",self:IsModalOpen())
 end
+-- 通知列依文字行數長高；劇情簡報等多行通知不會被截掉。
+function GUI:FitNotice()
+ local width=self.noticePanel.Size.X.Offset
+ local bounds=game:GetService("TextService"):GetTextSize(self.notice.Text,self.notice.TextSize,self.notice.Font,Vector2.new(math.max(1,width-48),10000))
+ self.noticePanel.Size=UDim2.fromOffset(width,math.max(self.touchLayout and 44 or 42,math.ceil(bounds.Y)+14))
+end
 function GUI:Notify(message,cue)
  if type(message) ~= "string" then return end
  if cue then Audio:Play(cue) end
- self.notice.Text = message; self.noticePanel.Visible = true; self.noticePanel.BackgroundTransparency = self.reducedMotion and 0.04 or 0.28
+ self.notice.Text = message; self:FitNotice(); self.noticePanel.Visible = true; self.noticePanel.BackgroundTransparency = self.reducedMotion and 0.04 or 0.28
  if not self.reducedMotion then tween(self.noticePanel,0.2,{BackgroundTransparency = 0.04}) end
  self.messageTime = os.clock()
 end

@@ -1504,7 +1504,6 @@ local function endMatch(winnerTeam)
   local room=rooms[activeRoomId]
   lobbyWorld:SetStatus(0,room.expected,0,"Ended",activeRoomId,room.settings)
  end
- for _,entry in ipairs(storyNotices) do notify(entry.actor,entry.message) end
  for unit in pairs(orders) do stop(unit) end
  if Travel.role=="Match" then
   -- 每場對局獨佔一台伺服器：結束後送回大廳，空伺服器由 Roblox 自動關閉。
@@ -1522,6 +1521,8 @@ local function endMatch(winnerTeam)
    notify(actor,nil,outcome=="win" and "Victory" or outcome=="loss" and "Defeat" or "MatchEnd")
   end
  end
+ -- 劇情解鎖通知排在勝利公告之後，否則會被公告蓋掉（通知列一次只顯示一則）。
+ for _,entry in ipairs(storyNotices) do notify(entry.actor,entry.message) end
 end
 checkVictory=function()
  if phase~="Playing" then return end
