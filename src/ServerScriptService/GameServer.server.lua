@@ -1013,6 +1013,15 @@ local function moveToward(unit,order,destination,speed,dt,now)
   order.path=nil; route(unit,order,destination,now); return
  end
  local neighbors=unitNeighbors(unit,current,nextPos,radius)
+ -- 穿越期間（見下方「完全被擋」的處理）：己方與盟友單位不算阻擋，只剩敵方與無主單位；建築與地形仍由 staticUnitSegmentClear 擋住。
+ if order.passFriendlyUntil and now<order.passFriendlyUntil then
+  local mover,kept=owner(unit),{}
+  for _,record in ipairs(neighbors or {}) do
+   local other=typeof(record.key)=="Instance" and owner(record.key) or nil
+   if not (other and mover and (other==mover or not enemies(mover,other))) then table.insert(kept,record) end
+  end
+  neighbors=kept
+ end
  if not UnitCollisionRules.segmentClear(current.X,current.Z,nextPos.X,nextPos.Z,radius,neighbors) then
   if order.kind=="move" and (destination-current).Magnitude<=radius+MAX_UNIT_RADIUS+1
    and stationaryUnitAt(unit,destination,radius) then stop(unit); return end
@@ -1061,6 +1070,9 @@ local function moveToward(unit,order,destination,speed,dt,now)
    -- 被己方閒置單位卡住超過 1 秒（例如停在狹窄通道裡的部隊）：請前方的閒置單位往兩側讓路，
    -- 否則移動者會永遠等下去（Studio 實測：僧侶卡在主城旁停著的步兵後面）。只動自己、沒有指令的單位，
    -- 每 2 秒最多請兩個；讓開的位置須沒有單位、也沒有建築或資源擋住。
+   -- 兩個有指令的己方單位在單行通道裡對頭（例如送貨的村民與撿聖物的僧侶），誰都不會讓路：
+   -- 卡住 2 秒後短暫允許穿過己方與盟友單位（AOE2 式），1.5 秒後恢復正常碰撞。
+   if now-order.crowdedSince>=2 then order.passFriendlyUntil=now+1.5 end
    if now-order.crowdedSince>=1 and now>=(order.yieldAfter or 0) then
     order.yieldAfter=now+2
     local mover,asked=owner(unit),0

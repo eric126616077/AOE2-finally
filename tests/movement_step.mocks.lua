@@ -35,6 +35,9 @@ local function stop(unit) unit.stopped=true; orders[unit]=nil end
 local units={}
 local function owner(model) return model and model.owner end
 local function issue(unit,kind,target) orders[unit]={kind=kind,target=target} end
+-- 標記 instance=true 的 mock 單位會被當成真正的 Instance（讓路／穿越分支只處理 Instance），owner 由 owner 欄位決定。
+local function enemies(a,b) return a~=b end
+local typeof=function(value) return type(value)=="table" and rawget(value,"instance")==true and "Instance" or type(value) end
 local function actor(x,z,radius,keepIndex)
  if not keepIndex then unitCollisionIndex=UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS); orders={} end
  local unit={pos=Vector3.new(x,0,z or 0),radius=radius or 2,moves=0,GetAttribute=function(self,key) return key=="Animation" and (self.Animation or "Idle") or self.radius end,SetAttribute=function(self,key,value) self[key]=value end,

@@ -243,4 +243,30 @@ do
  end
  expect(not order.escapeGoal and order.escapeAttempts==2 and order.escapeHistory==history and #history==2,"exhausted retreat budget cannot create a third attempt or expand history")
 end
+-- 單行通道裡兩個有指令的己方單位對頭（Studio 實測：送貨村民與撿聖物的僧侶卡住數分鐘）：
+-- 卡住 2 秒後可以互相穿過；敵方單位仍然擋住，且穿越前不會重疊。
+do
+ staticSegmentHook=function(_,from,to) return math.abs(from.Z)<0.5 and math.abs(to.Z)<0.5 end
+ local a=actor(0); a.instance,a.owner=true,"P"
+ local b=actor(12,0,2,true); b.instance,b.owner=true,"P"
+ local aOrder,bOrder={kind="relic"},{kind="deliver"}
+ local passed,overlapBefore=false,false
+ for tick=1,200 do
+  local now=tick*.1
+  if now<1.9 and (a.pos-b.pos).Magnitude<4.05-1e-7 then overlapBefore=true end
+  if (a.pos-Vector3.new(24,0,0)).Magnitude>=1 then moveToward(a,aOrder,Vector3.new(24,0,0),14,.1,now) end
+  if (b.pos-Vector3.new(-12,0,0)).Magnitude>=1 then moveToward(b,bOrder,Vector3.new(-12,0,0),14,.1,now) end
+  if (a.pos-Vector3.new(24,0,0)).Magnitude<1 and (b.pos-Vector3.new(-12,0,0)).Magnitude<1 then passed=true; break end
+ end
+ expect(not overlapBefore,"friendly units overlapped before waiting in the corridor")
+ expect(passed,"friendly units in a one-lane corridor never pass each other")
+ local mover=actor(0); mover.instance,mover.owner=true,"P"
+ local enemy=actor(8,0,2,true); enemy.instance,enemy.owner=true,"E"
+ local moverOrder={kind="move"}
+ for tick=1,60 do
+  moveToward(mover,moverOrder,Vector3.new(20,0,0),14,.1,tick*.1)
+  expect((mover.pos-enemy.pos).Magnitude>=4.05-1e-7,"unit passed through an enemy blocker")
+ end
+ staticSegmentHook=nil
+end
 print("Actual server movement step:",checks,"checks passed; mocked collision, not Studio path verification")
