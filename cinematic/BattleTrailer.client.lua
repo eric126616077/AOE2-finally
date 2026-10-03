@@ -287,8 +287,18 @@ local function report(stage,u,camera)
    fort=(front and point.X>=0 and point.X<=viewport.X and point.Y>=0 and point.Y<=viewport.Y) and "inView" or "offscreen"
   end
  end
- print(("[TRAILER_SHOT] %s units=%d/%d closest=%s fort=%s trauma=%.2f peak=%.2f hudHidden=%d"):format(key,inView,total,
-  closest<math.huge and ("%.1f"):format(closest) or "none",tostring(fort or "gone"),trauma,peakTrauma,(function() local n=0; for _ in pairs(hidden) do n+=1 end; return n end)()))
+ -- 屍體與倒塌複本是伺服器複製下來的；數量為 0 或零件為 0 時，畫面上就看不到倒地與倒塌。
+ local function remains(name)
+  local folder=workspace:FindFirstChild(name)
+  if not folder then return "none" end
+  local parts=0
+  for _,child in ipairs(folder:GetChildren()) do
+   for _,part in ipairs(child:GetDescendants()) do if part:IsA("BasePart") then parts+=1 end end
+  end
+  return #folder:GetChildren().."/"..parts.."p"
+ end
+ print(("[TRAILER_SHOT] %s units=%d/%d closest=%s fort=%s trauma=%.2f peak=%.2f corpses=%s ruins=%s hudHidden=%d"):format(key,inView,total,
+  closest<math.huge and ("%.1f"):format(closest) or "none",tostring(fort or "gone"),trauma,peakTrauma,remains("Corpses"),remains("Ruins"),(function() local n=0; for _ in pairs(hidden) do n+=1 end; return n end)()))
  if u>=.9 then peakTrauma=0 end
 end
 

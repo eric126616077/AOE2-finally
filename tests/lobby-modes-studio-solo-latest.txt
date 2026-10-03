@@ -1,0 +1,31 @@
+== 0.741.19.7411056_20261003T132644Z_Studio_5BE4A_last.log
+2026-10-03T13:27:13.336Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
+2026-10-03T13:27:16.569Z [Output] [LOBBY_MODES probe] Player1 removed 10 AI models
+== 0.741.19.7411056_20261003T132651Z_Studio_10636_last.log
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS welcome panel visible
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS no quick start button StorySolo
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS no quick start button Story
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS no quick start button PvP
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS no quick start button PvE
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS portal card Room1 visible and available
+2026-10-03T13:27:02.739Z [Output] [LOBBY_MODES Player1] PASS portal card Room2 visible and available
+2026-10-03T13:27:02.740Z [Output] [LOBBY_MODES Player1] PASS portal card Room3 visible and available
+2026-10-03T13:27:02.740Z [Output] [LOBBY_MODES Player1] PASS new session has no story clears
+2026-10-03T13:27:02.974Z [Output] [LOBBY_MODES Player1] PASS PvP portal room is PvP
+2026-10-03T13:27:02.974Z [Output] [LOBBY_MODES Player1] PASS no mode card Story
+2026-10-03T13:27:02.974Z [Output] [LOBBY_MODES Player1] PASS no mode card PvP
+2026-10-03T13:27:02.974Z [Output] [LOBBY_MODES Player1] PASS no mode card PvE
+2026-10-03T13:27:02.974Z [Output] [LOBBY_MODES Player1] PASS PvP page shows team mode, hides chapter
+2026-10-03T13:27:03.989Z [Output] [LOBBY_MODES Player1] PASS PvP portal rejects switching to Story
+2026-10-03T13:27:05.006Z [Output] [LOBBY_MODES Player1] PASS PvP with AI rejected
+2026-10-03T13:27:06.022Z [Output] [LOBBY_MODES Player1] PASS client Sandbox rejected
+2026-10-03T13:27:08.655Z [Output] [LOBBY_MODES Player1] PASS PvE portal has AI and no chapter
+2026-10-03T13:27:11.288Z [Output] [LOBBY_MODES Player1] PASS story portal applies chapter 1 rules
+2026-10-03T13:27:12.289Z [Output] [LOBBY_MODES Player1] PASS locked chapter 2 rejected
+2026-10-03T13:27:12.405Z [Output] [LOBBY_MODES Player1] PASS chapter rules not overridable by client
+2026-10-03T13:27:12.981Z [Output] [LOBBY_MODES Player1] PASS battle is Story chapter 1 co-op
+2026-10-03T13:27:12.981Z [Output] [LOBBY_MODES Player1] PASS AI named after chapter enemy
+2026-10-03T13:27:12.981Z [Output] [LOBBY_MODES Player1] PASS enemy team named, player on team 1
+2026-10-03T13:27:16.740Z [Output] [LOBBY_MODES Player1] PASS humans won the chapter
+2026-10-03T13:27:19.688Z [Output] [LOBBY_MODES Player1] PASS chapter 2 rules applied
+2026-10-03T13:27:22.122Z [Output] [LOBBY_MODES Player1] ALL PASS 26 checks

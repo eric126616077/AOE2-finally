@@ -1,0 +1,16 @@
+全面重跑（2026-10-03，main 15502c0 加上未提交的預告片診斷修改）
+CLI：scripts/verify.ps1 全部通過（exit 0），包含 shop.spec 81 項、lobby_trailer.spec 53 項、cinematic.spec 288 項與 Rojo build。
+Studio 命令列測試伺服器＋客戶端（tests/run-*-studio.sh、tests/run-studio-project.sh），沒有人看畫面：
+- 大廳版面 lobby-layout-validation：DONE 777 checks, 0 failed（tests/lobby-layout-studio-latest.txt）
+- 文明加成／AOE2 元素 aoe2-elements-validation：COMPLETE 45 PASS / 0 FAIL（tests/aoe2-elements-studio-latest.txt）
+- 大廳玩法 單人：ALL PASS 26 checks；雙人：Player1、Player2 各 ALL PASS 5 checks（tests/lobby-modes-studio-*-latest.txt）
+- 王國商店 shop-validation：DONE 30 PASS / 0 FAIL
+- 戰爭迷霧 fog-validation：ALL PASS passed=18 failed=0
+- 屍體與倒塌 remains-validation：COMPLETE 122 passed, 0 failed
+- 無人工地 site：COMPLETE passed=11 failed=0
+- 駐守 garrison：DONE pass=64 fail=0
+- 受損外觀 damage-visuals：DONE pass=92 fail=0
+- 戰鬥壓力 battle-stress：完成，無腳本錯誤；fps baseline 59、50v50 57、100v100 38、200v200 15（p95 70 ms，與先前紀錄相同）
+- 戰鬥預告片 cinematic：18 個鏡頭紀錄、無腳本錯誤；塔倒塌後客戶端 Ruins 仍為 0 個子物件（已知問題，見 docs/BATTLE-TRAILER-2026-10-03.md）
+以上所有紀錄都沒有 Script／Stack 錯誤行。
+未驗證：畫面目視（大廳大螢幕、預告片按鈕外觀、商店與迷霧的實際畫面）、真實影片資產、發布環境 DataStore 與真實 Robux 購買。

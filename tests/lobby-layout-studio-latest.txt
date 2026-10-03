@@ -1,0 +1,784 @@
+== 0.741.19.7411056_20261003T140704Z_Studio_1B198_last.log
+2026-10-03T14:07:51.322Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
+2026-10-03T14:07:54.520Z [Output] [LOBBY_MODES probe] Player1 removed 11 AI models
+== 0.741.19.7411056_20261003T140710Z_Studio_03EA1_last.log
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome inside the screen (860x209 at 503)
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button inside the screen
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the notice
+2026-10-03T14:07:17.198Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome leaves the courtyard visible (panel 209 of 720 px)
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome controls inside their panel
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome no overlap
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome text fits
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 tutorial card does not cover the welcome panel
+2026-10-03T14:07:17.199Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 tutorial card text fits
+2026-10-03T14:07:17.630Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome inside the screen (860x209 at 601)
+2026-10-03T14:07:17.630Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button inside the screen
+2026-10-03T14:07:17.630Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:17.630Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the notice
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome leaves the courtyard visible (panel 209 of 818 px)
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome controls inside their panel
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome no overlap
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome text fits
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 tutorial card does not cover the welcome panel
+2026-10-03T14:07:17.631Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 tutorial card text fits
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome inside the screen (860x209 at 403)
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button inside the screen
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the notice
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome leaves the courtyard visible (panel 209 of 620 px)
+2026-10-03T14:07:18.063Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome controls inside their panel
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome no overlap
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome text fits
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 tutorial card does not cover the welcome panel
+2026-10-03T14:07:18.064Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 tutorial card text fits
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome inside the screen (860x209 at 551)
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button inside the screen
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the notice
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome leaves the courtyard visible (panel 209 of 768 px)
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome controls inside their panel
+2026-10-03T14:07:18.496Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome no overlap
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome text fits
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome touch targets >= 44 px
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 tutorial card does not cover the welcome panel
+2026-10-03T14:07:18.497Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 tutorial card text fits
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome inside the screen (796x108 at 259)
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button inside the screen
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the notice
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome leaves the courtyard visible (panel 108 of 375 px)
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome controls inside their panel
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome no overlap
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:18.914Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:18.915Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome text fits
+2026-10-03T14:07:18.915Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome touch targets >= 44 px
+2026-10-03T14:07:18.915Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:18.915Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 tutorial card does not cover the welcome panel
+2026-10-03T14:07:18.915Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 tutorial card text fits
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome inside the screen (651x108 at 259)
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button inside the screen
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the notice
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome leaves the courtyard visible (panel 108 of 375 px)
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome controls inside their panel
+2026-10-03T14:07:19.348Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome no overlap
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome text fits
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome touch targets >= 44 px
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 tutorial card inside the screen (520x190 at 12)
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 tutorial card does not cover the welcome panel
+2026-10-03T14:07:19.349Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 tutorial card text fits
+2026-10-03T14:07:19.780Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome hidden only while the tutorial card needs the space
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome inside the screen (860x209 at 503)
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button inside the screen
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome trailer button clear of the notice
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome leaves the courtyard visible (panel 209 of 720 px)
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome controls inside their panel
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome no overlap
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:20.530Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 welcome text fits
+2026-10-03T14:07:20.965Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome inside the screen (860x209 at 601)
+2026-10-03T14:07:20.965Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button inside the screen
+2026-10-03T14:07:20.965Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome trailer button clear of the notice
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome leaves the courtyard visible (panel 209 of 818 px)
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome controls inside their panel
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome no overlap
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:20.966Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 welcome text fits
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome inside the screen (860x209 at 403)
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button inside the screen
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:21.398Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome trailer button clear of the notice
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome leaves the courtyard visible (panel 209 of 620 px)
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome controls inside their panel
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome no overlap
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:21.399Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 welcome text fits
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome inside the screen (860x209 at 551)
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button inside the screen
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome trailer button clear of the notice
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome leaves the courtyard visible (panel 209 of 768 px)
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome controls inside their panel
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome no overlap
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome text fits
+2026-10-03T14:07:21.829Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 welcome touch targets >= 44 px
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome inside the screen (796x108 at 259)
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button inside the screen
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome trailer button clear of the notice
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome leaves the courtyard visible (panel 108 of 375 px)
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome controls inside their panel
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome no overlap
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:22.264Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:22.265Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:22.265Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome text fits
+2026-10-03T14:07:22.265Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 welcome touch targets >= 44 px
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome inside the screen (651x108 at 259)
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button inside the screen
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome trailer button clear of the notice
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome leaves the courtyard visible (panel 108 of 375 px)
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome controls inside their panel
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome no overlap
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome text fits
+2026-10-03T14:07:22.679Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 welcome touch targets >= 44 px
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome inside the screen (552x108 at 204)
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome trailer button inside the screen
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome trailer button clear of the welcome panel
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome trailer button clear of the tutorial button
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome trailer button hidden while the tutorial card is open
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome trailer button clear of the notice
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome leaves the courtyard visible (panel 108 of 320 px)
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome controls inside their panel
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome no overlap
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome PortalCard_Room1 no overlap
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome PortalCard_Room2 no overlap
+2026-10-03T14:07:23.113Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome PortalCard_Room3 no overlap
+2026-10-03T14:07:23.114Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome text fits
+2026-10-03T14:07:23.114Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 welcome touch targets >= 44 px
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard header no overlap
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard footer no overlap
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard footer controls inside their panel
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 1 no overlap
+2026-10-03T14:07:23.814Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:23.815Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:23.815Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 359)
+2026-10-03T14:07:23.815Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard steps no overlap
+2026-10-03T14:07:23.815Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard text fits
+2026-10-03T14:07:24.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:24.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard header no overlap
+2026-10-03T14:07:24.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard footer no overlap
+2026-10-03T14:07:24.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard footer controls inside their panel
+2026-10-03T14:07:24.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 1 no overlap
+2026-10-03T14:07:24.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:24.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:24.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 359)
+2026-10-03T14:07:24.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard steps no overlap
+2026-10-03T14:07:24.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard text fits
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard header no overlap
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard footer no overlap
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard footer controls inside their panel
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 1 no overlap
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 355)
+2026-10-03T14:07:24.713Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard steps no overlap
+2026-10-03T14:07:24.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard text fits
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard header no overlap
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard footer no overlap
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard footer controls inside their panel
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 1 no overlap
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 359)
+2026-10-03T14:07:25.146Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard steps no overlap
+2026-10-03T14:07:25.147Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard text fits
+2026-10-03T14:07:25.147Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard header no overlap
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard footer no overlap
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard footer controls inside their panel
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 1 no overlap
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:25.596Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:25.597Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 180)
+2026-10-03T14:07:25.597Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard steps no overlap
+2026-10-03T14:07:25.597Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard text fits
+2026-10-03T14:07:25.597Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard header no overlap
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard footer no overlap
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard footer controls inside their panel
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 1 no overlap
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 180)
+2026-10-03T14:07:26.046Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard steps no overlap
+2026-10-03T14:07:26.047Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard text fits
+2026-10-03T14:07:26.047Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard header no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard footer no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard footer controls inside their panel
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 1 no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 1 content reachable by scrolling (content 168 / canvas 180)
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard steps no overlap
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard text fits
+2026-10-03T14:07:26.496Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard header no overlap
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard footer no overlap
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard footer controls inside their panel
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 no overlap
+2026-10-03T14:07:26.945Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard steps no overlap
+2026-10-03T14:07:26.946Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvP wizard text fits
+2026-10-03T14:07:27.398Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:27.398Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard header no overlap
+2026-10-03T14:07:27.398Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard footer no overlap
+2026-10-03T14:07:27.398Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard footer controls inside their panel
+2026-10-03T14:07:27.398Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard steps no overlap
+2026-10-03T14:07:27.399Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvP wizard text fits
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard header no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard footer no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard footer controls inside their panel
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:27.846Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:27.847Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 355)
+2026-10-03T14:07:27.847Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard steps no overlap
+2026-10-03T14:07:27.847Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvP wizard text fits
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard header no overlap
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard footer no overlap
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard footer controls inside their panel
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 no overlap
+2026-10-03T14:07:28.293Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard steps no overlap
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard text fits
+2026-10-03T14:07:28.294Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:28.747Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:28.747Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard header no overlap
+2026-10-03T14:07:28.747Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard footer no overlap
+2026-10-03T14:07:28.747Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard footer controls inside their panel
+2026-10-03T14:07:28.747Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard steps no overlap
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard text fits
+2026-10-03T14:07:28.748Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:29.257Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:29.257Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard header no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard footer no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard footer controls inside their panel
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard steps no overlap
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard text fits
+2026-10-03T14:07:29.258Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard header no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard footer no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard footer controls inside their panel
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 Setting_size no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 Setting_population no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard steps no overlap
+2026-10-03T14:07:29.696Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard text fits
+2026-10-03T14:07:29.698Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvP wizard touch targets >= 44 px
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard header no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard footer no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard footer controls inside their panel
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard steps no overlap
+2026-10-03T14:07:32.811Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard text fits
+2026-10-03T14:07:33.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:33.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard header no overlap
+2026-10-03T14:07:33.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard footer no overlap
+2026-10-03T14:07:33.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard footer controls inside their panel
+2026-10-03T14:07:33.264Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard steps no overlap
+2026-10-03T14:07:33.265Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard text fits
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard header no overlap
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard footer no overlap
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard footer controls inside their panel
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 no overlap
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:33.714Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:33.715Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:33.715Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 355)
+2026-10-03T14:07:33.715Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard steps no overlap
+2026-10-03T14:07:33.715Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard text fits
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard header no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard footer no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard footer controls inside their panel
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard steps no overlap
+2026-10-03T14:07:34.163Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard text fits
+2026-10-03T14:07:34.165Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard header no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard footer no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard footer controls inside their panel
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:34.614Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 292)
+2026-10-03T14:07:34.615Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard steps no overlap
+2026-10-03T14:07:34.615Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard text fits
+2026-10-03T14:07:34.615Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:35.064Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:35.064Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard header no overlap
+2026-10-03T14:07:35.064Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard footer no overlap
+2026-10-03T14:07:35.064Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard footer controls inside their panel
+2026-10-03T14:07:35.064Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 292)
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard steps no overlap
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard text fits
+2026-10-03T14:07:35.065Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:35.513Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:35.513Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard header no overlap
+2026-10-03T14:07:35.513Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard footer no overlap
+2026-10-03T14:07:35.513Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard footer controls inside their panel
+2026-10-03T14:07:35.513Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 Setting_teamMode no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 Setting_aiCount no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 Setting_difficulty no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 1 content reachable by scrolling (content 280 / canvas 292)
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard steps no overlap
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard text fits
+2026-10-03T14:07:35.514Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard header no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard footer no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard footer controls inside their panel
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard steps no overlap
+2026-10-03T14:07:35.980Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 PvE wizard text fits
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard header no overlap
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard footer no overlap
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard footer controls inside their panel
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 no overlap
+2026-10-03T14:07:36.411Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard steps no overlap
+2026-10-03T14:07:36.412Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 PvE wizard text fits
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard header no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard footer no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard footer controls inside their panel
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:36.863Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:36.864Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 355)
+2026-10-03T14:07:36.864Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard steps no overlap
+2026-10-03T14:07:36.864Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 PvE wizard text fits
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard header no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard footer no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard footer controls inside their panel
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 359)
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard steps no overlap
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard text fits
+2026-10-03T14:07:37.314Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard header no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard footer no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard footer controls inside their panel
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:37.762Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard steps no overlap
+2026-10-03T14:07:37.763Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard text fits
+2026-10-03T14:07:37.763Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard header no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard footer no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard footer controls inside their panel
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard steps no overlap
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard text fits
+2026-10-03T14:07:38.212Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard header no overlap
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard footer no overlap
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard footer controls inside their panel
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 no overlap
+2026-10-03T14:07:38.663Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 Setting_size no overlap
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 Setting_population no overlap
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard page 2 content reachable by scrolling (content 280 / canvas 288)
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard steps no overlap
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard text fits
+2026-10-03T14:07:38.664Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 PvE wizard touch targets >= 44 px
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard header no overlap
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard footer no overlap
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard footer controls inside their panel
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 1 no overlap
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:41.762Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:41.763Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 1 content reachable by scrolling (content 260 / canvas 359)
+2026-10-03T14:07:41.763Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard steps no overlap
+2026-10-03T14:07:41.763Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard text fits
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard header no overlap
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard footer no overlap
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard footer controls inside their panel
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 1 no overlap
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 1 content reachable by scrolling (content 260 / canvas 359)
+2026-10-03T14:07:42.212Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard steps no overlap
+2026-10-03T14:07:42.213Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard text fits
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard header no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard footer no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard footer controls inside their panel
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 1 no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 1 content reachable by scrolling (content 260 / canvas 355)
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard steps no overlap
+2026-10-03T14:07:42.661Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard text fits
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard header no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard footer no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard footer controls inside their panel
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 1 no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 1 content reachable by scrolling (content 260 / canvas 359)
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard steps no overlap
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard text fits
+2026-10-03T14:07:43.111Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard touch targets >= 44 px
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard header no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard footer no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard footer controls inside their panel
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 1 no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 1 content reachable by scrolling (content 260 / canvas 264)
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard steps no overlap
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard text fits
+2026-10-03T14:07:43.561Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard touch targets >= 44 px
+2026-10-03T14:07:44.012Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:44.012Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard header no overlap
+2026-10-03T14:07:44.012Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard footer no overlap
+2026-10-03T14:07:44.012Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard footer controls inside their panel
+2026-10-03T14:07:44.012Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 1 no overlap
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 1 content reachable by scrolling (content 260 / canvas 264)
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard steps no overlap
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard text fits
+2026-10-03T14:07:44.013Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard touch targets >= 44 px
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard header no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard footer no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard footer controls inside their panel
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 1 no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 1 Setting_storyChapter no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 1 Setting_expectedPlayers no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 1 content reachable by scrolling (content 260 / canvas 264)
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard steps no overlap
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard text fits
+2026-10-03T14:07:44.462Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard touch targets >= 44 px
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard header no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard footer no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard footer controls inside their panel
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:44.928Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:44.930Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:44.930Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:44.930Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard steps no overlap
+2026-10-03T14:07:44.930Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story wizard text fits
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard header no overlap
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard footer no overlap
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard footer controls inside their panel
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 no overlap
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:45.379Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard steps no overlap
+2026-10-03T14:07:45.380Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story wizard text fits
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard header no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard footer no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard footer controls inside their panel
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:45.828Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:45.829Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:45.829Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:45.829Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:45.829Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard steps no overlap
+2026-10-03T14:07:45.829Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story wizard text fits
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard header no overlap
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard footer no overlap
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard footer controls inside their panel
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 no overlap
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:46.262Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard steps no overlap
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard text fits
+2026-10-03T14:07:46.263Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story wizard touch targets >= 44 px
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard header no overlap
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard footer no overlap
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard footer controls inside their panel
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 no overlap
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:46.713Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard steps no overlap
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard text fits
+2026-10-03T14:07:46.714Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story wizard touch targets >= 44 px
+2026-10-03T14:07:47.162Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:47.162Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard header no overlap
+2026-10-03T14:07:47.162Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard footer no overlap
+2026-10-03T14:07:47.162Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard footer controls inside their panel
+2026-10-03T14:07:47.162Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard steps no overlap
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard text fits
+2026-10-03T14:07:47.163Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story wizard touch targets >= 44 px
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard header no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard footer no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard footer controls inside their panel
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_size no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_population no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_startingResources no overlap
+2026-10-03T14:07:47.612Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_victory no overlap
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_aiCount no overlap
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 Setting_difficulty no overlap
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard page 2 content reachable by scrolling (content 392 / canvas 400)
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard steps no overlap
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard text fits
+2026-10-03T14:07:47.613Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story wizard touch targets >= 44 px
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review room panel inside the screen (760x600 at 60)
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review header no overlap
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review footer no overlap
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review footer controls inside their panel
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review page 3 no overlap
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review page 3 content reachable by scrolling (content 322 / canvas 412)
+2026-10-03T14:07:48.245Z [Output] [LOBBY_LAYOUT] PASS desktop 1280x720 Story review text fits
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review room panel inside the screen (760x600 at 109)
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review header no overlap
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review footer no overlap
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review footer controls inside their panel
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review page 3 no overlap
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:48.679Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review page 3 content reachable by scrolling (content 322 / canvas 412)
+2026-10-03T14:07:48.680Z [Output] [LOBBY_LAYOUT] PASS desktop 1454x818 Story review text fits
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review room panel inside the screen (760x596 at 12)
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review header no overlap
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review footer no overlap
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review footer controls inside their panel
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review page 3 no overlap
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review page 3 content reachable by scrolling (content 322 / canvas 408)
+2026-10-03T14:07:49.112Z [Output] [LOBBY_LAYOUT] PASS short desktop 1366x620 Story review text fits
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review room panel inside the screen (760x600 at 84)
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review header no overlap
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review footer no overlap
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review footer controls inside their panel
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review page 3 no overlap
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review page 3 content reachable by scrolling (content 322 / canvas 412)
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review text fits
+2026-10-03T14:07:49.529Z [Output] [LOBBY_LAYOUT] PASS tablet 1024x768 Story review touch targets >= 44 px
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review room panel inside the screen (760x351 at 12)
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review header no overlap
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review footer no overlap
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review footer controls inside their panel
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review page 3 no overlap
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review page 3 content reachable by scrolling (content 322 / canvas 334)
+2026-10-03T14:07:49.962Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review text fits
+2026-10-03T14:07:49.963Z [Output] [LOBBY_LAYOUT] PASS phone 812x375 Story review touch targets >= 44 px
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review room panel inside the screen (643x351 at 12)
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review header no overlap
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review footer no overlap
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review footer controls inside their panel
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review page 3 no overlap
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review page 3 content reachable by scrolling (content 322 / canvas 334)
+2026-10-03T14:07:50.395Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review text fits
+2026-10-03T14:07:50.396Z [Output] [LOBBY_LAYOUT] PASS phone 667x375 Story review touch targets >= 44 px
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review room panel inside the screen (544x296 at 12)
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review header no overlap
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review footer no overlap
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review footer controls inside their panel
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review page 3 no overlap
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review page 3 CivilizationButton no overlap
+2026-10-03T14:07:50.813Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review page 3 content reachable by scrolling (content 378 / canvas 386)
+2026-10-03T14:07:50.814Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review text fits
+2026-10-03T14:07:50.814Z [Output] [LOBBY_LAYOUT] PASS phone 568x320 Story review touch targets >= 44 px
+2026-10-03T14:07:50.815Z [Output] [LOBBY_LAYOUT] PASS portal sign mode label scales with its card
+2026-10-03T14:07:50.815Z [Output] [LOBBY_LAYOUT] PASS portal sign mode and count lines do not overlap
+2026-10-03T14:07:50.816Z [Output] [LOBBY_LAYOUT] INFO portal sign text: 劇情 · 第 1 章 河灣初興 · 等待玩家準備
+2026-10-03T14:07:51.420Z [Output] [LOBBY_LAYOUT] PASS story start notice inside the screen (609x85 at 8)
+2026-10-03T14:07:51.420Z [Output] [LOBBY_LAYOUT] PASS story start notice text fits (68 px text in 85 px)
+2026-10-03T14:07:51.420Z [Output] [LOBBY_LAYOUT] INFO start notice: 第 1 章「河灣初興」 / 北方的灰狼掠奪者燒毀了河灣的漁村。重建市鎮、訓練守軍，把他們趕出河谷。 / 目標：消滅灰狼掠奪者的全部單位與建築。 / 你的文明：河灣盟邦（貿易車每趟黃金 +20%；村民攜帶量 +3；專屬兵種：河灣長弓手）
+2026-10-03T14:07:55.213Z [Output] [LOBBY_LAYOUT] PASS chapter unlock notice inside the screen (609x46 at 8)
+2026-10-03T14:07:55.213Z [Output] [LOBBY_LAYOUT] PASS chapter unlock notice text fits (17 px text in 46 px)
+2026-10-03T14:07:55.213Z [Output] [LOBBY_LAYOUT] PASS victory result inside the screen (1912x691 at 0)
+2026-10-03T14:07:55.214Z [Output] [LOBBY_LAYOUT] PASS victory result text fits
+2026-10-03T14:07:55.214Z [Output] [LOBBY_LAYOUT] DONE 777 checks, 0 failed

@@ -1,30 +1,30 @@
-== 0.741.19.7411056_20261003T092417Z_Studio_94E21_last.log
-2026-10-03T09:24:32.360Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
-2026-10-03T09:24:35.391Z [Output] [TRAILER] battlefield center=(-43,-43) obstacles=17
-2026-10-03T09:24:37.341Z [Output] [TRAILER] AI wave decoys=8 triggered=true
-2026-10-03T09:24:37.386Z [Output] [TRAILER] armies placed human=38 ai=44
-2026-10-03T09:24:37.387Z [Output] [TRAILER] fort=Tower
-2026-10-03T09:24:37.387Z [Output] [TRAILER] rolling total=72.5s
-2026-10-03T09:25:22.605Z [Output] [TRAILER] siege group attacking=7
-2026-10-03T09:25:50.903Z [Output] [TRAILER] done fortStanding=false
-== 0.741.19.7411056_20261003T092424Z_Studio_E0553_last.log
-2026-10-03T09:24:32.250Z [Output] [TRAILER] director ready; waiting for the battlefield
-2026-10-03T09:24:40.425Z [Output] [TRAILER_SHOT] intro:mid units=80/82 closest=129.6 fort=inView trauma=0.00 peak=0.00 hudHidden=7
-2026-10-03T09:24:42.215Z [Output] [TRAILER_SHOT] intro:end units=80/82 closest=129.6 fort=inView trauma=0.00 peak=0.00 hudHidden=7
-2026-10-03T09:24:46.665Z [Output] [TRAILER_SHOT] muster:mid units=15/82 closest=12.8 fort=offscreen trauma=0.00 peak=0.00 hudHidden=7
-2026-10-03T09:24:49.859Z [Output] [TRAILER_SHOT] muster:end units=0/82 closest=none fort=offscreen trauma=0.00 peak=0.00 hudHidden=7
-2026-10-03T09:24:53.659Z [Output] [TRAILER_SHOT] standoff:mid units=65/82 closest=46.5 fort=inView trauma=0.00 peak=0.00 hudHidden=7
-2026-10-03T09:24:56.060Z [Output] [TRAILER_SHOT] standoff:end units=63/82 closest=80.3 fort=inView trauma=0.00 peak=0.11 hudHidden=12
-2026-10-03T09:25:00.667Z [Output] [TRAILER_SHOT] charge:mid units=48/75 closest=5.7 fort=inView trauma=0.47 peak=0.98 hudHidden=40
-2026-10-03T09:25:03.876Z [Output] [TRAILER_SHOT] charge:end units=33/67 closest=4.0 fort=inView trauma=0.51 peak=0.98 hudHidden=49
-2026-10-03T09:25:07.669Z [Output] [TRAILER_SHOT] volley:mid units=36/54 closest=50.8 fort=inView trauma=0.00 peak=0.85 hudHidden=55
-2026-10-03T09:25:10.078Z [Output] [TRAILER_SHOT] volley:end units=45/51 closest=7.0 fort=inView trauma=0.16 peak=0.85 hudHidden=58
-2026-10-03T09:25:16.667Z [Output] [TRAILER_SHOT] clash:mid units=15/37 closest=25.0 fort=offscreen trauma=0.00 peak=0.98 hudHidden=69
-2026-10-03T09:25:21.464Z [Output] [TRAILER_SHOT] clash:end units=6/24 closest=43.2 fort=offscreen trauma=0.73 peak=0.98 hudHidden=89
-2026-10-03T09:25:28.175Z [Output] [TRAILER_SHOT] siege:mid units=2/20 closest=11.0 fort=inView trauma=0.00 peak=0.88 hudHidden=106
-2026-10-03T09:25:32.573Z [Output] [TRAILER_SHOT] siege:end units=0/12 closest=none fort=inView trauma=0.00 peak=0.88 hudHidden=107
-2026-10-03T09:25:37.170Z [Output] [TRAILER_SHOT] collapse:mid units=3/7 closest=31.5 fort=gone trauma=0.00 peak=0.98 hudHidden=109
-2026-10-03T09:25:39.967Z [Output] [TRAILER_SHOT] collapse:end units=3/6 closest=24.8 fort=gone trauma=0.00 peak=0.98 hudHidden=109
-2026-10-03T09:25:45.664Z [Output] [TRAILER_SHOT] finale:mid units=6/6 closest=88.8 fort=gone trauma=0.00 peak=0.00 hudHidden=109
-2026-10-03T09:25:49.671Z [Output] [TRAILER_SHOT] finale:end units=6/6 closest=160.8 fort=gone trauma=0.00 peak=0.00 hudHidden=109
-2026-10-03T09:25:54.664Z [Output] [TRAILER] finished; control returned to the RTS camera
+== 0.741.19.7411056_20261003T102226Z_Studio_3D7D7_last.log
+2026-10-03T10:22:42.640Z [Output] [RTS] 對局開始：1 名玩家、1 個電腦陣營，地圖 Small。
+2026-10-03T10:22:45.675Z [Output] [TRAILER] battlefield center=(-43,-43) obstacles=17
+2026-10-03T10:22:45.790Z [Output] [TRAILER] AI wave decoys=8 triggered=true
+2026-10-03T10:22:45.832Z [Output] [TRAILER] armies placed human=38 ai=44
+2026-10-03T10:22:45.834Z [Output] [TRAILER] fort=Tower
+2026-10-03T10:22:45.834Z [Output] [TRAILER] rolling total=72.5s
+2026-10-03T10:23:31.040Z [Output] [TRAILER] siege group attacking=7
+2026-10-03T10:23:59.337Z [Output] [TRAILER] done fortStanding=false
+== 0.741.19.7411056_20261003T102233Z_Studio_D2FAE_last.log
+2026-10-03T10:22:42.455Z [Output] [TRAILER] director ready; waiting for the battlefield
+2026-10-03T10:22:48.776Z [Output] [TRAILER_SHOT] intro:mid units=80/82 closest=129.6 fort=inView trauma=0.00 peak=0.00 corpses=none ruins=none hudHidden=7
+2026-10-03T10:22:50.582Z [Output] [TRAILER_SHOT] intro:end units=80/82 closest=129.6 fort=inView trauma=0.00 peak=0.00 corpses=none ruins=none hudHidden=7
+2026-10-03T10:22:55.028Z [Output] [TRAILER_SHOT] muster:mid units=26/82 closest=10.4 fort=offscreen trauma=0.00 peak=0.00 corpses=none ruins=none hudHidden=7
+2026-10-03T10:22:58.236Z [Output] [TRAILER_SHOT] muster:end units=9/82 closest=10.7 fort=offscreen trauma=0.00 peak=0.00 corpses=none ruins=none hudHidden=7
+2026-10-03T10:23:02.037Z [Output] [TRAILER_SHOT] standoff:mid units=64/82 closest=52.5 fort=inView trauma=0.00 peak=0.00 corpses=none ruins=none hudHidden=7
+2026-10-03T10:23:04.425Z [Output] [TRAILER_SHOT] standoff:end units=63/82 closest=81.0 fort=inView trauma=0.00 peak=0.00 corpses=1/40p ruins=none hudHidden=13
+2026-10-03T10:23:09.029Z [Output] [TRAILER_SHOT] charge:mid units=52/76 closest=4.6 fort=inView trauma=0.30 peak=0.83 corpses=7/214p ruins=none hudHidden=36
+2026-10-03T10:23:12.227Z [Output] [TRAILER_SHOT] charge:end units=41/69 closest=7.1 fort=inView trauma=0.30 peak=0.83 corpses=14/416p ruins=none hudHidden=42
+2026-10-03T10:23:16.030Z [Output] [TRAILER_SHOT] volley:mid units=38/57 closest=55.9 fort=inView trauma=0.00 peak=0.51 corpses=26/784p ruins=none hudHidden=51
+2026-10-03T10:23:18.427Z [Output] [TRAILER_SHOT] volley:end units=48/54 closest=8.0 fort=inView trauma=0.00 peak=0.51 corpses=29/868p ruins=none hudHidden=51
+2026-10-03T10:23:25.035Z [Output] [TRAILER_SHOT] clash:mid units=4/38 closest=21.8 fort=offscreen trauma=0.00 peak=0.72 corpses=44/1246p ruins=0/0p hudHidden=65
+2026-10-03T10:23:29.830Z [Output] [TRAILER_SHOT] clash:end units=6/26 closest=9.1 fort=offscreen trauma=0.00 peak=0.72 corpses=50/1392p ruins=0/0p hudHidden=81
+2026-10-03T10:23:36.527Z [Output] [TRAILER_SHOT] siege:mid units=2/22 closest=10.7 fort=inView trauma=0.00 peak=0.88 corpses=42/1085p ruins=0/0p hudHidden=102
+2026-10-03T10:23:40.931Z [Output] [TRAILER_SHOT] siege:end units=0/15 closest=none fort=inView trauma=0.00 peak=0.88 corpses=42/1094p ruins=0/0p hudHidden=105
+2026-10-03T10:23:45.524Z [Output] [TRAILER_SHOT] collapse:mid units=2/9 closest=36.1 fort=gone trauma=0.00 peak=0.98 corpses=36/932p ruins=0/0p hudHidden=106
+2026-10-03T10:23:48.325Z [Output] [TRAILER_SHOT] collapse:end units=0/7 closest=none fort=gone trauma=0.00 peak=0.98 corpses=32/828p ruins=0/0p hudHidden=108
+2026-10-03T10:23:54.034Z [Output] [TRAILER_SHOT] finale:mid units=7/7 closest=92.5 fort=gone trauma=0.00 peak=0.00 corpses=23/588p ruins=0/0p hudHidden=108
+2026-10-03T10:23:58.029Z [Output] [TRAILER_SHOT] finale:end units=7/7 closest=166.3 fort=gone trauma=0.00 peak=0.00 corpses=14/374p ruins=0/0p hudHidden=108
+2026-10-03T10:24:03.034Z [Output] [TRAILER] finished; control returned to the RTS camera
