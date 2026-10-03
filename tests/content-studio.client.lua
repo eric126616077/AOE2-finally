@@ -102,8 +102,8 @@ local ok,problem=pcall(function()
  local stable=server:InvokeServer("build","Stable",home,{min=48,max=170})
  local barracks=server:InvokeServer("build","Barracks",home,{min=48,max=170})
  check(archery and stable and barracks,"測試前置：射箭場、馬廄、兵營")
- local infantry=server:InvokeServer("spawn","infantry",home+Vector3.new(0,0,30))
- local spearman=server:InvokeServer("spawn","spearman",home+Vector3.new(6,0,30))
+ local infantry=server:InvokeServer("spawnFree","infantry",home+Vector3.new(0,0,40))
+ local spearman=server:InvokeServer("spawnFree","spearman",home+Vector3.new(0,0,40))
  local baseHP,baseAttack=infantry:GetAttribute("MaxHP"),infantry:GetAttribute("Attack")
  command:FireServer("Train",archery,"cavalryArcher")
  command:FireServer("Train",archery,"handCannoneer")
@@ -145,9 +145,13 @@ local ok,problem=pcall(function()
 
  guard("電腦撿聖物與跑貿易")
  -- 5. 電腦撿聖物與跑貿易（電腦在測試一開始就已準備）。兩者都觀察到後才讓電腦退回黑暗時代。
- local seen,trading
+ local seen,trading,lastPrint=nil,nil,0
  waitFor(function()
   local s=server:InvokeServer("aiState")
+  if s and os.clock()-lastPrint>20 then
+   lastPrint=os.clock()
+   print(TAG.."INFO 電腦：時代 "..tostring(s.age).." 黃金 "..tostring(s.gold).." 人口 "..s.population.." 修道院 "..s.monastery.." 僧侶 "..s.monks.." 貿易車 "..s.carts)
+  end
   if s and (s.seeking>0 or s.carrying>0) then seen=seen or s end
   if s and s.trading>0 then trading=trading or s end
   return seen and trading
@@ -164,11 +168,13 @@ local ok,problem=pcall(function()
  local monastery=server:InvokeServer("build","Monastery",home,{min=48,max=180})
  check(monastery~=nil,"測試前置：修道院")
  local monks={}
- for i=1,total+1 do monks[i]=server:InvokeServer("spawn","monk",home+Vector3.new(i*5-15,0,-30)) end
+ for i=1,total+1 do monks[i]=server:InvokeServer("spawnFree","monk",monastery:GetPivot().Position) end
+ check(#monks==total+1,"測試前置：在空地生成僧侶",#monks)
+ for i,relic in ipairs(groundRelics()) do print(TAG.."INFO 聖物 "..i.." 位置 "..tostring(relic:GetPivot().Position)) end
  -- 先驗掉落：一位僧侶撿起最近的聖物後被移除，聖物應回到地上。
  local first=nearest(groundRelics(),home)
  command:FireServer("Order",{monks[total+1]},first)
- check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",monks[total+1]:GetAttribute("OrderKind"))
+ check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",tostring(monks[total+1]:GetAttribute("OrderKind")).." 位置 "..tostring(monks[total+1]:GetPivot().Position))
  check(#groundRelics()==total-1,"拾取後地上少一件",#groundRelics())
  command:FireServer("Order",{monks[total+1]},infantry)
  task.wait(0.5)

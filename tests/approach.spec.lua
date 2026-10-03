@@ -31,7 +31,7 @@ for _,worker in ipairs(workers) do
  for _,candidate in ipairs(candidates) do blacklist[candidate.index]=true end
  expect(not Approach.nearest(candidates,worker.X,worker.Z,blacklist,usable),"exhausted perimeter fabricated a route")
 end
-for _,kind in ipairs({"build","gather","deliver","repair","garrison"}) do expect(Approach.isWork(kind),"village interaction excluded from common approach") end
+for _,kind in ipairs({"build","gather","deliver","repair","garrison","relic","relicStore","trade"}) do expect(Approach.isWork(kind),"village interaction excluded from common approach") end
 for _,kind in ipairs({"move","attack","custom","Build",false,0}) do expect(not Approach.isWork(kind),"unknown order entered worker interaction flow") end
 expect(not Approach.isWork(nil),"nil order entered worker interaction flow")
 

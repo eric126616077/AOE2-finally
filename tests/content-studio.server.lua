@@ -51,6 +51,26 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   return place(player.UserId,a,b,options.min or 40,options.max or 160,options.awayFrom,options.minAway)
  elseif action=="spawn" then
   return probe:Invoke("spawn",player.UserId,a,b)
+ elseif action=="spawnFree" then
+  -- 在 b 附近找沒有建築、資源或可碰撞零件的空地再生成，避免單位卡在房屋裡。
+  local params=OverlapParams.new()
+  params.FilterType=Enum.RaycastFilterType.Exclude
+  params.FilterDescendantsInstances={workspace:FindFirstChild("AOE2_Ground"),workspace.Units}
+  for radius=0,96,6 do
+   for index=0,math.max(0,radius//2) do
+    local angle=index*2*math.pi/math.max(1,radius//2+1)
+    local pos=b+Vector3.new(math.cos(angle)*radius,0,math.sin(angle)*radius)
+    local blocked=false
+    for _,part in ipairs(workspace:GetPartBoundsInBox(CFrame.new(pos+Vector3.new(0,2.5,0)),Vector3.new(8,5,8),params)) do
+     if part.CanCollide or part:IsDescendantOf(workspace.Buildings) or part:IsDescendantOf(workspace.Resources) then blocked=true; break end
+    end
+    if not blocked then
+     local unit=probe:Invoke("spawn",player.UserId,a,pos)
+     if unit then return unit end
+    end
+   end
+  end
+  return nil
  elseif action=="remove" then
   return probe:Invoke("remove",a)
  elseif action=="aiPrepare" then
@@ -60,7 +80,8 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local id=ai:GetAttribute("OwnerId")
   -- 帝王時代：電腦不會再為升級時代存資源（存資源時不訓練）；只給足夠訓練僧侶與貿易車的少量資源。
   ai:SetAttribute("Age",4)
-  for _,key in ipairs({"food","wood","gold","stone"}) do ai:SetAttribute(key,(ai:GetAttribute(key) or 0)+800) end
+  -- 測試期間電腦的軍隊會被持續移除、電腦會一直補兵，所以給足以同時補兵與訓練僧侶／貿易車的資源。
+  for _,key in ipairs({"food","wood","gold"}) do ai:SetAttribute(key,(ai:GetAttribute(key) or 0)+4000) end
   local home=ai:GetAttribute("HomePosition") or Vector3.zero
   local monastery=owned(id,"Monastery","Buildings")[1] or place(id,"Monastery",home,40,200)
   local market=owned(id,"Market","Buildings")[1] or place(id,"Market",home,40,200)
@@ -70,7 +91,9 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local ai=aiActor()
   if not ai then return nil end
   local id=ai:GetAttribute("OwnerId")
-  local result={monks=0,seeking=0,carrying=0,carts=0,trading=0}
+  local result={monks=0,seeking=0,carrying=0,carts=0,trading=0,gold=ai:GetAttribute("gold"),age=ai:GetAttribute("Age"),
+   population=tostring(ai:GetAttribute("Population")).."/"..tostring(ai:GetAttribute("PopulationCap")),monastery="無"}
+  for _,b in ipairs(owned(id,"Monastery","Buildings")) do result.monastery=(b:GetAttribute("Complete") and "完工" or "施工中").." 訓練="..tostring(b:GetAttribute("Training")) end
   for _,unit in ipairs(workspace.Units:GetChildren()) do
    if unit:GetAttribute("OwnerId")==id then
     local kind,order=unit:GetAttribute("UnitType"),unit:GetAttribute("OrderKind")
