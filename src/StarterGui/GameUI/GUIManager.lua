@@ -2087,7 +2087,6 @@ function GUI:UpdateLobby()
   local count=lobbyRoomAttribute(id,"Players") or 0
   local required=lobbyRoomAttribute(id,"ExpectedPlayers") or entry.portal.settings.expectedPlayers
   local status=lobbyRoomAttribute(id,"Status") or "Configuring"
-  local mode=lobbyRoomAttribute(id,"Setting_teamMode") or entry.portal.settings.teamMode
   local computers=lobbyRoomAttribute(id,"Setting_aiCount") or entry.portal.settings.aiCount
   local roomSettings={gameMode=lobbyRoomAttribute(id,"Setting_gameMode") or entry.portal.settings.gameMode,
    storyChapter=lobbyRoomAttribute(id,"Setting_storyChapter"),teamMode=lobbyRoomAttribute(id,"Setting_teamMode") or entry.portal.settings.teamMode}
