@@ -179,9 +179,11 @@ local ok,problem=pcall(function()
  -- 聖物階段的已知起點：取出修道院裡存放的聖物、補足並全部放回正式的對稱點，總數必須等於設定。
  local reset=server:InvokeServer("relicReset")
  print(TAG.."INFO 聖物重設：地上 "..tostring(reset and reset.count).." 對稱點 "..tostring(reset and reset.points).." 在原位 "..tostring(reset and reset.atHome)
-  .." 自修道院取出 "..tostring(reset and reset.stored).." 補回 "..tostring(reset and reset.created))
- assert(reset and reset.count==total and reset.points==total and reset.atHome==total,
-  "聖物重設失敗："..tostring(reset and reset.count).."/"..tostring(reset and reset.points).."/"..tostring(reset and reset.atHome))
+  .." 自修道院取出 "..tostring(reset and reset.stored).." 補回 "..tostring(reset and reset.created)
+  .." 全場實例 "..tostring(reset and reset.instances).." 攜帶者 "..tostring(reset and reset.carriers))
+ assert(reset and reset.count==total and reset.points==total and reset.atHome==total and reset.instances==total and reset.carriers==0,
+  "聖物重設失敗："..tostring(reset and reset.count).."/"..tostring(reset and reset.points).."/"..tostring(reset and reset.atHome)
+  .." 實例 "..tostring(reset and reset.instances).." 攜帶者 "..tostring(reset and reset.carriers))
  check(#groundRelics()==total and (player:GetAttribute("Relics") or 0)==0,"重設後全部聖物都在地上的對稱點",#groundRelics().." / "..total)
  local monastery=server:InvokeServer("build","Monastery",home,{min=48,max=180})
  check(monastery~=nil,"測試前置：修道院")

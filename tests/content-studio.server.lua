@@ -138,6 +138,13 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   aiHold(ai)
   return true
  elseif action=="relicReset" then
+  -- 0. 先移除電腦的所有僧侶與任何攜帶聖物的單位（玩家也算）：攜帶中的聖物只是單位上的旗標，
+  --    移除時伺服器會讓它掉回地上成為實例。必須在計數前做，否則會把攜帶中的那件當成遺失而多補一件。
+  local ai=aiActor()
+  if ai then aiHold(ai) end
+  for _,unit in ipairs(workspace.Units:GetChildren()) do
+   if unit:GetAttribute("CarryingRelic")==true then probe:Invoke("remove",unit) end
+  end
   -- 1. 取出所有修道院裡存放的聖物，並把各勢力的聖物件數歸零（伺服器的聖物勝利以勢力的 Relics 屬性計算）。
   local stored=0
   for _,building in ipairs(workspace.Buildings:GetChildren()) do
@@ -168,7 +175,13 @@ remote.OnServerInvoke=function(player,action,a,b,c)
    local p=relic:GetPivot().Position
    for _,point in ipairs(points) do if (Vector3.new(point.X,p.Y,point.Z)-p).Magnitude<1 then atHome+=1; break end end
   end
-  return {count=#relics,points=#points,atHome=atHome,stored=stored,created=created,total=total}
+  -- 全場的聖物實例（不限 Resources）與仍攜帶聖物的單位，用來斷言總數守恆。
+  local instances,carriers=0,0
+  for _,item in ipairs(workspace:GetDescendants()) do
+   if item:IsA("Model") and item:GetAttribute("Relic")==true then instances+=1 end
+  end
+  for _,unit in ipairs(workspace.Units:GetChildren()) do if unit:GetAttribute("CarryingRelic")==true then carriers+=1 end end
+  return {count=#relics,points=#points,atHome=atHome,stored=stored,created=created,total=total,instances=instances,carriers=carriers}
  elseif action=="aiDisarm" then
   -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。
   -- a="noMonks"：已觀察到電腦派僧侶撿聖物，之後持續移除電腦僧侶（聖物掉回地上），貿易照常。
