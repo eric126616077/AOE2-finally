@@ -233,7 +233,6 @@ local LOBBY_PALETTES = {
   on = Color3.fromRGB(220,239,255), off = Color3.fromRGB(234,237,243), ink = LB.text},
  blue = lobbyPalette(Color3.fromRGB(0,162,255)), green = lobbyPalette(Color3.fromRGB(40,196,90)),
  red = lobbyPalette(Color3.fromRGB(240,78,78)), yellow = lobbyPalette(Color3.fromRGB(255,196,40),LB.text)}
-local LOBBY_MODE_COLORS = {Story = Color3.fromRGB(255,170,30), PvP = Color3.fromRGB(240,78,78), PvE = Color3.fromRGB(40,190,96)}
 -- 白字配深色描邊；深色字不加描邊。
 local function lobbyText(label, color, font, outlined)
  if not label then return end
@@ -508,7 +507,7 @@ local lobbyLayouts={
  Sandbox={{"expectedPlayers"},{"size","population","startingResources","victory"}},
 }
 local storyLocked={size=true,aiCount=true,difficulty=true,population=true,startingResources=true,victory=true}
-local LOBBY_FIELD_TOP={152,64}
+local LOBBY_FIELD_TOP={64,64}
 local function waitingInLobby()
  local inLobby=player:GetAttribute("InLobby")
  return inLobby==true or (inLobby==nil and workspace:GetAttribute("MatchPhase")=="Lobby")
@@ -918,24 +917,10 @@ function GUI:CreateLobby()
  -- Only the visible surfaces catch input; the rest of the courtyard stays walkable.
  self.lobby = make("Frame",self.canvas,{Name = "LobbyLayer",Size = UDim2.fromScale(1,1),BackgroundTransparency = 1,ZIndex = 20,Active = false})
  self.lobbyWelcome = panel(self.lobby,UDim2.fromOffset(860,290),UDim2.new(0.5,-430,1,-302),"CourtyardWelcome")
- self.welcomeHeading=text(self.lobbyWelcome,"選擇玩法",UDim2.new(1,-36,0,32),UDim2.fromOffset(18,11),26,C.white,Enum.Font.SourceSansBold)
- self.welcomeDescription=text(self.lobbyWelcome,"快速開始會自動找房間；也可以走進庭院光圈，或選擇下方匹配點自訂房間。",UDim2.new(1,-36,0,25),UDim2.fromOffset(18,45),14,C.muted)
+ self.welcomeHeading=text(self.lobbyWelcome,"選擇傳送門",UDim2.new(1,-36,0,32),UDim2.fromOffset(18,11),26,C.white,Enum.Font.SourceSansBold)
+ self.welcomeDescription=text(self.lobbyWelcome,"每座傳送門是一種玩法：走進庭院光圈，或點下方卡片加入。",UDim2.new(1,-36,0,25),UDim2.fromOffset(18,45),14,C.muted)
  self.queueSummary=text(self.lobbyWelcome,"",UDim2.new(1,-36,0,20),UDim2.fromOffset(18,181),12,C.muted)
- -- 快速開始只送出玩法；伺服器決定加入哪個房間或建立新房間。
- self.quickButtons={}
- for i,entry in ipairs({{id="StorySolo",mode="Story",title="單人劇情"},{id="Story",mode="Story",title="多人劇情"},{id="PvP",mode="PvP",title="玩家對戰"},{id="PvE",mode="PvE",title="合作對電腦"}}) do
-  local b=button(self.lobbyWelcome,UDim2.fromOffset(196,64),UDim2.fromOffset(18+(i-1)*208,77),function()
-   local quick=self.quickButtons[i]
-   if waitingInLobby() and not self.lobbyStarting and quick.button:GetAttribute("Unavailable")~=true then lobbyCommand("QuickPlay",entry.id) end
-  end,"QuickPlay_"..entry.id)
-  local accent=Config.GameModes[entry.mode].accent or C.gold
-  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,4,1,-16),accent,0,"QuickAccent")
-  local title=text(b,entry.title.."  ›",UDim2.new(1,-20,0,26),UDim2.fromOffset(12,6),17,C.white,Enum.Font.SourceSansBold)
-  local detail=text(b,"",UDim2.new(1,-20,0,22),UDim2.fromOffset(12,34),12,C.muted)
-  detail.TextWrapped=false; detail.TextTruncate=Enum.TextTruncate.AtEnd
-  self.quickButtons[i]={button=b,title=title,detail=detail,entry=entry}
- end
- self.roomsHeading=text(self.lobbyWelcome,"自 訂 房 間",UDim2.new(1,-36,0,20),UDim2.fromOffset(18,150),13,C.gold,Enum.Font.SourceSansSemibold)
+ -- 每張卡片對應一座傳送門；玩法由傳送門決定，伺服器驗證後才加入。
  self.portalCards={}
  for i,portal in ipairs(Config.Lobby.portals or {}) do
   local b,edge=button(self.lobbyWelcome,UDim2.fromOffset(196,98),UDim2.fromOffset(18+(i-1)*208,77),function()
@@ -959,13 +944,13 @@ function GUI:CreateLobby()
  self.lobbyFrame.Visible=false
  self.lobbySeal=heraldry(self.lobbyFrame,42,UDim2.fromOffset(17,14))
  self.lobbyHeading=text(self.lobbyFrame,"匹配房間",UDim2.new(1,-206,0,34),UDim2.fromOffset(72,13),28,C.white,Enum.Font.SourceSansBold)
- self.lobbyDescription=text(self.lobbyFrame,"先選模式與人數，再設定這場遊戲。",UDim2.new(1,-98,0,24),UDim2.fromOffset(72,47),14,C.muted)
+ self.lobbyDescription=text(self.lobbyFrame,"先設定人數與對手，再確認這場遊戲。",UDim2.new(1,-98,0,24),UDim2.fromOffset(72,47),14,C.muted)
  self.leaveButton = namedButton(self.lobbyFrame,"離開房間",UDim2.fromOffset(104,44),UDim2.new(1,-120,0,15),function()
   if waitingInLobby() and not self.lobbyStarting then lobbyCommand("QueueLeave") end
  end,"LeaveQueueButton",C.muted)
  self.wizardSteps=make("Frame",self.lobbyFrame,{Name="WizardSteps",Size=UDim2.new(1,-32,0,44),Position=UDim2.fromOffset(16,83),BackgroundTransparency=1,Active=false})
  self.lobbyStepButtons={}
- for i,name in ipairs({"選擇玩法","遊戲設定","等候玩家"}) do
+ for i,name in ipairs({"人數與對手","遊戲設定","等候玩家"}) do
   local b,label=namedButton(self.wizardSteps,i.."  "..name,UDim2.new(1/3,-5,1,0),UDim2.new((i-1)/3,0,0,0),function()
    if self.lobbyWizard and not self.lobbyStarting and not self.lobbyConfigurePending and i<3 then self:SetLobbyPage(i) end
   end,"Step_"..i)
@@ -978,27 +963,9 @@ function GUI:CreateLobby()
  end
  local basic,advanced,review=self.lobbyPages[1],self.lobbyPages[2],self.lobbyPages[3]
  self.basicHeading=text(basic,"這場怎麼玩？",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
- self.basicHint=text(basic,"選擇玩法，再決定人數與對手。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
+ self.basicHint=text(basic,"決定人數與對手。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
  self.advancedHeading=text(advanced,"遊戲設定",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
  self.advancedHint=text(advanced,"已有預設規則；可直接完成設定，或再調整這場遊戲。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
- -- 三張玩法卡片；按下只送出提案，伺服器驗證後才會改變房間。
- self.modeCards={}
- for i,id in ipairs(GameModes.Order) do
-  local data=Config.GameModes[id]
-  local b,edge=button(basic,UDim2.new(1/3,-6,0,78),UDim2.new((i-1)/3,i==1 and 0 or 3,0,62),function()
-   if not self.lobbyWizard or not waitingInLobby() or self.lobbyStarting or self.lobbyConfigurePending then self:Notify("玩法由房主決定。") return end
-   if self.settings.gameMode==id then return end
-   local request,message=GameModes.next(self.settings,"gameMode",{id},self.lobbyHumanCount or 0,self:StoryUnlocked())
-   if not request then self:Notify(message or "目前人數不能切換到這個玩法。") return end
-   self:Notify((message and message.."\n" or "")..GameModes.label(request).." · "..request.expectedPlayers.." 真人＋"..request.aiCount.." 電腦")
-   lobbyCommand("LobbySettings",request)
-  end,"ModeCard_"..id)
-  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,4,1,-16),data.accent or C.gold,0,"ModeAccent")
-  local title=text(b,data.title,UDim2.new(1,-20,0,26),UDim2.fromOffset(12,5),17,C.white,Enum.Font.SourceSansBold)
-  local detail=text(b,data.description,UDim2.new(1,-20,0,40),UDim2.fromOffset(12,31),12,C.muted)
-  detail.TextYAlignment=Enum.TextYAlignment.Top
-  self.modeCards[id]={button=b,edge=edge,title=title,detail=detail}
- end
  self.storyBriefing=text(basic,"",UDim2.new(1,-8,0,70),UDim2.fromOffset(4,264),14,C.white)
  self.storyBriefing.Name="StoryBriefing"; self.storyBriefing.TextYAlignment=Enum.TextYAlignment.Top
  local chapterNames,chapterValues={},{}
@@ -1095,12 +1062,6 @@ function GUI:SkinLobby()
  lobbyText(self.welcomeHeading,LB.text,LOBBY_TITLE_FONT)
  lobbyText(self.welcomeDescription,LB.muted)
  lobbyText(self.queueSummary,LB.muted)
- lobbyText(self.roomsHeading,LB.blue,LOBBY_TITLE_FONT)
- for _,quick in ipairs(self.quickButtons) do
-  lobbyButton(quick.button,lobbyPalette(LOBBY_MODE_COLORS[quick.entry.mode] or LB.header),quick.title,0.84)
-  lobbyText(quick.detail,LB.white,LOBBY_BODY_FONT,true)
-  local accent=quick.button:FindFirstChild("QuickAccent"); if accent then accent.Visible=false end
- end
  for _,entry in pairs(self.portalCards) do
   lobbyButton(entry.button,lobbyPalette(entry.portal.color or LB.header),entry.title,0.92)
   lobbyText(entry.detail,LB.white,LOBBY_BODY_FONT,true)
@@ -1115,12 +1076,6 @@ function GUI:SkinLobby()
   status.BackgroundColor3=LB.outline; status.BackgroundTransparency=0.45
   round(status,10)
   make("UIPadding",status,{PaddingLeft=UDim.new(0,8),PaddingRight=UDim.new(0,8)})
- end
- for id,card in pairs(self.modeCards) do
-  local palette=table.clone(P.neutral); palette.on=LOBBY_MODE_COLORS[id] or LB.header
-  lobbyButton(card.button,palette,nil,0.88)
-  lobbyText(card.title,LB.text,LOBBY_TITLE_FONT); lobbyText(card.detail,LB.muted)
-  local accent=card.button:FindFirstChild("ModeAccent"); if accent then accent.BackgroundColor3=palette.on end
  end
  lobbyPanel(self.lobbyFrame)
  -- 房間面板頂部的藍色標題列；下半部用填色蓋掉圓角，與內容區平接。
@@ -1236,31 +1191,17 @@ function GUI:LayoutLobby()
  if not self.lobby then return end
  local width,height=self.layoutWidth or 1280,self.layoutHeight or 720
  local compact=width<700
- -- 手機橫向等矮畫面：只留標題、快速開始與房間名稱／狀態，面板不蓋住大半個庭院。
+ -- 手機橫向等矮畫面：只留標題與傳送門名稱／狀態，面板不蓋住大半個庭院。
  local tight=height<520
  local small=compact or tight
  local welcomeWidth=math.min(width-16,860)
- local columns=compact and 2 or 4
- local cardHeight=tight and 52 or compact and 82 or 98
- -- 快速開始固定一列四格；窄畫面只留標題，避免歡迎面板蓋住庭院。
- local quickTop=tight and 42 or compact and 67 or 77
- local quickHeight=small and 44 or 64
- local quickWidth=(welcomeWidth-28-3*6)/4
- for i,quick in ipairs(self.quickButtons) do
-  quick.button.Size=UDim2.fromOffset(quickWidth,quickHeight)
-  quick.button.Position=UDim2.fromOffset(14+(i-1)*(quickWidth+6),quickTop)
-  quick.title.Text=small and quick.entry.title or quick.entry.title.."  ›"
-  quick.title.TextSize=small and 14 or 17
-  quick.title.Position=UDim2.fromOffset(small and 8 or 12,small and 9 or 6)
-  quick.title.Size=UDim2.new(1,small and -12 or -20,0,26)
-  quick.detail.Visible=not small
-  quick.detail.Position=UDim2.fromOffset(12,34)
- end
- local roomsTop=quickTop+quickHeight+8
- self.roomsHeading.Visible=not small
- self.roomsHeading.Position=UDim2.fromOffset(14,roomsTop)
- local welcomeTop=roomsTop+(small and 0 or 24)
- local rows=math.ceil(#(Config.Lobby.portals or {})/columns)
+ local portalCount=math.max(1,#(Config.Lobby.portals or {}))
+ -- 傳送門卡片排成一列（最多四張）；太窄時說明文字收起，只留名稱與狀態。
+ local columns=math.min(portalCount,4)
+ local brief=tight or width<520
+ local cardHeight=brief and 52 or compact and 82 or 98
+ local welcomeTop=tight and 42 or compact and 70 or 77
+ local rows=math.ceil(portalCount/columns)
  local welcomeHeight=welcomeTop+rows*(cardHeight+6)+(tight and 8 or 28)
  self.lobbyWelcome.Size=UDim2.fromOffset(welcomeWidth,welcomeHeight)
  self.lobbyWelcome.Position=UDim2.new(0.5,-welcomeWidth/2,1,-welcomeHeight-8)
@@ -1281,10 +1222,10 @@ function GUI:LayoutLobby()
    entry.button.Position=UDim2.fromOffset(14+((i-1)%columns)*(cardWidth+6),welcomeTop+math.floor((i-1)/columns)*(cardHeight+6))
    entry.title.TextSize=small and 16 or 18
    entry.title.Position=UDim2.fromOffset(12,small and 4 or 7)
-   entry.title.Size=UDim2.new(1,-43,0,tight and 24 or 27)
-   -- 窄卡片的「›」會壓到說明文字；矮畫面只顯示房間名稱與狀態。
+   entry.title.Size=UDim2.new(1,-43,0,brief and 24 or 27)
+   -- 窄卡片的「›」會壓到說明文字；矮或窄畫面只顯示傳送門名稱與狀態。
    entry.arrow.Visible=not small
-   entry.detail.Visible=not tight
+   entry.detail.Visible=not brief
    entry.detail.Position=UDim2.fromOffset(12,compact and 30 or 34)
    entry.detail.Size=UDim2.new(1,-24,0,compact and 28 or 34)
    entry.detail.TextSize=compact and 12 or 13
@@ -1328,11 +1269,6 @@ function GUI:LayoutLobby()
  self.lobbyBody.CanvasSize=UDim2.fromOffset(0,pageHeight)
  for _,body in ipairs(self.lobbyPages) do body.Size=UDim2.new(1,-8,0,pageHeight) end
  local narrow=panelWidth<480
- for _,card in pairs(self.modeCards) do
-  card.title.TextSize=narrow and 14 or 17
-  card.detail.Visible=panelWidth>=560
-  card.button.Size=UDim2.new(1/3,-6,0,card.detail.Visible and 78 or 48)
- end
  self.storyBriefing.Visible=story
  self.storyBriefing.Position=UDim2.fromOffset(4,briefingTop)
  self.storyBriefing.Size=UDim2.new(1,-8,0,80)
@@ -2139,14 +2075,7 @@ function GUI:UpdateLobby()
  self.lobbyFrame.Visible=queued and not starting
  self.startingTravel.Visible=starting
  self.lobbyBody.Visible=queued and not starting
- self.queueSummary.Text="劇情已通關 "..math.min(player:GetAttribute("StoryCleared") or 0,GameModes.ChapterCount).." / "..GameModes.ChapterCount.." 章 · 房主設定玩法，滿員且全員準備後自動出發。"
- local nextChapter=GameModes.chapter(unlocked)
- local quickDetails={StorySolo="第 "..unlocked.." 章 · "..(nextChapter and nextChapter.title or "").." · 立即出發",
-  Story="2–3 人合作闖關",PvP="2–4 位真人對戰",PvE="與好友一起對抗電腦"}
- for _,quick in ipairs(self.quickButtons) do
-  quick.detail.Text=quickDetails[quick.entry.id] or ""
-  quick.button:SetAttribute("Unavailable",not waitingInLobby() or queued or starting)
- end
+ self.queueSummary.Text="劇情已通關 "..math.min(player:GetAttribute("StoryCleared") or 0,GameModes.ChapterCount).." / "..GameModes.ChapterCount.." 章 · 第一位進入的玩家當房主，滿員且全員準備後自動出發。"
  for id,entry in pairs(self.portalCards) do
   local count=lobbyRoomAttribute(id,"Players") or 0
   local required=lobbyRoomAttribute(id,"ExpectedPlayers") or entry.portal.settings.expectedPlayers
@@ -2155,7 +2084,7 @@ function GUI:UpdateLobby()
   local roomSettings={gameMode=lobbyRoomAttribute(id,"Setting_gameMode") or entry.portal.settings.gameMode,
    storyChapter=lobbyRoomAttribute(id,"Setting_storyChapter"),teamMode=lobbyRoomAttribute(id,"Setting_teamMode") or entry.portal.settings.teamMode}
   local available=(status=="Waiting" or status=="Configuring") and waitingInLobby() and count<required
-  entry.detail.Text=count==0 and status=="Configuring" and "劇情、對戰或合作\n由第一位進入的房主設定。" or GameModes.label(roomSettings).."\n"..required.." 位真人 · "..computers.." 位電腦"
+  entry.detail.Text=count==0 and status=="Configuring" and entry.portal.description or GameModes.label(roomSettings).."\n"..required.." 位真人 · "..computers.." 位電腦"
   entry.button:SetAttribute("Unavailable",not available)
   entry.status.Text=status=="Configuring" and (count==0 and "空房間 · 進入設定  ›" or "設定中 · "..count.." / "..required.." 人")
    or status=="Waiting" and ((count>=required and "已滿員 · " or "等候中 · ")..count.." / "..required.." 人")
@@ -2163,19 +2092,15 @@ function GUI:UpdateLobby()
   entry.status.TextColor3=LB.white
  end
  self.lobbyHeading.Text=portal and portal.name or "匹配房間"
- self.lobbyDescription.Text=self.lobbyWizard and "選擇玩法與人數，再確認遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定模式與規則，先等候玩家加入。")
+ self.lobbyDescription.Text=self.lobbyWizard and "設定人數與對手，再確認遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定規則，先等候玩家加入。")
  self.reviewStatus.Text=self.lobbyConfigured and "等候玩家" or "房主正在設定"
  self.rosterHeading.Text = "集 合 名 單  ·  "..humanCount.." / "..expectedPlayers.." 人"
  self.readySummary.Text="準備 "..readyCount.." / "..humanCount
  self.readySummary.TextColor3=humanCount>0 and readyCount==humanCount and LB.green or LB.muted
- for _,id in ipairs(GameModes.Order) do
-  local card=self.modeCards[id]
-  card.button:SetAttribute("Selected",gameMode==id)
-  card.button:SetAttribute("Unavailable",not self.lobbyWizard or self.lobbyConfigurePending~=nil)
-  lobbyText(card.title,gameMode==id and LB.white or LB.text,LOBBY_TITLE_FONT,gameMode==id)
-  lobbyText(card.detail,gameMode==id and LB.white or LB.muted,LOBBY_BODY_FONT,gameMode==id)
- end
- self.basicHint.Text=gameMode=="Story" and ("真人玩家同隊闖關；已解鎖到第 "..unlocked.." 章。") or Config.GameModes[gameMode] and Config.GameModes[gameMode].description or "選擇玩法，再決定人數與對手。"
+ -- 玩法由傳送門固定，第一頁標題直接顯示這座傳送門的玩法。
+ local modeData=Config.GameModes[gameMode]
+ self.basicHeading.Text=modeData and modeData.title or "這場怎麼玩？"
+ self.basicHint.Text=gameMode=="Story" and ("真人玩家同隊闖關；已解鎖到第 "..unlocked.." 章。") or modeData and modeData.description or "決定人數與對手。"
  self.advancedHint.Text=gameMode=="Story" and "這一章的戰場規則；換章節就會換規則。" or "已有預設規則；可直接完成設定，或再調整這場遊戲。"
  self.advancedHeading.Text=gameMode=="Story" and "章節規則" or "遊戲設定"
  self.lobbyStepButtons[2].label.Text="2  "..(gameMode=="Story" and "章節規則" or "遊戲設定")
@@ -2210,7 +2135,7 @@ function GUI:UpdateLobby()
  end
  local battlefieldBusy=phase~="Lobby" and not starting
  self.hostLabel.Text=self.lobbyConfigurePending and "正在確認房間設定…"
-  or self.lobbyWizard and (self.lobbyPage==1 and "先選玩法與人數，再前往下一步。" or gameMode=="Story" and "確認章節規則；完成設定後開放準備。" or "規則可沿用預設；完成設定後開放準備。")
+  or self.lobbyWizard and (self.lobbyPage==1 and "先決定人數與對手，再前往下一步。" or gameMode=="Story" and "確認章節規則；完成設定後開放準備。" or "規則可沿用預設；完成設定後開放準備。")
   or not self.lobbyConfigured and "房主完成設定後，就可以準備。"
   or battlefieldBusy and "戰場尚未開放。可先集合與準備，開放後自動出發。"
   or (humanCount<expectedPlayers and ("還差 "..(expectedPlayers-humanCount).." 位玩家 · 可先完成準備"))

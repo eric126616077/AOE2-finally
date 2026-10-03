@@ -283,7 +283,7 @@ function LobbyWorld.Create()
   end
  end
 
- -- Fountain centerpiece with a floating star between the four portals.
+ -- Fountain centerpiece with a floating star; the story portal stands between it and the castle.
  local fountain = Vector3.new(0, 0, 33)
  round("FountainBasin", 24, 2.4, fountain + Vector3.new(0, 1.2, 0), white)
  round("FountainRim", 25, 0.5, fountain + Vector3.new(0, 2.5, 0), trim, nil, false)
@@ -314,13 +314,14 @@ function LobbyWorld.Create()
  local boardFront = surface(board, Enum.NormalId.Back)
  local boardTitle = signText(boardFront, "Welcome", "歡迎來到集結廣場", UDim2.fromScale(0.04, 0.06), UDim2.fromScale(0.92, 0.48))
  boardTitle.UIStroke.Thickness = 4
- local instructions = signText(boardFront, "Instructions", "走進彩色光圈加入匹配點\n也可使用畫面下方的房間卡片", UDim2.fromScale(0.06, 0.56), UDim2.fromScale(0.88, 0.38), Color3.new(1, 1, 1), BODY_FONT)
+ local instructions = signText(boardFront, "Instructions", "每座傳送門是一種玩法\n走進光圈或使用畫面下方的卡片", UDim2.fromScale(0.06, 0.56), UDim2.fromScale(0.88, 0.38), Color3.new(1, 1, 1), BODY_FONT)
  signText(surface(board, Enum.NormalId.Front), "Farewell", "祝你凱旋歸來！", UDim2.fromScale(0.05, 0.15), UDim2.fromScale(0.9, 0.7))
 
- -- Flagpoles in the four portal colors at the plaza corners.
+ -- Flagpoles in the portal colors at the plaza corners; colors repeat when there are fewer portals.
  local portalList = Config.Lobby.portals
  for index, point in ipairs({ Vector2.new(84, 104), Vector2.new(-84, -76), Vector2.new(84, -76), Vector2.new(-84, 104) }) do
-  local color = portalList[index] and portalList[index].color or trim
+  local entry = #portalList > 0 and portalList[(index - 1) % #portalList + 1]
+  local color = entry and entry.color or trim
   block("FlagBase", Vector3.new(3, 1, 3), Vector3.new(point.X, 0.5, point.Y), white)
   round("Flagpole", 0.8, 22, Vector3.new(point.X, 11, point.Y), white)
   local knob = part(folder, "FlagKnob", Vector3.new(1.6, 1.6, 1.6), origin + Vector3.new(point.X, 22.4, point.Y), gold, nil, false)
@@ -420,7 +421,7 @@ function LobbyWorld.Create()
   local stage = phase == "Starting" and "正在建立新戰場" or (phase == "Playing" and "對局進行中" or (phase == "Ended" and "等待返回大廳" or (phase == "Configuring" and ((count or 0) > 0 and "房主設定中" or "等待房主設定") or "等待玩家準備")))
   entry.Mode.Text = GameModeRules.label(settings) .. " · " .. stage
   entry.Count.Text = string.format("玩家 %d / %d　準備 %d", count or 0, expected or 2, ready or 0)
-  instructions.Text = "走進光圈，由房主設定房間\n全員準備後一起前往全新戰場"
+  instructions.Text = "依玩法選傳送門走進光圈\n全員準備後一起前往全新戰場"
  end
  active = object
  return object

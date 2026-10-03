@@ -2000,23 +2000,30 @@ end
 queueJoin=function(state,roomId,quiet,fromUI)
  if not state.inLobby or state.playing or os.clock()<(state.queueCooldown or 0) then return end
  local portal=LobbyRules.room(Config.Lobby.portals,roomId)
- if not portal then if not quiet then notify(state.actor,"這個匹配點不存在。") end; return end
+ if not portal then if not quiet then notify(state.actor,"這個傳送門不存在。") end; return end
  local room=rooms[portal.id]
- if activeRoomId==room.id then if not quiet then notify(state.actor,"這個匹配點正在對局，請先選其他匹配點。") end; return end
+ if activeRoomId==room.id then if not quiet then notify(state.actor,"這個傳送門正在對局，請先選其他傳送門。") end; return end
  if state.teleporting then return end
- if room.travel then if not quiet then notify(state.actor,"這個匹配點的隊伍正在出發，請稍候或選其他匹配點。") end; return end
+ if room.travel then if not quiet then notify(state.actor,"這個傳送門的隊伍正在出發，請稍候或選其他傳送門。") end; return end
  if state.queued and state.roomId==room.id then return end
  local character=state.actor.Character
  local root=character and character:FindFirstChild("HumanoidRootPart")
  local humanoid=character and character:FindFirstChildOfClass("Humanoid")
  if not root or not humanoid or humanoid.Health<=0 then if not quiet then notify(state.actor,"大廳角色尚未準備好，請稍候再試。") end; return end
- if not fromUI and not lobbyWorld:NearPortal(state.actor,room.id) then if not quiet then notify(state.actor,"請走到所選匹配點，或使用房間卡片加入。") end; return end
- if #queuedStates(room.id)>=room.expected then if not quiet then notify(state.actor,"這個匹配點人數已滿，請選其他匹配點。") end; return end
+ if not fromUI and not lobbyWorld:NearPortal(state.actor,room.id) then if not quiet then notify(state.actor,"請走到所選傳送門，或使用下方卡片加入。") end; return end
+ if #queuedStates(room.id)>=room.expected then if not quiet then notify(state.actor,"這個傳送門人數已滿，請選其他傳送門。") end; return end
  local previous=state.roomId and rooms[state.roomId]
  joinSequence+=1
  state.queued,state.ready,state.queueOrder,state.roomId=true,false,joinSequence,room.id
  state.actor:SetAttribute("LobbyQueued",true)
  state.actor:SetAttribute("LobbyRoomId",room.id)
+ -- 劇情傳送門的新房主從自己最新解鎖的章節開始。
+ if room.settings.gameMode=="Story" and not room.configured and #queuedStates(room.id)==1 then
+  local unlocked=LobbyRules.GameModes.unlocked(state.actor:GetAttribute("StoryCleared"))
+  local latest=table.clone(room.settings); latest.storyChapter,latest.expectedPlayers=unlocked,room.expected
+  local validated,count=LobbyRules.settings(latest,{unlocked=unlocked})
+  if validated then room.settings,room.expected=validated,count end
+ end
  telemetry:Fact(state.actor,"queue")
  if previous then invalidateReady(previous) end
  invalidateReady(room)
@@ -2043,6 +2050,14 @@ local function configureLobby(player,payload)
  if not room or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id or room.travel
   or workspace:GetAttribute(roomPrefix(room,"HostUserId"))~=player.UserId then return end
  -- 劇情章節依房主的通關進度解鎖；StoryCleared 只由伺服器的個人檔案寫入。
+ -- 玩法由傳送門決定；指定其他玩法的請求一律拒絕（沒有 gameMode 的舊開發呼叫仍由規則推斷）。
+ local portal=LobbyRules.room(Config.Lobby.portals,room.id)
+ local portalMode=portal and portal.settings.gameMode
+ if type(payload)=="table" and payload.gameMode~=nil and payload.gameMode~=portalMode then
+  local mode=LobbyRules.GameModes.mode(portalMode)
+  notify(player,"這座傳送門只進行"..(mode and mode.title or "固定玩法").."；想換玩法請改走其他傳送門。")
+  return
+ end
  local validated,count=LobbyRules.settings(payload,{unlocked=LobbyRules.GameModes.unlocked(player:GetAttribute("StoryCleared"))})
  if not validated then notify(player,count); return end
  if count<#queuedStates(room.id) then notify(player,"參戰人數不能少於目前已集合的玩家。"); return end
@@ -2153,7 +2168,7 @@ local function lobbyReset()
  end
  if departingRoom then invalidateReady(departingRoom) end
  updateHost()
- announce("已返回匹配大廳，選擇匹配點後可準備新局。")
+ announce("已返回匹配大廳，選擇傳送門後可準備新局。")
 end
 startMatch=function(player)
  local requester=states[player]
@@ -2164,7 +2179,7 @@ startMatch=function(player)
  local ready,message=LobbyRules.canStart(room.expected,humans)
  if not ready then notify(player,message); return end
  for _,state in ipairs(humans) do
-  if not lobbyWorld:ContainsPortal(state.actor,room.id) then notify(player,"集合玩家已離開匹配點，請重新集合。"); queueLeave(state); return end
+  if not lobbyWorld:ContainsPortal(state.actor,room.id) then notify(player,"集合玩家已離開傳送門，請重新集合。"); queueLeave(state); return end
  end
  local validated
  validated,message=Rules.settings(room.settings,#humans)
@@ -2348,10 +2363,10 @@ local function join(player)
  if Travel.role=="Match" then Travel.admit(state); return end
  updateHost()
  spawnLobby(state)
- if phase~="Lobby" then notify(player,"目前有對局進行中；可在其他匹配點集合等待下一局。") end
+ if phase~="Lobby" then notify(player,"目前有對局進行中；可在其他傳送門集合等待下一局。") end
  if Travel.role=="Lobby" then
   local ok,data=pcall(function() return player:GetJoinData() end)
-  if ok and type(data)=="table" and data.SourcePlaceId==Config.Places.matchPlaceId then notify(player,"已返回大廳，選擇匹配點即可開始下一局。") end
+  if ok and type(data)=="table" and data.SourcePlaceId==Config.Places.matchPlaceId then notify(player,"已返回大廳，選擇傳送門即可開始下一局。") end
  end
 end
 -- 大廳 place：整隊出發。房間在傳送期間鎖定；任一步失敗都恢復房間並取消準備。
@@ -3019,7 +3034,7 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
    local candidate=rooms[portal.id]
    if activeRoomId~=candidate.id and #queuedStates(candidate.id)==0 then room=candidate; break end
   end
-  if not validated or not room then notify(player,"目前沒有空的匹配點，請稍候再試。"); return end
+  if not validated or not room then notify(player,"目前沒有空的傳送門，請稍候再試。"); return end
   queueJoin(state,room.id,true,true)
   if not state.queued or state.roomId~=room.id then notify(player,"大廳角色尚未準備好，請稍候再開始新手教程。"); return end
   room.settings,room.expected,room.configured=validated,count,true
@@ -3027,46 +3042,6 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
   state.ready=true
   player:SetAttribute("LobbyReady",true)
   player:SetAttribute("TutorialMatch",true)
-  updateHost()
-  return
- end
- if action=="QuickPlay" then
-  -- 快速開始：單人劇情直接開下一章；其他玩法先加入同玩法、還有空位的房間，沒有就建立新房間由玩家當房主設定。
-  local GameModes=LobbyRules.GameModes
-  local solo=a=="StorySolo"
-  local mode=solo and "Story" or a
-  if type(mode)~="string" or not table.find(GameModes.Order,mode) then return end
-  if not state.inLobby or state.playing then notify(player,"目前在對局中，請先返回大廳。"); return end
-  if state.queued then notify(player,"請先離開目前的房間，再使用快速開始。"); return end
-  local unlocked=GameModes.unlocked(player:GetAttribute("StoryCleared"))
-  if not solo then
-   for _,portal in ipairs(Config.Lobby.portals) do
-    local candidate=rooms[portal.id]
-    local count=#queuedStates(candidate.id)
-    if activeRoomId~=candidate.id and candidate.configured and candidate.settings.gameMode==mode and count>0 and count<candidate.expected then
-     queueJoin(state,candidate.id,true,true)
-     if state.queued then notify(player,"已加入"..portal.name.."："..GameModes.label(candidate.settings).."。確認設定後按準備完成。"); return end
-    end
-   end
-  end
-  local room,name
-  for _,portal in ipairs(Config.Lobby.portals) do
-   local candidate=rooms[portal.id]
-   if activeRoomId~=candidate.id and #queuedStates(candidate.id)==0 then room,name=candidate,portal.name; break end
-  end
-  local validated,count=LobbyRules.settings(GameModes.defaults(mode,solo and 1 or 2,unlocked),{unlocked=unlocked})
-  if not validated or not room then notify(player,"目前沒有空的匹配點，請稍候再試。"); return end
-  queueJoin(state,room.id,true,true)
-  if not state.queued or state.roomId~=room.id then notify(player,"大廳角色尚未準備好，請稍候再試。"); return end
-  room.settings,room.expected,room.configured=validated,count,solo
-  invalidateReady(room)
-  if solo then
-   state.ready=true
-   player:SetAttribute("LobbyReady",true)
-   notify(player,phase=="Lobby" and ("開始第 "..validated.storyChapter.." 章「"..GameModes.chapter(validated.storyChapter).title.."」…") or "戰場目前使用中；已準備好劇情章節，戰場開放後自動出發。")
-  else
-   notify(player,"已在"..name.."建立"..GameModes.mode(mode).title.."房間；確認設定後等候其他玩家加入。")
-  end
   updateHost()
   return
  end

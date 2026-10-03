@@ -190,13 +190,19 @@ local function setPage(page)
  if UI.lobbyWizard then UI:SetLobbyPage(page) end
  task.wait()
 end
-local function propose(id,mode)
- local current={gameMode=room(id,"Setting_gameMode"),storyChapter=room(id,"Setting_storyChapter"),expectedPlayers=room(id,"ExpectedPlayers")}
- for _,key in ipairs({"size","aiCount","difficulty","population","startingResources","victory","teamMode"}) do current[key]=room(id,"Setting_"..key) end
- local request=GameModes.next(current,"gameMode",{mode},1,GameModes.unlocked(player:GetAttribute("StoryCleared")))
- local revision=room(id,"SettingsRevision")
- command:FireServer("LobbySettings",request)
- await(function() return room(id,"SettingsRevision")~=revision and room(id,"Setting_gameMode")==mode and UI.settings.gameMode==mode end,"room switched to "..mode)
+-- 每座傳送門固定一種玩法：檢查某玩法就走進那座門。
+local function portalFor(mode)
+ for _,portal in ipairs(Config.Lobby.portals) do if portal.settings.gameMode==mode then return portal.id end end
+ error(label.."FAIL no portal for "..mode,0)
+end
+local function join(id,mode)
+ command:FireServer("QueueJoin",id)
+ await(function() return player:GetAttribute("LobbyRoomId")==id and UI.lobbyWizard and UI.settings.gameMode==mode end,"host wizard open in "..mode.." portal")
+end
+local function leave()
+ command:FireServer("QueueLeave")
+ await(function() return player:GetAttribute("LobbyQueued")==false end,"left room")
+ task.wait(2.3) -- server queue cooldown after leaving
 end
 
 local function run()
@@ -209,25 +215,24 @@ local function run()
  UI.inviteDismissed=true; UI.inviteForced=nil; task.wait(0.3)
  eachSize(welcomeChecks)
 
- -- 2-3. Room wizard in each mode and page, then the configured review page.
- command:FireServer("QueueJoin","Room1")
- await(function() return player:GetAttribute("LobbyRoomId")=="Room1" and UI.lobbyWizard end,"host wizard open")
- for _,mode in ipairs({"PvP","Story","PvE"}) do
-  if UI.settings.gameMode~=mode then propose("Room1",mode) end
+ -- 2-3. Room wizard in each portal and page, ending in the story portal's configured review page.
+ local storyId=portalFor("Story")
+ for _,mode in ipairs({"PvP","PvE","Story"}) do
+  join(portalFor(mode),mode)
   for page=1,2 do
    setPage(page)
    eachSize(function(size) setPage(page); wizardChecks(size,mode.." wizard") end)
   end
+  if mode~="Story" then leave() end
  end
- propose("Room1","Story")
- command:FireServer("LobbyConfigureComplete",room("Room1","SettingsRevision"))
- await(function() return room("Room1","Configured")==true and not UI.lobbyWizard and UI.lobbyPage==3 end,"review page")
+ command:FireServer("LobbyConfigureComplete",room(storyId,"SettingsRevision"))
+ await(function() return room(storyId,"Configured")==true and not UI.lobbyWizard and UI.lobbyPage==3 end,"review page")
  eachSize(function(size) wizardChecks(size,"Story review") end)
 
  -- 4. Plaza portal sign for the configured room.
  local lobbyFolder
- for _,child in ipairs(workspace:GetChildren()) do if child:FindFirstChild("Portal_Room1",true) then lobbyFolder=child; break end end
- local sign=lobbyFolder and lobbyFolder:FindFirstChild("Portal_Room1",true)
+ for _,child in ipairs(workspace:GetChildren()) do if child:FindFirstChild("Portal_"..storyId,true) then lobbyFolder=child; break end end
+ local sign=lobbyFolder and lobbyFolder:FindFirstChild("Portal_"..storyId,true)
  local mode=sign and sign:FindFirstChild("Mode",true)
  await(function() return mode and mode.Text:find(GameModes.label({gameMode="Story",storyChapter=1}),1,true) end,"portal sign shows the room mode",10)
  check(mode.TextScaled and mode.Parent and mode.Parent:IsA("GuiObject"),"portal sign mode label scales with its card")
@@ -235,11 +240,8 @@ local function run()
  check(count and not overlaps(mode,count),"portal sign mode and count lines do not overlap")
  print(label.."INFO portal sign text: "..mode.Text)
 
- -- 5. Story start and chapter victory notices.
- command:FireServer("QueueLeave")
- await(function() return player:GetAttribute("LobbyQueued")==false end,"left room")
- task.wait(2.3)
- command:FireServer("QuickPlay","StorySolo")
+ -- 5. Story start and chapter victory notices: the solo story room is configured, so readiness departs.
+ command:FireServer("LobbyReady",true,room(storyId,"SettingsRevision"))
  local chapter=Config.Story.chapters[1]
  await(function() return UI.notice.Text:find(chapter.objective,1,true) and UI.noticePanel.Visible end,"story start notice shown",60)
  local function noticeChecks(tag)

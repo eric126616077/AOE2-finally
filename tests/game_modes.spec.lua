@@ -85,7 +85,17 @@ for _,mode in ipairs(GameModeRules.Order) do
   end
  end
 end
-for _,portal in ipairs(Config.Lobby.portals) do expect(portal.settings.gameMode=="PvP","portal default mode") end
+-- One portal per public mode; each portal default is a valid room in its own mode.
+local portalModes={}
+for _,portal in ipairs(Config.Lobby.portals) do
+ local mode=portal.settings.gameMode
+ expect(GameModeRules.mode(mode)~=nil and not GameModeRules.mode(mode).internal,"portal mode must be public")
+ expect(portalModes[mode]==nil,"two portals share a game mode")
+ portalModes[mode]=portal.id
+ local preset=LobbyRules.settings(portal.settings)
+ expect(preset~=nil and preset.gameMode==mode,"portal default changed mode")
+end
+for _,mode in ipairs(GameModeRules.Order) do expect(portalModes[mode]~=nil,"no portal for mode "..mode) end
 
 -- Client proposals follow the same rules and never evict queued players.
 local pvp=assert(LobbyRules.settings(payload({gameMode="PvP",expectedPlayers=4,teamMode="Teams"})))

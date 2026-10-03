@@ -1,6 +1,6 @@
 -- Opt-in only through lobby-modes-validation.project.json; never mapped by the normal project.
--- One client: lobby UI, server validation, solo Story start / win / unlock, PvE and PvP quick rooms.
--- Two clients (Player1 / Player2): multiplayer Story co-op and a PvP match through QuickPlay.
+-- One client: lobby portal cards, per-portal mode lock, server validation, solo Story start / win / unlock, PvE portal.
+-- Two clients (Player1 / Player2): multiplayer Story co-op and a PvP match, both joined through their portals.
 local RunService=game:GetService("RunService")
 if not RunService:IsStudio() then return end
 local Players=game:GetService("Players")
@@ -62,11 +62,15 @@ end
 local function inBattle()
  return workspace:GetAttribute("MatchPhase")=="Playing" and player:GetAttribute("InLobby")==false and player:GetAttribute("TeamId")~=nil
 end
-local function quick(choice)
- command:FireServer("QuickPlay",choice)
- -- Solo Story can depart before the queued flag is observed; reaching the battle also counts.
- await(function() return player:GetAttribute("LobbyQueued")==true or inBattle() end,"QuickPlay "..choice.." joined a room")
- return player:GetAttribute("LobbyRoomId") or workspace:GetAttribute("ActiveBattleRoomId")
+-- 每座傳送門固定一種玩法；沒有快速開始，直接用卡片同一個指令加入。
+local function portalFor(mode)
+ for _,portal in ipairs(Config.Lobby.portals) do if portal.settings.gameMode==mode then return portal.id end end
+ error(label.."FAIL no portal for "..mode,0)
+end
+local function join(id)
+ command:FireServer("QueueJoin",id)
+ await(function() return player:GetAttribute("LobbyRoomId")==id end,"joined "..id)
+ return id
 end
 local function aiActors()
  local result={}
@@ -88,69 +92,67 @@ local function backToLobby(isHost)
 end
 
 local function solo()
- -- Lobby welcome panel.
+ -- Lobby welcome panel: one card per portal, no mode buttons.
  local welcome=find("CourtyardWelcome")
  check(welcome and visible(welcome),"welcome panel visible")
- for _,id in ipairs({"StorySolo","Story","PvP","PvE"}) do
-  local b=find("QuickPlay_"..id)
-  check(b and visible(b) and b:GetAttribute("Unavailable")~=true,"quick start "..id.." visible and available")
+ for _,id in ipairs({"StorySolo","Story","PvP","PvE"}) do check(find("QuickPlay_"..id)==nil,"no quick start button "..id) end
+ for _,portal in ipairs(Config.Lobby.portals) do
+  local card=find("PortalCard_"..portal.id)
+  check(card and visible(card) and card:GetAttribute("Unavailable")~=true,"portal card "..portal.id.." visible and available")
+  await(function() return textOf(card):find(portal.name,1,true) end,"portal card "..portal.id.." shows "..portal.name)
  end
- await(function() return textOf(find("QuickPlay_StorySolo")):find("單人劇情",1,true) end,"quick story title")
  check(player:GetAttribute("StoryCleared")==0,"new session has no story clears")
+ local pvpId,pveId,storyId=portalFor("PvP"),portalFor("PvE"),portalFor("Story")
 
- -- Room wizard as host, default PvP.
- command:FireServer("QueueJoin","Room1")
- await(function() return player:GetAttribute("LobbyRoomId")=="Room1" end,"joined Room1")
+ -- PvP portal: host wizard without mode cards; the server keeps the portal's mode.
+ join(pvpId)
  local frame=find("MatchLobby")
  await(function() return visible(frame) and frame:GetAttribute("WizardEnabled")==true end,"host wizard opened")
- check(settingsOf("Room1").gameMode=="PvP","room default mode is PvP")
- for _,id in ipairs(GameModes.Order) do check(find("ModeCard_"..id)~=nil,"mode card "..id) end
- await(function() return find("ModeCard_PvP"):GetAttribute("Selected")==true end,"PvP card selected")
+ check(settingsOf(pvpId).gameMode=="PvP","PvP portal room is PvP")
+ for _,id in ipairs(GameModes.Order) do check(find("ModeCard_"..id)==nil,"no mode card "..id) end
  check(visible(find("Setting_teamMode")) and not visible(find("Setting_storyChapter")),"PvP page shows team mode, hides chapter")
-
- -- Switch to Story through the same proposal the cards use.
- local current=settingsOf("Room1")
- local request=GameModes.next(current,"gameMode",{"Story"},1,GameModes.unlocked(player:GetAttribute("StoryCleared")))
- check(request and request.storyChapter==1,"client proposes Story chapter 1")
- local revision=send(request,"Room1")
- await(function() return changed("Room1",revision) and settingsOf("Room1").gameMode=="Story" end,"server stored Story")
- local s,chapter=settingsOf("Room1"),Config.Story.chapters[1]
- check(s.storyChapter==1 and s.teamMode=="CoopAI" and s.aiCount==chapter.aiCount and s.size==chapter.size and s.victory==chapter.victory,"server applied chapter 1 rules")
- await(function() return find("ModeCard_Story"):GetAttribute("Selected")==true and visible(find("Setting_storyChapter")) end,"Story card selected, chapter field shown")
- await(function() return visible(find("StoryBriefing")) and find("StoryBriefing").Text:find(chapter.briefing,1,true) end,"chapter briefing shown")
- check(not visible(find("Setting_teamMode")),"Story hides team mode")
-
- -- Server rejects a locked chapter, a client override of chapter rules, AI in PvP and an internal mode.
- local locked=table.clone(s); locked.storyChapter=2
- revision=send(locked,"Room1"); task.wait(1)
- check(not changed("Room1",revision) and settingsOf("Room1").storyChapter==1,"locked chapter 2 rejected")
- local override=table.clone(s); override.size="Large"; override.aiCount=3; override.difficulty="Hard"; override.expectedPlayers=1
- revision=send(override,"Room1")
- await(function() return changed("Room1",revision) end,"override request processed")
- s=settingsOf("Room1")
- check(s.size==chapter.size and s.aiCount==chapter.aiCount and s.difficulty==chapter.difficulty,"chapter rules not overridable by client")
- revision=send({gameMode="PvP",storyChapter=0,expectedPlayers=2,aiCount=1,teamMode="FFA",size="Medium",difficulty="Normal",population=100,startingResources="Standard",victory="Conquest"},"Room1"); task.wait(1)
- check(not changed("Room1",revision) and settingsOf("Room1").gameMode=="Story","PvP with AI rejected")
- revision=send({gameMode="Sandbox",storyChapter=0,expectedPlayers=1,aiCount=0,teamMode="FFA",size="Small",difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"},"Room1"); task.wait(1)
- check(not changed("Room1",revision),"client Sandbox rejected")
-
- -- PvE through the proposal; UI moves AI and difficulty to page 1.
- request=GameModes.next(settingsOf("Room1"),"gameMode",{"PvE"},1,1)
- revision=send(request,"Room1")
- await(function() return changed("Room1",revision) and settingsOf("Room1").gameMode=="PvE" end,"server stored PvE")
- s=settingsOf("Room1")
- check(s.aiCount>=1 and s.storyChapter==0 and (s.teamMode=="CoopAI" or s.teamMode=="FFA"),"PvE has AI and no chapter")
- await(function() return visible(find("Setting_aiCount")) and visible(find("Setting_difficulty")) and find("ModeCard_PvE"):GetAttribute("Selected")==true end,"PvE page 1 shows AI and difficulty")
+ local request=GameModes.defaults("Story",1,1,settingsOf(pvpId))
+ local revision=send(request,pvpId); task.wait(1)
+ check(not changed(pvpId,revision) and settingsOf(pvpId).gameMode=="PvP","PvP portal rejects switching to Story")
+ revision=send({gameMode="PvP",storyChapter=0,expectedPlayers=2,aiCount=1,teamMode="FFA",size="Medium",difficulty="Normal",population=100,startingResources="Standard",victory="Conquest"},pvpId); task.wait(1)
+ check(not changed(pvpId,revision) and settingsOf(pvpId).aiCount==0,"PvP with AI rejected")
+ revision=send({gameMode="Sandbox",storyChapter=0,expectedPlayers=1,aiCount=0,teamMode="FFA",size="Small",difficulty="Easy",population=100,startingResources="Rich",victory="Conquest"},pvpId); task.wait(1)
+ check(not changed(pvpId,revision),"client Sandbox rejected")
  leave()
 
- -- Solo Story quick start: departs immediately into chapter 1.
- local id=quick("StorySolo")
+ -- PvE portal: AI and difficulty on page 1.
+ join(pveId)
+ await(function() return find("MatchLobby"):GetAttribute("WizardEnabled")==true end,"PvE wizard opened")
+ local s=settingsOf(pveId)
+ check(s.gameMode=="PvE" and s.aiCount>=1 and s.storyChapter==0 and (s.teamMode=="CoopAI" or s.teamMode=="FFA"),"PvE portal has AI and no chapter")
+ await(function() return visible(find("Setting_aiCount")) and visible(find("Setting_difficulty")) end,"PvE page 1 shows AI and difficulty")
+ leave()
+
+ -- Story portal: starts at chapter 1 with chapter rules; locked chapters and rule overrides are refused.
+ join(storyId)
+ await(function() return find("MatchLobby"):GetAttribute("WizardEnabled")==true end,"Story wizard opened")
+ local chapter=Config.Story.chapters[1]
+ s=settingsOf(storyId)
+ check(s.gameMode=="Story" and s.storyChapter==1 and s.teamMode=="CoopAI" and s.aiCount==chapter.aiCount and s.size==chapter.size and s.victory==chapter.victory,"story portal applies chapter 1 rules")
+ await(function() return visible(find("Setting_storyChapter")) and not visible(find("Setting_teamMode")) end,"Story shows chapter, hides team mode")
+ await(function() return visible(find("StoryBriefing")) and find("StoryBriefing").Text:find(chapter.briefing,1,true) end,"chapter briefing shown")
+ local locked=table.clone(s); locked.storyChapter=2
+ revision=send(locked,storyId); task.wait(1)
+ check(not changed(storyId,revision) and settingsOf(storyId).storyChapter==1,"locked chapter 2 rejected")
+ local override=table.clone(s); override.size="Large"; override.aiCount=3; override.difficulty="Hard"; override.expectedPlayers=1
+ revision=send(override,storyId)
+ await(function() return changed(storyId,revision) end,"override request processed")
+ s=settingsOf(storyId)
+ check(s.size==chapter.size and s.aiCount==chapter.aiCount and s.difficulty==chapter.difficulty,"chapter rules not overridable by client")
+
+ -- Solo story departs once the host finishes setup and is ready.
+ finishSetup(storyId)
+ readyUp(storyId)
  await(inBattle,"solo Story battle started",60)
  check(workspace:GetAttribute("StoryChapter")==1 and workspace:GetAttribute("TeamMode")=="CoopAI","battle is Story chapter 1 co-op")
- await(function() return #aiActors()==Config.Story.chapters[1].aiCount end,"chapter AI spawned")
- check(aiActors()[1]:GetAttribute("DisplayName")==Config.Story.chapters[1].enemy,"AI named after chapter enemy")
- check(aiActors()[1]:GetAttribute("TeamName")==Config.Story.chapters[1].enemy and player:GetAttribute("TeamId")==1,"enemy team named, player on team 1")
- check(id~=nil,"solo story used room "..tostring(id))
+ await(function() return #aiActors()==chapter.aiCount end,"chapter AI spawned")
+ check(aiActors()[1]:GetAttribute("DisplayName")==chapter.enemy,"AI named after chapter enemy")
+ check(aiActors()[1]:GetAttribute("TeamName")==chapter.enemy and player:GetAttribute("TeamId")==1,"enemy team named, player on team 1")
 
  -- Chapter victory records progress and unlocks chapter 2.
  task.wait(3)
@@ -170,55 +172,34 @@ local function solo()
  check(workspace:GetAttribute("WinnerTeamId")==1,"humans won the chapter")
  await(function() return player:GetAttribute("StoryCleared")==1 end,"chapter 1 recorded as cleared")
  backToLobby(true)
- await(function() return textOf(find("QuickPlay_StorySolo")):len()>0 and find("QuickPlay_StorySolo"):FindFirstChildWhichIsA("TextLabel") end,"quick buttons back")
- local detailFound=false
- for _,child in ipairs(find("QuickPlay_StorySolo"):GetChildren()) do
-  if child:IsA("TextLabel") and child.Text:find("第 2 章",1,true) then detailFound=true end
- end
- check(detailFound,"solo story quick start now offers chapter 2")
 
- -- Chapter 2 is now accepted in a custom room.
+ -- The next story host starts from the newest unlocked chapter.
  task.wait(2.3)
- command:FireServer("QueueJoin","Room2")
- await(function() return player:GetAttribute("LobbyRoomId")=="Room2" end,"joined Room2")
- request=GameModes.next(settingsOf("Room2"),"gameMode",{"Story"},1,GameModes.unlocked(player:GetAttribute("StoryCleared")))
- check(request.storyChapter==2,"Story proposal defaults to newest chapter 2")
- revision=send(request,"Room2")
- await(function() return changed("Room2",revision) and settingsOf("Room2").storyChapter==2 end,"unlocked chapter 2 accepted")
- check(settingsOf("Room2").victory==Config.Story.chapters[2].victory,"chapter 2 rules applied")
+ join(storyId)
+ await(function() return settingsOf(storyId).storyChapter==2 end,"story portal opens at newest chapter 2")
+ check(settingsOf(storyId).victory==Config.Story.chapters[2].victory,"chapter 2 rules applied")
  leave()
-
- -- PvE / PvP quick rooms are created unconfigured for the host.
- for _,mode in ipairs({"PvE","PvP"}) do
-  id=quick(mode)
-  await(function() return settingsOf(id).gameMode==mode and room(id,"Configured")==false end,mode.." quick room created")
-  await(function() return find("ModeCard_"..mode):GetAttribute("Selected")==true and find("MatchLobby"):GetAttribute("WizardEnabled")==true end,mode.." wizard open with mode selected")
-  check(settingsOf(id).expectedPlayers==2,mode.." quick room waits for two players")
-  leave()
- end
 end
 
 local function duo()
  local first=player.Name=="Player1"
  local other
  await(function() for _,p in ipairs(Players:GetPlayers()) do if p~=player then other=p end end; return other~=nil end,"second client present")
- -- Multiplayer Story: Player1 creates the room; Player2 quick-joins the same room.
- local id
+ local storyId,pvpId=portalFor("Story"),portalFor("PvP")
+ -- Multiplayer Story: Player1 hosts the story portal for two; Player2 walks into the same portal.
  if first then
-  id=quick("Story")
-  await(function() return settingsOf(id).gameMode=="Story" end,"Story room created")
-  finishSetup(id)
+  join(storyId)
+  local coop=settingsOf(storyId); coop.expectedPlayers=2
+  local revision=send(coop,storyId)
+  await(function() return changed(storyId,revision) and room(storyId,"ExpectedPlayers")==2 end,"Story room set for two players")
+  finishSetup(storyId)
  else
-  await(function()
-   for _,portal in ipairs(Config.Lobby.portals) do
-    if room(portal.id,"Setting_gameMode")=="Story" and room(portal.id,"Configured")==true and (room(portal.id,"Players") or 0)==1 then return true end
-   end
-  end,"host Story room waiting",40)
-  id=quick("Story")
+  await(function() return room(storyId,"Configured")==true and room(storyId,"ExpectedPlayers")==2 and (room(storyId,"Players") or 0)==1 end,"host Story room waiting",40)
+  join(storyId)
  end
- await(function() return room(id,"Players")==2 end,"two players in Story room")
- check(other:GetAttribute("LobbyRoomId")==id,"both clients in the same Story room")
- readyUp(id)
+ await(function() return room(storyId,"Players")==2 end,"two players in Story room")
+ check(other:GetAttribute("LobbyRoomId")==storyId,"both clients in the same Story room")
+ readyUp(storyId)
  await(inBattle,"co-op Story battle started",60)
  check(workspace:GetAttribute("StoryChapter")==1 and player:GetAttribute("TeamId")==1,"co-op chapter 1, humans on team 1")
  await(function() return other:GetAttribute("TeamId")==1 end,"teammate on team 1")
@@ -228,21 +209,17 @@ local function duo()
  await(function() return player:GetAttribute("StoryCleared")==1 end,"co-op win recorded for this player")
  backToLobby(first)
 
- -- PvP through QuickPlay: humans only, then one surrenders.
+ -- PvP portal: humans only, then one surrenders.
  task.wait(2.3)
  if first then
-  id=quick("PvP")
-  finishSetup(id)
+  join(pvpId)
+  finishSetup(pvpId)
  else
-  await(function()
-   for _,portal in ipairs(Config.Lobby.portals) do
-    if room(portal.id,"Setting_gameMode")=="PvP" and room(portal.id,"Configured")==true and (room(portal.id,"Players") or 0)==1 then return true end
-   end
-  end,"host PvP room waiting",40)
-  id=quick("PvP")
+  await(function() return room(pvpId,"Configured")==true and (room(pvpId,"Players") or 0)==1 end,"host PvP room waiting",40)
+  join(pvpId)
  end
- await(function() return room(id,"Players")==2 end,"two players in PvP room")
- readyUp(id)
+ await(function() return room(pvpId,"Players")==2 end,"two players in PvP room")
+ readyUp(pvpId)
  await(inBattle,"PvP battle started",60)
  check(workspace:GetAttribute("AICount")==0 and #aiActors()==0 and workspace:GetAttribute("StoryChapter")==0,"PvP has no AI and no chapter")
  await(function() return other:GetAttribute("TeamId")~=nil and other:GetAttribute("TeamId")~=player:GetAttribute("TeamId") end,"PvP opponents on separate teams")

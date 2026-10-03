@@ -67,13 +67,15 @@ function Tests.Run()
  local layer=lobbyGui()
  local welcome=layer:FindFirstChild("CourtyardWelcome")
  check(welcome and welcome.Visible,"入場顯示匹配入口")
- for _,id in ipairs({"Room1","Room2","Room3","Room4"}) do
+ for _,data in ipairs(Config.Lobby.portals) do
+  local id=data.id
   local card=welcome:FindFirstChild("PortalCard_"..id,true)
-  check(card and card:IsA("TextButton"),"實際介面提供等價房間："..id)
+  check(card and card:IsA("TextButton"),"實際介面提供傳送門卡片："..id)
   local portal=lobby:FindFirstChild("Portal_"..id)
-  check(portal and portal:GetAttribute("PortalId")==id and portal:FindFirstChild("PortalDais"),"場景提供獨立匹配點："..id)
-  check(room(id,"Configured")==false and room(id,"ExpectedPlayers")==2,"新房間先由房主設定："..id)
+  check(portal and portal:GetAttribute("PortalId")==id and portal:FindFirstChild("PortalDais"),"場景提供獨立傳送門："..id)
+  check(room(id,"Configured")==false and room(id,"ExpectedPlayers")==data.settings.expectedPlayers and room(id,"Setting_gameMode")==data.settings.gameMode,"新房間依傳送門玩法等候房主設定："..id)
  end
+ check(welcome:FindFirstChild("QuickPlay_PvP",true)==nil and layer:FindFirstChild("ModeCard_PvP",true)==nil,"大廳不再提供玩法切換按鈕")
  check(player:GetAttribute("InLobby")==true,"入場狀態仍在大廳")
  local initialGeneration=workspace:GetAttribute("MatchGeneration") or 0
  command:FireServer("QueueJoin","Unknown")

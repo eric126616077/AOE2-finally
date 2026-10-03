@@ -56,7 +56,7 @@ expect(settings and expected==2 and settings.teamMode=="Teams","lobby dropped ca
 teamPayload.aiCount=1
 expect(not LobbyRules.settings(teamPayload),"lobby accepted unbalanced 2v1 settings")
 local portals=Config.Lobby.portals
-expect(type(portals)=="table" and #portals==4,"courtyard must provide four configured matching points")
+expect(type(portals)=="table" and #portals==3,"courtyard must provide one portal per public game mode")
 local seen={}
 for _,portal in ipairs(portals) do
  expect(not seen[portal.id],"duplicate portal would share another room's queue")
@@ -66,7 +66,7 @@ for _,portal in ipairs(portals) do
  expect(preset~=nil and humans==portal.settings.expectedPlayers,"portal default settings cannot start a valid match")
  expect(humans+preset.aiCount<=4,"portal exceeds maximum faction count")
 end
-expect(seen.Room1 and seen.Room2 and seen.Room3 and seen.Room4,"expected matching points missing")
+expect(seen.Room1 and seen.Room2 and seen.Room3 and not seen.Room4,"expected portals missing")
 expect(LobbyRules.room(portals,nil).id=="Room1","legacy omitted room must use the first portal")
 expect(LobbyRules.room(portals,"Custom").id=="Room1","legacy custom caller must use the first portal")
 for _,roomId in ipairs({false,12,{},"","room1","Room1 ","Practice","Duel","Teams","Room1/../../Room2",string.rep("x",25)}) do
@@ -74,11 +74,15 @@ for _,roomId in ipairs({false,12,{},"","room1","Room1 ","Practice","Duel","Teams
 end
 expect(LobbyRules.room(false,"Room1")==nil,"invalid portal catalog accepted")
 local previousSettings
+local modes={}
 for _,portal in ipairs(portals) do
  local initial=portal.settings
- expect(initial.expectedPlayers==2 and initial.aiCount==0 and initial.teamMode=="FFA","matching points must share the same human-versus-human default")
- expect(initial.size=="Medium" and initial.startingResources=="Standard","matching point has an unexpected preset")
+ expect(type(initial.gameMode)=="string" and not modes[initial.gameMode],"each portal must offer its own game mode")
+ modes[initial.gameMode]=true
+ expect(type(portal.name)=="string" and type(portal.description)=="string" and #portal.description>0,"portal needs a player-facing name and description")
  expect(initial~=previousSettings,"rooms share a mutable settings table")
  previousSettings=initial
 end
+expect(modes.Story and modes.PvP and modes.PvE,"story, PvP and PvE each need a portal")
+expect(LobbyRules.room(portals,"Room1").settings.gameMode=="PvP","legacy first portal must stay a human-versus-human room")
 print(string.format("PASS: %d lobby settings / readiness / portal validation checks",count))

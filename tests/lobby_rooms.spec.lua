@@ -7,8 +7,9 @@ local otherGuest=addHuman(40,4)
 local outsider=addHuman(50,5)
 local traveler=addHuman(60,6)
 updateHost()
-for _,id in ipairs({"Room1","Room2","Room3","Room4"}) do
- expect(rooms[id].configured==false and rooms[id].expected==2,"new room must await host configuration")
+for _,portal in ipairs(Config.Lobby.portals) do
+ local id=portal.id
+ expect(rooms[id].configured==false and rooms[id].expected==portal.settings.expectedPlayers and rooms[id].settings.gameMode==portal.settings.gameMode,"new room must await host configuration in its portal mode")
  expect(workspace:GetAttribute("LobbyRoom_"..id.."_HostUserId")==0,"empty room inherited another room's host")
 end
 queueJoin(host,"Unknown",false,true)
@@ -85,25 +86,39 @@ queueJoin(host,"Room1",false,true)
 expect(workspace:GetAttribute("LobbyRoom_Room1_HostUserId")==20,"rejoining former host stole host authority")
 lobbyReady(guest,true,rooms.Room1.revision)
 expect(guest.ready and not host.ready,"current room revision could not be readied")
--- Empty rooms restore common defaults; a future host must configure again.
+-- Each portal fixes its game mode; a story host starts from the newest unlocked chapter.
+outsider.actor:SetAttribute("StoryCleared",2)
 queueJoin(outsider,"Room3",false,true)
+expect(rooms.Room3.settings.gameMode=="Story" and rooms.Room3.settings.storyChapter==3 and not rooms.Room3.configured,"story portal host did not start at the newest unlocked chapter")
+local storyRevision=rooms.Room3.revision
+local otherMode=table.clone(settings1); otherMode.gameMode="PvP"
+configureLobby(outsider.actor,otherMode)
+expect(rooms.Room3.revision==storyRevision and rooms.Room3.settings.gameMode=="Story","portal accepted a different game mode")
+local storyDuo=table.clone(rooms.Room3.settings); storyDuo.expectedPlayers=2
+configureLobby(outsider.actor,storyDuo)
+expect(rooms.Room3.expected==2 and rooms.Room3.settings.gameMode=="Story" and rooms.Room3.settings.storyChapter==3,"story portal rejected its own mode")
+local unearned=table.clone(storyDuo); unearned.storyChapter=4
+configureLobby(outsider.actor,unearned)
+expect(rooms.Room3.settings.storyChapter==3,"story portal skipped a locked chapter")
+-- Empty rooms restore their portal defaults; a future host must configure again.
 local abandoned=table.clone(settings1); abandoned.expectedPlayers=3; abandoned.population=200
 configureLobby(outsider.actor,abandoned)
 configureLobbyComplete(outsider.actor,rooms.Room3.revision)
 expect(rooms.Room3.configured and rooms.Room3.expected==3,"third room did not accept host setup")
 queueLeave(outsider)
-expect(not rooms.Room3.configured and rooms.Room3.expected==2 and rooms.Room3.settings.population==100 and rooms.Room3.settings.size=="Medium","empty room retained departed host's settings")
+local storyPortal=LobbyRules.room(Config.Lobby.portals,"Room3")
+expect(not rooms.Room3.configured and rooms.Room3.expected==storyPortal.settings.expectedPlayers and rooms.Room3.settings.gameMode=="Story" and rooms.Room3.settings.population==100 and rooms.Room3.settings.size==storyPortal.settings.size,"empty room retained departed host's settings")
 expect(workspace:GetAttribute("LobbyRoom_Room3_HostUserId")==0,"empty room retained old host")
 -- Every point can start a configured match; only its members enter the new battlefield.
-queueJoin(traveler,"Room4",false,true)
+queueJoin(traveler,"Room3",false,true)
 local solo=table.clone(settings1); solo.expectedPlayers=1
 configureLobby(traveler.actor,solo)
-configureLobbyComplete(traveler.actor,rooms.Room4.revision)
+configureLobbyComplete(traveler.actor,rooms.Room3.revision)
 expect(phase=="Lobby","confirming setup alone started before player readiness")
 local keptRevision1=rooms.Room1.revision
 local oldCharacter=traveler.actor.Character
-lobbyReady(traveler,true,rooms.Room4.revision)
-expect(phase=="Playing" and activeRoomId=="Room4" and generatedMaps==1,"configured fully ready room did not automatically start")
+lobbyReady(traveler,true,rooms.Room3.revision)
+expect(phase=="Playing" and activeRoomId=="Room3" and generatedMaps==1,"configured fully ready room did not automatically start")
 expect(traveler.playing and not traveler.inLobby and traveler.actor:GetAttribute("InLobby")==false,"selected player stayed in lobby state")
 expect(traveler.actor.Character==nil and oldCharacter.destroyed,"start retained selected player's lobby avatar")
 expect(host.queued and guest.queued and guest.ready and host.inLobby and guest.inLobby and rooms.Room1.revision==keptRevision1,"start consumed another room's membership/readiness")
@@ -111,13 +126,13 @@ expect(otherHost.queued and otherGuest.queued and otherHost.ready and rooms.Room
 expect(host.actor.Character and guest.actor.Character and not host.playing and not guest.playing,"waiting room lost avatars or acquired RTS factions")
 expect(host.resetCalls==nil and guest.resetCalls==nil and otherHost.resetCalls==nil and otherGuest.resetCalls==nil,"actual battlefield cleanup reset waiting lobby actors")
 expect(currentMatch.participants[60]==traveler and currentMatch.participants[10]==nil and currentMatch.participants[30]==nil,"battle roster crossed room boundaries")
-expect(workspace:GetAttribute("ActiveBattleRoomId")=="Room4" and workspace:GetAttribute("MatchGeneration")==1,"fresh battlefield identity/generation missing")
+expect(workspace:GetAttribute("ActiveBattleRoomId")=="Room3" and workspace:GetAttribute("MatchGeneration")==1,"fresh battlefield identity/generation missing")
 local generation=matchGeneration
 lobbyReady(otherGuest,true,rooms.Room2.revision)
 startMatch(otherHost.actor)
-expect(matchGeneration==generation and generatedMaps==1 and activeRoomId=="Room4" and otherGuest.ready,"second ready room replaced running battlefield")
+expect(matchGeneration==generation and generatedMaps==1 and activeRoomId=="Room3" and otherGuest.ready,"second ready room replaced running battlefield")
 outsider.queueCooldown=0
-queueJoin(outsider,"Room4",false,true)
+queueJoin(outsider,"Room3",false,true)
 expect(not outsider.queued,"active room admitted new queued player")
 queueLeave(host)
 expect(not host.queued and guest.queued and guest.inLobby and traveler.playing,"waiting queue leave changed battle participants")
@@ -126,7 +141,7 @@ local firstSeed=workspace:GetAttribute("MapSeed")
 lobbyReset()
 expect(activeRoomId=="Room2" and phase=="Playing" and generatedMaps==2,"fully ready waiting room could not progress after battlefield reset")
 expect(otherHost.playing and otherGuest.playing and not otherHost.inLobby and not otherGuest.inLobby,"next match did not consume its own waiting room")
-expect(traveler.inLobby and not traveler.playing and not rooms.Room4.configured and rooms.Room4.expected==2,"departing room did not return to fresh configuration")
+expect(traveler.inLobby and not traveler.playing and not rooms.Room3.configured and rooms.Room3.expected==storyPortal.settings.expectedPlayers,"departing room did not return to fresh configuration")
 expect(guest.inLobby and guest.queued and rooms.Room1.configured and not guest.ready,"battlefield reset changed a different waiting room's setup")
 expect(workspace:GetAttribute("MapSeed")~=firstSeed and workspace:GetAttribute("MatchGeneration")==3,"next matching cycle reused previous battlefield generation")
 print(string.format("PASS: %d actual configurable rooms / setup commit / readiness / host / battlefield checks",checks))

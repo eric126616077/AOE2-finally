@@ -22,16 +22,14 @@ Config.Lobby = {
  origin = Vector3.new(0,0,2048), spawnOffset = Vector3.new(0,4,90),
  portalOffset = Vector3.new(54,0,62), portalRadius = 14, portalUseRange = 24,
  expectedPlayers = 2, scanInterval = 0.25,
- -- Equivalent room stations: the first entrant configures a room before everyone confirms readiness.
+ -- 每座傳送門固定一種玩法（settings.gameMode）；第一位進入的玩家當房主，只設定人數與規則，不能換玩法。
  portals = {
-  {id="Room1",name="匹配點 1",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(255,176,32),
+  {id="Room1",name="對戰傳送門",description="只有真人玩家，各自為戰或分隊；計入對戰紀錄。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(240,78,78),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room2",name="匹配點 2",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,4),color=Color3.fromRGB(46,196,104),
-   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room3",name="匹配點 3",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,4),color=Color3.fromRGB(32,148,255),
-   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room4",name="匹配點 4",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(160,92,250),
-   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+  {id="Room2",name="合作傳送門",description="和好友一起對抗電腦，自訂電腦數量與難度。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(46,196,104),
+   settings={gameMode="PvE",expectedPlayers=2,size="Medium",aiCount=2,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="CoopAI"}},
+  {id="Room3",name="劇情傳送門",description="依章節闖關，單人或與好友合作；勝利後解鎖下一章。",offset=Vector3.new(0,0,0),color=Color3.fromRGB(255,176,32),
+   settings={gameMode="Story",storyChapter=1,expectedPlayers=1,size="Small",aiCount=1,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="CoopAI"}},
  },
  -- 戰鬥預告片（cinematic.project.json 錄下的 77 秒影片）。videoId 是上傳到 Roblox 的影片資產 ID；
  -- 0 表示尚未上傳：大螢幕改輪播預告片字卡，大廳不顯示「觀看預告片」按鈕。
