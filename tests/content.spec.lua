@@ -192,6 +192,22 @@ expect(RelicTrade.relicHolder({[1]=3,[2]=2},5)==nil,"split relics produced a hol
 expect(RelicTrade.relicHolder({},0)==nil and RelicTrade.relicHolder({[1]=0},0)==nil,"zero relics produced a holder")
 expect(RelicTrade.relicHolder({[1]=0/0},5)==nil and RelicTrade.relicHolder(nil,5)==nil and RelicTrade.relicHolder({[1]=5},0/0)==nil,"invalid relic totals produced a holder")
 expect(Config.MatchModes.Relic~=nil and Config.Relics.victoryTime>0,"relic victory mode config")
+-- 電腦分派聖物：一件聖物只派一位、取全體最近；僧侶或聖物不足時只分派能配對的數量。
+local assigned=RelicTrade.assignRelics({{X=0,Z=0},{X=100,Z=0},{X=50,Z=50}},{{X=95,Z=0},{X=5,Z=0}})
+expect(assigned[1]==2 and assigned[2]==1 and assigned[3]==nil,"relic assignment is not nearest-unique")
+local count=0; for _ in pairs(RelicTrade.assignRelics({{X=0,Z=0}},{{X=1,Z=1},{X=2,Z=2}})) do count+=1 end
+expect(count==1,"one monk assigned to several relics")
+expect(next(RelicTrade.assignRelics({{X=0/0,Z=0}},{{X=1,Z=1}}))==nil and next(RelicTrade.assignRelics(nil,{}))==nil,"invalid seekers assigned")
+-- 電腦貿易路線：起點必須是己方；收益最高（含盟友加成）；距離不足時沒有路線。
+local home,destination,gold=RelicTrade.tradeRoute({{X=0,Z=0,own=true},{X=300,Z=0,own=true},{X=0,Z=500,own=false}},Config.Trade)
+expect(home==2 and destination==3 and gold==RelicTrade.tradeGold(math.sqrt(300^2+500^2),Config.Trade,true),"trade route did not pick the most profitable market")
+home,destination=RelicTrade.tradeRoute({{X=0,Z=0,own=false},{X=900,Z=0,own=false}},Config.Trade)
+expect(home==nil,"trade route started from an allied market")
+home=RelicTrade.tradeRoute({{X=0,Z=0,own=true},{X=50,Z=0,own=true}},Config.Trade)
+expect(home==nil,"too-short trade route accepted")
+-- 第二座市集候選：只留距離足夠的位置，由遠到近。
+local spots=RelicTrade.farSpots({{X=10,Z=0},{X=300,Z=0},{X=0,Z=200},{X=0/0,Z=0}},{X=0,Z=0},176)
+expect(#spots==2 and spots[1].X==300 and spots[2].Z==200,"far market spots not filtered and ranked")
 -- 貿易車與商隊設定。
 local cart=Config.Units.tradeCart
 expect(cart.class=="trade" and cart.damage==0 and table.find(Config.Buildings.Market.trains,"tradeCart"),"trade cart definition")

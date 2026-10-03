@@ -69,4 +69,60 @@ function Rules.tradeArrival(ownMarket,carrying)
  if not finite(carrying) or carrying<=0 then return "load" end
  return nil
 end
+-- 電腦：把空閒的僧侶分配到聖物。每次取全體中最近的一組（僧侶, 聖物），一件聖物只派一位。
+-- seekers／relics 為 {X,Z} 清單；回傳 {[僧侶索引]=聖物索引}。
+function Rules.assignRelics(seekers,relics)
+ local result={}
+ if type(seekers)~="table" or type(relics)~="table" then return result end
+ local usedSeeker,usedRelic={},{}
+ for _=1,math.min(#seekers,#relics) do
+  local bestSeeker,bestRelic,bestDistance=nil,nil,math.huge
+  for i,seeker in ipairs(seekers) do
+   if not usedSeeker[i] and finite(seeker.X) and finite(seeker.Z) then
+    for j,relic in ipairs(relics) do
+     if not usedRelic[j] and finite(relic.X) and finite(relic.Z) then
+      local d=(seeker.X-relic.X)^2+(seeker.Z-relic.Z)^2
+      if d<bestDistance then bestSeeker,bestRelic,bestDistance=i,j,d end
+     end
+    end
+   end
+  end
+  if not bestSeeker then break end
+  usedSeeker[bestSeeker],usedRelic[bestRelic]=true,true
+  result[bestSeeker]=bestRelic
+ end
+ return result
+end
+-- 電腦：在己方／盟友市集中找收益最高的路線。markets={{X,Z,own=bool,ally=bool}}，起點必須是己方。
+-- 回傳（起點索引, 目的地索引, 每趟黃金）；沒有可獲利的路線時回傳 nil。
+function Rules.tradeRoute(markets,config)
+ if type(markets)~="table" or type(config)~="table" then return nil end
+ local bestHome,bestDestination,bestGold=nil,nil,0
+ for i,home in ipairs(markets) do
+  if home.own==true and finite(home.X) and finite(home.Z) then
+   for j,destination in ipairs(markets) do
+    if i~=j and finite(destination.X) and finite(destination.Z) then
+     local distance=math.sqrt((home.X-destination.X)^2+(home.Z-destination.Z)^2)
+     local gold=Rules.tradeGold(distance,config,destination.own~=true)
+     if gold>bestGold then bestHome,bestDestination,bestGold=i,j,gold end
+    end
+   end
+  end
+ end
+ if not bestHome then return nil end
+ return bestHome,bestDestination,bestGold
+end
+-- 電腦：第二座市集的候選位置，依離第一座市集由遠到近排序，只保留距離足夠貿易的位置。
+function Rules.farSpots(candidates,from,minDistance)
+ local result={}
+ if type(candidates)~="table" or type(from)~="table" or not finite(from.X) or not finite(from.Z) or not finite(minDistance) then return result end
+ for _,spot in ipairs(candidates) do
+  if finite(spot.X) and finite(spot.Z) then
+   local distance=math.sqrt((spot.X-from.X)^2+(spot.Z-from.Z)^2)
+   if distance>=minDistance then table.insert(result,{X=spot.X,Z=spot.Z,distance=distance}) end
+  end
+ end
+ table.sort(result,function(a,b) if a.distance~=b.distance then return a.distance>b.distance end; if a.X~=b.X then return a.X<b.X end; return a.Z<b.Z end)
+ return result
+end
 return Rules

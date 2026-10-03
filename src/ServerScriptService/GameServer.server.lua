@@ -82,7 +82,7 @@ local unitCollisionIndex=assert(UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS))
 -- 僧侶規則、設定與函式集中在一個表，避免超過 Studio 的 200 個區域變數上限。
 local Monk={rules=require(script.Parent.ServerModules.MonkRules),config=Config.Monk,random=Random.new()}
 -- 聖物與貿易車的規則、設定與函式（同樣集中在表內；主程式區塊已接近 200 個區域變數上限）。Relic.trade.home[貿易車]=出發市集。
-local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),
+local Relic={rules=require(script.Parent.ServerModules.RelicTradeRules),config=Config.Relics,accumulated=setmetatable({},{__mode="k"}),ground=setmetatable({},{__mode="k"}),
  trade={home=setmetatable({},{__mode="k"}),config=Config.Trade}}
 local stop, issue, destroyModel, defeat, checkVictory, finishAttack, acquireTarget
 -- 自動工作的每單位狀態（閒置起點、玩家保留待命、暫時略過的目標）與延後定義的函式。
@@ -2388,6 +2388,7 @@ Relic.make=function(x,z)
  model:SetAttribute("Relic",true)
  model:SetAttribute("DisplayName",Relic.config.name)
  model.Parent=resources
+ Relic.ground[model]=true
  return model
 end
 Relic.spawnAll=function(sizeName)
@@ -2483,6 +2484,7 @@ Relic.orderStore=function(state,unit,building)
 end
 Relic.pickup=function(state,unit,relic)
  if not Relic.isRelic(relic) or unit:GetAttribute("CarryingRelic")==true then stop(unit); return end
+ Relic.ground[relic]=nil
  relic:Destroy()
  unit:SetAttribute("CarryingRelic",true)
  Factory.relicCarry(unit,true)
@@ -2571,6 +2573,85 @@ Trade.arrive=function(state,unit,order)
  issue(unit,"trade",nextTarget)
  orders[unit].home=market
  Trade.home[unit]=isOwned(state,nextTarget,buildings) and nextTarget or market
+end
+-- 電腦（基本版）：城堡時代起蓋修道院、派僧侶撿聖物，並在己方／盟友市集之間跑貿易車。
+-- build 由 aiStep 傳入（aiBuild 在本區塊之後才定義）。
+Relic.aiRelics=function(state,saving,build)
+ local relics,relicList={}, {}
+ for relic in pairs(Relic.ground) do
+  if Relic.isRelic(relic) then table.insert(relics,relic); local p=position(relic); table.insert(relicList,{X=p.X,Z=p.Z}) else Relic.ground[relic]=nil end
+ end
+ if #relics==0 and settings.victory~="Relic" then return end
+ local monastery
+ for building in pairs(state.buildings) do if Relic.storeTarget(state,building) then monastery=building; break end end
+ if not monastery then build(state,"Monastery"); return end
+ local claimed,free,seekers,monks={}, {}, {},0
+ for unit in pairs(state.units) do
+  if unit.Parent==units and unit:GetAttribute("UnitType")=="monk" then
+   monks+=1
+   local order=orders[unit]
+   if unit:GetAttribute("CarryingRelic")==true then
+    if not order or order.kind~="relicStore" then issue(unit,"relicStore",monastery,true) end
+   elseif order and order.kind=="relic" then claimed[order.target]=true
+   elseif not order or order.automatic then
+    table.insert(free,unit); local p=position(unit); table.insert(seekers,{X=p.X,Z=p.Z})
+   end
+  end
+ end
+ local openRelics,openList={}, {}
+ for index,relic in ipairs(relics) do
+  if not claimed[relic] then table.insert(openRelics,relic); table.insert(openList,relicList[index]) end
+ end
+ for seeker,relicIndex in pairs(Relic.rules.assignRelics(seekers,openList)) do issue(free[seeker],"relic",openRelics[relicIndex],true) end
+ local want=math.min(math.max(#relics,1),settings.difficulty=="Easy" and 1 or settings.difficulty=="Hard" and 4 or 2)
+ local queue=training[monastery]
+ if monks<want and not saving and (not queue or #queue==0) then trainRequest(state,monastery,"monk",true) end
+end
+Relic.aiTrade=function(state,saving,build)
+ local Trade=Relic.trade
+ local markets,list,ownMarkets,building={}, {}, {},false
+ for _,other in pairs(states) do
+  for market in pairs(other.buildings) do
+   if market.Parent==buildings and market:GetAttribute("BuildingType")=="Market" then
+    if other==state and not market:GetAttribute("Complete") then building=true
+    elseif Trade.market(state,market) then
+     local p=position(market)
+     table.insert(markets,market); table.insert(list,{X=p.X,Z=p.Z,own=other==state})
+     if other==state then table.insert(ownMarkets,market) end
+    end
+   end
+  end
+ end
+ if #ownMarkets==0 then return end
+ local homeIndex,destinationIndex=Relic.rules.tradeRoute(list,Trade.config)
+ if not homeIndex then
+  -- 沒有可獲利的路線：在基地另一側蓋第二座市集（已有工地時讓 aiBuild 接手施工）。
+  if building then build(state,"Market")
+  elseif not saving and affordable(state.actor,Config.Buildings.Market.cost) then
+   local data,candidates=Config.Buildings.Market,{}
+   for ring=2,6 do for index=0,15 do
+    local angle=index*math.pi/8
+    table.insert(candidates,{X=state.home.X+math.cos(angle)*(40+ring*20),Z=state.home.Z+math.sin(angle)*(40+ring*20)})
+   end end
+   local first=position(ownMarkets[1])
+   for _,spot in ipairs(Relic.rules.farSpots(candidates,{X=first.X,Z=first.Z},Trade.config.minDistance+16)) do
+    local pos=Grid.snap(Vector3.new(spot.X,Config.Map.GroundY,spot.Z),data.size)
+    if validPosition(pos) and Grid.inBounds(pos,data.size) and placementClear(pos,data) and buildRequest(state,"Market",pos,nil,true) then break end
+   end
+  end
+  return
+ end
+ local home,destination=markets[homeIndex],markets[destinationIndex]
+ local limit=settings.difficulty=="Easy" and 1 or settings.difficulty=="Hard" and 6 or 3
+ local carts=0
+ for unit in pairs(state.units) do
+  if unit.Parent==units and unit:GetAttribute("UnitType")=="tradeCart" then
+   carts+=1
+   if not orders[unit] then Trade.home[unit]=home; Trade.order(state,unit,destination) end
+  end
+ end
+ local queue=training[home]
+ if carts<limit and not saving and (not queue or #queue==0) then trainRequest(state,home,"tradeCart",true) end
 end
 end
 local function selectedFormationUnits(state,selection)
@@ -2991,6 +3072,8 @@ local function aiStep(state,now)
      local key=order.kind=="gather" and order.target:GetAttribute("ResourceType") or unit:GetAttribute("CarryType")
      if gathering[key] then gathering[key]+=1 end
     elseif not order then table.insert(idle,unit) end
+   -- 貿易車與負責聖物的僧侶是經濟單位，不跟著進攻。
+   elseif kind=="tradeCart" or unit:GetAttribute("CarryingRelic")==true or (order and (order.kind=="relic" or order.kind=="relicStore")) then
    else table.insert(military,unit) end
   end
  end
@@ -3029,6 +3112,7 @@ local function aiStep(state,now)
   elseif not completedBuilding(state,"University") then aiBuild(state,"University") end
  end
  if age>=2 and not completedBuilding(state,"Tower") and (state.actor:GetAttribute("stone") or 0)>150 then aiBuild(state,"Tower") end
+ if age>=3 then Relic.aiRelics(state,savingForAge,aiBuild); Relic.aiTrade(state,savingForAge,aiBuild) end
  -- 一塊農田只容一位村民：食物人手不足且沒有空閒食物來源時才增建。
  if gathering.food<math.ceil(villagerCount*0.42) and not nearestResource(state,state.home,"food") then aiBuild(state,"Farm") end
  if settings.victory=="Wonder" and age>=4 and not completedBuilding(state,"Wonder") then aiBuild(state,"Wonder") end
