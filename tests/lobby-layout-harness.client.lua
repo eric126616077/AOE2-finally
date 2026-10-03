@@ -146,6 +146,15 @@ local function welcomeChecks(size)
  local welcome=UI.lobbyWelcome
  if not shown(welcome) then check(UI.tutorialInviteCovers==true,tag.." hidden only while the tutorial card needs the space"); return end
  onCanvas(welcome,tag)
+ -- 「▶ 預告片」只在有影片時顯示；不論是否顯示，都檢查它擺放的位置（AbsolutePosition 照常計算）。
+ local trailer=UI.trailerButton
+ if trailer then
+  check(inside(trailer,UI.canvas),tag.." trailer button inside the screen")
+  check(not overlaps(trailer,welcome),tag.." trailer button clear of the welcome panel")
+  check(not (shown(UI.inviteReopen) and overlaps(trailer,UI.inviteReopen)),tag.." trailer button clear of the tutorial button")
+  check(not (shown(UI.tutorialInvite) and trailer.Visible),tag.." trailer button hidden while the tutorial card is open")
+  check(not (shown(UI.noticePanel) and overlaps(trailer,UI.noticePanel)),tag.." trailer button clear of the notice")
+ end
  check(box(welcome).h<=size.h*0.7,tag.." leaves the courtyard visible (panel "..math.floor(box(welcome).h).." of "..size.h.." px)")
  childrenInside(welcome,tag)
  noOverlap(welcome,tag)
