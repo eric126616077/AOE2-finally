@@ -1691,6 +1691,11 @@ function GUI:CreateResult()
   player:SetAttribute("RTSModalOpen",self:IsModalOpen())
  end,"WatchButton",C.muted)
  self.restartButton,self.restartLabel = namedButton(body,"返回戰局設定",UDim2.fromOffset(228,44),UDim2.new(0.5,6,1,-56),function()
+  -- 對戰 place 每局獨立：每位玩家自行返回大廳 place，由伺服器判斷是否已可離開。
+  if workspace:GetAttribute("PlaceRole")=="Match" then
+   if player:GetAttribute("ReturningToLobby")~=true then lobbyCommand("ReturnToLobby") end
+   return
+  end
   if workspace:GetAttribute("MatchPhase")=="Ended" and workspace:GetAttribute("HostUserId") == player.UserId then self.callbacks.restart() end
  end,"RestartMatchButton",C.gold)
  self.restartButton:SetAttribute("Primary",true)
@@ -1756,7 +1761,7 @@ function GUI:UpdateMatchReport(ended)
  end
  local report=self.matchReport
  self.resultHeading.Text=report and (report.finished and (reportOutcomes[report.outcome].." · 戰後覆盤") or "等待隊伍結果") or (ended and "戰局結束" or "你的勢力已淘汰")
- self.resultDescription.Text=report and ("存活 "..reportDuration(report.survivalSeconds)) or "你可以繼續觀戰，或由房主開始新局。"
+ self.resultDescription.Text=report and ("存活 "..reportDuration(report.survivalSeconds)) or (workspace:GetAttribute("PlaceRole")=="Match" and "你可以繼續觀戰，或返回大廳。" or "你可以繼續觀戰，或由房主開始新局。")
 end
 function GUI:UpdateLobby()
  local roomId=player:GetAttribute("LobbyRoomId") or "Room1"
@@ -1765,7 +1770,10 @@ function GUI:UpdateLobby()
  local queued = player:GetAttribute("LobbyQueued") == true
  local phase=workspace:GetAttribute("MatchPhase")
  local activeRoom=workspace:GetAttribute("ActiveBattleRoomId")
- local starting=phase=="Starting" and queued and (activeRoom==nil or activeRoom==roomId)
+ -- 大廳 place 的房間各自出發（全域階段維持 Lobby），以房間狀態判斷；單一伺服器仍看全域階段。
+ -- 對戰 place 沒有大廳：開局前一律顯示出發畫面（讀取票據、等待其他玩家抵達）。
+ local starting=(workspace:GetAttribute("PlaceRole")=="Match" and phase~="Playing" and phase~="Ended")
+  or queued and (lobbyRoomAttribute(roomId,"Status")=="Starting" or (phase=="Starting" and (activeRoom==nil or activeRoom==roomId)))
  local hostId=lobbyRoomAttribute(roomId,"HostUserId")
  local isHost=hostId==player.UserId and queued and not starting
  local changed=self.lobbyRoomId~=roomId or self.lobbyWasQueued~=queued or (isHost and not self.lobbyWasHost)
@@ -1899,7 +1907,7 @@ function GUI:UpdateLobby()
   ..self.settingLabels.size.field.names[self.settings.size].."戰場 · 人口上限 "..self.settings.population.."\n"
   ..self.settingLabels.startingResources.field.names[self.settings.startingResources]..(aiCount>0 and " · 電腦難度："..self.settingLabels.difficulty.field.names[self.settings.difficulty] or "")
  self.rules.Text=self.settingLabels.victory.field.names[self.settings.victory].." · "..victoryText
- self.travelStatus.Text=workspace:GetAttribute("MatchLoadStage") or "正在生成地圖與資源…"
+ self.travelStatus.Text=lobbyRoomAttribute(roomId,"TravelStage") or workspace:GetAttribute("MatchLoadStage") or "正在生成地圖與資源…"
  if changed or (self.lobbyWizard and not previousWizard) then self:SetLobbyPage(self.lobbyWizard and 1 or 3)
  elseif not self.lobbyWizard and self.lobbyPage~=3 then self:SetLobbyPage(3) end
  self:LayoutLobby()
@@ -2317,7 +2325,11 @@ function GUI:Update(selected,buildingKind)
  local modalOpen = self:IsModalOpen()
  if player:GetAttribute("RTSModalOpen") ~= modalOpen then player:SetAttribute("RTSModalOpen",modalOpen) end
  if resultVisible then
-  self.restartButton.Visible = ended; self.restartLabel.Text = workspace:GetAttribute("HostUserId") == player.UserId and "返回戰局設定" or "等待房主重新開局"
+  if workspace:GetAttribute("PlaceRole")=="Match" then
+   self.restartButton.Visible = true; self.restartLabel.Text = player:GetAttribute("ReturningToLobby")==true and "正在返回大廳…" or "返回大廳"
+  else
+   self.restartButton.Visible = ended; self.restartLabel.Text = workspace:GetAttribute("HostUserId") == player.UserId and "返回戰局設定" or "等待房主重新開局"
+  end
  end
  local elapsed = math.max(0,math.floor(workspace:GetAttribute("MatchTime") or 0)); local age = player:GetAttribute("Age") or 1
  local clock = string.format("%02d:%02d",math.floor(elapsed/60),elapsed%60)

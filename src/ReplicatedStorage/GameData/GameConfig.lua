@@ -34,6 +34,18 @@ Config.Lobby = {
    settings={expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
  },
 }
+-- 跨 place 對局：同一體驗內的大廳 place（起始 place）與對戰 place。兩個 ID 都填入且不同時，
+-- 大廳只負責集合，每場對局傳送到對戰 place 的獨立保留伺服器；保持 0 或在 Studio 中則維持單一伺服器流程。
+-- 兩個 place 發布同一份 build；伺服器依 game.PlaceId 判斷角色。
+Config.Places = {
+ lobbyPlaceId = 0, matchPlaceId = 0,
+ ticketTtl = 600,          -- 對局票據在 MemoryStore 保存秒數
+ ticketReadAttempts = 5,   -- 對戰伺服器讀取票據的嘗試次數
+ teleportAttempts = 3, retryPause = 2,
+ arrivalTimeout = 45,      -- 對戰伺服器等待全員抵達的秒數；逾時以已抵達的玩家開局
+ travelTimeout = 60,       -- 大廳等待玩家離開伺服器的秒數；逾時視為傳送失敗並恢復房間
+ returnDelay = 90,         -- 對局結束後自動送回大廳的秒數
+}
 Config.Map = {
  MapSize = 1024, GridSize = 8, GroundY = 0, Seed = 2718, RandomizeSeed = true,
  Sizes = { Small = 768, Medium = 1024, Large = 1536 },
