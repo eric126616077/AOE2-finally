@@ -307,7 +307,9 @@ local function refresh(model)
    and part.Name~="CollisionVolume" and not part.CanCollide then
    local entry=existing[part]
    if not entry then
-    local offset=root.CFrame:ToObjectSpace(part.CFrame)
+    -- 伺服器移動時只搬 Root，外觀零件可能還在舊位置；優先用伺服器記錄的相對位置。
+    local recorded=part:GetAttribute("RootOffset")
+    local offset=typeof(recorded)=="CFrame" and recorded or root.CFrame:ToObjectSpace(part.CFrame)
     entry={part=part,offset=offset,group=group,side=offset.X<0 and -1 or 1,
      front=offset.Z<0 and -1 or 1,pivot=offset.Position+Vector3.new(0,part.Size.Y/2-.1,0)}
    end

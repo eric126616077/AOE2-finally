@@ -32,6 +32,7 @@ UIS.WindowFocusReleased:Connect(function() focused="Background" end)
 local record,stage,started
 local receive,focusSeen={}, {}
 local motionWrites={}
+local appearance={checked=0,detached=0,worst=0}
 local lastSecond=0
 local function motion()
  local probe=script.Parent:FindFirstChild("RTSMotionProbe")
@@ -49,6 +50,25 @@ Run.RenderStepped:Connect(function(delta)
   focusSeen[focused]=(focusSeen[focused] or 0)+1
   local stats=motion()
   if stats then table.insert(motionWrites,stats.partWrites) end
+  -- 伺服器只搬 Root：檢查畫面上每個單位的身體零件是否跟著 Root（超過 6 studs 視為外觀脫離）。
+  local camera=workspace.CurrentCamera
+  local folder=workspace:FindFirstChild("Units")
+  if camera and folder then
+   for _,unit in ipairs(folder:GetChildren()) do
+    local root=unit.PrimaryPart
+    local body=unit:FindFirstChild("Body") or unit:FindFirstChild("HorseBody") or unit:FindFirstChild("Chassis")
+    if root and body and body:IsA("BasePart") then
+     local _,visible=camera:WorldToViewportPoint(root.Position)
+     if visible then
+      appearance.checked+=1
+      local offset=body.Position-root.Position
+      local flat=Vector3.new(offset.X,0,offset.Z).Magnitude
+      appearance.worst=math.max(appearance.worst,flat)
+      if flat>6 then appearance.detached+=1 end
+     end
+    end
+   end
+  end
  end
 end)
 local function finish()
@@ -66,7 +86,8 @@ local function finish()
   partWritesPerFrame={mean=round(writes.mean,0),worst=round(writes.worst,0)},
   motion=stats and {tracked=stats.tracked,visible=stats.visible,detailed=stats.detailed} or false,
   focusSeconds=focusSeen,viewport=camera and {camera.ViewportSize.X,camera.ViewportSize.Y} or false,
-  qualityLevel=qualityOK and quality or false})
+  qualityLevel=qualityOK and quality or false,
+  appearance={checked=appearance.checked,detached=appearance.detached,worstOffset=round(appearance.worst,2)}})
  record=nil
 end
 local function changed()
@@ -78,6 +99,7 @@ local function changed()
  if string.sub(value,1,4)=="run:" then
   stage,started,record=string.sub(value,5),os.clock(),Observer.NewFrames()
   receive,focusSeen,motionWrites={}, {}, {}
+  appearance={checked=0,detached=0,worst=0}
  elseif value=="done" then emit("DONE",{}) end
 end
 workspace:GetAttributeChangedSignal("BattleStressStage"):Connect(changed)

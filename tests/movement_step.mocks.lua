@@ -5,6 +5,8 @@ local MAX_UNIT_RADIUS=4
 local unitCollisionIndex=UnitCollisionRules.newIndex(16,MAX_UNIT_RADIUS)
 local orders={}
 local Config={Map={GroundY=0}}
+-- Server movement only moves the Root; the mock unit tracks its position the same way.
+local Factory={moveUnit=function(unit,frame) unit:PivotTo(frame) end}
 local vector={}
 vector.__index=function(self,key)
  if key=="Magnitude" then return math.sqrt(self.X*self.X+self.Y*self.Y+self.Z*self.Z) end

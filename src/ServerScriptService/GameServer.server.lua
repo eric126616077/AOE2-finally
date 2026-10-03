@@ -520,7 +520,8 @@ local function obstacleParts(pos,size)
  local hits=workspace:GetPartBoundsInBox(CFrame.new(pos),size,overlap)
  local obstacles={}
  for _,part in ipairs(hits) do
-  if part.CanCollide or part:IsDescendantOf(buildings) or part:IsDescendantOf(resources) or part:IsDescendantOf(units) then table.insert(obstacles,part) end
+  -- 單位只以碰撞體積佔位：移動中的外觀零件在伺服器端不即時跟隨 Root。
+  if part.CanCollide or part:IsDescendantOf(buildings) or part:IsDescendantOf(resources) or (part.Name=="CollisionVolume" and part:IsDescendantOf(units)) then table.insert(obstacles,part) end
  end
  return obstacles
 end
@@ -757,6 +758,8 @@ stop=function(unit,preserveFormationSlot)
  orders[unit]=nil
  if not preserveFormationSlot and unit.Parent then unit:SetAttribute("FormationSlot",nil) end
  if unit.Parent then
+  -- 停下時把伺服器端的外觀零件對齊 Root（移動中只搬 Root）。
+  Factory.syncAppearance(unit)
   unit:SetAttribute("Order","待命"); unit:SetAttribute("Animation","Idle"); unit:SetAttribute("WorkKind",nil)
   unit:SetAttribute("OrderKind",nil)
   unit:SetAttribute("OrderTargetName",nil)
@@ -1069,7 +1072,7 @@ local function moveToward(unit,order,destination,speed,dt,now)
  unit:SetAttribute("Animation","Walk")
  local profile=unitCollisionIndex.profile
  local pivotStarted=profile and os.clock()
- unit:PivotTo(CFrame.lookAt(nextPos+Vector3.new(0,2.5,0),nextPos+facing.Unit+Vector3.new(0,2.5,0)))
+ Factory.moveUnit(unit,CFrame.lookAt(nextPos+Vector3.new(0,2.5,0),nextPos+facing.Unit+Vector3.new(0,2.5,0)))
  if profile then profile.pivot+=os.clock()-pivotStarted; profile.pivots+=1 end
  unitCollisionIndex:Update(unit,nextPos.X,nextPos.Z,radius)
 end
