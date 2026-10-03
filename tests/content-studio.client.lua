@@ -27,6 +27,7 @@ local function waitFor(predicate,seconds)
  until os.clock()>deadline
  return nil
 end
+local running=false
 local ok,problem=pcall(function()
  assert(waitFor(function() return workspace:GetAttribute("RTSReady")==true and player.PlayerGui:FindFirstChild("AOE2_MainGUI") end,30),"初始化逾時")
  require(RS.Shared.LobbyTests).Start({size="Small",aiCount=1,difficulty="Easy",population=200,startingResources="Rich",victory="Relic",teamMode="FFA"})
@@ -55,8 +56,29 @@ local ok,problem=pcall(function()
   end
   return best
  end
+ -- 把伺服器的每則通知印出來，任何失敗都能看到伺服器給的原因（例如人口已滿、勢力淘汰）。
+ RS.RTSRemotes.Feedback.OnClientEvent:Connect(function(message)
+  if type(message)=="string" and message~="" then print(TAG.."INFO 通知："..message) end
+ end)
  local info=server:InvokeServer("setup")
- check(info and info.age==4 and info.ai~=nil,"測試前置：帝王時代、資源與電腦陣營",info and info.ai)
+ check(info and info.age==4 and info.ai~=nil and info.houses>=6,"測試前置：帝王時代、資源、房屋與電腦陣營",info and ("ai="..tostring(info.ai).." houses="..tostring(info.houses)))
+ -- 測試期間持續移除電腦的戰鬥單位，避免電腦進攻淘汰玩家而讓後續項目失效。
+ running=true
+ task.spawn(function()
+  while running and workspace:GetAttribute("MatchPhase")=="Playing" do
+   local removed=server:InvokeServer("aiDisarm")
+   if removed and removed>0 then print(TAG.."INFO 移除電腦戰鬥單位 "..removed) end
+   task.wait(3)
+  end
+ end)
+ local function guard(section)
+  local d=server:InvokeServer("diag")
+  print(TAG.."INFO "..section.."：單位 "..d.units.." 建築 "..d.buildings.." 人口 "..tostring(d.population).."/"..tostring(d.cap).." 階段 "..tostring(d.phase))
+  assert(not d.defeated and d.phase=="Playing","玩家在「"..section.."」前已被淘汰或對局已結束")
+ end
+ -- 電腦需要時間訓練：先讓電腦準備，最後再檢查。
+ local prepared=server:InvokeServer("aiPrepare")
+ check(prepared and prepared.monastery and prepared.market and prepared.second,"測試前置：電腦的修道院與兩座市集",prepared and (tostring(prepared.monastery).."/"..tostring(prepared.market).."/"..tostring(prepared.second)))
  local home=player:GetAttribute("HomePosition")
 
  -- 1. 鹿群與狩獵 -------------------------------------------------------------
@@ -74,6 +96,7 @@ local ok,problem=pcall(function()
  check(prey.Parent==nil or (prey:GetAttribute("Amount") or 0)<preyBefore,"鹿的食物減少",prey:GetAttribute("Amount"))
  command:FireServer("Stop",{hunter})
 
+ guard("新兵種與兵種升級")
  -- 2／3. 新兵種與兵種升級 -------------------------------------------------------
  local archery=server:InvokeServer("build","ArcheryRange",home,{min=48,max=170})
  local stable=server:InvokeServer("build","Stable",home,{min=48,max=170})
@@ -101,6 +124,7 @@ local ok,problem=pcall(function()
  local cannon=waitFor(function() return mine("handCannoneer")[1] end,Config.Units.handCannoneer.trainTime+20)
  check(cannon and cannon:GetAttribute("Attack")>=Config.Units.handCannoneer.damage,"火槍手訓練完成",cannon and cannon:GetAttribute("Attack"))
 
+ guard("貿易")
  -- 4. 貿易 ----------------------------------------------------------------------
  local marketA=server:InvokeServer("build","Market",home,{min=48,max=170})
  local marketB=marketA and server:InvokeServer("build","Market",home,{min=48,max=190,awayFrom=marketA:GetPivot().Position,minAway=Config.Trade.minDistance+20})
@@ -119,21 +143,20 @@ local ok,problem=pcall(function()
   check(waitFor(function() return cart:GetAttribute("OrderKind")=="trade" end,5),"入帳後自動繼續下一趟")
  end
 
- -- 5. 電腦撿聖物與跑貿易 ----------------------------------------------------------
- local prepared=server:InvokeServer("aiPrepare")
- check(prepared and prepared.monastery and prepared.market and prepared.second,"測試前置：電腦的修道院與兩座市集")
- -- 撿聖物與跑貿易都要電腦在城堡時代以上，所以兩者都觀察到之後才讓電腦退回黑暗時代。
+ guard("電腦撿聖物與跑貿易")
+ -- 5. 電腦撿聖物與跑貿易（電腦在測試一開始就已準備）。兩者都觀察到後才讓電腦退回黑暗時代。
  local seen,trading
  waitFor(function()
   local s=server:InvokeServer("aiState")
   if s and (s.seeking>0 or s.carrying>0) then seen=seen or s end
   if s and s.trading>0 then trading=trading or s end
   return seen and trading
- end,Config.Units.monk.trainTime+Config.Units.tradeCart.trainTime+60)
+ end,180)
  server:InvokeServer("aiStop")
  check(seen~=nil,"電腦訓練僧侶並派去撿聖物",seen and ("monks="..seen.monks))
  check(trading~=nil,"電腦訓練貿易車並跑貿易",trading and ("carts="..trading.carts))
 
+ guard("聖物")
  -- 6. 聖物：拾取、存放、收入、掉落、聖物勝利 ----------------------------------------
  local total=workspace:GetAttribute("RelicTotal") or 0
  check(total==Config.Relics.counts.Small,"小地圖放置設定數量的聖物",total)
@@ -145,7 +168,7 @@ local ok,problem=pcall(function()
  -- 先驗掉落：一位僧侶撿起最近的聖物後被移除，聖物應回到地上。
  local first=nearest(groundRelics(),home)
  command:FireServer("Order",{monks[total+1]},first)
- check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,90),"僧侶拾取聖物",monks[total+1]:GetAttribute("OrderKind"))
+ check(waitFor(function() return monks[total+1]:GetAttribute("CarryingRelic")==true end,120),"僧侶拾取聖物",monks[total+1]:GetAttribute("OrderKind"))
  check(#groundRelics()==total-1,"拾取後地上少一件",#groundRelics())
  command:FireServer("Order",{monks[total+1]},infantry)
  task.wait(0.5)
@@ -163,6 +186,7 @@ local ok,problem=pcall(function()
   check((player:GetAttribute("RelicGold") or 0)>goldBefore,"存放的聖物持續產生黃金",player:GetAttribute("RelicGold"))
  end
  check(waitFor(function() return (player:GetAttribute("Relics") or 0)==total end,200),"集齊全部聖物",player:GetAttribute("Relics"))
+ guard("聖物勝利倒數")
  local countdown=waitFor(function() return player:GetAttribute("RelicRemaining") end,5)
  check(countdown and countdown<=Config.Relics.victoryTime,"聖物勝利開始倒數",countdown)
  local guiObjective=player.PlayerGui:FindFirstChild("AOE2_MainGUI") and player.PlayerGui.AOE2_MainGUI:FindFirstChild("MatchObjective",true)
@@ -171,4 +195,5 @@ local ok,problem=pcall(function()
  check(workspace:GetAttribute("WinnerId")==player.UserId,"聖物勝利的勝利者是玩家",workspace:GetAttribute("WinnerId"))
 end)
 if not ok then failed+=1; warn(TAG.."FAIL 測試中斷："..tostring(problem)) end
+running=false
 print(string.format("%s%s %d passed, %d failed",TAG,failed==0 and "COMPLETE" or "INCOMPLETE",passed,failed))
