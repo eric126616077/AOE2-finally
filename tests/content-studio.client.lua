@@ -64,9 +64,10 @@ local ok,problem=pcall(function()
  check(info and info.age==4 and info.ai~=nil and info.houses>=6,"測試前置：帝王時代、資源、房屋與電腦陣營",info and ("ai="..tostring(info.ai).." houses="..tostring(info.houses)))
  -- 測試期間持續移除電腦的戰鬥單位，避免電腦進攻淘汰玩家而讓後續項目失效。
  running=true
+ local holdAI=false
  task.spawn(function()
   while running and workspace:GetAttribute("MatchPhase")=="Playing" do
-   local removed=server:InvokeServer("aiDisarm")
+   local removed=server:InvokeServer("aiDisarm",holdAI)
    if removed and removed>0 then print(TAG.."INFO 移除電腦戰鬥單位 "..removed) end
    task.wait(3)
   end
@@ -156,7 +157,9 @@ local ok,problem=pcall(function()
   if s and s.trading>0 then trading=trading or s end
   return seen and trading
  end,180)
- server:InvokeServer("aiStop")
+ local restored=server:InvokeServer("aiStop")
+ holdAI=true
+ print(TAG.."INFO 電腦觀察結束：移回原位的聖物 "..tostring(restored and restored.moved).." / 原位 "..tostring(restored and restored.home))
  check(seen~=nil,"電腦訓練僧侶並派去撿聖物",seen and ("monks="..seen.monks))
  check(trading~=nil,"電腦訓練貿易車並跑貿易",trading and ("carts="..trading.carts))
 

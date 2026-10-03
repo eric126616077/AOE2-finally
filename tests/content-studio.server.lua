@@ -34,6 +34,21 @@ local function place(ownerId,kind,center,minRadius,maxRadius,awayFrom,minAway)
  end
  return nil
 end
+-- 開局時聖物的對稱位置；電腦觀察結束後，把被電腦僧侶帶走又掉落的聖物放回原位（電腦僧侶被移除時聖物掉在牠腳下，
+-- 常在電腦主城射程內，玩家的僧侶過去會被射死，讓「集齊全部聖物」的前提不成立）。
+local relicHome={}
+local function groundRelics()
+ local result={}
+ for _,model in ipairs(workspace.Resources:GetChildren()) do if model:GetAttribute("Relic")==true then table.insert(result,model) end end
+ return result
+end
+local function aiHold(ai)
+ -- 測試的聖物階段：電腦維持在城堡時代以前（電腦只在城堡時代以後撿聖物），且沒有僧侶。
+ ai:SetAttribute("Age",1)
+ ai:SetAttribute("gold",0)
+ local id=ai:GetAttribute("OwnerId")
+ for _,unit in ipairs(owned(id,"monk","Units")) do probe:Invoke("remove",unit) end
+end
 remote.OnServerInvoke=function(player,action,a,b,c)
  if not probe then return nil end
  if action=="setup" then
@@ -78,6 +93,8 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local ai=aiActor()
   if not ai then return nil end
   local id=ai:GetAttribute("OwnerId")
+  table.clear(relicHome)
+  for _,relic in ipairs(groundRelics()) do table.insert(relicHome,relic:GetPivot().Position) end
   -- 帝王時代：電腦不會再為升級時代存資源（存資源時不訓練）；只給足夠訓練僧侶與貿易車的少量資源。
   ai:SetAttribute("Age",4)
   -- 測試期間電腦的軍隊會被持續移除、電腦會一直補兵，所以給足以同時補兵與訓練僧侶／貿易車的資源。
@@ -112,15 +129,28 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   -- 電腦觀察結束：回到黑暗時代（電腦只在城堡時代以後處理聖物與貿易），並移除牠的僧侶，攜帶的聖物會掉回地上。
   local ai=aiActor()
   if not ai then return false end
-  local id=ai:GetAttribute("OwnerId")
-  ai:SetAttribute("Age",1)
-  ai:SetAttribute("gold",0)
-  for _,unit in ipairs(owned(id,"monk","Units")) do probe:Invoke("remove",unit) end
-  return true
+  aiHold(ai)
+  task.wait(0.5)
+  -- 把不在原位的聖物移回空著的原位。
+  local moved=0
+  for _,relic in ipairs(groundRelics()) do
+   local here=relic:GetPivot().Position
+   local atHome=false
+   for _,spot in ipairs(relicHome) do if (spot-here).Magnitude<3 then atHome=true; break end end
+   if not atHome then
+    for _,spot in ipairs(relicHome) do
+     local taken=false
+     for _,other in ipairs(groundRelics()) do if (other:GetPivot().Position-spot).Magnitude<3 then taken=true; break end end
+     if not taken then relic:PivotTo(CFrame.new(spot)); moved+=1; break end
+    end
+   end
+  end
+  return {moved=moved,home=#relicHome}
  elseif action=="aiDisarm" then
-  -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。
+  -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。a=true 時（聖物階段）另外維持電腦不撿聖物。
   local ai=aiActor()
   if not ai then return 0 end
+  if a==true then aiHold(ai) end
   local id,removed=ai:GetAttribute("OwnerId"),0
   for _,unit in ipairs(workspace.Units:GetChildren()) do
    local kind=unit:GetAttribute("UnitType")
