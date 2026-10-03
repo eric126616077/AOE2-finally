@@ -410,6 +410,14 @@ local function detachPresentation(model,item)
  end
  UnitView.Clear(model)
 end
+-- 與 updateVisibility 相同的畫面測試，給剛建立的單位立即使用。
+local function inViewport(position)
+ local camera=workspace.CurrentCamera
+ if not camera then return false end
+ local point=camera:WorldToViewportPoint(position)
+ local size=camera.ViewportSize
+ return point.Z>0 and point.Z<1000 and point.X>=-40 and point.Y>=-40 and point.X<=size.X+40 and point.Y<=size.Y+40
+end
 local function refresh(model)
  local root=model.PrimaryPart
  local previous=tracked[model]
@@ -460,6 +468,9 @@ local function refresh(model)
     local duration=Motion.SpawnDuration(offset.Magnitude,observer and observer.speed)
     if duration>0 then item.spawn={offset=offset,start=os.clock(),duration=duration} end
    end
+   -- 不等下一次可見度更新（最多 0.125 秒）：否則新單位會先停在出生點一下，再跳回建築邊緣開始出場。
+   -- 細節預設開啟，下一次可見度更新再依距離與數量上限修正。
+   if inViewport(root.Position) then visibleUnits[model]=item; item.detailed=true end
    diagnostics.rootSamples+=1
    item.rootConnection=root:GetPropertyChangedSignal("CFrame"):Connect(function()
     if tracked[model]~=item then return end

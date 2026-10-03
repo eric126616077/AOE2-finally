@@ -100,7 +100,9 @@ local function auditSpawn(unit)
  local face=edgeX>=edgeZ and "x" or "z"
  local _,_,_,r00,_,_,_,r11,_,_,_,r22=footprint.CFrame:GetComponents()
  local rotation=math.acos(math.clamp((r00+r11+r22-1)/2,-1,1))
- local ok=direction.Magnitude>0 and perpendicular<=.05 and along>0 and along<toRoot.Magnitude
+ -- 這裡在 task.defer 之後才檢查：同一批連續出生的單位可能已被單位碰撞分離推開約 1 stud，
+ -- Root 不再是 markSpawn 當下的出生點，所以連線偏離容許 1.5 studs；邊緣比例仍以占地精確檢查。
+ local ok=direction.Magnitude>0 and perpendicular<=1.5 and along>0 and along<toRoot.Magnitude
   and insideRatio<1 and math.abs(edgeRatio-1)<=.02 and math.abs(from.Y-root.Position.Y)<=.01
  check(ok,label.."：SpawnFrom 在中心→出生點連線上、占地內，往外 1 stud 到占地邊緣，高度同 Root",
   string.format("偏離連線 %.3f、離中心 %.2f／出生點 %.2f、邊緣比例 %.3f（%s 面）、占地 %.0f×%.0f、占地旋轉 %.3f rad、高度差 %.3f",

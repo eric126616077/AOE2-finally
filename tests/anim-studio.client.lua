@@ -128,6 +128,16 @@ local function startSpawn(unit,addedClock,addedServer,late)
 end
 local function watchUnit(unit)
  if not unit:IsA("Model") or unit:GetAttribute("OwnerId")~=player.UserId then return end
+ -- 客戶端的 ChildAdded 可能早於子零件複製。UnitMotion 也是等 Root 與外觀零件到了才開始追蹤，
+ -- 所以等 PrimaryPart 出現，並以那一刻為「出現時間」。
+ if not unit.PrimaryPart then
+  local connection
+  connection=unit:GetPropertyChangedSignal("PrimaryPart"):Connect(function()
+   if unit.PrimaryPart then connection:Disconnect(); watchUnit(unit) end
+  end)
+  task.delay(3,function() connection:Disconnect() end)
+  return
+ end
  local addedClock,addedServer=os.clock(),serverNow()
  if unit:GetAttribute("SpawnFrom")~=nil then startSpawn(unit,addedClock,addedServer,false); return end
  -- UnitMotion 只在追蹤當下讀屬性：晚到的屬性代表不會播放出場，記錄下來由檢查判定失敗。
