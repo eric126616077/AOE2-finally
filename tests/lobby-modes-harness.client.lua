@@ -156,6 +156,17 @@ local function solo()
  task.wait(3)
  probe:FireServer("DefeatAI")
  await(function() return workspace:GetAttribute("MatchPhase")=="Ended" end,"chapter ended after AI eliminated",30)
+ -- The winner attributes are set right after the phase; give replication a moment, then report what ended the match.
+ local deadline=os.clock()+3
+ while workspace:GetAttribute("WinnerTeamId")~=1 and os.clock()<deadline do task.wait(0.1) end
+ if workspace:GetAttribute("WinnerTeamId")~=1 then
+  local ai=aiActors()[1]
+  print(label.."INFO match end: WinnerTeamId="..tostring(workspace:GetAttribute("WinnerTeamId"))
+   .." Winner="..tostring(workspace:GetAttribute("Winner")).." player Defeated="..tostring(player:GetAttribute("Defeated"))
+   .." Forfeited="..tostring(player:GetAttribute("Forfeited")).." TeamId="..tostring(player:GetAttribute("TeamId"))
+   .." AI="..tostring(ai and ai:GetAttribute("DisplayName")).." AI Defeated="..tostring(ai and ai:GetAttribute("Defeated"))
+   .." StoryCleared="..tostring(player:GetAttribute("StoryCleared")))
+ end
  check(workspace:GetAttribute("WinnerTeamId")==1,"humans won the chapter")
  await(function() return player:GetAttribute("StoryCleared")==1 end,"chapter 1 recorded as cleared")
  backToLobby(true)
