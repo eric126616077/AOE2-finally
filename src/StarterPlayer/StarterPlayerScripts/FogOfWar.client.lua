@@ -13,8 +13,11 @@ local player=Players.LocalPlayer
 if script:GetAttribute("FogInitialized") then return end
 script:SetAttribute("FogInitialized",true)
 local VISION=Config.Vision
-local SLAB_HEIGHT,FOG_TRANSPARENCY=2,.5
-local folder,rowParts,grid=nil,{},nil
+-- 迷霧畫在離地 FOG_HEIGHT 的一整片透明平面上（SurfaceGui），每格對齊整數像素：
+-- 不用一列一塊的 Part，避免半透明側面與接縫在地面上疊出一條條線。
+local FOG_HEIGHT,FOG_TRANSPARENCY=1.95,.5
+local folder,surface,rowFrames,grid=nil,nil,{},nil
+local cellPixels=8
 -- 單位用 LocalTransparencyModifier 隱藏（UnitMotion 不使用它）；建築與資源改本機 Transparency，
 -- 避免和施工／損壞外觀使用的 LocalTransparencyModifier 互相覆蓋。
 local hiddenUnits=setmetatable({},{__mode="k"})
@@ -90,27 +93,49 @@ local function trackStatic(model)
  hideStatic(model)
 end
 
-local function slab(row,run)
- local cell=grid.cell
- local half=grid.size/2
- local part=Instance.new("Part")
- part.Name=run.state==0 and "Unexplored" or "Fog"
- part.Anchored,part.CanCollide,part.CanQuery,part.CanTouch,part.CastShadow=true,false,false,false,false
- part.Material=Enum.Material.SmoothPlastic
- part.Color=Color3.new(0,0,0)
- part.Transparency=run.state==0 and 0 or FOG_TRANSPARENCY
- local width=(run.last-run.first+1)*cell
- part.Size=Vector3.new(width,SLAB_HEIGHT,cell)
- part.CFrame=CFrame.new((run.first-1)*cell-half+width/2,Config.Map.GroundY+SLAB_HEIGHT/2-.05,(row-.5)*cell-half)
- part.Parent=folder
- return part
+-- 平面的正面朝上：畫布 +X 對應世界 -X，畫布 +Y 對應世界 -Z。
+local function cellFrame(row,run)
+ local frame=Instance.new("Frame")
+ frame.Name=run.state==0 and "Unexplored" or "Fog"
+ frame.BorderSizePixel=0
+ frame.Active=false
+ frame.BackgroundColor3=Color3.new(0,0,0)
+ frame.BackgroundTransparency=run.state==0 and 0 or FOG_TRANSPARENCY
+ frame.Position=UDim2.fromOffset((grid.count-run.last)*cellPixels,(grid.count-row)*cellPixels)
+ frame.Size=UDim2.fromOffset((run.last-run.first+1)*cellPixels,cellPixels)
+ frame.Parent=surface
+ return frame
 end
 local function drawRow(row)
- for _,part in ipairs(rowParts[row] or {}) do part:Destroy() end
- local parts={}
- for _,run in ipairs(FogRules.runs(grid,row)) do table.insert(parts,slab(row,run)) end
- rowParts[row]=parts
+ for _,frame in ipairs(rowFrames[row] or {}) do frame:Destroy() end
+ local frames={}
+ for _,run in ipairs(FogRules.runs(grid,row)) do table.insert(frames,cellFrame(row,run)) end
+ rowFrames[row]=frames
  FogView.mapRows[row]=true
+end
+local function buildPlane()
+ local span=grid.count*grid.cell
+ local half=grid.size/2
+ local thickness=.1
+ local plane=Instance.new("Part")
+ plane.Name="FogPlane"
+ plane.Anchored,plane.CanCollide,plane.CanQuery,plane.CanTouch,plane.CastShadow=true,false,false,false,false
+ plane.Transparency=1
+ plane.Size=Vector3.new(span,span,thickness)
+ plane.CFrame=CFrame.new(span/2-half,Config.Map.GroundY+FOG_HEIGHT-thickness/2,span/2-half)*CFrame.Angles(math.pi/2,0,0)
+ plane.Parent=folder
+ cellPixels=math.clamp(math.floor(512/grid.count),1,8)
+ surface=Instance.new("SurfaceGui")
+ surface.Name="FogSurface"
+ surface.Face=Enum.NormalId.Front
+ surface.SizingMode=Enum.SurfaceGuiSizingMode.FixedSize
+ surface.CanvasSize=Vector2.new(grid.count*cellPixels,grid.count*cellPixels)
+ surface.LightInfluence=0
+ surface.MaxDistance=math.huge
+ surface.ClipsDescendants=true
+ surface.Active=false
+ surface.Adornee=plane
+ surface.Parent=plane
 end
 
 local function sources()
@@ -180,7 +205,8 @@ local function stop()
  for model in pairs(hiddenUnits) do showUnit(model) end
  for model in pairs(hiddenStatic) do showStatic(model) end
  table.clear(staticCells)
- table.clear(rowParts)
+ table.clear(rowFrames)
+ surface=nil
  table.clear(FogView.seenBuildings)
  FogView.mapRows={all=true}
  if folder then folder:Destroy(); folder=nil end
@@ -199,6 +225,7 @@ local function start()
  FogView.grid=grid
  FogView.active=true
  FogView.mapRows={all=true}
+ buildPlane()
  for row=1,grid.count do drawRow(row) end
  for _,name in ipairs({"Resources","Buildings"}) do
   local holder=workspace:FindFirstChild(name)

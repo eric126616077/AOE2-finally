@@ -75,7 +75,7 @@ local ok,problem=pcall(function()
  end
  local minimap=player.PlayerGui:FindFirstChild("Minimap",true)
  local fogFrames=0
- if minimap then for _,frame in ipairs(minimap:GetChildren()) do if frame.Name=="MinimapFog" then fogFrames+=1 end end end
+ if minimap then for _,frame in ipairs(minimap:GetDescendants()) do if frame.Name=="MinimapFog" then fogFrames+=1 end end end
  check(fogFrames>0,"小地圖顯示黑色地圖",fogFrames)
 
  local info=server:InvokeServer("setup")

@@ -3000,14 +3000,23 @@ function GUI:UpdateMapFog()
   for row=1,grid.count do rows[row]=true end
  end
  local FogRules=require(RS.Shared.FogRules)
+ -- 每種狀態一層 CanvasGroup：層內格子不透明並多蓋 1 像素，整層再套透明度，
+ -- 列高不是整數像素時也不會出現縫隙或重疊變深的線。
+ if not self.mapFogLayers then
+  self.mapFogLayers={}
+  for state,transparency in pairs({[0]=0,[1]=.5}) do
+   self.mapFogLayers[state]=make("CanvasGroup",self.map,{Name="MinimapFogLayer",Size=UDim2.fromScale(1,1),BackgroundTransparency=1,
+    GroupTransparency=transparency,Active=false,ZIndex=2})
+  end
+ end
  for row in pairs(rows) do
   if type(row)=="number" then
    for _,frame in ipairs(self.mapFog[row] or {}) do frame:Destroy() end
    local frames={}
    for _,run in ipairs(FogRules.runs(grid,row)) do
-    table.insert(frames,make("Frame",self.map,{Name="MinimapFog",BorderSizePixel=0,Active=false,ZIndex=2,BackgroundColor3=Color3.new(0,0,0),
-     BackgroundTransparency=run.state==0 and 0 or .5,Position=UDim2.fromScale((run.first-1)/grid.count,(row-1)/grid.count),
-     Size=UDim2.fromScale((run.last-run.first+1)/grid.count,1/grid.count)}))
+    table.insert(frames,make("Frame",self.mapFogLayers[run.state],{Name="MinimapFog",BorderSizePixel=0,Active=false,BackgroundColor3=Color3.new(0,0,0),
+     Position=UDim2.fromScale((run.first-1)/grid.count,(row-1)/grid.count),
+     Size=UDim2.new((run.last-run.first+1)/grid.count,1,1/grid.count,1)}))
    end
    self.mapFog[row]=frames
   end
