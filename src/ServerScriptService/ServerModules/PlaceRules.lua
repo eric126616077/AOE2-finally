@@ -63,7 +63,8 @@ function PlaceRules.readTicket(raw, now, maxAge, portals)
  if type(raw.settings) ~= "table" or raw.settings.expectedPlayers ~= nil then return nil, "對局設定無效。" end
  local payload = table.clone(raw.settings)
  payload.expectedPlayers = #players
- local settings, message = LobbyRules.settings(payload)
+ -- 大廳已檢查章節解鎖與內部模式（新手教程）；票據只重驗設定本身的合法性。
+ local settings, message = LobbyRules.settings(payload, {internal = true})
  if not settings then return nil, message end
  return {matchId = raw.matchId, roomId = portal.id, settings = settings, expected = #players, players = players, createdAt = raw.createdAt}
 end
