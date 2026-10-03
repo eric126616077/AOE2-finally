@@ -33,6 +33,14 @@ Config.Lobby = {
   {id="Room4",name="匹配點 4",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(160,92,250),
    settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
  },
+ -- 戰鬥預告片（cinematic.project.json 錄下的 77 秒影片）。videoId 是上傳到 Roblox 的影片資產 ID；
+ -- 0 表示尚未上傳：大螢幕改輪播預告片字卡，大廳不顯示「觀看預告片」按鈕。
+ -- 後牆左右各一面螢幕，朝向出生點；screenX 為正的一側是海報，負的一側播放影片。
+ trailer = {
+  videoId = 0,
+  screenX = 80, screenZ = -102, screenBottom = 6, screenSize = Vector2.new(56, 31.5), screenYaw = 18,
+  slideSeconds = 4.5,
+ },
 }
 -- 大廳玩法：劇情（單人或多人合作闖關）、玩家對戰（只有真人）、合作對電腦。Sandbox 只供新手教程由伺服器建立。
 -- 人數上限受四個出生點限制：真人＋電腦最多四方。

@@ -16,6 +16,7 @@ local active -- slot currently audible
 local mood="Silent"
 local enabled,musicVolume,ambienceOn,soundVolume=true,1,false,1
 local duckUntil,ducked=0,false
+local hushed=false -- 大廳全螢幕預告片播放時整個靜音，影片自帶聲音
 local groupTween
 local history={}
 local failed={}
@@ -24,7 +25,7 @@ local ambience={}
 local trackName
 local function groupVolume()
  local value=enabled and MUSIC_MIX*musicVolume or 0
- return ducked and value*.22 or value
+ return hushed and 0 or ducked and value*.22 or value
 end
 local function applyGroup(time)
  if not musicGroup then return end
@@ -184,12 +185,20 @@ function Music:Duck(duration)
   if duckUntil==deadline and ducked then ducked=false; applyGroup(1.5) end
  end)
 end
+-- 播放有聲影片時讓配樂完全安靜；關閉後淡回原本音量（若仍在提示音的壓低期間則維持壓低）。
+function Music:Hush(on)
+ on=on==true
+ if on==hushed then return end
+ hushed=on
+ ensure()
+ applyGroup(on and .5 or 1.5)
+end
 function Music:GetStats()
  local failures=0
  for _ in pairs(failed) do failures+=1 end
  return {mood=mood,enabled=enabled,volume=musicVolume,track=trackName,
   playing=active~=nil and active.sound.IsPlaying,loaded=active~=nil and active.sound.IsLoaded,
-  failedTracks=failures,ducked=ducked,ambience=ambienceOn,
+  failedTracks=failures,ducked=ducked,hushed=hushed,ambience=ambienceOn,
   groupVolume=musicGroup and musicGroup.Volume or 0}
 end
 function Music:Destroy()

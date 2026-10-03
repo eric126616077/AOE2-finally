@@ -21,6 +21,7 @@ local SelectionIcons = require(RS.Shared.SelectionIcons)
 local UnitSelectionPanel = require(RS.Shared.UnitSelectionPanel)
 local HotkeyRules = require(RS.Shared.HotkeyRules)
 local FogView = require(RS.Shared.FogView)
+local TrailerView = require(RS.Shared.LobbyTrailerView)
 local player = Players.LocalPlayer
 local GUI = {hitAreas = {}, reducedMotion = false, tab = "build", page = 1}
 -- Parchment-and-timber theme, matching the storybook models: warm paper panels in a wood frame,
@@ -1086,6 +1087,7 @@ function GUI:CreateLobby()
  self.lobbyPage=1
  self:SkinLobby()
  self:LayoutLobby()
+ TrailerView.Start()
 end
 function GUI:SkinLobby()
  local P=LOBBY_PALETTES
@@ -1165,6 +1167,7 @@ function GUI:SkinTutorialInvite()
  lobbyButton(self.inviteSkip,P.neutral,self.inviteSkipLabel)
  lobbyButton(self.inviteLater,P.neutral,self.inviteLaterLabel)
  lobbyButton(self.inviteReopen,P.yellow,buttonLabel(self.inviteReopen))
+ lobbyButton(self.trailerButton,P.red,buttonLabel(self.trailerButton))
 end
 function GUI:StoryUnlocked()
  return GameModes.unlocked(player:GetAttribute("StoryCleared"))
@@ -1436,6 +1439,12 @@ function GUI:CreateGuidance()
  end,"ReopenTutorialButton",C.gold)
  table.insert(self.hitAreas,self.inviteReopen)
  self.inviteReopen.Visible=false; self.inviteReopen.ZIndex=21
+ -- 戰鬥預告片：有可播放的影片時才出現在左上角，按下開啟全螢幕播放。
+ self.trailerButton=namedButton(self.lobby,"▶ 預告片",UDim2.fromOffset(120,44),UDim2.fromOffset(12,12),function()
+  if not TrailerView.Open() then self:Notify("預告片暫時無法播放。") end
+ end,"WatchTrailerButton",C.gold)
+ table.insert(self.hitAreas,self.trailerButton)
+ self.trailerButton.Visible=false; self.trailerButton.ZIndex=21
  self:SkinTutorialInvite()
  self.helpButton=namedButton(self.menuPanel,"重新查看新手指引",UDim2.fromOffset(192,44),UDim2.fromOffset(13,158),function()
   self.tutorialHidden=false; self.guidanceExpanded=true; self.menuPanel.Visible=false
@@ -1493,6 +1502,8 @@ function GUI:UpdateTutorialInvite(phase)
  local open=idle and not pending and (self.inviteForced==true or (firstTime and not self.inviteDismissed))
  self.tutorialInvite.Visible=open
  self.inviteReopen.Visible=idle and not open and not pending
+ self.trailerButton.Visible=idle and not open and TrailerView.Available()
+ self.trailerButton.Position=UDim2.fromOffset(self.inviteReopen.Visible and 132 or 12,12)
  local width,height=self.layoutWidth or 1280,self.layoutHeight or 720
  local cardWidth=math.min(520,width-16)
  local narrow=cardWidth<480
@@ -2250,7 +2261,7 @@ function GUI:BlocksPointer(screenPoint)
  return false
 end
 function GUI:IsModalOpen()
- return GuiService.MenuIsOpen or (self.deleteConfirm and self.deleteConfirm.Visible) or (self.result and self.result.Visible) or (self.menuPanel and self.menuPanel.Visible) or (self.hotkeyPanel and self.hotkeyPanel.Visible) or (self.lobby and self.lobby.Visible and (player:GetAttribute("LobbyQueued") == true or (self.startingTravel and self.startingTravel.Visible)))
+ return GuiService.MenuIsOpen or (self.deleteConfirm and self.deleteConfirm.Visible) or (self.result and self.result.Visible) or (self.menuPanel and self.menuPanel.Visible) or (self.hotkeyPanel and self.hotkeyPanel.Visible) or TrailerView.IsOpen() or (self.lobby and self.lobby.Visible and (player:GetAttribute("LobbyQueued") == true or (self.startingTravel and self.startingTravel.Visible)))
 end
 function GUI:ToggleMenu()
  if self.menuPanel.Visible then self.menuPanel.Visible=false

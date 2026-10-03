@@ -2,6 +2,7 @@
 local Config = require(game.ReplicatedStorage.GameData.GameConfig)
 local Art = require(game.ReplicatedStorage.Shared.Art)
 local GameModeRules = require(game.ReplicatedStorage.Shared.GameModeRules)
+local LobbyTrailerRules = require(game.ReplicatedStorage.Shared.LobbyTrailerRules)
 local LobbyWorld = {}
 local active
 -- Clean SmoothPlastic palette: white stone, candy trims and saturated grass read well at every graphics level.
@@ -234,6 +235,53 @@ function LobbyWorld.Create()
  titleShine.Rotation, titleShine.Color = 90, ColorSequence.new(Color3.fromRGB(255, 240, 120), Color3.fromRGB(255, 150, 30))
  titleShine.Parent = title
  signText(titleGui, "Subtitle", "選一座傳送門，和朋友一起出征！", UDim2.fromScale(0.1, 0.72), UDim2.fromScale(0.8, 0.28), Color3.new(1, 1, 1), BODY_FONT)
+
+ -- Twin jumbotrons on the rear lawn, beside the castle and angled toward the spawn pad.
+ -- The client draws the trailer on TrailerScreen; the server only builds the frames and the static poster.
+ local trailer = Config.Lobby.trailer
+ if trailer then
+  local width, height = trailer.screenSize.X, trailer.screenSize.Y
+  local yaw = math.rad(trailer.screenYaw or 0)
+  for _, side in ipairs({ -1, 1 }) do
+   local center = origin + Vector3.new(side * trailer.screenX, trailer.screenBottom + height / 2, trailer.screenZ)
+   local frame = CFrame.lookAt(center, center + Vector3.new(-side * math.sin(yaw), 0, math.cos(yaw)))
+   local function at(name, size, offset, color, material, collidable)
+    local item = part(folder, name, size, center, color, material, collidable)
+    item.CFrame = frame * CFrame.new(offset)
+    return item
+   end
+   at("TrailerBezel", Vector3.new(width + 3, height + 3, 1.6), Vector3.new(0, 0, 0.9), trim)
+   at("TrailerCap", Vector3.new(width + 6, 2, 4), Vector3.new(0, height / 2 + 2.3, 0.6), roof)
+   at("TrailerCapTrim", Vector3.new(width + 6.4, 0.6, 4.4), Vector3.new(0, height / 2 + 1.1, 0.6), white, nil, false)
+   for _, x in ipairs({ -(width / 2 - 7), width / 2 - 7 }) do
+    local legHeight = trailer.screenBottom + height / 2
+    at("TrailerLeg", Vector3.new(2.6, legHeight, 2.6), Vector3.new(x, -legHeight / 2, 2.6), white)
+    local finial = at("TrailerFinial", Vector3.new(2.2, 2.2, 2.2), Vector3.new(x, height / 2 + 4.4, 0.6), gold, nil, false)
+    finial.Shape = Enum.PartType.Ball
+   end
+   local screen = at(side < 0 and "TrailerScreen" or "TrailerPoster", Vector3.new(width, height, 1), Vector3.zero, ink)
+   screen.CanQuery = false
+   if side < 0 then
+    screen:SetAttribute("LobbyTrailerScreen", true)
+   else
+    local poster = surface(screen, Enum.NormalId.Front, 16)
+    local backdrop = Instance.new("Frame")
+    backdrop.Name, backdrop.Size, backdrop.BorderSizePixel, backdrop.BackgroundColor3 = "Backdrop", UDim2.fromScale(1, 1), 0, Color3.fromRGB(16, 22, 44)
+    backdrop.Parent = poster
+    local shade = Instance.new("UIGradient")
+    shade.Rotation, shade.Color = 90, ColorSequence.new(Color3.fromRGB(70, 92, 160), Color3.fromRGB(12, 14, 28))
+    shade.Parent = backdrop
+    local heading = signText(backdrop, "Heading", "帝國鍛造坊", UDim2.fromScale(0.06, 0.12), UDim2.fromScale(0.88, 0.36))
+    heading.UIStroke.Thickness = 5
+    local shine = Instance.new("UIGradient")
+    shine.Rotation, shine.Color = 90, ColorSequence.new(Color3.fromRGB(255, 240, 120), Color3.fromRGB(255, 150, 30))
+    shine.Parent = heading
+    signText(backdrop, "Tagline", "採集・建造・征服", UDim2.fromScale(0.15, 0.5), UDim2.fromScale(0.7, 0.16), Color3.new(1, 1, 1), BODY_FONT)
+    local hint = LobbyTrailerRules.AssetId(trailer.videoId) and "按畫面左上角「▶ 預告片」觀看完整戰役" or "戰役預告片即將上映"
+    signText(backdrop, "Hint", hint, UDim2.fromScale(0.1, 0.74), UDim2.fromScale(0.8, 0.12), gold, BODY_FONT)
+   end
+  end
+ end
 
  -- Fountain centerpiece with a floating star between the four portals.
  local fountain = Vector3.new(0, 0, 33)

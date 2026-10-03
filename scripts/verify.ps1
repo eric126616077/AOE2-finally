@@ -267,6 +267,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Death fall / collapse / resource fade timing tests failed.' }
     & $runtime tests/cinematic.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Battle trailer timeline / camera math tests failed.' }
+    & $runtime tests/lobby_trailer.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Lobby trailer video id / slideshow / fit tests failed.' }
     $cinematic = @(Get-ChildItem cinematic -Filter *.lua | ForEach-Object FullName)
     & $compiler -O0 --null @cinematic
     if ($LASTEXITCODE -ne 0) { throw 'Battle trailer scripts failed to compile.' }
