@@ -19,7 +19,7 @@ function Shop.new(options)
  options = options or {}
  local valid,err = ShopRules.audit(Catalog)
  assert(valid,err)
- local self = setmetatable({wallets=WalletStore.new(Catalog,options.wallet),vip={},busy={},connections={},hooks={},milestonePending={}},Shop)
+ local self = setmetatable({wallets=WalletStore.new(Catalog,options.wallet),vip={},busy={},connections={},hooks={},milestonePending={},published={}},Shop)
  self.studio = RunService:IsStudio()
  MarketplaceService.ProcessReceipt = function(info) return self:_receipt(info) end
  MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(player,passId,purchased)
@@ -77,9 +77,11 @@ function Shop:_publish(player)
  player:SetAttribute("Crowns",data and data.crowns or 0)
  player:SetAttribute("OwnedCosmetics",data and ShopRules.encodeOwned(data.owned) or "")
  player:SetAttribute("StarterPackOwned",data and data.milestones.starter==true or false)
- -- 對戰中外觀固定：只在不在對戰時更新，對局開始時的外觀維持到結束。
- if not self.hooks.locked or not self.hooks.locked(player) or player:GetAttribute("CosmeticUnitSkin")==nil then
+ -- 外觀屬性只用已載入的錢包發布（之前留空，生成的模型維持預設）。對戰中外觀固定，
+ -- 但錢包比開局晚載入時仍補發一次，之後生成的單位與建築才會用到玩家的外觀。
+ if data and (not self.published[player] or not (self.hooks.locked and self.hooks.locked(player))) then
   for slot,id in pairs(self:_equipped(player)) do player:SetAttribute(slotAttribute[slot],id) end
+  self.published[player] = true
  end
  self:_publishDaily(player)
 end
@@ -169,6 +171,7 @@ function Shop:Close(player)
  if not list then return end
  for _,connection in ipairs(list) do connection:Disconnect() end
  self.connections[player],self.vip[player],self.busy[player],self.milestonePending[player] = nil,nil,nil,nil
+ self.published[player] = nil
  self.wallets:Close(player)
 end
 

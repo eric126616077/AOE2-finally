@@ -49,6 +49,13 @@ expect(ShopRules.matchReward(Catalog,{mode="Story",outcome="loss",seconds=900})=
 expect(ShopRules.matchReward(Catalog,{mode="PurePvP",outcome="win",seconds=900})==Catalog.rewards.matchBase+Catalog.rewards.matchWin+Catalog.rewards.pvpWin,"pvp win wrong")
 expect(ShopRules.matchReward(Catalog,{mode="AIPractice",outcome="win",seconds=0/0})==0,"NaN duration rewarded")
 
+-- 未設定 ProductId（0）或不認得的商品，收據查不到商品，伺服器不發放。
+expect(ShopRules.product(Catalog,0)==nil and ShopRules.product(Catalog,123456789)==nil and ShopRules.product(Catalog,-1)==nil and ShopRules.product(Catalog,0/0)==nil,"unconfigured product resolved for a receipt")
+for _,product in ipairs(Catalog.products) do expect(product.productId==0 or ShopRules.product(Catalog,product.productId)==product,"configured product lookup wrong") end
+-- 記憶體錢包的測試金冠只用在 Studio 記憶體儲存；雲端錢包拒絕種子。
+local cloud=WalletStore.new(Catalog,{persistent=true,store=WalletStore.Memory.new(),defer=function(f) f() end,delay=function() end,wait=function() end,log=function() end})
+expect(not cloud:Seed({UserId=7},1000) and cloud.store:GetAsync("w_7")==nil,"test crowns seeded into a persistent wallet")
+
 -- 錢包交易
 local function apply(wallet,op) return WalletRules.apply(wallet,op,Catalog) end
 local empty=WalletRules.empty()
