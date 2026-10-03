@@ -24,14 +24,47 @@ Config.Lobby = {
  expectedPlayers = 2, scanInterval = 0.25,
  -- Equivalent room stations: the first entrant configures a room before everyone confirms readiness.
  portals = {
-  {id="Room1",name="匹配點 1",description="由房主設定模式與人數，準備齊全後進入新戰場。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(223,184,102),
-   settings={expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room2",name="匹配點 2",description="由房主設定模式與人數，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,4),color=Color3.fromRGB(101,190,143),
-   settings={expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room3",name="匹配點 3",description="由房主設定模式與人數，準備齊全後進入新戰場。",offset=Vector3.new(54,0,4),color=Color3.fromRGB(92,168,226),
-   settings={expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
-  {id="Room4",name="匹配點 4",description="由房主設定模式與人數，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(180,137,221),
-   settings={expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+  {id="Room1",name="匹配點 1",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,62),color=Color3.fromRGB(223,184,102),
+   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+  {id="Room2",name="匹配點 2",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,4),color=Color3.fromRGB(101,190,143),
+   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+  {id="Room3",name="匹配點 3",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(54,0,4),color=Color3.fromRGB(92,168,226),
+   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+  {id="Room4",name="匹配點 4",description="由房主選擇劇情、對戰或合作，準備齊全後進入新戰場。",offset=Vector3.new(-54,0,62),color=Color3.fromRGB(180,137,221),
+   settings={gameMode="PvP",expectedPlayers=2,size="Medium",aiCount=0,difficulty="Normal",population=100,startingResources="Standard",victory="Conquest",teamMode="FFA"}},
+ },
+}
+-- 大廳玩法：劇情（單人或多人合作闖關）、玩家對戰（只有真人）、合作對電腦。Sandbox 只供新手教程由伺服器建立。
+-- 人數上限受四個出生點限制：真人＋電腦最多四方。
+Config.GameModes = {
+ order = {"Story","PvP","PvE"},
+ Story = {name="劇情",title="劇情戰役",minPlayers=1,maxPlayers=3,accent=Color3.fromRGB(223,184,102),
+  description="依章節闖關，單人或與好友合作；勝利後解鎖下一章。"},
+ PvP = {name="對戰",title="玩家對戰",minPlayers=2,maxPlayers=4,accent=Color3.fromRGB(209,96,84),
+  description="只有真人玩家，各自為戰或分隊；計入對戰紀錄。"},
+ PvE = {name="合作",title="合作對電腦",minPlayers=1,maxPlayers=3,accent=Color3.fromRGB(101,190,143),
+  description="自訂電腦數量與難度，單人或與好友一起對抗電腦。"},
+ Sandbox = {name="練習",title="練習局",minPlayers=1,maxPlayers=1,internal=true,description="沒有對手的練習局。"},
+}
+-- 劇情章節：章節決定戰場、電腦、難度與勝利規則；真人玩家固定同隊。多人時電腦數量不超過剩餘出生點。
+-- 解鎖以房主的進度為準；勝利的真人玩家都會記錄通關。
+Config.Story = {
+ chapters = {
+  {id="RiverDawn",title="河灣初興",enemy="灰狼掠奪者",size="Small",aiCount=1,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",
+   briefing="北方的灰狼掠奪者燒毀了河灣的漁村。重建市鎮、訓練守軍，把他們趕出河谷。",
+   objective="消滅灰狼掠奪者的全部單位與建築。"},
+  {id="SunOath",title="旭日之盟",enemy="赤砂軍閥",size="Medium",aiCount=1,difficulty="Normal",population=100,startingResources="Standard",victory="Regicide",
+   briefing="旭日城邦請求援軍：赤砂軍閥佔據了高原古城。攻下他們的主城，軍閥就會瓦解。",
+   objective="攻陷赤砂軍閥的起始市鎮中心，同時守住你的主城。"},
+  {id="JadeWatch",title="青林守望",enemy="霧沼部族",size="Medium",aiCount=2,difficulty="Normal",population=150,startingResources="Standard",victory="Conquest",
+   briefing="兩支霧沼部族從森林兩側包夾青林公國。先穩住經濟，再分頭擊破。",
+   objective="擊敗所有霧沼部族。"},
+  {id="WonderVow",title="奇觀之誓",enemy="鐵冠帝國",size="Large",aiCount=2,difficulty="Normal",population=200,startingResources="Rich",victory="Wonder",
+   briefing="三國立誓共建世界奇觀，象徵新的同盟。鐵冠帝國不會坐視不管。",
+   objective="建成世界奇觀並守住，或擊敗所有敵軍。"},
+  {id="LastThrone",title="最後的王座",enemy="鐵冠帝國",size="Large",aiCount=2,difficulty="Hard",population=200,startingResources="Standard",victory="Conquest",
+   briefing="鐵冠帝國傾全力反撲。這一戰決定河谷的命運。",
+   objective="徹底消滅鐵冠帝國的大軍。"},
  },
 }
 Config.Map = {

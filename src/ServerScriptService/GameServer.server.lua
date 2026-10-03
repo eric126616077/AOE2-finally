@@ -146,7 +146,10 @@ local function actorName(actor)
 end
 local function teamName(team)
  if not team then return nil end
- if settings.teamMode=="CoopAI" then return team==1 and "玩家聯軍" or "電腦聯軍" end
+ if settings.teamMode=="CoopAI" then
+  local chapter=LobbyRules.story(settings)
+  return team==1 and "玩家聯軍" or (chapter and chapter.enemy or "電腦聯軍")
+ end
  return "第 "..team.." 隊"
 end
 local function publishTeam(state,instance)
@@ -1367,6 +1370,12 @@ local function endMatch(winnerTeam)
    local outcome=TeamRules.result(matchTeams,state.id,winnerTeam,true,state.forfeited==true)
    finishReport(state,outcome,endedAt)
    recordMatchResult(state,outcome)
+   -- 劇情勝利記錄通關章節；投降或淘汰的玩家不算。
+   if outcome=="win" and not state.ai and settings.gameMode=="Story" and state.actor.Parent==Players
+    and profiles:CompleteStory(state.actor,settings.storyChapter) then
+    local nextChapter=LobbyRules.GameModes.chapter(settings.storyChapter+1)
+    notify(state.actor,nextChapter and ("已解鎖第 "..(settings.storyChapter+1).." 章「"..nextChapter.title.."」。") or "恭喜完成全部劇情章節！")
+   end
   end
   for _,state in pairs(currentMatch.participants) do
    if state.actor.Parent==Players then telemetry:Match(state.actor,"Completed",os.clock()-matchStart,matchContext(state)) end
@@ -1853,7 +1862,8 @@ local function configureLobby(player,payload)
  local room=state and state.roomId and rooms[state.roomId]
  if not room or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id
   or workspace:GetAttribute(roomPrefix(room,"HostUserId"))~=player.UserId then return end
- local validated,count=LobbyRules.settings(payload)
+ -- 劇情章節依房主的通關進度解鎖；StoryCleared 只由伺服器的個人檔案寫入。
+ local validated,count=LobbyRules.settings(payload,{unlocked=LobbyRules.GameModes.unlocked(player:GetAttribute("StoryCleared"))})
  if not validated then notify(player,count); return end
  if count<#queuedStates(room.id) then notify(player,"參戰人數不能少於目前已集合的玩家。"); return end
  local nextTeams,message=TeamRules.changeSettings(
@@ -2009,7 +2019,8 @@ startMatch=function(player)
   actor.Name="AI_"..i
   actor:SetAttribute("UserId",aiId)
   actor:SetAttribute("OwnerId",aiId)
-  actor:SetAttribute("DisplayName","電腦 "..i)
+  local chapter=LobbyRules.story(settings)
+  actor:SetAttribute("DisplayName",chapter and (chapter.enemy..(settings.aiCount>1 and " "..i or "")) or "電腦 "..i)
   actor:SetAttribute("IsAI",true)
   actor.Parent=factions
   local state={actor=actor,id=aiId,ai=true,aiTurn=0,nextAttack=0,tokens=12,last=os.clock(),civilization=Config.CivilizationOrder[i%#Config.CivilizationOrder+1]}
@@ -2061,7 +2072,7 @@ startMatch=function(player)
  workspace:SetAttribute("MatchLoadStage",nil)
  currentMatch={id=HttpService:GenerateGUID(false),participants={},factions={},results={},teamMode=settings.teamMode,
   eligible=ProfileRules.eligible(profiles.enabled,#humans,settings.aiCount,true),
-  mode=#humans>=2 and settings.aiCount==0 and "PurePvP" or settings.aiCount>0 and "AIPractice" or "Sandbox"}
+  mode=settings.gameMode=="Story" and "Story" or #humans>=2 and settings.aiCount==0 and "PurePvP" or settings.aiCount>0 and "AIPractice" or "Sandbox"}
  for _,state in ipairs(participants) do
   currentMatch.factions[state.id]=state
   clearReport(state)
@@ -2074,7 +2085,10 @@ startMatch=function(player)
  end
  updateHost()
  print(string.format("[RTS] 對局開始：%d 名玩家、%d 個電腦陣營，地圖 %s。",#humans,settings.aiCount,settings.size))
- local startMessage=startingSides==1 and "練習對局開始：可自由熟悉經濟與建造；投降後返回大廳。"
+ local story=LobbyRules.story(settings)
+ workspace:SetAttribute("StoryChapter",story and settings.storyChapter or 0)
+ local startMessage=story and ("第 "..settings.storyChapter.." 章「"..story.title.."」\n"..story.briefing.."\n目標："..story.objective)
+  or startingSides==1 and "練習對局開始：可自由熟悉經濟與建造；投降後返回大廳。"
   or settings.teamMode=="CoopAI" and "合作對局開始！所有玩家同隊，發展經濟並擊敗電腦聯軍。"
   or settings.teamMode=="Teams" and "分隊對局開始！與盟友共同發展，擊敗敵方隊伍。"
   or "對局開始！採集資源、發展時代並擊敗對手。"
@@ -2328,7 +2342,7 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
   -- 新手教程：伺服器代玩家把一間空房設成單人、無對手、豐富資源並準備，之後走正常的開局流程。
   if phase~="Lobby" or not state.inLobby or state.playing then notify(player,"戰場目前使用中，請稍候再開始新手教程。"); return end
   if state.queued then notify(player,"請先離開目前的房間，再開始新手教程。"); return end
-  local validated,count=LobbyRules.settings({expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"})
+  local validated,count=LobbyRules.settings({gameMode="Sandbox",expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"},{internal=true})
   local room
   for _,portal in ipairs(Config.Lobby.portals) do
    local candidate=rooms[portal.id]
@@ -2342,6 +2356,46 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
   state.ready=true
   player:SetAttribute("LobbyReady",true)
   player:SetAttribute("TutorialMatch",true)
+  updateHost()
+  return
+ end
+ if action=="QuickPlay" then
+  -- 快速開始：單人劇情直接開下一章；其他玩法先加入同玩法、還有空位的房間，沒有就建立新房間由玩家當房主設定。
+  local GameModes=LobbyRules.GameModes
+  local solo=a=="StorySolo"
+  local mode=solo and "Story" or a
+  if type(mode)~="string" or not table.find(GameModes.Order,mode) then return end
+  if not state.inLobby or state.playing then notify(player,"目前在對局中，請先返回大廳。"); return end
+  if state.queued then notify(player,"請先離開目前的房間，再使用快速開始。"); return end
+  local unlocked=GameModes.unlocked(player:GetAttribute("StoryCleared"))
+  if not solo then
+   for _,portal in ipairs(Config.Lobby.portals) do
+    local candidate=rooms[portal.id]
+    local count=#queuedStates(candidate.id)
+    if activeRoomId~=candidate.id and candidate.configured and candidate.settings.gameMode==mode and count>0 and count<candidate.expected then
+     queueJoin(state,candidate.id,true,true)
+     if state.queued then notify(player,"已加入"..portal.name.."："..GameModes.label(candidate.settings).."。確認設定後按準備完成。"); return end
+    end
+   end
+  end
+  local room,name
+  for _,portal in ipairs(Config.Lobby.portals) do
+   local candidate=rooms[portal.id]
+   if activeRoomId~=candidate.id and #queuedStates(candidate.id)==0 then room,name=candidate,portal.name; break end
+  end
+  local validated,count=LobbyRules.settings(GameModes.defaults(mode,solo and 1 or 2,unlocked),{unlocked=unlocked})
+  if not validated or not room then notify(player,"目前沒有空的匹配點，請稍候再試。"); return end
+  queueJoin(state,room.id,true,true)
+  if not state.queued or state.roomId~=room.id then notify(player,"大廳角色尚未準備好，請稍候再試。"); return end
+  room.settings,room.expected,room.configured=validated,count,solo
+  invalidateReady(room)
+  if solo then
+   state.ready=true
+   player:SetAttribute("LobbyReady",true)
+   notify(player,phase=="Lobby" and ("開始第 "..validated.storyChapter.." 章「"..GameModes.chapter(validated.storyChapter).title.."」…") or "戰場目前使用中；已準備好劇情章節，戰場開放後自動出發。")
+  else
+   notify(player,"已在"..name.."建立"..GameModes.mode(mode).title.."房間；確認設定後等候其他玩家加入。")
+  end
   updateHost()
   return
  end

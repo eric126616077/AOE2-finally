@@ -309,4 +309,28 @@ expect(next(telemetry.sessions)==nil and #emitted==7,"telemetry leaked leaving p
 local offlineTelemetry=Telemetry.new({enabled=false,service=analytics,defer=function(fn) fn() end,guid=function() return "offline" end})
 offlineTelemetry:Join(playerB); offlineTelemetry:Match(playerB,"Started",0)
 expect(#emitted==7,"Studio analytics reached live service")
+-- 劇情進度：只往前、取較大值，格式錯誤的存檔不被接受；載入前通關也會在之後寫入。
+local cleared=ProfileRules.merge(empty,{storyCleared=2},Config)
+expect(cleared.storyCleared==2 and empty.storyCleared==nil,"story progress not merged or mutated stored input")
+expect(ProfileRules.merge(cleared,{storyCleared=1},Config).storyCleared==2,"older story progress rolled the profile back")
+expect(ProfileRules.merge(cleared,{storyCleared=3},Config).storyCleared==3,"later story progress ignored")
+for _,bad in ipairs({-1,1.5,"2",true,0/0,100}) do
+ expect(ProfileRules.merge(cleared,{storyCleared=bad},Config).storyCleared==2,"malformed story progress merged")
+ local stored=table.clone(empty); stored.storyCleared=bad
+ expect(not ProfileRules.read(stored,Config),"malformed stored story progress accepted")
+end
+local storyRuntime=harness(first)
+local storyStore=ProfileStore.new(Config,storyRuntime.options)
+local storyPlayer=storyRuntime:player(31)
+storyStore:Open(storyPlayer)
+expect(storyStore:CompleteStory(storyPlayer,1) and storyPlayer.attributes.StoryCleared==1,"story clear before load not shown")
+expect(not storyStore:CompleteStory(storyPlayer,1) and not storyStore:CompleteStory(storyPlayer,"2"),"repeated or malformed story clear accepted")
+storyRuntime:drain()
+expect(storyRuntime.raw.storyCleared==1 and sameStats(storyRuntime.raw,1,0),"story clear not saved after load or erased statistics")
+expect(storyStore:CompleteStory(storyPlayer,2) and storyPlayer.attributes.StoryCleared==2,"next chapter clear rejected")
+storyRuntime:drain()
+expect(storyRuntime.raw.storyCleared==2 and storyStore.entries[storyPlayer].storyCleared==nil,"saved story clear kept a pending write")
+storyStore:Close(storyPlayer)
+storyRuntime:drain()
+expect(next(storyStore.entries)==nil,"story session leaked a closed profile entry")
 print(string.format("PASS: %d profile concurrency / load-safety / PvP eligibility / analytics checks",count))

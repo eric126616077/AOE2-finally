@@ -12,6 +12,7 @@ local TouchRules = require(RS.Shared.TouchRules)
 local CameraFocus = require(RS.Shared.CameraFocus)
 local Audio = require(RS.Shared.AudioFeedback)
 local TeamClient = require(RS.Shared.TeamClientRules)
+local GameModes = require(RS.Shared.GameModeRules)
 local Building = require(RS.Shared.BuildingController)
 local ClientUnitView = require(RS.Shared.ClientUnitView)
 local BuildMenuRules = require(RS.Shared.BuildMenuRules)
@@ -175,6 +176,11 @@ local function button(parent, size, position, callback, name)
    or (selected or primary) and Color3.fromRGB(244,210,128) or C.card
   if animations[b] then animations[b]:Cancel(); animations[b]=nil end
   if immediate or GUI.reducedMotion then b.BackgroundColor3=color else tween(b,0.1,{BackgroundColor3=color}) end
+  if palette then
+   edge.Transparency=unavailable and 0.45 or 0
+   palette.gradient.Offset=pressed and Vector2.new(0,0.1) or Vector2.zero
+   return
+  end
   edge.Transparency=focused and 0 or pressed and 0.05 or hovered and 0.1 or unavailable and 0.75 or 0.35
   sheen.BackgroundTransparency=pressed and 1 or unavailable and 0.92 or 0.8
  end
@@ -405,6 +411,15 @@ local function lobbyRoomAttribute(roomId,key)
  local oldKey=legacy[key] or (key:match("^Setting_") and "Lobby"..key) or (key:match("^AITeam_") and "Lobby"..key)
  return oldKey and workspace:GetAttribute(oldKey) or nil
 end
+-- 每種玩法在設定精靈兩頁中顯示的欄位；劇情的戰場規則由章節決定，只顯示不能改。
+local lobbyLayouts={
+ Story={{"storyChapter","expectedPlayers"},{"size","aiCount","difficulty","population","startingResources","victory"}},
+ PvP={{"expectedPlayers","teamMode"},{"size","population","startingResources","victory"}},
+ PvE={{"expectedPlayers","aiCount","teamMode","difficulty"},{"size","population","startingResources","victory"}},
+ Sandbox={{"expectedPlayers"},{"size","population","startingResources","victory"}},
+}
+local storyLocked={size=true,aiCount=true,difficulty=true,population=true,startingResources=true,victory=true}
+local LOBBY_FIELD_TOP={152,64}
 local function waitingInLobby()
  local inLobby=player:GetAttribute("InLobby")
  return inLobby==true or (inLobby==nil and workspace:GetAttribute("MatchPhase")=="Lobby")
@@ -810,13 +825,28 @@ function GUI:LayoutUnitSelection()
 end
 
 function GUI:CreateLobby()
- self.settings = {expectedPlayers = 2,size = "Medium",aiCount = 0,difficulty = "Normal",population = 100,startingResources = "Standard",victory = "Conquest",teamMode="FFA"}
+ self.settings = {gameMode="PvP",storyChapter=0,expectedPlayers = 2,size = "Medium",aiCount = 0,difficulty = "Normal",population = 100,startingResources = "Standard",victory = "Conquest",teamMode="FFA"}
  -- Only the visible surfaces catch input; the rest of the courtyard stays walkable.
  self.lobby = make("Frame",self.canvas,{Name = "LobbyLayer",Size = UDim2.fromScale(1,1),BackgroundTransparency = 1,ZIndex = 20,Active = false})
- self.lobbyWelcome = panel(self.lobby,UDim2.fromOffset(860,208),UDim2.new(0.5,-430,1,-220),"CourtyardWelcome")
- self.welcomeHeading=text(self.lobbyWelcome,"選擇匹配點",UDim2.new(1,-36,0,32),UDim2.fromOffset(18,11),26,C.white,Enum.Font.SourceSansBold)
- self.welcomeDescription=text(self.lobbyWelcome,"走進庭院光圈，或選擇下方入口。準備完成後前往全新戰場。",UDim2.new(1,-36,0,25),UDim2.fromOffset(18,45),14,C.muted)
+ self.lobbyWelcome = panel(self.lobby,UDim2.fromOffset(860,290),UDim2.new(0.5,-430,1,-302),"CourtyardWelcome")
+ self.welcomeHeading=text(self.lobbyWelcome,"選擇玩法",UDim2.new(1,-36,0,32),UDim2.fromOffset(18,11),26,C.white,Enum.Font.SourceSansBold)
+ self.welcomeDescription=text(self.lobbyWelcome,"快速開始會自動找房間；也可以走進庭院光圈，或選擇下方匹配點自訂房間。",UDim2.new(1,-36,0,25),UDim2.fromOffset(18,45),14,C.muted)
  self.queueSummary=text(self.lobbyWelcome,"",UDim2.new(1,-36,0,20),UDim2.fromOffset(18,181),12,C.muted)
+ -- 快速開始只送出玩法；伺服器決定加入哪個房間或建立新房間。
+ self.quickButtons={}
+ for i,entry in ipairs({{id="StorySolo",mode="Story",title="單人劇情"},{id="Story",mode="Story",title="多人劇情"},{id="PvP",mode="PvP",title="玩家對戰"},{id="PvE",mode="PvE",title="合作對電腦"}}) do
+  local b=button(self.lobbyWelcome,UDim2.fromOffset(196,64),UDim2.fromOffset(18+(i-1)*208,77),function()
+   local quick=self.quickButtons[i]
+   if waitingInLobby() and not self.lobbyStarting and quick.button:GetAttribute("Unavailable")~=true then lobbyCommand("QuickPlay",entry.id) end
+  end,"QuickPlay_"..entry.id)
+  local accent=Config.GameModes[entry.mode].accent or C.gold
+  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,4,1,-16),accent,0,"QuickAccent")
+  local title=text(b,entry.title.."  ›",UDim2.new(1,-20,0,26),UDim2.fromOffset(12,6),17,C.white,Enum.Font.SourceSansBold)
+  local detail=text(b,"",UDim2.new(1,-20,0,22),UDim2.fromOffset(12,34),12,C.muted)
+  detail.TextWrapped=false; detail.TextTruncate=Enum.TextTruncate.AtEnd
+  self.quickButtons[i]={button=b,title=title,detail=detail,entry=entry}
+ end
+ self.roomsHeading=text(self.lobbyWelcome,"自 訂 房 間",UDim2.new(1,-36,0,20),UDim2.fromOffset(18,150),13,C.gold,Enum.Font.SourceSansSemibold)
  self.portalCards={}
  for i,portal in ipairs(Config.Lobby.portals or {}) do
   local b,edge=button(self.lobbyWelcome,UDim2.fromOffset(196,98),UDim2.fromOffset(18+(i-1)*208,77),function()
@@ -846,7 +876,7 @@ function GUI:CreateLobby()
  end,"LeaveQueueButton",C.muted)
  self.wizardSteps=make("Frame",self.lobbyFrame,{Name="WizardSteps",Size=UDim2.new(1,-32,0,44),Position=UDim2.fromOffset(16,83),BackgroundTransparency=1,Active=false})
  self.lobbyStepButtons={}
- for i,name in ipairs({"模式與人數","遊戲設定","等候玩家"}) do
+ for i,name in ipairs({"選擇玩法","遊戲設定","等候玩家"}) do
   local b,label=namedButton(self.wizardSteps,i.."  "..name,UDim2.new(1/3,-5,1,0),UDim2.new((i-1)/3,0,0,0),function()
    if self.lobbyWizard and not self.lobbyStarting and not self.lobbyConfigurePending and i<3 then self:SetLobbyPage(i) end
   end,"Step_"..i)
@@ -858,30 +888,53 @@ function GUI:CreateLobby()
   self.lobbyPages[i]=make("Frame",self.lobbyBody,{Name=name,Size=UDim2.new(1,-8,0,400),BackgroundTransparency=1,Active=false,Visible=i==1})
  end
  local basic,advanced,review=self.lobbyPages[1],self.lobbyPages[2],self.lobbyPages[3]
- text(basic,"這場怎麼玩？",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
- text(basic,"先選擇真人玩家數與隊伍模式。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
- text(advanced,"遊戲設定",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
- text(advanced,"已有預設規則；可直接完成設定，或再調整這場遊戲。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
+ self.basicHeading=text(basic,"這場怎麼玩？",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
+ self.basicHint=text(basic,"選擇玩法，再決定人數與對手。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
+ self.advancedHeading=text(advanced,"遊戲設定",UDim2.new(1,0,0,28),UDim2.fromOffset(0,0),21,C.white,Enum.Font.SourceSansSemibold)
+ self.advancedHint=text(advanced,"已有預設規則；可直接完成設定，或再調整這場遊戲。",UDim2.new(1,0,0,25),UDim2.fromOffset(0,30),14,C.muted)
+ -- 三張玩法卡片；按下只送出提案，伺服器驗證後才會改變房間。
+ self.modeCards={}
+ for i,id in ipairs(GameModes.Order) do
+  local data=Config.GameModes[id]
+  local b,edge=button(basic,UDim2.new(1/3,-6,0,78),UDim2.new((i-1)/3,i==1 and 0 or 3,0,62),function()
+   if not self.lobbyWizard or not waitingInLobby() or self.lobbyStarting or self.lobbyConfigurePending then self:Notify("玩法由房主決定。") return end
+   if self.settings.gameMode==id then return end
+   local request,message=GameModes.next(self.settings,"gameMode",{id},self.lobbyHumanCount or 0,self:StoryUnlocked())
+   if not request then self:Notify(message or "目前人數不能切換到這個玩法。") return end
+   self:Notify((message and message.."\n" or "")..GameModes.label(request).." · "..request.expectedPlayers.." 真人＋"..request.aiCount.." 電腦")
+   lobbyCommand("LobbySettings",request)
+  end,"ModeCard_"..id)
+  rule(b,UDim2.fromOffset(0,8),UDim2.new(0,4,1,-16),data.accent or C.gold,0,"ModeAccent")
+  local title=text(b,data.title,UDim2.new(1,-20,0,26),UDim2.fromOffset(12,5),17,C.white,Enum.Font.SourceSansBold)
+  local detail=text(b,data.description,UDim2.new(1,-20,0,40),UDim2.fromOffset(12,31),12,C.muted)
+  detail.TextYAlignment=Enum.TextYAlignment.Top
+  self.modeCards[id]={button=b,edge=edge,title=title,detail=detail}
+ end
+ self.storyBriefing=text(basic,"",UDim2.new(1,-8,0,70),UDim2.fromOffset(4,264),14,C.white)
+ self.storyBriefing.Name="StoryBriefing"; self.storyBriefing.TextYAlignment=Enum.TextYAlignment.Top
+ local chapterNames,chapterValues={},{}
+ for index,chapter in ipairs(Config.Story.chapters) do chapterNames[index]="第 "..index.." 章 · "..chapter.title; chapterValues[index]=index end
  local fields = {
-  {key="expectedPlayers",label="真人玩家",page=1,row=1,values={1,2,3,4},names={[1]="1 人",[2]="2 人",[3]="3 人",[4]="4 人"}},
-  {key="teamMode",label="隊伍模式",page=1,row=2,values={"FFA","Teams","CoopAI"}},
-  {key="size",label="戰場大小",page=2,row=1,values={"Small","Medium","Large"},names={Small="小型",Medium="標準",Large="大型"}},
-  {key="aiCount",label="電腦對手",page=2,row=2,values={0,1,2,3},names={[0]="無",[1]="1 位電腦",[2]="2 位電腦",[3]="3 位電腦"}},
-  {key="difficulty",label="電腦難度",page=2,row=3,values={"Easy","Normal","Hard"},names={Easy="簡單",Normal="普通",Hard="困難"}},
-  {key="population",label="人口上限",page=2,row=4,values={60,100,150,200}},
-  {key="startingResources",label="初始資源",page=2,row=5,values={"Standard","Rich"},names={Standard="標準經濟",Rich="豐富資源"}},
-  {key="victory",label="勝利規則",page=2,row=6,values={"Conquest","Regicide","Wonder"},names={Conquest="征服",Regicide="主城決戰",Wonder="世界奇觀"}},
+  {key="storyChapter",label="劇情章節",values=chapterValues,names=chapterNames},
+  {key="expectedPlayers",label="真人玩家",values={1,2,3,4},names={[1]="1 人",[2]="2 人",[3]="3 人",[4]="4 人"}},
+  {key="teamMode",label="隊伍模式",values={"FFA","Teams","CoopAI"}},
+  {key="size",label="戰場大小",values={"Small","Medium","Large"},names={Small="小型",Medium="標準",Large="大型"}},
+  {key="aiCount",label="電腦對手",values={0,1,2,3},names={[0]="無",[1]="1 位電腦",[2]="2 位電腦",[3]="3 位電腦"}},
+  {key="difficulty",label="電腦難度",values={"Easy","Normal","Hard"},names={Easy="簡單",Normal="普通",Hard="困難"}},
+  {key="population",label="人口上限",values={60,100,150,200}},
+  {key="startingResources",label="初始資源",values={"Standard","Rich"},names={Standard="標準經濟",Rich="豐富資源"}},
+  {key="victory",label="勝利規則",values={"Conquest","Regicide","Wonder"},names={Conquest="征服",Regicide="主城決戰",Wonder="世界奇觀"}},
  }
  self.settingLabels = {}
  for _,field in ipairs(fields) do
-  local body=self.lobbyPages[field.page]
-  local y=64+(field.row-1)*56
-  local caption=text(body,field.label,UDim2.fromOffset(100,48),UDim2.fromOffset(6,y),15,C.muted)
-  local b,label = namedButton(body,"",UDim2.new(1,-126,0,48),UDim2.fromOffset(122,y),function()
+  local caption=text(basic,field.label,UDim2.fromOffset(100,48),UDim2.fromOffset(6,0),15,C.muted)
+  local b,label = namedButton(basic,"",UDim2.new(1,-126,0,48),UDim2.fromOffset(122,0),function()
    if not self.lobbyWizard or not waitingInLobby() or self.lobbyStarting or self.lobbyConfigurePending then self:Notify("戰局設定由房主決定。") return end
-   local request,message = TeamClient.NextSetting(self.settings,field.key,field.values,self.lobbyHumanCount or 0)
+   local entry=self.settingLabels[field.key]
+   if entry.locked then self:Notify("劇情章節已決定這項規則；換一章就能換規則。") return end
+   local request,message = GameModes.next(self.settings,field.key,field.values,self.lobbyHumanCount or 0,self:StoryUnlocked())
    if not request then self:Notify(message or "目前設定沒有其他合法選項。") return end
-   if field.key=="teamMode" then self:Notify((message and message.."\n" or "")..TeamClient.ModeLabel(request.teamMode,request.expectedPlayers,request.aiCount).." · "..request.expectedPlayers.." 真人＋"..request.aiCount.." 電腦；確認設定後重新準備。") end
+   if field.key=="teamMode" or message then self:Notify((message and message.."\n" or "")..GameModes.label(request).." · "..request.expectedPlayers.." 真人＋"..request.aiCount.." 電腦；確認設定後重新準備。") end
    lobbyCommand("LobbySettings",request)
   end,"Setting_"..field.key)
   self.settingLabels[field.key] = {label = label,caption=caption,field = field,button = b}
@@ -945,6 +998,27 @@ function GUI:CreateLobby()
  self.lobbyPage=1
  self:LayoutLobby()
 end
+function GUI:StoryUnlocked()
+ return GameModes.unlocked(player:GetAttribute("StoryCleared"))
+end
+-- 依目前玩法把設定欄位放到精靈的第一或第二頁。
+function GUI:ArrangeLobbyFields()
+ local layout=lobbyLayouts[self.settings.gameMode] or lobbyLayouts.PvP
+ local story=self.settings.gameMode=="Story"
+ for _,entry in pairs(self.settingLabels) do entry.page=nil end
+ for page,keys in ipairs(layout) do
+  for row,key in ipairs(keys) do
+   local entry=self.settingLabels[key]
+   entry.page,entry.row=page,row
+   entry.caption.Parent,entry.button.Parent=self.lobbyPages[page],self.lobbyPages[page]
+  end
+ end
+ for key,entry in pairs(self.settingLabels) do
+  entry.locked=story and storyLocked[key]==true
+  entry.caption.Visible,entry.button.Visible=entry.page~=nil,entry.page~=nil
+ end
+ self.lobbyFieldRows={#layout[1],#layout[2]}
+end
 function GUI:CompleteLobbySetup()
  if not self.lobbyWizard or not self.lobbyIsHost or not waitingInLobby() or self.lobbyStarting or self.lobbyConfigurePending then return false end
  if type(self.lobbyRevision)~="number" then self:Notify("正在同步房間設定，請稍候再試。") return false end
@@ -994,7 +1068,24 @@ function GUI:LayoutLobby()
  local welcomeWidth=math.min(width-16,860)
  local columns=compact and 2 or 4
  local cardHeight=compact and 82 or 98
- local welcomeTop=compact and 67 or 77
+ -- 快速開始固定一列四格；窄畫面只留標題，避免歡迎面板蓋住庭院。
+ local quickTop=compact and 67 or 77
+ local quickHeight=compact and 44 or 64
+ local quickWidth=(welcomeWidth-28-3*6)/4
+ for i,quick in ipairs(self.quickButtons) do
+  quick.button.Size=UDim2.fromOffset(quickWidth,quickHeight)
+  quick.button.Position=UDim2.fromOffset(14+(i-1)*(quickWidth+6),quickTop)
+  quick.title.Text=compact and quick.entry.title or quick.entry.title.."  ›"
+  quick.title.TextSize=compact and 14 or 17
+  quick.title.Position=UDim2.fromOffset(compact and 8 or 12,compact and 9 or 6)
+  quick.title.Size=UDim2.new(1,compact and -12 or -20,0,26)
+  quick.detail.Visible=not compact
+  quick.detail.Position=UDim2.fromOffset(12,34)
+ end
+ local roomsTop=quickTop+quickHeight+8
+ self.roomsHeading.Visible=not compact
+ self.roomsHeading.Position=UDim2.fromOffset(14,roomsTop)
+ local welcomeTop=roomsTop+(compact and 0 or 24)
  local rows=math.ceil(#(Config.Lobby.portals or {})/columns)
  local welcomeHeight=welcomeTop+rows*(cardHeight+6)+28
  self.lobbyWelcome.Size=UDim2.fromOffset(welcomeWidth,welcomeHeight)
@@ -1021,7 +1112,7 @@ function GUI:LayoutLobby()
   end
  end
  local panelWidth=math.min(760,width-24)
- local panelHeight=math.min(572,height-24)
+ local panelHeight=math.min(600,height-24)
  local short=panelHeight<420
  self.lobbyFrame.Size=UDim2.fromOffset(panelWidth,panelHeight)
  self.lobbyFrame.Position=UDim2.new(0.5,-panelWidth/2,0.5,-panelHeight/2)
@@ -1047,17 +1138,33 @@ function GUI:LayoutLobby()
  local rosterTop=reviewColumns and 66 or summaryHeight+72
  local rulesTop=rosterTop+factionCount*50+8
  local reviewHeight=reviewColumns and 334 or rulesTop+134
- local pageHeight=self.lobbyPage==1 and 186 or self.lobbyPage==2 and 400 or reviewHeight
+ local fieldRows=self.lobbyFieldRows or {2,4}
+ local story=self.settings.gameMode=="Story"
+ local briefingTop=LOBBY_FIELD_TOP[1]+fieldRows[1]*56+4
+ local basicHeight=briefingTop+(story and 84 or 0)
+ local pageHeight=self.lobbyPage==1 and basicHeight or self.lobbyPage==2 and LOBBY_FIELD_TOP[2]+fieldRows[2]*56 or reviewHeight
  self.lobbyBody.CanvasSize=UDim2.fromOffset(0,pageHeight)
  for _,body in ipairs(self.lobbyPages) do body.Size=UDim2.new(1,-8,0,pageHeight) end
- local captionWidth=panelWidth<480 and 84 or 110
+ local narrow=panelWidth<480
+ for _,card in pairs(self.modeCards) do
+  card.title.TextSize=narrow and 14 or 17
+  card.detail.Visible=panelWidth>=560
+  card.button.Size=UDim2.new(1/3,-6,0,card.detail.Visible and 78 or 48)
+ end
+ self.storyBriefing.Visible=story
+ self.storyBriefing.Position=UDim2.fromOffset(4,briefingTop)
+ self.storyBriefing.Size=UDim2.new(1,-8,0,80)
+ self.storyBriefing.TextSize=narrow and 13 or 14
+ local captionWidth=narrow and 84 or 110
  for _,entry in pairs(self.settingLabels) do
-  local y=64+(entry.field.row-1)*56
-  entry.caption.Position=UDim2.fromOffset(4,y); entry.caption.Size=UDim2.fromOffset(captionWidth,48)
-  entry.caption.TextSize=panelWidth<480 and 14 or 15
-  entry.button.Position=UDim2.fromOffset(captionWidth+12,y)
-  entry.button.Size=UDim2.new(1,-captionWidth-16,0,48)
-  entry.label.TextSize=panelWidth<480 and 13 or 14
+  if entry.page then
+   local y=LOBBY_FIELD_TOP[entry.page]+(entry.row-1)*56
+   entry.caption.Position=UDim2.fromOffset(4,y); entry.caption.Size=UDim2.fromOffset(captionWidth,48)
+   entry.caption.TextSize=narrow and 14 or 15
+   entry.button.Position=UDim2.fromOffset(captionWidth+12,y)
+   entry.button.Size=UDim2.new(1,-captionWidth-16,0,48)
+   entry.label.TextSize=narrow and 13 or 14
+  end
  end
  self.reviewStatus.Position=UDim2.fromOffset(4,0)
  self.reviewStatus.Size=UDim2.new(1,-8,0,30)
@@ -1783,6 +1890,10 @@ function GUI:UpdateLobby()
   local value=lobbyRoomAttribute(roomId,key=="expectedPlayers" and "ExpectedPlayers" or "Setting_"..key)
   self.settings[key]=value~=nil and value or (portal and portal.settings[key]) or default
  end
+ self:ArrangeLobbyFields()
+ local gameMode=self.settings.gameMode
+ local chapter=gameMode=="Story" and GameModes.chapter(self.settings.storyChapter) or nil
+ local unlocked=self:StoryUnlocked()
  self.lobbyRevision=lobbyRoomAttribute(roomId,"SettingsRevision")
  local pending=self.lobbyConfigurePending
  if pending then
@@ -1828,15 +1939,24 @@ function GUI:UpdateLobby()
  self.lobbyFrame.Visible=queued and not starting
  self.startingTravel.Visible=starting
  self.lobbyBody.Visible=queued and not starting
- self.queueSummary.Text="各匹配點玩法相同；由房主設定，滿員且全員準備後自動出發。"
+ self.queueSummary.Text="劇情已通關 "..math.min(player:GetAttribute("StoryCleared") or 0,GameModes.ChapterCount).." / "..GameModes.ChapterCount.." 章 · 房主設定玩法，滿員且全員準備後自動出發。"
+ local nextChapter=GameModes.chapter(unlocked)
+ local quickDetails={StorySolo="第 "..unlocked.." 章 · "..(nextChapter and nextChapter.title or "").." · 立即出發",
+  Story="2–3 人合作闖關",PvP="2–4 位真人對戰",PvE="與好友一起對抗電腦"}
+ for _,quick in ipairs(self.quickButtons) do
+  quick.detail.Text=quickDetails[quick.entry.id] or ""
+  quick.button:SetAttribute("Unavailable",not waitingInLobby() or queued or starting)
+ end
  for id,entry in pairs(self.portalCards) do
   local count=lobbyRoomAttribute(id,"Players") or 0
   local required=lobbyRoomAttribute(id,"ExpectedPlayers") or entry.portal.settings.expectedPlayers
   local status=lobbyRoomAttribute(id,"Status") or "Configuring"
   local mode=lobbyRoomAttribute(id,"Setting_teamMode") or entry.portal.settings.teamMode
   local computers=lobbyRoomAttribute(id,"Setting_aiCount") or entry.portal.settings.aiCount
+  local roomSettings={gameMode=lobbyRoomAttribute(id,"Setting_gameMode") or entry.portal.settings.gameMode,
+   storyChapter=lobbyRoomAttribute(id,"Setting_storyChapter"),teamMode=lobbyRoomAttribute(id,"Setting_teamMode") or entry.portal.settings.teamMode}
   local available=(status=="Waiting" or status=="Configuring") and waitingInLobby() and count<required
-  entry.detail.Text=count==0 and status=="Configuring" and "選擇模式與人數\n設定完成後等候玩家。" or TeamClient.ModeLabel(mode,required,computers).."\n"..required.." 位真人 · "..computers.." 位電腦"
+  entry.detail.Text=count==0 and status=="Configuring" and "劇情、對戰或合作\n由第一位進入的房主設定。" or GameModes.label(roomSettings).."\n"..required.." 位真人 · "..computers.." 位電腦"
   entry.button:SetAttribute("Unavailable",not available)
   entry.status.Text=status=="Configuring" and (count==0 and "空房間 · 進入設定  ›" or "設定中 · "..count.." / "..required.." 人")
    or status=="Waiting" and ((count>=required and "已滿員 · " or "等候中 · ")..count.." / "..required.." 人")
@@ -1844,14 +1964,29 @@ function GUI:UpdateLobby()
   entry.status.TextColor3=available and (entry.portal.color or C.gold):Lerp(C.white,0.45) or C.muted
  end
  self.lobbyHeading.Text=portal and portal.name or "匹配房間"
- self.lobbyDescription.Text=self.lobbyWizard and "選擇模式與人數，再設定遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定模式與規則，先等候玩家加入。")
+ self.lobbyDescription.Text=self.lobbyWizard and "選擇玩法與人數，再確認遊戲規則。" or (self.lobbyConfigured and "確認設定並準備；滿員且全員準備後自動出發。" or "房主正在設定模式與規則，先等候玩家加入。")
  self.reviewStatus.Text=self.lobbyConfigured and "等候玩家" or "房主正在設定"
  self.rosterHeading.Text = "集 合 名 單  ·  "..humanCount.." / "..expectedPlayers.." 人"
  self.readySummary.Text="準備 "..readyCount.." / "..humanCount
  self.readySummary.TextColor3=humanCount>0 and readyCount==humanCount and C.green or C.muted
+ for _,id in ipairs(GameModes.Order) do
+  local card=self.modeCards[id]
+  card.button:SetAttribute("Selected",gameMode==id)
+  card.button:SetAttribute("Unavailable",not self.lobbyWizard or self.lobbyConfigurePending~=nil)
+  card.title.TextColor3=gameMode==id and C.gold or C.white
+ end
+ self.basicHint.Text=gameMode=="Story" and ("真人玩家同隊闖關；已解鎖到第 "..unlocked.." 章。") or Config.GameModes[gameMode] and Config.GameModes[gameMode].description or "選擇玩法，再決定人數與對手。"
+ self.advancedHint.Text=gameMode=="Story" and "這一章的戰場規則；換章節就會換規則。" or "已有預設規則；可直接完成設定，或再調整這場遊戲。"
+ self.advancedHeading.Text=gameMode=="Story" and "章節規則" or "遊戲設定"
+ self.lobbyStepButtons[2].label.Text="2  "..(gameMode=="Story" and "章節規則" or "遊戲設定")
+ self.storyBriefing.Text=chapter and (chapter.briefing.."\n目標："..chapter.objective..(chapter.aiCount>aiCount and "\n多人時敵方陣營減為 "..aiCount.." 個（出生點有限）。" or "")) or ""
  for key,entry in pairs(self.settingLabels) do
-  local editable=self.lobbyWizard and not self.lobbyConfigurePending and (key ~= "aiCount" or expectedPlayers < 4)
-  local value = self.settings[key]; entry.label.Text = (key=="teamMode" and TeamClient.ModeLabel(value,expectedPlayers,aiCount) or entry.field.names and entry.field.names[value] or tostring(value))..(editable and "  ›" or "")
+  local editable=self.lobbyWizard and not self.lobbyConfigurePending and not entry.locked and (key ~= "aiCount" or expectedPlayers < 4)
+  local value = self.settings[key]
+  local shown=key=="teamMode" and TeamClient.ModeLabel(value,expectedPlayers,aiCount)
+   or key=="expectedPlayers" and gameMode=="Story" and (value==1 and "單人" or value.." 人合作")
+   or entry.field.names and entry.field.names[value] or tostring(value)
+  entry.label.Text = shown..(key=="storyChapter" and value==unlocked and (player:GetAttribute("StoryCleared") or 0)<GameModes.ChapterCount and "（最新）" or "")..(entry.locked and "（章節）" or "")..(editable and "  ›" or "")
   entry.label.TextColor3 = editable and C.white or C.muted
   entry.button:SetAttribute("Unavailable",not editable)
   entry.button.SettingIndicator.BackgroundTransparency=editable and 0.45 or 0.86
@@ -1867,14 +2002,15 @@ function GUI:UpdateLobby()
   elseif i <= expectedPlayers+aiCount then
    local aiIndex=i-expectedPlayers
    local teamLabel=previewReady and TeamClient.TeamLabel(teamMode,lobbyRoomAttribute(roomId,"AITeam_"..aiIndex)) or "分隊待確認"
-   label.Text = "◆  電腦 "..aiIndex.." · "..teamLabel.." · 已準備"; label.TextColor3 = C.gold
+   local enemy=chapter and (chapter.enemy..(aiCount>1 and " "..aiIndex or "")) or "電腦 "..aiIndex
+   label.Text = "◆  "..enemy.." · "..teamLabel.." · 已準備"; label.TextColor3 = C.gold
   else label.Text = "○  空位"; label.TextColor3 = C.muted end
   label.Parent.RosterStateAccent.BackgroundColor3=label.TextColor3
   label.Parent.Visible=i<=self.lobbyFactionCount
  end
  local battlefieldBusy=phase~="Lobby" and not starting
  self.hostLabel.Text=self.lobbyConfigurePending and "正在確認房間設定…"
-  or self.lobbyWizard and (self.lobbyPage==1 and "先選模式與人數，再前往遊戲設定。" or "規則可沿用預設；完成設定後開放準備。")
+  or self.lobbyWizard and (self.lobbyPage==1 and "先選玩法與人數，再前往下一步。" or gameMode=="Story" and "確認章節規則；完成設定後開放準備。" or "規則可沿用預設；完成設定後開放準備。")
   or not self.lobbyConfigured and "房主完成設定後，就可以準備。"
   or battlefieldBusy and "戰場尚未開放。可先集合與準備，開放後自動出發。"
   or (humanCount<expectedPlayers and ("還差 "..(expectedPlayers-humanCount).." 位玩家 · 可先完成準備"))
@@ -1895,10 +2031,10 @@ function GUI:UpdateLobby()
  local victoryText = self.settings.victory == "Regicide" and (teamMode=="FFA" and "保護你的起始市鎮中心。\n起始主城失守即淘汰。" or "保護你的起始市鎮中心。\n起始主城失守即淘汰；盟友仍可繼續作戰。")
   or self.settings.victory == "Wonder" and ("完工後守住世界奇觀 "..(Config.Settings.wonderVictoryTime or 180).." 秒即可勝利。\n消滅其餘勢力也能獲勝。")
   or (teamMode=="FFA" and "消滅敵方全部單位與建築。\n最後存活的勢力獲勝；沒有對手可自由建設。" or "消滅敵隊全部陣營；盟友不可互相攻擊。\n各自管理資源與單位，最後存活的隊伍獲勝。")
- self.reviewSummary.Text=TeamClient.ModeLabel(teamMode,expectedPlayers,aiCount).." · "..expectedPlayers.." 真人＋"..aiCount.." 電腦\n"
+ self.reviewSummary.Text=GameModes.label(self.settings).." · "..expectedPlayers.." 真人＋"..aiCount.." 電腦\n"
   ..self.settingLabels.size.field.names[self.settings.size].."戰場 · 人口上限 "..self.settings.population.."\n"
   ..self.settingLabels.startingResources.field.names[self.settings.startingResources]..(aiCount>0 and " · 電腦難度："..self.settingLabels.difficulty.field.names[self.settings.difficulty] or "")
- self.rules.Text=self.settingLabels.victory.field.names[self.settings.victory].." · "..victoryText
+ self.rules.Text=chapter and ("目標："..chapter.objective) or (self.settingLabels.victory.field.names[self.settings.victory].." · "..victoryText)
  self.travelStatus.Text=workspace:GetAttribute("MatchLoadStage") or "正在生成地圖與資源…"
  if changed or (self.lobbyWizard and not previousWizard) then self:SetLobbyPage(self.lobbyWizard and 1 or 3)
  elseif not self.lobbyWizard and self.lobbyPage~=3 then self:SetLobbyPage(3) end
@@ -2095,7 +2231,7 @@ function GUI:UpdateCommands(selected,buildingKind)
    end
    for _,techKey in ipairs(researchKeys) do
     local data = Config.Technologies[techKey]
-    table.insert(actions,{key = techKey,name = data.name,description = data.description,cost = data.cost,minAge = data.minAge or 1,tech = true,requires = data.requires,callback = function() self.callbacks.research(techKey) end})
+    table.insert(actions,{key = techKey,name = data.name,description = data.description,cost = data.cost,minAge = data.minAge or 1,tech = true,requires = data.requires,art = data.upgrade and data.upgrade.unit or nil,callback = function() self.callbacks.research(techKey) end})
    end
    if kind == "Mill" then
     local farmCost,limit = Config.Buildings.Farm.cost,Config.Farms.queueLimit

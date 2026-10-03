@@ -24,13 +24,14 @@ function Store.new(config,options)
  return self
 end
 function Store:_publish(entry)
- local view=Rules.merge(entry.base,{preference=entry.preference,results=entry.results,tutorialDone=entry.tutorialDone,hotkeys=entry.hotkeys},self.config) or Rules.empty(self.config)
+ local view=Rules.merge(entry.base,{preference=entry.preference,results=entry.results,tutorialDone=entry.tutorialDone,hotkeys=entry.hotkeys,storyCleared=entry.storyCleared},self.config) or Rules.empty(self.config)
  entry.player:SetAttribute("ProfileStatus",entry.status)
  entry.player:SetAttribute("ProfileLoaded",entry.status=="Ready" or entry.status=="SaveFailed")
  entry.player:SetAttribute("PvPWins",view.pvpWins)
  entry.player:SetAttribute("PvPLosses",view.pvpLosses)
  entry.player:SetAttribute("TutorialDone",view.tutorialDone==true)
  entry.player:SetAttribute("SavedHotkeys",view.hotkeys)
+ entry.player:SetAttribute("StoryCleared",view.storyCleared or 0)
 end
 function Store:Open(player,onLoaded)
  if self.entries[player] then return end
@@ -55,7 +56,7 @@ function Store:Open(player,onLoaded)
    local applied=pcall(onLoaded,loaded)
    if not applied then self.log("[RTS Profile] 已讀取檔案，但大廳偏好未能套用。") end
   end
-  if entry.closed or entry.preference or entry.tutorialDone or entry.hotkeys or next(entry.results) then self:Save(player) end
+  if entry.closed or entry.preference or entry.tutorialDone or entry.hotkeys or entry.storyCleared or next(entry.results) then self:Save(player) end
  end)
 end
 function Store:_schedule(entry,seconds)
@@ -81,6 +82,17 @@ function Store:CompleteTutorial(player)
  local entry=self.entries[player]
  if not entry or entry.closed or entry.tutorialDone or entry.base.tutorialDone then return false end
  entry.tutorialDone=true
+ entry.attempts=0
+ self:_publish(entry)
+ self:Save(player)
+ return true
+end
+-- 劇情通關：只記錄比目前更後面的章節。停用雲端（Studio）時仍記在本工作階段，可以接著選下一章。
+function Store:CompleteStory(player,chapter)
+ local entry=self.entries[player]
+ if not entry or entry.closed or not Rules.storyCleared(chapter) then return false end
+ if chapter<=math.max(entry.storyCleared or 0,entry.base.storyCleared or 0) then return false end
+ entry.storyCleared=chapter
  entry.attempts=0
  self:_publish(entry)
  self:Save(player)
@@ -112,8 +124,8 @@ function Store:Save(player)
  local entry=self.entries[player]
  if not entry or not self.enabled or entry.status=="Loading" or entry.status=="LoadFailed" then return false end
  if entry.saving then entry.saveAgain=true; return false end
- if not entry.preference and not entry.tutorialDone and not entry.hotkeys and not next(entry.results) then if entry.closed then self.entries[player]=nil end; return true end
- local snapshot={preference=entry.preference and table.clone(entry.preference),results={},tutorialDone=entry.tutorialDone,hotkeys=entry.hotkeys}
+ if not entry.preference and not entry.tutorialDone and not entry.hotkeys and not entry.storyCleared and not next(entry.results) then if entry.closed then self.entries[player]=nil end; return true end
+ local snapshot={preference=entry.preference and table.clone(entry.preference),results={},tutorialDone=entry.tutorialDone,hotkeys=entry.hotkeys,storyCleared=entry.storyCleared}
  for id,result in pairs(entry.results) do snapshot.results[id]=table.clone(result) end
  entry.saving=true
  self.pendingWrites+=1
@@ -129,6 +141,7 @@ function Store:Save(player)
    for id in pairs(snapshot.results) do entry.results[id]=nil end
    if snapshot.tutorialDone then entry.tutorialDone=nil end
    if snapshot.hotkeys and entry.hotkeys==snapshot.hotkeys then entry.hotkeys=nil end
+   if snapshot.storyCleared and entry.storyCleared==snapshot.storyCleared then entry.storyCleared=nil end
    if snapshot.preference and entry.preference and snapshot.preference.token==entry.preference.token then entry.preference=nil end
   else
    entry.status="SaveFailed"
@@ -140,7 +153,7 @@ function Store:Save(player)
   self:_publish(entry)
   local again=entry.saveAgain
   entry.saveAgain=false
-  if loaded and (again or entry.preference or entry.tutorialDone or entry.hotkeys or next(entry.results)) then self:Save(player)
+  if loaded and (again or entry.preference or entry.tutorialDone or entry.hotkeys or entry.storyCleared or next(entry.results)) then self:Save(player)
   elseif not loaded and entry.attempts<MAX_RETRIES then self:_schedule(entry,5*entry.attempts)
   elseif entry.closed then self.entries[player]=nil end
  end)

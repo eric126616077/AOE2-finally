@@ -6,7 +6,9 @@ local difficulties = {Easy = true, Normal = true, Hard = true}
 local populations = {[60] = true, [100] = true, [150] = true, [200] = true}
 local resources = {Standard = true, Rich = true}
 local victories = {Conquest = true, Regicide = true, Wonder = true}
-local settingFields={expectedPlayers=true,size=true,aiCount=true,difficulty=true,population=true,startingResources=true,victory=true,teamMode=true}
+local settingFields={expectedPlayers=true,size=true,aiCount=true,difficulty=true,population=true,startingResources=true,victory=true,teamMode=true,gameMode=true,storyChapter=true}
+-- 玩法本身的人數與章節規則由 LobbyRules／GameModeRules 檢查；這裡只確認欄位型別。
+local gameModes = {Story = true, PvP = true, PvE = true, Sandbox = true}
 
 function Rules.finite(value)
  return type(value) == "number" and value == value and math.abs(value) < math.huge
@@ -27,6 +29,10 @@ function Rules.settings(payload, humanCount)
   return nil, "對局設定包含不支援的選項。"
  end
  if humanCount + aiCount > 4 then return nil, "玩家與電腦合計最多四個陣營。" end
+ local gameMode,chapter=payload.gameMode,payload.storyChapter
+ if (gameMode~=nil and not gameModes[gameMode]) or (chapter~=nil and (not Rules.finite(chapter) or chapter%1~=0 or chapter<0 or chapter>99)) then
+  return nil, "對局設定包含不支援的選項。"
+ end
  local mode=payload.teamMode
  if mode==nil then mode="FFA" end -- Existing development callers retain their individual-faction mode.
  local teamMode,message=TeamRules.validateMode(mode,humanCount,aiCount)
@@ -34,7 +40,7 @@ function Rules.settings(payload, humanCount)
  return {
   size = payload.size, aiCount = aiCount, difficulty = payload.difficulty,
   population = payload.population, startingResources = payload.startingResources,
-  victory = payload.victory,teamMode=teamMode,
+  victory = payload.victory,teamMode=teamMode,gameMode=gameMode,storyChapter=chapter,
  }
 end
 

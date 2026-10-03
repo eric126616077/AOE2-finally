@@ -1,7 +1,9 @@
 -- Pure validation shared by the lobby authority and regression tests.
 local MatchRules = require(script.Parent.MatchRules)
 local TeamRules = require(script.Parent.TeamRules)
+local GameModeRules = require(game:GetService("ReplicatedStorage").Shared.GameModeRules)
 local LobbyRules = {}
+LobbyRules.GameModes = GameModeRules
 
 -- Never create a room from an untrusted identifier; old callers retain access to the first station.
 function LobbyRules.room(portals, roomId)
@@ -13,13 +15,16 @@ function LobbyRules.room(portals, roomId)
  return nil
 end
 
-function LobbyRules.settings(payload)
+-- options.internal：伺服器自己建立的練習局；options.unlocked：房主可選的最後一個劇情章節。
+function LobbyRules.settings(payload, options)
  if type(payload) ~= "table" then return nil, "集合設定無效。" end
  local expected = payload.expectedPlayers
  if not MatchRules.finite(expected) or expected % 1 ~= 0 or expected < 1 or expected > 4 then
   return nil, "參戰玩家人數必須介於 1 到 4。"
  end
- local settings, message = MatchRules.settings(payload, expected)
+ local applied, modeMessage = GameModeRules.apply(payload, options)
+ if not applied then return nil, modeMessage end
+ local settings, message = MatchRules.settings(applied, expected)
  if not settings then return nil, message end
  return settings, expected
 end
@@ -64,6 +69,11 @@ function LobbyRules.teamPreview(mode,expected,members,aiIds)
   table.insert(roster,{id=aiIds[index],ai=true})
  end
  return TeamRules.assign(mode,roster)
+end
+
+-- 劇情章節資料（只在劇情模式回傳）。
+function LobbyRules.story(settings)
+ return type(settings) == "table" and settings.gameMode == "Story" and GameModeRules.chapter(settings.storyChapter) or nil
 end
 
 -- humanStates is already sorted by the server; preserve an online host before migration.

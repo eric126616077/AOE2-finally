@@ -52,12 +52,20 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     $lobbyRules = Get-Content src/ServerScriptService/ServerModules/LobbyRules.lua -Raw
     $lobbyRules = $lobbyRules.Replace('local MatchRules = require(script.Parent.MatchRules)', '')
     $lobbyRules = $lobbyRules.Replace('local TeamRules = require(script.Parent.TeamRules)', '')
+    $lobbyRules = $lobbyRules.Replace('local GameModeRules = require(game:GetService("ReplicatedStorage").Shared.GameModeRules)', '')
+    $gameModeRules = (Get-Content src/ReplicatedStorage/Shared/GameModeRules.lua -Raw).Replace('local Config = require(script.Parent.Parent.GameData.GameConfig)', '')
+    $lobbyPrelude = $teamMatchPrelude + "local GameModeRules=(function()`n" + $gameModeRules + "`nend)()`n"
     $lobbyTests = Get-Content tests/lobby.spec.lua -Raw
     $lobbyTests = $lobbyTests.Replace('local MatchRules=require("../src/ServerScriptService/ServerModules/MatchRules")', '')
-    $lobbyBundle = $teamMatchPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $lobbyTests
+    $lobbyBundle = $lobbyPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $lobbyTests
     Write-Utf8NoBom build/lobby-tests.luau $lobbyBundle
     & $runtime build/lobby-tests.luau
     if ($LASTEXITCODE -ne 0) { throw 'Lobby rules tests failed.' }
+    $gameModeTests = Get-Content tests/game_modes.spec.lua -Raw
+    $gameModeBundle = $lobbyPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $gameModeTests
+    Write-Utf8NoBom build/game-mode-tests.luau $gameModeBundle
+    & $runtime build/game-mode-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Story / PvP / PvE lobby mode tests failed.' }
     $lobbyServerSource = Get-Content src/ServerScriptService/GameServer.server.lua -Raw
     $lobbyInitStart = $lobbyServerSource.IndexOf('for _,portal in ipairs(Config.Lobby.portals) do')
     $lobbyInitEnd = $lobbyServerSource.IndexOf('local queueJoin, queueLeave, spawnLobby', $lobbyInitStart)
@@ -74,7 +82,7 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     $lobbyRoomMocks = $lobbyRoomMocks.Replace('-- ACTUAL_SERVER_LOBBY_CLEAR_BODY', $lobbyServerSource.Substring($lobbyRoomEnd, $lobbyLifecycleStart - $lobbyRoomEnd))
     $lobbyRoomMocks = $lobbyRoomMocks.Replace('-- ACTUAL_SERVER_LOBBY_LIFECYCLE_BODY', $lobbyServerSource.Substring($lobbyLifecycleStart, $lobbyLifecycleEnd - $lobbyLifecycleStart))
     $lobbyRoomTests = Get-Content tests/lobby_rooms.spec.lua -Raw
-    $lobbyRoomBundle = $teamMatchPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $lobbyRoomMocks + "`n" + $lobbyRoomTests
+    $lobbyRoomBundle = $lobbyPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $lobbyRoomMocks + "`n" + $lobbyRoomTests
     Write-Utf8NoBom build/lobby-room-tests.luau $lobbyRoomBundle
     & $runtime build/lobby-room-tests.luau
     if ($LASTEXITCODE -ne 0) { throw 'Actual lobby room separation / readiness / host / matching lifecycle tests failed.' }
