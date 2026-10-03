@@ -2409,7 +2409,7 @@ Travel.load=function()
   local raw
   if RunService:IsStudio() then raw=Travel.studioTicket()
   elseif Travel.rules.reserved(game.PrivateServerId,game.PrivateServerOwnerId) then raw=Travel.service:ReadTicket(game.PrivateServerId) end
-  local ticket,message=Travel.rules.readTicket(raw,os.time(),Config.Places.ticketTtl,Config.Lobby.portals)
+  local ticket,message=Travel.rules.readTicket(raw,os.time(),Config.Places.ticketTtl,Config.Lobby.portals,Travel.rules.ticketOptions(RunService:IsStudio()))
   if not ticket then
    warn("[RTS Travel] 無法取得對局資料："..tostring(message))
    Travel.ticketError=true

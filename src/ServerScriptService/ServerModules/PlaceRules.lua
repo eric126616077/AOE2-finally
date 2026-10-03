@@ -40,8 +40,20 @@ function PlaceRules.newTicket(matchId, roomId, settings, members, now)
   expected = #players, players = players, createdAt = now}
 end
 
+-- Studio 的 Server & Clients 測試玩家 UserId 為負數（Player1=-1）。放寬與否只由伺服器的 IsStudio 決定，
+-- 不讀票據或任何玩家可控制的資料；正式伺服器一律要求正整數。
+function PlaceRules.ticketOptions(isStudio)
+ if isStudio == true then return {studioIds = true} end
+ return nil
+end
+local function playerId(value, studioIds)
+ if positiveInteger(value) then return true end
+ return studioIds == true and type(value) == "number" and value % 1 == 0 and value < 0 and value > -2^53
+end
+
 -- 任何欄位不符都整張拒絕；設定再走一次與大廳相同的驗證。
-function PlaceRules.readTicket(raw, now, maxAge, portals)
+function PlaceRules.readTicket(raw, now, maxAge, portals, options)
+ local studioIds = type(options) == "table" and options.studioIds == true
  if type(raw) ~= "table" or raw.v ~= PlaceRules.TICKET_VERSION then return nil, "對局資料版本不符。" end
  if not shortString(raw.matchId, 64) then return nil, "對局識別無效。" end
  local portal = LobbyRules.room(portals, raw.roomId)
@@ -54,7 +66,7 @@ function PlaceRules.readTicket(raw, now, maxAge, portals)
  local players, seen = {}, {}
  for index = 1, #raw.players do
   local entry = raw.players[index]
-  if type(entry) ~= "table" or not positiveInteger(entry.userId) or seen[entry.userId]
+  if type(entry) ~= "table" or not playerId(entry.userId, studioIds) or seen[entry.userId]
    or (entry.civilization ~= nil and not shortString(entry.civilization, 32))
    or (entry.tutorial ~= nil and type(entry.tutorial) ~= "boolean") then return nil, "參戰名單無效。" end
   seen[entry.userId] = true

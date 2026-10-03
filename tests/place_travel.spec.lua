@@ -87,6 +87,32 @@ local sandboxRead,sandboxMessage=PlaceRules.readTicket(PlaceRules.newTicket("tut
 expect(sandboxRead and sandboxRead.settings.gameMode=="Sandbox" and sandboxRead.players[1].tutorial==true,"tutorial ticket rejected by the match server: "..tostring(sandboxMessage))
 expect(LobbyRules.settings({gameMode="Sandbox",expectedPlayers=1,size="Small",aiCount=0,difficulty="Easy",population=100,startingResources="Rich",victory="Conquest",teamMode="FFA"})==nil,"lobby players can create the internal tutorial mode")
 
+-- Studio 測試玩家：負數 UserId 只在伺服器判定為 Studio 時接受；票據內的旗標不能放寬檢查。
+local testRoster={{id=-1},{id=-2}}
+local testTicket=PlaceRules.newTicket("studio-1","Room1",settings,testRoster,1000)
+expect(PlaceRules.ticketOptions(false)==nil,"live server produced relaxed ticket options")
+expect(PlaceRules.ticketOptions("true")==nil and PlaceRules.ticketOptions(1)==nil and PlaceRules.ticketOptions(nil)==nil,"non-boolean Studio flag relaxed ticket checks")
+expect(PlaceRules.ticketOptions(true).studioIds==true,"Studio did not relax test player ids")
+expect(PlaceRules.readTicket(testTicket,1010,600,Config.Lobby.portals)==nil,"negative test ids accepted by default")
+expect(PlaceRules.readTicket(testTicket,1010,600,Config.Lobby.portals,PlaceRules.ticketOptions(false))==nil,"negative test ids accepted on a live server")
+local flagged=PlaceRules.newTicket("studio-2","Room1",settings,testRoster,1000)
+flagged.studioIds=true; flagged.options={studioIds=true}; flagged.settings.studioIds=nil
+expect(PlaceRules.readTicket(flagged,1010,600,Config.Lobby.portals,PlaceRules.ticketOptions(false))==nil,"ticket-supplied studioIds flag relaxed a live server")
+expect(PlaceRules.readTicket(flagged,1010,600,Config.Lobby.portals)==nil,"ticket-supplied studioIds flag relaxed default checks")
+local settingsFlagged=PlaceRules.newTicket("studio-3","Room1",settings,testRoster,1000)
+settingsFlagged.settings.studioIds=true
+expect(PlaceRules.readTicket(settingsFlagged,1010,600,Config.Lobby.portals,PlaceRules.ticketOptions(true))==nil,"studioIds smuggled into settings accepted")
+local studioRead,studioMessage=PlaceRules.readTicket(testTicket,1010,600,Config.Lobby.portals,PlaceRules.ticketOptions(true))
+expect(studioRead and studioRead.players[1].userId==-1 and studioRead.players[2].userId==-2,"Studio test ids rejected: "..tostring(studioMessage))
+expect(PlaceRules.member(studioRead,-2)==studioRead.players[2],"Studio test player not found in roster")
+local studio=PlaceRules.ticketOptions(true)
+expect(PlaceRules.readTicket(PlaceRules.newTicket("studio-4","Room1",settings,{{id=0},{id=-2}},1000),1010,600,Config.Lobby.portals,studio)==nil,"zero user id accepted in Studio")
+expect(PlaceRules.readTicket(PlaceRules.newTicket("studio-5","Room1",settings,{{id=-1.5},{id=-2}},1000),1010,600,Config.Lobby.portals,studio)==nil,"fractional test id accepted in Studio")
+expect(PlaceRules.readTicket(PlaceRules.newTicket("studio-6","Room1",settings,{{id=-1},{id=-1}},1000),1010,600,Config.Lobby.portals,studio)==nil,"duplicate test id accepted in Studio")
+expect(PlaceRules.readTicket(PlaceRules.newTicket("studio-7","Room1",settings,{{id=0/0},{id=-2}},1000),1010,600,Config.Lobby.portals,studio)==nil,"NaN user id accepted in Studio")
+expect(PlaceRules.readTicket(PlaceRules.newTicket("studio-8","Room1",settings,{{id=-math.huge},{id=-2}},1000),1010,600,Config.Lobby.portals,studio)==nil,"infinite user id accepted in Studio")
+expect(PlaceRules.readTicket(ticket,1010,600,Config.Lobby.portals,studio)~=nil,"Studio rejected ordinary positive ids")
+
 -- 抵達：全員到齊立即開局，逾時以已到者開局，沒有人到則放棄。
 expect(PlaceRules.arrival(2,2,0,45)=="start","full roster waited")
 expect(PlaceRules.arrival(2,1,10,45)=="wait","partial roster started early")
