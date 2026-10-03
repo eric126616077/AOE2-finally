@@ -86,6 +86,16 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     Write-Utf8NoBom build/lobby-room-tests.luau $lobbyRoomBundle
     & $runtime build/lobby-room-tests.luau
     if ($LASTEXITCODE -ne 0) { throw 'Actual lobby room separation / readiness / host / matching lifecycle tests failed.' }
+    $placeRules = Get-Content src/ServerScriptService/ServerModules/PlaceRules.lua -Raw
+    $placeRules = $placeRules.Replace('local LobbyRules = require(script.Parent.LobbyRules)', '')
+    $matchTravel = Get-Content src/ServerScriptService/ServerModules/MatchTravel.lua -Raw
+    $matchTravel = $matchTravel.Replace('local PlaceRules = require(script.Parent.PlaceRules)', '')
+    $placeTests = Get-Content tests/place_travel.spec.lua -Raw
+    $taskShim = "local task={spawn=function(callback,...) return callback(...) end}`n"
+    $placeBundle = $lobbyPrelude + "local LobbyRules=(function()`n" + $lobbyRules + "`nend)()`n" + $taskShim + "local PlaceRules=(function()`n" + $placeRules + "`nend)()`nlocal MatchTravel=(function()`n" + $matchTravel + "`nend)()`n" + $placeTests
+    Write-Utf8NoBom build/place-travel-tests.luau $placeBundle
+    & $runtime build/place-travel-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Cross-place match ticket / teleport tests failed.' }
     & $runtime tests/team.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Server team assignment / alliance / victory tests failed.' }
     & $runtime tests/team_lifecycle.spec.lua

@@ -23,7 +23,6 @@ local LobbyRules = require(script.Parent.ServerModules.LobbyRules)
 local LobbyWorld = require(script.Parent.ServerModules.LobbyWorld)
 local CivilizationRules = require(script.Parent.ServerModules.CivilizationRules)
 local CivilizationPreferenceRules = require(script.Parent.ServerModules.CivilizationPreferenceRules)
-local CommerceRules = require(script.Parent.ServerModules.CommerceRules)
 local ProfileRules = require(script.Parent.ServerModules.ProfileRules)
 local ProfileStore = require(script.Parent.ServerModules.ProfileStore)
 local Telemetry = require(script.Parent.ServerModules.Telemetry)
@@ -38,7 +37,8 @@ local telemetry=Telemetry.new()
 local currentMatch
 local matchTeams
 assert(CivilizationRules.audit(Config))
-assert(CommerceRules.audit(Config))
+-- 商店規則只在啟動時稽核一次；不佔用主腳本的區域變數。
+assert(require(script.Parent.ServerModules.CommerceRules).audit(Config))
 Players.CharacterAutoLoads = false
 
 local buildings,resources,units,factions,remotes,command,feedback
@@ -134,7 +134,12 @@ Garrison.publish=function(model)
  model:SetAttribute("Garrison",held and #held or 0)
  model:SetAttribute("GarrisonArrows",held and held.arrows or 0)
 end
-local lobbyWorld = LobbyWorld.Create()
+-- 跨 place 對局：Combined＝單一伺服器（Studio／未設定 place）；Lobby 只集合並傳送；Match 只跑一場對局。
+-- Studio 可在 ServerScriptService 設屬性 RTSPlaceRole="Match" 模擬對戰 place（以先進入的玩家組成名單）。
+local Travel={rules=require(script.Parent.ServerModules.PlaceRules),places=Config.Places}
+Travel.role=Travel.rules.role(Config.Places,game.PlaceId,RunService:IsStudio(),script.Parent:GetAttribute("RTSPlaceRole"))
+Travel.service=require(script.Parent.ServerModules.MatchTravel).new(Config.Places,Travel.role)
+local lobbyWorld = Travel.role=="Match" and LobbyWorld.Stub() or LobbyWorld.Create()
 local rooms, activeRoomId = {}, nil
 for _,portal in ipairs(Config.Lobby.portals) do
  local roomSettings,count=LobbyRules.settings(portal.settings)
@@ -1408,7 +1413,15 @@ local function endMatch(winnerTeam)
  workspace:SetAttribute("WinnerId",winnerId)
  workspace:SetAttribute("WinnerTeamId",winnerTeam or 0)
  for unit in pairs(orders) do stop(unit) end
- announce(winnerTeam and (winnerName.." 獲得勝利！房主可返回大廳開始新局。") or "對局結束。房主可返回大廳。")
+ if Travel.role=="Match" then
+  -- 每場對局獨佔一台伺服器：結束後送回大廳，空伺服器由 Roblox 自動關閉。
+  local delay=Config.Places.returnDelay
+  announce((winnerTeam and (winnerName.." 獲得勝利！") or "對局結束。").."可按「返回大廳」，"..delay.." 秒後自動返回。")
+  local generation=matchGeneration
+  task.delay(delay,function() if matchGeneration==generation then Travel.returnAll("對局已結束，正在返回大廳…") end end)
+ else
+  announce(winnerTeam and (winnerName.." 獲得勝利！房主可返回大廳開始新局。") or "對局結束。房主可返回大廳。")
+ end
  for actor,state in pairs(states) do
   if actor:IsA("Player") and not state.inLobby then
    local outcome=currentMatch and TeamRules.isParticipant(matchTeams,currentMatch.factions,state)
@@ -1783,11 +1796,17 @@ local function updateHost()
  for _,data in ipairs(Config.Lobby.portals) do
   local room=rooms[data.id]
   local members=queuedStates(room.id)
+  if room.travel then
+   -- 出發中的房間在最後一位成員離開伺服器（傳送成功）或全部恢復後解鎖。
+   local travelling=false
+   for _,state in ipairs(members) do if state.teleporting==room.travel.id then travelling=true; break end end
+   if not travelling then room.travel=nil; workspace:SetAttribute(roomPrefix(room,"TravelStage"),nil) end
+  end
   if #members==0 and room.hadMembers and activeRoomId~=room.id then resetRoomDefaults(room) end
   if #members>0 then room.hadMembers=true end
   local ready=0
   local host=members[1] and members[1].id or 0
-  local status=activeRoomId==room.id and phase or (room.configured and "Waiting" or "Configuring")
+  local status=activeRoomId==room.id and phase or (room.travel and "Starting") or (room.configured and "Waiting" or "Configuring")
   workspace:SetAttribute(roomPrefix(room,"HostUserId"),host)
   workspace:SetAttribute(roomPrefix(room,"Players"),#members)
   workspace:SetAttribute(roomPrefix(room,"Status"),status)
@@ -1847,6 +1866,8 @@ queueJoin=function(state,roomId,quiet,fromUI)
  if not portal then if not quiet then notify(state.actor,"這個匹配點不存在。") end; return end
  local room=rooms[portal.id]
  if activeRoomId==room.id then if not quiet then notify(state.actor,"這個匹配點正在對局，請先選其他匹配點。") end; return end
+ if state.teleporting then return end
+ if room.travel then if not quiet then notify(state.actor,"這個匹配點的隊伍正在出發，請稍候或選其他匹配點。") end; return end
  if state.queued and state.roomId==room.id then return end
  local character=state.actor.Character
  local root=character and character:FindFirstChild("HumanoidRootPart")
@@ -1865,7 +1886,7 @@ queueJoin=function(state,roomId,quiet,fromUI)
  updateHost()
 end
 queueLeave=function(state)
- if not state.inLobby or state.playing or not state.queued then return end
+ if not state.inLobby or state.playing or not state.queued or state.teleporting then return end
  local room=rooms[state.roomId]
  state.queued,state.ready,state.roomId=false,false,nil
  state.queueCooldown=os.clock()+2
@@ -1882,7 +1903,7 @@ end
 local function configureLobby(player,payload)
  local state=states[player]
  local room=state and state.roomId and rooms[state.roomId]
- if not room or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id
+ if not room or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id or room.travel
   or workspace:GetAttribute(roomPrefix(room,"HostUserId"))~=player.UserId then return end
  -- 劇情章節依房主的通關進度解鎖；StoryCleared 只由伺服器的個人檔案寫入。
  local validated,count=LobbyRules.settings(payload,{unlocked=LobbyRules.GameModes.unlocked(player:GetAttribute("StoryCleared"))})
@@ -1904,7 +1925,7 @@ local function configureLobbyComplete(player,revision,rateRejected)
  state.configureRejected=false
  local room=state.roomId and rooms[state.roomId]
  local accepted=false
- if room and state.inLobby and not state.playing and state.queued and activeRoomId~=room.id
+ if room and state.inLobby and not state.playing and state.queued and activeRoomId~=room.id and not room.travel
   and workspace:GetAttribute(roomPrefix(room,"HostUserId"))==player.UserId
   and Rules.finite(revision) and revision%1==0 and revision==room.revision then
   local validated=Rules.settings(room.settings,room.expected)
@@ -1965,6 +1986,8 @@ local function clearMatch()
  workspace:SetAttribute("MatchTime",0)
 end
 local function lobbyReset()
+ -- 對戰 place 沒有大廳：結束或無法開局時把仍在伺服器的玩家送回大廳 place。
+ if Travel.role=="Match" then Travel.returnAll("正在返回大廳…"); return end
  local departingRoom=activeRoomId and rooms[activeRoomId]
  activeRoomId=nil
  workspace:SetAttribute("ActiveBattleRoomId",nil)
@@ -1993,7 +2016,7 @@ end
 startMatch=function(player)
  local requester=states[player]
  local room=requester and requester.roomId and rooms[requester.roomId]
- if phase~="Lobby" or not room or not room.configured or not requester.inLobby or requester.playing
+ if phase~="Lobby" or not room or not room.configured or room.travel or not requester.inLobby or requester.playing
   or workspace:GetAttribute(roomPrefix(room,"HostUserId"))~=player.UserId then return end
  local humans=queuedStates(room.id)
  local ready,message=LobbyRules.canStart(room.expected,humans)
@@ -2004,6 +2027,14 @@ startMatch=function(player)
  local validated
  validated,message=Rules.settings(room.settings,#humans)
  if not validated then notify(player,message); return end
+ -- 大廳 place 不在本伺服器開局：預留對戰伺服器並整隊傳送，其他房間可同時出發。
+ if Travel.role=="Lobby" then Travel.dispatch(room,humans,validated); return end
+ Travel.launch(room,humans,validated,player)
+end
+-- 在本伺服器建立戰場；單一伺服器模式由大廳呼叫，對戰 place 在名單抵達後呼叫。
+-- 放在 Travel 表內：主腳本已接近 Studio 的 200 個區域變數上限。
+Travel.launch=function(room,humans,validated,player)
+ local message
  activeRoomId=room.id
  workspace:SetAttribute("ActiveBattleRoomId",room.id)
  workspace:SetAttribute("HostUserId",player.UserId)
@@ -2126,7 +2157,7 @@ autoStartLobby=function()
  for _,portal in ipairs(Config.Lobby.portals) do
   local room=rooms[portal.id]
   local members=queuedStates(room.id)
-  if room.configured and LobbyRules.canStart(room.expected,members) then
+  if room.configured and not room.travel and LobbyRules.canStart(room.expected,members) then
     local host=members[1] and members[1].actor
     if host and host.Parent==Players then startMatch(host); if phase~="Lobby" then return end end
   end
@@ -2134,7 +2165,7 @@ autoStartLobby=function()
 end
 local function lobbyReady(state,value,revision)
  local room=state.roomId and rooms[state.roomId]
- if not room or not room.configured or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id
+ if not room or not room.configured or room.travel or not state.inLobby or state.playing or not state.queued or activeRoomId==room.id
   or type(value)~="boolean" or revision~=room.revision then return end
  if not lobbyWorld:ContainsPortal(state.actor,room.id) then queueLeave(state); return end
  state.ready=value
@@ -2164,9 +2195,171 @@ local function join(player)
   end
  end)
  telemetry:Join(player)
+ if Travel.role=="Match" then Travel.admit(state); return end
  updateHost()
  spawnLobby(state)
  if phase~="Lobby" then notify(player,"目前有對局進行中；可在其他匹配點集合等待下一局。") end
+ if Travel.role=="Lobby" then
+  local ok,data=pcall(function() return player:GetJoinData() end)
+  if ok and type(data)=="table" and data.SourcePlaceId==Config.Places.matchPlaceId then notify(player,"已返回大廳，選擇匹配點即可開始下一局。") end
+ end
+end
+-- 大廳 place：整隊出發。房間在傳送期間鎖定；任一步失敗都恢復房間並取消準備。
+Travel.dispatch=function(room,humans,validated)
+ local id=HttpService:GenerateGUID(false)
+ local members,players={},{}
+ room.travel={id=id,at=os.clock()}
+ for _,state in ipairs(humans) do
+  state.teleporting=id
+  table.insert(members,{id=state.id,civilization=state.civilization,tutorial=state.actor:GetAttribute("TutorialMatch")==true})
+  table.insert(players,state.actor)
+ end
+ workspace:SetAttribute(roomPrefix(room,"TravelStage"),"正在預留對戰伺服器…")
+ updateHost()
+ local ticket=Travel.rules.newTicket(id,room.id,validated,members,os.time())
+ task.spawn(function()
+  local ok,message=Travel.service:Dispatch(players,ticket,function(actor)
+   Travel.restore(states[actor],id,"傳送到對戰伺服器失敗，請重新準備。")
+  end)
+  if not room.travel or room.travel.id~=id then return end
+  if ok then workspace:SetAttribute(roomPrefix(room,"TravelStage"),"正在傳送到對戰伺服器…"); return end
+  for _,state in ipairs(humans) do Travel.restore(state,id,message) end
+ end)
+end
+Travel.restore=function(state,id,message)
+ if not state or state.teleporting~=id or state.actor.Parent~=Players then return end
+ state.teleporting=nil
+ Travel.service:Cancel(state.actor)
+ state.ready=false
+ state.actor:SetAttribute("LobbyReady",false)
+ if message then notify(state.actor,message,"Error") end
+ updateHost()
+end
+-- 對戰 place：玩家抵達後等票據，名單外或開局後才到的玩家送回大廳。
+Travel.admit=function(state)
+ state.inLobby=false
+ state.actor:SetAttribute("InLobby",false)
+ Travel.step()
+end
+Travel.returnPlayers=function(list,message)
+ local players={}
+ for _,state in ipairs(list) do
+  if state.actor.Parent==Players and not state.returning then
+   state.returning=true
+   state.actor:SetAttribute("ReturningToLobby",true)
+   if message then notify(state.actor,message) end
+   table.insert(players,state.actor)
+  end
+ end
+ if #players==0 then return end
+ local function failed(actor)
+  local state=states[actor]
+  if not state or not state.returning then return end
+  state.returning=false
+  actor:SetAttribute("ReturningToLobby",false)
+  notify(actor,"返回大廳失敗，請稍後再試一次，或直接離開遊戲。","Error")
+ end
+ task.spawn(function()
+  if not Travel.service:Return(players,failed) then for _,actor in ipairs(players) do failed(actor) end end
+ end)
+end
+Travel.returnAll=function(message)
+ Travel.returnPlayers(humanStates(),message)
+end
+-- Studio 模擬：以先進入的玩家組成名單，設定取 RTSStudioSettings（JSON）或匹配點 1 的預設。
+Travel.studioTicket=function()
+ local payload=table.clone(Config.Lobby.portals[1].settings)
+ local raw=script.Parent:GetAttribute("RTSStudioSettings")
+ if type(raw)=="string" then
+  local ok,decoded=pcall(HttpService.JSONDecode,HttpService,raw)
+  if ok and type(decoded)=="table" then payload=decoded end
+ end
+ local validated,count=LobbyRules.settings(payload)
+ if not validated then warn("[RTS Travel] Studio 對局設定無效："..tostring(count)); return nil end
+ local deadline=os.clock()+10
+ while #humanStates()<count and os.clock()<deadline do task.wait(0.25) end
+ local members={}
+ for index,state in ipairs(humanStates()) do
+  if index>count then break end
+  table.insert(members,{id=state.id,civilization=state.civilization})
+ end
+ if #members==0 then return nil end
+ local tutorial=script.Parent:GetAttribute("RTSStudioTutorial")==true
+ for _,member in ipairs(members) do member.tutorial=tutorial end
+ return Travel.rules.newTicket("studio-"..HttpService:GenerateGUID(false),"Room1",validated,members,os.time())
+end
+Travel.load=function()
+ Travel.bootedAt=os.clock()
+ workspace:SetAttribute("MatchLoadStage","正在讀取對局資料…")
+ task.spawn(function()
+  local raw
+  if RunService:IsStudio() then raw=Travel.studioTicket()
+  elseif Travel.rules.reserved(game.PrivateServerId,game.PrivateServerOwnerId) then raw=Travel.service:ReadTicket(game.PrivateServerId) end
+  local ticket,message=Travel.rules.readTicket(raw,os.time(),Config.Places.ticketTtl,Config.Lobby.portals)
+  if not ticket then
+   warn("[RTS Travel] 無法取得對局資料："..tostring(message))
+   Travel.ticketError=true
+   workspace:SetAttribute("MatchLoadStage","找不到這場對局的資料，正在返回大廳…")
+  else
+   Travel.ticket=ticket
+   Travel.bootedAt=os.clock()
+   -- 房間狀態跟隨 Starting，客戶端在等待抵達時顯示出發畫面。
+   activeRoomId=ticket.roomId
+   workspace:SetAttribute("ActiveBattleRoomId",ticket.roomId)
+  end
+  Travel.step()
+ end)
+end
+Travel.step=function()
+ if Travel.role=="Lobby" then
+  for _,room in pairs(rooms) do
+   local travel=room.travel
+   if travel and os.clock()-travel.at>Config.Places.travelTimeout then
+    for _,state in ipairs(queuedStates(room.id)) do Travel.restore(state,travel.id,"傳送逾時，請重新準備。") end
+   end
+  end
+  return
+ end
+ if Travel.role~="Match" then return end
+ if Travel.ticketError then Travel.returnAll("找不到這場對局的資料，正在返回大廳。"); return end
+ local ticket=Travel.ticket
+ if not ticket then return end
+ for _,state in ipairs(humanStates()) do
+  if not state.admitted then
+   state.admitted=true
+   local entry=Travel.rules.member(ticket,state.id)
+   if Travel.launched or not entry then
+    Travel.returnPlayers({state},entry and "這場對局已經開始，正在返回大廳。" or "你不在這場對局的名單中，正在返回大廳。")
+   else
+    local order=0
+    for index,candidate in ipairs(ticket.players) do if candidate==entry then order=index end end
+    state.civilization=CivilizationRules.resolve(Config,entry.civilization or state.civilization)
+    publishCivilization(state,state.actor)
+    state.queued,state.ready,state.roomId,state.queueOrder=true,true,ticket.roomId,order
+    state.actor:SetAttribute("LobbyQueued",true)
+    state.actor:SetAttribute("LobbyReady",true)
+    state.actor:SetAttribute("LobbyRoomId",ticket.roomId)
+    state.actor:SetAttribute("TutorialMatch",entry.tutorial or nil)
+   end
+  end
+ end
+ if Travel.launched then return end
+ local present=queuedStates(ticket.roomId)
+ local decision=Travel.rules.arrival(ticket.expected,#present,os.clock()-Travel.bootedAt,Config.Places.arrivalTimeout)
+ workspace:SetAttribute("MatchLoadStage",string.format("等待玩家抵達（%d / %d）…",#present,ticket.expected))
+ updateHost()
+ if decision=="wait" then return end
+ Travel.launched=true
+ if decision=="abort" then return end
+ if not RunService:IsStudio() then task.spawn(function() Travel.service:RemoveTicket(game.PrivateServerId) end) end
+ local validated,message=Rules.settings(ticket.settings,#present)
+ if not validated then Travel.returnAll("部分玩家未抵達，這場對局無法開始："..tostring(message)); return end
+ local room=rooms[ticket.roomId]
+ room.settings,room.expected,room.configured=validated,#present,true
+ if #present<ticket.expected then
+  for _,state in ipairs(present) do notify(state.actor,"部分玩家未能抵達，以已抵達的玩家開局。") end
+ end
+ task.spawn(Travel.launch,room,present,validated,present[1].actor)
 end
 -- Trade 是區塊內的別名，不占主程式的區域變數。
 do
@@ -2639,7 +2832,12 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
   return
  end
  if action=="StartMatch" then startMatch(player); return end
- if action=="RestartMatch" then if phase=="Ended" and workspace:GetAttribute("HostUserId")==player.UserId then lobbyReset() end; return end
+ if action=="RestartMatch" then if Travel.role~="Match" and phase=="Ended" and workspace:GetAttribute("HostUserId")==player.UserId then lobbyReset() end; return end
+ -- 對戰 place：對局結束、已淘汰或觀戰的玩家可以各自返回大廳；仍在作戰的玩家要先投降。
+ if action=="ReturnToLobby" then
+  if Travel.role=="Match" and (phase=="Ended" or not alive(state)) then Travel.returnPlayers({state},"正在返回大廳…") end
+  return
+ end
  if phase~="Playing" or not alive(state) then return end
  if action=="Surrender" then defeat(state,"你已投降，本局判負；可以繼續觀戰。",true); if startingSides==1 then endMatch(nil) end
  elseif action=="Build" then buildRequest(state,a,b,c,false,d)
@@ -2701,6 +2899,7 @@ Players.PlayerRemoving:Connect(function(player)
  for unit in pairs(state.units) do destroyModel(unit) end
  for b in pairs(state.buildings) do destroyModel(b) end
  clearLobbyCharacter(state)
+ Travel.service:Cancel(player)
  profiles:Close(player)
  telemetry:Leave(player)
  states[player],byId[state.id]=nil,nil
@@ -3674,7 +3873,18 @@ workspace:SetAttribute("CommercePolicy",Config.Commerce.policyText)
 workspace:SetAttribute("ProfilesEnabled",profiles.enabled)
 workspace:SetAttribute("AnalyticsEnabled",telemetry.enabled)
 game:BindToClose(function() profiles:FlushAll() end)
-setPhase("Lobby")
+workspace:SetAttribute("PlaceRole",Travel.role)
+if Travel.role=="Match" then
+ -- 對戰伺服器關閉（更新或錯誤）時盡量把仍在場的玩家送回大廳。
+ game:BindToClose(function()
+  local players=Players:GetPlayers()
+  if #players>0 then Travel.service:Return(players) end
+ end)
+ setPhase("Starting")
+ Travel.load()
+else
+ setPhase("Lobby")
+end
 publishLobbySettings()
 -- The lobby sits outside the RTS battlefield. Generate resources only after
 -- the host's confirmed settings enter Starting, before any faction is spawned.
@@ -3732,6 +3942,7 @@ RunService.Heartbeat:Connect(function(dt)
   stepTimers.lobby+=dt
   if stepTimers.lobby>=Config.Lobby.scanInterval then
    stepTimers.lobby=0
+   Travel.step()
    for _,state in ipairs(humanStates()) do
     if state.configureRejected then
      state.configureRejected=false

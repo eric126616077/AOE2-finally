@@ -378,4 +378,16 @@ function LobbyWorld.Create()
  return object
 end
 
+-- 對戰 place 沒有城堡廣場：保留相同介面，但不生成任何幾何、沒有匹配點。
+function LobbyWorld.Stub()
+ local object = {Portals = {}}
+ function object:SpawnCFrame() return CFrame.new(Config.Lobby.origin + Config.Lobby.spawnOffset) end
+ function object:QueueCFrame() return self:SpawnCFrame() end
+ function object:ContainsPortal() return false end
+ function object:NearPortal() return false end
+ function object:PortalAt() return nil end
+ function object:SetStatus() end
+ return object
+end
+
 return LobbyWorld

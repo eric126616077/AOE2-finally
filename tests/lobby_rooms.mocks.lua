@@ -36,6 +36,7 @@ local rooms={}
 local activeRoomId
 local currentMatch,matchTeams
 local queueJoin,queueLeave,spawnLobby,startMatch,autoStartLobby
+local Travel={role="Combined"}
 local resources={}
 function resources:GetChildren() return {} end
 local managedResources={}
