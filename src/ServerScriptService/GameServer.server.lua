@@ -3165,6 +3165,16 @@ AOE.bell=function(state,building)
   for other in pairs(state.buildings) do
    if other.Parent==buildings and Garrison.inside[other] then released+=AOE.releaseVillagers(state,other) end
   end
+  -- 還在前往建築路上的村民也回到原本的工作（警鐘派出的駐紮指令帶有 bellRung 標記）。
+  for unit in pairs(state.units) do
+   local order=orders[unit]
+   if unit.Parent==units and order and order.kind=="garrison" and order.bellRung then
+    local resume=order.bellResume
+    stop(unit)
+    AOE.resume(state,unit,resume)
+    released+=1
+   end
+  end
   notify(state.actor,"警報解除："..released.." 位村民離開建築，回到原本的工作。","Order")
   return
  end
@@ -3190,7 +3200,7 @@ AOE.bell=function(state,building)
     local resume=previous and (previous.kind=="gather" or previous.kind=="build") and {kind=previous.kind,target=previous.target}
      or previous and previous.kind=="deliver" and previous.returnTarget and {kind="gather",target=previous.returnTarget} or nil
     issue(unit,"garrison",best.model)
-    orders[unit].bellResume=resume
+    orders[unit].bellResume,orders[unit].bellRung=resume,true
     best.free-=1
     sent+=1
    else left+=1 end

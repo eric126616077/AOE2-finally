@@ -42,6 +42,14 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   return {ai=ai and ai:GetAttribute("OwnerId"),houses=houses}
  elseif action=="build" then
   return place(player.UserId,a,b,c or 50,(c or 50)+120)
+ elseif action=="buildFor" then
+  -- 指定陣營（c）在 center（a）外 radius（b）的圓上放一座房屋，作為不會反擊的目標。
+  for index=0,35 do
+   local angle=index*math.pi/18
+   local model=probe:Invoke("build",c,"House",a+Vector3.new(math.cos(angle)*b,0,math.sin(angle)*b))
+   if model then return model end
+  end
+  return nil
  elseif action=="spawn" then
   return spawnNear(type(c)=="number" and c or player.UserId,a,b,6)
  elseif action=="remove" then

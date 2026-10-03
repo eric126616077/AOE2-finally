@@ -88,18 +88,28 @@ local ok,problem=pcall(function()
  end)
 
  -- 2. 羊群 -------------------------------------------------------------------
+ -- 自動工作會讓閒置村民先去宰殺主城旁的綿羊：開局綿羊＝現存綿羊＋已宰殺的羊肉。
  local sheep=mine("sheep")
- check(#sheep==Config.Herds.startSheep,"開局有已歸屬的綿羊",#sheep)
+ local slain=0
+ for _,model in ipairs(workspace.Resources:GetChildren()) do
+  if model.Name=="Sheep" and model:GetAttribute("Slain") and (model:GetPivot().Position-home).Magnitude<80 then slain+=1 end
+ end
+ check(#sheep+slain==Config.Herds.startSheep,"開局有已歸屬的綿羊",#sheep.." 隻＋已宰殺 "..slain)
  local nonHerd=0
  for _,unit in ipairs(workspace.Units:GetChildren()) do if unit:GetAttribute("OwnerId")==player.UserId and unit:GetAttribute("UnitType")~="sheep" then nonHerd+=1 end end
  check(player:GetAttribute("Population")==nonHerd,"綿羊不佔人口",tostring(player:GetAttribute("Population")).." / "..nonHerd)
  local villager=mine("villager")[1]
  if #sheep>0 and villager then
-  command:FireServer("Order",{villager},sheep[1])
+  local target=sheep[1]
+  local spot=target:GetPivot().Position
+  command:FireServer("Order",{villager},target)
+  check(waitFor(function() return target.Parent==nil end,25),"村民宰殺指定的綿羊")
   local carcass=waitFor(function()
-   for _,model in ipairs(workspace.Resources:GetChildren()) do if model.Name=="Sheep" and model:GetAttribute("Slain") then return model end end
-  end,25)
-  check(carcass~=nil and sheep[1].Parent==nil,"村民宰殺綿羊，原地留下食物")
+   for _,model in ipairs(workspace.Resources:GetChildren()) do
+    if model.Name=="Sheep" and model:GetAttribute("Slain") and (model:GetPivot().Position-spot).Magnitude<12 then return model end
+   end
+  end,5)
+  check(carcass~=nil,"宰殺後原地留下羊肉")
   check(waitFor(function() return (villager:GetAttribute("Carrying") or 0)>0 and villager:GetAttribute("CarryType")=="food" end,15),"村民採集羊肉")
  end
  local neutral
@@ -154,22 +164,27 @@ local ok,problem=pcall(function()
   command:FireServer("Stance",{archer},"StandGround")
   check(waitFor(function() return archer:GetAttribute("Stance")=="StandGround" end,3),"切換為堅守姿態")
   local start=archer:GetPivot().Position
-  local enemy=server:InvokeServer("spawn","infantry",start+Vector3.new(62,0,0),info.ai)
-  if enemy then server:InvokeServer("keep",enemy) end
+  -- 目標是電腦的房屋：在一般索敵半徑內、堅守姿態的射程外，而且不會反擊。
+  local enemy=server:InvokeServer("buildFor",start,66,info.ai)
   task.wait(4)
-  check(enemy~=nil and (archer:GetPivot().Position-start).Magnitude<2,"堅守姿態不追擊射程外的敵人",(archer:GetPivot().Position-start).Magnitude)
+  check(enemy~=nil and (archer:GetPivot().Position-start).Magnitude<2 and archer:GetAttribute("OrderKind")~="attack","堅守姿態不追擊射程外的敵人",(archer:GetPivot().Position-start).Magnitude)
   command:FireServer("Stance",{archer},"Aggressive")
-  check(waitFor(function() return (archer:GetPivot().Position-start).Magnitude>4 or archer:GetAttribute("OrderKind")=="attack" end,6),"改回攻擊姿態後主動接戰")
-  if enemy and enemy.Parent then server:InvokeServer("remove",enemy) end
+  check(waitFor(function() return archer:GetAttribute("OrderKind")=="attack" and (archer:GetPivot().Position-start).Magnitude>4 end,8),"改回攻擊姿態後主動接戰並追擊")
   if archer.Parent then server:InvokeServer("remove",archer) end
  end
 
  -- 6. 城鎮警鐘 ----------------------------------------------------------------
  command:FireServer("TownBell",center)
  check(waitFor(function() return player:GetAttribute("TownBell")==true end,3),"城鎮警鐘響起")
- check(waitFor(function() return server:InvokeServer("garrison")>0 end,25),"村民進入駐紮建築",server:InvokeServer("garrison"))
+ check(waitFor(function() return server:InvokeServer("garrison")>=3 end,25),"村民進入駐紮建築",server:InvokeServer("garrison"))
  command:FireServer("TownBell",center)
+ local function headingIn()
+  for _,unit in ipairs(mine("villager")) do if unit:GetAttribute("OrderKind")=="garrison" then return true end end
+  return false
+ end
  check(waitFor(function() return player:GetAttribute("TownBell")==false and server:InvokeServer("garrison")==0 end,8),"解除警報後村民離開建築")
+ task.wait(2)
+ check(not headingIn() and server:InvokeServer("garrison")==0,"解除警報後沒有村民繼續前往駐紮")
 
  -- 7. 科技、兵種與木柵牆 -------------------------------------------------------
  local university=server:InvokeServer("build","University",home)
