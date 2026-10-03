@@ -32,6 +32,8 @@ local ProductionRules = require(script.Parent.ServerModules.ProductionRules)
 local MatchReportRules = require(script.Parent.ServerModules.MatchReportRules)
 local CommandRules = require(script.Parent.ServerModules.CommandRules)
 local profiles=ProfileStore.new(Config)
+-- 王國商店：只有外觀與金冠；建立時稽核商品資料，任何對戰欄位都會讓伺服器拒絕啟動。主腳本區域變數已滿，以模組單例存取。
+require(script.Parent.ServerModules.Shop).Get()
 local telemetry=Telemetry.new()
 local currentMatch
 local matchTeams
@@ -415,6 +417,7 @@ local function makeBuilding(state,kind,pos,complete,rotated)
  rotated=data.rotatable==true and rotated==true
  local sizeX,sizeY=Walls.rules.footprint(data.size.X,data.size.Y,rotated)
  local model=Factory.model(kind,pos,Vector3.new(sizeX*GRID_SIZE,data.height,sizeY*GRID_SIZE),data.color,"Buildings",state.actor:GetAttribute("TeamColor"),rotated)
+ require(script.Parent.ServerModules.Shop).StyleBuilding(model,state.actor)
  model:SetAttribute("RTSManaged",true)
  if data.rotatable then model:SetAttribute("Rotated",rotated) end
  if data.gate then model:SetAttribute("GateOpen",false) end
@@ -1481,6 +1484,15 @@ local function endMatch(winnerTeam)
    local outcome=TeamRules.result(matchTeams,state.id,winnerTeam,true,state.forfeited==true)
    finishReport(state,outcome,endedAt)
    recordMatchResult(state,outcome)
+   -- 金冠只買外觀；對局獎勵依伺服器事實計算，每場每人一次。勝利者的主城施放勝利慶典。
+   if not state.ai and state.actor:IsA("Player") and state.actor.Parent==Players then
+    require(script.Parent.ServerModules.Shop).Get():MatchReward(state.actor,currentMatch.id,{mode=currentMatch.mode,outcome=outcome,seconds=endedAt-matchStart,forfeited=state.forfeited==true})
+    if outcome=="win" then
+     for model in pairs(state.buildings) do
+      if model:GetAttribute("BuildingType")=="TownCenter" and model.PrimaryPart then require(script.Parent.ServerModules.Shop).Get():Celebrate(state.actor,model.PrimaryPart.Position+Vector3.new(0,model.PrimaryPart.Size.Y/2+8,0)); break end
+     end
+    end
+   end
    -- 劇情勝利記錄通關章節；投降或淘汰的玩家不算。
    if outcome=="win" and not state.ai and settings.gameMode=="Story" and state.actor.Parent==Players
     and profiles:CompleteStory(state.actor,settings.storyChapter) then
@@ -2326,6 +2338,7 @@ local function join(player)
    if state.queued then invalidateReady(rooms[state.roomId]); updateHost() end
   end
  end)
+ require(script.Parent.ServerModules.Shop).Get():Open(player)
  telemetry:Join(player)
  if Travel.role=="Match" then Travel.admit(state); return end
  updateHost()
@@ -2981,6 +2994,8 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
  if action=="LobbyConfigureComplete" then configureLobbyComplete(player,a); return end
  -- 教程旗標只是偏好：不給資源或戰力，完成或跳過都只記一次。
  if action=="TutorialDone" then profiles:CompleteTutorial(player); return end
+ -- 商店指令：購買外觀、裝備、每日獎勵與 Robux 提示；對戰中不能更換外觀。
+ if action=="Shop" then require(script.Parent.ServerModules.Shop).Get():Command(player,a,b,state.inLobby and not state.playing); return end
  -- 熱鍵只是介面偏好：伺服器重新解析成合法綁定後才存檔，不影響戰局。
  if action=="Hotkeys" then
   if type(a)=="string" and #a<=512 then
@@ -3492,6 +3507,9 @@ AOE.pierce=function(state,unit,from,impact,target,amount,data,at)
  end
 end
 end
+require(script.Parent.ServerModules.Shop).Get():Bind({notify=notify,
+ locked=function(player) local state=states[player]; return state~=nil and state.playing==true end,
+ assets=function(player) local state=states[player]; if state and state.playing then return state.buildings,state.units end; return nil end})
 Players.PlayerAdded:Connect(join)
 Players.PlayerRemoving:Connect(function(player)
  local state=states[player]
@@ -3503,6 +3521,7 @@ Players.PlayerRemoving:Connect(function(player)
  clearLobbyCharacter(state)
  Travel.service:Cancel(player)
  profiles:Close(player)
+ require(script.Parent.ServerModules.Shop).Get():Close(player)
  telemetry:Leave(player)
  states[player],byId[state.id]=nil,nil
  if state.queued then invalidateReady(state.roomId and rooms[state.roomId]) end
@@ -4513,6 +4532,7 @@ workspace:SetAttribute("CommercePolicy",Config.Commerce.policyText)
 workspace:SetAttribute("ProfilesEnabled",profiles.enabled)
 workspace:SetAttribute("AnalyticsEnabled",telemetry.enabled)
 game:BindToClose(function() profiles:FlushAll() end)
+game:BindToClose(function() require(script.Parent.ServerModules.Shop).Get():FlushAll() end)
 workspace:SetAttribute("PlaceRole",Travel.role)
 if Travel.role=="Match" then
  -- 對戰伺服器關閉（更新或錯誤）時盡量把仍在場的玩家送回大廳。

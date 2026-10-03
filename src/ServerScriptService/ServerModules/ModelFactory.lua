@@ -2,6 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Art=require(ReplicatedStorage.Shared.Art)
 local Config=require(ReplicatedStorage.GameData.GameConfig)
 local Remains=require(ReplicatedStorage.Shared.RemainsRules)
+local Cosmetic=require(ReplicatedStorage.Shared.CosmeticArt)
 local Factory = {}
 -- Canopies may meet while the shared gameplay footprint leaves walking room.
 local function visualFootprint(kind,size,category)
@@ -399,6 +400,8 @@ function Factory.unit(kind,position,data,owner)
  local ownerId=owner:IsA("Player") and owner.UserId or owner:GetAttribute("UserId")
  local ownerName=owner:IsA("Player") and owner.DisplayName or owner:GetAttribute("DisplayName") or owner.Name
  local model=Art.Create(kind,team)
+ -- 部隊塗裝只換非隊伍色零件的配色；電腦玩家沒有外觀屬性，維持預設。
+ Cosmetic.SkinUnit(model,owner:GetAttribute("CosmeticUnitSkin"))
  model.Name=data.name
  for _,part in ipairs(model:GetDescendants()) do
   if part:IsA("BasePart") then part.CanCollide,part.CanTouch=false,false end

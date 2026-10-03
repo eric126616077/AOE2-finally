@@ -118,6 +118,15 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     Write-Utf8NoBom build/profile-tests.luau $profileBundle
     & $runtime build/profile-tests.luau
     if ($LASTEXITCODE -ne 0) { throw 'Profile / telemetry safety tests failed.' }
+    $shopCatalog = Get-Content src/ReplicatedStorage/GameData/ShopCatalog.lua -Raw
+    $shopRules = Get-Content src/ReplicatedStorage/Shared/ShopRules.lua -Raw
+    $walletRules = (Get-Content src/ServerScriptService/ServerModules/WalletRules.lua -Raw).Replace('local ShopRules = require(game:GetService("ReplicatedStorage").Shared.ShopRules)', '')
+    $walletStore = (Get-Content src/ServerScriptService/ServerModules/WalletStore.lua -Raw).Replace('local Rules = require(script.Parent.WalletRules)', 'local Rules=WalletRules')
+    $shopTests = Get-Content tests/shop.spec.lua -Raw
+    $shopBundle = $shim + "`nlocal ShopCatalog=(function()`n" + $shopCatalog + "`nend)()`nlocal ShopRules=(function()`n" + $shopRules + "`nend)()`nlocal WalletRules=(function()`n" + $walletRules + "`nend)()`nlocal WalletStore=(function()`n" + $walletStore + "`nend)()`n" + $shopTests
+    Write-Utf8NoBom build/shop-tests.luau $shopBundle
+    & $runtime build/shop-tests.luau
+    if ($LASTEXITCODE -ne 0) { throw 'Shop catalog / fair commerce / wallet transaction tests failed.' }
     & $runtime tests/match_report.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Match report successful-fact accounting tests failed.' }
     & $runtime tests/ai_workers.spec.lua
@@ -253,7 +262,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     $factory = $factory.Replace('local Config=require(ReplicatedStorage.GameData.GameConfig)', '')
     $remains = Get-Content src/ReplicatedStorage/Shared/RemainsRules.lua -Raw
     $factory = $factory.Replace('local Remains=require(ReplicatedStorage.Shared.RemainsRules)', "local Remains=(function()`n" + $remains + "`nend)()")
-    $factoryMocks = Get-Content tests/model_factory.mocks.lua -Raw
+    $factory = $factory.Replace('local Cosmetic=require(ReplicatedStorage.Shared.CosmeticArt)', 'local Cosmetic={SkinUnit=function(model,id) table.insert(CosmeticCalls,{model=model,id=id}); return 0 end}')
+    $factoryMocks = "local CosmeticCalls={}`n" + (Get-Content tests/model_factory.mocks.lua -Raw)
     $factoryTests = Get-Content tests/model_factory.spec.lua -Raw
     $factoryBundle = $shim + "`nlocal Config=(function()`n" + $config + "`nend)()`n" + $factoryMocks + "`nlocal Factory=(function()`n" + $factory + "`nend)()`n" + $factoryTests
     Write-Utf8NoBom build/model-factory-tests.luau $factoryBundle

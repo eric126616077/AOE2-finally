@@ -2776,7 +2776,9 @@ function GUI:Update(selected,buildingKind)
      or (workspace:GetAttribute("VictoryMode") == "Relic" and ("聖物 "..(actor:GetAttribute("Relics") or 0).." · 時代 "..(actor:GetAttribute("Age") or 1)))
      or ("時代 "..(actor:GetAttribute("Age") or 1)))
    local teamLabel=teamMode~="FFA" and (" · "..TeamClient.TeamLabel(teamMode,actorTeam)) or ""
-   row.Text = (faction.ai and "◆ " or "")..faction.name..teamLabel.."  ·  "..stateText
+   -- 稱號只是外觀（王國商店）；電腦勢力沒有稱號。
+   local title=not faction.ai and require(RS.Shared.CosmeticArt).Title(actor:GetAttribute("CosmeticTitle")) or nil
+   row.Text = (faction.ai and "◆ " or "")..(title and ("「"..title.text.."」") or "")..faction.name..teamLabel.."  ·  "..stateText
    local teamColor = actor:GetAttribute("TeamColor")
    row.TextColor3 = won and C.green or (actor:GetAttribute("Defeated") and C.muted or C.white)
    self.scoreSwatches[i].Visible = true

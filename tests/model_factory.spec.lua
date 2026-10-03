@@ -233,4 +233,14 @@ expect(field.PrimaryPart.Name=="Footprint" and not field.PrimaryPart.CanCollide 
 for kind,data in pairs(Config.Buildings) do
  expect((data.walkable==true)==(kind=="Farm"),"unexpected walkable building "..kind)
 end
+-- 部隊塗裝：以擁有者的外觀屬性呼叫 CosmeticArt，碰撞與數值欄位與預設外觀相同。
+local skinned={UserId=38,DisplayName="外觀玩家",Name="SkinPlayer",IsA=function(_,class) return class=="Player" end,
+ GetAttribute=function(_,name) return ({TeamColor=team,Team=2,TeamId=2,CosmeticUnitSkin="skin_gilded"})[name] end}
+local before=#CosmeticCalls
+local skinnedUnit=unitFlags("infantry",Config.Units.infantry,skinned,Config.UnitCollision.profiles[Config.Units.infantry.class] or Config.UnitCollision.default)
+expect(#CosmeticCalls==before+1 and CosmeticCalls[#CosmeticCalls].id=="skin_gilded","unit skin not applied from owner attribute")
+expect(skinnedUnit.attributes.HP==Config.Units.infantry.hp and skinnedUnit.attributes.MaxHP==Config.Units.infantry.hp,"unit skin changed gameplay stats")
+local aiCalls=#CosmeticCalls
+unitFlags("villager",Config.Units.villager,ai,Config.UnitCollision.profiles.villager)
+expect(CosmeticCalls[aiCalls+1].id==nil,"AI unit received a cosmetic")
 print(string.format("ModelFactory actual-body engine-mock tests: %d PASS (not Studio)",checks))
