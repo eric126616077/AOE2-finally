@@ -40,7 +40,11 @@ local SIZES={
  {name="phone 667x375",w=667,h=375,touch=true},
  {name="phone 568x320",w=568,h=320,touch=true},
 }
-local real={scale=UI.scale.Scale,size=UI.canvas.Size,w=UI.layoutWidth,h=UI.layoutHeight}
+-- The game client creates the GUI (UI.scale / UI.canvas) in UI:Init; snapshot it once the lobby is ready.
+local real
+local function remember()
+ real={scale=UI.scale.Scale,size=UI.canvas.Size,w=UI.layoutWidth,h=UI.layoutHeight}
+end
 local function applySize(size)
  UI.scale.Scale=1
  UI.canvas.Size=UDim2.fromOffset(size.w,size.h)
@@ -51,6 +55,7 @@ local function applySize(size)
  task.wait()
 end
 local function restoreSize()
+ if not real then return end
  UI.scale.Scale,UI.canvas.Size,UI.layoutWidth,UI.layoutHeight=real.scale,real.size,real.w,real.h
  if UI.resize then UI.resize() end
 end
@@ -186,8 +191,9 @@ end
 
 local function run()
  await(function() return workspace:GetAttribute("RTSReady")==true and workspace:GetAttribute("MatchPhase")=="Lobby"
-  and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and UI.lobby and UI.lobby.Visible end,"lobby ready",60)
+  and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and UI.scale and UI.canvas and UI.lobby and UI.lobby.Visible end,"lobby ready",60)
  task.wait(1)
+ remember()
  -- 1. Welcome panel, first with the first-visit tutorial card, then after "later".
  eachSize(welcomeChecks)
  UI.inviteDismissed=true; UI.inviteForced=nil; task.wait(0.3)
