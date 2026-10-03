@@ -33,7 +33,8 @@ local function main()
  local function mine()
   local list={}
   for _,unit in ipairs(unitFolder:GetChildren()) do
-   if unit:GetAttribute("OwnerId")==player.UserId and (unit:GetAttribute("HP") or 0)>0 then table.insert(list,unit) end
+   -- 開局的綿羊（UnitClass=herd，人口 0）不能駐紮，也不是這組測試的對象。
+   if unit:GetAttribute("OwnerId")==player.UserId and (unit:GetAttribute("HP") or 0)>0 and unit:GetAttribute("UnitClass")~="herd" then table.insert(list,unit) end
   end
   return list
  end
