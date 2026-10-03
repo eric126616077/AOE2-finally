@@ -17,7 +17,7 @@ local units=workspace:WaitForChild("Units")
 local buildings=workspace:WaitForChild("Buildings")
 local tracked,observers,projectiles={}, {}, {}
 local visibleUnits={}
-local diagnostics={rootSamples=0,partWrites=0,totalPartWrites=0}
+local diagnostics={rootSamples=0,partWrites=0,totalPartWrites=0,projectileWrites=0}
 local motionProbe
 local reducedMotion=player:GetAttribute("ReducedMotion")==true
 local MAX_EFFECTS=80
@@ -568,57 +568,90 @@ local folderConnections={
 for _,model in ipairs(units:GetChildren()) do track(model) end
 for _,model in ipairs(buildings:GetChildren()) do track(model) end
 
-local function turnAt(point,angle)
- return CFrame.new(point)*CFrame.Angles(angle,0,0)*CFrame.new(-point)
-end
-local function pose(entry,item,kind,walk,work,attack,workKind)
- local group,phase=entry.group,item.phase
- if not group then return entry.offset end
- local sine,cosine=math.sin(phase),math.cos(phase)
- local mounted=Config.Units[kind]~=nil and Config.Units[kind].mounted==true
+-- 固定的轉軸先建好，避免每個零件每次姿勢更新都重建兩個 CFrame。
+local function pivot(point) return {CFrame.new(point),CFrame.new(-point)} end
+local function turnAround(axis,angle) return axis[1]*CFrame.Angles(angle,0,0)*axis[2] end
+local HORSE_AXIS,LEAN_AXIS=pivot(Vector3.new(0,1,-2)),pivot(Vector3.new(0,-.7,0))
+local CATAPULT_AXIS,TREBUCHET_AXIS=pivot(Vector3.new(0,2.5,0)),pivot(Vector3.new(0,6.5,0))
+local HIP_AXIS={[true]=pivot(Vector3.new(0,2.4,0)),[false]=pivot(Vector3.new(0,-.7,0))}
+-- 同一個單位所有零件共用的值：每次姿勢更新只算一次，而不是每個零件各算一次。
+local figure={}
+local function beginPose(item,kind,walk,work,attack,workKind)
+ local phase=item.phase
+ local sine=math.sin(phase)
+ local data=Config.Units[kind]
+ local mounted=data~=nil and data.mounted==true
+ figure.phase,figure.sine,figure.cosine=phase,sine,math.cos(phase)
+ figure.kind,figure.walk,figure.work,figure.attack,figure.workKind=kind,walk,work,attack,workKind
+ figure.mounted=mounted
  -- A standing figure slowly shifts its weight; feet, hooves and wheels stay planted.
- local idle=walk<=0 and not work and attack<=0
- local breath=item.idleClock*1.6+item.idleSeed
+ figure.idle=walk<=0 and not work and attack<=0
+ figure.breath=item.idleClock*1.6+item.idleSeed
  -- walk is the stride weight 0..1. A walker sinks as its legs spread, so the planted sole
  -- stays on the ground; a horse rises with each bound.
- local lift=mounted and walk*.18*sine*sine or -walk*.3*sine*sine
- local frame=CFrame.new(0,lift,0)
+ figure.lift=mounted and walk*.18*sine*sine or -walk*.3*sine*sine
+ figure.liftFrame,figure.body=nil,nil
+ return figure
+end
+local function liftFrame(f)
+ local frame=f.liftFrame
+ if not frame then frame=CFrame.new(0,f.lift,0); f.liftFrame=frame end
+ return frame
+end
+local function bodyFrame(f)
+ local body=f.body
+ if body then return body end
+ if f.idle then
+  local hip=HIP_AXIS[f.mounted]
+  body=hip[1]*CFrame.Angles(.03*math.sin(f.breath*1.3),0,.07*math.sin(f.breath))*hip[2]
+ else
+  local lean=f.work and (f.workKind=="food" and .13 or .055)*(1-f.sine)*.5 or 0
+  -- A walker tips slightly into its stride.
+  if not f.mounted then lean-=f.walk*.09 end
+  body=liftFrame(f)*turnAround(LEAN_AXIS,lean)
+ end
+ f.body=body
+ return body
+end
+local function pose(entry,f)
+ local group=entry.group
+ if not group then return entry.offset end
+ local walk,phase,sine=f.walk,f.phase,f.sine
  if group=="wheel" then
   return walk>0 and CFrame.new(entry.offset.Position)*CFrame.Angles(phase,0,0)*entry.offset.Rotation or entry.offset
  elseif group=="horseLeg" then
   local shift=entry.side*entry.front<0 and math.pi or 0
   -- The leg swinging forward lifts clear; the one pushing back stays planted.
   local swing=walk*.3*math.max(0,math.cos(phase+shift))
-  return CFrame.new(0,swing,0)*turnAt(entry.pivot,walk*math.sin(phase+shift)*.55)*entry.offset
+  entry.pivotAxis=entry.pivotAxis or pivot(entry.pivot)
+  return CFrame.new(0,swing,0)*turnAround(entry.pivotAxis,walk*math.sin(phase+shift)*.55)*entry.offset
  elseif group=="horse" then
-  return frame*turnAt(Vector3.new(0,1,-2),walk*sine*.035+(idle and .045*math.sin(breath*.8) or 0))*entry.offset
+  return liftFrame(f)*turnAround(HORSE_AXIS,walk*sine*.035+(f.idle and .045*math.sin(f.breath*.8) or 0))*entry.offset
  elseif group=="foot" then
-  if mounted then return frame*turnAt(entry.pivot,walk*sine*entry.side*.1)*entry.offset end
+  if f.mounted then
+   entry.pivotAxis=entry.pivotAxis or pivot(entry.pivot)
+   return liftFrame(f)*turnAround(entry.pivotAxis,walk*sine*entry.side*.1)*entry.offset
+  end
   -- Legs swing from the hip under the skirt, not from the boot top.
-  local swing=walk*.3*math.max(0,cosine*entry.side)
-  return CFrame.new(0,lift+swing,0)*turnAt(entry.pivot+Vector3.new(0,.6,0),walk*sine*entry.side*.65)*entry.offset
+  local swing=walk*.3*math.max(0,f.cosine*entry.side)
+  entry.hipAxis=entry.hipAxis or pivot(entry.pivot+Vector3.new(0,.6,0))
+  return CFrame.new(0,f.lift+swing,0)*turnAround(entry.hipAxis,walk*sine*entry.side*.65)*entry.offset
  elseif group=="siege" then
   return entry.offset
  elseif group=="ram" then
-  return CFrame.new(0,0,-attack*.9)*entry.offset
+  return CFrame.new(0,0,-f.attack*.9)*entry.offset
  elseif group=="catapult" then
-  return turnAt(Vector3.new(0,2.5,0),-attack*.8)*entry.offset
+  return turnAround(CATAPULT_AXIS,-f.attack*.8)*entry.offset
  elseif group=="trebuchet" then
-  return turnAt(Vector3.new(0,6.5,0),attack*1.2)*entry.offset
+  return turnAround(TREBUCHET_AXIS,f.attack*1.2)*entry.offset
  end
- local lean=work and (workKind=="food" and .13 or .055)*(1-sine)*.5 or 0
- -- A walker tips slightly into its stride.
- if not mounted then lean-=walk*.09 end
- local body=frame*turnAt(Vector3.new(0,-.7,0),lean)
- if idle then
-  local hip=Vector3.new(0,mounted and 2.4 or -.7,0)
-  body=CFrame.new(hip)*CFrame.Angles(.03*math.sin(breath*1.3),0,.07*math.sin(breath))*CFrame.new(-hip)
- end
+ local body=bodyFrame(f)
  if group=="torso" then return body*entry.offset end
+ local mounted,attack,kind,workKind=f.mounted,f.attack,f.kind,f.workKind
  local angle=walk*sine*entry.side*(mounted and -.2 or -.45)
- if idle then angle=.12*math.sin(breath*1.3+entry.side) end
+ if f.idle then angle=.12*math.sin(f.breath*1.3+entry.side) end
  local reach=0
- if work then
+ if f.work then
   if workKind=="food" then angle=-.3-(1-sine)*.14; reach=.16*(1-sine)
   elseif workKind=="wood" then angle=group=="right" and -.65+sine*.5 or -.18
   elseif workKind=="stone" or workKind=="gold" then angle=group=="right" and -.55+sine*.55 or -.15
@@ -632,8 +665,13 @@ local function pose(entry,item,kind,walk,work,attack,workKind)
   elseif kind=="spearman" then angle=group=="right" and -attack*1.3 or -.18; reach=group=="right" and attack*.5 or 0
   else angle=group=="right" and -attack*1.15 or -attack*.12; reach=group=="right" and attack*(mounted and 2.2 or .5) or 0 end
  end
- local shoulder=Vector3.new(entry.side*1.4,mounted and 4.3 or 1.2,0)
- return body*CFrame.new(0,0,-reach)*turnAt(shoulder,angle)*entry.offset
+ -- The shoulder depends only on the side and whether the figure rides.
+ if entry.shoulderMounted~=mounted then
+  entry.shoulderMounted=mounted
+  entry.shoulderAxis=pivot(Vector3.new(entry.side*1.4,mounted and 4.3 or 1.2,0))
+ end
+ local arm=turnAround(entry.shoulderAxis,angle)*entry.offset
+ return reach~=0 and body*CFrame.new(0,0,-reach)*arm or body*arm
 end
 
 local moveParts,moveFrames={},{}
@@ -650,35 +688,40 @@ local function queueRest(model,item)
  item.poseDirty=true
  UnitView.Clear(model)
 end
+-- 每次可見度更新重用同一個陣列，深度直接記在 item 上，不再為每個單位建立暫時表。
+local candidates={}
+local function nearer(a,b) return a.depth<b.depth end
 local function updateVisibility()
  local camera=workspace.CurrentCamera
- local candidates={}
+ local size=camera and camera.ViewportSize
+ -- A small margin avoids popping legs / weapons whose Root is just outside the image.
+ local right,bottom=size and size.X+40,size and size.Y+40
  for model,item in pairs(tracked) do
   if model.Parent~=units or not item.root.Parent then untrack(model); continue end
   local visible,depth=false,math.huge
   if camera then
    local point=camera:WorldToViewportPoint(item.root.Position)
-   local size=camera.ViewportSize
-   -- A small margin avoids popping legs / weapons whose Root is just outside the image.
-   visible=point.Z>0 and point.Z<1000 and point.X>=-40 and point.Y>=-40 and point.X<=size.X+40 and point.Y<=size.Y+40
+   visible=point.Z>0 and point.Z<1000 and point.X>=-40 and point.Y>=-40 and point.X<=right and point.Y<=bottom
    depth=point.Z
   end
   if visible then
    if not visibleUnits[model] then item.dirty=true; item.poseDirty=true end
    visibleUnits[model]=item
-   table.insert(candidates,{item=item,depth=depth})
+   item.depth=depth
+   table.insert(candidates,item)
   elseif visibleUnits[model] then
    queueRest(model,item)
    visibleUnits[model]=nil
   end
  end
  -- All visible units keep continuous movement. Bound costly gait details in large crowds.
- table.sort(candidates,function(a,b) return a.depth<b.depth end)
- for index,candidate in ipairs(candidates) do
-  local detail=index<=Motion.MaxDetailedUnits and candidate.depth<480
-  if candidate.item.detailed~=detail then candidate.item.poseDirty=true end
-  candidate.item.detailed=detail
+ table.sort(candidates,nearer)
+ for index,item in ipairs(candidates) do
+  local detail=index<=Motion.MaxDetailedUnits and item.depth<480
+  if item.detailed~=detail then item.poseDirty=true end
+  item.detailed=detail
  end
+ table.clear(candidates)
 end
 local poseElapsed,visibilityElapsed=0,Motion.VisibilityInterval
 local renderConnection=RunService.RenderStepped:Connect(function(dt)
@@ -690,16 +733,29 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
  if visibilityElapsed>=Motion.VisibilityInterval then visibilityElapsed=0; updateVisibility() end
  local now=os.clock()
  local reduced=reducedMotion
+ -- queueRest 可能已在可見度更新中排入離開畫面的單位。
+ local queuedBefore=#moveParts
+ -- 投射物另外計為 projectileWrites；partWrites 只計單位外觀零件，與以前的量測可比較。
  for part,item in pairs(projectiles) do
   if reduced then pool:Release(item.record); continue end
   local t=math.clamp((now-item.created)/item.duration,0,1)
   local point=item.start:Lerp(item.finish,t)+Vector3.new(0,4*item.arc*t*(1-t),0)
   local tangent=item.finish-item.start+Vector3.new(0,4*item.arc*(1-2*t),0)
   if tangent.Magnitude<.001 then tangent=item.finish-item.start end
-  part.CFrame=CFrame.lookAt(point,point+tangent)
-  for _,extra in ipairs(item.extras) do extra.part.CFrame=part.CFrame*extra.offset end
-  if t>=1 then land(item,tangent) end
+  -- 抵達時直接交給 land()（消失或插住）；飛行中與單位外觀零件併入同一次 BulkMoveTo。
+  if t>=1 then land(item,tangent)
+  else
+   local frame=CFrame.lookAt(point,point+tangent)
+   table.insert(moveParts,part)
+   table.insert(moveFrames,frame)
+   for _,extra in ipairs(item.extras) do
+    table.insert(moveParts,extra.part)
+    table.insert(moveFrames,frame*extra.offset)
+   end
+  end
  end
+ local projectileWrites=#moveParts-queuedBefore
+ diagnostics.projectileWrites=projectileWrites
  for model,item in pairs(visibleUnits) do
   if model.Parent~=units or not item.root.Parent then untrack(model); continue end
   local before,after,alpha=Motion.Sample(item.timeline,now)
@@ -760,9 +816,10 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
    -- Step in so the weapon reaches the target, then back; the Root never moves.
    local lunge=active and observer and observer.lunge*attack or 0
    if lunge>0 then frame*=CFrame.new(0,0,-lunge) end
+   local f=poseChanged and active and beginPose(item,kind,item.gait,working,attack,observer and observer.workKind)
    for _,entry in ipairs(item.parts) do
     if entry.part.Parent then
-     if poseChanged then entry.localFrame=active and pose(entry,item,kind,item.gait,working,attack,observer and observer.workKind) or entry.offset end
+     if poseChanged then entry.localFrame=f and pose(entry,f) or entry.offset end
      table.insert(moveParts,entry.part)
      table.insert(moveFrames,frame*(entry.localFrame or entry.offset))
     end
@@ -778,8 +835,8 @@ local renderConnection=RunService.RenderStepped:Connect(function(dt)
   if bar.anchor and model.Parent==units then bar.anchor.Position=UnitView.GetFrame(model).Position end
  end
  -- One engine batch, only appearance parts. Never PivotTo / BulkMoveTo an authoritative Root.
- diagnostics.partWrites=#moveParts
- diagnostics.totalPartWrites+=#moveParts
+ diagnostics.partWrites=#moveParts-projectileWrites
+ diagnostics.totalPartWrites+=#moveParts-projectileWrites
  if #moveParts>0 then workspace:BulkMoveTo(moveParts,moveFrames,Enum.BulkMoveMode.FireCFrameChanged) end
  table.clear(moveParts); table.clear(moveFrames)
 end)
@@ -799,7 +856,7 @@ if RunService:IsStudio() then
   for _,item in pairs(visibleUnits) do visible+=1; if item.detailed then details+=1 end end
   local result={ready=script:GetAttribute("RTSMotionReady")==true,
    stats={tracked=count,visible=visible,detailed=details,rootSamples=diagnostics.rootSamples,
-    partWrites=diagnostics.partWrites,totalPartWrites=diagnostics.totalPartWrites,
+    partWrites=diagnostics.partWrites,totalPartWrites=diagnostics.totalPartWrites,projectileWrites=diagnostics.projectileWrites,
     effectsActive=pool.count,effectsIdle=pool:IdleCount(),effectsCreated=pool.created,effectsReused=pool.reused,stuckArrows=#stuckArrows,
     delay=Motion.Delay,maxSamples=Motion.MaxSamples,maxDetailed=Motion.MaxDetailedUnits}}
   if typeof(model)=="Instance" and model:IsA("Model") then
