@@ -127,6 +127,8 @@ issue=function(unit,kind,target) orders[unit]={kind=kind,target=target}; unit:Se
 local function beginDelivery(_state,unit,target) issue(unit,"deliver",target) end
 local function acceptsResource() return true end
 local runServerChecks=false
+-- Engine boundary: server appearance alignment is a ModelFactory concern.
+local Factory={syncAppearance=function() return false end}
 -- ACTUAL_SERVER_ORDER_STATE_BODY
 -- ACTUAL_SERVER_FORMATION_BODY
 if runServerChecks then

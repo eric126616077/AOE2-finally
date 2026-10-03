@@ -157,30 +157,86 @@ function Factory.watchFarm(model)
   model:GetAttributeChangedSignal(attribute):Connect(function() task.defer(Factory.refreshStage,model) end)
  end
 end
+-- 單位移動只搬 Root 與碰撞體積兩個零件；外觀零件由客戶端 UnitMotion 依 Root 推算。
+-- 每個外觀零件記下相對 Root 的位置（RootOffset 屬性，客戶端優先使用），伺服器端只在
+-- 停下、原地轉向與陣亡留屍時一次對齊。原本每步 PivotTo 整個多零件模型是大型戰鬥最大的單項成本，
+-- 也讓每個零件每步都要複製給客戶端。
+local appearance=setmetatable({},{__mode="k"})
+local function appearanceParts(unit)
+ local root=unit.PrimaryPart
+ if not root then return nil end
+ local entry=appearance[unit]
+ if not entry or entry.root~=root then entry={root=root,parts={},stale=false}; appearance[unit]=entry end
+ for _,part in ipairs(unit:GetDescendants()) do
+  if part:IsA("BasePart") and part~=root then
+   if part.Name=="CollisionVolume" then
+    if entry.volume~=part then entry.volume,entry.volumeOffset=part,root.CFrame:ToObjectSpace(part.CFrame) end
+   elseif entry.parts[part]==nil then
+    -- 新零件（工具、攜帶物）由 Art 依目前 Root 擺放，此刻記錄的相對位置一定正確。
+    local offset=root.CFrame:ToObjectSpace(part.CFrame)
+    entry.parts[part]=offset
+    part:SetAttribute("RootOffset",offset)
+   end
+  end
+ end
+ return entry
+end
+Factory.trackAppearance=appearanceParts
+function Factory.syncAppearance(unit)
+ local entry=appearance[unit]
+ if not entry or not entry.stale or entry.root~=unit.PrimaryPart or not entry.root.Parent then return false end
+ local frame=entry.root.CFrame
+ local parts,frames={},{}
+ for part,offset in pairs(entry.parts) do
+  if part:IsDescendantOf(unit) then table.insert(parts,part); table.insert(frames,frame*offset)
+  else entry.parts[part]=nil end
+ end
+ if #parts>0 then workspace:BulkMoveTo(parts,frames,Enum.BulkMoveMode.FireCFrameChanged) end
+ entry.stale=false
+ return true
+end
+function Factory.moveUnit(unit,frame)
+ local entry=appearance[unit]
+ if not entry or entry.root~=unit.PrimaryPart or not entry.volume or entry.volume.Parent~=unit then entry=appearanceParts(unit) end
+ if not entry or not entry.volume then unit:PivotTo(frame); return end
+ workspace:BulkMoveTo({entry.root,entry.volume},{frame,frame*entry.volumeOffset},Enum.BulkMoveMode.FireCFrameChanged)
+ entry.stale=true
+end
 -- Workers and fighters turn toward what they are acting on; the Root keeps its position.
 function Factory.face(unit,point)
  local pivot=unit:GetPivot()
  local dx,dz=point.X-pivot.Position.X,point.Z-pivot.Position.Z
  local length=math.sqrt(dx*dx+dz*dz)
- if length<0.05 then return false end
  local look=pivot.LookVector
- if (look.X*dx+look.Z*dz)/length>0.999 then return false end
- unit:PivotTo(CFrame.lookAt(pivot.Position,pivot.Position+Vector3.new(dx,0,dz)))
- return true
+ if length>=0.05 and (look.X*dx+look.Z*dz)/length<=0.999 then
+  Factory.moveUnit(unit,CFrame.lookAt(pivot.Position,pivot.Position+Vector3.new(dx,0,dz)))
+  Factory.syncAppearance(unit)
+  return true
+ end
+ -- 走到定點後站著工作／攻擊：外觀零件在伺服器端對齊一次。
+ Factory.syncAppearance(unit)
+ return false
 end
 local workTools={wood="axe",gold="pick",stone="pick",build="hammer",repair="hammer"}
 function Factory.workTool(unit,workKind,target)
  if unit:GetAttribute("UnitType")~="villager" then return false end
  -- 打獵用狩獵矛，耕田用鋤頭，採漿果用籃子。
  local tool=workKind=="food" and (target:GetAttribute("BuildingType") and "hoe" or target:GetAttribute("Hunt") and "spear" or "basket") or workTools[workKind]
- return tool~=nil and Art.SetTool(unit,tool)
+ local changed=tool~=nil and Art.SetTool(unit,tool)
+ if changed then appearanceParts(unit) end
+ return changed
 end
 -- 僧侶背著聖物、貿易車載著貨箱；只是外觀，數量由伺服器屬性決定。
-function Factory.relicCarry(unit,on) return Art.SetCarry(unit,on and "relic" or nil) end
-function Factory.tradeCargo(unit,on) return Art.SetCarry(unit,on and "trade" or nil) end
+local function carry(unit,kind)
+ local changed=Art.SetCarry(unit,kind)
+ if changed then appearanceParts(unit) end
+ return changed
+end
+function Factory.relicCarry(unit,on) return carry(unit,on and "relic" or nil) end
+function Factory.tradeCargo(unit,on) return carry(unit,on and "trade" or nil) end
 function Factory.watchCarry(unit)
  unit:GetAttributeChangedSignal("Carrying"):Connect(function()
-  Art.SetCarry(unit,(unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType") or nil)
+  carry(unit,(unit:GetAttribute("Carrying") or 0)>0 and unit:GetAttribute("CarryType") or nil)
  end)
 end
 -- Fallen units stay on the field as remains: people lie on their back, mounts on their side,
@@ -196,6 +252,7 @@ local corpseLay={
 }
 local ashen=Color3.fromRGB(96,88,80)
 function Factory.corpse(unit,seconds,limit)
+ Factory.syncAppearance(unit)
  local root=unit.PrimaryPart
  if not root or type(seconds)~="number" or seconds<=0 or type(limit)~="number" or limit<1 then return nil end
  local ground=root.Position-Vector3.new(0,2.5,0)
@@ -272,6 +329,7 @@ function Factory.unit(kind,position,data,owner)
  modifier.Parent=volume
  volume.Parent=model
  model:PivotTo(CFrame.new(position+Vector3.new(0,2.5,0)))
+ appearanceParts(model)
  model:SetAttribute("UnitType",kind)
  model:SetAttribute("DisplayName",data.name)
  model:SetAttribute("HP",data.hp)

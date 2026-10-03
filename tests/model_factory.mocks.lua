@@ -28,7 +28,7 @@ frameMeta.__index={Inverse=function(self)
  local inverse=frame(Vector3.new(0,0,0),Vector3.new(r.X,u.X,-l.X),Vector3.new(r.Y,u.Y,-l.Y),Vector3.new(-r.Z,-u.Z,l.Z))
  inverse.Position=rotate(inverse,self.Position)*-1
  return inverse
-end}
+end,ToObjectSpace=function(self,other) return self:Inverse()*other end}
 function CFrame.Angles(x,y,z)
  local zero=Vector3.new(0,0,0)
  local cx,sx,cy,sy,cz,sz=math.cos(x),math.sin(x),math.cos(y),math.sin(y),math.cos(z),math.sin(z)
@@ -48,6 +48,7 @@ local function item(class,name)
   for _,child in ipairs(self.children) do if not child.destroyed and child:IsA(target) then return child end end
  end
  function value:Destroy() self.destroyed=true end
+ function value:SetAttribute(name,attribute) self.attributes=self.attributes or {}; self.attributes[name]=attribute end
  return setmetatable(value,{__index=function(self,key)
   if key=="Position" then return self.CFrame.Position end
  end,__newindex=function(self,key,newValue)
