@@ -242,6 +242,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     $factory = Get-Content src/ServerScriptService/ServerModules/ModelFactory.lua -Raw
     $factory = $factory.Replace('local Art=require(ReplicatedStorage.Shared.Art)', '')
     $factory = $factory.Replace('local Config=require(ReplicatedStorage.GameData.GameConfig)', '')
+    $remains = Get-Content src/ReplicatedStorage/Shared/RemainsRules.lua -Raw
+    $factory = $factory.Replace('local Remains=require(ReplicatedStorage.Shared.RemainsRules)', "local Remains=(function()`n" + $remains + "`nend)()")
     $factoryMocks = Get-Content tests/model_factory.mocks.lua -Raw
     $factoryTests = Get-Content tests/model_factory.spec.lua -Raw
     $factoryBundle = $shim + "`nlocal Config=(function()`n" + $config + "`nend)()`n" + $factoryMocks + "`nlocal Factory=(function()`n" + $factory + "`nend)()`n" + $factoryTests
@@ -252,6 +254,8 @@ local Color3 = {fromRGB=function(r,g,b) return {r,g,b} end}
     if ($LASTEXITCODE -ne 0) { throw 'Performance observer accounting tests failed.' }
     & $runtime tests/motion.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Buffered unit motion / visible pose budget tests failed.' }
+    & $runtime tests/remains.spec.lua
+    if ($LASTEXITCODE -ne 0) { throw 'Death fall / collapse / resource fade timing tests failed.' }
     & $runtime tests/ambience.spec.lua
     if ($LASTEXITCODE -ne 0) { throw 'Ambience wind / grass layout tests failed.' }
     & $runtime tests/touch.spec.lua

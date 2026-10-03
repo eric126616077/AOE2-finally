@@ -1548,6 +1548,8 @@ local function damage(target,raw,attacker,now)
   end
   -- 戰死的單位留下屍體；投降、刪除與清場不留。
   if target.Parent==units then Factory.corpse(target,COMBAT.corpseSeconds,COMBAT.maxCorpses) end
+  -- 被摧毀的完工建築留下倒塌複本，由客戶端播放下沉與揚塵。
+  if target.Parent==buildings then Factory.ruinBuilding(target) end
   -- 被摧毀的建築先放出駐軍，再判定淘汰。
   Garrison.release(target)
   eliminationCheck(victim)
@@ -4348,7 +4350,7 @@ orderStep=function(dt,now)
     unit:SetAttribute("Carrying",carrying+amount)
     if amount>0 then unit:SetAttribute("LastWork",now) end
     if carrying+amount>=stats.carry or (target:GetAttribute("Amount") or 0)<=0 then beginDelivery(state,unit,target) end
-    if (target:GetAttribute("Amount") or 0)<=0 and target.Parent==resources then managedResources[target]=nil; target:Destroy() end
+    if (target:GetAttribute("Amount") or 0)<=0 and target.Parent==resources then managedResources[target]=nil; Factory.ruinResource(target); target:Destroy() end
    elseif order.kind=="attack" and UnitRules.takeAction(actionClocks,unit,"attack",now,stats.interval,0.3) then
     local kind=unit:GetAttribute("UnitType")
     local data=Config.Units[kind]

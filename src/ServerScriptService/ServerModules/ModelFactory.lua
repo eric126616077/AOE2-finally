@@ -1,6 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Art=require(ReplicatedStorage.Shared.Art)
 local Config=require(ReplicatedStorage.GameData.GameConfig)
+local Remains=require(ReplicatedStorage.Shared.RemainsRules)
 local Factory = {}
 -- Canopies may meet while the shared gameplay footprint leaves walking room.
 local function visualFootprint(kind,size,category)
@@ -259,7 +260,8 @@ function Factory.corpse(unit,seconds,limit)
  local look=root.CFrame.LookVector
  local flat=Vector3.new(look.X,0,look.Z)
  local base=flat.Magnitude>.01 and CFrame.lookAt(ground,ground+flat) or CFrame.new(ground)
- local frame=base*(corpseLay[unit:GetAttribute("UnitClass")] or corpseLay.default)
+ local lay=corpseLay[unit:GetAttribute("UnitClass")] or corpseLay.default
+ local frame=base*lay
  local corpse=Instance.new("Model")
  corpse.Name="Corpse"
  for _,part in ipairs(unit:GetDescendants()) do
@@ -278,6 +280,10 @@ function Factory.corpse(unit,seconds,limit)
  end
  if not corpse:FindFirstChildWhichIsA("BasePart") then corpse:Destroy(); return nil end
  corpse:SetAttribute("UnitType",unit:GetAttribute("UnitType"))
+ -- 客戶端 Remains 用這三項播放倒地與淡出；屍體本身已在最終位置，缺少時照舊靜止顯示。
+ corpse:SetAttribute("CorpseBase",base)
+ corpse:SetAttribute("CorpseLay",lay)
+ corpse:SetAttribute("CorpseExpires",workspace:GetServerTimeNow()+seconds)
  if not corpseFolder or not corpseFolder.Parent then
   corpseFolder=workspace:FindFirstChild("Corpses")
   if not corpseFolder then
@@ -294,9 +300,77 @@ function Factory.corpse(unit,seconds,limit)
  while #corpseQueue>limit do table.remove(corpseQueue,1):Destroy() end
  return corpse
 end
+-- 被摧毀的建築與採完的資源留下短暫的外觀複本（Ruins），由客戶端 Remains 播放倒塌／倒下／淡出。
+-- 原模型仍照常立即移除，複本不碰撞、不可點選、不參與查詢；伺服器在 seconds 後刪除。
+-- 客戶端無法在延遲訊號中複製已被移除的模型，所以複本必須由伺服器建立。
+local ruinFolder
+local ruinQueue={}
+local keepInRuin={Decal=true,Texture=true,SpecialMesh=true,SurfaceAppearance=true}
+local function ruin(model,kind,seconds,limit,maxParts)
+ if typeof(model)~="Instance" or not model:IsA("Model") or type(seconds)~="number" or seconds<=0 then return nil end
+ local ok,frame,size=pcall(function() return model:GetBoundingBox() end)
+ if not ok then return nil end
+ local candidates={}
+ for _,part in ipairs(model:GetDescendants()) do
+  if part:IsA("BasePart") and part~=model.PrimaryPart and part.Name~="CollisionVolume" and part.Name~="Footprint" and part.Transparency<1 then
+   table.insert(candidates,part)
+  end
+ end
+ -- 超過上限時只保留最大的零件：倒塌中的小裝飾消失不明顯，大塊牆面才是輪廓。
+ if type(maxParts)=="number" and #candidates>maxParts then
+  table.sort(candidates,function(a,b) return a.Size.X*a.Size.Y*a.Size.Z>b.Size.X*b.Size.Y*b.Size.Z end)
+  for index=#candidates,maxParts+1,-1 do candidates[index]=nil end
+ end
+ local ruin=Instance.new("Model")
+ ruin.Name="Ruin"
+ for _,part in ipairs(candidates) do
+  local copied,copy=pcall(function() return part:Clone() end)
+  if copied and copy then
+   for _,child in ipairs(copy:GetDescendants()) do
+    if not keepInRuin[child.ClassName] then child:Destroy() end
+   end
+   copy.Anchored,copy.CanCollide,copy.CanQuery,copy.CanTouch=true,false,false,false
+   if kind=="building" then copy.Color=copy.Color:Lerp(ashen,.3) end
+   copy.CFrame=part.CFrame
+   copy.Parent=ruin
+  end
+ end
+ if not ruin:FindFirstChildWhichIsA("BasePart") then ruin:Destroy(); return nil end
+ ruin:SetAttribute("RuinKind",kind)
+ ruin:SetAttribute("RuinStart",workspace:GetServerTimeNow())
+ ruin:SetAttribute("RuinSeconds",seconds)
+ ruin:SetAttribute("RuinGround",frame.Position-Vector3.new(0,size.Y/2,0))
+ ruin:SetAttribute("RuinHeight",size.Y)
+ if not ruinFolder or not ruinFolder.Parent then
+  ruinFolder=workspace:FindFirstChild("Ruins")
+  if not ruinFolder then
+   ruinFolder=Instance.new("Folder")
+   ruinFolder.Name="Ruins"
+   ruinFolder.Parent=workspace
+  end
+ end
+ ruin.Parent=ruinFolder
+ -- 稍晚於動畫結束才刪除，網路延遲時客戶端仍能播完淡出。
+ game:GetService("Debris"):AddItem(ruin,seconds+.5)
+ for index=#ruinQueue,1,-1 do if not ruinQueue[index].Parent then table.remove(ruinQueue,index) end end
+ table.insert(ruinQueue,ruin)
+ while type(limit)=="number" and #ruinQueue>limit do table.remove(ruinQueue,1):Destroy() end
+ return ruin
+end
+-- 只有完工建築留下倒塌複本；工地的鷹架與未顯現零件屬於客戶端外觀，照舊直接消失。
+function Factory.ruinBuilding(model)
+ if model:GetAttribute("Complete")~=true then return nil end
+ return ruin(model,"building",Remains.CollapseSeconds,Remains.MaxRuins,Remains.MaxCollapseParts)
+end
+function Factory.ruinResource(model)
+ local tree=model:GetAttribute("ResourceType")=="wood"
+ return ruin(model,tree and "tree" or "resource",tree and Remains.TreeFallSeconds or Remains.ResourceFadeSeconds,Remains.MaxRuins,Remains.MaxCollapseParts)
+end
 function Factory.clearCorpses()
  for _,corpse in ipairs(corpseQueue) do corpse:Destroy() end
  table.clear(corpseQueue)
+ for _,ruin in ipairs(ruinQueue) do ruin:Destroy() end
+ table.clear(ruinQueue)
 end
 function Factory.unit(kind,position,data,owner)
  local team=owner:GetAttribute("TeamColor")
