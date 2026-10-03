@@ -444,6 +444,28 @@ function painters.sheep(canvas, team)
  ellipse(canvas, "Eye", 0.78, 0.38, 0.035, 0.035, P.light)
 end
 
+-- 文明專屬兵種的頭像：沿用同類頭像，再加上文明特徵。
+function painters.longbowman(canvas, team)
+ painters.archer(canvas, team)
+ edgedLine(canvas, "LongBow", 0.86, 0.06, 0.86, 0.94, 0.045, P.woodLight)
+ edgedLine(canvas, "Feather", 0.62, 0.12, 0.7, 0.3, 0.04, Color3.fromRGB(120, 200, 230))
+end
+
+function painters.sunKnight(canvas, team)
+ painters.cavalry(canvas, team)
+ ellipse(canvas, "SunDiscEdge", 0.37, 0.03, 0.26, 0.2, P.outline)
+ ellipse(canvas, "SunDisc", 0.385, 0.045, 0.23, 0.17, P.gold)
+ ellipse(canvas, "SunCore", 0.455, 0.08, 0.09, 0.09, team)
+end
+
+function painters.woodWarden(canvas, team)
+ painters.infantry(canvas, team)
+ for i, x in ipairs({0.18, 0.36, 0.56}) do
+  ellipse(canvas, "LeafEdge", x, 0.5 + (i % 2) * 0.05, 0.22, 0.16, P.outline)
+  ellipse(canvas, "Leaf", x + 0.015, 0.515 + (i % 2) * 0.05, 0.19, 0.13, P.green)
+ end
+end
+
 local function unknown(canvas, team)
  shoulders(canvas, 0.235, 0.57, 0.53, 0.31, P.steelDark, team)
  ellipse(canvas, "HeadEdge", 0.345, 0.255, 0.31, 0.31, P.outline)

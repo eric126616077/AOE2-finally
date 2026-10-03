@@ -197,6 +197,8 @@ local function publishCivilization(state,instance)
  instance:SetAttribute("CivilizationName",data.name)
  instance:SetAttribute("CivilizationEmblem",data.emblem)
  instance:SetAttribute("CivilizationAccent",data.accent)
+ -- 大廳與介面用的文明加成說明（客戶端不能讀伺服器模組）。
+ if instance==state.actor then instance:SetAttribute("CivilizationSummary",CivilizationRules.summary(Config,id)) end
 end
 local function civilizationMark(state,model,height)
  if not model.PrimaryPart then return end
@@ -1316,6 +1318,10 @@ local function trainRequest(state,building,kind,quiet)
  if not alive(state) or not isOwned(state,building,buildings) or type(kind)~="string" then return false end
  local data=Config.Units[kind]
  if not data or not canTrain(building:GetAttribute("BuildingType"),kind) then return false end
+ if not CivilizationRules.canTrain(Config,state.civilization,kind) then
+  if not quiet then notify(state.actor,data.name.."是其他文明的專屬兵種。") end
+  return false
+ end
  if not building:GetAttribute("Complete") then if not quiet then notify(state.actor,"建築尚未完工。") end; return false end
  if (state.actor:GetAttribute("Age") or 1)<(data.minAge or 1) then if not quiet then notify(state.actor,"此單位尚未解鎖，請先升級時代。") end; return false end
  if data.requiresTech and not state.technologies[data.requiresTech] then
@@ -1786,12 +1792,21 @@ local function resetActor(state)
  publishCivilization(state,state.actor)
  state.units,state.buildings,state.technologies,state.pendingTech,state.defenseLast={},{},{},{},{}
  state.modifiers={attack=0,armor=0,hp=0,gather=0,carry=0,speed=0,gatherFood=0,gatherWood=0,gatherGold=0,gatherStone=0,farmCapacity=0,range=0,interval=0,trainSpeed=0,
-  buildingHp=0,buildingArmor=0,buildSpeed=0,towerAttack=0,towerRange=0,buildingVision=0,garrisonHeal=0,tributeFeeCut=0}
+  buildingHp=0,buildingArmor=0,buildSpeed=0,towerAttack=0,towerRange=0,buildingVision=0,garrisonHeal=0,tributeFeeCut=0,tradeGold=0}
  state.townBell=false
  state.actor:SetAttribute("TownBell",false)
  state.actor:SetAttribute("BuildingVision",0)
  state.classModifiers={}
  state.unitModifiers,state.unitNames={},{}
+ -- 文明加成：開局套用一次，與科技使用相同的修正值（文明在大廳已鎖定）。
+ for _,bonus in ipairs(CivilizationRules.gameplay(Config,state.civilization).bonuses) do
+  local target=state.modifiers
+  if bonus.unitClass then
+   target=state.classModifiers[bonus.unitClass] or {}
+   state.classModifiers[bonus.unitClass]=target
+  end
+  for key,value in pairs(bonus.effect) do target[key]=(target[key] or 0)+value end
+ end
  Relic.accumulated[state]=nil
  for _,key in ipairs({"Relics","RelicGold","TradeIncome"}) do state.actor:SetAttribute(key,0) end
  state.actor:SetAttribute("RelicRemaining",nil)
@@ -2264,7 +2279,9 @@ Travel.launch=function(room,humans,validated,player)
   or settings.teamMode=="Teams" and "分隊對局開始！與盟友共同發展，擊敗敵方隊伍。"
   or "對局開始！採集資源、發展時代並擊敗對手。"
  for _,state in ipairs(humans) do
-  notify(state.actor,state.actor:GetAttribute("TutorialMatch")==true and "新手教程開始：跟著左上角的指引一步一步來；這一局沒有對手，可以慢慢練習。" or startMessage,"MatchStart")
+  local _,civilization=CivilizationRules.resolve(Config,state.civilization)
+  local civilizationLine="\n你的文明："..civilization.name.."（"..CivilizationRules.summary(Config,state.civilization).."）"
+  notify(state.actor,state.actor:GetAttribute("TutorialMatch")==true and "新手教程開始：跟著左上角的指引一步一步來；這一局沒有對手，可以慢慢練習。" or startMessage..civilizationLine,"MatchStart")
  end
 end
 autoStartLobby=function()
@@ -2675,6 +2692,8 @@ Trade.arrive=function(state,unit,order)
  elseif action=="load" then
   local partner=order.home
   local gold=(partner and partner.Parent==buildings) and Relic.rules.tradeGold(Trade.distance(partner,market),Trade.config,owner(market)~=state) or 0
+  -- 文明加成（河灣盟邦）：每趟黃金按比例增加，無條件捨去。
+  gold=math.floor(gold*(1+(state.modifiers.tradeGold or 0)))
   unit:SetAttribute("TradeGold",gold)
   Factory.tradeCargo(unit,gold>0)
  end
@@ -3041,7 +3060,7 @@ command.OnServerEvent:Connect(function(player,action,a,b,c,d)
    publishCivilization(state,player)
    invalidateReady(state.roomId and rooms[state.roomId])
    updateHost()
-   notify(player,"已選擇"..entry.name.."；所有文明使用相同對戰數值與科技。")
+   notify(player,"已選擇"..entry.name.."："..CivilizationRules.summary(Config,a).."。")
   end
   return
  end

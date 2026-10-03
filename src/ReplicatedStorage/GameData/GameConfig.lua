@@ -137,7 +137,7 @@ Config.Buildings = {
  Tower = { name="瞭望塔", description="自動射擊進入射程的敵軍；可駐紮 5 個步行單位增加箭數。", cost={wood=50,stone=125}, hp=1500, size=Vector2.new(2,2), height=30, color=Color3.fromRGB(161,158,144), population=0, minAge=2, buildTime=22, damage=8, range=60, attackInterval=1.8, garrison={capacity=5,maxArrows=5,blocked={cavalry=true}}, trains={} },
  Wall = { name="石牆", description="封鎖狹道並保護基地；按住拖曳可一次放置整排。", cost={stone=15}, hp=1700, size=Vector2.new(1,1), height=13, color=Color3.fromRGB(169,166,150), population=0, minAge=2, buildTime=4, line=true, trains={} },
  Gate = { name="城門", description="己方與同盟部隊可自由通行，敵軍必須攻破才能進入；可直接蓋在自己的石牆上。放置時可旋轉方向。", cost={stone=30}, hp=2000, size=Vector2.new(3,1), height=16, color=Color3.fromRGB(160,156,140), population=0, minAge=2, buildTime=14, gate=true, rotatable=true, trains={} },
- Castle = { name="城堡", description="強大的基地防禦，可製造巨型投石機；射程內沒有敵軍時會射擊敵方建築。可駐紮 20 個單位增加箭數。", cost={stone=650}, hp=4800, size=Vector2.new(8,8), height=48, color=Color3.fromRGB(118,128,146), population=10, minAge=3, buildTime=45, damage=14, range=75, attackInterval=1.6, attacksBuildings=true, garrison={capacity=20,maxArrows=15}, dropoff={"food","wood","gold","stone"}, trains={"trebuchet"} },
+ Castle = { name="城堡", description="強大的基地防禦，可製造巨型投石機與本文明的專屬兵種；射程內沒有敵軍時會射擊敵方建築。可駐紮 20 個單位增加箭數。", cost={stone=650}, hp=4800, size=Vector2.new(8,8), height=48, color=Color3.fromRGB(118,128,146), population=10, minAge=3, buildTime=45, damage=14, range=75, attackInterval=1.6, attacksBuildings=true, garrison={capacity=20,maxArrows=15}, dropoff={"food","wood","gold","stone"}, trains={"trebuchet","longbowman","sunKnight","woodWarden"} },
  -- 木柵牆：黑暗時代的廉價木牆，整排放置規則與石牆相同。前哨站只提供視野，不會攻擊。
  Palisade = { name="木柵牆", description="黑暗時代就能蓋的廉價木牆，能拖延敵軍突襲；生命比石牆低。按住拖曳可一次放置整排。", cost={wood=3}, hp=300, size=Vector2.new(1,1), height=10, color=Color3.fromRGB(150,112,70), population=0, minAge=1, buildTime=2, line=true, trains={} },
  Outpost = { name="前哨站", description="便宜的木造瞭望台，提供很遠的視野，用來監視敵軍動向；不會攻擊。", cost={wood=25,stone=10}, hp=500, size=Vector2.new(1,1), height=18, color=Color3.fromRGB(158,122,82), population=0, minAge=1, buildTime=10, trains={} },
@@ -169,6 +169,10 @@ Config.Units = {
  -- 綿羊（AOE2 式放牧）：不佔人口、不能訓練、不會攻擊。附近只有某一方的單位時歸那一方；
  -- 村民右鍵宰殺後變成可採集的食物（Config.Resources.Sheep）。
  sheep = { name="綿羊", description="放牧的羊群：附近沒有原主人的單位時，其他玩家靠近就會接收。可以像部隊一樣移動，村民右鍵宰殺後採集食物。", cost={}, hp=7, speed=8, damage=0, range=3.5, trainTime=1, color=Color3.fromRGB(236,232,220), minAge=1, trainsAt={}, class="herd", armor=0, attackInterval=1, population=0, bonus={} },
+ -- 文明專屬兵種（civilization 欄位）：只有該文明能在城堡訓練；其他文明的城堡不顯示也不接受。
+ longbowman = { name="河灣長弓手", description="河灣盟邦的專屬兵種：射程極遠的弓兵，能在敵軍接近前先削弱對方。", cost={wood=35,gold=40}, hp=35, speed=15, damage=6, range=64, trainTime=18, color=Color3.fromRGB(110,160,150), minAge=3, trainsAt={"Castle"}, class="archer", armor=0, attackInterval=2.0, population=1, civilization="RiverHaven", bonus={infantry=1} },
+ sunKnight = { name="旭日聖騎", description="旭日城邦的專屬兵種：生命與護甲都很高的重騎兵，擅長衝散弓兵陣線。", cost={food=70,gold=80}, hp=150, speed=22, damage=13, range=4.5, trainTime=22, color=Color3.fromRGB(230,190,90), minAge=3, trainsAt={"Castle"}, class="cavalry", mounted=true, armor=3, attackInterval=1.6, population=1, civilization="Sunspire", bonus={archer=4} },
+ woodWarden = { name="青林林卒", description="青林公國的專屬兵種：行動迅速的輕步兵，擅長突襲建築與攻城器械。", cost={food=65,gold=25}, hp=70, speed=21, damage=9, range=3.5, trainTime=12, color=Color3.fromRGB(110,160,90), minAge=3, trainsAt={"Castle"}, class="infantry", armor=0, attackInterval=1.2, population=1, civilization="JadeGrove", bonus={building=8,siege=6} },
 }
 -- Shared gameplay volumes; decorative limbs, weapons and wheels do not collide.
 Config.UnitCollision = {
@@ -303,17 +307,36 @@ Config.Relics = { name="聖物", description="僧侶右鍵拾取，帶回自己�
  -- 聖物勝利：同一隊存放全圖所有聖物並守住 victoryTime 秒即獲勝。
  -- reserve：地圖生成時，聖物點周圍這個半徑內不放樹林與礦，聖物一定落在對稱點上、四周開闊可抵達。
  goldPerSecond=0.5, victoryTime=180, reserve=36, counts={Small=4,Medium=5,Large=9}, axisRadii={Small={0.55},Medium={0.55},Large={0.38,0.72}}, clearance=10, size=4 }
--- Original identities share the complete gameplay rules above. Purchases never alter them.
+-- 文明身份免費選擇；身份本身不帶數值，加成只來自 Config.CivilizationBonuses，購買永遠不改變它們。
 Config.CivilizationOrder = { "RiverHaven", "Sunspire", "JadeGrove" }
 Config.DefaultCivilization = "RiverHaven"
+-- 文明身份（名稱、徽記、色彩）；對戰加成另見 Config.CivilizationBonuses。
 Config.Civilizations = {
  RiverHaven = { name="河灣盟邦", description="沿河而建的商旅城邦，以藍青旗幟集結盟友。", emblem="川", accent=Color3.fromRGB(83,192,195), public=true },
  Sunspire = { name="旭日城邦", description="立於高原的日耀城邦，以金色旗幟守護家園。", emblem="日", accent=Color3.fromRGB(240,187,83), public=true },
  JadeGrove = { name="青林公國", description="與森林相伴的山林公國，以翠綠旗幟記錄傳承。", emblem="森", accent=Color3.fromRGB(130,190,123), public=true },
 }
+-- 文明加成（AOE2 式）：三個文明都免費選擇；每個文明 2 項開局加成與 1 種城堡專屬兵種。
+-- 加成沿用科技的效果欄位（effect、unitClass），開局時套用一次。付費商品不能改變這裡的任何數值（CommerceRules 稽核）。
+Config.CivilizationBonuses = {
+ RiverHaven = { uniqueUnit="longbowman", bonuses={
+  {text="貿易車每趟黃金 +20%。", effect={tradeGold=0.2}},
+  {text="村民攜帶量 +3。", effect={carry=3}, unitClass="villager"},
+ }},
+ Sunspire = { uniqueUnit="sunKnight", bonuses={
+  {text="村民採集黃金 +15%。", effect={gatherGold=0.15}, unitClass="villager"},
+  {text="所有建築生命 +10%。", effect={buildingHp=0.1}},
+ }},
+ JadeGrove = { uniqueUnit="woodWarden", bonuses={
+  {text="村民伐木 +15%。", effect={gatherWood=0.15}, unitClass="villager"},
+  {text="步兵移動速度 +10%。", effect={speed=0.1}, unitClass="infantry"},
+ }},
+}
+-- 單項加成的上限：比例效果不超過 limits.ratio，攜帶量等加值不超過 limits.flat。
+Config.CivilizationBonusLimits = { ratio=0.25, flat=5, perCivilization=2 }
 Config.Commerce = {
  enabled=false,
- catalog={}, -- Add only real, configured cosmetic / equal-rules civilization passes before enabling.
+ catalog={}, -- Add only real, configured cosmetic passes before enabling; purchases never change CivilizationBonuses.
  policyText="付費僅限文明身份與造型；不販售資源、加速、人口或戰鬥優勢。",
 }
 return Config

@@ -2412,6 +2412,8 @@ function GUI:UpdateCommands(selected,buildingKind)
   elseif self.tab == "train" and owned and Config.Buildings[kind] then
    for _,unitKind in ipairs(Config.Buildings[kind].trains or {}) do
     local data = Config.Units[unitKind]
+    -- 其他文明的專屬兵種不顯示（伺服器同樣拒絕）。
+    if data.civilization and data.civilization ~= player:GetAttribute("Civilization") then continue end
     local upgradedName = player:GetAttribute("UnitName_"..unitKind)
     table.insert(actions,{key = unitKind,name = upgradedName or data.name,description = (upgradedName and ("已升級為"..upgradedName.."。\n") or "")..data.description,cost = data.cost,minAge = data.minAge or 1,requires = data.requiresTech,art = unitKind,callback = function() self.callbacks.train(unitKind) end})
    end

@@ -21,6 +21,8 @@ function Commerce.audit(config)
   end
   if entry.category=="civilization" then
    if type(entry.civilizationId)~="string" or not config.Civilizations[entry.civilizationId] or entry.cosmeticId~=nil then return false,"文明商品設定無效。" end
+   -- 有對戰加成的文明一律免費；販售它等於販售數值優勢。
+   if type(config.CivilizationBonuses)=="table" and config.CivilizationBonuses[entry.civilizationId]~=nil then return false,"有對戰加成的文明不能付費販售。" end
   elseif type(entry.cosmeticId)~="string" or #entry.cosmeticId==0 or #entry.cosmeticId>64 or entry.civilizationId~=nil then return false,"造型商品設定無效。" end
  end
  return true

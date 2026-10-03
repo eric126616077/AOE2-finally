@@ -509,4 +509,42 @@ function B.sheep(model,kind,team,stage)
  tint(block(model,"TeamPatch",V(1.1,.3,.5),V(0,2.3,-1.55),team,Fabric),true)
  ball(model,"HorseBody",.6,V(0,2.4,1.6),wool,Fabric)
 end
+-- 文明專屬兵種：沿用同類兵種的骨架，加上一眼可辨的特徵（長弓、日冕頭盔、葉披風）。
+-- River Haven longbowman: a teal-cloaked archer with a bow taller than the man and a river-blue feather.
+function B.longbowman(model,kind,team,stage)
+ local teal,tealDark=Color3.fromRGB(70,140,140),Color3.fromRGB(46,104,108)
+ figure(model,{cloth=teal,skirt=tealDark,glove=leather,boot=leather})
+ block(model,"Tabard",V(1.3,1.3,1.5),V(0,2.95,0),team,Fabric)
+ ball(model,"Hat",2.02,V(0,4.6,.14),teal,Fabric)
+ round(model,"Hat",2.7,.35,V(0,4.95,.05),tealDark,Fabric)
+ block(model,"HatBand",V(.16,1.6,.32),V(.6,5.6,.4),Color3.fromRGB(120,200,230),Fabric).CFrame*=CFrame.Angles(-.35,0,-.3)
+ bow(model,1.45)
+ local top=V(-.55,3.9,1)
+ beam(model,"Quiver",V(.6,1.9,1),top,.6,leather)
+ tint(beam(model,"Quiver",top,top+(top-V(.6,1.9,1)).Unit*.5,.45,team,Fabric),true)
+end
+-- Sunspire sun knight: a gilded great helm crowned with a sun disc, golden barding.
+function B.sunKnight(model,kind,team,stage)
+ figure(model,{cloth=gold,skirt=mail,sleeve=mail,glove=leather,pauldron=gold,metal=true,boot=iron,helm=true})
+ block(model,"Tabard",V(1.4,2.2,1.74),V(0,2.45,0),team,Fabric)
+ round(model,"Hat",1.95,1.7,V(0,4.6,-.02),gold,Metal)
+ block(model,"Hat",V(1.3,.18,.12),V(0,4.75,-.96),dark)
+ disc(model,"HatBand",1.7,.18,V(0,5.85,.1),Color3.fromRGB(255,214,96),Metal)
+ ball(model,"HatBand",.7,V(0,5.85,.1),team,Fabric)
+ sword(model,.3)
+ kiteShield(model,team)
+ mount(model,team,true)
+end
+-- Jade Grove wood warden: a light skirmisher in a leaf cloak with a hand axe and round shield.
+function B.woodWarden(model,kind,team,stage)
+ local moss,mossDark=Color3.fromRGB(96,140,70),Color3.fromRGB(66,104,52)
+ figure(model,{cloth=hide,skirt=mossDark,sleeve=moss,glove=leather,boot=leather})
+ block(model,"Tabard",V(1.3,1.6,1.5),V(0,2.75,0),team,Fabric)
+ ball(model,"Hat",1.95,V(0,4.62,.12),moss,Fabric)
+ for index,offset in ipairs({V(-.7,3.6,.75),V(.7,3.6,.75),V(0,3.3,.95)}) do
+  ball(model,"Robe",1.1,offset,index==3 and mossDark or moss,Enum.Material.Grass)
+ end
+ sword(model,.5)
+ roundShield(model,team,1.6)
+end
 return {builders=B,tool=villagerTool,carry=carryLoad,toolKinds=toolKinds,carryKinds=carryKinds}

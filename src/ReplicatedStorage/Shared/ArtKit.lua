@@ -31,7 +31,7 @@ local buildingKinds={Castle=true,TownCenter=true,House=true,Barracks=true,Archer
  SiegeWorkshop=true,Blacksmith=true,Market=true,University=true,Monastery=true,Mill=true,LumberCamp=true,
  MiningCamp=true,Tower=true,Wall=true,Gate=true,Wonder=true,Farm=true,Palisade=true,Outpost=true}
 local unitKinds={villager=true,infantry=true,spearman=true,archer=true,skirmisher=true,scout=true,
- cavalry=true,monk=true,ram=true,mangonel=true,trebuchet=true,cavalryArcher=true,camel=true,handCannoneer=true,tradeCart=true,scorpion=true,bombardCannon=true,sheep=true}
+ cavalry=true,monk=true,ram=true,mangonel=true,trebuchet=true,cavalryArcher=true,camel=true,handCannoneer=true,tradeCart=true,scorpion=true,bombardCannon=true,sheep=true,longbowman=true,sunKnight=true,woodWarden=true}
 local teamColorNames={Roof=true,Banner=true,Flag=true,Tabard=true,Shield=true,Saddle=true,Ridge=true,
  Awning=true,CanvasSail=true,TeamTrim=true,Cuff=true,TeamPatch=true,Bullseye=true,Shutter=true,
  Sling=true,HatBand=true,HorseCloth=true,SiegeBanner=true}

@@ -7,6 +7,7 @@
 --  5. 姿態：堅守姿態的弓兵不追擊射程外的敵人；改回攻擊姿態後會追擊。
 --  6. 城鎮警鐘：村民進入駐紮建築，解除後離開。
 --  7. 科技與兵種：石工術提高建築生命；沒有化學時不能訓練射石砲；木柵牆整排放置。
+--  8. 文明：開局加成生效、只能訓練本文明的專屬兵種。
 -- 捷徑見 tests/aoe2-elements-studio.server.lua。輸出以 [AOE2X] 開頭。
 local Run=game:GetService("RunService")
 if not Run:IsStudio() then return end
@@ -185,6 +186,33 @@ local ok,problem=pcall(function()
  check(waitFor(function() return player:GetAttribute("TownBell")==false and server:InvokeServer("garrison")==0 end,8),"解除警報後村民離開建築")
  task.wait(2)
  check(not headingIn() and server:InvokeServer("garrison")==0,"解除警報後沒有村民繼續前往駐紮")
+
+ -- 8. 文明加成與專屬兵種（在石工術之前檢查建築生命） ------------------------------
+ local civilization=player:GetAttribute("Civilization")
+ local civBonus=Config.CivilizationBonuses[civilization]
+ if check(civBonus~=nil and (player:GetAttribute("CivilizationSummary") or "")~="","玩家文明有加成說明",tostring(civilization).." · "..tostring(player:GetAttribute("CivilizationSummary"))) then
+  local worker=mine("villager")[1]
+  if civilization=="RiverHaven" then
+   check(worker and worker:GetAttribute("CarryCapacity")==Config.Units.villager.carryCapacity+3,"河灣盟邦：村民攜帶量 +3",worker and worker:GetAttribute("CarryCapacity"))
+  elseif civilization=="Sunspire" then
+   check(center:GetAttribute("MaxHP")==math.floor(Config.Buildings.TownCenter.hp*1.1+0.5),"旭日城邦：建築生命 +10%",center:GetAttribute("MaxHP"))
+  elseif civilization=="JadeGrove" then
+   local rate=worker and worker:GetAttribute("GatherRate_wood")
+   check(rate and math.abs(rate-Config.Units.villager.gatherRate*1.15)<1e-6,"青林公國：村民伐木 +15%",rate)
+  end
+  local castle=server:InvokeServer("build","Castle",home,70)
+  if check(castle~=nil,"放置城堡") then
+   for kind,unit in pairs(Config.Units) do
+    if unit.civilization and unit.civilization~=civilization then
+     command:FireServer("Train",castle,kind)
+     task.wait(0.5)
+     check((castle:GetAttribute("QueueCount") or 0)==0,"不能訓練其他文明的專屬兵種："..unit.name)
+    end
+   end
+   command:FireServer("Train",castle,civBonus.uniqueUnit)
+   check(waitFor(function() return castle:GetAttribute("QueueKind_1")==civBonus.uniqueUnit end,3),"可以訓練本文明的專屬兵種："..Config.Units[civBonus.uniqueUnit].name)
+  end
+ end
 
  -- 7. 科技、兵種與木柵牆 -------------------------------------------------------
  local university=server:InvokeServer("build","University",home)

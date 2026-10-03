@@ -46,6 +46,8 @@ local actionClocks={}
 local AutoWork={units={}}
 -- AOE2 式擴充系統的替身：開局放羊群／野豬與市集價格發布不在此測試範圍。
 local AOE={boars={},neutralSheep={},prices={},spawnHerds=function() end,publishPrices=function() end}
+-- 開局訊息會附上文明加成說明。
+local CivilizationRules={resolve=function() return "RiverHaven",{name="測試文明"} end,summary=function() return "測試加成" end}
 local reportSequence,reportSubjectSequence=0,0
 local reportSubjects={}
 local generatedMaps=0
