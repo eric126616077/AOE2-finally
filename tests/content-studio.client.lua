@@ -69,10 +69,10 @@ local ok,problem=pcall(function()
  check(info and info.age==4 and info.ai~=nil and info.houses>=6,"測試前置：帝王時代、資源、房屋與電腦陣營",info and ("ai="..tostring(info.ai).." houses="..tostring(info.houses)))
  -- 測試期間持續移除電腦的戰鬥單位，避免電腦進攻淘汰玩家而讓後續項目失效。
  running=true
- local holdAI=false
+ local aiMode=nil
  task.spawn(function()
   while running and workspace:GetAttribute("MatchPhase")=="Playing" do
-   local removed=server:InvokeServer("aiDisarm",holdAI)
+   local removed=server:InvokeServer("aiDisarm",aiMode)
    if removed and removed>0 then print(TAG.."INFO 移除電腦戰鬥單位 "..removed) end
    task.wait(3)
   end
@@ -160,12 +160,15 @@ local ok,problem=pcall(function()
    lastPrint=os.clock()
    print(TAG.."INFO 電腦：時代 "..tostring(s.age).." 黃金 "..tostring(s.gold).." 人口 "..s.population.." 修道院 "..s.monastery.." 僧侶 "..s.monks.." 貿易車 "..s.carts)
   end
-  if s and (s.seeking>0 or s.carrying>0) then seen=seen or s end
+  if s and (s.seeking>0 or s.carrying>0) and not seen then
+   -- 看到電腦派僧侶撿聖物就夠了：立刻移除電腦僧侶，避免牠把聖物存進修道院；貿易繼續觀察。
+   seen=s; aiMode="noMonks"; server:InvokeServer("aiDisarm","noMonks")
+  end
   if s and s.trading>0 then trading=trading or s end
   return seen and trading
  end,180)
  server:InvokeServer("aiStop")
- holdAI=true
+ aiMode="hold"
  check(seen~=nil,"電腦訓練僧侶並派去撿聖物",seen and ("monks="..seen.monks))
  check(trading~=nil,"電腦訓練貿易車並跑貿易",trading and ("carts="..trading.carts))
 
@@ -173,12 +176,13 @@ local ok,problem=pcall(function()
  -- 6. 聖物：拾取、存放、收入、掉落、聖物勝利 ----------------------------------------
  local total=workspace:GetAttribute("RelicTotal") or 0
  check(total==Config.Relics.counts.Small,"小地圖放置設定數量的聖物",total)
- check(waitFor(function() return #groundRelics()==total end,30),"電腦停止後聖物都在地上",#groundRelics())
- -- 聖物階段的已知起點：全部放回正式的對稱點，總數必須等於設定。
+ -- 聖物階段的已知起點：取出修道院裡存放的聖物、補足並全部放回正式的對稱點，總數必須等於設定。
  local reset=server:InvokeServer("relicReset")
+ print(TAG.."INFO 聖物重設：地上 "..tostring(reset and reset.count).." 對稱點 "..tostring(reset and reset.points).." 在原位 "..tostring(reset and reset.atHome)
+  .." 自修道院取出 "..tostring(reset and reset.stored).." 補回 "..tostring(reset and reset.created))
  assert(reset and reset.count==total and reset.points==total and reset.atHome==total,
   "聖物重設失敗："..tostring(reset and reset.count).."/"..tostring(reset and reset.points).."/"..tostring(reset and reset.atHome))
- check(true,"聖物重設到對稱點",reset.atHome.." / "..total)
+ check(#groundRelics()==total and (player:GetAttribute("Relics") or 0)==0,"重設後全部聖物都在地上的對稱點",#groundRelics().." / "..total)
  local monastery=server:InvokeServer("build","Monastery",home,{min=48,max=180})
  check(monastery~=nil,"測試前置：修道院")
  local monks={}

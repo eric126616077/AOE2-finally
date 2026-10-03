@@ -42,12 +42,18 @@ local function groundRelics()
  for _,model in ipairs(workspace.Resources:GetChildren()) do if model:GetAttribute("Relic")==true then table.insert(result,model) end end
  return result
 end
+-- 電腦觀察開始前保存一件聖物的複本，重設時用來補回被存進修道院的聖物。
+local relicTemplate
+local function removeAIMonks(ai)
+ local removed=0
+ for _,unit in ipairs(owned(ai:GetAttribute("OwnerId"),"monk","Units")) do probe:Invoke("remove",unit); removed+=1 end
+ return removed
+end
 local function aiHold(ai)
  -- 測試的聖物階段：電腦維持在城堡時代以前（電腦只在城堡時代以後撿聖物），且沒有僧侶。
  ai:SetAttribute("Age",1)
  ai:SetAttribute("gold",0)
- local id=ai:GetAttribute("OwnerId")
- for _,unit in ipairs(owned(id,"monk","Units")) do probe:Invoke("remove",unit) end
+ removeAIMonks(ai)
 end
 remote.OnServerInvoke=function(player,action,a,b,c)
  if not probe then return nil end
@@ -93,6 +99,8 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   local ai=aiActor()
   if not ai then return nil end
   local id=ai:GetAttribute("OwnerId")
+  local sample=groundRelics()[1]
+  if sample and not relicTemplate then relicTemplate=sample:Clone() end
   -- 帝王時代：電腦不會再為升級時代存資源（存資源時不訓練）；只給足夠訓練僧侶與貿易車的少量資源。
   ai:SetAttribute("Age",4)
   -- 測試期間電腦的軍隊會被持續移除、電腦會一直補兵，所以給足以同時補兵與訓練僧侶／貿易車的資源。
@@ -130,6 +138,22 @@ remote.OnServerInvoke=function(player,action,a,b,c)
   aiHold(ai)
   return true
  elseif action=="relicReset" then
+  -- 1. 取出所有修道院裡存放的聖物，並把各勢力的聖物件數歸零（伺服器的聖物勝利以勢力的 Relics 屬性計算）。
+  local stored=0
+  for _,building in ipairs(workspace.Buildings:GetChildren()) do
+   if building:GetAttribute("BuildingType")=="Monastery" and (building:GetAttribute("Relics") or 0)>0 then
+    stored+=building:GetAttribute("Relics"); building:SetAttribute("Relics",0)
+   end
+  end
+  for _,actor in ipairs(game:GetService("Players"):GetPlayers()) do actor:SetAttribute("Relics",0) end
+  for _,actor in ipairs(RS:WaitForChild("RTSFactions"):GetChildren()) do actor:SetAttribute("Relics",0) end
+  -- 2. 補回地上不足的聖物（從保存的複本產生，屬性與伺服器產生的聖物相同）。
+  local total=workspace:GetAttribute("RelicTotal") or 0
+  local created=0
+  while #groundRelics()<total and relicTemplate do
+   relicTemplate:Clone().Parent=workspace.Resources
+   created+=1
+  end
   local size=workspace:GetAttribute("MapSize") or Config.Map.MapSize
   local sizeName=workspace:GetAttribute("MatchSizeName") or "Medium"
   local points=RelicRules.relicPoints(size,Config.Relics.counts[sizeName],Config.Relics.axisRadii[sizeName]) or {}
@@ -144,12 +168,14 @@ remote.OnServerInvoke=function(player,action,a,b,c)
    local p=relic:GetPivot().Position
    for _,point in ipairs(points) do if (Vector3.new(point.X,p.Y,point.Z)-p).Magnitude<1 then atHome+=1; break end end
   end
-  return {count=#relics,points=#points,atHome=atHome}
+  return {count=#relics,points=#points,atHome=atHome,stored=stored,created=created,total=total}
  elseif action=="aiDisarm" then
-  -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。a=true 時（聖物階段）另外維持電腦不撿聖物。
+  -- 移除電腦的戰鬥單位（保留村民、僧侶與貿易車），讓電腦無法進攻玩家。
+  -- a="noMonks"：已觀察到電腦派僧侶撿聖物，之後持續移除電腦僧侶（聖物掉回地上），貿易照常。
+  -- a="hold"：聖物階段，電腦維持在城堡時代以前、沒有黃金與僧侶。
   local ai=aiActor()
   if not ai then return 0 end
-  if a==true then aiHold(ai) end
+  if a=="hold" then aiHold(ai) elseif a=="noMonks" then removeAIMonks(ai) end
   local id,removed=ai:GetAttribute("OwnerId"),0
   for _,unit in ipairs(workspace.Units:GetChildren()) do
    local kind=unit:GetAttribute("UnitType")
