@@ -30,8 +30,11 @@ local function inView(point)
 end
 -- 客戶端收到 Corpses／Ruins 的新模型時，子零件可能還沒複製過來（ChildAdded 先到）。
 -- 所以先追蹤模型，零件陸續到達時再加入；晚到的零件立即套用目前的淡出，下一次 RenderStepped 套用動作。
+local fallMotion
 local function addPart(entry,part)
  local item={part=part,final=part.CFrame}
+ -- 倒地中的屍體：晚到的零件立刻擺到目前的倒地姿勢，不等下一次 RenderStepped（否則會先平躺一幀）。
+ if entry.fallStart then part.CFrame=fallMotion(entry,os.clock())*item.final end
  -- 樹幹與樹冠從底部倒下；地面上的樹樁、木頭與切口只淡出。
  if entry.kind=="tree" then item.topples=item.final.Position.Y-entry.ground.Y>1.5 end
  table.insert(entry.parts,item)
@@ -94,6 +97,10 @@ local function untrackCorpse(corpse)
  if entry.connection then entry.connection:Disconnect() end
  if entry.fallStart then falling-=1 end
 end
+fallMotion=function(entry,clock)
+ local t=(clock-entry.fallStart)/Rules.FallSeconds
+ return entry.base*CFrame.identity:Lerp(entry.lay,Rules.FallProgress(t))*entry.undo
+end
 local function stepCorpses(clock,serverNow)
  local still=reduced()
  for corpse,entry in pairs(corpses) do
@@ -107,7 +114,7 @@ local function stepCorpses(clock,serverNow)
     falling-=1
     motion=CFrame.identity
    else
-    motion=entry.base*CFrame.identity:Lerp(entry.lay,Rules.FallProgress(t))*entry.undo
+    motion=fallMotion(entry,clock)
    end
   end
   -- 降低動態效果時只淡出，不下沉。

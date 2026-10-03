@@ -471,6 +471,20 @@ local function refresh(model)
    -- 不等下一次可見度更新（最多 0.125 秒）：否則新單位會先停在出生點一下，再跳回建築邊緣開始出場。
    -- 細節預設開啟，下一次可見度更新再依距離與數量上限修正。
    if inViewport(root.Position) then visibleUnits[model]=item; item.detailed=true end
+   -- 新單位常在這一幀的 RenderStepped 之後才建立：立刻把外觀零件擺到建築邊緣，
+   -- 否則這一幀會先畫在伺服器出生點，下一幀才跳回邊緣開始出場。
+   if item.spawn and visibleUnits[model] then
+    local position=frame.Position+item.spawn.offset
+    local start=CFrame.lookAt(position,position-item.spawn.offset)
+    item.viewFrame=start
+    UnitView.SetFrame(model,start)
+    local list,frames={}, {}
+    for _,entry in ipairs(parts) do
+     table.insert(list,entry.part)
+     table.insert(frames,start*entry.offset)
+    end
+    workspace:BulkMoveTo(list,frames,Enum.BulkMoveMode.FireCFrameChanged)
+   end
    diagnostics.rootSamples+=1
    item.rootConnection=root:GetPropertyChangedSignal("CFrame"):Connect(function()
     if tracked[model]~=item then return end

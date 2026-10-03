@@ -310,12 +310,14 @@ local function analyzeSpawn(rec,name,mode)
  local function walk(sample) return flat(sample.display.Position)-flat(sample.base.Position) end
  if mode=="reduced" then
   check(rec.reduced,name.."：前置：本機 ReducedMotion=true")
+  -- 只比較「顯示位置－同時間軸重建的基準」：前面 D 設的集結點仍有效，新單位會移動，
+  -- 顯示位置本來就比 Root 晚 Motion.Delay，直接和 Root 比會把正常的插值落後當成出場位移。
   local worst=0
   for _,sample in ipairs(rec.samples) do
-   if sample.visible then worst=math.max(worst,walk(sample).Magnitude,(flat(sample.display.Position)-flat(sample.root.Position)).Magnitude) end
+   if sample.visible then worst=math.max(worst,walk(sample).Magnitude) end
   end
   check(walk(first).Magnitude<=.05,name.."：降低動態效果時第一個畫面就在伺服器出生點（不播放出場）",string.format("偏差 %.3f",walk(first).Magnitude))
-  check(worst<=.05,name.."：降低動態效果時全程沒有出場位移",string.format("最大偏差 %.3f",worst))
+  check(worst<=(rec.rootMoved>.05 and .3 or .05),name.."：降低動態效果時全程沒有出場位移",string.format("最大偏差 %.3f（Root 最大位移 %.1f）",worst,rec.rootMoved))
   return failed==before
  end
  check(not rec.reduced,name.."：前置：本機 ReducedMotion 關閉")
