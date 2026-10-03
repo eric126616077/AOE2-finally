@@ -1477,21 +1477,16 @@ local function endMatch(winnerTeam)
  -- 順序：覆盤、劇情進度與勝負屬性全部寫好之後才切到 Ended。客戶端屬性變更的觸發順序和伺服器設定的順序相同，
  -- 先切階段的話，結算畫面（與測試）在看到 Ended 的那一刻可能讀到舊的勝者。通知與音效在切換之後才送出。
  -- 這段沒有 yield，phase 仍是 Playing 的期間不會有其他步驟插進來。
- local storyNotices={}
+ local storyNotices,shopEnds={},{}
  local endedAt=os.clock()
  if currentMatch then
   for _,state in pairs(currentMatch.factions) do
    local outcome=TeamRules.result(matchTeams,state.id,winnerTeam,true,state.forfeited==true)
    finishReport(state,outcome,endedAt)
    recordMatchResult(state,outcome)
-   -- 金冠只買外觀；對局獎勵依伺服器事實計算，每場每人一次。勝利者的主城施放勝利慶典。
+   -- 金冠只買外觀：先記下伺服器事實，切到 Ended 並送出勝負公告後才發獎勵與施放勝利慶典。
    if not state.ai and state.actor:IsA("Player") and state.actor.Parent==Players then
-    require(script.Parent.ServerModules.Shop).Get():MatchReward(state.actor,currentMatch.id,{mode=currentMatch.mode,outcome=outcome,seconds=endedAt-matchStart,forfeited=state.forfeited==true})
-    if outcome=="win" then
-     for model in pairs(state.buildings) do
-      if model:GetAttribute("BuildingType")=="TownCenter" and model.PrimaryPart then require(script.Parent.ServerModules.Shop).Get():Celebrate(state.actor,model.PrimaryPart.Position+Vector3.new(0,model.PrimaryPart.Size.Y/2+8,0)); break end
-     end
-    end
+    table.insert(shopEnds,{state=state,facts={mode=currentMatch.mode,outcome=outcome,seconds=endedAt-matchStart,forfeited=state.forfeited==true}})
    end
    -- 劇情勝利記錄通關章節；投降或淘汰的玩家不算。
    if outcome=="win" and not state.ai and settings.gameMode=="Story" and state.actor.Parent==Players
@@ -1541,6 +1536,16 @@ local function endMatch(winnerTeam)
  end
  -- 劇情解鎖通知排在勝利公告之後，否則會被公告蓋掉（通知列一次只顯示一則）。
  for _,entry in ipairs(storyNotices) do notify(entry.actor,entry.message) end
+ -- 對局金冠（每場每人一次，交易在背景執行）與勝利者主城上空的勝利慶典。
+ for _,entry in ipairs(shopEnds) do
+  local shop=require(script.Parent.ServerModules.Shop).Get()
+  shop:MatchReward(entry.state.actor,currentMatch.id,entry.facts)
+  if entry.facts.outcome=="win" then
+   for model in pairs(entry.state.buildings) do
+    if model:GetAttribute("BuildingType")=="TownCenter" and model.PrimaryPart then shop:Celebrate(entry.state.actor,model.PrimaryPart.Position+Vector3.new(0,model.PrimaryPart.Size.Y/2+8,0)); break end
+   end
+  end
+ end
 end
 checkVictory=function()
  if phase~="Playing" then return end
